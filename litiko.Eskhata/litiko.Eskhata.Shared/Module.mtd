@@ -1,0 +1,60 @@
+{
+  "$type": "Sungero.Metadata.SolutionMetadata, Sungero.Metadata",
+  "NameGuid": "78d05f91-7585-42b9-addc-5b14478d4680",
+  "Name": "Eskhata",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "litiko.Eskhata.Client",
+  "ClientBaseAssemblyName": "litiko.Eskhata.ClientBase",
+  "ClientBaseNamespace": "litiko.Eskhata.ClientBase",
+  "ClientNamespace": "litiko.Eskhata.Client",
+  "Code": "Eskhata",
+  "CompanyCode": "litiko",
+  "Cover": {
+    "NameGuid": "59b5fdbb-1711-4a75-aa17-40ffaa03984f",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "6d0d69be-58ed-4c1d-a24e-44630bbbef2e",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "a2377767-aab8-4428-85a0-96bcf81c9d98",
+      "BackgroundPosition": "Stretch"
+    },
+    "Tabs": []
+  },
+  "DesktopViews": [],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "litiko.Eskhata",
+  "IsolatedAssemblyName": "litiko.Eskhata.Isolated",
+  "IsolatedNamespace": "litiko.Eskhata.Isolated",
+  "OrderedSpecialFolders": [],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "litiko.Eskhata",
+  "ResourcesKeys": [],
+  "ServerAssemblyName": "litiko.Eskhata.Server",
+  "ServerNamespace": "litiko.Eskhata.Server",
+  "SharedAssemblyName": "litiko.Eskhata.Shared",
+  "SharedNamespace": "litiko.Eskhata.Shared",
+  "SpecialFolders": [],
+  "Version": "4.8.138.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "SolutionMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}
