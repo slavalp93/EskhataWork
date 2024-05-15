@@ -1,0 +1,167 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "7466ead6-2162-47df-9ff2-7dc848d040cf",
+  "Name": "Counterparty",
+  "BaseGuid": "294767f1-009f-4fbd-80fc-f98c49ddc560",
+  "CanBeNavigationPropertyType": true,
+  "CreationAreaMetadata": {
+    "NameGuid": "44f23965-7406-44e3-b898-7004712bfbbe",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "ExtraSearchProperties": [],
+  "FilterPanel": {
+    "NameGuid": "b0125fbd-3b91-4dbb-914a-689276216404",
+    "Name": "FilterPanel",
+    "Controls": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "Forms": [
+    {
+      "$type": "Sungero.Metadata.StandaloneFormMetadata, Sungero.Metadata",
+      "NameGuid": "026f3b94-a2e4-47bc-a270-d900853f782e",
+      "Name": "Card",
+      "Controls": [],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "SettingsResourceKey"
+      ],
+      "Versions": []
+    }
+  ],
+  "HandledEvents": [
+    "CreatedServer"
+  ],
+  "IconResourcesKeys": [],
+  "IsAbstract": true,
+  "LayeredFromGuid": "294767f1-009f-4fbd-80fc-f98c49ddc560",
+  "OperationsClass": "",
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "48d3db8f-8ca4-4434-8089-3e4794b48434",
+      "Name": "TIN",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "f37e4637-5192-4dde-8272-29c8982e1b56",
+      "Name": "Nonresident",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "a16a0224-d3ae-44bf-842e-0f0afcaeb066",
+      "Name": "NCEO",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "8c43815d-1a3d-47ec-a98d-909052509a21",
+      "Name": "ExchangeBoxes",
+      "EntityGuid": "ee4c0bc9-7f21-4b23-8007-83c97f6b38a4",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "EntityGuid"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "3ae9dd96-2ff5-4954-8561-d033cb7b31e9",
+      "Name": "ExternalId",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsShowedInList"
+      ]
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "cd987209-47bc-4b52-b52b-37072a926d5f",
+      "Name": "NUNonrezidentlitiko",
+      "CanBeSearch": false,
+      "Code": "NUNonrezidentl",
+      "IsShowedInList": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "3ae9dd96-2ff5-4954-8561-d033cb7b31e9"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "b7939aea-a9cb-4e17-ab8d-2487580b734e",
+      "Name": "Inamelitiko",
+      "Code": "Inamelitiko",
+      "Length": 160,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "cd987209-47bc-4b52-b52b-37072a926d5f"
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "9c8c1bda-16cb-49df-aa4e-02e12c326afe",
+      "Name": "OKONHlitiko",
+      "Code": "CounterpOKONH",
+      "EntityGuid": "fec15447-29be-4389-9966-75375a52e39c",
+      "IsShowedInList": false,
+      "PreviousPropertyGuid": "b7939aea-a9cb-4e17-ab8d-2487580b734e"
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "2c2de8eb-61e4-47c4-9b82-c22eb80c3132",
+      "Name": "OKVEDlitiko",
+      "Code": "CounterpOKVED",
+      "EntityGuid": "eb73e7c2-4a03-4c71-bb5d-accbab247b14",
+      "IsShowedInList": false,
+      "PreviousPropertyGuid": "9c8c1bda-16cb-49df-aa4e-02e12c326afe"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "f301c37e-0718-450e-b2eb-f3ad159dbd08",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "43897795-a2bb-4a25-a4c8-0a1c1a322003",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

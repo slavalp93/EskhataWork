@@ -1,0 +1,106 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "932cda8e-d0b6-4708-b815-3a126f10f6b1",
+  "Name": "NSI",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "litiko.NSI.Client",
+  "ClientBaseAssemblyName": "litiko.NSI.ClientBase",
+  "ClientBaseNamespace": "litiko.NSI.ClientBase",
+  "ClientNamespace": "litiko.NSI.Client",
+  "Code": "NSI",
+  "CompanyCode": "litiko",
+  "Cover": {
+    "NameGuid": "972a0ce8-2413-4529-a36d-f5860d7c07dc",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "b22a3451-ccf9-475b-8f22-c800159c891b",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "1a5c0f64-9b49-44e0-9867-ac11ca9d5fd2",
+      "BackgroundPosition": "Stretch"
+    },
+    "Tabs": []
+  },
+  "Dependencies": [
+    {
+      "Id": "78d05f91-7585-42b9-addc-5b14478d4680",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "21f09a65-2d59-4638-8db0-92d747e52217"
+    },
+    {
+      "ItemId": "b0f4d89b-db2f-454c-8941-a306e3b10d45",
+      "PreviousItemId": "21f09a65-2d59-4638-8db0-92d747e52217"
+    },
+    {
+      "ItemId": "60c0634c-20b8-4dda-acf6-546005a931a2",
+      "PreviousItemId": "b0f4d89b-db2f-454c-8941-a306e3b10d45"
+    },
+    {
+      "ItemId": "28e5b3f5-3283-41a4-bf61-2231b1702a1b",
+      "PreviousItemId": "60c0634c-20b8-4dda-acf6-546005a931a2"
+    },
+    {
+      "ItemId": "55514763-7d82-47b0-b638-d8b8f6f203d0",
+      "PreviousItemId": "28e5b3f5-3283-41a4-bf61-2231b1702a1b"
+    },
+    {
+      "ItemId": "539ec71a-7f00-425b-b7cc-494426732339",
+      "PreviousItemId": "55514763-7d82-47b0-b638-d8b8f6f203d0"
+    },
+    {
+      "ItemId": "dfebc4b8-f429-4fe0-999e-611fcfa28809",
+      "PreviousItemId": "539ec71a-7f00-425b-b7cc-494426732339"
+    },
+    {
+      "ItemId": "4e4571da-71c5-4f73-82f6-c2b4ec721156",
+      "PreviousItemId": "dfebc4b8-f429-4fe0-999e-611fcfa28809"
+    },
+    {
+      "ItemId": "a41cc530-6875-4bde-a348-5ae69965a938",
+      "PreviousItemId": "4e4571da-71c5-4f73-82f6-c2b4ec721156"
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "litiko.NSI",
+  "IsolatedAssemblyName": "litiko.NSI.Isolated",
+  "IsolatedNamespace": "litiko.NSI.Isolated",
+  "IsVisible": false,
+  "Overridden": [
+    "IsVisible"
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "litiko.NSI",
+  "ResourcesKeys": [],
+  "ServerAssemblyName": "litiko.NSI.Server",
+  "ServerNamespace": "litiko.NSI.Server",
+  "SharedAssemblyName": "litiko.NSI.Shared",
+  "SharedNamespace": "litiko.NSI.Shared",
+  "SpecialFolders": [],
+  "Version": "0.0.1.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

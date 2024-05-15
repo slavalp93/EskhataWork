@@ -58,4 +58,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="OKPOerror" xml:space="preserve">
+    <value>ОКПО не можен превышать 16 символов</value>
+  </data>
+  <data name="INNNonRezidentError" xml:space="preserve">
+    <value>Для организаций-нерезидентов ИНН не можен превышать 12 символов</value>
+  </data>
+  <data name="INNRezidentError" xml:space="preserve">
+    <value>Для организаций-резидентов ИНН не можен превышать 9 символов</value>
+  </data>
 </root>

@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Resource_444488dbb11a4c698e87d2156738e190" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_444488dbb11a4c698e87d2156738e190_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_7675f69407a5448099fa2dd0a55ebc06" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_9e3df66a01e8408aaa4ca5c92a1227fb" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="Resource_966f5464efad489f8598d48f1fdfe547" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_966f5464efad489f8598d48f1fdfe547_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_37b611c90c654ebbb20b532c099ebe6d" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_37b611c90c654ebbb20b532c099ebe6d_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_0a16025bf9b74ee38653fae0509c4ab4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_0a16025bf9b74ee38653fae0509c4ab4_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_2e356dc05ad946958703d2d84f01c2bf" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_2e356dc05ad946958703d2d84f01c2bf_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_db0be72b481a49feb8cb90f6be327354" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_db0be72b481a49feb8cb90f6be327354_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_8aa590633d62455fb454b27459ee3d32" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_8aa590633d62455fb454b27459ee3d32_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_687c94fc67704c17bb0b57a69433b001" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_687c94fc67704c17bb0b57a69433b001_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_69a4139490424b338d9ce5253d0a8c27" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="Resource_a4203bd178814b25bef4e70576f0d4dd" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_a4203bd178814b25bef4e70576f0d4dd_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_9076ca8d34a84905bc813820f9122929" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_9076ca8d34a84905bc813820f9122929_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_ecde6d2983f144e39d87ad6fcf2bc170" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_ecde6d2983f144e39d87ad6fcf2bc170_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_ad0ce6fbbac14ed3976e3bee9f09cc38" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_ae7b3b5f05c24593b8ba7518f5453634" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_ae7b3b5f05c24593b8ba7518f5453634_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_d9e6b8e02fc94abda2c489a79313dbb7" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_d9e6b8e02fc94abda2c489a79313dbb7_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_d50744ec800e4e2ba9cdf8ded5a586a6" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_d50744ec800e4e2ba9cdf8ded5a586a6_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_fd69d648b48e44f2a0d521c641392aea" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_fd69d648b48e44f2a0d521c641392aea_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_5094830693744e37b9e658b10fb140e4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_df687b306ddd439d8abc8262e3a8ba92" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_df687b306ddd439d8abc8262e3a8ba92_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_7b56103cae5a49ea91b06c2f11101c0f" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_cdf44b7cfc804a0a86455a3c4323c0a8" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_cdf44b7cfc804a0a86455a3c4323c0a8_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_SettlParticipantlitiko" xml:space="preserve">
+    <value>Participant in settlements</value>
+  </data>
+  <data name="Property_LoroCorrespondentlitiko" xml:space="preserve">
+    <value>Loro correspondent</value>
+  </data>
+  <data name="Property_NostroCorrespondentlitiko" xml:space="preserve">
+    <value>Nostro correspondent</value>
+  </data>
+  <data name="Property_Countrylitiko" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="Action_FillFromABSlitiko" xml:space="preserve">
+    <value>Fill from ABS using BIC</value>
+  </data>
+  <data name="Action_FillFromABSlitikoDescription" xml:space="preserve">
+    <value>Automatic filling of bank details from ABS using BIC</value>
+  </data>
+  <data name="Action_FillFromABSlitikoHint" xml:space="preserve">
+    <value>Automatic filling of bank details from ABS using BIC</value>
+  </data>
+  <data name="Action_FillFromABSlitikoConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_FillFromABSlitikoConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+</root>

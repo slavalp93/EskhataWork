@@ -1,0 +1,172 @@
+{
+  "$type": "Sungero.Metadata.LayerModuleMetadata, Sungero.Metadata",
+  "NameGuid": "18fbc515-ddd4-425d-9c0a-ab95cbccde56",
+  "Name": "Commons",
+  "AssociatedGuid": "78d05f91-7585-42b9-addc-5b14478d4680",
+  "AsyncHandlers": [
+    {
+      "NameGuid": "1e83eeb6-e56d-4786-98e6-dd3b7290f3d5",
+      "Name": "IndexEntity",
+      "DelayPeriod": 15,
+      "DelayStrategy": "ExponentialDelayStrategy",
+      "IsAncestorMetadata": true,
+      "Parameters": [
+        {
+          "NameGuid": "056ceed8-4474-4864-80e1-c911a3dcd47c",
+          "Name": "AllowCreateRecord",
+          "ParameterType": "Boolean"
+        },
+        {
+          "NameGuid": "223d3e5d-bd6d-4ad9-a2b0-fc393129af40",
+          "Name": "IndexName",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "3821109a-a822-4e88-a91e-0795c0eae41e",
+          "Name": "EntityId",
+          "ParameterType": "LongInteger"
+        },
+        {
+          "NameGuid": "a7a7a3e5-32fa-4df4-9d35-828cf1030bcb",
+          "Name": "Json",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "b92fefd3-9f88-4e85-9ba7-ba771d7a3dbc",
+          "Name": "AsyncCreated",
+          "ParameterType": "DateTime"
+        }
+      ]
+    },
+    {
+      "NameGuid": "cb668a39-0ffc-4e03-9217-d07d59997c66",
+      "Name": "RemoveEntityFromIndex",
+      "DelayPeriod": 15,
+      "DelayStrategy": "ExponentialDelayStrategy",
+      "IsAncestorMetadata": true,
+      "Parameters": [
+        {
+          "NameGuid": "172caa65-ec88-4111-a33b-01000cea9d7c",
+          "Name": "IndexName",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "6a5aca32-4e24-4d00-978b-e5c8bd72604b",
+          "Name": "EntityId",
+          "ParameterType": "LongInteger"
+        }
+      ]
+    }
+  ],
+  "BaseGuid": "459fa497-ee5b-49a4-9980-de00cada9b7a",
+  "ClientBaseAssemblyName": "litiko.Eskhata.ClientBase",
+  "ClientBaseNamespace": "litiko.Eskhata.Module.Commons.ClientBase",
+  "Code": "Commons",
+  "CompanyCode": "Sungero",
+  "Cover": {
+    "NameGuid": "d4c0d93c-8e47-4d87-8887-93ea823aa01f",
+    "Actions": [
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "25024669-4d85-48b8-82fe-e90d19d25700",
+        "Name": "ShowOKVEDlitiko",
+        "EntityTypeId": "539ec71a-7f00-425b-b7cc-494426732339",
+        "GroupId": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
+        "IsVisibleInDesktopClient": false,
+        "PreviousItemGuid": "a612a63d-1044-4d05-8a0a-75a89f85b269"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "2a06d19f-c151-42dc-b834-c9914b453340",
+        "Name": "ShowIDTypelitiko",
+        "EntityTypeId": "a41cc530-6875-4bde-a348-5ae69965a938",
+        "GroupId": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
+        "IsVisibleInDesktopClient": false,
+        "PreviousItemGuid": "bdfea838-c8fa-429f-9865-9aa7aa3ed883"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "3ecb2cc2-d0c5-4845-8531-1fd30f106206",
+        "Name": "ShowEnterpriseTypelitiko",
+        "EntityTypeId": "dfebc4b8-f429-4fe0-999e-611fcfa28809",
+        "GroupId": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
+        "IsVisibleInDesktopClient": false,
+        "PreviousItemGuid": "cbbea2d5-fb3c-4bda-a872-29246a0b0b37"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "6de14f8b-1b4e-45a5-adde-80b57af452f1",
+        "Name": "ShowOKOPFlitiko",
+        "EntityTypeId": "b0f4d89b-db2f-454c-8941-a306e3b10d45",
+        "GroupId": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
+        "IsVisibleInDesktopClient": false,
+        "PreviousItemGuid": "73c2ee10-0b5e-420d-9a71-b5012b2bf23d"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "a612a63d-1044-4d05-8a0a-75a89f85b269",
+        "Name": "ShowOKONHlitiko",
+        "EntityTypeId": "28e5b3f5-3283-41a4-bf61-2231b1702a1b",
+        "GroupId": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
+        "IsVisibleInDesktopClient": false,
+        "PreviousItemGuid": "aea90657-b3e2-4af3-983c-a20fb1c3a23f"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "aea90657-b3e2-4af3-983c-a20fb1c3a23f",
+        "Name": "ShowOKFSlitiko",
+        "EntityTypeId": "60c0634c-20b8-4dda-acf6-546005a931a2",
+        "GroupId": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
+        "IsVisibleInDesktopClient": false,
+        "PreviousItemGuid": "6de14f8b-1b4e-45a5-adde-80b57af452f1"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "bdfea838-c8fa-429f-9865-9aa7aa3ed883",
+        "Name": "ShowFamilyStatuslitiko",
+        "EntityTypeId": "4e4571da-71c5-4f73-82f6-c2b4ec721156",
+        "GroupId": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
+        "IsVisibleInDesktopClient": false,
+        "PreviousItemGuid": "3ecb2cc2-d0c5-4845-8531-1fd30f106206"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "cbbea2d5-fb3c-4bda-a872-29246a0b0b37",
+        "Name": "ShowEnvironmentalRisklitiko",
+        "EntityTypeId": "55514763-7d82-47b0-b638-d8b8f6f203d0",
+        "GroupId": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
+        "IsVisibleInDesktopClient": false,
+        "PreviousItemGuid": "25024669-4d85-48b8-82fe-e90d19d25700"
+      }
+    ],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Overridden": [
+      "Actions"
+    ],
+    "Tabs": [],
+    "Versions": []
+  },
+  "ExplorerTreeOrder": [],
+  "IconResourcesKeys": [],
+  "Importance": "Low",
+  "LayeredFromGuid": "459fa497-ee5b-49a4-9980-de00cada9b7a",
+  "NeedResetAppliedCache": true,
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "litiko.Eskhata.Module.Commons",
+  "ResourcesKeys": [],
+  "SpecialFolders": [],
+  "Version": "4.8.138.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "LayerModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    }
+  ]
+}

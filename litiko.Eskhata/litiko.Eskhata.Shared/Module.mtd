@@ -24,7 +24,57 @@
     },
     "Tabs": []
   },
+  "Dependencies": [
+    {
+      "Id": "459fa497-ee5b-49a4-9980-de00cada9b7a",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
+    },
+    {
+      "Id": "243b34ec-8425-4c7e-b66f-27f7b9c8f38d",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
+    },
+    {
+      "Id": "d534e107-a54d-48ec-85ff-bc44d731a82f",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
+    }
+  ],
   "DesktopViews": [],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "d3e0a9c3-3070-4654-9178-b77ea31e78d0"
+    },
+    {
+      "ItemId": "f8d19a5a-b434-4606-bd5c-66fd90c64b3c",
+      "PreviousItemId": "d3e0a9c3-3070-4654-9178-b77ea31e78d0"
+    },
+    {
+      "ItemId": "7466ead6-2162-47df-9ff2-7dc848d040cf",
+      "PreviousItemId": "f8d19a5a-b434-4606-bd5c-66fd90c64b3c"
+    },
+    {
+      "ItemId": "c3ba7473-eda6-45bd-b39c-7601ae3b11d3",
+      "PreviousItemId": "7466ead6-2162-47df-9ff2-7dc848d040cf"
+    },
+    {
+      "ItemId": "56eccc07-08c0-4b41-976f-2a0cf39e2483",
+      "PreviousItemId": "c3ba7473-eda6-45bd-b39c-7601ae3b11d3"
+    },
+    {
+      "ItemId": "6d1237ee-73e6-4bbd-bd06-c57be3fef412",
+      "PreviousItemId": "56eccc07-08c0-4b41-976f-2a0cf39e2483"
+    },
+    {
+      "ItemId": "628fd168-c85b-4b57-8412-c2524f226425",
+      "PreviousItemId": "6d1237ee-73e6-4bbd-bd06-c57be3fef412"
+    },
+    {
+      "ItemId": "fcb8b5bf-2454-41d1-99f6-85550034ed8f",
+      "PreviousItemId": "628fd168-c85b-4b57-8412-c2524f226425"
+    }
+  ],
   "IconResourcesKeys": [],
   "Importance": "Medium",
   "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
@@ -35,7 +85,11 @@
   "PublicStructures": [],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.Eskhata",
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "OKPOerror",
+    "INNNonRezidentError",
+    "INNRezidentError"
+  ],
   "ServerAssemblyName": "litiko.Eskhata.Server",
   "ServerNamespace": "litiko.Eskhata.Server",
   "SharedAssemblyName": "litiko.Eskhata.Shared",

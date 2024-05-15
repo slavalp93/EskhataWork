@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_Inamelitiko" xml:space="preserve">
+    <value>Интернациональное наименование</value>
+  </data>
+  <data name="Resource_69146147b9c44f47a97515990570d974" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_69146147b9c44f47a97515990570d974_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_2812c08b949c45028db2faa6f07e3fa1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_2812c08b949c45028db2faa6f07e3fa1_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_514374bce2c44c718a55832f36db6f6f" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_514374bce2c44c718a55832f36db6f6f_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_bba041ddff534020ade7f40b42894c75" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_bba041ddff534020ade7f40b42894c75_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_696020c339d64173870e77c71e60e681" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_696020c339d64173870e77c71e60e681_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_9bf192f4d4914ad295f6b2180ae511d7" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_008a422fc89644759937cb93d3ae3ce9" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_008a422fc89644759937cb93d3ae3ce9_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_518e105aca4b4cafb7ec75d99cb09d84" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_518e105aca4b4cafb7ec75d99cb09d84_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_RegNumlitiko" xml:space="preserve">
+    <value>Регистрационный номер</value>
+  </data>
+  <data name="Property_OKVEDlitiko" xml:space="preserve">
+    <value>ОКВЭД</value>
+  </data>
+  <data name="ControlGroup_bb54f7b1375543819b5a9c3cee9177cf" xml:space="preserve">
+    <value>Контактная информация</value>
+  </data>
+  <data name="Resource_622902f178454ad7977d20118eecbb94" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_622902f178454ad7977d20118eecbb94_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_aeda37379c194913b9dcf7f057161bf8" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_aeda37379c194913b9dcf7f057161bf8_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_a826a3226afc47aa85768602c547bba8" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_a826a3226afc47aa85768602c547bba8_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_904847d7ec654ce288418ac85f44d6b5" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_904847d7ec654ce288418ac85f44d6b5_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_90156c38f540457cbdccfdabc15ba87c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_90156c38f540457cbdccfdabc15ba87c_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_0f130974d4e74a53966e75b382db56ab" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_0f130974d4e74a53966e75b382db56ab_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_3113519881bb4ef8be7585a3352d11ba" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_3113519881bb4ef8be7585a3352d11ba_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_9da605c7bdd94e6993bc03b9e8426253" xml:space="preserve">
+    <value>Банковские реквизиты</value>
+  </data>
+  <data name="Resource_7a2a2046050142bca902c5d2c647a5b1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_7a2a2046050142bca902c5d2c647a5b1_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_ba2f90d73cc3447f91bea6a11b6eaf81" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_ba2f90d73cc3447f91bea6a11b6eaf81_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_9fdc669362014c9397edc404a1a81110" xml:space="preserve">
+    <value>Примечание</value>
+  </data>
+  <data name="Resource_471227dcd36a4f4192ab6ffb55e7d522" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_471227dcd36a4f4192ab6ffb55e7d522_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_d829478116be4ca8b533786ea672d89a" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_d829478116be4ca8b533786ea672d89a_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_3195751eedf84148bc33dbaf98d5f6a6" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_675d96a13bd24a88ba7fa8d49445fa7c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_675d96a13bd24a88ba7fa8d49445fa7c_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_4be2fe98ffe14cae9fb8272c672acf11" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_3ee02b1c709e458c94a6f1d051edfb7f" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_3ee02b1c709e458c94a6f1d051edfb7f_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_NUNonrezidentlitiko" xml:space="preserve">
+    <value>Налоговый нерезидент</value>
+  </data>
+  <data name="Property_OKOPFlitiko" xml:space="preserve">
+    <value>ОКОПФ</value>
+  </data>
+  <data name="Property_OKFSlitiko" xml:space="preserve">
+    <value>ОКФС</value>
+  </data>
+  <data name="Property_OKONHlitiko" xml:space="preserve">
+    <value>ОКОНХ</value>
+  </data>
+  <data name="Property_Numberslitiko" xml:space="preserve">
+    <value>Численность</value>
+  </data>
+  <data name="Property_Businesslitiko" xml:space="preserve">
+    <value>Вид деятельности</value>
+  </data>
+  <data name="Property_EnterpriseTypelitiko" xml:space="preserve">
+    <value>Вид предприятия</value>
+  </data>
+  <data name="Property_Countrylitiko" xml:space="preserve">
+    <value>Юрисдикция</value>
+  </data>
+</root>
