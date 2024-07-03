@@ -519,6 +519,19 @@
   "Properties": [
     {
       "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "48d3db8f-8ca4-4434-8089-3e4794b48434",
+      "Name": "TIN",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
       "NameGuid": "af15ce07-b655-4d04-982a-38665dd903d8",
       "Name": "INILA",
       "CanBeSearch": false,

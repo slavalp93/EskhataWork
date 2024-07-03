@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="VersionRequestToRX" xml:space="preserve">
+    <value>RequestToRX_{0}</value>
+  </data>
+  <data name="ResponseXMLTemplate" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;root&gt;
+&lt;head&gt;
+	&lt;session_id&gt;{0}&lt;/session_id&gt;
+&lt;/head&gt; 
+&lt;response&gt; 
+&lt;protocol-version&gt;1.00&lt;/protocol-version&gt; 
+&lt;request-type&gt;{1}&lt;/request-type&gt; 
+&lt;state&gt;{2}&lt;/state&gt; 
+&lt;state_msg&gt;{3}&lt;/state_msg&gt; 
+&lt;/response&gt; 
+&lt;/root&gt;</value>
+  </data>
+  <data name="RequestXMLTemplate" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;root&gt;
+&lt;head&gt;
+	&lt;session_id&gt;{0}&lt;/session_id&gt;
+	&lt;application_key&gt;{1}&lt;/application_key&gt;
+&lt;/head&gt;
+&lt;request&gt;
+	&lt;protocol-version&gt;1.00&lt;/protocol-version&gt;
+	&lt;request-type&gt;R_DR_GET_DATA&lt;/request-type&gt;
+	&lt;dictionary&gt;{2}&lt;/dictionary&gt;
+	&lt;lastId&gt;{3}&lt;/lastId&gt;
+&lt;/request&gt;
+&lt;/root&gt;</value>
+  </data>
+  <data name="VersionRequestToIS" xml:space="preserve">
+    <value>RequestToIS_{0}</value>
+  </data>
+  <data name="VersionRequestToRXFull" xml:space="preserve">
+    <value>RequestToRX_Full</value>
+  </data>
+  <data name="VersionResponseFromIS" xml:space="preserve">
+    <value>ResponseFromIS_{0}</value>
+  </data>
+  <data name="NoticeSubjectForErrorTask" xml:space="preserve">
+    <value>Errors occurred during integration with an external system.</value>
+  </data>
+  <data name="AvailableActionMessage" xml:space="preserve">
+    <value>The action is available only to users in the following roles: "Administrators", "Counterparties responsible", "Synchronization responsible"</value>
+  </data>
+  <data name="RequestXMLTemplateForCompany" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;root&gt;
+&lt;head&gt;
+	&lt;session_id&gt;{0}&lt;/session_id&gt;
+	&lt;application_key&gt;{1}&lt;/application_key&gt;
+&lt;/head&gt;
+&lt;request&gt;
+	&lt;protocol-version&gt;1.00&lt;/protocol-version&gt;
+	&lt;request-type&gt;R_DR_GET_DATA&lt;/request-type&gt;
+	&lt;dictionary&gt;{2}&lt;/dictionary&gt;
+	&lt;lastId&gt;{3}&lt;/lastId&gt;
+	&lt;INN&gt;{4}&lt;/INN&gt;
+&lt;/request&gt;
+&lt;/root&gt;</value>
+  </data>
+  <data name="RequestXMLTemplateForBank" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;root&gt;
+&lt;head&gt;
+	&lt;session_id&gt;{0}&lt;/session_id&gt;
+	&lt;application_key&gt;{1}&lt;/application_key&gt;
+&lt;/head&gt;
+&lt;request&gt;
+	&lt;protocol-version&gt;1.00&lt;/protocol-version&gt;
+	&lt;request-type&gt;R_DR_GET_DATA&lt;/request-type&gt;
+	&lt;dictionary&gt;{2}&lt;/dictionary&gt;
+	&lt;lastId&gt;{3}&lt;/lastId&gt;
+	&lt;BIC&gt;{4}&lt;/BIC&gt;
+&lt;/request&gt;
+&lt;/root&gt;</value>
+  </data>
+  <data name="ResponseNotReceived" xml:space="preserve">
+    <value>The response from the external system was not received within the allotted time.</value>
+  </data>
+  <data name="DataUpdatedSuccessfully" xml:space="preserve">
+    <value>Data updated successfully.</value>
+  </data>
+  <data name="IntegrationMethodNotFound" xml:space="preserve">
+    <value>Integration method {0} not found.</value>
+  </data>
+</root>

@@ -73,6 +73,14 @@
     {
       "ItemId": "fcb8b5bf-2454-41d1-99f6-85550034ed8f",
       "PreviousItemId": "628fd168-c85b-4b57-8412-c2524f226425"
+    },
+    {
+      "ItemId": "d4102611-3b27-4249-bf8a-9d8b9c4d35e4",
+      "PreviousItemId": "fcb8b5bf-2454-41d1-99f6-85550034ed8f"
+    },
+    {
+      "ItemId": "5ea8c39a-58a4-4c50-9473-453bb8c9b9f0",
+      "PreviousItemId": "d4102611-3b27-4249-bf8a-9d8b9c4d35e4"
     }
   ],
   "IconResourcesKeys": [],
@@ -88,14 +96,16 @@
   "ResourcesKeys": [
     "OKPOerror",
     "INNNonRezidentError",
-    "INNRezidentError"
+    "INNRezidentError",
+    "INNNonRezidentPersonError",
+    "INNRezidentPersonError"
   ],
   "ServerAssemblyName": "litiko.Eskhata.Server",
   "ServerNamespace": "litiko.Eskhata.Server",
   "SharedAssemblyName": "litiko.Eskhata.Shared",
   "SharedNamespace": "litiko.Eskhata.Shared",
   "SpecialFolders": [],
-  "Version": "4.8.138.0",
+  "Version": "4.8.138.2",
   "Widgets": [],
   "Versions": [
     {

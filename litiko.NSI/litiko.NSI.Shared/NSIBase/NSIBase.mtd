@@ -139,11 +139,28 @@
   "HandledEvents": [
     "RefreshClient"
   ],
+  "HideFromNavigationEditorCreationArea": true,
   "IconResourcesKeys": [],
   "IntegrationServiceName": "NSINSIBase",
   "IsAbstract": true,
+  "IsStatusEnabled": true,
   "OperationsClass": "",
+  "Overridden": [
+    "HideFromNavigationEditorCreationArea",
+    "IsStatusEnabled"
+  ],
   "Properties": [
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "1dcedc29-5140-4770-ac92-eabc212326a1",
+      "Name": "Status",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsShowedInList",
+        "IsVisibility",
+        "CanBeSearch"
+      ]
+    },
     {
       "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
       "NameGuid": "18bde9af-cf82-4e71-87bf-be9ab2ad57bc",
@@ -151,6 +168,7 @@
       "Code": "Name",
       "IsDisplayValue": true,
       "IsQuickSearchAllowed": true,
+      "IsRequired": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1"
     },
@@ -177,7 +195,11 @@
       "Code": "ParentEntry",
       "EntityGuid": "21f09a65-2d59-4638-8db0-92d747e52217",
       "FlatListInStandaloneLookup": true,
+      "HandledEvents": [
+        "LookupServer"
+      ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "NeedPassEntityToLookupEvent": true,
       "PreviousPropertyGuid": "8862f08e-7248-44f7-a2f2-ef81ce0405da"
     },
     {

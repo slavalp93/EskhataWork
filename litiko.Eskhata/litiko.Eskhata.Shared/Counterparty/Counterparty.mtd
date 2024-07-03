@@ -33,7 +33,8 @@
     }
   ],
   "HandledEvents": [
-    "CreatedServer"
+    "CreatedServer",
+    "BeforeSaveServer"
   ],
   "IconResourcesKeys": [],
   "IsAbstract": true,

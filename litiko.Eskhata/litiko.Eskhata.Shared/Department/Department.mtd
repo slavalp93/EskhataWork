@@ -31,10 +31,10 @@
           "Name": "ControlGroup",
           "ColumnDefinitions": [
             {
-              "Percentage": 55.0
+              "Percentage": 50.0
             },
             {
-              "Percentage": 45.0
+              "Percentage": 50.0
             }
           ],
           "IsAncestorMetadata": true,
@@ -84,6 +84,9 @@
       "Name": "ExternalCodelitiko",
       "CanBeSearch": false,
       "Code": "ExternalCodeli",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "Length": 100,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "f52e1279-0001-4bae-94f5-e4a045f181e4"

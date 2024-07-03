@@ -12,7 +12,7 @@ namespace litiko.NSI
 
     public override void Refresh(Sungero.Presentation.FormRefreshEventArgs e)
     {
-      _obj.State.Properties.ExternalId.IsEnabled = false;
+      //_obj.State.Properties.ExternalId.IsEnabled = false;
     }
 
   }

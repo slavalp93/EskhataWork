@@ -617,7 +617,8 @@
     }
   ],
   "HandledEvents": [
-    "CreatedServer"
+    "CreatedServer",
+    "BeforeSaveServer"
   ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "eff95720-181f-4f7d-892d-dec034c7b2ab",

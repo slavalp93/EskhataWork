@@ -4,11 +4,12 @@ using System.Linq;
 using Sungero.Core;
 using Sungero.CoreEntities;
 using litiko.Eskhata.Company;
+using System.Threading;
 
 namespace litiko.Eskhata.Client
 {
   partial class CompanyFunctions
   {
-
+    
   }
 }

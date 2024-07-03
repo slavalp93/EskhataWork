@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Exchange document</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Exchange document</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Exchange documents</value>
+  </data>
+  <data name="Property_IntegrationSystem" xml:space="preserve">
+    <value>Integration system</value>
+  </data>
+  <data name="Property_IntegrationMethod" xml:space="preserve">
+    <value>Integration method</value>
+  </data>
+  <data name="Resource_a4234aaf007d40fd9b3fee5fff8313d0" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_a4234aaf007d40fd9b3fee5fff8313d0_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_dac5a094b07f407ea80d71198fff1704" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_StatusRequestToIS" xml:space="preserve">
+    <value>Status request to IS</value>
+  </data>
+  <data name="Enum_StatusRequestToIS_Created" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="Enum_StatusRequestToIS_Sent" xml:space="preserve">
+    <value>Sent</value>
+  </data>
+  <data name="Property_StatusRequestToRX" xml:space="preserve">
+    <value>Status request to RX</value>
+  </data>
+  <data name="Enum_StatusRequestToRX_Awaiting" xml:space="preserve">
+    <value>Awaiting</value>
+  </data>
+  <data name="Enum_StatusRequestToRX_ReceivedPart" xml:space="preserve">
+    <value>Partially received</value>
+  </data>
+  <data name="Enum_StatusRequestToRX_ReceivedFull" xml:space="preserve">
+    <value>Received in full</value>
+  </data>
+  <data name="Enum_StatusRequestToIS_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Enum_StatusRequestToRX_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ControlGroup_72db81c75de54a49ade751f9a2c2c006" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_RequestToISInfo" xml:space="preserve">
+    <value>Request additional info from IS</value>
+  </data>
+  <data name="Property_RequestToRXInfo" xml:space="preserve">
+    <value>Request additional info from RX</value>
+  </data>
+  <data name="Property_RequestToRXPacketCount" xml:space="preserve">
+    <value>Count of request to RX packets</value>
+  </data>
+  <data name="Property_StatusProcessingRx" xml:space="preserve">
+    <value>Processing status</value>
+  </data>
+  <data name="Enum_StatusProcessingRx_Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="Enum_StatusProcessingRx_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Property_Counterparty" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+</root>

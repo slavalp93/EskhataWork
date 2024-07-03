@@ -219,7 +219,6 @@
       "Name": "ExternalIdlitiko",
       "CanBeSearch": false,
       "Code": "CntrExternalId",
-      "IsShowedInList": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "cbf5fb4c-9a3a-4dc2-bafe-55f1c0f119f7"
     }

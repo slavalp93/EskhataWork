@@ -67,4 +67,10 @@
   <data name="INNRezidentError" xml:space="preserve">
     <value>For resident organizations, the TIN cannot exceed 9 characters</value>
   </data>
+  <data name="INNNonRezidentPersonError" xml:space="preserve">
+    <value>For non-resident individuals, the TIN cannot exceed 12 characters</value>
+  </data>
+  <data name="INNRezidentPersonError" xml:space="preserve">
+    <value>For resident individuals, the TIN cannot exceed 9 characters</value>
+  </data>
 </root>

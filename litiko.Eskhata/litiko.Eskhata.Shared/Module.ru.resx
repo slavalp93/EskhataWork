@@ -59,12 +59,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="OKPOerror" xml:space="preserve">
-    <value>ОКПО не можен превышать 16 символов</value>
+    <value>ОКПО не может превышать 16 символов</value>
   </data>
   <data name="INNNonRezidentError" xml:space="preserve">
-    <value>Для организаций-нерезидентов ИНН не можен превышать 12 символов</value>
+    <value>Для организаций-нерезидентов ИНН не может превышать 12 символов</value>
   </data>
   <data name="INNRezidentError" xml:space="preserve">
-    <value>Для организаций-резидентов ИНН не можен превышать 9 символов</value>
+    <value>Для организаций-резидентов ИНН не может превышать 9 символов</value>
+  </data>
+  <data name="INNNonRezidentPersonError" xml:space="preserve">
+    <value>Для физических лиц-нерезидентов ИНН не может превышать 12 символов</value>
+  </data>
+  <data name="INNRezidentPersonError" xml:space="preserve">
+    <value>Для физических лиц-резидентов ИНН не может превышать 9 символов</value>
   </data>
 </root>
