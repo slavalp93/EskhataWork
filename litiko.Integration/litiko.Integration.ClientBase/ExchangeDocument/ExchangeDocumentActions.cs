@@ -7,4 +7,22 @@ using litiko.Integration.ExchangeDocument;
 
 namespace litiko.Integration.Client
 {
+  partial class ExchangeDocumentActions
+  {
+    public virtual void StartProcessingXML(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var asyncHandler = Integration.AsyncHandlers.ImportData.Create();
+      asyncHandler.ExchangeDocId = _obj.Id;
+      asyncHandler.ExecuteAsync("ImportData started","ImportData finished", "ImportData was errors", Users.Current);
+      
+      Locks.Unlock(_obj);
+    }
+
+    public virtual bool CanStartProcessingXML(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return true;
+    }
+
+  }
+
 }

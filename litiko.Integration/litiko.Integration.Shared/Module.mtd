@@ -6,7 +6,7 @@
     {
       "NameGuid": "1007271d-3b8a-4a9d-b314-f41bf1286170",
       "Name": "ImportData",
-      "DelayPeriod": 15,
+      "DelayPeriod": 5,
       "DelayStrategy": "RegularDelayStrategy",
       "IsHandlerGenerated": true,
       "MaxRetryCount": 4,
@@ -178,8 +178,8 @@
         },
         {
           "Name": "lastId",
-          "ParameterType": "global::System.Int32",
-          "ParameterTypeFullName": "System.Int32"
+          "ParameterType": "global::System.Int64",
+          "ParameterTypeFullName": "System.Int64"
         }
       ],
       "Placement": "Shared",
@@ -227,7 +227,8 @@
     "RequestXMLTemplateForBank",
     "ResponseNotReceived",
     "DataUpdatedSuccessfully",
-    "IntegrationMethodNotFound"
+    "IntegrationMethodNotFound",
+    "VersionRequestToRX_"
   ],
   "ServerAssemblyName": "litiko.Integration.Server",
   "ServerNamespace": "litiko.Integration.Server",

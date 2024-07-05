@@ -34,7 +34,7 @@ namespace litiko.Integration.Server
       if (!Locks.TryLock(exchDoc))
       {
         // При неудачной попытке делаем запись в лог и отправляем обработчик на повтор.
-        Logger.DebugFormat("{0} ExchangeDocument with id = {1} is locked. Sent to retry", logPrefix, args.ExchangeDocId);
+        Logger.ErrorFormat("{0} ExchangeDocument with id = {1} is locked. Sent to retry", logPrefix, args.ExchangeDocId);
         args.Retry = true;
         return;
       }
@@ -43,94 +43,89 @@ namespace litiko.Integration.Server
       {
         #region Собрать единый xml из частей
         Sungero.Content.IElectronicDocumentVersions versionFullXML = null;
-        if (exchDoc.RequestToRXPacketCount > 1)
+        versionFullXML = exchDoc.Versions.Where(v => v.Note == Integration.Resources.VersionRequestToRXFull && v.AssociatedApplication.Extension == "xml" && v.Body.Size > 0).FirstOrDefault();
+        if (versionFullXML == null)
         {
-          Logger.DebugFormat("{0} Creating full xml version. Packets count: {1}. {2}", logPrefix, exchDoc.RequestToRXPacketCount, logPostfix);
-          List<XElement> dataElements = new List<XElement>();
-          XElement headElement = null;
-          XElement requestElement = null;
-          List<Sungero.Content.IElectronicDocumentVersions> versionsWithPackage = new List<Sungero.Content.IElectronicDocumentVersions>();
-  
-          var i = 0;
-          while (i < exchDoc.RequestToRXPacketCount)
-          {            
-            var versionWithPackage = exchDoc.Versions.Where(v => v.Note == Integration.Resources.VersionRequestToRXFormat(i) && v.AssociatedApplication.Extension == "xml" && v.Body.Size > 0).FirstOrDefault();
-            if (versionWithPackage != null)
+          if (exchDoc.RequestToRXPacketCount > 1)
+          {
+            Logger.DebugFormat("{0} Creating full xml version. Packets count: {1}. {2}", logPrefix, exchDoc.RequestToRXPacketCount, logPostfix);
+            List<XElement> dataElements = new List<XElement>();
+            XElement headElement = null;
+            XElement requestElement = null;          
+            List<Sungero.Content.IElectronicDocumentVersions> versionsToDelete = new List<Sungero.Content.IElectronicDocumentVersions>();
+            
+            var versionsWithPackage = exchDoc.Versions.Where(v => v.Note.StartsWith(Integration.Resources.VersionRequestToRX_) && v.AssociatedApplication.Extension == "xml" && v.Body.Size > 0);
+            foreach (var versionWithPackage in versionsWithPackage)
             {
               XDocument doc = XDocument.Load(versionWithPackage.Body.Read());
               var elements = doc.Descendants("Data").Elements("element");
               dataElements.AddRange(elements);
-              
+                
               if (headElement == null && requestElement == null)
               {
-                  headElement = doc.Root.Element("head");
-                  requestElement = doc.Root.Element("request");
+                headElement = doc.Root.Element("head");
+                requestElement = doc.Root.Element("request");
               }
-              versionsWithPackage.Add(versionWithPackage);
-            }
-            else
-              Logger.DebugFormat("{0} Version with note {1} not found. {2}", logPrefix, Integration.Resources.VersionRequestToRXFormat(0), logPostfix);
-            
-            i++;
-          }          
-  
-          // Создание новой версии XML
-          if (dataElements.Any())
-          {
-            using (MemoryStream ms = new MemoryStream())
-            {            
-              XmlWriterSettings xws = new XmlWriterSettings();
-              xws.OmitXmlDeclaration = false;
-              xws.Indent = true;
-              
-              using (XmlWriter xw = XmlWriter.Create(ms, xws))
-              {
-                // Копирование структуры request без <Data>
-                XElement newRequestElement = new XElement(requestElement);
-                newRequestElement.Element("Data").Remove();
-        
-                // Создание нового элемента <Data> с объединенными элементами
-                XElement newDataElement = new XElement("Data", dataElements);
-        
-                // Добавление нового <Data> к запросу
-                newRequestElement.Add(newDataElement);
-                
-                // Создание нового XML документа
-                XDocument newDoc = new XDocument(
-                  new XDeclaration("1.0", "UTF-8", null),  
-                  new XElement("root", headElement, newRequestElement)
-                );
-                newDoc.WriteTo(xw);
-              }
-              
-              exchDoc.CreateVersionFrom(ms, "xml");
-              exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;              
-              Logger.DebugFormat("{0} Full xml version created. {1}", logPrefix, logPostfix);
-              versionFullXML = exchDoc.LastVersion;  
+              versionsToDelete.Add(versionWithPackage);
             }          
-          }
-
-          // Удаление версий с пакетами
-          foreach (var version in versionsWithPackage)          
-            exchDoc.DeleteVersion(version);
-        }
-        else
-        {
-          var VersionWithPackage = exchDoc.Versions.Where(v => v.Note == Integration.Resources.VersionRequestToRXFormat(0) && v.AssociatedApplication.Extension == "xml" && v.Body.Size > 0).FirstOrDefault();
-          if (VersionWithPackage == null)
-          {            
-            Logger.DebugFormat("{0} Version with note {1} not found. {2}", logPrefix, Integration.Resources.VersionRequestToRXFormat(0), logPostfix);
+    
+            // Создание новой версии XML
+            if (dataElements.Any())
+            {
+              using (MemoryStream ms = new MemoryStream())
+              {            
+                XmlWriterSettings xws = new XmlWriterSettings();
+                xws.OmitXmlDeclaration = false;
+                xws.Indent = true;
+                
+                using (XmlWriter xw = XmlWriter.Create(ms, xws))
+                {
+                  // Копирование структуры request без <Data>
+                  XElement newRequestElement = new XElement(requestElement);
+                  newRequestElement.Element("Data").Remove();
+          
+                  // Создание нового элемента <Data> с объединенными элементами
+                  XElement newDataElement = new XElement("Data", dataElements);
+          
+                  // Добавление нового <Data> к запросу
+                  newRequestElement.Add(newDataElement);
+                  
+                  // Создание нового XML документа
+                  XDocument newDoc = new XDocument(
+                    new XDeclaration("1.0", "UTF-8", null),  
+                    new XElement("root", headElement, newRequestElement)
+                  );
+                  newDoc.WriteTo(xw);
+                }
+                
+                exchDoc.CreateVersionFrom(ms, "xml");
+                exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;              
+                Logger.DebugFormat("{0} Full xml version created. {1}", logPrefix, logPostfix);
+                versionFullXML = exchDoc.LastVersion;  
+              }
+              
+              // Удаление версий с пакетами
+              foreach (var version in versionsToDelete)          
+                exchDoc.DeleteVersion(version);              
+            }
           }
           else
           {
-            VersionWithPackage.Note = Integration.Resources.VersionRequestToRXFull;            
-            versionFullXML = VersionWithPackage;
-          }            
-        }
-        
-        if (exchDoc.State.IsChanged)
-          exchDoc.Save();
-        
+            var VersionWithPackage = exchDoc.Versions.Where(v => v.Note.StartsWith(Integration.Resources.VersionRequestToRX_) && v.AssociatedApplication.Extension == "xml" && v.Body.Size > 0).FirstOrDefault();
+            if (VersionWithPackage == null)
+            {            
+              Logger.DebugFormat("{0} Version with note starts with {1} not found. {2}", logPrefix, Integration.Resources.VersionRequestToRX_, logPostfix);
+            }
+            else
+            {
+              VersionWithPackage.Note = Integration.Resources.VersionRequestToRXFull;            
+              versionFullXML = VersionWithPackage;
+            }            
+          }
+          
+          if (exchDoc.State.IsChanged)
+            exchDoc.Save();        
+        }        
         #endregion
         
         #region Обработка данных в зависимости от метода интеграции, указанного в xml

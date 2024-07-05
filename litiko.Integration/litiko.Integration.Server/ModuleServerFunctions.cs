@@ -27,7 +27,7 @@ namespace litiko.Integration.Server
     /// <param name="lastId">0 - новый запрос, >0 - запрос очередной части предыдущего запроса</param></param>
     /// <returns>Строка с ошибкой или пустая строка</returns>
     [Public, Remote]
-    public string SendRequestToIS(IIntegrationMethod method, IExchangeDocument exchDoc, int lastId)
+    public string SendRequestToIS(IIntegrationMethod method, IExchangeDocument exchDoc, long lastId)
     {
       var errorMessage = string.Empty;
       
@@ -152,7 +152,7 @@ namespace litiko.Integration.Server
         long session_id;
         var dictionary = string.Empty;
         var lastId_str = string.Empty;
-        int lastId;
+        long lastId;
         var invalidParamValue = "???";
         
         XmlDocument xmlDoc = new XmlDocument();
@@ -184,7 +184,7 @@ namespace litiko.Integration.Server
         else
           lastId_str = lastId_Node.InnerText;
         
-        if (!int.TryParse(lastId_str, out lastId))
+        if (!long.TryParse(lastId_str, out lastId))
           return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, "Invalid value in lastId"));        
         
         XmlNode data_Node = root.SelectSingleNode("//request/Data");
@@ -309,7 +309,7 @@ namespace litiko.Integration.Server
               Logger.DebugFormat("Department with ExternalId:{0} was found. Id:{1}, Name:{2}", isId, department.Id, department.Name);
             else
             {              
-              if (isState == "Active")
+              if (isState == "1")
               {
                 department = Eskhata.Departments.Create();
                 department.ExternalId = isId;
@@ -324,7 +324,7 @@ namespace litiko.Integration.Server
               
             if (department != null)
             {
-              if (isState == "Closed")
+              if (isState == "0")
               {
                 if (Equals(department.Status, Eskhata.Department.Status.Active))
                 {
@@ -487,7 +487,7 @@ namespace litiko.Integration.Server
 
             if(!string.IsNullOrEmpty(isNuRezident))
             {
-              bool isNuRezidentBool = bool.Parse(isNuRezident);
+              bool isNuRezidentBool = isNuRezident == "1" ? true : false;
               if(businessUnit.NUNonrezidentlitiko != !isNuRezidentBool)
               {
                 Logger.DebugFormat("Change NUNonrezidentlitiko: current:{0}, new:{1}", businessUnit.NUNonrezidentlitiko, !isNuRezidentBool);
@@ -497,7 +497,7 @@ namespace litiko.Integration.Server
             
             if(!string.IsNullOrEmpty(isRezident))
             {
-              bool isRezidentBool = bool.Parse(isRezident);
+              bool isRezidentBool = isRezident == "1" ? true : false;
               if(businessUnit.Nonresident != !isRezidentBool)
               {
                 Logger.DebugFormat("Change Nonresident: current:{0}, new:{1}", businessUnit.Nonresident, !isRezidentBool);
@@ -713,7 +713,8 @@ namespace litiko.Integration.Server
           var isPhone = element.Element("Phone")?.Value;
           var isJobTittle = element.Element("JobTitle");
           var isPerson = element.Element("FASE");          
-          
+          var isEmployeeEmail = element.Element("FASE").Element("Email")?.Value;
+            
           try
           {                        
             if (string.IsNullOrEmpty(isId) || string.IsNullOrEmpty(isState) || string.IsNullOrEmpty(isFirstNameRu) || string.IsNullOrEmpty(isLastNameRu) || string.IsNullOrEmpty(isDepartmentID))
@@ -724,7 +725,7 @@ namespace litiko.Integration.Server
               Logger.DebugFormat("Employee with ExternalId:{0} was found. Id:{1}, Name:{2}", isId, employee.Id, employee.Name);
             else
             {              
-              if (isState == "Active")
+              if (isState == "1")
               {
                 employee = Sungero.Company.Employees.Create();
                 employee.ExternalId = isId;
@@ -739,7 +740,7 @@ namespace litiko.Integration.Server
             
             if (employee != null)
             {
-              if (isState == "Closed")
+              if (isState == "0")
               {
                 if (Equals(employee.Status, Sungero.Company.Employee.Status.Active))
                 {
@@ -799,6 +800,32 @@ namespace litiko.Integration.Server
                 employee.Person = person;                
               }                              
               
+              
+              if (!string.IsNullOrEmpty(isEmployeeEmail) && employee.Email != isEmployeeEmail)
+              {                
+                Logger.DebugFormat("Change Email: current:{0}, new:{1}", employee.Email, isEmployeeEmail);
+                employee.Email = isEmployeeEmail;                   
+              }
+              
+              bool needNotify = !string.IsNullOrEmpty(employee.Email) ? true : false;
+              if (employee.NeedNotifyAssignmentsSummary != needNotify)
+              {
+                Logger.DebugFormat("Change NeedNotifyAssignmentsSummary: current:{0}, new:{1}", employee.NeedNotifyAssignmentsSummary, needNotify);
+                employee.NeedNotifyAssignmentsSummary = needNotify;
+              }
+
+              if (employee.NeedNotifyExpiredAssignments != needNotify)
+              {
+                Logger.DebugFormat("Change NeedNotifyExpiredAssignments: current:{0}, new:{1}", employee.NeedNotifyExpiredAssignments, needNotify);
+                employee.NeedNotifyExpiredAssignments = needNotify;
+              }
+
+              if (employee.NeedNotifyNewAssignments != needNotify)
+              {
+                Logger.DebugFormat("Change NeedNotifyNewAssignments: current:{0}, new:{1}", employee.NeedNotifyNewAssignments, needNotify);
+                employee.NeedNotifyNewAssignments = needNotify;
+              }
+              
               if (employee.State.IsInserted || employee.State.IsChanged)
               {
                 employee.Save();                                          
@@ -818,7 +845,7 @@ namespace litiko.Integration.Server
           }
           catch (Exception ex)
           {
-            var errorMessage = string.Format("Error when processing BusinessUnit with ExternalId:{0}. Description: {1}. StackTrace: {2}", isId, ex.Message, ex.StackTrace);
+            var errorMessage = string.Format("Error when processing Employee with ExternalId:{0}. Description: {1}. StackTrace: {2}", isId, ex.Message, ex.StackTrace);
             Logger.Error(errorMessage);
             errorList.Add(errorMessage);
             countErrors++;
@@ -910,7 +937,7 @@ namespace litiko.Integration.Server
               country.INamelitiko = isINAME;              
             }  
 
-            bool isOffShareBool = bool.Parse(isOFFSHARE);          
+            bool isOffShareBool = isOFFSHARE == "1" ? true : false;
             if(country.IsOffsharelitiko != isOffShareBool)
             {
               Logger.DebugFormat("Change IsOffsharelitiko: current:{0}, new:{1}", country.IsOffsharelitiko, isOffShareBool);
@@ -1196,7 +1223,7 @@ namespace litiko.Integration.Server
             
             if(!string.IsNullOrEmpty(isHighRisk))
             {
-              bool isHighRiskBool = bool.Parse(isHighRisk);
+              bool isHighRiskBool = isHighRisk == "1" ? true : false;
               if(entity.IsHighRisk != isHighRiskBool)
               {
                 Logger.DebugFormat("Change IsHighRisk: current:{0}, new:{1}", entity.IsHighRisk, isHighRiskBool);
@@ -1206,7 +1233,7 @@ namespace litiko.Integration.Server
                        
             if(!string.IsNullOrEmpty(isLicensing))
             {
-              bool isLicensingBool = bool.Parse(isLicensing);
+              bool isLicensingBool = isLicensing == "1" ? true : false;
               if(entity.IsLicensing != isLicensingBool)
               {
                 Logger.DebugFormat("Change IsLicensing: current:{0}, new:{1}", entity.IsLicensing, isLicensingBool);
@@ -1745,7 +1772,7 @@ namespace litiko.Integration.Server
 
         if(!string.IsNullOrEmpty(isNuRezident))
         {
-          bool isNuRezidentBool = bool.Parse(isNuRezident);
+          bool isNuRezidentBool = isNuRezident == "1" ? true : false;
           if(company.NUNonrezidentlitiko != !isNuRezidentBool)
           {
             Logger.DebugFormat("Change NUNonrezidentlitiko: current:{0}, new:{1}", company.NUNonrezidentlitiko, !isNuRezidentBool);
@@ -1755,7 +1782,7 @@ namespace litiko.Integration.Server
             
         if(!string.IsNullOrEmpty(isRezident))
         {
-          bool isRezidentBool = bool.Parse(isRezident);
+          bool isRezidentBool = isRezident == "1" ? true : false;
           if(company.Nonresident != !isRezidentBool)
           {
             Logger.DebugFormat("Change Nonresident: current:{0}, new:{1}", company.Nonresident, !isRezidentBool);
@@ -2071,7 +2098,7 @@ namespace litiko.Integration.Server
         
         if(!string.IsNullOrEmpty(isNuRezident))
         {
-          bool isNuRezidentBool = bool.Parse(isNuRezident);
+          bool isNuRezidentBool = isNuRezident == "1" ? true : false;
           if(bank.NUNonrezidentlitiko != !isNuRezidentBool)
           {
             Logger.DebugFormat("Change NUNonrezidentlitiko: current:{0}, new:{1}", bank.NUNonrezidentlitiko, !isNuRezidentBool);
@@ -2081,7 +2108,7 @@ namespace litiko.Integration.Server
             
         if(!string.IsNullOrEmpty(isRezident))
         {
-          bool isRezidentBool = bool.Parse(isRezident);
+          bool isRezidentBool = isRezident == "1" ? true : false;
           if(bank.Nonresident != !isRezidentBool)
           {
             Logger.DebugFormat("Change Nonresident: current:{0}, new:{1}", bank.Nonresident, !isRezidentBool);
@@ -2109,7 +2136,7 @@ namespace litiko.Integration.Server
 
         if(!string.IsNullOrEmpty(isIsSettlements))
         {
-          bool isIsSettlementsBool = bool.Parse(isIsSettlements);
+          bool isIsSettlementsBool = isIsSettlements == "1" ? true : false;
           if(bank.SettlParticipantlitiko != isIsSettlementsBool)
           {
             Logger.DebugFormat("Change SettlParticipantlitiko: current:{0}, new:{1}", bank.SettlParticipantlitiko, isIsSettlementsBool);
@@ -2119,7 +2146,7 @@ namespace litiko.Integration.Server
 
         if(!string.IsNullOrEmpty(isIsLoroCorrespondent))
         {
-          bool isIsLoroCorrespondentBool = bool.Parse(isIsLoroCorrespondent);
+          bool isIsLoroCorrespondentBool = isIsLoroCorrespondent == "1" ? true : false;
           if(bank.LoroCorrespondentlitiko != isIsLoroCorrespondentBool)
           {
             Logger.DebugFormat("Change LoroCorrespondentlitiko: current:{0}, new:{1}", bank.LoroCorrespondentlitiko, isIsLoroCorrespondentBool);
@@ -2129,7 +2156,7 @@ namespace litiko.Integration.Server
 
         if(!string.IsNullOrEmpty(isIsNostroCorrespondent))
         {
-          bool isIsNostroCorrespondentBool = bool.Parse(isIsNostroCorrespondent);
+          bool isIsNostroCorrespondentBool = isIsNostroCorrespondent == "1" ? true : false;
           if(bank.NostroCorrespondentlitiko != isIsNostroCorrespondentBool)
           {
             Logger.DebugFormat("Change NostroCorrespondentlitiko: current:{0}, new:{1}", bank.NostroCorrespondentlitiko, isIsNostroCorrespondentBool);
@@ -2432,7 +2459,7 @@ namespace litiko.Integration.Server
 
       if(!string.IsNullOrEmpty(isNuRezident))
       {
-        bool isNuRezidentBool = bool.Parse(isNuRezident);
+        bool isNuRezidentBool = isNuRezident == "1" ? true : false;
         if(person.NUNonrezidentlitiko != !isNuRezidentBool)
         {
           Logger.DebugFormat("Change NUNonrezidentlitiko: current:{0}, new:{1}", person.NUNonrezidentlitiko, !isNuRezidentBool);
@@ -2442,7 +2469,7 @@ namespace litiko.Integration.Server
             
       if(!string.IsNullOrEmpty(isRezident))
       {
-        bool isRezidentBool = bool.Parse(isRezident);
+        bool isRezidentBool = isRezident == "1" ? true : false;
         if(person.Nonresident != !isRezidentBool)
         {
           Logger.DebugFormat("Change Nonresident: current:{0}, new:{1}", person.Nonresident, !isRezidentBool);

@@ -146,4 +146,7 @@
   <data name="IntegrationMethodNotFound" xml:space="preserve">
     <value>Integration method {0} not found.</value>
   </data>
+  <data name="VersionRequestToRX_" xml:space="preserve">
+    <value>RequestToRX_</value>
+  </data>
 </root>

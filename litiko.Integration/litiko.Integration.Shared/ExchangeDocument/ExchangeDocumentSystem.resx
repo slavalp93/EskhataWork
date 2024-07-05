@@ -133,4 +133,22 @@
   <data name="Property_Counterparty" xml:space="preserve">
     <value>Counterparty</value>
   </data>
+  <data name="Action_StartProcessingXML" xml:space="preserve">
+    <value>Start processing XML</value>
+  </data>
+  <data name="Action_StartProcessingXMLDescription" xml:space="preserve">
+    <value>Start processing XML</value>
+  </data>
+  <data name="Action_StartProcessingXMLHint" xml:space="preserve">
+    <value>Start processing XML</value>
+  </data>
+  <data name="Action_StartProcessingXMLConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_StartProcessingXMLConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Group_314bba1b43e4404a9e80e4976afce26b" xml:space="preserve">
+    <value>Processing XML</value>
+  </data>
 </root>
