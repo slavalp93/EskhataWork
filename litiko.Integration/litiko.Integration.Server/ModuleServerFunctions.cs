@@ -300,7 +300,7 @@ namespace litiko.Integration.Server
             if (!string.IsNullOrEmpty(isMainDepartmentID))
             {
               mainDepartment = Eskhata.Departments.GetAll().Where(d => d.ExternalId == isMainDepartmentID).FirstOrDefault();
-              if (mainDepartment == null)
+              if (mainDepartment == null && isState == "1")
                 throw AppliedCodeException.Create(string.Format("The parent department with ID={0} was not found.", isMainDepartmentID));
             }
             

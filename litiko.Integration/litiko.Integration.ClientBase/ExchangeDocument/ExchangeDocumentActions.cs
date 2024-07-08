@@ -15,7 +15,8 @@ namespace litiko.Integration.Client
       asyncHandler.ExchangeDocId = _obj.Id;
       asyncHandler.ExecuteAsync("ImportData started","ImportData finished", "ImportData was errors", Users.Current);
       
-      Locks.Unlock(_obj);
+      if (Locks.GetLockInfo(_obj).IsLockedByMe)
+        Locks.Unlock(_obj);
     }
 
     public virtual bool CanStartProcessingXML(Sungero.Domain.Client.CanExecuteActionArgs e)

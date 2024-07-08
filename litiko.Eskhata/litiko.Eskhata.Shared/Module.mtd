@@ -39,6 +39,11 @@
       "Id": "d534e107-a54d-48ec-85ff-bc44d731a82f",
       "MaxVersion": "",
       "MinVersion": "4.8.138.0"
+    },
+    {
+      "Id": "10731f77-ea04-4ba8-b1c2-e680f9fa88ad",
+      "MaxVersion": "",
+      "MinVersion": "4.8.0.9"
     }
   ],
   "DesktopViews": [],
@@ -105,7 +110,7 @@
   "SharedAssemblyName": "litiko.Eskhata.Shared",
   "SharedNamespace": "litiko.Eskhata.Shared",
   "SpecialFolders": [],
-  "Version": "4.8.138.2",
+  "Version": "4.8.138.3",
   "Widgets": [],
   "Versions": [
     {
