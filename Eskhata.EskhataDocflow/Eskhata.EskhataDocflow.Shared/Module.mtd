@@ -1,0 +1,96 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "c464eb37-942f-4270-964f-8d1d1e146581",
+  "Name": "EskhataDocflow",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "Eskhata.EskhataDocflow.Client",
+  "ClientBaseAssemblyName": "Eskhata.EskhataDocflow.ClientBase",
+  "ClientBaseNamespace": "Eskhata.EskhataDocflow.ClientBase",
+  "ClientNamespace": "Eskhata.EskhataDocflow.Client",
+  "Code": "Eskhata",
+  "CompanyCode": "Eskhata",
+  "Cover": {
+    "NameGuid": "c309c3c8-4e48-496f-b639-3c786a64f545",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "d94e3e0f-27ea-438a-b192-6933e3b7785f",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "42291764-c031-4566-8260-32d78dd92e64",
+      "BackgroundPosition": "Stretch"
+    },
+    "Tabs": []
+  },
+  "Dependencies": [
+    {
+      "Id": "78d05f91-7585-42b9-addc-5b14478d4680",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "8c4372ae-f7c6-45e0-8f06-0ee3650b62e7"
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "Eskhata.EskhataDocflow",
+  "IsolatedAssemblyName": "Eskhata.EskhataDocflow.Isolated",
+  "IsolatedNamespace": "Eskhata.EskhataDocflow.Isolated",
+  "IsVisible": false,
+  "Overridden": [
+    "IsVisible"
+  ],
+  "PublicConstants": [
+    {
+      "Name": "Addendum",
+      "ParentClasses": [
+        "Module",
+        "DocumentTypeGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"58b9ed35-9c84-46cd-aa79-9b5ef5a82f5d\")"
+    },
+    {
+      "Name": "Checklist",
+      "ParentClasses": [
+        "Module",
+        "DocumentKindGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"125a38e1-a9f0-46b9-9103-ed7f9912343d\")"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "Eskhata.EskhataDocflow",
+  "ResourcesKeys": [
+    "ChecklistKindName"
+  ],
+  "ServerAssemblyName": "Eskhata.EskhataDocflow.Server",
+  "ServerNamespace": "Eskhata.EskhataDocflow.Server",
+  "SharedAssemblyName": "Eskhata.EskhataDocflow.Shared",
+  "SharedNamespace": "Eskhata.EskhataDocflow.Shared",
+  "SpecialFolders": [],
+  "Version": "0.0.1.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}
