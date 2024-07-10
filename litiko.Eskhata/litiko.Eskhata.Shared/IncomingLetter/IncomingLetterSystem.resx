@@ -58,37 +58,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ChecklistKindName" xml:space="preserve">
-    <value>Регистрационно-контрольный лист</value>
+  <data name="Property_Category" xml:space="preserve">
+    <value>Category</value>
   </data>
-  <data name="IncomingCorrespondence" xml:space="preserve">
-    <value>Входящая корреспонденция</value>
+  <data name="Property_ReceivedTo" xml:space="preserve">
+    <value>Received to</value>
   </data>
-  <data name="IncomingCorrespondenceExecutive" xml:space="preserve">
-    <value>Входящая корреспонденция от исполнительных органов</value>
+  <data name="Property_RegistrationDepartment" xml:space="preserve">
+    <value>Registration department</value>
   </data>
-  <data name="IncomingCorrespondenceTax" xml:space="preserve">
-    <value>Входящая корреспонденция от налогового комитета</value>
+  <data name="Property_AddresseeDepartment" xml:space="preserve">
+    <value>Addressee departments</value>
   </data>
-  <data name="IncomingCorrespondenceNBT" xml:space="preserve">
-    <value>Входящая корреспонденция от НБТ</value>
+  <data name="Resource_e3ff64d6224e4699a1cb1be6371c5342" xml:space="preserve">
+    <value />
   </data>
-  <data name="IncomingCorrespondenceBranches" xml:space="preserve">
-    <value>Входящая корреспонденция от филиалов</value>
+  <data name="Control_e3ff64d6224e4699a1cb1be6371c5342_EmptyText" xml:space="preserve">
+    <value />
   </data>
-  <data name="IncomingLettersCitizens" xml:space="preserve">
-    <value>Входящие письма/ обращения граждан</value>
+  <data name="Resource_04c061290f38437481b6b94334b50a07" xml:space="preserve">
+    <value />
   </data>
-  <data name="IncomingLettersOrganisations" xml:space="preserve">
-    <value>Входящие письма/ обращения организаций</value>
+  <data name="Control_04c061290f38437481b6b94334b50a07_EmptyText" xml:space="preserve">
+    <value />
   </data>
-  <data name="IncomingCorrespondenceHeadOffice" xml:space="preserve">
-    <value>Входящая корреспонденция адресованная в ГО</value>
+  <data name="Control_fc50c88831554ff196e8ff7064894ead_EmptyText" xml:space="preserve">
+    <value />
   </data>
-  <data name="OutgoingCorrespondenceNBT" xml:space="preserve">
-    <value>Исходящая корреспонденция в НБТ</value>
+  <data name="Resource_fc50c88831554ff196e8ff7064894ead" xml:space="preserve">
+    <value />
   </data>
-  <data name="OutgoingCorrespondence" xml:space="preserve">
-    <value>Исходящая корреспонденция</value>
+  <data name="Resource_fe993de5cfae4063940f65e2630453d3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_fe993de5cfae4063940f65e2630453d3_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_ddf41ead829a4a3f8d12d40a52b7440c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_ddf41ead829a4a3f8d12d40a52b7440c_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_f0607051ea774af2b7966d11cd8a7374" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_f0607051ea774af2b7966d11cd8a7374_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_a915c070568d4f08a7365fbdabe9e559" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_a915c070568d4f08a7365fbdabe9e559_EmptyText" xml:space="preserve">
+    <value />
   </data>
 </root>

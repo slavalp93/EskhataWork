@@ -61,4 +61,34 @@
   <data name="ChecklistKindName" xml:space="preserve">
     <value>Checklist</value>
   </data>
+  <data name="IncomingCorrespondence" xml:space="preserve">
+    <value>Incoming correspondence</value>
+  </data>
+  <data name="IncomingCorrespondenceExecutive" xml:space="preserve">
+    <value>Incoming correspondence from executive bodies</value>
+  </data>
+  <data name="IncomingCorrespondenceTax" xml:space="preserve">
+    <value>Incoming correspondence from the tax committee</value>
+  </data>
+  <data name="IncomingCorrespondenceNBT" xml:space="preserve">
+    <value>Incoming correspondence from the NBT</value>
+  </data>
+  <data name="IncomingCorrespondenceBranches" xml:space="preserve">
+    <value>Incoming correspondence from branches</value>
+  </data>
+  <data name="IncomingLettersCitizens" xml:space="preserve">
+    <value>Incoming letters/citizen appeals</value>
+  </data>
+  <data name="IncomingLettersOrganisations" xml:space="preserve">
+    <value>Incoming letters/inquiries from organisations</value>
+  </data>
+  <data name="IncomingCorrespondenceHeadOffice" xml:space="preserve">
+    <value>Incoming correspondence addressed to the Head Office</value>
+  </data>
+  <data name="OutgoingCorrespondenceNBT" xml:space="preserve">
+    <value>Outgoing correspondence to the NBT</value>
+  </data>
+  <data name="OutgoingCorrespondence" xml:space="preserve">
+    <value>Outgoing correspondence</value>
+  </data>
 </root>

@@ -58,37 +58,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ChecklistKindName" xml:space="preserve">
-    <value>Регистрационно-контрольный лист</value>
-  </data>
-  <data name="IncomingCorrespondence" xml:space="preserve">
-    <value>Входящая корреспонденция</value>
-  </data>
-  <data name="IncomingCorrespondenceExecutive" xml:space="preserve">
-    <value>Входящая корреспонденция от исполнительных органов</value>
-  </data>
-  <data name="IncomingCorrespondenceTax" xml:space="preserve">
-    <value>Входящая корреспонденция от налогового комитета</value>
-  </data>
-  <data name="IncomingCorrespondenceNBT" xml:space="preserve">
-    <value>Входящая корреспонденция от НБТ</value>
-  </data>
-  <data name="IncomingCorrespondenceBranches" xml:space="preserve">
-    <value>Входящая корреспонденция от филиалов</value>
-  </data>
-  <data name="IncomingLettersCitizens" xml:space="preserve">
-    <value>Входящие письма/ обращения граждан</value>
-  </data>
-  <data name="IncomingLettersOrganisations" xml:space="preserve">
-    <value>Входящие письма/ обращения организаций</value>
-  </data>
-  <data name="IncomingCorrespondenceHeadOffice" xml:space="preserve">
-    <value>Входящая корреспонденция адресованная в ГО</value>
-  </data>
-  <data name="OutgoingCorrespondenceNBT" xml:space="preserve">
-    <value>Исходящая корреспонденция в НБТ</value>
-  </data>
-  <data name="OutgoingCorrespondence" xml:space="preserve">
-    <value>Исходящая корреспонденция</value>
+  <data name="Property_NameTj" xml:space="preserve">
+    <value>Name (tj)</value>
   </data>
 </root>
