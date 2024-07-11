@@ -178,7 +178,7 @@
           "Name": "Category",
           "ColumnNumber": 0,
           "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
           "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
           "PropertyGuid": "29df8f33-691c-4943-8219-9e2ccaf73a3b",
           "RowNumber": 2,
@@ -291,11 +291,13 @@
       ]
     },
     {
-      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
       "NameGuid": "29df8f33-691c-4943-8219-9e2ccaf73a3b",
       "Name": "Category",
       "Code": "Category",
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "EntityGuid": "3f34d04c-0ada-48f9-a4c6-4e88e52a2c72",
+      "FlatListInStandaloneLookup": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "7117b3fd-2c53-4336-bae4-dd580de20646"
     },
     {
