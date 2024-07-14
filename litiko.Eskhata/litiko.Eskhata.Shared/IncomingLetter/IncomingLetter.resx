@@ -58,4 +58,57 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="RegistrationStampEskhata" xml:space="preserve">
+    <value>&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+
+&lt;head&gt;
+    &lt;style type="text/css"&gt;
+        .box {
+            padding-left: 1.5px;
+            padding-right: 1.5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border: 4px solid #d7d7d7;
+            border-color: #003f75;
+            width: 60mm;
+            height: 22mm;
+        }
+
+        .stamp-text {
+            font-size: 11pt;
+            font-family: Arial, "Segoe UI", Consolas, Calibri,
+                monospace;
+            line-height: 1.5;
+            color: #003f75;
+            --white-space: pre-wrap;
+            width: 100%;
+            text-align: center;
+            margin: auto;
+        }
+
+        .holder {
+            display: flex;
+            --align-items: center;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body style="margin: 0"&gt;
+    &lt;div class="box"&gt;
+        &lt;div class="holder"&gt;
+
+            &lt;img width="30" height="30"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAiCAYAAADRcLDBAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAASdSURBVFhHzZd/TNRlHMff94O7g4PzgFOEwBsIQwkEMj0YFktatjJQY6wJ6UizWhJbtdYvaw3cGm6tkk35I9uyX1gNZ6upkSVhGBFBIaeQTRSUnyK/4Q6Onuf5Pnfc9w7uAG9nr+3ZPZ/nC3fv+3w+z+fzOck0AXeYOUXQ47GJKbR1DOD0uStovtyH2r9v8KeLJ3tTLF572gCpVMJP5hAxOGzCb39dx9enWlDf3IXJKQt/cvvMJkLKX20Mj5rxwdE/8NbBavbNPSlgLkQibg2Oo2B/JY7/2IpxEgpvYRMxOj6J/WXn0WDshsUijpDCR4pAjYpb7gnWqrAiNGDWFbTE+X1sOVFR2YqSj2qJBybZAwqNW9zKYGSk6hGq88er753lTwRiI4PQ2tbvJDrzgWjkb4uHXO4Ubfj7KqDVKLklwP6q79YYysobRQIoWRkxKC68Dzu3xGNdwnJ+OsOLO+/F7scToFTI+YlATUMHVEo5wkMCnJajAAoT8XFFE7r6RtgBRSKRICNFj9f3GKAP02Amj8WE6NTYk5OErI3R/ESgp38Mh75s4JZ7mIiquqvMsBKj16KocAPkMmd3OiKTSbA3Nxl3R+v4iQCtLdTD84F9yqa0KGx/dDVbuZvj8Pz2ZKgcXOyKALUChTvWwk81I5qG9uzv7dxyDfuv3dkJeOHJtWwV5N2DtOS7SEjY83kTow/Eyohgbgk0XOziO9e47B3fnG5B8eEabi2e1eSGZT8UiwfJLaNec/yC7oPuAYyk7xQd+hVvvF+FxkvdpC/xBxyviLBSXd+BA6QW9faP8hMBr4qgGP+9yYqiPS5zoqquHUdPXGB7s3mKuLKH7a3Ex+hYUaJMTlpY9RwZMzObQsv30kA/XOscEp1TPj+wmeUKhYmoa+qExU5LVLgWukBfbgncHBhHRn45twSOl25lxYzS2TuCXW+exPXuYWZT8h6LQ15mHCpr2nCYFC/aoa3kbyM3ktxECgtHyZFakjS/2NZXpy6JRM2HH0hx6uyZqbqUlMRQhASrsYWU/zWxy/ipwD/EayaT0KmZCBlpVL2k1FrXF98Z0U5cOF+ukOmr7FijSHgoKemGxDC2V/v6IGaFlu2t0K5tIiGkMBE5D69i/cLK0IgJL5f8zK6WO49QAUWkltjHXCabxrNPJNnKPh2M+gcn2N4KLfdSfi3YyyP3R2G9Q5ekSfZ26Tl8+9NlTHC3OXLm/FXs+7CazSD2rIpcivR1EdwCrt0YQr1RXD1pmKxJbbsddJAtKK5kCWiPUiFDxHINUpJC8emJZn4qQIcdk1k8/lGH7siKJyLCSfeV4AJ53/LvSXi7hkRF6p29acjk3dcmgg4mn5DrONtc4WmWBfmi4uBW+JFcofCokA1JTtpBn8lJXNAot1CW+Cvxyi6DTQDFJoLiQ8axXHK39z2XyqYgTyMlsaJ1I339TL5QXFbM0s/+xLGTF8l1msC0RaR3YZA80ah98O5L6TCsEa6tPS5FUAbID6Gmlh5S8/sWnSuRpAKnJoXNOmlT3IrwBrfhY8/BPLFh4xFuep/qM09ZPbHAgdLDcBF3Ni3+B4kJ/AdJi851X7VcvwAAAABJRU5ErkJggg=="&gt;
+
+            &lt;div class="stamp-text" style="margin-left:1.5px;margin-right:1.5px"&gt;
+                ҶСК "БОНКИ ЭСХАТА"&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="stamp-text"&gt;ВОРИДОТ № {RegNumber}&lt;/div&gt;
+        &lt;div class="stamp-text"&gt;{RegDate}&lt;/div&gt;
+    &lt;/div&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;</value>
+  </data>
 </root>

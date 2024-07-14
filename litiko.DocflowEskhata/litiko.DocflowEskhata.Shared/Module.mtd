@@ -46,6 +46,10 @@
   "InterfaceNamespace": "litiko.DocflowEskhata",
   "IsolatedAssemblyName": "litiko.DocflowEskhata.Isolated",
   "IsolatedNamespace": "litiko.DocflowEskhata.Isolated",
+  "IsVisible": false,
+  "Overridden": [
+    "IsVisible"
+  ],
   "PublicConstants": [
     {
       "Name": "Addendum",

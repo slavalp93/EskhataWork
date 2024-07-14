@@ -9,6 +9,6 @@ namespace litiko.Eskhata.Shared
 {
   partial class IncomingLetterFunctions
   {
-
+    
   }
 }

@@ -112,4 +112,19 @@
   <data name="Control_a915c070568d4f08a7365fbdabe9e559_EmptyText" xml:space="preserve">
     <value />
   </data>
+  <data name="Action_CreateChecklist" xml:space="preserve">
+    <value>Create checklist</value>
+  </data>
+  <data name="Action_CreateChecklistDescription" xml:space="preserve">
+    <value>Create checklist</value>
+  </data>
+  <data name="Action_CreateChecklistHint" xml:space="preserve">
+    <value>Create checklist</value>
+  </data>
+  <data name="Action_CreateChecklistConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateChecklistConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
 </root>
