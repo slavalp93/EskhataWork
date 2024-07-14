@@ -10,33 +10,91 @@ namespace litiko.Integration.Server
   {
 
     /// <summary>
+    /// 
+    /// </summary>
+    public virtual void GetOKVED()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_OKVED");        
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void GetOKOPF()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_OKOPF");       
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void GetOKONH()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_OKONH");         
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void GetOKFS()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_OKFS");         
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void GetMaterialStatuses()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_MARITALSTATUSES");       
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void GetEcolog()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_ECOLOG");       
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void GetCountries()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_COUNTRIES");      
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void GetCompanyKinds()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_COMPANYKINDS");
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void GetEmployees()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_EMPLOYEES");            
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void GetBusinessUnits()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_BUSINESSUNITS");                  
+    }
+
+    /// <summary>
     /// Запрос подразделений из интегрируемой системы
     /// </summary>
     public virtual void GetDepartments()
     {                
-      string integrationMethodName = "R_DR_GET_DEPART";
-      int lastId = 0;
-            
-      var integrationMethod = IntegrationMethods.GetAll().Where(x => x.Name == integrationMethodName).FirstOrDefault();
-      if (integrationMethod == null)
-        throw AppliedCodeException.Create(string.Format("Integration method {0} not found", integrationMethodName));
-      
-      // Проверить, есть ли документы обмена, на которые еще не получен ответ
-      var exchDocs = ExchangeDocuments.GetAll().Where(d => d.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.Awaiting || d.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart
-                                                     && Equals(d.IntegrationMethod, integrationMethod)).Select(d => d.Id);
-      if (exchDocs.Any())
-      {
-        Logger.DebugFormat("Pending requests found: {0}", exchDocs.ToString());
-        return;
-      }
-            
-      var exchDoc = Integration.ExchangeDocuments.Create();
-      exchDoc.IntegrationMethod = integrationMethod;      
-      exchDoc.Save();
-      
-      var errorMessage = Functions.Module.SendRequestToIS(integrationMethod, exchDoc, lastId);            
-      if (!string.IsNullOrEmpty(errorMessage))
-        throw AppliedCodeException.Create(errorMessage);
+      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_DEPART");
     }
 
   }

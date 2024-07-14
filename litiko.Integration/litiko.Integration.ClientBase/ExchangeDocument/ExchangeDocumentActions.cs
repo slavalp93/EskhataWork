@@ -11,12 +11,12 @@ namespace litiko.Integration.Client
   {
     public virtual void StartProcessingXML(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      var asyncHandler = Integration.AsyncHandlers.ImportData.Create();
-      asyncHandler.ExchangeDocId = _obj.Id;
-      asyncHandler.ExecuteAsync("ImportData started","ImportData finished", "ImportData was errors", Users.Current);
-      
       if (Locks.GetLockInfo(_obj).IsLockedByMe)
         Locks.Unlock(_obj);
+      
+      var asyncHandler = Integration.AsyncHandlers.ImportData.Create();
+      asyncHandler.ExchangeDocId = _obj.Id;
+      asyncHandler.ExecuteAsync("ImportData started","ImportData finished", "ImportData was errors", Users.Current);     
     }
 
     public virtual bool CanStartProcessingXML(Sungero.Domain.Client.CanExecuteActionArgs e)

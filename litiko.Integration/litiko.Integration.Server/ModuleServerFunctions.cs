@@ -258,7 +258,37 @@ namespace litiko.Integration.Server
       }
         
       return false; // Условие не выполнено за maxAttempts попыток
-    }    
+    }
+
+    /// <summary>
+    /// Ф-я для запуска фоновых процессов по интеграции с внешней системой.
+    /// </summary>  
+    /// <param name="integrationMethodName">Наименование метода интеграции.</param>    
+    public static void BackgroundProcessStart(string integrationMethodName)
+    {
+      int lastId = 0;
+            
+      var integrationMethod = IntegrationMethods.GetAll().Where(x => x.Name == integrationMethodName).FirstOrDefault();
+      if (integrationMethod == null)
+        throw AppliedCodeException.Create(string.Format("Integration method {0} not found", integrationMethodName));
+      
+      // Проверить, есть ли документы обмена, на которые еще не получен ответ
+      var exchDocs = ExchangeDocuments.GetAll().Where(d => d.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.Awaiting || d.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart
+                                                     && Equals(d.IntegrationMethod, integrationMethod)).Select(d => d.Id);
+      if (exchDocs.Any())
+      {
+        Logger.DebugFormat("Pending requests found: {0}", exchDocs.ToString());
+        return;
+      }
+            
+      var exchDoc = Integration.ExchangeDocuments.Create();
+      exchDoc.IntegrationMethod = integrationMethod;      
+      exchDoc.Save();
+      
+      var errorMessage = Functions.Module.SendRequestToIS(integrationMethod, exchDoc, lastId);            
+      if (!string.IsNullOrEmpty(errorMessage))
+        throw AppliedCodeException.Create(errorMessage);        
+    }
     
     #endregion
 
@@ -290,6 +320,7 @@ namespace litiko.Integration.Server
           var isShortName = element.Element("ShortName")?.Value;
           var isState = element.Element("State")?.Value;
           var isHeadOfDepartment = element.Element("HeadOfDepartment")?.Value;
+          var bankExternalID = "10598717";
           
           try
           {                        
@@ -334,7 +365,12 @@ namespace litiko.Integration.Server
               }
               else
               {
-                // department.BusinessUnit !!!
+		            var businessUnit = litiko.Eskhata.BusinessUnits.GetAll().Where(x => x.ExternalId == bankExternalID).SingleOrDefault();
+                if (businessUnit != null && !Equals(department.BusinessUnit, businessUnit))
+                {
+                  Logger.DebugFormat("Change BusinessUnit: current:{0}, new:{1}", department.BusinessUnit?.Name, businessUnit?.Name);
+                  department.BusinessUnit = businessUnit;                  
+                }
                 
                 if (Equals(department.Status, Eskhata.Department.Status.Closed))
                 {

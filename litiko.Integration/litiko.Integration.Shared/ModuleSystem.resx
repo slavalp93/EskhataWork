@@ -73,4 +73,64 @@
   <data name="AsyncHandler_Description_1007271d3b8a4a9db314f41bf1286170" xml:space="preserve">
     <value>Import data from xml in exchange document</value>
   </data>
+  <data name="JobDisplayName_3b37113510d34828943d12ef13f39e31" xml:space="preserve">
+    <value>Integration. Business units</value>
+  </data>
+  <data name="JobDescription_3b37113510d34828943d12ef13f39e31" xml:space="preserve">
+    <value>Integration. Business units</value>
+  </data>
+  <data name="JobDisplayName_207085453d61492d9b8ce9cee3281235" xml:space="preserve">
+    <value>Integration. Employees</value>
+  </data>
+  <data name="JobDescription_207085453d61492d9b8ce9cee3281235" xml:space="preserve">
+    <value>Integration. Employees</value>
+  </data>
+  <data name="JobDisplayName_23a2bc5ce5884a48970cfe90ec6662df" xml:space="preserve">
+    <value>Integration. Company kinds</value>
+  </data>
+  <data name="JobDescription_23a2bc5ce5884a48970cfe90ec6662df" xml:space="preserve">
+    <value>Integration. Company kinds</value>
+  </data>
+  <data name="JobDisplayName_cca63b4be1b94c79b323a8382062ddc8" xml:space="preserve">
+    <value>Integration. Countries</value>
+  </data>
+  <data name="JobDescription_cca63b4be1b94c79b323a8382062ddc8" xml:space="preserve">
+    <value>Integration. Countries</value>
+  </data>
+  <data name="JobDisplayName_2add48cc84a34144adabc435482ce936" xml:space="preserve">
+    <value>Integration. Environmental risks</value>
+  </data>
+  <data name="JobDescription_2add48cc84a34144adabc435482ce936" xml:space="preserve">
+    <value>Integration. Environmental risks</value>
+  </data>
+  <data name="JobDisplayName_bdb06ee3a5974904965d4ee3b39c6fa4" xml:space="preserve">
+    <value>Integration. Material statuses</value>
+  </data>
+  <data name="JobDescription_bdb06ee3a5974904965d4ee3b39c6fa4" xml:space="preserve">
+    <value>Integration. Material statuses</value>
+  </data>
+  <data name="JobDisplayName_202442d0e5f54d63b589fcd2b9875e28" xml:space="preserve">
+    <value>Integration. OKFS</value>
+  </data>
+  <data name="JobDescription_202442d0e5f54d63b589fcd2b9875e28" xml:space="preserve">
+    <value>Integration. OKFS</value>
+  </data>
+  <data name="JobDisplayName_8960cd487ffd4d8ba31937170d3d87b9" xml:space="preserve">
+    <value>Integration. OKONH</value>
+  </data>
+  <data name="JobDescription_8960cd487ffd4d8ba31937170d3d87b9" xml:space="preserve">
+    <value>Integration. OKONH</value>
+  </data>
+  <data name="JobDisplayName_99c50527e3fe4a8c93b81f2369547f2e" xml:space="preserve">
+    <value>Integration. OKOPF</value>
+  </data>
+  <data name="JobDescription_99c50527e3fe4a8c93b81f2369547f2e" xml:space="preserve">
+    <value>Integration. OKOPF</value>
+  </data>
+  <data name="JobDisplayName_0f7f09fe1d33410384c547b389580edd" xml:space="preserve">
+    <value>Integration. OKVED</value>
+  </data>
+  <data name="JobDescription_0f7f09fe1d33410384c547b389580edd" xml:space="preserve">
+    <value>Integration. OKVED</value>
+  </data>
 </root>
