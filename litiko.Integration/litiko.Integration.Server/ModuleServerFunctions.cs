@@ -70,41 +70,47 @@ namespace litiko.Integration.Server
           response.EnsureSuccessStatusCode();
 
           // Чтение ответа как строки
-          string responseBody = response.Content.ReadAsStringAsync().Result;
+          string responseBody = response.Content.ReadAsStringAsync().Result;          
 
-          // Парсинг ответа
-          XElement xmlResponse = XElement.Parse(responseBody);
-
-          // Обработка ответа
-          //string sessionId = xmlResponse.Element("head")?.Element("session_id")?.Value;
-          //string protocolVersion = xmlResponse.Element("response")?.Element("protocol-version")?.Value;
-          //string requestType = xmlResponse.Element("response")?.Element("request-type")?.Value;
-          //string dictionary = xmlResponse.Element("response")?.Element("dictionary")?.Value;
-          string state = xmlResponse.Element("response")?.Element("state")?.Value;
-          string stateMsg = xmlResponse.Element("response")?.Element("state_msg")?.Value;
-
-          if (state == "1")
+          if (IsValidXml(responseBody))
           {
-            Logger.DebugFormat("Response successful. State message: {0}", stateMsg);
-            exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Sent;            
+            // Парсинг ответа
+            XElement xmlResponse = XElement.Parse(responseBody);
+  
+            // Обработка ответа
+            string state = xmlResponse.Element("response")?.Element("state")?.Value;
+            string stateMsg = xmlResponse.Element("response")?.Element("state_msg")?.Value;
+  
+            if (state == "1")
+            {
+              Logger.DebugFormat("Response successful. State message: {0}", stateMsg);
+              exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Sent;            
+            }
+            else
+            {
+              Logger.DebugFormat("Response failed. State message: {0}", stateMsg);
+              exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
+            }
+            
+            exchDoc.RequestToISInfo = stateMsg;
+            
+            // Сохранение ответа
+            if (method.SaveResponseFromIS.Value)
+            {
+              using (var xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(responseBody)))
+              {
+                exchDoc.CreateVersionFrom(xmlStream, "xml");
+                exchDoc.LastVersion.Note = Integration.Resources.VersionResponseFromISFormat(lastId);              
+              }                
+            }
           }
           else
-          {
-            Logger.DebugFormat("Response failed. State message: {0}", stateMsg);
+          {             
+            errorMessage = string.Format("Response is not valid XML: {0}", responseBody);
+            Logger.Error(errorMessage);
+            exchDoc.RequestToISInfo = errorMessage;
             exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
-          }
-          
-          exchDoc.RequestToISInfo = stateMsg;
-          
-          // Сохранение ответа
-          if (method.SaveResponseFromIS.Value)
-          {
-            using (var xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(responseBody)))
-            {
-              exchDoc.CreateVersionFrom(xmlStream, "xml");
-              exchDoc.LastVersion.Note = Integration.Resources.VersionResponseFromISFormat(lastId);              
-            }                
-          }
+          }          
         }
       }
       catch (HttpRequestException e)
@@ -2663,6 +2669,19 @@ namespace litiko.Integration.Server
         return exchDoc.Versions.Where(v => v.Note == Integration.Resources.VersionRequestToRXFull && v.AssociatedApplication.Extension == "xml" && v.Body.Size > 0).FirstOrDefault();
       else
         return null;
+    }    
+    
+    public bool IsValidXml(string xml)
+    {
+        try
+        {
+            XElement.Parse(xml);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
     }    
     
     #endregion
