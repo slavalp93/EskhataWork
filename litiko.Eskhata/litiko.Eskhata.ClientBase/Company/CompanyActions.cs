@@ -46,8 +46,8 @@ namespace litiko.Eskhata.Client
       var errorMessage =  Integration.PublicFunctions.Module.Remote.SendRequestToIS(integrationMethod, exchDoc, 0);      
       if (!string.IsNullOrEmpty(errorMessage))
       {
-        //e.AddError(errorMessage);
-        //return;
+        e.AddError(errorMessage);
+        return;
       }      
 
       bool successed = Integration.PublicFunctions.Module.Remote.WaitForGettingDataFromIS(exchDoc, 1000, 10);
