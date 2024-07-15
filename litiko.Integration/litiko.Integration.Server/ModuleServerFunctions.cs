@@ -31,7 +31,7 @@ namespace litiko.Integration.Server
     {
       var errorMessage = string.Empty;
       
-      string application_key = "10.10.202.171/Integration/odata/Integration/ProcessResponseFromIS";            
+      string application_key = "10.10.202.171/Integration/odata/Integration/ProcessResponseFromIS##";            
       string url = method.IntegrationSystem.ServiceUrl;
       var xmlRequestBody = string.Empty;
 
