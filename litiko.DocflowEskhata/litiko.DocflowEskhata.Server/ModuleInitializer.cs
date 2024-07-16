@@ -14,6 +14,7 @@ namespace litiko.DocflowEskhata.Server
     {
       CreateDocumentKinds();
       GrantRightsOnDatabooks();
+      CreateApprovalRole(DocflowEskhata.UnitManagerApprovalRole.Type.UnitManager, "Глава департамента Инициатора");
     }
     
     public static void GrantRightsOnDatabooks()
@@ -196,6 +197,34 @@ namespace litiko.DocflowEskhata.Server
                            Constants.Module.DocumentKindGuids.Checklist,
                            false);
       #endregion
+    }
+    
+    public static void CreateReportsTables()
+    {
+      var envelopesReportsTableName = Constants.EnvelopeB4Report.EnvelopesTableName;
+      
+      Sungero.Docflow.PublicFunctions.Module.DropReportTempTables(new[] {
+                                                            envelopesReportsTableName
+                                                          });
+      
+      Sungero.Docflow.PublicFunctions.Module.ExecuteSQLCommandFormat(Queries.EnvelopeB4Report.CreateEnvelopesTable, new[] { envelopesReportsTableName });
+    }
+    
+    /// <summary>
+    /// Создание роли.
+    /// </summary>
+    public static void CreateApprovalRole(Enumeration roleType, string description)
+    {
+      var role = UnitManagerApprovalRoles.GetAll().Where(r => Equals(r.Type, roleType)).FirstOrDefault();
+      // Проверяет наличие роли.
+      if (role == null)
+      {
+        role = UnitManagerApprovalRoles.Create();
+        role.Type = roleType;
+      }
+      role.Description = description;
+      role.Save();
+      InitializationLogger.Debug($"Создана роль '{description}'");
     }
   }
 }
