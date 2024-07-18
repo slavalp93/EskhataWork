@@ -32,6 +32,15 @@
       "MinVersion": ""
     }
   ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "cbbbf66f-6cab-4596-99b3-a677e810d90e"
+    },
+    {
+      "ItemId": "eec1f1a0-303c-4533-b5ce-8d713bc2cb51",
+      "PreviousItemId": "cbbbf66f-6cab-4596-99b3-a677e810d90e"
+    }
+  ],
   "HandledEvents": [
     "InitializingServer"
   ],
@@ -99,6 +108,25 @@
       ],
       "TypeName": "System.Guid",
       "Value": "new System.Guid(\"9570e517-7ab7-4f23-a959-3652715efad3\")"
+    }
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "GetApprovalSheetOrdReportTable",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "reportSessionId",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<global::litiko.RecordManagementEskhata.Structures.ConvertOrdToPdf.IApprovalRow>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
     }
   ],
   "PublicStructures": [],

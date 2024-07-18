@@ -307,7 +307,11 @@
       "Code": "Category",
       "EntityGuid": "3f34d04c-0ada-48f9-a4c6-4e88e52a2c72",
       "FlatListInStandaloneLookup": true,
+      "HandledEvents": [
+        "LookupServer"
+      ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "NeedPassEntityToLookupEvent": true,
       "PreviousPropertyGuid": "7117b3fd-2c53-4336-bae4-dd580de20646"
     },
     {

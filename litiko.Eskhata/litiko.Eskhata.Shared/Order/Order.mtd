@@ -22,6 +22,17 @@
   },
   "Forms": [
     {
+      "$type": "Sungero.Metadata.InplaceFormMetadata, Sungero.Metadata",
+      "NameGuid": "520df4ea-e554-4745-8d4f-018b6d022962",
+      "Name": "PreviewPage",
+      "Controls": [],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "SettingsResourceKey"
+      ],
+      "Versions": []
+    },
+    {
       "$type": "Sungero.Metadata.StandaloneFormMetadata, Sungero.Metadata",
       "NameGuid": "fa03f748-4397-42ef-bdc2-22119af7bf7f",
       "Name": "Card",
@@ -121,6 +132,9 @@
       ],
       "Versions": []
     }
+  ],
+  "HandledEvents": [
+    "CreatedServer"
   ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "9570e517-7ab7-4f23-a959-3652715efad3",

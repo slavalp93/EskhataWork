@@ -122,6 +122,9 @@
       "Versions": []
     }
   ],
+  "HandledEvents": [
+    "CreatedServer"
+  ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "264ada4e-b272-4ecc-a115-1246c9556bfa",
   "OpenCardByDefaultInCollection": true,

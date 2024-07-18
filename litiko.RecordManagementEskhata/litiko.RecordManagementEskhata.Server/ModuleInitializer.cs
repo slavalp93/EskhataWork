@@ -13,6 +13,8 @@ namespace litiko.RecordManagementEskhata.Server
     public override void Initializing(Sungero.Domain.ModuleInitializingEventArgs e)
     {
       CreateDocumentKinds();
+      CreateReportsTables();
+      CreateConvertOrdToPdfStage();
     }
     
     public static void CreateDocumentKinds()
@@ -86,6 +88,24 @@ namespace litiko.RecordManagementEskhata.Server
                            Constants.Module.DocumentKindGuids.BranchOrder,
                            false);
       #endregion
+    }
+    
+    public static void CreateReportsTables()
+    {
+      var approvalSheetOrdTableName = Constants.ApprovalSheetOrd.SourceTableName;
+      Sungero.Docflow.PublicFunctions.Module.DropReportTempTables(new[] { approvalSheetOrdTableName });
+
+      Sungero.Docflow.PublicFunctions.Module.ExecuteSQLCommandFormat(Queries.ApprovalSheetOrd.CreateApprovalSheetOrdSourceTable, new[] { approvalSheetOrdTableName });
+    }
+    
+    public static void CreateConvertOrdToPdfStage()
+    {
+      if (ConvertOrdToPdfs.GetAll().Any())
+        return;
+      var record = ConvertOrdToPdfs.Create();
+      record.Name = "Преобразование в PDF ОРД";
+      record.TimeoutInHours = 4;
+      record.Save();
     }
   }
 }

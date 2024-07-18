@@ -7,6 +7,15 @@ using litiko.Eskhata.IncomingLetter;
 
 namespace litiko.Eskhata
 {
+  partial class IncomingLetterCategoryPropertyFilteringServerHandler<T>
+  {
+
+    public virtual IQueryable<T> CategoryFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e)
+    {
+      return query.Where(x => x.DocumentKinds.Any(k => Equals(k.DocumentKind,  _obj.DocumentKind)));
+    }
+  }
+
   partial class IncomingLetterServerHandlers
   {
 

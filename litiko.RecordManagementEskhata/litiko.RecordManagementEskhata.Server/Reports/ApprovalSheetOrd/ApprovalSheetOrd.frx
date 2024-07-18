@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Localization&#13;&#10;Sungero.Declension&#13;&#10;Sungero.Content.Shared&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;Sungero.Workflow.Interfaces&#13;&#10;Sungero.Docflow.Shared&#13;&#10;Sungero.Docflow.Server&#13;&#10;litiko.RecordManagementEskhata.Shared&#13;&#10;litiko.RecordManagementEskhata.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.Docflow;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = litiko.RecordManagementEskhata.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${SelectDataFromTable}">
+        <Column Name="RowIndex" DataType="System.Int32" PropName="Column"/>
+        <Column Name="JobTitle" DataType="System.String" PropName="Column"/>
+        <Column Name="SignerName" DataType="System.String" PropName="Column"/>
+        <Column Name="SignResult" DataType="System.String" PropName="Column"/>
+        <Column Name="Comment" DataType="System.String" PropName="Column"/>
+        <Column Name="Signature" DataType="System.String" PropName="Column"/>
+        <Column Name="Date" DataType="System.String" PropName="Column"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="91eb4b84-49fd-477b-aa81-2acf7c13632f" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="Document" Id="a9a3f6e6-68d7-4796-8028-795d8ba36a12" IsRequired="false" IsCollection="false" InternalDataType="Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="58cca102-1e97-4f07-b6ac-fd866a8b7cb1"/>
+    <SungeroParameter Name="ReportSessionId" Id="677daf73-cb68-4500-94f7-d3302e02d159" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="18.9">
+      <TextObject Name="Text1" Width="718.2" Height="18.9" Text="Лист согласования" HorzAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="42.37" Width="718.2" Height="75.6" DataSource="Table">
+      <TableObject Name="Table2" Width="718.8" Height="75.6" Border.Lines="All">
+        <TableColumn Name="Column7" Width="119.8"/>
+        <TableColumn Name="Column8" Width="119.8"/>
+        <TableColumn Name="Column9" Width="119.8"/>
+        <TableColumn Name="Column10" Width="119.8"/>
+        <TableColumn Name="Column11" Width="119.8"/>
+        <TableColumn Name="Column12" Width="119.8"/>
+        <TableRow Name="Row2" Height="75.6">
+          <TableCell Name="Cell7" Border.Lines="All" Text="[Table.JobTitle]" Font="Times New Roman, 12pt"/>
+          <TableCell Name="Cell8" Border.Lines="All" Text="[Table.SignerName]" Font="Times New Roman, 12pt"/>
+          <TableCell Name="Cell9" Border.Lines="All" Text="[Table.SignResult]" Font="Times New Roman, 12pt"/>
+          <TableCell Name="Cell10" Border.Lines="All" Text="[Table.Comment]" Font="Times New Roman, 12pt"/>
+          <TableCell Name="Cell11" Border.Lines="All" Font="Times New Roman, 12pt">
+            <BarcodeObject Name="Barcode1" Left="28.35" Top="9.45" Width="55.65" Height="55.65" Border.Lines="All" AutoSize="false" Text="[Table.Signature]" ShowText="false" AllowExpressions="true" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="false"/>
+          </TableCell>
+          <TableCell Name="Cell12" Border.Lines="All" Text="[Table.Date]" Font="Times New Roman, 12pt">
+            <Formats>
+              <GeneralFormat/>
+              <GeneralFormat/>
+            </Formats>
+          </TableCell>
+        </TableRow>
+      </TableObject>
+      <DataHeaderBand Name="DataHeader1" Top="21.19" Width="718.2" Height="18.9">
+        <TableObject Name="Table1" Width="718.8" Height="18.9" Border.Lines="All" Fill.Color="Silver">
+          <TableColumn Name="Column1" Width="119.8"/>
+          <TableColumn Name="Column2" Width="119.8"/>
+          <TableColumn Name="Column3" Width="119.8"/>
+          <TableColumn Name="Column4" Width="119.8"/>
+          <TableColumn Name="Column5" Width="119.8"/>
+          <TableColumn Name="Column6" Width="119.8"/>
+          <TableRow Name="Row1">
+            <TableCell Name="Cell1" Border.Lines="All" Text="Должность" Font="Times New Roman, 12pt, style=Bold"/>
+            <TableCell Name="Cell2" Border.Lines="All" Text="ФИО" Font="Times New Roman, 12pt, style=Bold"/>
+            <TableCell Name="Cell3" Border.Lines="All" Text="Результат" Font="Times New Roman, 12pt, style=Bold"/>
+            <TableCell Name="Cell4" Border.Lines="All" Text="Комментарий" Font="Times New Roman, 12pt, style=Bold"/>
+            <TableCell Name="Cell5" Border.Lines="All" Text="Подпись" Font="Times New Roman, 12pt, style=Bold"/>
+            <TableCell Name="Cell6" Border.Lines="All" Text="Дата" Font="Times New Roman, 12pt, style=Bold"/>
+          </TableRow>
+        </TableObject>
+      </DataHeaderBand>
+      <Sort>
+        <Sort Expression="[Table.RowIndex]"/>
+      </Sort>
+    </DataBand>
+  </ReportPage>
+</Report>

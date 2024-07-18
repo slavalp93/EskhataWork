@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="SelectDataFromTable">
+    <default><![CDATA[select *
+from  litiko_ApprSheetOrd temp
+where ReportSessionId = @ReportSessionId
+order by RowIndex]]></default>
+  </query>
+  <query key="CreateApprovalSheetOrdSourceTable">
+    <mssql><![CDATA[create table {0}
+  ([RowIndex] int NOT NULL,
+  [JobTitle] nvarchar(max),
+  [SignerName] nvarchar(max),
+  [SignResult] nvarchar(max),
+  [Comment] nvarchar(max),
+  [Signature] nvarchar(max),
+  [Date] nvarchar(max),
+  [ReportSessionId] nvarchar(max) NOT NULL)]]></mssql>
+    <postgres><![CDATA[create table {0}
+  (RowIndex int NOT NULL,
+  JobTitle citext,
+  SignerName citext,
+  SignResult citext,
+  Comment citext,
+  Signature citext,
+  Date citext,
+  ReportSessionId citext NOT NULL)]]></postgres>
+  </query>
+</queries>
