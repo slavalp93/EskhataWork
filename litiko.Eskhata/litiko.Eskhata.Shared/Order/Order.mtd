@@ -142,6 +142,21 @@
   "OperationsClass": "",
   "Properties": [
     {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "736105fc-ec2e-482b-b7a8-23a45ea4e288",
+      "Name": "Assignee",
+      "HandledEvents": [
+        "LookupServer"
+      ],
+      "IsAncestorMetadata": true,
+      "NeedPassEntityToLookupEvent": true,
+      "Overridden": [
+        "HandledEvents",
+        "NeedPassEntityToLookupEvent"
+      ],
+      "Versions": []
+    },
+    {
       "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
       "NameGuid": "56cbe741-880f-4e6f-9567-343d08494b59",
       "Name": "Versions",
