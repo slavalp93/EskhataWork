@@ -45,56 +45,20 @@ namespace litiko.RecordManagementEskhata.Server
             .ToList();
           if (signature.SubstitutedUser == null)
           {
-            var additionalInfo = additionalInfos.FirstOrDefault();
-            employeeName = string.Format("{1}{0}", signature.SignatoryFullName, AddEndOfLine(additionalInfo)).Trim();
+            employeeName = signature.SignatoryFullName;
           }
           else
           {
-            if (additionalInfos.Count() == 3)
-            {
-              // Замещающий.
-              var signatoryAdditionalInfo = additionalInfos[0];
-              if (!string.IsNullOrEmpty(signatoryAdditionalInfo))
-                signatoryAdditionalInfo = AddEndOfLine(signatoryAdditionalInfo);
-              var signatoryText = AddEndOfLine(string.Format("{0}{1}", signatoryAdditionalInfo, signature.SignatoryFullName));
-              
-              // Замещаемый.
-              var substitutedUserAdditionalInfo = additionalInfos[1];
-              if (!string.IsNullOrEmpty(substitutedUserAdditionalInfo))
-                substitutedUserAdditionalInfo = AddEndOfLine(substitutedUserAdditionalInfo);
-              var substitutedUserText = string.Format("{0}{1}", substitutedUserAdditionalInfo, signature.SubstitutedUserFullName);
-              
-              // Замещающий за замещаемого.
-              var onBehalfOfText = AddEndOfLine(Sungero.Docflow.ApprovalTasks.Resources.OnBehalfOf);
-              employeeName = string.Format("{0}{1}{2}", signatoryText, onBehalfOfText, substitutedUserText);
-            }
-            else if (additionalInfos.Count() == 2)
-            {
-              // Замещающий / Система.
-              var signatoryText = AddEndOfLine(signature.SignatoryFullName);
-              
-              // Замещаемый.
-              var substitutedUserAdditionalInfo = additionalInfos[0];
-              if (!string.IsNullOrEmpty(substitutedUserAdditionalInfo))
-                substitutedUserAdditionalInfo = AddEndOfLine(substitutedUserAdditionalInfo);
-              var substitutedUserText = string.Format("{0}{1}", substitutedUserAdditionalInfo, signature.SubstitutedUserFullName);
-              
-              // Система за замещаемого.
-              var onBehalfOfText = AddEndOfLine(Sungero.Docflow.ApprovalTasks.Resources.OnBehalfOf);
-              employeeName = string.Format("{0}{1}{2}", signatoryText, onBehalfOfText, substitutedUserText);
-            }
-            else
-            {
-              // Замещающий / Система.
-              var signatoryText = AddEndOfLine(signature.SignatoryFullName);
-              
-              // Замещаемый.
-              var substitutedUserText = signature.SubstitutedUserFullName;
-              
-              // Система за замещаемого.
-              var onBehalfOfText = AddEndOfLine(Sungero.Docflow.ApprovalTasks.Resources.OnBehalfOf);
-              employeeName = string.Format("{0}{1}{2}", signatoryText, onBehalfOfText, substitutedUserText);
-            }
+            // Замещающий / Система.
+            var signatoryText = AddEndOfLine(signature.SignatoryFullName);
+            
+            // Замещаемый.
+            var substitutedUserText = signature.SubstitutedUserFullName;
+            
+            // Система за замещаемого.
+            var onBehalfOfText = AddEndOfLine(Sungero.Docflow.ApprovalTasks.Resources.OnBehalfOf);
+            employeeName = string.Format("{0}{1}{2}", signatoryText, onBehalfOfText, substitutedUserText);
+            
           }
           var row = Structures.ConvertOrdToPdf.ApprovalRow.Create();
           row.RowIndex = i++;
@@ -115,6 +79,7 @@ namespace litiko.RecordManagementEskhata.Server
       return approvalList;
     }
     
+    #region private
     private string GetSignatureKey(Sungero.Domain.Shared.ISignature signature, int versionNumber)
     {
       // Если подпись не "несогласующая", она должна схлапываться вне версий.
@@ -177,5 +142,6 @@ namespace litiko.RecordManagementEskhata.Server
       var zeroWidthSpace = '\u200b';
       return new string(new char[] { zeroWidthSpace, zeroWidthSpace, zeroWidthSpace });
     }
+    #endregion
   }
 }

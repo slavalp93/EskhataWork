@@ -14,6 +14,9 @@ namespace litiko.Eskhata.Shared
       var baseRoles = base.GetPossibleRoles();
       baseRoles.Add(DocflowEskhata.UnitManagerApprovalRole.Type.UnitManager);
       
+      if (_obj.StageType == Sungero.Docflow.ApprovalStage.StageType.Approvers)
+        baseRoles.Add(DocflowEskhata.UnitManagerApprovalRole.Type.Signatory);
+      
       return baseRoles;
     }
   }

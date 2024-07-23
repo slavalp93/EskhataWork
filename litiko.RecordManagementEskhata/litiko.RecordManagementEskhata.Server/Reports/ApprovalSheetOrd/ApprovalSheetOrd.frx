@@ -47,10 +47,10 @@ namespace FastReport
     <SungeroParameter Name="ReportSessionId" Id="677daf73-cb68-4500-94f7-d3302e02d159" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
   </Dictionary>
   <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
-    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="18.9">
-      <TextObject Name="Text1" Width="718.2" Height="18.9" Text="Лист согласования" HorzAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
+      <TextObject Name="Text1" Width="718.2" Height="37.8" Text="Лист согласования" HorzAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
     </ReportTitleBand>
-    <DataBand Name="Data1" Top="42.37" Width="718.2" Height="75.6" DataSource="Table">
+    <DataBand Name="Data1" Top="63.1" Width="718.2" Height="75.6" CanGrow="true" DataSource="Table">
       <TableObject Name="Table2" Width="718.8" Height="75.6" Border.Lines="All">
         <TableColumn Name="Column7" Width="119.8"/>
         <TableColumn Name="Column8" Width="119.8"/>
@@ -74,8 +74,8 @@ namespace FastReport
           </TableCell>
         </TableRow>
       </TableObject>
-      <DataHeaderBand Name="DataHeader1" Top="21.19" Width="718.2" Height="18.9">
-        <TableObject Name="Table1" Width="718.8" Height="18.9" Border.Lines="All" Fill.Color="Silver">
+      <DataHeaderBand Name="DataHeader1" Top="41" Width="718.2" Height="18.9">
+        <TableObject Name="Table1" Width="718.8" Height="18.9" Border.Lines="All">
           <TableColumn Name="Column1" Width="119.8"/>
           <TableColumn Name="Column2" Width="119.8"/>
           <TableColumn Name="Column3" Width="119.8"/>

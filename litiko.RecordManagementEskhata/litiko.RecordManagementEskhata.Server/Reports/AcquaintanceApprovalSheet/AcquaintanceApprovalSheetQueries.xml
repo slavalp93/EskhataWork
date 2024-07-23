@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="SelectDataFromTable">
+    <default><![CDATA[select *
+from  Sungero_Reports_Acquaintance temp
+where ReportSessionId = @ReportSessionId]]></default>
+  </query>
+</queries>

@@ -11,7 +11,7 @@ namespace litiko.RecordManagementEskhata.Server
   {
     public override Sungero.Docflow.Structures.ApprovalFunctionStageBase.ExecutionResult Execute(Sungero.Docflow.IApprovalTask approvalTask)
     {
-      var result = Sungero.Docflow.Structures.ApprovalFunctionStageBase.ExecutionResult.Create();
+      var result = base.Execute(approvalTask);
       var document = approvalTask.DocumentGroup.OfficialDocuments.FirstOrDefault();
       if (document?.HasVersions != true)
       {
@@ -22,27 +22,22 @@ namespace litiko.RecordManagementEskhata.Server
       
       try
       {
-        var version = Sungero.Docflow.PublicFunctions.OfficialDocument.GetBodyToConvertToPdf(document, document.LastVersion, true);
-        using (var bodyStream = new System.IO.MemoryStream(version.Body))
+        Logger.DebugFormat("ConvertOrdToPdf. Start convert to pdf for document id {0}.", document.Id);
+        var conversionResult = ConvertToPdf(document);
+        if (conversionResult.HasErrors)
         {
-          using (var pdfDocumentStream = Sungero.Docflow.IsolatedFunctions.PdfConverter.GeneratePdf(bodyStream, version.Extension))
-          {
-            if (pdfDocumentStream != null)
-            {
-              document.LastVersion.PublicBody.Write(pdfDocumentStream);
-              document.LastVersion.AssociatedApplication = Sungero.Content.AssociatedApplications.GetByExtension(Sungero.Docflow.PublicConstants.OfficialDocument.PdfExtension);
-              document.Save();
-            }
-          }
+          Logger.ErrorFormat("ConvertOrdToPdf. Convert to pdf error {0}. Document Id {1}, Version Id {2}", conversionResult.ErrorMessage, document.Id, document.LastVersion.Id);
+          result = this.GetRetryResult(string.Empty);
         }
+        
       }
       catch (Exception ex)
       {
-        result.Success = false;
-        result.ErrorMessage = string.Format("Failed to generate PDF from last version body Document ID={0}. Error message = {1}", document.Id, ex.Message);
-        Logger.ErrorFormat("Failed to generate PDF from last version body Document ID={0}.", ex, document.Id);
-        return result;
+        Logger.ErrorFormat("ConvertOrdToPdf. Convert to pdf error. Document Id {0}, Version Id {1}", ex, document.Id, document.LastVersion.Id);
+        result = this.GetRetryResult(string.Empty);
       }
+      if (!result.Success)
+        return result;
       
       try
       {
@@ -68,7 +63,16 @@ namespace litiko.RecordManagementEskhata.Server
         Logger.ErrorFormat("Failed to export approval sheet report or merge two PDFs. Document ID={0}.", ex, document.Id);
         return result;
       }
-      return base.Execute(approvalTask);
+      return result;
+    }
+    
+    public virtual Eskhata.Module.Docflow.Structures.Module.IConversionToPdfResult ConvertToPdf(Sungero.Docflow.IOfficialDocument document)
+    {
+      var lastVersionId = document.LastVersion.Id;
+      var signature = Sungero.Docflow.PublicFunctions.OfficialDocument.GetSignatureForMark(document, lastVersionId);
+      var signatureMark = (signature != null) ? Sungero.Docflow.PublicFunctions.OfficialDocument.GetSignatureMarkAsHtml(document, lastVersionId) : string.Empty;
+      
+      return litiko.Eskhata.Module.Docflow.PublicFunctions.Module.GeneratePublicBodyWithSignatureMarkEskhata(document, lastVersionId, signatureMark);
     }
   }
 }
