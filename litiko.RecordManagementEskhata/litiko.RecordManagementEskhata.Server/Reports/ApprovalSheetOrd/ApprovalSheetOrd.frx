@@ -51,14 +51,14 @@ namespace FastReport
       <TextObject Name="Text1" Width="718.2" Height="37.8" Text="Лист согласования" HorzAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
     </ReportTitleBand>
     <DataBand Name="Data1" Top="63.1" Width="718.2" Height="75.6" CanGrow="true" DataSource="Table">
-      <TableObject Name="Table2" Width="718.8" Height="75.6" Border.Lines="All">
+      <TableObject Name="Table2" Width="718.8" Height="75.6" Border.Lines="All" GrowToBottom="true">
         <TableColumn Name="Column7" Width="119.8"/>
         <TableColumn Name="Column8" Width="119.8"/>
         <TableColumn Name="Column9" Width="119.8"/>
         <TableColumn Name="Column10" Width="119.8"/>
         <TableColumn Name="Column11" Width="119.8"/>
         <TableColumn Name="Column12" Width="119.8"/>
-        <TableRow Name="Row2" Height="75.6">
+        <TableRow Name="Row2" Height="75.6" AutoSize="true">
           <TableCell Name="Cell7" Border.Lines="All" Text="[Table.JobTitle]" Font="Times New Roman, 12pt"/>
           <TableCell Name="Cell8" Border.Lines="All" Text="[Table.SignerName]" Font="Times New Roman, 12pt"/>
           <TableCell Name="Cell9" Border.Lines="All" Text="[Table.SignResult]" Font="Times New Roman, 12pt"/>

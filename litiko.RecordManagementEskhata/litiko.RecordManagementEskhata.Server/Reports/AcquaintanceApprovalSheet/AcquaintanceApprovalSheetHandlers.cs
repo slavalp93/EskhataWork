@@ -25,10 +25,7 @@ namespace litiko.RecordManagementEskhata
       var calledFromDocument = sourceDocument != null;
       var selectedVersionNumber = AcquaintanceApprovalSheet.DocumentVersion;
       
-      // Если у документа нет тела, но есть задачи ознакомления, номер версии берем 0, иначе выбранный.
-      var versionNumber = 0;
-      if (selectedVersionNumber != null)
-        versionNumber = Convert.ToInt32(selectedVersionNumber);
+      var versionNumber = sourceTask.AcquaintanceVersions.First(v => v.IsMainDocument == true).Number.Value;
       
       var tasks = new List<Sungero.RecordManagement.IAcquaintanceTask>();
       
@@ -182,12 +179,6 @@ namespace litiko.RecordManagementEskhata
           dataTable.Add(newLine);
         }
       }
-      
-      // Фильтр по статусу выполнения.
-      if (AcquaintanceApprovalSheet.EmployeesAcquaintanceStatus.Equals(Sungero.RecordManagement.Reports.Resources.AcquaintanceReport.ForAcquaintedPerformers))
-        dataTable = dataTable.Where(d => d.State == Sungero.RecordManagement.Reports.Resources.AcquaintanceReport.AcquaintedState).ToList();
-      else if (AcquaintanceApprovalSheet.EmployeesAcquaintanceStatus.Equals(Sungero.RecordManagement.Reports.Resources.AcquaintanceReport.ForNotAcquaintedPerformers))
-        dataTable = dataTable.Where(d => d.State != Sungero.RecordManagement.Reports.Resources.AcquaintanceReport.AcquaintedState).ToList();
       
       Sungero.Docflow.PublicFunctions.Module.WriteStructuresToTable(Constants.AcquaintanceApprovalSheet.SourceTableName, dataTable);
       

@@ -1,0 +1,18 @@
+{
+  "$type": "Sungero.NoCode.Settings.Models.SettingsLayerLocalization, Sungero.NoCode.Settings.Interfaces",
+  "Subject_SE_4": {
+    "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.String, System.Private.CoreLib]], System.Private.CoreLib",
+    "default": "Ознакомление с документом",
+    "ru-RU": "Ознакомление с документом"
+  },
+  "Subject_SE_6": {
+    "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.String, System.Private.CoreLib]], System.Private.CoreLib",
+    "default": "Завершение работ по ознакомлению",
+    "ru-RU": "Завершение работ по ознакомлению"
+  },
+  "Subject_SE_7": {
+    "$type": "System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.String, System.Private.CoreLib]], System.Private.CoreLib",
+    "default": "Уведомление о завершении ознакомления",
+    "ru-RU": "Уведомление о завершении ознакомления"
+  }
+}
