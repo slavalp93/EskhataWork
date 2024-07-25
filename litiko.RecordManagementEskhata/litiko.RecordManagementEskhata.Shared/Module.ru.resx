@@ -70,4 +70,10 @@
   <data name="BranchOrder" xml:space="preserve">
     <value>Приказ по филиалу / Приказ</value>
   </data>
+  <data name="ConvertToPdfCompleteNotification" xml:space="preserve">
+    <value>Документ {0} преобразован в PDF.</value>
+  </data>
+  <data name="ConvertionErrorNotification" xml:space="preserve">
+    <value>Произошла ошибка при преобразовании документа в PDF. Обратитесь к администратору.{1} {1}{0}</value>
+  </data>
 </root>

@@ -63,5 +63,7 @@ namespace litiko.DocflowEskhata.Constants
       [Sungero.Core.Public]
       public static readonly Guid Checklist = Guid.Parse("125a38e1-a9f0-46b9-9103-ed7f9912343d");
     }
+    [Sungero.Core.Public]
+    public const string ConvertingVersionId = "convertingVersionId";
   }
 }

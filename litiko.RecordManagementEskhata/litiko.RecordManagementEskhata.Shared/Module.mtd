@@ -2,7 +2,31 @@
   "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
   "NameGuid": "477f982f-17bc-4249-b338-32bf97fe8ecf",
   "Name": "RecordManagementEskhata",
-  "AsyncHandlers": [],
+  "AsyncHandlers": [
+    {
+      "NameGuid": "374e1d17-3c6c-4913-8eeb-bb35eb93f9b3",
+      "Name": "ConvertAcquaintedDocToPDF",
+      "DelayStrategy": "ExponentialDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "333a6b92-e179-4864-af25-c32966f12232",
+          "Name": "DocumentId",
+          "ParameterType": "LongInteger"
+        },
+        {
+          "NameGuid": "977e9126-ca24-4108-9924-e2af5dba3fe6",
+          "Name": "VersionId",
+          "ParameterType": "LongInteger"
+        },
+        {
+          "NameGuid": "c3c6468b-2417-4585-be42-22e58802c735",
+          "Name": "TaskId",
+          "ParameterType": "LongInteger"
+        }
+      ]
+    }
+  ],
   "ClientAssemblyName": "litiko.RecordManagementEskhata.Client",
   "ClientBaseAssemblyName": "litiko.RecordManagementEskhata.ClientBase",
   "ClientBaseNamespace": "litiko.RecordManagementEskhata.ClientBase",
@@ -116,6 +140,22 @@
   ],
   "PublicFunctions": [
     {
+      "Name": "ConvertToPdfWithSignatureMark",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "task",
+          "ParameterType": "global::Sungero.Workflow.ITask",
+          "ParameterTypeFullName": "Sungero.Workflow.ITask, Sungero.Workflow.Interfaces"
+        }
+      ],
+      "ReturnType": "Eskhata.Module.Docflow.Structures.Module.IConversionToPdfResult"
+    },
+    {
       "Name": "GetApprovalSheetOrdReportTable",
       "Parameters": [
         {
@@ -140,7 +180,9 @@
     "CharmanOrder",
     "NormativeOrder",
     "DepartmentalDirective",
-    "BranchOrder"
+    "BranchOrder",
+    "ConvertToPdfCompleteNotification",
+    "ConvertionErrorNotification"
   ],
   "ServerAssemblyName": "litiko.RecordManagementEskhata.Server",
   "ServerNamespace": "litiko.RecordManagementEskhata.Server",

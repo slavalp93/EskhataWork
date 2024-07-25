@@ -70,4 +70,10 @@
   <data name="BranchOrder" xml:space="preserve">
     <value>Branch order</value>
   </data>
+  <data name="ConvertToPdfCompleteNotification" xml:space="preserve">
+    <value>Document {0} has been converted to PDF.</value>
+  </data>
+  <data name="ConvertionErrorNotification" xml:space="preserve">
+    <value>An error occurred while converting the document to PDF. Contact your system administrator.{1} {1}{0}</value>
+  </data>
 </root>

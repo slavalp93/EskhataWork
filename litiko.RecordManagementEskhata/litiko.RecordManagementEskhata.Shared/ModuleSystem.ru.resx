@@ -58,4 +58,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AsyncHandler_Description_374e1d173c6c49138eebbb35eb93f9b3" xml:space="preserve">
+    <value>AsyncHandler</value>
+  </data>
 </root>

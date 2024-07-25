@@ -11,15 +11,25 @@ namespace litiko.Eskhata.Client
   {
     public virtual void ConvertToPDFWithAcqList(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      var report = RecordManagementEskhata.Reports.GetAcquaintanceApprovalSheet();
-      report.Document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
-      report.Task = AcquaintanceTasks.As(_obj.Task);
-      report.Open();
+      var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
+      
+      Eskhata.Module.Docflow.Structures.Module.IConversionToPdfResult result = null;
+      result = RecordManagementEskhata.PublicFunctions.Module.ConvertToPdfWithSignatureMark(document, _obj.Task);
+      
+      if (result.HasErrors)
+      {
+        Dialogs.NotifyMessage(result.ErrorMessage);
+        return;
+      }
+      e.CloseFormAfterAction = true;
+      Dialogs.ShowMessage(Sungero.Docflow.OfficialDocuments.Resources.ConvertionInProgress, litiko.Eskhata.AcquaintanceFinishAssignments.Resources.CloseDocumentAndOpenLater, MessageType.Information);
+      return;
     }
+    
 
     public virtual bool CanConvertToPDFWithAcqList(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return true;
+      return _obj.DocumentGroup.OfficialDocuments.FirstOrDefault()?.HasVersions == true;
     }
 
   }

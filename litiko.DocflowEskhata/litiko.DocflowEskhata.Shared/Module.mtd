@@ -78,6 +78,14 @@
       "Value": "new System.Guid(\"125a38e1-a9f0-46b9-9103-ed7f9912343d\")"
     },
     {
+      "Name": "ConvertingVersionId",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"convertingVersionId\""
+    },
+    {
       "Name": "IncomingCorrespondence",
       "ParentClasses": [
         "Module",
