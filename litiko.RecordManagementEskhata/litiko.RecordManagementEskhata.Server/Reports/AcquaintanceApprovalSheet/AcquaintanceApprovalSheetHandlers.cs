@@ -33,14 +33,16 @@ namespace litiko.RecordManagementEskhata
       {
         // Получить задачи на ознакомление по документу.
         tasks = Sungero.Docflow.PublicFunctions.OfficialDocument.Remote.GetAcquaintanceTasks(sourceDocument);
-        
+        Logger.Debug("AcquaintanceApprovalSheet. Before task filtering, tasksId : " + string.Join(",",tasks?.Select(x => x.Id.ToString())));
         // Фильтр по номеру версии.
         tasks = tasks
           .Where(t => t.AcquaintanceVersions.First(v => v.IsMainDocument == true).Number == versionNumber)
           .ToList();
+        Logger.Debug("AcquaintanceApprovalSheet. After task filtering, tasksId : " + string.Join(",",tasks?.Select(x => x.Id.ToString())));
       }
       else
       {
+        Logger.Debug("AcquaintanceApprovalSheet. Running only with current task, tasksId : " + sourceTask.Id.ToString());
         tasks.Add(sourceTask);
         versionNumber = GetDocumentVersion(sourceTask);
         sourceDocument = sourceTask.DocumentGroup.OfficialDocuments.First();
