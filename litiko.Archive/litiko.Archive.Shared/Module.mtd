@@ -1,0 +1,152 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "59bcaa80-e50b-48db-838f-a9416085a477",
+  "Name": "Archive",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "litiko.Archive.Client",
+  "ClientBaseAssemblyName": "litiko.Archive.ClientBase",
+  "ClientBaseNamespace": "litiko.Archive.ClientBase",
+  "ClientNamespace": "litiko.Archive.Client",
+  "Code": "Archive",
+  "CompanyCode": "litiko",
+  "Cover": {
+    "NameGuid": "b8761ff4-604c-4324-b417-3e87b832547d",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "8080eaa5-c007-4ef5-8600-9a29353bacd1",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "1ff6142f-e9f1-47be-b3e2-9bfb7363d367",
+      "BackgroundPosition": "Stretch"
+    },
+    "Tabs": []
+  },
+  "Dependencies": [
+    {
+      "Id": "78d05f91-7585-42b9-addc-5b14478d4680",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    },
+    {
+      "Id": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "8041356e-45a8-44e0-a7a1-0ff73f561047"
+    },
+    {
+      "ItemId": "926182a5-94ef-4bbb-a6c5-cf670038da1d",
+      "PreviousItemId": "8041356e-45a8-44e0-a7a1-0ff73f561047"
+    },
+    {
+      "ItemId": "a279a254-243b-4c01-bd30-d2b36a3824ee",
+      "PreviousItemId": "926182a5-94ef-4bbb-a6c5-cf670038da1d"
+    },
+    {
+      "ItemId": "31a5a3fd-8cfe-4fa0-bc28-f4c8665c1047",
+      "PreviousItemId": "a279a254-243b-4c01-bd30-d2b36a3824ee"
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "litiko.Archive",
+  "IsolatedAssemblyName": "litiko.Archive.Isolated",
+  "IsolatedNamespace": "litiko.Archive.Isolated",
+  "IsVisible": false,
+  "Overridden": [
+    "IsVisible"
+  ],
+  "PublicConstants": [
+    {
+      "Name": "ArchiveList",
+      "ParentClasses": [
+        "Module",
+        "DocumentTypeGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"926182a5-94ef-4bbb-a6c5-cf670038da1d\")"
+    },
+    {
+      "Name": "ArchiveList",
+      "ParentClasses": [
+        "Module",
+        "DocumentKindGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"50adebff-f5e8-4765-9e5f-4ed8994ced87\")"
+    },
+    {
+      "Name": "ArchiveShedule",
+      "ParentClasses": [
+        "Module",
+        "DocumentKindGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"c1d06c86-f923-40ec-b853-39773cfbbddc\")"
+    },
+    {
+      "Name": "Order",
+      "ParentClasses": [
+        "Module",
+        "DocumentTypeGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"9570e517-7ab7-4f23-a959-3652715efad3\")"
+    },
+    {
+      "Name": "OrderArchive",
+      "ParentClasses": [
+        "Module",
+        "DocumentKindGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"f4ecaaa2-a115-4866-a95d-0b10701d0720\")"
+    },
+    {
+      "Name": "SimpleDocument",
+      "ParentClasses": [
+        "Module",
+        "DocumentTypeGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"09584896-81e2-4c83-8f6c-70eb8321e1d0\")"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "litiko.Archive",
+  "ResourcesKeys": [
+    "OrderArchiveKind",
+    "ArchiveScheduleKind",
+    "ArchiveListKind",
+    "ArchiveListType"
+  ],
+  "ServerAssemblyName": "litiko.Archive.Server",
+  "ServerNamespace": "litiko.Archive.Server",
+  "SharedAssemblyName": "litiko.Archive.Shared",
+  "SharedNamespace": "litiko.Archive.Shared",
+  "SpecialFolders": [],
+  "Version": "0.0.1.1",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

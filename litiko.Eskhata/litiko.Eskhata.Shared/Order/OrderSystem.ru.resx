@@ -88,4 +88,13 @@
   <data name="Control_f52462d28d5445929b3d657da4591f56_EmptyText" xml:space="preserve">
     <value />
   </data>
+  <data name="Action_CreateArchiveSchedulelitiko" xml:space="preserve">
+    <value>Создать график сдачи в архив</value>
+  </data>
+  <data name="Action_CreateArchiveSchedulelitikoHint" xml:space="preserve">
+    <value>Создать график сдачи в архив</value>
+  </data>
+  <data name="Action_CreateArchiveSchedulelitikoDescription" xml:space="preserve">
+    <value>Создать график сдачи в архив</value>
+  </data>
 </root>

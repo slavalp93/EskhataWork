@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_Archivelitiko" xml:space="preserve">
+    <value>Archive</value>
+  </data>
+  <data name="Property_TransferredToArchivelitiko" xml:space="preserve">
+    <value>Transferred to archive</value>
+  </data>
+  <data name="Resource_4e9c1072ca9e46b39e8b3070604d0b00" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_4e9c1072ca9e46b39e8b3070604d0b00_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_d2c2f590c4294e9db64c4b22e5d37153" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_d2c2f590c4294e9db64c4b22e5d37153_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_3c57e24d180e4a13bfc657cce2f01054" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_5c4d2771c21f47e282d501bd87b6897f" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_880d5ce937724239a06a039d3dd4abfe" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_880d5ce937724239a06a039d3dd4abfe_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_e866127743864aedaafbbe7f34d34a13" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_e866127743864aedaafbbe7f34d34a13_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_592c7012339740cba8bbaadcb8d00dcf" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_592c7012339740cba8bbaadcb8d00dcf_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_84f0e37999f3431fa049c221fb7c6297" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_d063e616903a4db0b3eb4cce13c37249" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_d063e616903a4db0b3eb4cce13c37249_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_909dccf3df964a098ccf39b891324ecd" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_347e6f25bf974cfc88fd0cadc6f05174" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_9cb8a2036324459085b020bf79b13699" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_9cb8a2036324459085b020bf79b13699_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_615227f011d64a6c8f19ad5440547e6e" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_TransferToArchivelitiko" xml:space="preserve">
+    <value>Transfer to archive</value>
+  </data>
+  <data name="Action_TransferToArchivelitikoDescription" xml:space="preserve">
+    <value>Transfer to archive</value>
+  </data>
+  <data name="Action_TransferToArchivelitikoHint" xml:space="preserve">
+    <value>Transfer to archive</value>
+  </data>
+  <data name="Action_TransferToArchivelitikoConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_TransferToArchivelitikoConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+</root>

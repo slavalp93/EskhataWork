@@ -387,6 +387,26 @@
   "ClientBaseNamespace": "litiko.Eskhata.Module.Docflow.ClientBase",
   "Code": "Docflow",
   "CompanyCode": "Sungero",
+  "Cover": {
+    "NameGuid": "1125bc9f-b2d0-4461-96fc-540fc56ce158",
+    "Actions": [
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "83860013-47a3-4172-9ed4-2b06e1fdfd14",
+        "Name": "Archiveslitiko",
+        "EntityTypeId": "8041356e-45a8-44e0-a7a1-0ff73f561047",
+        "GroupId": "23d239d0-8f2c-49ba-975e-559a554b96d7",
+        "PreviousItemGuid": "121d4a59-5559-4d52-b661-3e4413e746c3"
+      }
+    ],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Overridden": [
+      "Actions"
+    ],
+    "Tabs": [],
+    "Versions": []
+  },
   "ExplorerTreeOrder": [],
   "IconResourcesKeys": [],
   "Importance": "Low",

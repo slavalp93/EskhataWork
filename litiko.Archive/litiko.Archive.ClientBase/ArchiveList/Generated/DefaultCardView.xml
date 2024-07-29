@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+  <ViewName>Default</ViewName>
+  <Collection3a72c402345e4ed6ac45e4aa13b9f336 FormGuid="e48c4a39-6242-40a8-9263-00c7e0dbeef7">
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="$GridControl" iskey="true" value="GridControl">
+        <property name="View" isnull="true" iskey="true">
+          <property name="LinesPerRowMode">None</property>
+          <property name="ColumnChooserState" isnull="true" iskey="true">
+            <property name="Location">660,-2.80000000000001</property>
+            <property name="Size">220,250</property>
+          </property>
+          <property name="AllowMoveColumnToDropArea">false</property>
+          <property name="AllowColumnMoving">true</property>
+          <property name="AllowSorting">true</property>
+          <property name="ShowTotalSummary">false</property>
+          <property name="IsRowCellMenuEnabled">false</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="AutoWidth">false</property>
+          <property name="AllowGrouping">false</property>
+        </property>
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="SortInfo" iskey="true" value="1">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="FieldName">CaseFile</property>
+            <property name="SortOrder">Ascending</property>
+          </property>
+        </property>
+        <property name="GroupSummary" iskey="true" value="0" />
+        <property name="GroupCount">0</property>
+        <property name="Columns" iskey="true" value="7">
+          <property name="Item1" isnull="true" iskey="true">
+            <property name="ExtendedVisibleIndex">1</property>
+            <property name="Visible">true</property>
+            <property name="Name">ArchiveList_CaseFiles_DepartmentIndex</property>
+            <property name="FieldName">DepartmentIndex</property>
+            <property name="VisibleIndex">1</property>
+            <property name="Width">151</property>
+            <property name="ActualWidth">16*</property>
+          </property>
+          <property name="Item2" isnull="true" iskey="true">
+            <property name="ExtendedVisibleIndex">0</property>
+            <property name="Visible">true</property>
+            <property name="Name">ArchiveList_CaseFiles_CaseFile</property>
+            <property name="FieldName">CaseFile</property>
+            <property name="VisibleIndex">0</property>
+            <property name="Width">246</property>
+            <property name="ActualWidth">26*</property>
+          </property>
+          <property name="Item3" isnull="true" iskey="true">
+            <property name="ExtendedVisibleIndex">3</property>
+            <property name="Visible">true</property>
+            <property name="Name">ArchiveList_CaseFiles_DateEndYear</property>
+            <property name="FieldName">DateEndYear</property>
+            <property name="VisibleIndex">2</property>
+            <property name="Width">66</property>
+            <property name="ActualWidth">7*</property>
+          </property>
+          <property name="Item4" isnull="true" iskey="true">
+            <property name="ExtendedVisibleIndex">4</property>
+            <property name="Visible">true</property>
+            <property name="Name">ArchiveList_CaseFiles_DocCount</property>
+            <property name="FieldName">DocCount</property>
+            <property name="VisibleIndex">3</property>
+            <property name="Width">123</property>
+            <property name="ActualWidth">13*</property>
+          </property>
+          <property name="Item5" isnull="true" iskey="true">
+            <property name="ExtendedVisibleIndex">5</property>
+            <property name="Visible">true</property>
+            <property name="Name">ArchiveList_CaseFiles_RetentionPeriod</property>
+            <property name="FieldName">RetentionPeriod</property>
+            <property name="VisibleIndex">4</property>
+            <property name="Width">132</property>
+            <property name="ActualWidth">14*</property>
+          </property>
+          <property name="Item6" isnull="true" iskey="true">
+            <property name="ExtendedVisibleIndex">6</property>
+            <property name="Visible">true</property>
+            <property name="Name">ArchiveList_CaseFiles_Bunch</property>
+            <property name="FieldName">Bunch</property>
+            <property name="VisibleIndex">5</property>
+            <property name="Width">76</property>
+            <property name="ActualWidth">8*</property>
+          </property>
+          <property name="Item7" isnull="true" iskey="true">
+            <property name="ExtendedVisibleIndex">7</property>
+            <property name="Visible">true</property>
+            <property name="Name">ArchiveList_CaseFiles_Notes</property>
+            <property name="FieldName">Notes</property>
+            <property name="VisibleIndex">6</property>
+            <property name="Width">113</property>
+            <property name="ActualWidth">12*</property>
+          </property>
+        </property>
+        <property name="GroupSummarySortInfo" iskey="true" value="0" />
+      </property>
+    </XtraSerializer>
+  </Collection3a72c402345e4ed6ac45e4aa13b9f336>
+  <AccessRightsAccessRightEntryCardGrid_38106a151b4548f2900c4f02ff9fa8b2>
+    <XtraSerializer version="1.0" application="GridControl">
+      <property name="#LayoutVersion" isnull="true" />
+      <property name="\$GridControl" iskey="true" value="GridControl">
+        <property name="TotalSummary" iskey="true" value="0" />
+        <property name="View" isnull="true" iskey="true">
+          <property name="AutoWidth">true</property>
+          <property name="ShowGroupPanel">false</property>
+          <property name="ShowTotalSummary">false</property>
+          <property name="LinesPerRowMode">None</property>
+        </property>
+      </property>
+    </XtraSerializer>
+  </AccessRightsAccessRightEntryCardGrid_38106a151b4548f2900c4f02ff9fa8b2>
+  <collapsableTree>
+    <Layout>
+      <IsDocked>true</IsDocked>
+      <Width>230</Width>
+    </Layout>
+  </collapsableTree>
+  <treeListLayout>
+    <GridViewSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <ColumnWidths>
+        <string>230</string>
+        <string>Auto</string>
+        <string>*</string>
+      </ColumnWidths>
+    </GridViewSettings>
+  </treeListLayout>
+</settings>

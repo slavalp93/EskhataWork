@@ -3,6 +3,17 @@
   "NameGuid": "8ef6451a-0a92-4ed9-ab61-2b39ea3d97ab",
   "Name": "Order",
   "AccessRightsMode": "Both",
+  "Actions": [
+    {
+      "NameGuid": "bf531569-05fb-4753-9b12-57311f085eff",
+      "Name": "CreateArchiveSchedulelitiko",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "IsVisibleInDesktopClient": false,
+      "LargeIconName": "Action_CreateArchiveSchedulelitiko_large_bf53156905fb47539b1257311f085eff.png",
+      "SmallIconName": "Action_CreateArchiveSchedulelitiko_small_bf53156905fb47539b1257311f085eff.png"
+    }
+  ],
   "BaseGuid": "9570e517-7ab7-4f23-a959-3652715efad3",
   "CanBeNavigationPropertyType": true,
   "CreationAreaMetadata": {
@@ -196,12 +207,24 @@
     }
   ],
   "PublicStructures": [],
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "NotAccessToExecute"
+  ],
   "RibbonCardMetadata": {
     "NameGuid": "df70ffde-c4d2-4e99-a09b-b01be2fd4130",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "d4a74e48-4c10-4cb5-83b9-ad97857e5028",
+        "Name": "ActionButtonlitiko",
+        "ActionGuid": "bf531569-05fb-4753-9b12-57311f085eff",
+        "ButtonSize": "Large",
+        "Index": 3,
+        "ParentGuid": "05d63e9c-36c0-44c3-a7fd-b1a360e13fc0"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],

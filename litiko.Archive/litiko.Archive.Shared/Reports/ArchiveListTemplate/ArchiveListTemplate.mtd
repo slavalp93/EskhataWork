@@ -1,0 +1,47 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "31a5a3fd-8cfe-4fa0-bc28-f4c8665c1047",
+  "Name": "ArchiveListTemplate",
+  "AccessRightsMode": "NoRight",
+  "AssociatedGuid": "926182a5-94ef-4bbb-a6c5-cf670038da1d",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [
+    {
+      "NameGuid": "c8834665-3a0a-4ca4-91b4-1a9d32fe194c",
+      "Name": "Doc",
+      "EntityType": "926182a5-94ef-4bbb-a6c5-cf670038da1d"
+    }
+  ],
+  "DefaultExportFormat": "Word",
+  "ExportFormats": [
+    "Word"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "IntegrationServiceName": "ArchiveArchiveListTemplate",
+  "Overridden": [
+    "AccessRightsMode",
+    "PublicConstants",
+    "PublicStructures",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "DisplayName",
+    "DataSources",
+    "Parameters",
+    "HandledEvents"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "1bfd6cab-d751-43e8-82e0-d2e9102edf72",
+      "Name": "Entity",
+      "EntityType": "926182a5-94ef-4bbb-a6c5-cf670038da1d",
+      "InternalDataTypeName": "litiko.Archive.IArchiveList, Sungero.Domain.Interfaces",
+      "IsRequired": true
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "Versions": []
+}
