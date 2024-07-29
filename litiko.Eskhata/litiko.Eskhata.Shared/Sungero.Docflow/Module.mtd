@@ -546,7 +546,13 @@
   ],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.Eskhata.Module.Docflow",
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "SimpleTextStamp",
+    "RegistrationDayAnchorSymbol",
+    "RegistrationMonthAnchorSymbol",
+    "RegistrationYearAnchorSymbol",
+    "RegistrationNumberAnchorSymbol"
+  ],
   "SpecialFolders": [],
   "Version": "4.8.138.0",
   "Widgets": [],

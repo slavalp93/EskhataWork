@@ -58,4 +58,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="SimpleTextStamp" xml:space="preserve">
+    <value>&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+&lt;style type="text/css"&gt;
+.tg2{font-size:14pt;font-family:Arial, "Segoe UI", Consolas, Calibri, monospace;text-align:center;white-space: nowrap}
+ 
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body style="margin: 0"&gt;
+    &lt;span class="tg2"&gt;{0}&lt;/span&gt;
+&lt;/body&gt;
+&lt;/html&gt;</value>
+  </data>
+  <data name="RegistrationDayAnchorSymbol" xml:space="preserve">
+    <value>⚓ дд</value>
+  </data>
+  <data name="RegistrationMonthAnchorSymbol" xml:space="preserve">
+    <value>⚓ мм</value>
+  </data>
+  <data name="RegistrationYearAnchorSymbol" xml:space="preserve">
+    <value>⚓ гггг</value>
+  </data>
+  <data name="RegistrationNumberAnchorSymbol" xml:space="preserve">
+    <value>⚓№</value>
+  </data>
 </root>

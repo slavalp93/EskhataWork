@@ -27,5 +27,92 @@ namespace litiko.Eskhata.Module.Docflow.Server
     {
       return base.GeneratePublicBodyWithSignatureMark(document, versionId, signatureMark);
     }
+    public override Sungero.Docflow.Structures.OfficialDocument.ConversionToPdfResult ConvertToPdfWithStamp(Sungero.Docflow.IOfficialDocument document, long versionId, string htmlStamp, bool isSignatureMark, double rightIndent, double bottomIndent)
+    {
+      // Предпроверки.
+      var result = Sungero.Docflow.Structures.OfficialDocument.ConversionToPdfResult.Create();
+      result.HasErrors = true;
+      var version = document.Versions.SingleOrDefault(v => v.Id == versionId);
+      if (version == null)
+      {
+        result.HasConvertionError = true;
+        result.ErrorMessage = Sungero.Docflow.OfficialDocuments.Resources.NoVersionWithNumberErrorFormat(versionId);
+        return result;
+      }
+      
+      Sungero.Docflow.PublicFunctions.Module.LogPdfConverting("Start converting to PDF", document, version);
+      
+      // Получить тело версии для преобразования в PDF.
+      var body = Sungero.Docflow.PublicFunctions.OfficialDocument.GetBodyToConvertToPdf(document, version, isSignatureMark);
+      if (body == null || body.Body == null || body.Body.Length == 0)
+      {
+        Sungero.Docflow.PublicFunctions.Module.LogPdfConverting("Cannot get version body", document, version);
+        result.HasConvertionError = true;
+        result.ErrorMessage = isSignatureMark ? Sungero.Docflow.OfficialDocuments.Resources.ConvertionErrorTitleBase : Docflow.Resources.AddRegistrationStampErrorTitle;
+        return result;
+      }
+      
+      System.IO.Stream pdfDocumentStream = null;
+      using (var inputStream = new System.IO.MemoryStream(body.Body))
+      {
+        try
+        {
+          pdfDocumentStream = Sungero.Docflow.IsolatedFunctions.PdfConverter.GeneratePdf(inputStream, body.Extension);
+          if (!string.IsNullOrEmpty(htmlStamp))
+          {
+            pdfDocumentStream = isSignatureMark
+              ? Sungero.Docflow.IsolatedFunctions.PdfConverter.AddSignatureStamp(pdfDocumentStream, body.Extension, htmlStamp, Docflow.Resources.SignatureMarkAnchorSymbol,
+                                                                                 Sungero.Docflow.Constants.Module.SearchablePagesLimit)
+              : Sungero.Docflow.IsolatedFunctions.PdfConverter.AddRegistrationStamp(pdfDocumentStream, htmlStamp, 1, rightIndent, bottomIndent);
+          }
+          pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddRegistrationData(pdfDocumentStream, document.RegistrationNumber, document.RegistrationDate);
+        }
+        catch (Exception ex)
+        {
+          if (ex is AppliedCodeException)
+            Logger.Error(Docflow.Resources.PdfConvertErrorFormat(document.Id), ex.InnerException);
+          else
+            Logger.Error(Docflow.Resources.PdfConvertErrorFormat(document.Id), ex);
+          
+          result.HasConvertionError = true;
+          result.HasLockError = false;
+          result.ErrorMessage = isSignatureMark ? Sungero.Docflow.OfficialDocuments.Resources.ConvertionErrorTitleBase : Docflow.Resources.AddRegistrationStampErrorTitle;
+        }
+      }
+      
+      if (!string.IsNullOrWhiteSpace(result.ErrorMessage))
+        return result;
+      
+      // Выключить error-логирование при доступе к зашифрованным бинарным данным/версии.
+      AccessRights.SuppressSecurityEvents(
+        () =>
+        {
+          if (isSignatureMark)
+          {
+            version.PublicBody.Write(pdfDocumentStream);
+            version.AssociatedApplication = Sungero.Content.AssociatedApplications.GetByExtension(Sungero.Docflow.Constants.OfficialDocument.PdfExtension);
+          }
+          else
+          {
+            document.CreateVersionFrom(pdfDocumentStream, Sungero.Docflow.Constants.OfficialDocument.PdfExtension);
+            
+            var lastVersion = document.LastVersion;
+            lastVersion.Note = Sungero.Docflow.OfficialDocuments.Resources.VersionWithRegistrationStamp;
+          }
+        });
+      
+      pdfDocumentStream.Close();
+      
+      Sungero.Docflow.PublicFunctions.Module.LogPdfConverting(isSignatureMark ? "Generate public body" : "Create new version", document, version);
+      result = this.SaveDocumentAfterConvertToPdf(document, isSignatureMark);
+      Sungero.Docflow.PublicFunctions.Module.LogPdfConverting("End converting to PDF", document, version);
+      
+      return result;
+    }
+    
+    public override Sungero.Docflow.Structures.OfficialDocument.ConversionToPdfResult SaveDocumentAfterConvertToPdf(Sungero.Docflow.IOfficialDocument document, bool isSignatureMark)
+    {
+      return base.SaveDocumentAfterConvertToPdf(document, isSignatureMark);
+    }
   }
 }
