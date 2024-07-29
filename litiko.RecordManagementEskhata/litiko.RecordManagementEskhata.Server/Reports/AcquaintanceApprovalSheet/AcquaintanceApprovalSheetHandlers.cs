@@ -103,6 +103,7 @@ namespace litiko.RecordManagementEskhata
             ? acquainters.Where(x => x.IncludedIn(AcquaintanceApprovalSheet.Department))
             : acquainters.Where(x => Equals(x.Department, AcquaintanceApprovalSheet.Department));
         
+        Logger.Debug("AcquaintanceApprovalSheet. Task id = "+task.Id+", acquainter ids : " + string.Join(",",acquainters?.Select(x => x.Id.ToString())));
         foreach (var employee in acquainters)
         {
           // Задание.
