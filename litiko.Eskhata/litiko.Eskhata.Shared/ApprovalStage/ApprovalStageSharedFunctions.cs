@@ -14,11 +14,20 @@ namespace litiko.Eskhata.Shared
       var baseRoles = base.GetPossibleRoles();
       baseRoles.Add(DocflowEskhata.UnitManagerApprovalRole.Type.UnitManager);
       
+      #region Согласование
       if (_obj.StageType == Sungero.Docflow.ApprovalStage.StageType.Approvers)
       {
         baseRoles.Add(DocflowEskhata.UnitManagerApprovalRole.Type.Signatory);
         baseRoles.Add(Archive.ApprovalRole.Type.Archivist);
       }
+      #endregion
+      
+      #region Задание
+      if (_obj.StageType == Sungero.Docflow.ApprovalStage.StageType.SimpleAgr)
+      {
+        baseRoles.Add(Archive.ApprovalRole.Type.Archivist);
+      }
+      #endregion
       
       return baseRoles;
     }

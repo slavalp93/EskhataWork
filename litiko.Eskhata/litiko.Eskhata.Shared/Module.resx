@@ -73,4 +73,7 @@
   <data name="INNRezidentPersonError" xml:space="preserve">
     <value>For resident individuals, the TIN cannot exceed 9 characters</value>
   </data>
+  <data name="VersionCreatedSuccessfully" xml:space="preserve">
+    <value>Document version created successfully</value>
+  </data>
 </root>

@@ -175,6 +175,22 @@
   "IsolatedAssemblyName": "litiko.Eskhata.Isolated",
   "IsolatedNamespace": "litiko.Eskhata.Isolated",
   "OrderedSpecialFolders": [],
+  "PublicFunctions": [
+    {
+      "Name": "CreateArchiveListByCaseFiles",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "caseFiles",
+          "ParameterType": "global::System.Collections.Generic.List<global::litiko.Eskhata.ICaseFile>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::litiko.Archive.IArchiveList",
+      "ReturnTypeFullName": "litiko.Archive.IArchiveList, Sungero.Domain.Interfaces"
+    }
+  ],
   "PublicStructures": [],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.Eskhata",
@@ -183,14 +199,15 @@
     "INNNonRezidentError",
     "INNRezidentError",
     "INNNonRezidentPersonError",
-    "INNRezidentPersonError"
+    "INNRezidentPersonError",
+    "VersionCreatedSuccessfully"
   ],
   "ServerAssemblyName": "litiko.Eskhata.Server",
   "ServerNamespace": "litiko.Eskhata.Server",
   "SharedAssemblyName": "litiko.Eskhata.Shared",
   "SharedNamespace": "litiko.Eskhata.Shared",
   "SpecialFolders": [],
-  "Version": "4.8.138.18",
+  "Version": "4.8.138.20",
   "Widgets": [],
   "Versions": [
     {

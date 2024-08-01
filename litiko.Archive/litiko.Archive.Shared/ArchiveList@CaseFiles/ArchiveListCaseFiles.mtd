@@ -83,6 +83,7 @@
       "Name": "Bunch",
       "CanBeSearch": false,
       "Code": "Bunch",
+      "IsRequired": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "f419ba25-94f2-4531-9279-9dc283d0614c"
     },

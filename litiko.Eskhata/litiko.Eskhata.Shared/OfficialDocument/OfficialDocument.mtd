@@ -163,6 +163,7 @@
       "Code": "Archivelitiko",
       "EntityGuid": "8041356e-45a8-44e0-a7a1-0ff73f561047",
       "FlatListInStandaloneLookup": true,
+      "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "c74d8054-d16d-43c5-a826-ae982cbde6db"
     },
@@ -171,6 +172,7 @@
       "NameGuid": "bd63208e-e9fc-4ef0-8b57-26a8dc6365f5",
       "Name": "TransferredToArchivelitiko",
       "Code": "TransferredToA",
+      "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
       "PreviousPropertyGuid": "afeb04ab-abe9-4388-a17e-344e90743c09"
     }

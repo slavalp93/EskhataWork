@@ -17,7 +17,7 @@ namespace litiko.Eskhata
       // Добавить в связи, если основной документ - Приказ о сдаче документов в архив
       if (_obj.LeadingDocument != null && _obj.LeadingDocument.AccessRights.CanRead() 
           && _obj.LeadingDocument.DocumentKind != null 
-          && Equals(_obj.DocumentKind, Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(Archive.PublicConstants.Module.DocumentKindGuids.OrderArchive))
+          && Equals(_obj.LeadingDocument.DocumentKind, Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(Archive.PublicConstants.Module.DocumentKindGuids.OrderArchive))
           && !_obj.Relations.GetRelatedFrom("Basis").Contains(_obj.LeadingDocument))
         _obj.Relations.AddFromOrUpdate("Basis", _obj.State.Properties.LeadingDocument.OriginalValue, _obj.LeadingDocument);
     }

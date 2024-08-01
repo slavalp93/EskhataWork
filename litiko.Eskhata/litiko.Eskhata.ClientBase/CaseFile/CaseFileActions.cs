@@ -7,18 +7,20 @@ using litiko.Eskhata.CaseFile;
 
 namespace litiko.Eskhata.Client
 {
-  partial class CaseFileActions
+  partial class CaseFileCollectionActions
   {
-    public virtual void TransferToArchivelitiko(Sungero.Domain.Client.ExecuteActionArgs e)
-    {
-      e.AddInformation("Создание нового документа с видом Список документов для передачи в архив.");
-    }
 
     public virtual bool CanTransferToArchivelitiko(Sungero.Domain.Client.CanExecuteActionArgs e)
-    {
-      return !_obj.State.IsChanged && !_obj.State.IsInserted && Equals(_obj.RegistrationGroup?.ResponsibleEmployee, Users.Current);
+    {      
+      return !_objs.Any(x => !Equals(x.RegistrationGroup?.ResponsibleEmployee, Users.Current))
+        && !_objs.Any(x => x.State.IsInserted || x.State.IsChanged);
     }
 
+    public virtual void TransferToArchivelitiko(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var doc = litiko.Eskhata.PublicFunctions.Module.Remote.CreateArchiveListByCaseFiles(_objs.ToList());
+      doc.Show();
+    }
   }
 
 }

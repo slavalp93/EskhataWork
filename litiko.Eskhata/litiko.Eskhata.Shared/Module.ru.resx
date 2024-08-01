@@ -73,4 +73,7 @@
   <data name="INNRezidentPersonError" xml:space="preserve">
     <value>Для физических лиц-резидентов ИНН не может превышать 9 символов</value>
   </data>
+  <data name="VersionCreatedSuccessfully" xml:space="preserve">
+    <value>Версия документа создана успешно</value>
+  </data>
 </root>

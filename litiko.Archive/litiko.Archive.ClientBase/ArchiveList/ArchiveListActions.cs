@@ -13,7 +13,17 @@ namespace litiko.Archive.Client
     {
       //base.CreateFromTemplate(e);
       
-      litiko.Archive.Functions.ArchiveList.Remote.FillArchiveListTemplate(_obj);
+      try
+      {
+        litiko.Archive.Functions.ArchiveList.Remote.FillArchiveListTemplate(_obj);
+        e.AddInformation(litiko.Eskhata.Resources.VersionCreatedSuccessfully);
+      }
+      catch (Exception ex)
+      {        
+        throw;
+      }
+      
+      
     }
 
     public override bool CanCreateFromTemplate(Sungero.Domain.Client.CanExecuteActionArgs e)

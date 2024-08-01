@@ -69,7 +69,7 @@
           "Name": "Departments",
           "ColumnNumber": 0,
           "ColumnSpan": 2,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiSelectEditorToCollectionBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiSelectFromListEditorToCollectionBinder",
           "ParentGuid": "c646c211-0041-4b37-ac66-4d8863a15974",
           "PropertyGuid": "ef649b20-da09-4ffa-b763-5faca0462eff",
           "RowNumber": 2,

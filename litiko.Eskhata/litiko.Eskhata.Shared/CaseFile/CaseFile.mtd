@@ -8,6 +8,7 @@
       "Name": "TransferToArchivelitiko",
       "ActionArea": "CardAndCollection",
       "GenerateHandler": true,
+      "IsMultiSelectAction": true,
       "IsVisibleInDesktopClient": false,
       "LargeIconName": "Action_TransferToArchivelitiko_large_31d6ac0c0ae04e81869b13d847f9a161.png",
       "SmallIconName": "Action_TransferToArchivelitiko_small_31d6ac0c0ae04e81869b13d847f9a161.png"
@@ -297,6 +298,7 @@
       "Code": "Archivelitiko",
       "EntityGuid": "8041356e-45a8-44e0-a7a1-0ff73f561047",
       "FlatListInStandaloneLookup": true,
+      "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "d8ce1aaf-5b88-4655-b700-430f48bb8458"
     },
@@ -305,6 +307,7 @@
       "NameGuid": "4be76290-a3e9-4231-a229-026b4d5e9261",
       "Name": "TransferredToArchivelitiko",
       "Code": "TransferredToA",
+      "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
       "PreviousPropertyGuid": "a53421a1-57be-4bf7-9175-ced4fd1a34ff"
     }
@@ -358,7 +361,7 @@
         "Name": "CopyEntity",
         "ActionGuid": "00fae4b6-935a-4047-831d-312fd3c02faf",
         "DefaultIndexInQuickAccessToolBar": 20,
-        "Index": 21,
+        "Index": 23,
         "IsAncestorMetadata": true,
         "IsShowInContextMenu": true,
         "Overridden": [
@@ -371,7 +374,7 @@
         "NameGuid": "5133599e-202e-4a71-876e-45af52df2b7b",
         "Name": "SetAccessRights",
         "ActionGuid": "40975f07-51e4-46d4-80d7-6592cd03f66e",
-        "Index": 31,
+        "Index": 33,
         "IsAncestorMetadata": true,
         "IsShowInContextMenu": true,
         "Overridden": [
@@ -384,7 +387,7 @@
         "NameGuid": "36d11e82-ebe8-488c-8e3c-f81ee5469773",
         "Name": "DeleteEntity",
         "ActionGuid": "18cdb157-e89a-488b-8cea-bce6a63d0a13",
-        "Index": 41,
+        "Index": 43,
         "IsAncestorMetadata": true,
         "Overridden": [
           "Index"
@@ -396,7 +399,7 @@
         "NameGuid": "07eef63c-3d22-4643-900d-082310732f2c",
         "Name": "DeleteEntities",
         "ActionGuid": "9f70df4c-99a1-4c55-bbd8-dd6c7727a479",
-        "Index": 41,
+        "Index": 43,
         "IsAncestorMetadata": true,
         "Overridden": [
           "Index"
@@ -405,7 +408,7 @@
       },
       {
         "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
-        "NameGuid": "2103222d-a9a0-45ee-b550-ebdccc1ce1ea",
+        "NameGuid": "5c7f088f-85ad-4e4d-92e3-88339716e6b1",
         "Name": "TransferToArchivelitikolitiko",
         "ActionGuid": "31d6ac0c-0ae0-4e81-869b-13d847f9a161",
         "ButtonSize": "Large",

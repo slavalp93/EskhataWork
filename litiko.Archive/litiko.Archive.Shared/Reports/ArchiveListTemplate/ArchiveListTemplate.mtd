@@ -39,6 +39,28 @@
       "EntityType": "926182a5-94ef-4bbb-a6c5-cf670038da1d",
       "InternalDataTypeName": "litiko.Archive.IArchiveList, Sungero.Domain.Interfaces",
       "IsRequired": true
+    },
+    {
+      "NameGuid": "901099b3-b8f6-4e4d-9c91-76b59fda3452",
+      "Name": "cntCaseFiles",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "42b42b55-454c-4add-b61b-b5cb9a688895",
+      "Name": "cntCaseFilesInWords",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "5a585d83-bbb6-4ed1-8d59-e12be4f05f32",
+      "Name": "cntBranch",
+      "InternalDataTypeName": "System.Int32",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "c6837f3e-43e8-4671-969a-76ad52f780eb",
+      "Name": "cntBranchInWords",
+      "InternalDataTypeName": "System.String"
     }
   ],
   "PublicStructures": [],

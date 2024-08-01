@@ -514,6 +514,7 @@
       "Code": "Archive",
       "EntityGuid": "8041356e-45a8-44e0-a7a1-0ff73f561047",
       "FlatListInStandaloneLookup": true,
+      "IsRequired": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "bd63208e-e9fc-4ef0-8b57-26a8dc6365f5"
     },
