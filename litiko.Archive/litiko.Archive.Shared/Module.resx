@@ -70,4 +70,19 @@
   <data name="ArchiveListType" xml:space="preserve">
     <value>List of documents</value>
   </data>
+  <data name="DocInArchiveLocationState" xml:space="preserve">
+    <value>The document is located in the archive "{0}"</value>
+  </data>
+  <data name="NoticeSubjectForErrorTask" xml:space="preserve">
+    <value>Errors occurred during the transfer of documents to the archive</value>
+  </data>
+  <data name="AsyncHandlerStartNotification" xml:space="preserve">
+    <value>The process of reflecting the transfer of documents to the archive has been launched</value>
+  </data>
+  <data name="AsyncHandlerFinishNotification" xml:space="preserve">
+    <value>The process of reflecting the transfer of documents to the archive has been completed</value>
+  </data>
+  <data name="DocumentsAreNotTransferedToArchive" xml:space="preserve">
+    <value>The documents have not yet been transferred to the archive. Start the transfer process from the document card or wait until it is completed.</value>
+  </data>
 </root>

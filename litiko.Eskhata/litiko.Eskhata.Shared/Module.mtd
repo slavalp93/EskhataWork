@@ -166,6 +166,66 @@
     {
       "ItemId": "47ccb9ae-3d4f-41e4-b2f1-47d74051507d",
       "PreviousItemId": "5fa2c3b4-7436-4ce6-884b-a2e30457f75b"
+    },
+    {
+      "ItemId": "b2b15ed6-6181-4542-8dbe-9121a96f53e4",
+      "PreviousItemId": "47ccb9ae-3d4f-41e4-b2f1-47d74051507d"
+    },
+    {
+      "ItemId": "1bc72831-b65e-4e1b-b722-011f844115bb",
+      "PreviousItemId": "b2b15ed6-6181-4542-8dbe-9121a96f53e4"
+    },
+    {
+      "ItemId": "4483e20d-4fa7-43bf-933e-96e6d8cf16ac",
+      "PreviousItemId": "1bc72831-b65e-4e1b-b722-011f844115bb"
+    },
+    {
+      "ItemId": "8ebcfe71-a3cf-4fc6-b68a-534b7723d545",
+      "PreviousItemId": "4483e20d-4fa7-43bf-933e-96e6d8cf16ac"
+    },
+    {
+      "ItemId": "95d4f71e-7e06-4d3e-8309-d63dfa3b8337",
+      "PreviousItemId": "8ebcfe71-a3cf-4fc6-b68a-534b7723d545"
+    },
+    {
+      "ItemId": "1c498bb7-d503-471b-8f84-34c09db16609",
+      "PreviousItemId": "95d4f71e-7e06-4d3e-8309-d63dfa3b8337"
+    },
+    {
+      "ItemId": "00808843-1974-4176-9a49-ea77c61099e6",
+      "PreviousItemId": "1c498bb7-d503-471b-8f84-34c09db16609"
+    },
+    {
+      "ItemId": "c6e57cd5-8dc1-4c12-90c7-65fa4078ef2d",
+      "PreviousItemId": "00808843-1974-4176-9a49-ea77c61099e6"
+    },
+    {
+      "ItemId": "dd2b0e02-31ed-4868-8401-c6312e0dac95",
+      "PreviousItemId": "c6e57cd5-8dc1-4c12-90c7-65fa4078ef2d"
+    },
+    {
+      "ItemId": "3d2ed69e-f4f2-41fa-b639-e3bac8a379a4",
+      "PreviousItemId": "dd2b0e02-31ed-4868-8401-c6312e0dac95"
+    },
+    {
+      "ItemId": "ccb43446-aa67-4608-a37a-259eff27e68a",
+      "PreviousItemId": "3d2ed69e-f4f2-41fa-b639-e3bac8a379a4"
+    },
+    {
+      "ItemId": "bf6a790f-c32e-49fa-b6f8-1aff5638c757",
+      "PreviousItemId": "ccb43446-aa67-4608-a37a-259eff27e68a"
+    },
+    {
+      "ItemId": "b4b4e7eb-2adb-4080-99e6-8bdeead19fe2",
+      "PreviousItemId": "bf6a790f-c32e-49fa-b6f8-1aff5638c757"
+    },
+    {
+      "ItemId": "8d2eeaed-9598-418e-b403-3d5df0cc0aa3",
+      "PreviousItemId": "b4b4e7eb-2adb-4080-99e6-8bdeead19fe2"
+    },
+    {
+      "ItemId": "f40e0fe2-2118-4a36-a1b5-221c62c0cfbc",
+      "PreviousItemId": "8d2eeaed-9598-418e-b403-3d5df0cc0aa3"
     }
   ],
   "IconResourcesKeys": [],
@@ -207,7 +267,7 @@
   "SharedAssemblyName": "litiko.Eskhata.Shared",
   "SharedNamespace": "litiko.Eskhata.Shared",
   "SpecialFolders": [],
-  "Version": "4.8.138.20",
+  "Version": "4.8.138.21",
   "Widgets": [],
   "Versions": [
     {

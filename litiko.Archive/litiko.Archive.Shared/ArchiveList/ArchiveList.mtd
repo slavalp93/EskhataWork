@@ -13,10 +13,20 @@
         "GenerateHandler"
       ],
       "Versions": []
+    },
+    {
+      "NameGuid": "cb3ba227-e3f2-4c72-9983-3d4b4912c976",
+      "Name": "ConfirmTransferToArchive",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_ConfirmTransferToArchive_large_cb3ba227e3f24c7299833d4b4912c976.png",
+      "NeedConfirmation": true,
+      "SmallIconName": "Action_ConfirmTransferToArchive_small_cb3ba227e3f24c7299833d4b4912c976.png"
     }
   ],
   "BaseGuid": "ce3e34ed-7be2-4426-a951-d5a70f966650",
   "CanBeNavigationPropertyType": true,
+  "CanBeSearch": true,
   "CreationAreaMetadata": {
     "NameGuid": "01403d88-dd86-41ff-aa3b-40002653507a",
     "Name": "CreationArea",
@@ -418,7 +428,8 @@
   "OperationsClass": "",
   "Overridden": [
     "IconName",
-    "DocumentVersionCreationSources"
+    "DocumentVersionCreationSources",
+    "CanBeSearch"
   ],
   "Properties": [
     {
@@ -573,13 +584,74 @@
       "PreviousPropertyGuid": "8678c0af-c762-4863-9319-7c0e7c115fb4"
     }
   ],
+  "PublicFunctions": [
+    {
+      "Name": "IsAllTransferedToArchive",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "archiveList",
+          "ParameterType": "global::litiko.Archive.IArchiveList",
+          "ParameterTypeFullName": "litiko.Archive.IArchiveList, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    }
+  ],
   "PublicStructures": [],
   "ResourcesKeys": [],
   "RibbonCardMetadata": {
     "NameGuid": "148c3e6e-e4df-4180-ae7d-ccbba97c69ce",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "c0f642e9-81fe-46b3-bc7f-f9921564bd76",
+        "Name": "CreateVersionFromLastVersion",
+        "ActionGuid": "cff11896-d843-428c-b768-dc6c7fe62d7a",
+        "Index": 31,
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "Index"
+        ],
+        "ParentGuid": "4f04b1b4-b6b2-424f-a95a-9a6927cfbdb4"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonStaticDropDownButtonMetadata, Sungero.Metadata",
+        "NameGuid": "79d7acaa-bca4-4e99-9fb2-947a236ec1a8",
+        "Name": "ImportDocument",
+        "Index": 41,
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "Index"
+        ],
+        "ParentGuid": "4f04b1b4-b6b2-424f-a95a-9a6927cfbdb4"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "c43817e9-9654-4640-99a3-e3804c48a2e2",
+        "Name": "ExportVersion",
+        "ActionGuid": "623e47f7-f308-49b5-95e1-8432fb324f3f",
+        "Index": 51,
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "Index"
+        ],
+        "ParentGuid": "4f04b1b4-b6b2-424f-a95a-9a6927cfbdb4"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "b1f58745-1c9d-4777-8085-7699df5e2c4a",
+        "Name": "ConfirmTransferToArchive",
+        "ActionGuid": "cb3ba227-e3f2-4c72-9983-3d4b4912c976",
+        "ButtonSize": "Large",
+        "Index": 21,
+        "ParentGuid": "4f04b1b4-b6b2-424f-a95a-9a6927cfbdb4"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],

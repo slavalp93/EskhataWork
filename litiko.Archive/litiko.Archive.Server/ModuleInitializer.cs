@@ -102,7 +102,15 @@ namespace litiko.Archive.Server
       {
         Archives.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Read);
         Archives.AccessRights.Save();
-      }     
+      }
+
+      // Делопроизводители
+      var clerks = Sungero.Docflow.PublicFunctions.DocumentRegister.Remote.GetClerks();
+      if (clerks != null)
+      {
+        ArchiveLists.AccessRights.Grant(clerks, DefaultAccessRightsTypes.Create);
+        ArchiveLists.AccessRights.Save();
+      }
     }    
     
     /// <summary>

@@ -39,9 +39,11 @@
       "EntityGuid": "06cfaba0-c943-47bf-a037-1a1b540f49d2",
       "FlatListInStandaloneLookup": true,
       "HandledEvents": [
-        "ChangedShared"
+        "ChangedShared",
+        "LookupServer"
       ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "NeedPassEntityToLookupEvent": true,
       "PreviousPropertyGuid": "a9b1872e-be65-43eb-8528-3b521fd97a2b"
     },
     {

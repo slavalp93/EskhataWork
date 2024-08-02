@@ -13,7 +13,8 @@ namespace litiko.Eskhata.Client
     public virtual bool CanTransferToArchivelitiko(Sungero.Domain.Client.CanExecuteActionArgs e)
     {      
       return !_objs.Any(x => !Equals(x.RegistrationGroup?.ResponsibleEmployee, Users.Current))
-        && !_objs.Any(x => x.State.IsInserted || x.State.IsChanged);
+        && !_objs.Any(x => x.State.IsInserted || x.State.IsChanged)
+        && !_objs.Any(x => x.Archivelitiko == null || !x.TransferredToArchivelitiko.HasValue);
     }
 
     public virtual void TransferToArchivelitiko(Sungero.Domain.Client.ExecuteActionArgs e)

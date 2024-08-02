@@ -160,4 +160,20 @@
   <data name="Property_CommissionBoss" xml:space="preserve">
     <value>Chairman</value>
   </data>
+  <data name="Action_ConfirmTransferToArchive" xml:space="preserve">
+    <value>Confirm transfer to archive</value>
+  </data>
+  <data name="Action_ConfirmTransferToArchiveDescription" xml:space="preserve">
+    <value>Confirmation of receipt of documents in the archive and starting the process of reflecting the transfer in the system</value>
+  </data>
+  <data name="Action_ConfirmTransferToArchiveHint" xml:space="preserve">
+    <value>Confirm transfer to archive</value>
+  </data>
+  <data name="Action_ConfirmTransferToArchiveConfirmationMessage" xml:space="preserve">
+    <value>Do you confirm that you accepted the documents into the archive?
+The process of reflecting the transfer of documents in the system will be launched</value>
+  </data>
+  <data name="Action_ConfirmTransferToArchiveConfirmationDescription" xml:space="preserve">
+    <value>The process of reflecting the transfer of documents in the system will be launched</value>
+  </data>
 </root>

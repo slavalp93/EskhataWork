@@ -7,6 +7,16 @@ using litiko.Archive.ArchiveList;
 
 namespace litiko.Archive
 {
+  partial class ArchiveListCaseFilesCaseFilePropertyFilteringServerHandler<T>
+  {
+
+    public virtual IQueryable<T> CaseFilesCaseFileFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e)
+    {
+      var caseFileIds = _obj.ArchiveList.CaseFiles.Where(x => x.CaseFile != null).Select(f => f.CaseFile.Id).ToList();
+      return query.Where(x => !caseFileIds.Contains(x.Id) && x.Archivelitiko == null && !x.TransferredToArchivelitiko.HasValue);
+    }
+  }
+
   partial class ArchiveListServerHandlers
   {
 

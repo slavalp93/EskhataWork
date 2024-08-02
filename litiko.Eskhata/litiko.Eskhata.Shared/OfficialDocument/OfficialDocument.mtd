@@ -22,6 +22,17 @@
   },
   "Forms": [
     {
+      "$type": "Sungero.Metadata.InplaceFormMetadata, Sungero.Metadata",
+      "NameGuid": "30d15053-0c64-40f2-89b8-b68c0c9fd574",
+      "Name": "Tracking",
+      "Controls": [],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "SettingsResourceKey"
+      ],
+      "Versions": []
+    },
+    {
       "$type": "Sungero.Metadata.StandaloneFormMetadata, Sungero.Metadata",
       "NameGuid": "fa03f748-4397-42ef-bdc2-22119af7bf7f",
       "Name": "Card",
@@ -126,7 +137,8 @@
     }
   ],
   "HandledEvents": [
-    "RefreshClient"
+    "RefreshClient",
+    "BeforeSaveServer"
   ],
   "IconResourcesKeys": [],
   "IsAbstract": true,

@@ -2,7 +2,28 @@
   "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
   "NameGuid": "59bcaa80-e50b-48db-838f-a9416085a477",
   "Name": "Archive",
-  "AsyncHandlers": [],
+  "AsyncHandlers": [
+    {
+      "NameGuid": "96798734-89c2-42f2-b939-1f45542b98b9",
+      "Name": "TransferToArchive",
+      "DelayPeriod": 15,
+      "DelayStrategy": "ExponentialDelayStrategy",
+      "IsHandlerGenerated": true,
+      "MaxRetryCount": 50,
+      "Parameters": [
+        {
+          "NameGuid": "22846607-1f57-4e12-9d39-01dfc2d36ad7",
+          "Name": "dateTransfer",
+          "ParameterType": "DateTime"
+        },
+        {
+          "NameGuid": "562882d6-9fa0-43b3-924d-cfcf28432ab3",
+          "Name": "docId",
+          "ParameterType": "LongInteger"
+        }
+      ]
+    }
+  ],
   "ClientAssemblyName": "litiko.Archive.Client",
   "ClientBaseAssemblyName": "litiko.Archive.ClientBase",
   "ClientBaseNamespace": "litiko.Archive.ClientBase",
@@ -130,14 +151,19 @@
     "OrderArchiveKind",
     "ArchiveScheduleKind",
     "ArchiveListKind",
-    "ArchiveListType"
+    "ArchiveListType",
+    "DocInArchiveLocationState",
+    "NoticeSubjectForErrorTask",
+    "AsyncHandlerStartNotification",
+    "AsyncHandlerFinishNotification",
+    "DocumentsAreNotTransferedToArchive"
   ],
   "ServerAssemblyName": "litiko.Archive.Server",
   "ServerNamespace": "litiko.Archive.Server",
   "SharedAssemblyName": "litiko.Archive.Shared",
   "SharedNamespace": "litiko.Archive.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.8",
+  "Version": "0.0.1.9",
   "Widgets": [],
   "Versions": [
     {

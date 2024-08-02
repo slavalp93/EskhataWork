@@ -61,4 +61,7 @@
   <data name="DisplayName" xml:space="preserve">
     <value>Архив</value>
   </data>
+  <data name="AsyncHandler_Description_9679873489c242f2b9391f45542b98b9" xml:space="preserve">
+    <value>Передача дел и документов в архив</value>
+  </data>
 </root>

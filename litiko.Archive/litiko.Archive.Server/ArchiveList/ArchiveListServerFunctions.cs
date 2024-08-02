@@ -20,5 +20,14 @@ namespace litiko.Archive.Server
       report.ExportTo(_obj);
       _obj.Save();
     }
+    
+    /// <summary>
+    /// Проверить отражение передачи в архив
+    /// </summary>
+    [Public, Remote(IsPure = true)]
+    public bool IsAllTransferedToArchive()
+    {                
+      return !_obj.CaseFiles.Where(x => x.CaseFile != null).Any(x => x.CaseFile.Archivelitiko == null);
+    }    
   }
 }

@@ -160,4 +160,20 @@
   <data name="Property_CommissionBoss" xml:space="preserve">
     <value>Председатель</value>
   </data>
+  <data name="Action_ConfirmTransferToArchive" xml:space="preserve">
+    <value>Подтвердить прием в архив</value>
+  </data>
+  <data name="Action_ConfirmTransferToArchiveHint" xml:space="preserve">
+    <value>Подтвердить прием в архив</value>
+  </data>
+  <data name="Action_ConfirmTransferToArchiveDescription" xml:space="preserve">
+    <value>Подтверждение приема документов в архив и запуск процесса отражения передачи в системе</value>
+  </data>
+  <data name="Action_ConfirmTransferToArchiveConfirmationMessage" xml:space="preserve">
+    <value>Вы подтверждаете, что приняли документы в архив?
+Будет запущен процесс отражения передачи документов в системе.</value>
+  </data>
+  <data name="Action_ConfirmTransferToArchiveConfirmationDescription" xml:space="preserve">
+    <value>Будет запущен процесс отражения передачи документов в системе</value>
+  </data>
 </root>
