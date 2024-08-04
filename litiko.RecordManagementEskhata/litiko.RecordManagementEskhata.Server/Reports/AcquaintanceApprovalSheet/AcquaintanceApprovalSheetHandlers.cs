@@ -151,8 +151,8 @@ namespace litiko.RecordManagementEskhata
           {
             string jobTitle = Eskhata.JobTitles.As(employee.JobTitle)?.NameTGlitiko;
             newLine.AssignmentHyperlink = string.IsNullOrEmpty(jobTitle) ? 
-              string.Format("{0};{1}", newLine.ShortName, Hyperlinks.Get(sourceDocument)) :
-              string.Format("{0} {1};{2}", jobTitle, newLine.ShortName, Hyperlinks.Get(sourceDocument));
+              string.Format("{0};{1}{2}", newLine.ShortName, Environment.NewLine, Hyperlinks.Get(sourceDocument)) :
+              string.Format("{0} {1};{2}{3}", jobTitle, newLine.ShortName, Environment.NewLine, Hyperlinks.Get(sourceDocument));
           }
           
           var isCompleted = assignment.Status == Sungero.Workflow.Task.Status.Completed;

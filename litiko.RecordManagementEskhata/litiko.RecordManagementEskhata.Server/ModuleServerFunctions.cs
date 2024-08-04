@@ -19,7 +19,7 @@ namespace litiko.RecordManagementEskhata.Server
       int i = 1;
       foreach (var version in document.Versions.OrderByDescending(v => v.Created))
       {
-        var versionSignatures = Signatures.Get(version).Where(s => (showNotApproveSign || s.SignatureType != SignatureType.NotEndorsing)
+        var versionSignatures = Signatures.Get(version).Where(s => (showNotApproveSign || s.SignatureType == SignatureType.Endorsing)
                                                               && s.IsExternal != true
                                                               && !filteredSignatures.ContainsKey(GetSignatureKey(s, version.Number.Value)));
         var lastSignaturesInVersion = versionSignatures
@@ -72,8 +72,8 @@ namespace litiko.RecordManagementEskhata.Server
             : signature.Comment;
           string jobTitle = Eskhata.JobTitles.As(signatory?.JobTitle)?.NameTGlitiko;
           row.Signature = string.IsNullOrEmpty(jobTitle) ? 
-            string.Format("{0};{1}", signature.SignatoryFullName, Hyperlinks.Get(document)) :
-            string.Format("{0} {1};{2}", jobTitle, signature.SignatoryFullName, Hyperlinks.Get(document));
+            string.Format("{0};{1}{2}", signature.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document)) :
+            string.Format("{0} {1};{2}{3}", jobTitle, signature.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document));
           row.Date = signature.SigningDate.ToString();
           row.ReportSessionId = reportSessionId;
           approvalList.Add(row);

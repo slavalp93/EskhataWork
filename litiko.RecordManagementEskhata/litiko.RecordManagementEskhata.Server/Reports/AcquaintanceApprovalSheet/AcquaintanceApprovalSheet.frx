@@ -88,8 +88,8 @@ namespace FastReport
         </TableRow>
       </TableObject>
     </ReportTitleBand>
-    <GroupHeaderBand Name="GroupHeader1" Top="196.4" Width="971.46" CanShrink="true" Condition="[Table.TaskId]">
-      <DataBand Name="Data1" Top="200.4" Width="971.46" Height="74.84" CanGrow="true" DataSource="Table">
+    <GroupHeaderBand Name="GroupHeader1" Top="195.6" Width="971.46" CanShrink="true" Condition="[Table.TaskId]">
+      <DataBand Name="Data1" Top="198.8" Width="971.46" Height="74.84" CanGrow="true" DataSource="Table">
         <TableObject Name="Table2" Left="45.36" Width="894.34" Height="74.84">
           <TableColumn Name="Column6" Width="37.04"/>
           <TableColumn Name="Column7" Width="301.27"/>
@@ -108,7 +108,7 @@ namespace FastReport
         </TableObject>
       </DataBand>
     </GroupHeaderBand>
-    <ReportSummaryBand Name="ReportSummary1" Top="279.24" Width="971.46" Height="37.8">
+    <ReportSummaryBand Name="ReportSummary1" Top="276.84" Width="971.46" Height="37.8">
       <TextObject Name="Text3" Left="45.36" Width="894.35" Height="37.8" Text="Лист принял: ____________________________________________ Дата_________________________" VertAlign="Bottom" Font="Times New Roman, 12pt"/>
     </ReportSummaryBand>
   </ReportPage>
