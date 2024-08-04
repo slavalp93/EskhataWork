@@ -83,10 +83,41 @@
       ],
       "ReturnType": "global::System.IO.Stream",
       "ReturnTypeFullName": "System.IO.Stream"
+    },
+    {
+      "NameGuid": "15728e06-17cc-4394-8f2d-245502adf2cb",
+      "Name": "AddSignatureQRStamp",
+      "IsolatedAreaId": "34bf9e51-a4f9-4420-8e33-989fe35e2845",
+      "Parameters": [
+        {
+          "Name": "inputStream",
+          "ParameterType": "global::System.IO.Stream",
+          "ParameterTypeFullName": "System.IO.Stream"
+        },
+        {
+          "Name": "qrText",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "phrase",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.IO.Stream",
+      "ReturnTypeFullName": "System.IO.Stream"
     }
   ],
   "IsolatedNamespace": "litiko.DocflowEskhata.Isolated",
   "IsVisible": false,
+  "Libraries": [
+    {
+      "NameGuid": "a797a8de-93bf-47ea-81e1-d1aec50478de",
+      "Name": "Drawing",
+      "Scope": "Both"
+    }
+  ],
   "Overridden": [
     "IsVisible"
   ],

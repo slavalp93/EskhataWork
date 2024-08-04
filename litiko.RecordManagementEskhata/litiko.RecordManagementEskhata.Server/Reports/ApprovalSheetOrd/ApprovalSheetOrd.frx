@@ -26,6 +26,12 @@ namespace FastReport
 {
   public class ReportScript
   {
+
+    private void Page1_StartPage(object sender, EventArgs e)
+    {
+      if (Data1.DataSource.RowCount == 0)
+        Page1.Visible = false;
+    }
   }
 }
   </ScriptText>
@@ -46,11 +52,8 @@ namespace FastReport
     <SungeroParameter Name="Document" Id="a9a3f6e6-68d7-4796-8028-795d8ba36a12" IsRequired="false" IsCollection="false" InternalDataType="Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="58cca102-1e97-4f07-b6ac-fd866a8b7cb1"/>
     <SungeroParameter Name="ReportSessionId" Id="677daf73-cb68-4500-94f7-d3302e02d159" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
   </Dictionary>
-  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt">
-    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="37.8">
-      <TextObject Name="Text1" Width="718.2" Height="37.8" Text="Лист согласования" HorzAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
-    </ReportTitleBand>
-    <DataBand Name="Data1" Top="64.7" Width="718.2" Height="75.6" CanGrow="true" CanShrink="true" DataSource="Table">
+  <ReportPage Name="Page1" Watermark.Font="Arial, 60pt" StartPageEvent="Page1_StartPage">
+    <DataBand Name="Data1" Top="59.9" Width="718.2" Height="75.6" CanGrow="true" CanShrink="true" DataSource="Table">
       <TextObject Name="Text2" Width="119.83" Height="75.6" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.JobTitle]" Font="Times New Roman, 12pt"/>
       <TextObject Name="Text3" Left="119.83" Width="119.83" Height="75.6" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.SignerName]" Font="Times New Roman, 12pt"/>
       <TextObject Name="Text4" Left="239.65" Width="119.83" Height="75.6" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.SignResult]" Font="Times New Roman, 12pt"/>
@@ -58,8 +61,8 @@ namespace FastReport
       <TextObject Name="Text6" Left="479.3" Width="119.83" Height="75.6" Border.Lines="All" CanGrow="true" GrowToBottom="true" Font="Times New Roman, 12pt"/>
       <BarcodeObject Name="Barcode2" Left="507.65" Top="9.45" Width="55.65" Height="55.65" Border.Lines="All" AutoSize="false" Text="[Table.Signature]" ShowText="false" AllowExpressions="true" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="false"/>
       <TextObject Name="Text7" Left="599.13" Width="119.83" Height="75.6" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Date]" Font="Times New Roman, 12pt"/>
-      <DataHeaderBand Name="DataHeader1" Top="41.8" Width="718.2" Height="18.9">
-        <TableObject Name="Table1" Width="718.8" Height="18.9" Border.Lines="All">
+      <DataHeaderBand Name="DataHeader1" Width="718.2" Height="56.7">
+        <TableObject Name="Table1" Top="37.8" Width="718.8" Height="18.9" Border.Lines="All">
           <TableColumn Name="Column1" Width="119.8"/>
           <TableColumn Name="Column2" Width="119.8"/>
           <TableColumn Name="Column3" Width="119.8"/>
@@ -75,6 +78,7 @@ namespace FastReport
             <TableCell Name="Cell6" Border.Lines="All" Text="Дата" Font="Times New Roman, 12pt, style=Bold"/>
           </TableRow>
         </TableObject>
+        <TextObject Name="Text1" Width="718.2" Height="37.8" Text="Лист согласования" HorzAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
       </DataHeaderBand>
       <Sort>
         <Sort Expression="[Table.RowIndex]"/>

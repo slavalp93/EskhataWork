@@ -36,6 +36,21 @@ namespace litiko.DocflowEskhata.Isolated.PdfConverter
       }
     }
     
+    [Public]
+    public Stream AddSignatureQRStamp(Stream inputStream, string qrText, string phrase)
+    {      
+      var pdfStamper = CreatePdfStamper();
+      try
+      {        
+        return pdfStamper.AddQRStampToDocument(inputStream, qrText, phrase, 6, 80);
+      }
+      catch (Exception e)
+      {
+        Logger.Error("Cannot add stamp", e);
+        throw new AppliedCodeException("Cannot add stamp");
+      }      
+    }
+    
     public virtual litiko.DocflowEskhata.Isolated.PdfConverter.Eskhata_PdfStamper CreatePdfStamper()
     {
       return new PdfConverter.Eskhata_PdfStamper();

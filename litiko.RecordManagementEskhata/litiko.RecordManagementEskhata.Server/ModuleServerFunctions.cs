@@ -70,7 +70,10 @@ namespace litiko.RecordManagementEskhata.Server
           row.Comment = HasApproveWithSuggestionsMark(signature.Comment)
             ? RemoveApproveWithSuggestionsMark(signature.Comment)
             : signature.Comment;
-          row.Signature = string.Format("{0};{1}", signature.SignatoryFullName, Hyperlinks.Get(document));
+          string jobTitle = Eskhata.JobTitles.As(signatory?.JobTitle)?.NameTGlitiko;
+          row.Signature = string.IsNullOrEmpty(jobTitle) ? 
+            string.Format("{0};{1}", signature.SignatoryFullName, Hyperlinks.Get(document)) :
+            string.Format("{0} {1};{2}", jobTitle, signature.SignatoryFullName, Hyperlinks.Get(document));
           row.Date = signature.SigningDate.ToString();
           row.ReportSessionId = reportSessionId;
           approvalList.Add(row);

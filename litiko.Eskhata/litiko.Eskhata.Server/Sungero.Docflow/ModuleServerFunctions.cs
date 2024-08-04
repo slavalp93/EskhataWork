@@ -58,14 +58,24 @@ namespace litiko.Eskhata.Module.Docflow.Server
         try
         {
           pdfDocumentStream = Sungero.Docflow.IsolatedFunctions.PdfConverter.GeneratePdf(inputStream, body.Extension);
-          if (!string.IsNullOrEmpty(htmlStamp))
+          if (!string.IsNullOrEmpty(htmlStamp) && !isSignatureMark)
           {
-            pdfDocumentStream = isSignatureMark
-              ? Sungero.Docflow.IsolatedFunctions.PdfConverter.AddSignatureStamp(pdfDocumentStream, body.Extension, htmlStamp, Docflow.Resources.SignatureMarkAnchorSymbol,
-                                                                                 Sungero.Docflow.Constants.Module.SearchablePagesLimit)
-              : Sungero.Docflow.IsolatedFunctions.PdfConverter.AddRegistrationStamp(pdfDocumentStream, htmlStamp, 1, rightIndent, bottomIndent);
+            pdfDocumentStream = Sungero.Docflow.IsolatedFunctions.PdfConverter.AddRegistrationStamp(pdfDocumentStream, htmlStamp, 1, rightIndent, bottomIndent);
           }
           pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddRegistrationData(pdfDocumentStream, document.RegistrationNumber, document.RegistrationDate);
+          
+          var signatureForQR = Sungero.Docflow.PublicFunctions.OfficialDocument.GetSignatureForMark(document, version.Id);
+          if (signatureForQR != null)
+          {
+            var signatory = Sungero.Company.Employees.As(signatureForQR.Signatory);
+            string jobTitle = Eskhata.JobTitles.As(signatory)?.NameTGlitiko;
+            var qrText = string.IsNullOrEmpty(jobTitle) ?
+              string.Format("{0};{1}", signatureForQR.SignatoryFullName, Hyperlinks.Get(document)) :
+              string.Format("{0} {1};{2}", jobTitle, signatureForQR.SignatoryFullName, Hyperlinks.Get(document));
+            
+            pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddSignatureQRStamp(pdfDocumentStream, qrText, "⚓^");
+          }
+          
         }
         catch (Exception ex)
         {
