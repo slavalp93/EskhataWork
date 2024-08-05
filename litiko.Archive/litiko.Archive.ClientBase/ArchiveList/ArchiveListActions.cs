@@ -43,7 +43,7 @@ namespace litiko.Archive.Client
 
     public override bool CanCreateFromTemplate(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return base.CanCreateFromTemplate(e);
+      return base.CanCreateFromTemplate(e) && !_obj.State.IsInserted;
     }
 
   }

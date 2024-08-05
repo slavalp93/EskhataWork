@@ -6,7 +6,7 @@
     {
       "NameGuid": "31d6ac0c-0ae0-4e81-869b-13d847f9a161",
       "Name": "TransferToArchivelitiko",
-      "ActionArea": "CardAndCollection",
+      "ActionArea": "Collection",
       "GenerateHandler": true,
       "IsMultiSelectAction": true,
       "IsVisibleInDesktopClient": false,
@@ -334,17 +334,7 @@
     "NameGuid": "7f94b70f-4496-4001-b8ea-836c1c4920ef",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [
-      {
-        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
-        "NameGuid": "7c5025b7-b822-4f42-a659-2bf762e98f60",
-        "Name": "ActionButtonlitiko",
-        "ActionGuid": "31d6ac0c-0ae0-4e81-869b-13d847f9a161",
-        "ButtonSize": "Large",
-        "Index": 1,
-        "ParentGuid": "63579a8a-c8dd-468f-b8dd-33f1a83c889d"
-      }
-    ],
+    "Elements": [],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],

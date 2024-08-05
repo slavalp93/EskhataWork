@@ -487,12 +487,14 @@
         "LookupServer"
       ],
       "IsAncestorMetadata": true,
+      "IsRequired": true,
       "Overridden": [
         "IsVisibility",
         "HandledEvents",
         "IsEnabled",
         "IsShowedInList",
-        "CanBeSearch"
+        "CanBeSearch",
+        "IsRequired"
       ],
       "Versions": []
     },
