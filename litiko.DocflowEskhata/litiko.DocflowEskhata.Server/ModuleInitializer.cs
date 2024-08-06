@@ -14,6 +14,8 @@ namespace litiko.DocflowEskhata.Server
     {
       CreateDocumentKinds();
       GrantRightsOnDatabooks();
+      Reports.AccessRights.Grant(Reports.GetEnvelopeB4Report().Info, Roles.AllUsers, DefaultReportAccessRightsTypes.Execute);
+      CreateReportsTables();
       CreateApprovalRole(DocflowEskhata.UnitManagerApprovalRole.Type.UnitManager, "Глава департамента Инициатора");
     }
     
