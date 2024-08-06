@@ -1,0 +1,25 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "3d8ea045-d764-4370-9ff4-1179e87ff2e6",
+  "Name": "DocflowReport",
+  "AssociatedGuid": "477f982f-17bc-4249-b338-32bf97fe8ecf",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Word",
+  "ExportFormats": [
+    "Word"
+  ],
+  "IconResourcesKeys": [],
+  "IntegrationServiceName": "RecordManagementEskhataDocflowReport",
+  "Overridden": [
+    "PublicConstants",
+    "PublicStructures",
+    "DisplayName",
+    "ExportFormats",
+    "DefaultExportFormat"
+  ],
+  "Parameters": [],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "Versions": []
+}
