@@ -71,7 +71,7 @@ namespace litiko.RecordManagementEskhata.Server
             ? RemoveApproveWithSuggestionsMark(signature.Comment)
             : signature.Comment;
           string jobTitle = Eskhata.JobTitles.As(signatory?.JobTitle)?.NameTGlitiko;
-          row.Signature = string.IsNullOrEmpty(jobTitle) ? 
+          row.Signature = string.IsNullOrEmpty(jobTitle) ?
             string.Format("{0};{1}{2}", signature.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document)) :
             string.Format("{0} {1};{2}{3}", jobTitle, signature.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document));
           row.Date = signature.SigningDate.ToString();
@@ -243,7 +243,114 @@ namespace litiko.RecordManagementEskhata.Server
       return result;
     }
     
+    [Public]
+    public virtual List<RecordManagementEskhata.Structures.Module.IDocflowReportLine> GetActionItemCompletionData(DateTime? beginDate,
+                                                                                                                  DateTime? endDate,
+                                                                                                                  string itemsState)
+    {
+      List<Structures.Module.IDocflowReportLine> tasks = new List<litiko.RecordManagementEskhata.Structures.Module.IDocflowReportLine>();
+      
+      AccessRights.AllowRead(
+        () =>
+        {
+          var query = Sungero.RecordManagement.ActionItemExecutionTasks.GetAll()
+            .Where(t => t.Status == Sungero.Workflow.Task.Status.Completed || t.Status == Sungero.Workflow.Task.Status.InProcess)
+            .Where(t => t.IsCompoundActionItem != true && t.ActionItemType != Sungero.RecordManagement.ActionItemExecutionTask.ActionItemType.Additional);
+          
+          var serverBeginDate = Sungero.Docflow.PublicFunctions.Module.Remote.GetTenantDateTimeFromUserDay(beginDate.Value);
+          var serverEndDate = endDate.Value.EndOfDay().FromUserTime();
+          
+          if (itemsState == litiko.RecordManagementEskhata.Resources.Completed)
+          {
+            query = query.Where(t =>
+                                t.Status == Sungero.Workflow.Task.Status.Completed &&
+                                (Calendar.Between(t.ActualDate.Value.Date, beginDate.Value.Date, endDate.Value.Date) ||
+                                 t.Deadline.HasValue &&
+                                 ((t.Deadline.Value.Date == t.Deadline.Value
+                                   ? t.Deadline.Between(beginDate.Value.Date, endDate.Value.Date)
+                                   : t.Deadline.Between(serverBeginDate, serverEndDate)) ||
+                                  t.ActualDate.Value.Date >= endDate && (t.Deadline.Value.Date == t.Deadline.Value
+                                                                         ? t.Deadline <= beginDate.Value.Date
+                                                                         : t.Deadline <= serverBeginDate))));
+          }
+          else if (itemsState == litiko.RecordManagementEskhata.Resources.InWork)
+          {
+            query = query.Where(t =>
+                                t.Status == Sungero.Workflow.Task.Status.InProcess &&
+                                t.Deadline.HasValue && (t.Deadline.Value.Date == t.Deadline.Value
+                                                        ? t.Deadline <= endDate.Value.Date
+                                                        : t.Deadline <= serverEndDate));
+          }
+          else if (itemsState == litiko.RecordManagementEskhata.Resources.Expired)
+          {
+            query = query.Where(t =>
+                                t.Status == Sungero.Workflow.Task.Status.InProcess &&
+                                t.Deadline.HasValue && (t.Deadline.Value.Date == t.Deadline.Value
+                                                        ? t.Deadline > endDate.Value.Date
+                                                        : t.Deadline >= serverEndDate));
+          }
+          else if (itemsState == litiko.RecordManagementEskhata.Resources.All)
+          {
+            query = query.Where(t =>
+                                t.Status == Sungero.Workflow.Task.Status.Completed &&
+                                (Calendar.Between(t.ActualDate.Value.Date, beginDate.Value.Date, endDate.Value.Date) ||
+                                 t.Deadline.HasValue &&
+                                 ((t.Deadline.Value.Date == t.Deadline.Value
+                                   ? t.Deadline.Between(beginDate.Value.Date, endDate.Value.Date)
+                                   : t.Deadline.Between(serverBeginDate, serverEndDate)) ||
+                                  t.ActualDate.Value.Date >= endDate && (t.Deadline.Value.Date == t.Deadline.Value
+                                                                         ? t.Deadline <= beginDate.Value.Date
+                                                                         : t.Deadline <= serverBeginDate))) || t.Status == Sungero.Workflow.Task.Status.InProcess);
+          }
+          
+          // Guid группы вложений для документа в поручении.
+          var documentsGroupGuid = Sungero.Docflow.PublicConstants.Module.TaskMainGroup.ActionItemExecutionTask;
+          var documents = Sungero.Docflow.IncomingDocumentBases.GetAll();
+          query = query.Where(t => t.AttachmentDetails.Any(g => g.GroupId == documentsGroupGuid && documents.Any(m => m.Id == g.AttachmentId)));
+          
+          tasks = query
+            .Select(t => Structures.Module.DocflowReportLine.Create(
+              t.AttachmentDetails.First(x => x.GroupId == documentsGroupGuid).AttachmentId.Value, t.Id, t.Assignee.Id, t.Assignee.Name, t.Assignee.Department.Id, t.Assignee.Department.Name, 1, 0, 0, 0, 0))
+            .ToList();
+          
+          for (int i = 0; i < tasks.Count(); i++)
+          {
+            var row = tasks[i];
+            var document = documents.FirstOrDefault(x => x.Id == row.DocumentId);
+            row.Nbt = IsNBT(document.DocumentKind);
+            row.Filial = IsFilial(document.DocumentKind);
+            row.Letters = IsLetters(document.DocumentKind);
+            row.Others = (row.Nbt == 0 && row.Filial == 0 && row.Letters == 0) ? 1 : 0;
+          }
+          
+        });
+      
+      return tasks;
+    }
+    
     #region private
+    private int IsNBT(Sungero.Docflow.IDocumentKind kind)
+    {
+      var incomingCorrespondenceNBT = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(DocflowEskhata.PublicConstants.Module.DocumentKindGuids.IncomingCorrespondenceNBT);
+      if (Equals(kind, incomingCorrespondenceNBT))
+        return 1;
+      return 0;
+    }
+    private int IsFilial(Sungero.Docflow.IDocumentKind kind)
+    {
+      var incomingCorrespondenceBranches = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(DocflowEskhata.PublicConstants.Module.DocumentKindGuids.IncomingCorrespondenceBranches);
+      if (Equals(kind, incomingCorrespondenceBranches))
+        return 1;
+      return 0;
+    }
+    private int IsLetters(Sungero.Docflow.IDocumentKind kind)
+    {
+      var incomingLettersCitizens = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(DocflowEskhata.PublicConstants.Module.DocumentKindGuids.IncomingLettersCitizens);
+      var incomingLettersOrganisations = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(DocflowEskhata.PublicConstants.Module.DocumentKindGuids.IncomingLettersOrganisations);
+      if (Equals(kind, incomingLettersCitizens) || Equals(kind, incomingLettersOrganisations))
+        return 1;
+      return 0;
+    }
     private string GetSignatureKey(Sungero.Domain.Shared.ISignature signature, int versionNumber)
     {
       // Если подпись не "несогласующая", она должна схлапываться вне версий.

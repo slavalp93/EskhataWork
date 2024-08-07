@@ -31,18 +31,16 @@ namespace FastReport
   <Dictionary>
     <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]"/>
     <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="6feea029-6d97-4939-b583-8367b38251e8" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="BeginDate" Id="48f2ab36-496e-4f76-9ca0-845294787db0" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="EndDate" Id="7e267638-4e34-4df7-8ca8-fbe1faf9bfbe" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ClientEndDate" Id="d70901c7-8ba3-40b8-b62d-b462300c064a" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ReportSessionId" Id="bdbf8979-5d6d-43e9-8d47-cadf1cb04f20" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="State" Id="6078ba89-6c5f-4a42-bdc5-22c1dd7a3f40" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
   </Dictionary>
   <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" Watermark.Font="Arial, 60pt">
-    <DataBand Name="Data1" Top="77.6" Width="1047.06" Height="18.9">
-      <TextObject Name="Text1" Width="182.95" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
-      <TextObject Name="Text2" Left="182.95" Width="154.6" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
-      <TextObject Name="Text3" Left="337.93" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
-      <TextObject Name="Text4" Left="435.83" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
-      <TextObject Name="Text5" Left="533.74" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
-      <TextObject Name="Text6" Left="631.64" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
-      <TextObject Name="Text7" Left="729.92" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
-      <TextObject Name="Text8" Left="827.82" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
-      <DataHeaderBand Name="DataHeader1" Width="1047.06" Height="75.6">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="56.7"/>
+    <GroupHeaderBand Name="GroupHeader1" Top="136.87" Width="1047.06" Height="37.8" CanShrink="true">
+      <DataHeaderBand Name="DataHeader1" Top="58.99" Width="1047.06" Height="75.6">
         <TableObject Name="Table1" Width="925.83" Height="75.6">
           <TableColumn Name="Column1" Width="183.06"/>
           <TableColumn Name="Column2" Width="154.71"/>
@@ -74,7 +72,17 @@ namespace FastReport
           </TableRow>
         </TableObject>
       </DataHeaderBand>
-      <DataFooterBand Name="DataFooter1" Top="98.5" Width="1047.06" Height="37.8"/>
-    </DataBand>
+      <DataBand Name="Data1" Top="176.96" Width="1047.06" Height="18.9">
+        <TextObject Name="Text1" Width="182.95" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
+        <TextObject Name="Text2" Left="182.95" Width="154.6" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
+        <TextObject Name="Text3" Left="337.93" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
+        <TextObject Name="Text4" Left="435.83" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
+        <TextObject Name="Text5" Left="533.74" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
+        <TextObject Name="Text6" Left="631.64" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
+        <TextObject Name="Text7" Left="729.92" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
+        <TextObject Name="Text8" Left="827.82" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
+      </DataBand>
+      <GroupFooterBand Name="GroupFooter1" Top="198.14" Width="1047.06" Height="37.8"/>
+    </GroupHeaderBand>
   </ReportPage>
 </Report>

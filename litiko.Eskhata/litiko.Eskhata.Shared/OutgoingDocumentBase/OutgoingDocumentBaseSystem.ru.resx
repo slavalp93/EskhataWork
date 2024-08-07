@@ -58,4 +58,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Action_PrintEnvelopeDescription" xml:space="preserve">
+    <value>Печать конвертов для выбранных документов. Доступные форматы: С4, B4.
+
+Для выбора документов нажмите и удерживайте клавишу CTRL, затем выделите элементы левой кнопкой мыши.
+</value>
+  </data>
 </root>

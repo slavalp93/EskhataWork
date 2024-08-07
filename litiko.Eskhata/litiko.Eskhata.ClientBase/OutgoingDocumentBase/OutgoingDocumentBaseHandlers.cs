@@ -7,8 +7,4 @@ using litiko.Eskhata.OutgoingDocumentBase;
 
 namespace litiko.Eskhata
 {
-  partial class OutgoingDocumentBaseClientHandlers
-  {
-
-  }
 }

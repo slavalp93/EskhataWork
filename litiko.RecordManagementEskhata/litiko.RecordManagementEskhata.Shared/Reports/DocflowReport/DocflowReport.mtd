@@ -9,6 +9,10 @@
   "ExportFormats": [
     "Word"
   ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "BeforeExecuteClient"
+  ],
   "IconResourcesKeys": [],
   "IntegrationServiceName": "RecordManagementEskhataDocflowReport",
   "Overridden": [
@@ -16,9 +20,40 @@
     "PublicStructures",
     "DisplayName",
     "ExportFormats",
-    "DefaultExportFormat"
+    "DefaultExportFormat",
+    "HandledEvents",
+    "Parameters"
   ],
-  "Parameters": [],
+  "Parameters": [
+    {
+      "NameGuid": "48f2ab36-496e-4f76-9ca0-845294787db0",
+      "Name": "BeginDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "7e267638-4e34-4df7-8ca8-fbe1faf9bfbe",
+      "Name": "EndDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "d70901c7-8ba3-40b8-b62d-b462300c064a",
+      "Name": "ClientEndDate",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "bdbf8979-5d6d-43e9-8d47-cadf1cb04f20",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "6078ba89-6c5f-4a42-bdc5-22c1dd7a3f40",
+      "Name": "State",
+      "InternalDataTypeName": "System.String"
+    }
+  ],
   "PublicStructures": [],
   "ResourcesKeys": [],
   "Versions": []

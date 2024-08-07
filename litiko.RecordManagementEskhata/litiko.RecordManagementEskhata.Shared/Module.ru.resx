@@ -76,4 +76,16 @@
   <data name="ConvertionErrorNotification" xml:space="preserve">
     <value>Произошла ошибка при преобразовании документа в PDF. Обратитесь к администратору.{1} {1}{0}</value>
   </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Исполнены</value>
+  </data>
+  <data name="InWork" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="Expired" xml:space="preserve">
+    <value>Просрочены</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Все</value>
+  </data>
 </root>

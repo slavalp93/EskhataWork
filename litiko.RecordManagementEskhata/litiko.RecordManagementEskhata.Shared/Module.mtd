@@ -161,6 +161,28 @@
       "ReturnType": "Eskhata.Module.Docflow.Structures.Module.IConversionToPdfResult"
     },
     {
+      "Name": "GetActionItemCompletionData",
+      "Parameters": [
+        {
+          "Name": "beginDate",
+          "ParameterType": "global::System.Nullable<global::System.DateTime>",
+          "ParameterTypeFullName": "System.Nullable"
+        },
+        {
+          "Name": "endDate",
+          "ParameterType": "global::System.Nullable<global::System.DateTime>",
+          "ParameterTypeFullName": "System.Nullable"
+        },
+        {
+          "Name": "itemsState",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<global::litiko.RecordManagementEskhata.Structures.Module.IDocflowReportLine>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
       "Name": "GetApprovalSheetOrdReportTable",
       "Parameters": [
         {
@@ -178,7 +200,61 @@
       "ReturnTypeFullName": "System.Collections.Generic.List"
     }
   ],
-  "PublicStructures": [],
+  "PublicStructures": [
+    {
+      "Name": "DocflowReportLine",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "DocumentId",
+          "TypeFullName": "global::System.Int64"
+        },
+        {
+          "Name": "TaskId",
+          "TypeFullName": "global::System.Int64"
+        },
+        {
+          "Name": "ResponsibleId",
+          "TypeFullName": "global::System.Int64"
+        },
+        {
+          "Name": "Responsible",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "DepartmentId",
+          "TypeFullName": "global::System.Int64"
+        },
+        {
+          "Name": "Department",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Total",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "Nbt",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "Filial",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "Letters",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "Others",
+          "TypeFullName": "global::System.Int32"
+        }
+      ],
+      "StructureNamespace": "litiko.RecordManagementEskhata.Structures.Module"
+    }
+  ],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.RecordManagementEskhata",
   "ResourcesKeys": [
@@ -187,7 +263,11 @@
     "DepartmentalDirective",
     "BranchOrder",
     "ConvertToPdfCompleteNotification",
-    "ConvertionErrorNotification"
+    "ConvertionErrorNotification",
+    "Completed",
+    "InWork",
+    "Expired",
+    "All"
   ],
   "ServerAssemblyName": "litiko.RecordManagementEskhata.Server",
   "ServerNamespace": "litiko.RecordManagementEskhata.Server",

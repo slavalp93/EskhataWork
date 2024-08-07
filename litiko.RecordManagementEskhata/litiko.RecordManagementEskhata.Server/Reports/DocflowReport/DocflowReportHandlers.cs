@@ -9,5 +9,10 @@ namespace litiko.RecordManagementEskhata
   partial class DocflowReportServerHandlers
   {
 
+    public override void BeforeExecute(Sungero.Reporting.Server.BeforeExecuteEventArgs e)
+    {
+      RecordManagementEskhata.PublicFunctions.Module.GetActionItemCompletionData(DocflowReport.BeginDate, DocflowReport.EndDate, DocflowReport.State);
+    }
+
   }
 }

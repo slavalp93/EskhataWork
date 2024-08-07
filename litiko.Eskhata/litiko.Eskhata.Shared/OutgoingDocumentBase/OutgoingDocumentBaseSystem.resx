@@ -58,4 +58,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Action_PrintEnvelopeDescription" xml:space="preserve">
+    <value>Print envelopes for selected documents. Available sizes: С4, B4.
+
+Hold the CTRL key and click the items in a list to choose them.
+</value>
+  </data>
 </root>
