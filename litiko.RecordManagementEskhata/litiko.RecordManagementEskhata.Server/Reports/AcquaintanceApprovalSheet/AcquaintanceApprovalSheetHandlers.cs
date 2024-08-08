@@ -87,7 +87,7 @@ namespace litiko.RecordManagementEskhata
       {
         AcquaintanceApprovalSheet.Author = task.Author?.Name;
         if (Sungero.Company.Employees.Is(task.Author))
-         AcquaintanceApprovalSheet.AuthorJobTitle = Sungero.Company.Employees.As(task.Author).JobTitle?.Name; 
+          AcquaintanceApprovalSheet.AuthorJobTitle = Sungero.Company.Employees.As(task.Author).JobTitle?.Name;
         var createdDate = Sungero.Docflow.PublicFunctions.Module.ToShortDateShortTime(task.Created.Value.ToUserTime());
         var taskId = task.Id;
         var taskHyperlink = Hyperlinks.Get(task);
@@ -145,12 +145,12 @@ namespace litiko.RecordManagementEskhata
               dataTable.Add(newLine);
             continue;
           }
-          
-          newLine.AssignmentId = assignment.Id.ToString();
+          var taskAuthorLine = $"Ознакомил/провел обучение: {Sungero.Company.Employees.As(task.Author)?.JobTitle?.Name} - {task.Author?.Name}";
+          newLine.AssignmentId = taskAuthorLine;
           if (task.IsElectronicAcquaintance == true)
           {
             string jobTitle = Eskhata.JobTitles.As(employee.JobTitle)?.NameTGlitiko;
-            newLine.AssignmentHyperlink = string.IsNullOrEmpty(jobTitle) ? 
+            newLine.AssignmentHyperlink = string.IsNullOrEmpty(jobTitle) ?
               string.Format("{0};{1}{2}", newLine.ShortName, Environment.NewLine, Hyperlinks.Get(sourceDocument)) :
               string.Format("{0} {1};{2}{3}", jobTitle, newLine.ShortName, Environment.NewLine, Hyperlinks.Get(sourceDocument));
           }
@@ -234,8 +234,8 @@ namespace litiko.RecordManagementEskhata
       return Sungero.RecordManagement.PublicFunctions.AcquaintanceTask.Remote.GetParticipants(task);
     }
     private string GetAcquaintanceAssignmentState(Sungero.RecordManagement.IAcquaintanceAssignment assignment,
-                                                         bool isElectronicAcquaintance,
-                                                         bool isCompleted)
+                                                  bool isElectronicAcquaintance,
+                                                  bool isCompleted)
     {
       if (!isCompleted)
         return string.Empty;

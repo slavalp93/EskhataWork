@@ -70,10 +70,10 @@ namespace FastReport
     <SungeroParameter Name="ElectronicAcquaintance" Id="ac058065-aaea-477b-b932-c68939c6e0fb" IsRequired="false" IsCollection="false" InternalDataType="System.Boolean" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
   </Dictionary>
   <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" LeftMargin="20" RightMargin="20" Watermark.Font="Arial, 60pt">
-    <ReportTitleBand Name="ReportTitle1" Width="971.46" Height="192.4">
+    <ReportTitleBand Name="ReportTitle1" Width="971.46" Height="173.5">
       <TextObject Name="Text1" Top="79.76" Width="973.35" Height="18.9" Text="Лист ознакомления" HorzAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
-      <TextObject Name="Text2" Top="98.66" Width="973.35" Height="56.7" Text="Документ для ознакомления: [DocName]&#13;&#10;Структура: [DepartmentName]&#13;&#10;Ознакомил/провел обучение: [AuthorJobTitle] – [Author]" HorzAlign="Center" Font="Times New Roman, 12pt"/>
-      <TableObject Name="Table1" Left="45.36" Top="155.36" Width="894.34" Height="37.04" GrowToBottom="true">
+      <TextObject Name="Text2" Top="98.66" Width="973.35" Height="37.8" Text="Документ для ознакомления: [DocName]&#13;&#10;Структура: [DepartmentName]" HorzAlign="Center" Font="Times New Roman, 12pt"/>
+      <TableObject Name="Table1" Left="45.36" Top="136.46" Width="894.34" Height="37.04" GrowToBottom="true">
         <TableColumn Name="Column1" Width="37.04"/>
         <TableColumn Name="Column2" Width="301.27"/>
         <TableColumn Name="Column3" Width="198.45"/>
@@ -88,8 +88,9 @@ namespace FastReport
         </TableRow>
       </TableObject>
     </ReportTitleBand>
-    <GroupHeaderBand Name="GroupHeader1" Top="195.6" Width="971.46" CanShrink="true" Condition="[Table.TaskId]">
-      <DataBand Name="Data1" Top="198.8" Width="971.46" Height="74.84" CanGrow="true" DataSource="Table">
+    <GroupHeaderBand Name="GroupHeader1" Top="175.79" Width="971.46" Height="37.8" CanGrow="true" CanShrink="true" Condition="[Table.TaskId]">
+      <TextObject Name="Text21" Left="45.36" Width="894.35" Height="37.8" Border.Lines="All" Fill.Color="WhiteSmoke" CanGrow="true" CanBreak="false" Text="[Table.TaskDisplayName]&#13;&#10;[Table.AssignmentId]" Font="Times New Roman, 12pt" TextRenderType="HtmlTags"/>
+      <DataBand Name="Data1" Top="215.87" Width="971.46" Height="74.84" CanGrow="true" DataSource="Table">
         <TableObject Name="Table2" Left="45.36" Width="894.34" Height="74.84">
           <TableColumn Name="Column6" Width="37.04"/>
           <TableColumn Name="Column7" Width="301.27"/>
@@ -108,7 +109,7 @@ namespace FastReport
         </TableObject>
       </DataBand>
     </GroupHeaderBand>
-    <ReportSummaryBand Name="ReportSummary1" Top="276.84" Width="971.46" Height="37.8">
+    <ReportSummaryBand Name="ReportSummary1" Top="293" Width="971.46" Height="37.8">
       <TextObject Name="Text3" Left="45.36" Width="894.35" Height="37.8" Text="Лист принял: ____________________________________________ Дата_________________________" VertAlign="Bottom" Font="Times New Roman, 12pt"/>
     </ReportSummaryBand>
   </ReportPage>
