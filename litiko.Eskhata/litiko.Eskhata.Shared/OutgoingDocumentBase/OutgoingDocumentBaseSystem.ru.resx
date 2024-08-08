@@ -64,4 +64,9 @@
 Для выбора документов нажмите и удерживайте клавишу CTRL, затем выделите элементы левой кнопкой мыши.
 </value>
   </data>
+  <data name="Action_PrintEnvelopeCardDescription" xml:space="preserve">
+    <value>Печать конверта.
+Доступные форматы: С4, B4.
+</value>
+  </data>
 </root>

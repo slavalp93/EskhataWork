@@ -5,6 +5,16 @@
   "AccessRightsMode": "Both",
   "Actions": [
     {
+      "NameGuid": "b3de1e86-72df-4082-b99a-60887cf66cc0",
+      "Name": "PrintEnvelopeCard",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ],
+      "Versions": []
+    },
+    {
       "NameGuid": "99c46152-332a-4f61-9100-d4ae14ef11bc",
       "Name": "PrintEnvelope",
       "GenerateHandler": true,
@@ -32,6 +42,19 @@
     "IsAncestorMetadata": true,
     "Versions": []
   },
+  "Forms": [
+    {
+      "$type": "Sungero.Metadata.StandaloneFormMetadata, Sungero.Metadata",
+      "NameGuid": "fa03f748-4397-42ef-bdc2-22119af7bf7f",
+      "Name": "Card",
+      "Controls": [],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "SettingsResourceKey"
+      ],
+      "Versions": []
+    }
+  ],
   "IconResourcesKeys": [],
   "IsAbstract": true,
   "LayeredFromGuid": "f5f104fb-52e4-422b-9de1-a36937d85a2d",

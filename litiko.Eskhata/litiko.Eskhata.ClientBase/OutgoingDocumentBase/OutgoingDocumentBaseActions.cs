@@ -7,6 +7,20 @@ using litiko.Eskhata.OutgoingDocumentBase;
 
 namespace litiko.Eskhata.Client
 {
+  partial class OutgoingDocumentBaseActions
+  {
+    public override void PrintEnvelopeCard(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      Functions.OutgoingDocumentBase.ShowSelectEnvelopeFormatDialog(new List<IOutgoingDocumentBase>() { _obj }, null, null);
+    }
+
+    public override bool CanPrintEnvelopeCard(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return base.CanPrintEnvelopeCard(e);
+    }
+
+  }
+
   partial class OutgoingDocumentBaseCollectionActions
   {
     public override void PrintEnvelope(Sungero.Domain.Client.ExecuteActionArgs e)

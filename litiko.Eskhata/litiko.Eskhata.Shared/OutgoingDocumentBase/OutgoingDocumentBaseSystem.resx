@@ -64,4 +64,8 @@
 Hold the CTRL key and click the items in a list to choose them.
 </value>
   </data>
+  <data name="Action_PrintEnvelopeCardDescription" xml:space="preserve">
+    <value>Print Envelope.
+Available sizes: С4, B4.</value>
+  </data>
 </root>
