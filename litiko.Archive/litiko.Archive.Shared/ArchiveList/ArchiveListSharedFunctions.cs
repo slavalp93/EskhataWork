@@ -31,7 +31,7 @@ namespace litiko.Archive.Shared
       var name = string.Empty;
       
       /* Имя в формате:
-        <Сокр. Наименование вида> №<Номер> от <Дата рег.> <Подразделение (краткое наименование)>
+        <Сокр. Наименование вида> №<Номер> от <Дата рег.> <По подразделению>
        */
       using (TenantInfo.Culture.SwitchTo())
       {       
@@ -41,8 +41,8 @@ namespace litiko.Archive.Shared
         if (_obj.RegistrationDate != null)
           name += Sungero.Docflow.OfficialDocuments.Resources.DateFrom + _obj.RegistrationDate.Value.ToString("dd.mm.yy");        
         
-        if (_obj.Department != null)
-          name += " " + _obj.Department.ShortName;
+        if (_obj.ByDepartment != null)
+          name += " " + _obj.ByDepartment.Name;
       }
       
       if (string.IsNullOrWhiteSpace(name))

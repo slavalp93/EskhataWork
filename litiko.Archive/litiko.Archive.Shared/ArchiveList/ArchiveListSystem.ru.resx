@@ -176,4 +176,7 @@
   <data name="Action_ConfirmTransferToArchiveConfirmationDescription" xml:space="preserve">
     <value>Будет запущен процесс отражения передачи документов в системе</value>
   </data>
+  <data name="Property_ByDepartment" xml:space="preserve">
+    <value>По подразделению</value>
+  </data>
 </root>

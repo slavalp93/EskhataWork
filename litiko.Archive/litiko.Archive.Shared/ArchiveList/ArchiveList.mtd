@@ -265,7 +265,7 @@
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.TextEditorToTextBinder",
           "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
           "PropertyGuid": "4bc39efb-1f46-4a1e-8b8c-04f2b90d6a8b",
-          "RowNumber": 4,
+          "RowNumber": 5,
           "RowSpan": 1,
           "Settings": [
             {
@@ -284,7 +284,7 @@
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
           "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
           "PropertyGuid": "aae1f6ae-d090-4c5a-963e-44c8b79dc92b",
-          "RowNumber": 2,
+          "RowNumber": 3,
           "RowSpan": 1,
           "Settings": []
         },
@@ -297,7 +297,7 @@
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
           "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
           "PropertyGuid": "591d3047-51f0-4c69-bdc2-9e99c4e0a338",
-          "RowNumber": 3,
+          "RowNumber": 4,
           "RowSpan": 1,
           "Settings": []
         },
@@ -374,6 +374,19 @@
           "ParentGuid": "b5ee6af4-74be-46f6-840f-165ddf572e4f",
           "PropertyGuid": "63dff68a-dc77-450a-8b58-07d67ee0fcbe",
           "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "1c6bc1ae-1213-4baa-a0d4-5842003e6c88",
+          "Name": "ByDepartment",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
+          "PropertyGuid": "97921afb-c10a-4984-b689-af36dd9a2412",
+          "RowNumber": 2,
           "RowSpan": 1,
           "Settings": []
         }
@@ -584,6 +597,17 @@
       "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "8678c0af-c762-4863-9319-7c0e7c115fb4"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "97921afb-c10a-4984-b689-af36dd9a2412",
+      "Name": "ByDepartment",
+      "Code": "ByDepartment",
+      "EntityGuid": "628fd168-c85b-4b57-8412-c2524f226425",
+      "FlatListInStandaloneLookup": true,
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "63dff68a-dc77-450a-8b58-07d67ee0fcbe"
     }
   ],
   "PublicFunctions": [

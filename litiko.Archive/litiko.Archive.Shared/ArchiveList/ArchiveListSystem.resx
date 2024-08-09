@@ -176,4 +176,7 @@ The process of reflecting the transfer of documents in the system will be launch
   <data name="Action_ConfirmTransferToArchiveConfirmationDescription" xml:space="preserve">
     <value>The process of reflecting the transfer of documents in the system will be launched</value>
   </data>
+  <data name="Property_ByDepartment" xml:space="preserve">
+    <value>By department</value>
+  </data>
 </root>

@@ -287,6 +287,9 @@
       "Versions": []
     }
   ],
+  "HandledEvents": [
+    "CreatingFromServer"
+  ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "493bb59e-ae48-4cb5-ab66-071de5f890b0",
   "OperationsClass": "",
