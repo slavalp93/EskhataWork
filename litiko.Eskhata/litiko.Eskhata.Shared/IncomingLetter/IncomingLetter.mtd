@@ -340,6 +340,9 @@
       "Name": "AddresseeDepartment",
       "Code": "IncomingLetter",
       "EntityGuid": "a6a77b7d-a969-4ec0-ad50-718b743d044d",
+      "HandledEvents": [
+        "DeletedShared"
+      ],
       "IsShowedInList": false,
       "PreviousPropertyGuid": "16bbb68f-b183-4e0b-903d-81e3bd22ac4f"
     }

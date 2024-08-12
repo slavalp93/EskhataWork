@@ -27,6 +27,9 @@
       "Code": "Department",
       "EntityGuid": "628fd168-c85b-4b57-8412-c2524f226425",
       "FlatListInStandaloneLookup": true,
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "8e7bce70-becd-4667-a222-48a7437a55e3"
     }
