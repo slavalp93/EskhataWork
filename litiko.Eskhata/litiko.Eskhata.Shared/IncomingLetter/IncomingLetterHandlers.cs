@@ -14,9 +14,10 @@ namespace litiko.Eskhata
     {
       if (e.NewValue == null)
       {
-        var groups = Sungero.Docflow.RegistrationGroups.GetAll(x => x.Departments.Any(d => d == e.OldValue));
+        var groups = Sungero.Docflow.RegistrationGroups.GetAll(x => x.Departments.Any(d => d.Department == e.OldValue)).ToList();
+        var responsiblesList = groups.Select(x => x.ResponsibleEmployee).ToList();
         List<Sungero.Docflow.IIncomingDocumentBaseAddressees> addresseesToDelete = new List<Sungero.Docflow.IIncomingDocumentBaseAddressees>();
-        foreach (var employee in groups.Select(x => x.ResponsibleEmployee).ToList())
+        foreach (var employee in responsiblesList)
         {
           addresseesToDelete.AddRange(_obj.IncomingLetter.Addressees.Where(x => x.Addressee == employee).ToList());
         }
@@ -28,14 +29,15 @@ namespace litiko.Eskhata
       }
       else
       {
-        var groups = Sungero.Docflow.RegistrationGroups.GetAll(x => x.Departments.Any(d => d == e.NewValue));
+        var groups = Sungero.Docflow.RegistrationGroups.GetAll(x => x.Departments.Any(d => d.Department.Id == e.NewValue.Id)).ToList();
+        var responsiblesList = groups.Select(x => x.ResponsibleEmployee).ToList();
         List<Sungero.Docflow.IIncomingDocumentBaseAddressees> addresseesToAdd = new List<Sungero.Docflow.IIncomingDocumentBaseAddressees>();
-        foreach (var employee in groups.Select(x => x.ResponsibleEmployee).ToList())
+        foreach (var employee in responsiblesList)
         {
           if (!_obj.IncomingLetter.Addressees.Any(x => x.Addressee == employee))
-          _obj.IncomingLetter.Addressees.AddNew().Addressee = employee;
+            _obj.IncomingLetter.Addressees.AddNew().Addressee = employee;
         }
-      }                                                
+      }
     }
   }
 
@@ -44,7 +46,20 @@ namespace litiko.Eskhata
 
     public virtual void AddresseeDepartmentDeleted(Sungero.Domain.Shared.CollectionPropertyDeletedEventArgs e)
     {
-      
+      if (_deleted.Department == null)
+        return;
+      var groups = Sungero.Docflow.RegistrationGroups.GetAll(x => x.Departments.Any(d => d.Department.Id == _deleted.Department.Id)).ToList();
+      var responsiblesList = groups.Select(x => x.ResponsibleEmployee).ToList();
+      List<Sungero.Docflow.IIncomingDocumentBaseAddressees> addresseesToDelete = new List<Sungero.Docflow.IIncomingDocumentBaseAddressees>();
+      foreach (var employee in responsiblesList)
+      {
+        addresseesToDelete.AddRange(_obj.Addressees.Where(x => x.Addressee == employee).ToList());
+      }
+      if (addresseesToDelete.Any())
+      {
+        foreach (var addressee in addresseesToDelete.Distinct().ToList())
+          _obj.Addressees.Remove(addressee);
+      }
     }
   }
 
