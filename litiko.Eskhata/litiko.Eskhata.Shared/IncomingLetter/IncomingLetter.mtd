@@ -355,7 +355,17 @@
     "NameGuid": "7ff62074-3322-4144-991c-84dde1d5bc04",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "aaa65af1-eba9-4c1e-91ee-06d16fb86d45",
+        "Name": "ActionButtonlitiko",
+        "ActionGuid": "6af467db-ce34-492b-9ebd-f04132b99201",
+        "ButtonSize": "Large",
+        "Index": 3,
+        "ParentGuid": "05d63e9c-36c0-44c3-a7fd-b1a360e13fc0"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],

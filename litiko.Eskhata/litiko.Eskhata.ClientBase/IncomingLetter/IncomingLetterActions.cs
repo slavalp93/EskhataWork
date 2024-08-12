@@ -21,6 +21,7 @@ namespace litiko.Eskhata.Client
       var checklist = Sungero.Docflow.Addendums.Create();
       var checklistKindGuid = DocflowEskhata.PublicConstants.Module.DocumentKindGuids.Checklist;
       checklist.DocumentKind = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(checklistKindGuid);
+      checklist.LeadingDocument = _obj;
       checklist.ShowModal();
       _obj.Relations.Add(Sungero.Docflow.PublicConstants.Module.AddendumRelationName, checklist);
       
