@@ -18,6 +18,7 @@ namespace litiko.RecordManagementEskhata.Structures.Module
     public int Total { get; set; }
     public int Nbt { get; set; }
     public int Filial { get; set; }
+    public int InternalLetters { get; set; }
     public int Letters { get; set; }
     public int Others { get; set; }
   }

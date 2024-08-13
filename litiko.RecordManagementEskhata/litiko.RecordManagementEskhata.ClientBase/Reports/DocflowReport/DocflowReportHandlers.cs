@@ -14,13 +14,13 @@ namespace litiko.RecordManagementEskhata
       var report = DocflowReport;
       
       var personalSettings = Sungero.Docflow.PublicFunctions.PersonalSetting.GetPersonalSettings(null);
-      var dialog = Dialogs.CreateInputDialog("dialog title");
+      var dialog = Dialogs.CreateInputDialog(litiko.RecordManagementEskhata.Reports.Resources.DocflowReport.DialogTitle);
 
       var settingsStartDate = Sungero.Docflow.PublicFunctions.PersonalSetting.GetStartDate(personalSettings);
-      var beginDate = dialog.AddDate("PeriodFrom", true, settingsStartDate ?? Calendar.UserToday);
+      var beginDate = dialog.AddDate(litiko.RecordManagementEskhata.Reports.Resources.DocflowReport.PeriodFrom, true, settingsStartDate ?? Calendar.UserToday);
       var settingsEndDate = Sungero.Docflow.PublicFunctions.PersonalSetting.GetEndDate(personalSettings);
-      var endDate = dialog.AddDate("PeriodTo", true, settingsEndDate ?? Calendar.UserToday);
-      var state = dialog.AddSelect("State", true, litiko.RecordManagementEskhata.Resources.All)
+      var endDate = dialog.AddDate(litiko.RecordManagementEskhata.Reports.Resources.DocflowReport.PeriodTo, true, settingsEndDate ?? Calendar.UserToday);
+      var state = dialog.AddSelect(litiko.RecordManagementEskhata.Reports.Resources.DocflowReport.State, true, litiko.RecordManagementEskhata.Resources.All)
         .From(new string[]
               {
                 litiko.RecordManagementEskhata.Resources.All,

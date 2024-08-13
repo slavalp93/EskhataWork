@@ -55,6 +55,11 @@
     }
   ],
   "PublicStructures": [],
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "DialogTitle",
+    "PeriodTo",
+    "PeriodFrom",
+    "State"
+  ],
   "Versions": []
 }

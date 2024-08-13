@@ -1,3 +1,38 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <queries>
+  <query key="CreateDocflowReportSourceTable">
+    <mssql><![CDATA[create table {0}
+  ([DocumentId] bigint NOT NULL,
+  [TaskId] bigint,
+  [ResponsibleId] bigint,
+  [Responsible] nvarchar(max),
+  [DepartmentId] bigint,
+  [Department] nvarchar(max),
+  [Total] int,
+  [Nbt] int,
+  [Filial] int,
+  [InternalLetters] int,
+  [Letters] int,
+  [Others] int,
+  [ReportSessionId] nvarchar(max) NOT NULL)]]></mssql>
+    <postgres><![CDATA[create table {0}
+  (DocumentId bigint NOT NULL,
+  TaskId bigint,
+  ResponsibleId bigint,
+  Responsible citext,
+  DepartmentId bigint,
+  Department citext,
+  Total int,
+  Nbt int,
+  Filial int,
+  InternalLetters int,
+  Letters int,
+  Others int,
+  ReportSessionId citext NOT NULL)]]></postgres>
+  </query>
+  <query key="SelectDataFromTable">
+    <default><![CDATA[select *
+from  litiko_DocflowReport temp
+where ReportSessionId = @ReportSessionId]]></default>
+  </query>
 </queries>

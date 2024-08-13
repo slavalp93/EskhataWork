@@ -29,7 +29,22 @@ namespace FastReport
 }
   </ScriptText>
   <Dictionary>
-    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]"/>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${SelectDataFromTable}">
+        <Column Name="DocumentId" DataType="System.Int64"/>
+        <Column Name="TaskId" DataType="System.Int64"/>
+        <Column Name="ResponsibleId" DataType="System.Int64"/>
+        <Column Name="Responsible" DataType="System.String"/>
+        <Column Name="DepartmentId" DataType="System.Int64"/>
+        <Column Name="Department" DataType="System.String"/>
+        <Column Name="Total" DataType="System.Int32"/>
+        <Column Name="Nbt" DataType="System.Int32"/>
+        <Column Name="Filial" DataType="System.Int32"/>
+        <Column Name="Letters" DataType="System.Int32"/>
+        <Column Name="Others" DataType="System.Int32"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
     <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="6feea029-6d97-4939-b583-8367b38251e8" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="BeginDate" Id="48f2ab36-496e-4f76-9ca0-845294787db0" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="EndDate" Id="7e267638-4e34-4df7-8ca8-fbe1faf9bfbe" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
@@ -39,50 +54,47 @@ namespace FastReport
   </Dictionary>
   <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" Watermark.Font="Arial, 60pt">
     <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="56.7"/>
-    <GroupHeaderBand Name="GroupHeader1" Top="136.87" Width="1047.06" Height="37.8" CanShrink="true">
-      <DataHeaderBand Name="DataHeader1" Top="58.99" Width="1047.06" Height="75.6">
+    <DataBand Name="Data1" Top="140.3" Width="1047.06" Height="18.9" CanGrow="true" DataSource="Table">
+      <TextObject Name="Text1" Width="182.95" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Responsible]" VertAlign="Bottom" Font="Calibri, 11pt"/>
+      <TextObject Name="Text2" Left="182.95" Width="154.6" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Department]" VertAlign="Bottom" Font="Calibri, 11pt"/>
+      <TextObject Name="Text3" Left="337.93" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Total]" VertAlign="Bottom" Font="Calibri, 11pt"/>
+      <TextObject Name="Text4" Left="435.83" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Nbt]" VertAlign="Bottom" Font="Calibri, 11pt"/>
+      <TextObject Name="Text5" Left="533.74" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Filial]" VertAlign="Bottom" Font="Calibri, 11pt"/>
+      <TextObject Name="Text6" Left="631.64" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="0" VertAlign="Bottom" Font="Calibri, 11pt"/>
+      <TextObject Name="Text7" Left="729.92" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Letters]" VertAlign="Bottom" Font="Calibri, 11pt"/>
+      <TextObject Name="Text8" Left="827.82" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Others]" VertAlign="Bottom" Font="Calibri, 11pt"/>
+      <DataHeaderBand Name="DataHeader2" Top="60.7" Width="1047.06" Height="75.6" CanGrow="true">
         <TableObject Name="Table1" Width="925.83" Height="75.6">
-          <TableColumn Name="Column1" Width="183.06"/>
-          <TableColumn Name="Column2" Width="154.71"/>
-          <TableColumn Name="Column3" Width="98.01"/>
-          <TableColumn Name="Column4" Width="98.01"/>
-          <TableColumn Name="Column5" Width="98.01"/>
-          <TableColumn Name="Column6" Width="98.01"/>
-          <TableColumn Name="Column7" Width="98.01"/>
-          <TableColumn Name="Column8" Width="98.01"/>
-          <TableRow Name="Row1">
-            <TableCell Name="Cell1" Font="Arial, 10pt"/>
-            <TableCell Name="Cell2" Font="Arial, 10pt"/>
-            <TableCell Name="Cell3" Font="Arial, 10pt"/>
-            <TableCell Name="Cell4" Border.Lines="All" Text="из них" Font="Calibri, 11pt, style=Bold, Italic" ColSpan="5"/>
-            <TableCell Name="Cell5" Font="Arial, 10pt"/>
-            <TableCell Name="Cell11" Font="Arial, 10pt"/>
-            <TableCell Name="Cell12" Font="Arial, 10pt"/>
-            <TableCell Name="Cell13" Font="Arial, 10pt"/>
+          <TableColumn Name="Column9" Width="183.06"/>
+          <TableColumn Name="Column10" Width="154.71"/>
+          <TableColumn Name="Column11" Width="98.01"/>
+          <TableColumn Name="Column12" Width="98.01"/>
+          <TableColumn Name="Column13" Width="98.01"/>
+          <TableColumn Name="Column14" Width="98.01"/>
+          <TableColumn Name="Column15" Width="98.01"/>
+          <TableColumn Name="Column16" Width="98.01"/>
+          <TableRow Name="Row3">
+            <TableCell Name="Cell17" Font="Arial, 10pt"/>
+            <TableCell Name="Cell18" Font="Arial, 10pt"/>
+            <TableCell Name="Cell19" Font="Arial, 10pt"/>
+            <TableCell Name="Cell20" Border.Lines="All" Text="из них" Font="Calibri, 11pt, style=Bold, Italic" ColSpan="5"/>
+            <TableCell Name="Cell21" Font="Arial, 10pt"/>
+            <TableCell Name="Cell22" Font="Arial, 10pt"/>
+            <TableCell Name="Cell23" Font="Arial, 10pt"/>
+            <TableCell Name="Cell24" Font="Arial, 10pt"/>
           </TableRow>
-          <TableRow Name="Row2" Height="56.7">
-            <TableCell Name="Cell6" Border.Lines="All" Text="Ответственное лицо" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
-            <TableCell Name="Cell7" Border.Lines="All" Text="подразделение" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
-            <TableCell Name="Cell8" Border.Lines="All" Text="Итого" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
-            <TableCell Name="Cell9" Border.Lines="All" Text="НБТ" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
-            <TableCell Name="Cell10" Border.Lines="All" Text="Док. с филиалов" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
-            <TableCell Name="Cell14" Border.Lines="All" Text="внут. документы" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
-            <TableCell Name="Cell15" Border.Lines="All" Text="письма граждан" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
-            <TableCell Name="Cell16" Border.Lines="All" Text="другие входящие" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
+          <TableRow Name="Row4" Height="56.7">
+            <TableCell Name="Cell25" Border.Lines="All" Text="Ответственное лицо" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
+            <TableCell Name="Cell26" Border.Lines="All" Text="подразделение" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
+            <TableCell Name="Cell27" Border.Lines="All" Text="Итого" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
+            <TableCell Name="Cell28" Border.Lines="All" Text="НБТ" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
+            <TableCell Name="Cell29" Border.Lines="All" Text="Док. с филиалов" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
+            <TableCell Name="Cell30" Border.Lines="All" Text="внут. документы" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
+            <TableCell Name="Cell31" Border.Lines="All" Text="письма граждан" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
+            <TableCell Name="Cell32" Border.Lines="All" Text="другие входящие" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
           </TableRow>
         </TableObject>
       </DataHeaderBand>
-      <DataBand Name="Data1" Top="176.96" Width="1047.06" Height="18.9">
-        <TextObject Name="Text1" Width="182.95" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
-        <TextObject Name="Text2" Left="182.95" Width="154.6" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
-        <TextObject Name="Text3" Left="337.93" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
-        <TextObject Name="Text4" Left="435.83" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
-        <TextObject Name="Text5" Left="533.74" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
-        <TextObject Name="Text6" Left="631.64" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
-        <TextObject Name="Text7" Left="729.92" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
-        <TextObject Name="Text8" Left="827.82" Width="97.9" Height="18.9" Border.Lines="All" VertAlign="Bottom" Font="Calibri, 11pt"/>
-      </DataBand>
-      <GroupFooterBand Name="GroupFooter1" Top="198.14" Width="1047.06" Height="37.8"/>
-    </GroupHeaderBand>
+    </DataBand>
   </ReportPage>
 </Report>

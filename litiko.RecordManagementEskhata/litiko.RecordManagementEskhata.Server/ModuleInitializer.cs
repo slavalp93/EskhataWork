@@ -15,6 +15,7 @@ namespace litiko.RecordManagementEskhata.Server
       CreateDocumentKinds();
       CreateReportsTables();
       CreateConvertOrdToPdfStage();
+      Reports.AccessRights.Grant(Reports.GetDocflowReport().Info, Roles.AllUsers, DefaultReportAccessRightsTypes.Execute);
     }
     
     public static void CreateDocumentKinds()
@@ -93,9 +94,11 @@ namespace litiko.RecordManagementEskhata.Server
     public static void CreateReportsTables()
     {
       var approvalSheetOrdTableName = Constants.ApprovalSheetOrd.SourceTableName;
-      Sungero.Docflow.PublicFunctions.Module.DropReportTempTables(new[] { approvalSheetOrdTableName });
+      var docflowReportTableName = Constants.DocflowReport.SourceTableName;
+      Sungero.Docflow.PublicFunctions.Module.DropReportTempTables(new[] { approvalSheetOrdTableName, docflowReportTableName });
 
       Sungero.Docflow.PublicFunctions.Module.ExecuteSQLCommandFormat(Queries.ApprovalSheetOrd.CreateApprovalSheetOrdSourceTable, new[] { approvalSheetOrdTableName });
+      Sungero.Docflow.PublicFunctions.Module.ExecuteSQLCommandFormat(Queries.DocflowReport.CreateDocflowReportSourceTable, new[] { docflowReportTableName });
     }
     
     public static void CreateConvertOrdToPdfStage()

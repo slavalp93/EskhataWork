@@ -11,7 +11,8 @@ namespace litiko.RecordManagementEskhata
 
     public override void BeforeExecute(Sungero.Reporting.Server.BeforeExecuteEventArgs e)
     {
-      RecordManagementEskhata.PublicFunctions.Module.GetActionItemCompletionData(DocflowReport.BeginDate, DocflowReport.EndDate, DocflowReport.State);
+      var rows = RecordManagementEskhata.PublicFunctions.Module.GetActionItemCompletionData(DocflowReport.BeginDate, DocflowReport.EndDate, DocflowReport.State);
+      Sungero.Docflow.PublicFunctions.Module.WriteStructuresToTable(Constants.ApprovalSheetOrd.SourceTableName, rows);
     }
 
   }

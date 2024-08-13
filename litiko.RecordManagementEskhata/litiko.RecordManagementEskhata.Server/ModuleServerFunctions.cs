@@ -256,7 +256,7 @@ namespace litiko.RecordManagementEskhata.Server
           var query = Sungero.RecordManagement.ActionItemExecutionTasks.GetAll()
             .Where(t => t.Status == Sungero.Workflow.Task.Status.Completed || t.Status == Sungero.Workflow.Task.Status.InProcess)
             .Where(t => t.IsCompoundActionItem != true && t.ActionItemType != Sungero.RecordManagement.ActionItemExecutionTask.ActionItemType.Additional);
-          
+         /* 
           var serverBeginDate = Sungero.Docflow.PublicFunctions.Module.Remote.GetTenantDateTimeFromUserDay(beginDate.Value);
           var serverEndDate = endDate.Value.EndOfDay().FromUserTime();
           
@@ -301,17 +301,18 @@ namespace litiko.RecordManagementEskhata.Server
                                   t.ActualDate.Value.Date >= endDate && (t.Deadline.Value.Date == t.Deadline.Value
                                                                          ? t.Deadline <= beginDate.Value.Date
                                                                          : t.Deadline <= serverBeginDate))) || t.Status == Sungero.Workflow.Task.Status.InProcess);
-          }
+          }*/
           
           // Guid группы вложений для документа в поручении.
           var documentsGroupGuid = Sungero.Docflow.PublicConstants.Module.TaskMainGroup.ActionItemExecutionTask;
           var documents = Sungero.Docflow.IncomingDocumentBases.GetAll();
           query = query.Where(t => t.AttachmentDetails.Any(g => g.GroupId == documentsGroupGuid && documents.Any(m => m.Id == g.AttachmentId)));
-          
-          tasks = query
-            .Select(t => Structures.Module.DocflowReportLine.Create(
-              t.AttachmentDetails.First(x => x.GroupId == documentsGroupGuid).AttachmentId.Value, t.Id, t.Assignee.Id, t.Assignee.Name, t.Assignee.Department.Id, t.Assignee.Department.Name, 1, 0, 0, 0, 0))
-            .ToList();
+          foreach (var task in query.ToList())
+          {
+            tasks.Add(Structures.Module.DocflowReportLine.Create(
+              task.AttachmentDetails.First(x => x.GroupId == documentsGroupGuid).AttachmentId.Value, 
+              task.Id, task.Assignee.Id, task.Assignee.Name, task.Assignee.Department.Id, task.Assignee.Department.Name, 1, 0, 0, 0, 0, 0));
+          }
           
           for (int i = 0; i < tasks.Count(); i++)
           {
@@ -322,6 +323,23 @@ namespace litiko.RecordManagementEskhata.Server
             row.Letters = IsLetters(document.DocumentKind);
             row.Others = (row.Nbt == 0 && row.Filial == 0 && row.Letters == 0) ? 1 : 0;
           }
+          
+          tasks = tasks.GroupBy(d => d.ResponsibleId)
+            .Select(
+              g => Structures.Module.DocflowReportLine.Create(
+                g.First().DocumentId, 
+                g.First().TaskId, 
+                g.Key, 
+                g.First().Responsible,
+                g.First().DepartmentId,
+                g.First().Department,
+                g.Sum(s => s.Total),
+                g.Sum(s => s.Nbt),
+                g.Sum(s => s.Filial),
+                g.Sum(s => s.InternalLetters),
+                g.Sum(s => s.Letters),
+                g.Sum(s => s.Others)
+               )).ToList();
           
         });
       

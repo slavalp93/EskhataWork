@@ -244,6 +244,10 @@
           "TypeFullName": "global::System.Int32"
         },
         {
+          "Name": "InternalLetters",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
           "Name": "Letters",
           "TypeFullName": "global::System.Int32"
         },

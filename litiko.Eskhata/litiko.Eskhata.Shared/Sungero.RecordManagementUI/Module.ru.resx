@@ -58,13 +58,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CoverAction_Archiveslitiko" xml:space="preserve">
-    <value>Архивы</value>
-  </data>
-  <data name="CoverDescription_Archiveslitiko" xml:space="preserve">
-    <value>Перечень архивов компании</value>
-  </data>
-  <data name="CoverAction_IncomingLetterCatlitiko" xml:space="preserve">
-    <value>Категории входящих писем</value>
-  </data>
 </root>
