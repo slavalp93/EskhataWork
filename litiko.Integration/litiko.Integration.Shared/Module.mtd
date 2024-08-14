@@ -315,7 +315,7 @@
   "SharedAssemblyName": "litiko.Integration.Shared",
   "SharedNamespace": "litiko.Integration.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.30",
+  "Version": "0.0.1.31",
   "Widgets": [],
   "Versions": [
     {
