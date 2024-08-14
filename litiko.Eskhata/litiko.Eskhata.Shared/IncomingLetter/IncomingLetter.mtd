@@ -240,7 +240,7 @@
           "Name": "AddresseeDepartment",
           "ColumnNumber": 0,
           "ColumnSpan": 2,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiSelectEditorToCollectionBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiSelectFromListEditorToCollectionBinder",
           "ParentGuid": "3fe3ca1d-7110-4c4c-ab92-e6e546cfca6f",
           "PropertyGuid": "195822f6-617f-42f6-ad4c-2117cab76ac6",
           "RowNumber": 4,

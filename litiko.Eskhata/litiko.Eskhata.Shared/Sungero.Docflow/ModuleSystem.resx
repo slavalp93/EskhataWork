@@ -68,6 +68,6 @@
     <value>Incoming letters category</value>
   </data>
   <data name="CoverDescription_IncomingLetterCatlitiko" xml:space="preserve">
-    <value />
+    <value>Additional classification of incoming letters within document kinds</value>
   </data>
 </root>

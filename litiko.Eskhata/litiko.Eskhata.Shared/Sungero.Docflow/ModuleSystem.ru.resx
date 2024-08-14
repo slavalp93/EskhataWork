@@ -67,4 +67,7 @@
   <data name="CoverAction_IncomingLetterCatlitiko" xml:space="preserve">
     <value>Категории входящих писем</value>
   </data>
+  <data name="CoverDescription_IncomingLetterCatlitiko" xml:space="preserve">
+    <value>Дополнительная классификация входящих писем в рамках видов документов</value>
+  </data>
 </root>
