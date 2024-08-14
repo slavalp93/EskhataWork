@@ -5,9 +5,10 @@
   "AssociatedGuid": "477f982f-17bc-4249-b338-32bf97fe8ecf",
   "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
   "DataSources": [],
-  "DefaultExportFormat": "Word",
+  "DefaultExportFormat": "Excel",
   "ExportFormats": [
-    "Word"
+    "Word",
+    "Excel"
   ],
   "HandledEvents": [
     "BeforeExecuteServer",

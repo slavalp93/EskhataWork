@@ -246,7 +246,8 @@ namespace litiko.RecordManagementEskhata.Server
     [Public]
     public virtual List<RecordManagementEskhata.Structures.Module.IDocflowReportLine> GetActionItemCompletionData(DateTime? beginDate,
                                                                                                                   DateTime? endDate,
-                                                                                                                  string itemsState)
+                                                                                                                  string itemsState,
+                                                                                                                  string reportSessionId)
     {
       List<Structures.Module.IDocflowReportLine> tasks = new List<litiko.RecordManagementEskhata.Structures.Module.IDocflowReportLine>();
       
@@ -256,7 +257,7 @@ namespace litiko.RecordManagementEskhata.Server
           var query = Sungero.RecordManagement.ActionItemExecutionTasks.GetAll()
             .Where(t => t.Status == Sungero.Workflow.Task.Status.Completed || t.Status == Sungero.Workflow.Task.Status.InProcess)
             .Where(t => t.IsCompoundActionItem != true && t.ActionItemType != Sungero.RecordManagement.ActionItemExecutionTask.ActionItemType.Additional);
-         /* 
+         
           var serverBeginDate = Sungero.Docflow.PublicFunctions.Module.Remote.GetTenantDateTimeFromUserDay(beginDate.Value);
           var serverEndDate = endDate.Value.EndOfDay().FromUserTime();
           
@@ -301,7 +302,7 @@ namespace litiko.RecordManagementEskhata.Server
                                   t.ActualDate.Value.Date >= endDate && (t.Deadline.Value.Date == t.Deadline.Value
                                                                          ? t.Deadline <= beginDate.Value.Date
                                                                          : t.Deadline <= serverBeginDate))) || t.Status == Sungero.Workflow.Task.Status.InProcess);
-          }*/
+          }
           
           // Guid группы вложений для документа в поручении.
           var documentsGroupGuid = Sungero.Docflow.PublicConstants.Module.TaskMainGroup.ActionItemExecutionTask;
@@ -311,7 +312,7 @@ namespace litiko.RecordManagementEskhata.Server
           {
             tasks.Add(Structures.Module.DocflowReportLine.Create(
               task.AttachmentDetails.First(x => x.GroupId == documentsGroupGuid).AttachmentId.Value, 
-              task.Id, task.Assignee.Id, task.Assignee.Name, task.Assignee.Department.Id, task.Assignee.Department.Name, 1, 0, 0, 0, 0, 0));
+              task.Id, task.Assignee.Id, task.Assignee.Name, task.Assignee.Department.Id, task.Assignee.Department.Name, 1, 0, 0, 0, 0, 0, reportSessionId));
           }
           
           for (int i = 0; i < tasks.Count(); i++)
@@ -338,7 +339,8 @@ namespace litiko.RecordManagementEskhata.Server
                 g.Sum(s => s.Filial),
                 g.Sum(s => s.InternalLetters),
                 g.Sum(s => s.Letters),
-                g.Sum(s => s.Others)
+                g.Sum(s => s.Others),
+                reportSessionId
                )).ToList();
           
         });

@@ -177,6 +177,11 @@
           "Name": "itemsState",
           "ParameterType": "global::System.String",
           "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "reportSessionId",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
         }
       ],
       "ReturnType": "global::System.Collections.Generic.List<global::litiko.RecordManagementEskhata.Structures.Module.IDocflowReportLine>",
@@ -254,6 +259,11 @@
         {
           "Name": "Others",
           "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "ReportSessionId",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
         }
       ],
       "StructureNamespace": "litiko.RecordManagementEskhata.Structures.Module"

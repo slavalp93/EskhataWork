@@ -21,5 +21,6 @@ namespace litiko.RecordManagementEskhata.Structures.Module
     public int InternalLetters { get; set; }
     public int Letters { get; set; }
     public int Others { get; set; }
+    public string ReportSessionId { get; set; }
   }
 }
