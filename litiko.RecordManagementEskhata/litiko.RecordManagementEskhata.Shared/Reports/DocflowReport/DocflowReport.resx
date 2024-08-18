@@ -62,10 +62,10 @@
     <value>Docflow report</value>
   </data>
   <data name="PeriodTo" xml:space="preserve">
-    <value>To</value>
+    <value>Due to</value>
   </data>
   <data name="PeriodFrom" xml:space="preserve">
-    <value>From</value>
+    <value>Due from</value>
   </data>
   <data name="State" xml:space="preserve">
     <value>Action items state</value>

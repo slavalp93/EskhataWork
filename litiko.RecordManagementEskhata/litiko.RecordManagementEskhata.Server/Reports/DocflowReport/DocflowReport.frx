@@ -51,20 +51,41 @@ namespace FastReport
     <SungeroParameter Name="ClientEndDate" Id="d70901c7-8ba3-40b8-b62d-b462300c064a" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="ReportSessionId" Id="bdbf8979-5d6d-43e9-8d47-cadf1cb04f20" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="State" Id="6078ba89-6c5f-4a42-bdc5-22c1dd7a3f40" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <Total Name="Total" Expression="[Table.Total]" Evaluator="Data1" PrintOn="DataFooter1"/>
+    <Total Name="TotalNbt" Expression="[Table.Nbt]" Evaluator="Data1" PrintOn="DataFooter1"/>
+    <Total Name="TotalFilial" Expression="[Table.Filial]" Evaluator="Data1" PrintOn="DataFooter1"/>
+    <Total Name="TotalLetter" Expression="[Table.Letters]" Evaluator="Data1" PrintOn="DataFooter1"/>
+    <Total Name="TotalOthers" Expression="[Table.Others]" Evaluator="Data1" PrintOn="DataFooter1"/>
   </Dictionary>
   <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" Watermark.Font="Arial, 60pt">
-    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="56.7"/>
-    <DataBand Name="Data1" Top="140.3" Width="1047.06" Height="18.9" CanGrow="true" DataSource="Table">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="85.05">
+      <TextObject Name="Text9" Width="827.82" Height="66.15" Text="Количество поручений по входящим документам&#13;&#10;[Date]&#13;&#10;&#13;&#10;Период: [BeginDate] – [EndDate]" HorzAlign="Center" Font="Arial, 10pt, style=Bold">
+        <Formats>
+          <DateFormat/>
+          <DateFormat/>
+          <DateFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text10" Top="66.15" Width="827.82" Height="18.9" Text="Исполнение:[State]" Font="Arial, 10pt, style=Bold">
+        <Formats>
+          <DateFormat/>
+          <DateFormat/>
+          <DateFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="168.65" Width="1047.06" Height="18.9" CanGrow="true" DataSource="Table">
       <TextObject Name="Text1" Width="182.95" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Responsible]" VertAlign="Bottom" Font="Calibri, 11pt"/>
       <TextObject Name="Text2" Left="182.95" Width="154.6" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Department]" VertAlign="Bottom" Font="Calibri, 11pt"/>
       <TextObject Name="Text3" Left="337.93" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Total]" VertAlign="Bottom" Font="Calibri, 11pt"/>
       <TextObject Name="Text4" Left="435.83" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Nbt]" VertAlign="Bottom" Font="Calibri, 11pt"/>
       <TextObject Name="Text5" Left="533.74" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Filial]" VertAlign="Bottom" Font="Calibri, 11pt"/>
-      <TextObject Name="Text6" Left="631.64" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="0" VertAlign="Bottom" Font="Calibri, 11pt"/>
-      <TextObject Name="Text7" Left="729.92" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Letters]" VertAlign="Bottom" Font="Calibri, 11pt"/>
-      <TextObject Name="Text8" Left="827.82" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Others]" VertAlign="Bottom" Font="Calibri, 11pt"/>
-      <DataHeaderBand Name="DataHeader2" Top="60.7" Width="1047.06" Height="75.6" CanGrow="true">
-        <TableObject Name="Table1" Width="925.83" Height="75.6">
+      <TextObject Name="Text7" Left="631.64" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Letters]" VertAlign="Bottom" Font="Calibri, 11pt"/>
+      <TextObject Name="Text8" Left="729.92" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.Others]" VertAlign="Bottom" Font="Calibri, 11pt"/>
+      <DataHeaderBand Name="DataHeader2" Top="89.05" Width="1047.06" Height="75.6" CanGrow="true">
+        <TableObject Name="Table1" Width="827.82" Height="75.6">
           <TableColumn Name="Column9" Width="183.06"/>
           <TableColumn Name="Column10" Width="154.71"/>
           <TableColumn Name="Column11" Width="98.01"/>
@@ -72,16 +93,14 @@ namespace FastReport
           <TableColumn Name="Column13" Width="98.01"/>
           <TableColumn Name="Column14" Width="98.01"/>
           <TableColumn Name="Column15" Width="98.01"/>
-          <TableColumn Name="Column16" Width="98.01"/>
           <TableRow Name="Row3">
             <TableCell Name="Cell17" Font="Arial, 10pt"/>
             <TableCell Name="Cell18" Font="Arial, 10pt"/>
             <TableCell Name="Cell19" Font="Arial, 10pt"/>
-            <TableCell Name="Cell20" Border.Lines="All" Text="из них" Font="Calibri, 11pt, style=Bold, Italic" ColSpan="5"/>
+            <TableCell Name="Cell20" Border.Lines="All" Text="из них" Font="Calibri, 11pt, style=Bold, Italic" ColSpan="4"/>
             <TableCell Name="Cell21" Font="Arial, 10pt"/>
             <TableCell Name="Cell22" Font="Arial, 10pt"/>
             <TableCell Name="Cell23" Font="Arial, 10pt"/>
-            <TableCell Name="Cell24" Font="Arial, 10pt"/>
           </TableRow>
           <TableRow Name="Row4" Height="56.7">
             <TableCell Name="Cell25" Border.Lines="All" Text="Ответственное лицо" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
@@ -89,12 +108,19 @@ namespace FastReport
             <TableCell Name="Cell27" Border.Lines="All" Text="Итого" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
             <TableCell Name="Cell28" Border.Lines="All" Text="НБТ" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
             <TableCell Name="Cell29" Border.Lines="All" Text="Док. с филиалов" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
-            <TableCell Name="Cell30" Border.Lines="All" Text="внут. документы" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
-            <TableCell Name="Cell31" Border.Lines="All" Text="письма граждан" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
-            <TableCell Name="Cell32" Border.Lines="All" Text="другие входящие" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
+            <TableCell Name="Cell30" Border.Lines="All" Text="письма граждан" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
+            <TableCell Name="Cell31" Border.Lines="All" Text="другие входящие" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
           </TableRow>
         </TableObject>
       </DataHeaderBand>
+      <DataFooterBand Name="DataFooter1" Top="191.55" Width="1047.06" Height="37.8" CanGrow="true" CanShrink="true">
+        <TextObject Name="Text11" Width="337.55" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="Всего" HorzAlign="Center" VertAlign="Bottom" Font="Calibri, 11pt, style=Bold, Italic"/>
+        <TextObject Name="Text13" Left="337.93" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Total]" VertAlign="Bottom" Font="Calibri, 11pt"/>
+        <TextObject Name="Text14" Left="435.83" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[TotalNbt]" VertAlign="Bottom" Font="Calibri, 11pt"/>
+        <TextObject Name="Text15" Left="533.74" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[TotalFilial]" VertAlign="Bottom" Font="Calibri, 11pt"/>
+        <TextObject Name="Text16" Left="631.64" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[TotalLetter]" VertAlign="Bottom" Font="Calibri, 11pt"/>
+        <TextObject Name="Text17" Left="729.92" Width="97.9" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[TotalOthers]" VertAlign="Bottom" Font="Calibri, 11pt"/>
+      </DataFooterBand>
     </DataBand>
   </ReportPage>
 </Report>

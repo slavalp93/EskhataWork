@@ -62,10 +62,10 @@
     <value>Отчет по документообороту</value>
   </data>
   <data name="PeriodTo" xml:space="preserve">
-    <value>По</value>
+    <value>Срок исполнения по</value>
   </data>
   <data name="PeriodFrom" xml:space="preserve">
-    <value>С</value>
+    <value>Срок исполнения с</value>
   </data>
   <data name="State" xml:space="preserve">
     <value>Состояние поручений</value>

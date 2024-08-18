@@ -257,52 +257,72 @@ namespace litiko.RecordManagementEskhata.Server
           var query = Sungero.RecordManagement.ActionItemExecutionTasks.GetAll()
             .Where(t => t.Status == Sungero.Workflow.Task.Status.Completed || t.Status == Sungero.Workflow.Task.Status.InProcess)
             .Where(t => t.IsCompoundActionItem != true && t.ActionItemType != Sungero.RecordManagement.ActionItemExecutionTask.ActionItemType.Additional);
-         
+          
           var serverBeginDate = Sungero.Docflow.PublicFunctions.Module.Remote.GetTenantDateTimeFromUserDay(beginDate.Value);
           var serverEndDate = endDate.Value.EndOfDay().FromUserTime();
           
           if (itemsState == litiko.RecordManagementEskhata.Resources.Completed)
+            #region Completed
           {
-            query = query.Where(t =>
-                                t.Status == Sungero.Workflow.Task.Status.Completed &&
-                                (Calendar.Between(t.ActualDate.Value.Date, beginDate.Value.Date, endDate.Value.Date) ||
-                                 t.Deadline.HasValue &&
-                                 ((t.Deadline.Value.Date == t.Deadline.Value
-                                   ? t.Deadline.Between(beginDate.Value.Date, endDate.Value.Date)
-                                   : t.Deadline.Between(serverBeginDate, serverEndDate)) ||
-                                  t.ActualDate.Value.Date >= endDate && (t.Deadline.Value.Date == t.Deadline.Value
-                                                                         ? t.Deadline <= beginDate.Value.Date
-                                                                         : t.Deadline <= serverBeginDate))));
+            query = query.Where(t => 
+                                t.ActualDate.HasValue &&
+                                t.ActualDate.Value.Date == t.ActualDate.Value &&
+                                Calendar.Between(t.ActualDate.Value.Date, beginDate.Value.Date, endDate.Value.Date));
           }
+          #endregion
           else if (itemsState == litiko.RecordManagementEskhata.Resources.InWork)
+            #region InWork
           {
             query = query.Where(t =>
-                                t.Status == Sungero.Workflow.Task.Status.InProcess &&
-                                t.Deadline.HasValue && (t.Deadline.Value.Date == t.Deadline.Value
-                                                        ? t.Deadline <= endDate.Value.Date
-                                                        : t.Deadline <= serverEndDate));
+                                t.Deadline < beginDate &&
+                                (t.ActualDate > endDate || t.Status == Sungero.Workflow.Task.Status.InProcess)
+                               );
           }
+          #endregion
           else if (itemsState == litiko.RecordManagementEskhata.Resources.Expired)
+            #region Expired
           {
             query = query.Where(t =>
-                                t.Status == Sungero.Workflow.Task.Status.InProcess &&
-                                t.Deadline.HasValue && (t.Deadline.Value.Date == t.Deadline.Value
-                                                        ? t.Deadline > endDate.Value.Date
-                                                        : t.Deadline >= serverEndDate));
+                                (
+                                  t.Deadline.HasValue &&
+                                  t.Deadline.Value.Date == t.Deadline.Value &&
+                                  Calendar.Between(t.Deadline.Value.Date, beginDate.Value.Date, endDate.Value.Date) &&
+                                  (t.ActualDate >= endDate || t.Status == Sungero.Workflow.Task.Status.InProcess)
+                                 ) ||
+                                
+                                (
+                                  t.ActualDate.HasValue &&
+                                  t.ActualDate.Value.Date == t.ActualDate.Value &&
+                                  Calendar.Between(t.ActualDate.Value.Date, beginDate.Value.Date, endDate.Value.Date) &&
+                                  t.ActualDate > t.Deadline
+                                 ) ||
+                                
+                                (
+                                  t.Deadline < beginDate &&
+                                  (t.ActualDate > endDate || t.Status == Sungero.Workflow.Task.Status.InProcess)
+                                 )
+                               );
           }
+          #endregion
           else if (itemsState == litiko.RecordManagementEskhata.Resources.All)
+            #region All
           {
             query = query.Where(t =>
-                                t.Status == Sungero.Workflow.Task.Status.Completed &&
-                                (Calendar.Between(t.ActualDate.Value.Date, beginDate.Value.Date, endDate.Value.Date) ||
-                                 t.Deadline.HasValue &&
-                                 ((t.Deadline.Value.Date == t.Deadline.Value
-                                   ? t.Deadline.Between(beginDate.Value.Date, endDate.Value.Date)
-                                   : t.Deadline.Between(serverBeginDate, serverEndDate)) ||
-                                  t.ActualDate.Value.Date >= endDate && (t.Deadline.Value.Date == t.Deadline.Value
-                                                                         ? t.Deadline <= beginDate.Value.Date
-                                                                         : t.Deadline <= serverBeginDate))) || t.Status == Sungero.Workflow.Task.Status.InProcess);
+                                Calendar.Between(t.ActualDate.Value.Date, beginDate.Value.Date, endDate.Value.Date) ||
+                                
+                                (
+                                  t.Deadline.HasValue &&
+                                  t.Deadline.Value.Date == t.Deadline.Value &&
+                                  t.Deadline.Between(beginDate.Value.Date, endDate.Value.Date)
+                                 ) ||
+                                
+                                ((t.ActualDate.Value.Date >= endDate || t.Status == Sungero.Workflow.Task.Status.InProcess) &&
+                                 (t.Deadline.Value.Date == t.Deadline.Value
+                                  ? t.Deadline <= beginDate.Value.Date
+                                  : t.Deadline <= serverBeginDate))
+                               );
           }
+          #endregion
           
           // Guid группы вложений для документа в поручении.
           var documentsGroupGuid = Sungero.Docflow.PublicConstants.Module.TaskMainGroup.ActionItemExecutionTask;
@@ -311,7 +331,7 @@ namespace litiko.RecordManagementEskhata.Server
           foreach (var task in query.ToList())
           {
             tasks.Add(Structures.Module.DocflowReportLine.Create(
-              task.AttachmentDetails.First(x => x.GroupId == documentsGroupGuid).AttachmentId.Value, 
+              task.AttachmentDetails.First(x => x.GroupId == documentsGroupGuid).AttachmentId.Value,
               task.Id, task.Assignee.Id, task.Assignee.Name, task.Assignee.Department.Id, task.Assignee.Department.Name, 1, 0, 0, 0, 0, 0, reportSessionId));
           }
           
@@ -328,9 +348,9 @@ namespace litiko.RecordManagementEskhata.Server
           tasks = tasks.GroupBy(d => d.ResponsibleId)
             .Select(
               g => Structures.Module.DocflowReportLine.Create(
-                g.First().DocumentId, 
-                g.First().TaskId, 
-                g.Key, 
+                g.First().DocumentId,
+                g.First().TaskId,
+                g.Key,
                 g.First().Responsible,
                 g.First().DepartmentId,
                 g.First().Department,
