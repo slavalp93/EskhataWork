@@ -61,4 +61,7 @@
   <data name="DisplayName" xml:space="preserve">
     <value>Отчет по документообороту</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Список поручений по входящим документам с плановым сроком исполнения в выбранном периоде</value>
+  </data>
 </root>

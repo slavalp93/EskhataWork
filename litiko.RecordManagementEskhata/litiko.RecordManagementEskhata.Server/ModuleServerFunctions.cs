@@ -274,7 +274,7 @@ namespace litiko.RecordManagementEskhata.Server
             #region InWork
           {
             query = query.Where(t =>
-                                t.Deadline < beginDate &&
+                                t.Deadline < endDate &&
                                 (t.ActualDate > endDate || t.Status == Sungero.Workflow.Task.Status.InProcess)
                                );
           }

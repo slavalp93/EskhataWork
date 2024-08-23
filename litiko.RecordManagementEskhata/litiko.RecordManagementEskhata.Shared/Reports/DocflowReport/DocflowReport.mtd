@@ -23,7 +23,8 @@
     "ExportFormats",
     "DefaultExportFormat",
     "HandledEvents",
-    "Parameters"
+    "Parameters",
+    "Description"
   ],
   "Parameters": [
     {
