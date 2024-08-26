@@ -281,13 +281,13 @@ namespace litiko.RecordManagementEskhata.Server
           #endregion
           else if (itemsState == litiko.RecordManagementEskhata.Resources.Expired)
             #region Expired
-          {
+          { 
             query = query.Where(t =>
                                 (
                                   t.Deadline.HasValue &&
                                   t.Deadline.Value.Date == t.Deadline.Value &&
                                   Calendar.Between(t.Deadline.Value.Date, beginDate.Value.Date, endDate.Value.Date) &&
-                                  (t.ActualDate >= endDate || t.Status == Sungero.Workflow.Task.Status.InProcess)
+                                  (t.ActualDate > endDate || t.Status == Sungero.Workflow.Task.Status.InProcess)
                                  ) ||
                                 
                                 (

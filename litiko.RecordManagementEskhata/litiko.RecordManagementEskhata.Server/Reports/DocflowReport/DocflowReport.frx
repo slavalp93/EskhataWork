@@ -59,7 +59,7 @@ namespace FastReport
   </Dictionary>
   <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" Watermark.Font="Arial, 60pt">
     <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="85.05">
-      <TextObject Name="Text9" Width="827.82" Height="66.15" Text="Количество поручений по входящим документам&#13;&#10;&#13;&#10;&#13;&#10;Период: [BeginDate] – [ClientEndDate]" HorzAlign="Center" Font="Arial, 10pt, style=Bold">
+      <TextObject Name="Text9" Top="18.9" Width="827.82" Height="47.25" Text="Количество поручений по входящим документам&#13;&#10;Период: [BeginDate] – [ClientEndDate]" HorzAlign="Center" Font="Arial, 10pt, style=Bold">
         <Formats>
           <DateFormat/>
           <DateFormat/>
@@ -68,6 +68,14 @@ namespace FastReport
         </Formats>
       </TextObject>
       <TextObject Name="Text10" Top="66.15" Width="827.82" Height="18.9" Text="Исполнение:[State]" Font="Arial, 10pt, style=Bold">
+        <Formats>
+          <DateFormat/>
+          <DateFormat/>
+          <DateFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+      <TextObject Name="Text18" Width="827.82" Height="18.9" Text="Дата формирования отчета: [Date]" HorzAlign="Right" Font="Arial, 10pt">
         <Formats>
           <DateFormat/>
           <DateFormat/>
