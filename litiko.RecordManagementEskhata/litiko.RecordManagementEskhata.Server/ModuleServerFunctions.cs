@@ -264,7 +264,7 @@ namespace litiko.RecordManagementEskhata.Server
           if (itemsState == litiko.RecordManagementEskhata.Resources.Completed)
             #region Completed
           {
-            query = query.Where(t => 
+            query = query.Where(t =>
                                 t.ActualDate.HasValue &&
                                 t.ActualDate.Value.Date == t.ActualDate.Value &&
                                 Calendar.Between(t.ActualDate.Value.Date, beginDate.Value.Date, endDate.Value.Date));
@@ -281,13 +281,17 @@ namespace litiko.RecordManagementEskhata.Server
           #endregion
           else if (itemsState == litiko.RecordManagementEskhata.Resources.Expired)
             #region Expired
-          { 
+          {
+            var now = Calendar.Now;
+            var today = Calendar.UserToday;
+            var tomorrow = today.AddDays(1);
+            //26.08.2024 – 04.09.2024, в нього потрапляють як прострочені доручення з кінцевою датою 03.09 та 04.09 але ж на момент формування звіту (на сьогодні) ці доручення не є простроченими, можливо вони будуть прострочені саме на 05.09 а можливо й ні - якщо їх виконають вчасно.
             query = query.Where(t =>
                                 (
                                   t.Deadline.HasValue &&
                                   t.Deadline.Value.Date == t.Deadline.Value &&
                                   Calendar.Between(t.Deadline.Value.Date, beginDate.Value.Date, endDate.Value.Date) &&
-                                  (t.ActualDate > endDate || t.Status == Sungero.Workflow.Task.Status.InProcess)
+                                  (t.ActualDate > endDate || (t.Status == Sungero.Workflow.Task.Status.InProcess && t.Deadline < now && t.Deadline != today && t.Deadline != tomorrow))
                                  ) ||
                                 
                                 (
@@ -299,7 +303,7 @@ namespace litiko.RecordManagementEskhata.Server
                                 
                                 (
                                   t.Deadline < beginDate &&
-                                  (t.ActualDate > endDate || t.Status == Sungero.Workflow.Task.Status.InProcess)
+                                  (t.ActualDate > endDate || (t.Status == Sungero.Workflow.Task.Status.InProcess && t.Deadline < now && t.Deadline != today && t.Deadline != tomorrow))
                                  )
                                );
           }
