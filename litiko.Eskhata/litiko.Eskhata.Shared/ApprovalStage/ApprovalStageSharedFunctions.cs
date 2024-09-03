@@ -19,6 +19,8 @@ namespace litiko.Eskhata.Shared
       {
         baseRoles.Add(DocflowEskhata.UnitManagerApprovalRole.Type.Signatory);
         baseRoles.Add(Archive.ApprovalRole.Type.Archivist);
+        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.Speaker);
+        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.SecretaryByCat);
       }
       #endregion
       
@@ -26,6 +28,7 @@ namespace litiko.Eskhata.Shared
       if (_obj.StageType == Sungero.Docflow.ApprovalStage.StageType.SimpleAgr)
       {
         baseRoles.Add(Archive.ApprovalRole.Type.Archivist);
+        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.SecretaryByCat);
       }
       #endregion
       

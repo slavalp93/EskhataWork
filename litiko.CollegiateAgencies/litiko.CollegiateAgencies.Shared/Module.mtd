@@ -1,0 +1,210 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "8c6dc2cd-fe6a-4f89-b05c-494f454a9e68",
+  "Name": "CollegiateAgencies",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "litiko.CollegiateAgencies.Client",
+  "ClientBaseAssemblyName": "litiko.CollegiateAgencies.ClientBase",
+  "ClientBaseNamespace": "litiko.CollegiateAgencies.ClientBase",
+  "ClientNamespace": "litiko.CollegiateAgencies.Client",
+  "Code": "Collegi",
+  "CompanyCode": "litiko",
+  "Cover": {
+    "NameGuid": "22ce485a-2b7b-498d-9155-3c03ffc45dcd",
+    "Actions": [
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "02783d92-8e49-4c0e-8999-31aca516d222",
+        "Name": "MeetingCategories",
+        "EntityTypeId": "6ae9c018-da75-4e80-88a6-6fc1c710e5f9",
+        "GroupId": "e55d6d7e-273f-4c5d-8c47-efa43ae1bd69"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "06cbec7c-9754-4ffc-a946-3423f3c6ee32",
+        "Name": "BringQuestion",
+        "FunctionName": "BringQuestion",
+        "GroupId": "b694281e-a1e3-43d0-8edb-f542ce7f1f23"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "21581c08-6b8f-4b5e-becd-5aba3317116f",
+        "Name": "Resolutions",
+        "FunctionName": "Resolutions",
+        "GroupId": "b694281e-a1e3-43d0-8edb-f542ce7f1f23",
+        "PreviousItemGuid": "2a3ca129-e113-4bbe-b954-c745da96c3a0"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "28fe0ad2-2e19-49eb-a77d-a7fdcd8e68f1",
+        "Name": "MeetingMethods",
+        "EntityTypeId": "9e3c98dd-9f9a-4092-b5b1-930334a11387",
+        "GroupId": "e55d6d7e-273f-4c5d-8c47-efa43ae1bd69",
+        "PreviousItemGuid": "02783d92-8e49-4c0e-8999-31aca516d222"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "2a3ca129-e113-4bbe-b954-c745da96c3a0",
+        "Name": "Extracts",
+        "FunctionName": "Extracts",
+        "GroupId": "b694281e-a1e3-43d0-8edb-f542ce7f1f23",
+        "PreviousItemGuid": "8d63c299-36f9-4ebb-949c-54ab7caa968b"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "8d63c299-36f9-4ebb-949c-54ab7caa968b",
+        "Name": "SolutionProjects",
+        "FunctionName": "SolutionProjects",
+        "GroupId": "b694281e-a1e3-43d0-8edb-f542ce7f1f23",
+        "PreviousItemGuid": "06cbec7c-9754-4ffc-a946-3423f3c6ee32"
+      }
+    ],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "3b8314a2-3a8c-4bd1-9457-ec58eb558797",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [
+      {
+        "NameGuid": "b694281e-a1e3-43d0-8edb-f542ce7f1f23",
+        "Name": "Douments",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconDoumentsGroup_b694281ea1e343d08edbf542ce7f1f23.png",
+        "TabId": "f10a0b61-f7e5-4cbd-b4e6-527613cb5664"
+      },
+      {
+        "NameGuid": "e55d6d7e-273f-4c5d-8c47-efa43ae1bd69",
+        "Name": "LinkedInformation",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconLinkedInformation_e55d6d7e273f4c5d8c47efa43ae1bd69.png",
+        "PreviousItemGuid": "b694281e-a1e3-43d0-8edb-f542ce7f1f23",
+        "TabId": "f10a0b61-f7e5-4cbd-b4e6-527613cb5664"
+      }
+    ],
+    "Header": {
+      "NameGuid": "b1727599-4407-4f9f-a9a2-8fcd3f5312d2",
+      "BackgroundPosition": "Stretch"
+    },
+    "Tabs": [
+      {
+        "NameGuid": "f10a0b61-f7e5-4cbd-b4e6-527613cb5664",
+        "Name": "Tab"
+      }
+    ]
+  },
+  "Dependencies": [
+    {
+      "Id": "78d05f91-7585-42b9-addc-5b14478d4680",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    },
+    {
+      "Id": "593dcc11-15ee-49f2-b4ef-bf4cf7867055",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
+    },
+    {
+      "Id": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "6ae9c018-da75-4e80-88a6-6fc1c710e5f9"
+    },
+    {
+      "ItemId": "9e3c98dd-9f9a-4092-b5b1-930334a11387",
+      "PreviousItemId": "6ae9c018-da75-4e80-88a6-6fc1c710e5f9"
+    },
+    {
+      "ItemId": "38450693-6600-4c7b-a2a6-5ca6aa9edd21",
+      "PreviousItemId": "9e3c98dd-9f9a-4092-b5b1-930334a11387"
+    },
+    {
+      "ItemId": "2b1feb20-ac60-46de-a63c-67309e3a6e70",
+      "PreviousItemId": "38450693-6600-4c7b-a2a6-5ca6aa9edd21"
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "litiko.CollegiateAgencies",
+  "IsolatedAssemblyName": "litiko.CollegiateAgencies.Isolated",
+  "IsolatedNamespace": "litiko.CollegiateAgencies.Isolated",
+  "PublicConstants": [
+    {
+      "Name": "Addendum",
+      "ParentClasses": [
+        "Module",
+        "DocumentTypeGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"58b9ed35-9c84-46cd-aa79-9b5ef5a82f5d\")"
+    },
+    {
+      "Name": "ExplanatoryNote",
+      "ParentClasses": [
+        "Module",
+        "DocumentKindGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"83c31ba0-0c56-4738-8450-a2a401bc9a2e\")"
+    },
+    {
+      "Name": "ProjectSolution",
+      "ParentClasses": [
+        "Module",
+        "DocumentTypeGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"38450693-6600-4c7b-a2a6-5ca6aa9edd21\")"
+    },
+    {
+      "Name": "ProjectSolution",
+      "ParentClasses": [
+        "Module",
+        "DocumentKindGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"1e104576-8dd4-45be-ad53-e0c7ccabd9f0\")"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "litiko.CollegiateAgencies",
+  "ResourcesKeys": [
+    "ProjectsolutionType",
+    "ProjectSolutionKind",
+    "DocumentIsNotIncludedInAgenda",
+    "DialogTittle",
+    "DialogText",
+    "DialogBtnCreateNew",
+    "DialogBtnSelectExisting",
+    "AlreadyIncludedMessage",
+    "ScheduledMeetings",
+    "NoRightsToChangeMeeting",
+    "ExplanatoryNoteKind"
+  ],
+  "ServerAssemblyName": "litiko.CollegiateAgencies.Server",
+  "ServerNamespace": "litiko.CollegiateAgencies.Server",
+  "SharedAssemblyName": "litiko.CollegiateAgencies.Shared",
+  "SharedNamespace": "litiko.CollegiateAgencies.Shared",
+  "SpecialFolders": [],
+  "Version": "0.0.1.1",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

@@ -10,5 +10,12 @@ namespace litiko.Eskhata
   partial class ApprovalStageClientHandlers
   {
 
+    public override void Showing(Sungero.Presentation.FormShowingEventArgs e)
+    {
+      base.Showing(e);
+      
+      _obj.State.Properties.CheckIncludeInAgendalitiko.IsVisible = _obj.StageType == Sungero.Docflow.ApprovalStage.StageType.SimpleAgr;
+    }
   }
+
 }

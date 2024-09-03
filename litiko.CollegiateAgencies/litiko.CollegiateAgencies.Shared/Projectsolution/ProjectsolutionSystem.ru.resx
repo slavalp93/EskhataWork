@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Проект решения</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Проект решения</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Проекты решений</value>
+  </data>
+  <data name="Property_Subject" xml:space="preserve">
+    <value>Заголовок</value>
+  </data>
+  <data name="Property_SubjectTJ" xml:space="preserve">
+    <value>Заголовок (TJ)</value>
+  </data>
+  <data name="Resource_fc50c88831554ff196e8ff7064894ead" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_fc50c88831554ff196e8ff7064894ead_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_ddf41ead829a4a3f8d12d40a52b7440c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_ddf41ead829a4a3f8d12d40a52b7440c_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_f0607051ea774af2b7966d11cd8a7374" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_f0607051ea774af2b7966d11cd8a7374_EmptyText" xml:space="preserve">
+    <value>Название проекта решения, которое соответствует его содержанию (в форме, отвечающей на вопрос «О чем?»)</value>
+  </data>
+  <data name="Resource_a915c070568d4f08a7365fbdabe9e559" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_a915c070568d4f08a7365fbdabe9e559_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_MeetingCategory" xml:space="preserve">
+    <value>Категория заседания</value>
+  </data>
+  <data name="Property_Speaker" xml:space="preserve">
+    <value>Докладчик</value>
+  </data>
+  <data name="Property_Regulations" xml:space="preserve">
+    <value>Регламент, ч</value>
+  </data>
+  <data name="Action_IncludeInAgenda" xml:space="preserve">
+    <value>Включить в повестку</value>
+  </data>
+  <data name="Property_InvitedEmployees" xml:space="preserve">
+    <value>Приглашенные сотрудники</value>
+  </data>
+  <data name="Property_InvitedExternal" xml:space="preserve">
+    <value>Приглашенные (внешние)</value>
+  </data>
+  <data name="Property_LeadingDocument" xml:space="preserve">
+    <value>Пояснительная записка</value>
+  </data>
+  <data name="Property_IncludedInAgenda" xml:space="preserve">
+    <value>Включен в повестку</value>
+  </data>
+  <data name="Property_Meeting" xml:space="preserve">
+    <value>Совещание</value>
+  </data>
+  <data name="ControlGroup_8a38af1bf1874e76a8fd3584fdbcdaf2" xml:space="preserve">
+    <value>Слушали</value>
+  </data>
+  <data name="Property_ListenedRU" xml:space="preserve">
+    <value>Слушали (RU)</value>
+  </data>
+  <data name="Control_8ea72e9aa57c4a21bbbf17f886d8069d_EmptyText" xml:space="preserve">
+    <value>Указывается суть вопроса, выносимого на рассмотрение коллегиального органа.</value>
+  </data>
+  <data name="Property_ListenedTJ" xml:space="preserve">
+    <value>Слушали (TJ)</value>
+  </data>
+  <data name="Property_ListenedEN" xml:space="preserve">
+    <value>Слушали (EN)</value>
+  </data>
+  <data name="Property_Decided" xml:space="preserve">
+    <value>ПОСТАНОВИЛИ</value>
+  </data>
+  <data name="Form_e32bc81e8c114777bb7469dde609021a" xml:space="preserve">
+    <value>Протокол</value>
+  </data>
+  <data name="Property_ListenedRUMinutes" xml:space="preserve">
+    <value>Слушали (RU)</value>
+  </data>
+  <data name="Property_ListenedTJMinutes" xml:space="preserve">
+    <value>Слушали (TJ)</value>
+  </data>
+  <data name="Property_ListenedENMinutes" xml:space="preserve">
+    <value>Слушали (EN)</value>
+  </data>
+  <data name="Control_868f64ab15924c08a250fa91c8b61da4_EmptyText" xml:space="preserve">
+    <value>Указывается суть вопроса, выносимого на рассмотрение коллегиального органа.</value>
+  </data>
+  <data name="Action_TransferFromAgenda" xml:space="preserve">
+    <value>Перенести из повестки</value>
+  </data>
+  <data name="Action_TransferFromAgendaHint" xml:space="preserve">
+    <value>Перенести из повестки</value>
+  </data>
+  <data name="Action_TransferFromAgendaDescription" xml:space="preserve">
+    <value>Перенести из повестки</value>
+  </data>
+  <data name="Control_0c313a927f654cdb9c920647e5297395_DisplayValue" xml:space="preserve">
+    <value>Перенести из повестки</value>
+  </data>
+  <data name="Property_DecidedMinutes" xml:space="preserve">
+    <value>ПОСТАНОВИЛИ</value>
+  </data>
+  <data name="Form_3f5c4c6d6ea24290b3c6601fa66dac97" xml:space="preserve">
+    <value>Голосование</value>
+  </data>
+  <data name="Property_Voting" xml:space="preserve">
+    <value>Голосование</value>
+  </data>
+  <data name="Property_OurSignatory" xml:space="preserve">
+    <value>Ответственный за подготовку</value>
+  </data>
+  <data name="Resource_09b8c877bb4f4b329a9832d12a8dae24" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_09b8c877bb4f4b329a9832d12a8dae24_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_597fdf1225334c36b69ae250aa909158" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_597fdf1225334c36b69ae250aa909158_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_dcab7ecffaed4bd68e0fa391e95f08dc" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_dcab7ecffaed4bd68e0fa391e95f08dc_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_IncludeInAgendaDescription" xml:space="preserve">
+    <value>Включить в повестку</value>
+  </data>
+  <data name="Action_IncludeInAgendaHint" xml:space="preserve">
+    <value>Включить в повестку</value>
+  </data>
+  <data name="Resource_117977e76f8247d0a434a42f670a0e5f" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_117977e76f8247d0a434a42f670a0e5f_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateExplanatoryNote" xml:space="preserve">
+    <value>Создать пояснительную записку</value>
+  </data>
+  <data name="Action_CreateExplanatoryNoteHint" xml:space="preserve">
+    <value>Создать пояснительную записку</value>
+  </data>
+  <data name="Action_CreateExplanatoryNoteDescription" xml:space="preserve">
+    <value>Создать пояснительную записку</value>
+  </data>
+</root>

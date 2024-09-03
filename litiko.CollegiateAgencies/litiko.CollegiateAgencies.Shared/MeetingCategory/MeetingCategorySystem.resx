@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_Name" xml:space="preserve">
+    <value>Name (RU)</value>
+  </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Meeting category</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Meeting categories</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Meeting category</value>
+  </data>
+  <data name="Property_NameTJ" xml:space="preserve">
+    <value>Name (TJ)</value>
+  </data>
+  <data name="Property_NameForTemplate" xml:space="preserve">
+    <value>Name for template (RU)</value>
+  </data>
+  <data name="Property_President" xml:space="preserve">
+    <value>President</value>
+  </data>
+  <data name="Property_Secretary" xml:space="preserve">
+    <value>Secretary</value>
+  </data>
+  <data name="ControlGroup_4f0ec26aec534e0091a529c22176fdb2" xml:space="preserve">
+    <value>Participants</value>
+  </data>
+  <data name="Property_Members" xml:space="preserve">
+    <value>Participants</value>
+  </data>
+  <data name="Property_Quorum" xml:space="preserve">
+    <value>Quorum</value>
+  </data>
+  <data name="Property_TextForTemplate" xml:space="preserve">
+    <value>Text (RU)</value>
+  </data>
+  <data name="Property_TextForTemplateTJ" xml:space="preserve">
+    <value>Text (TJ)</value>
+  </data>
+  <data name="ControlGroup_349f2419f78b4529818526d84b418f19" xml:space="preserve">
+    <value>For template</value>
+  </data>
+  <data name="Property_NameForTemplateTJ" xml:space="preserve">
+    <value>Name for template (TJ)</value>
+  </data>
+</root>

@@ -1,0 +1,60 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "9e900cea-618c-49d9-b8f5-2aaac0368295",
+  "Name": "MeetingCategoryMembers",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "MeetingMembers",
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "b7d57d20-75ad-4d03-b341-2a1f4085165c",
+      "Name": "MeetingCategory",
+      "CanBeSearch": false,
+      "Code": "MeetingCategor",
+      "EntityGuid": "6ae9c018-da75-4e80-88a6-6fc1c710e5f9",
+      "IsReferenceToRootEntity": true,
+      "IsShowedInList": false
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "454a3620-969b-491b-a60f-860a0b1f170f",
+      "Name": "Member",
+      "CanBeSearch": false,
+      "Code": "Member",
+      "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "b7d57d20-75ad-4d03-b341-2a1f4085165c"
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "e0afbe9f-7990-40ef-b9ed-9755456b1f15",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "13c4312c-5965-44d4-8daf-5514f635b3c6",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

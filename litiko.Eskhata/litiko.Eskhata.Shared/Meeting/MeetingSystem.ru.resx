@@ -1,0 +1,166 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_MeetingCategorylitiko" xml:space="preserve">
+    <value>Категория</value>
+  </data>
+  <data name="Resource_0b8a6889f5934eeaa26ea10bb9cbe05c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_0b8a6889f5934eeaa26ea10bb9cbe05c_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_ed3a45f4c7ca4191adbb2313102fe806" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_ab54321ddda84b889884bf0670d25aa4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_ab54321ddda84b889884bf0670d25aa4_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_077564898f1e4d72ad84b0549a7b19c0" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_70a0c2e484e1479a91178b114c8cb061" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_Numberlitiko" xml:space="preserve">
+    <value>Номер</value>
+  </data>
+  <data name="Property_MeetingTypelitiko" xml:space="preserve">
+    <value>Тип</value>
+  </data>
+  <data name="Enum_MeetingTypelitiko_Regular" xml:space="preserve">
+    <value>Очередное</value>
+  </data>
+  <data name="Enum_MeetingTypelitiko_NotRegular" xml:space="preserve">
+    <value>Внеочередное</value>
+  </data>
+  <data name="Property_Formalitiko" xml:space="preserve">
+    <value>Форма проведения</value>
+  </data>
+  <data name="Enum_Formalitiko_Intramural" xml:space="preserve">
+    <value>Очное</value>
+  </data>
+  <data name="Enum_Formalitiko_Online" xml:space="preserve">
+    <value>Онлайн</value>
+  </data>
+  <data name="Property_Votinglitiko" xml:space="preserve">
+    <value>Голосование</value>
+  </data>
+  <data name="Enum_Votinglitiko_Intramural" xml:space="preserve">
+    <value>Очное</value>
+  </data>
+  <data name="Enum_Votinglitiko_extramural" xml:space="preserve">
+    <value>Заочное</value>
+  </data>
+  <data name="Enum_Votinglitiko_NoVoting" xml:space="preserve">
+    <value>Без голосования</value>
+  </data>
+  <data name="Property_MeetingMethodlitiko" xml:space="preserve">
+    <value>Способ проведения</value>
+  </data>
+  <data name="Property_InvitedEmployeeslitiko" xml:space="preserve">
+    <value>Приглашенные сотрудники</value>
+  </data>
+  <data name="Property_InvitedExternallitiko" xml:space="preserve">
+    <value>Приглашенные (внешние)</value>
+  </data>
+  <data name="Resource_c491106bf18543c0b57a0decf3a2703a" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_c491106bf18543c0b57a0decf3a2703a_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_754ae620bcc5482d81e2ae4b5efe8740" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_754ae620bcc5482d81e2ae4b5efe8740_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_d0bca50f3fc541659c02ff3971f33968" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_d0bca50f3fc541659c02ff3971f33968_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_Presentlitiko" xml:space="preserve">
+    <value>Присутствовали</value>
+  </data>
+  <data name="Property_Absentlitiko" xml:space="preserve">
+    <value>Отсутствовали</value>
+  </data>
+  <data name="Property_Quorumlitiko" xml:space="preserve">
+    <value>Кворум</value>
+  </data>
+  <data name="Enum_Quorumlitiko_Present" xml:space="preserve">
+    <value>Имеется</value>
+  </data>
+  <data name="Enum_Quorumlitiko_NotPresent" xml:space="preserve">
+    <value>Не имеется</value>
+  </data>
+  <data name="Form_e36f46d2cabe4181aebfeea270776a13" xml:space="preserve">
+    <value>Вопросы на повестке дня</value>
+  </data>
+  <data name="Property_ProjectSolutionslitiko" xml:space="preserve">
+    <value>Вопросы на повестке дня</value>
+  </data>
+</root>

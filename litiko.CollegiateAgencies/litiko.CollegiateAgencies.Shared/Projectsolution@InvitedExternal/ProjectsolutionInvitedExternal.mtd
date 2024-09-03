@@ -1,0 +1,60 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "980902b8-44bc-4b3b-8a6a-97c14f55d04a",
+  "Name": "ProjectsolutionInvitedExternal",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "InvitedExt",
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "83c1a168-a6cd-4b53-a93c-5eda3e9c4b82",
+      "Name": "Projectsolution",
+      "CanBeSearch": false,
+      "Code": "EDoc",
+      "EntityGuid": "38450693-6600-4c7b-a2a6-5ca6aa9edd21",
+      "IsReferenceToRootEntity": true,
+      "IsShowedInList": false
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "87495758-8979-4955-abf3-832235667dd7",
+      "Name": "Person",
+      "CanBeSearch": false,
+      "Code": "Person",
+      "EntityGuid": "f5509cdc-ac0c-4507-a4d3-61d7a0a9b6f6",
+      "FlatListInStandaloneLookup": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "83c1a168-a6cd-4b53-a93c-5eda3e9c4b82"
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "d971ed9c-6f15-4957-827d-df75c90f0a03",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "97810e54-e61e-4438-b759-3551f89bee70",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

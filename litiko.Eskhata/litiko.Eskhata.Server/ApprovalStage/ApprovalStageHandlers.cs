@@ -7,4 +7,15 @@ using litiko.Eskhata.ApprovalStage;
 
 namespace litiko.Eskhata
 {
+  partial class ApprovalStageServerHandlers
+  {
+
+    public override void Created(Sungero.Domain.CreatedEventArgs e)
+    {
+      base.Created(e);
+      
+      _obj.CheckIncludeInAgendalitiko = false;
+    }
+  }
+
 }

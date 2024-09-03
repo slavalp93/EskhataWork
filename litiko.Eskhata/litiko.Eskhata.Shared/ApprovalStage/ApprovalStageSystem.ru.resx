@@ -58,4 +58,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Property_CheckIncludeInAgendalitiko" xml:space="preserve">
+    <value>Контроль включения в повестку</value>
+  </data>
+  <data name="Resource_bd72e6f067304d9a8d7046e2b2c9ac0e" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_00ecd6269f41416785e72c09d41b2106" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_d9c8220ccdaf4f2aa5905dd9c669304f" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_d33877ad57d04ff78d010fc326a5e8a3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_c6206d70867b465eb9328e545f5549f4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_44d74841352947a98e96a7b3c267ea05" xml:space="preserve">
+    <value />
+  </data>
 </root>

@@ -1,0 +1,60 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "c0e48a76-28eb-4f87-a00f-998319228b46",
+  "Name": "MeetingInvitedExternallitiko",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "MeetingInvExt",
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d64d16b8-e8a3-4e1a-9533-5a4e51ae6670",
+      "Name": "Meeting",
+      "CanBeSearch": false,
+      "Code": "Meeting",
+      "EntityGuid": "b5ca5dfe-ff12-4f99-a426-1573911ab8a0",
+      "IsReferenceToRootEntity": true,
+      "IsShowedInList": false
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "de0a093b-987f-4491-9c50-0ef879350639",
+      "Name": "Person",
+      "CanBeSearch": false,
+      "Code": "Person",
+      "EntityGuid": "f5509cdc-ac0c-4507-a4d3-61d7a0a9b6f6",
+      "FlatListInStandaloneLookup": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "d64d16b8-e8a3-4e1a-9533-5a4e51ae6670"
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "5c2f108d-fb6a-411b-93b7-acccbda9b944",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "687d95fc-169b-44f0-adf3-293268fc834f",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

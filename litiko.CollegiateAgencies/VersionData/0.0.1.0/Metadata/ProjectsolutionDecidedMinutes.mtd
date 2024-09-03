@@ -1,0 +1,111 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "b28bfc74-14f6-4a88-945e-0f5324195e52",
+  "Name": "ProjectsolutionDecidedMinutes",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "Projectsolutio",
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "64fc1184-1e65-49f4-9e9b-e6f16a6463cf",
+      "Name": "Projectsolution",
+      "CanBeSearch": false,
+      "Code": "EDoc",
+      "EntityGuid": "38450693-6600-4c7b-a2a6-5ca6aa9edd21",
+      "IsReferenceToRootEntity": true,
+      "IsShowedInList": false
+    },
+    {
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "bb97eaa9-c14a-4963-9420-c77c0256d965",
+      "Name": "Number",
+      "CanBeSearch": false,
+      "Code": "Number",
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "64fc1184-1e65-49f4-9e9b-e6f16a6463cf"
+    },
+    {
+      "$type": "Sungero.Metadata.TextPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "917fc928-3a09-4bb5-b971-74bce939b01c",
+      "Name": "DecisionRU",
+      "CanBeSearch": false,
+      "Code": "DecisionRU",
+      "IsRequired": true,
+      "IsSortingAllowed": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultilineStringEditorToTextBinder",
+      "PreviousPropertyGuid": "bb97eaa9-c14a-4963-9420-c77c0256d965"
+    },
+    {
+      "$type": "Sungero.Metadata.TextPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "8e655eb9-4c8c-4b88-afe0-a8d860bb9cd0",
+      "Name": "DecisionTJ",
+      "CanBeSearch": false,
+      "Code": "DecisionTJ",
+      "IsSortingAllowed": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultilineStringEditorToTextBinder",
+      "PreviousPropertyGuid": "917fc928-3a09-4bb5-b971-74bce939b01c"
+    },
+    {
+      "$type": "Sungero.Metadata.TextPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "fac86b2e-4d31-42a1-bbe5-8c30450ef41e",
+      "Name": "DecisionEN",
+      "CanBeSearch": false,
+      "Code": "DecisionEN",
+      "IsSortingAllowed": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultilineStringEditorToTextBinder",
+      "PreviousPropertyGuid": "8e655eb9-4c8c-4b88-afe0-a8d860bb9cd0"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "ee5c545d-3683-444c-842a-3b52f04c3143",
+      "Name": "Responsible",
+      "CanBeSearch": false,
+      "Code": "Responsible",
+      "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
+      "IsSortingAllowed": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "fac86b2e-4d31-42a1-bbe5-8c30450ef41e"
+    },
+    {
+      "$type": "Sungero.Metadata.DateTimePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "a104c1bc-de15-4d23-b888-f7cba7772b17",
+      "Name": "Date",
+      "CanBeSearch": false,
+      "Code": "Date",
+      "IsSortingAllowed": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
+      "PreviousPropertyGuid": "ee5c545d-3683-444c-842a-3b52f04c3143"
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "7533d120-f1ab-427b-b507-2c1e60e9939c",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "5400138a-2076-4849-800d-f45621bbafeb",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

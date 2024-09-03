@@ -1,0 +1,64 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "24afebf4-081b-4757-ae70-097072fadace",
+  "Name": "MeetingPresentlitiko",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "MeetingPresent",
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "91208770-2f88-4608-80f1-6230e396e63b",
+      "Name": "Meeting",
+      "CanBeSearch": false,
+      "Code": "Meeting",
+      "EntityGuid": "b5ca5dfe-ff12-4f99-a426-1573911ab8a0",
+      "IsReferenceToRootEntity": true,
+      "IsShowedInList": false
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "c73d540a-3c67-4218-b557-a26f8411b786",
+      "Name": "Employee",
+      "CanBeSearch": false,
+      "Code": "Employee",
+      "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
+      "HandledEvents": [
+        "LookupServer",
+        "ChangedShared"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "NeedPassEntityToLookupEvent": true,
+      "PreviousPropertyGuid": "91208770-2f88-4608-80f1-6230e396e63b"
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "43be11a7-c186-41e3-a9af-3240ff237c59",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "ccfea955-30cf-47f5-9f02-b8aa31a135de",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

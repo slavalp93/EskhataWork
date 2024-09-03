@@ -1,0 +1,76 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "2b1feb20-ac60-46de-a63c-67309e3a6e70",
+  "Name": "ApprovalRole",
+  "BaseGuid": "3445f357-1435-4444-9f24-a56a752fc471",
+  "CanBeNavigationPropertyType": true,
+  "CreationAreaMetadata": {
+    "NameGuid": "f7766750-eee2-4fcd-8003-5c06a90d1f44",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "ExtraSearchProperties": [],
+  "FilterPanel": {
+    "NameGuid": "b0125fbd-3b91-4dbb-914a-689276216404",
+    "Name": "FilterPanel",
+    "Controls": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "IconResourcesKeys": [],
+  "IntegrationServiceName": "CollegiateAgenciesApprovalRole",
+  "OperationsClass": "",
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "644bffad-c8fe-4ef4-90fc-15bc9176a728",
+      "Name": "Type",
+      "DirectValues": [
+        {
+          "NameGuid": "2a4454ab-bb13-42b0-8c0b-a09e92c60922",
+          "Name": "Speaker",
+          "Code": "Speaker"
+        },
+        {
+          "NameGuid": "f6475c2d-6734-4cf6-90eb-eac64bd2d928",
+          "Name": "SecretaryByCat",
+          "Code": "SecretaryByCat"
+        }
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "Values"
+      ],
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "25e383d1-5063-49f9-9aa9-808209a0f4e3",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "d08b9241-8572-46eb-9407-827744f9fbe9",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

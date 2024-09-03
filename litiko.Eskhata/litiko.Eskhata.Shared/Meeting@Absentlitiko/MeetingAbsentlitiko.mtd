@@ -1,0 +1,72 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "8db8dd7f-7826-4202-9b55-d78cfc572f88",
+  "Name": "MeetingAbsentlitiko",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "MeetingAbsentl",
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d521e940-9f06-41ba-b49b-54deab5245c4",
+      "Name": "Meeting",
+      "CanBeSearch": false,
+      "Code": "Meeting",
+      "EntityGuid": "b5ca5dfe-ff12-4f99-a426-1573911ab8a0",
+      "IsReferenceToRootEntity": true,
+      "IsShowedInList": false
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "55582daa-9118-4c9a-b680-2abb316bb6a0",
+      "Name": "Employee",
+      "CanBeSearch": false,
+      "Code": "Employee",
+      "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "d521e940-9f06-41ba-b49b-54deab5245c4"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "08beb413-169c-4bc9-893a-8e5d3cb9aa62",
+      "Name": "Reason",
+      "CanBeSearch": false,
+      "Code": "Reason",
+      "IsSortingAllowed": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "55582daa-9118-4c9a-b680-2abb316bb6a0"
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "7e77ec79-d986-4341-9cfc-edfa180fb0b2",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "a249e2b1-67b1-41f7-b751-7020f9ab7ed4",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

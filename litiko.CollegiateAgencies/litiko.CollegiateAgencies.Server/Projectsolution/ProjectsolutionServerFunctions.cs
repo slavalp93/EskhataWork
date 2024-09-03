@@ -1,0 +1,80 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using Sungero.Core;
+using Sungero.CoreEntities;
+using litiko.CollegiateAgencies.Projectsolution;
+
+namespace litiko.CollegiateAgencies.Server
+{
+  partial class ProjectsolutionFunctions
+  {
+    /// <summary>
+    /// Создать проект решения.
+    /// </summary>
+    /// <returns>Проект решения.</returns>
+    [Remote, Public]
+    public static IProjectsolution CreateProjectsolution()
+    {
+      return Projectsolutions.Create();
+    }
+    
+    /// <summary>
+    /// Создать пояснительную записку.
+    /// </summary>
+    /// <returns>Пояснительная записка.</returns>
+    [Remote, Public]
+    public static Sungero.Docflow.IAddendum CreateExplanatoryNote()
+    {
+      var docKind = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(litiko.CollegiateAgencies.PublicConstants.Module.DocumentKindGuids.ExplanatoryNote);
+      if (docKind == null)
+        return null;
+      
+      var newDoc = Sungero.Docflow.Addendums.Create();
+      newDoc.DocumentKind = docKind;
+      return newDoc;
+    }    
+    
+    /// <summary>
+    /// Пункты решения (RU).
+    /// </summary>
+    /// <param name="projectSolution">Проект решения.</param>
+    /// <returns>Значение табличного реквизита Постановили карточки Проекта решения.</returns>
+    [Converter("GetProjectSolutionDecidedRU")]
+    public static string GetProjectSolutionDecidedRU(IProjectsolution projectSolution)
+    {
+      if (!projectSolution.Decided.Any())
+        return null;      
+      
+      return string.Join(Environment.NewLine, projectSolution.Decided.Select(element => $"{element.Number}. {element.DecisionRU}"));
+    } 
+
+    /// <summary>
+    /// Пункты решения (TJ).
+    /// </summary>
+    /// <param name="projectSolution">Проект решения.</param>
+    /// <returns>Значение табличного реквизита Постановили карточки Проекта решения.</returns>
+    [Converter("GetProjectSolutionDecidedTJ")]
+    public static string GetProjectSolutionDecidedTJ(IProjectsolution projectSolution)
+    {
+      if (!projectSolution.Decided.Any())
+        return null;      
+      
+      return string.Join(Environment.NewLine, projectSolution.Decided.Select(element => $"{element.Number}. {element.DecisionTJ}"));
+    }  
+
+    /// <summary>
+    /// Пункты решения (EN).
+    /// </summary>
+    /// <param name="projectSolution">Проект решения.</param>
+    /// <returns>Значение табличного реквизита Постановили карточки Проекта решения.</returns>
+    [Converter("GetProjectSolutionDecidedEN")]
+    public static string GetProjectSolutionDecidedEN(IProjectsolution projectSolution)
+    {
+      if (!projectSolution.Decided.Any())
+        return null;      
+      
+      return string.Join(Environment.NewLine, projectSolution.Decided.Select(element => $"{element.Number}. {element.DecisionEN}"));
+    }    
+  }
+}

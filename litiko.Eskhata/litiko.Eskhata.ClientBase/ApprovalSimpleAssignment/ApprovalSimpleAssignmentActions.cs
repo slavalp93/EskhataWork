@@ -21,7 +21,7 @@ namespace litiko.Eskhata.Client
           e.AddError(litiko.Archive.Resources.DocumentsAreNotTransferedToArchive);
           return;
         } 
-      }      
+      }                  
     }
 
     public override bool CanComplete(Sungero.Workflow.Client.CanExecuteResultActionArgs e)

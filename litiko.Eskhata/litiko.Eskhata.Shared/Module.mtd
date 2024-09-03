@@ -172,12 +172,8 @@
       "PreviousItemId": "47ccb9ae-3d4f-41e4-b2f1-47d74051507d"
     },
     {
-      "ItemId": "1bc72831-b65e-4e1b-b722-011f844115bb",
-      "PreviousItemId": "b2b15ed6-6181-4542-8dbe-9121a96f53e4"
-    },
-    {
       "ItemId": "4483e20d-4fa7-43bf-933e-96e6d8cf16ac",
-      "PreviousItemId": "1bc72831-b65e-4e1b-b722-011f844115bb"
+      "PreviousItemId": "b2b15ed6-6181-4542-8dbe-9121a96f53e4"
     },
     {
       "ItemId": "8ebcfe71-a3cf-4fc6-b68a-534b7723d545",
@@ -230,6 +226,14 @@
     {
       "ItemId": "8254c2e0-3b83-46b1-8e58-30fe89e874ce",
       "PreviousItemId": "f40e0fe2-2118-4a36-a1b5-221c62c0cfbc"
+    },
+    {
+      "ItemId": "b5ca5dfe-ff12-4f99-a426-1573911ab8a0",
+      "PreviousItemId": "8254c2e0-3b83-46b1-8e58-30fe89e874ce"
+    },
+    {
+      "ItemId": "1bc72831-b65e-4e1b-b722-011f844115bb",
+      "PreviousItemId": "b5ca5dfe-ff12-4f99-a426-1573911ab8a0"
     }
   ],
   "IconResourcesKeys": [],
@@ -271,7 +275,7 @@
   "SharedAssemblyName": "litiko.Eskhata.Shared",
   "SharedNamespace": "litiko.Eskhata.Shared",
   "SpecialFolders": [],
-  "Version": "4.8.138.35",
+  "Version": "4.8.138.36",
   "Widgets": [],
   "Versions": [
     {

@@ -1,0 +1,59 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "0f3b0869-7099-4466-8a10-01ebff4422ce",
+  "Name": "ProjectsolutionInvitedEmployees",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "InvitedEmpl",
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d6ea1e45-34aa-42b6-b2ec-07a71e438801",
+      "Name": "Projectsolution",
+      "CanBeSearch": false,
+      "Code": "EDoc",
+      "EntityGuid": "38450693-6600-4c7b-a2a6-5ca6aa9edd21",
+      "IsReferenceToRootEntity": true,
+      "IsShowedInList": false
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "5bc984b1-244b-436b-9641-270da08a2732",
+      "Name": "Employee",
+      "CanBeSearch": false,
+      "Code": "Employee",
+      "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "d6ea1e45-34aa-42b6-b2ec-07a71e438801"
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "7adecd01-4ff3-4b4f-8f75-1e0f63a7d125",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "ca3273a0-7089-4347-89cc-7b9785e5e603",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

@@ -34,6 +34,9 @@
     "IsAncestorMetadata": true,
     "Versions": []
   },
+  "HandledEvents": [
+    "BeforeCompleteServer"
+  ],
   "IconResourcesKeys": [],
   "IsVisibleThreadText": true,
   "LayeredFromGuid": "b0931934-7981-4139-a398-f0e39abbb981",
