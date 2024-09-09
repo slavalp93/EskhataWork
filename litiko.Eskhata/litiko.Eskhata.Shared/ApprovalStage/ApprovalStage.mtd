@@ -189,6 +189,32 @@
       "PreviousPropertyGuid": "739e17c1-55ee-4319-a42c-12a0817daa24"
     }
   ],
+  "PublicFunctions": [
+    {
+      "Name": "GetStageRecipients",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "approvalStage",
+          "ParameterType": "global::litiko.Eskhata.IApprovalStage",
+          "ParameterTypeFullName": "litiko.Eskhata.IApprovalStage, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "task",
+          "ParameterType": "global::Sungero.Docflow.IApprovalTask",
+          "ParameterTypeFullName": "Sungero.Docflow.IApprovalTask, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "additionalApprovers",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.CoreEntities.IRecipient>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.CoreEntities.IRecipient>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    }
+  ],
   "PublicStructures": [],
   "ResourcesKeys": [],
   "RibbonCardMetadata": {

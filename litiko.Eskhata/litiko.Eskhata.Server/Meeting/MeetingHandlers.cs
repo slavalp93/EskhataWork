@@ -7,20 +7,59 @@ using litiko.Eskhata.Meeting;
 
 namespace litiko.Eskhata
 {
+  partial class MeetingAbsentlitikoEmployeePropertyFilteringServerHandler<T>
+  {
+
+    public virtual IQueryable<T> AbsentlitikoEmployeeFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e)
+    {
+      var aviabledMemberIDs = _root.Members.Where(x => x.Member != null).Select(m => m.Member.Id).ToList();
+      if (_root.Secretary != null && !aviabledMemberIDs.Contains(_root.Secretary.Id))
+        aviabledMemberIDs.Add(_root.Secretary.Id);
+      if (_root.President != null && !aviabledMemberIDs.Contains(_root.President.Id))
+        aviabledMemberIDs.Add(_root.President.Id);
+
+      //aviabledMemberIDs = aviabledMemberIDs.Union(_root.InvitedEmployeeslitiko.Where(x => x.Employee != null).Select(m => m.Employee.Id)).ToList();
+      foreach (var element in _root.InvitedEmployeeslitiko.Where(x => x.Employee != null))
+      {
+        if (!aviabledMemberIDs.Contains(element.Employee.Id))
+          aviabledMemberIDs.Add(element.Employee.Id);
+      }
+        
+      query = query.Where(x => aviabledMemberIDs.Contains(x.Id));      
+      return query;
+    }
+  }
+
+  partial class MeetingMembersMemberPropertyFilteringServerHandler<T>
+  {
+
+    public override IQueryable<T> MembersMemberFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e)
+    {
+      query = base.MembersMemberFiltering(query, e);
+      query = query.Where(x => Sungero.Company.Employees.Is(x));
+      return query;
+    }
+  }
+
   partial class MeetingPresentlitikoEmployeePropertyFilteringServerHandler<T>
   {
 
     public virtual IQueryable<T> PresentlitikoEmployeeFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e)
     {      
+      var aviabledMemberIDs = _root.Members.Where(x => x.Member != null).Select(m => m.Member.Id).ToList();
+      if (_root.Secretary != null && !aviabledMemberIDs.Contains(_root.Secretary.Id))
+        aviabledMemberIDs.Add(_root.Secretary.Id);
+      if (_root.President != null && !aviabledMemberIDs.Contains(_root.President.Id))
+        aviabledMemberIDs.Add(_root.President.Id);
 
-      /*
-      var meeting = _obj.Meeting;
-      if (meeting != null && meeting.MeetingCategorylitiko != null)
+      //aviabledMemberIDs = aviabledMemberIDs.Union(_root.InvitedEmployeeslitiko.Where(x => x.Employee != null).Select(m => m.Employee.Id)).ToList();
+      foreach (var element in _root.InvitedEmployeeslitiko.Where(x => x.Employee != null))
       {
-        var aviabledMemberIDs = meeting.MeetingCategorylitiko.Members.Where(x => x.Member != null).Select(m => m.Member.Id).ToList();
-        query = query.Where(x => aviabledMemberIDs.Contains(x.Id));
-      }        
-      */
+        if (!aviabledMemberIDs.Contains(element.Employee.Id))
+          aviabledMemberIDs.Add(element.Employee.Id);
+      }
+        
+      query = query.Where(x => aviabledMemberIDs.Contains(x.Id));      
       return query;
     }
   }

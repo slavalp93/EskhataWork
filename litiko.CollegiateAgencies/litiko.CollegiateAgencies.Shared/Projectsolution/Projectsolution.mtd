@@ -31,6 +31,7 @@
   ],
   "BaseGuid": "ce3e34ed-7be2-4426-a951-d5a70f966650",
   "CanBeNavigationPropertyType": true,
+  "CanBeSearch": true,
   "ConverterFunctions": [
     {
       "Name": "GetProjectSolutionDecidedEN",
@@ -660,7 +661,8 @@
   "OpenCardByDefaultInCollection": true,
   "OperationsClass": "",
   "Overridden": [
-    "IsVisible"
+    "IsVisible",
+    "CanBeSearch"
   ],
   "Properties": [
     {
@@ -930,6 +932,18 @@
       "Placement": "Shared",
       "ReturnType": "global::litiko.CollegiateAgencies.IProjectsolution",
       "ReturnTypeFullName": "litiko.CollegiateAgencies.IProjectsolution, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetProjectSolutionAddendumSubjects",
+      "Parameters": [
+        {
+          "Name": "docId",
+          "ParameterType": "global::System.Int64",
+          "ParameterTypeFullName": "System.Int64"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
     }
   ],
   "PublicStructures": [],

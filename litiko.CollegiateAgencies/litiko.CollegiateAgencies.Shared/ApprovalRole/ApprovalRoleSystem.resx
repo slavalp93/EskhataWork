@@ -64,4 +64,13 @@
   <data name="Enum_Type_SecretaryByCat" xml:space="preserve">
     <value>Secretary by meeting category</value>
   </data>
+  <data name="Enum_Type_PresidentByCat" xml:space="preserve">
+    <value>President by meeting category</value>
+  </data>
+  <data name="Enum_Type_MeetingMembers" xml:space="preserve">
+    <value>Meeting members</value>
+  </data>
+  <data name="Enum_Type_MeetingInvited" xml:space="preserve">
+    <value>Invited employees</value>
+  </data>
 </root>

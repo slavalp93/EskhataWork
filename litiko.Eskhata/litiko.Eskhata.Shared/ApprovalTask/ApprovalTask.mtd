@@ -41,7 +41,7 @@
       "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
       "NameGuid": "3364c324-c4c4-4ccb-a81c-53653255a022",
       "Name": "Observers",
-      "EntityGuid": "4ed77bdb-40c9-4760-8dc8-1f6c1016717d",
+      "EntityGuid": "aa3192f5-dc98-4983-a447-2d49ac187487",
       "IsAncestorMetadata": true,
       "Overridden": [
         "EntityGuid"
@@ -52,7 +52,7 @@
       "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
       "NameGuid": "0df00f0c-6170-4c95-8238-70588a994c81",
       "Name": "ReqApprovers",
-      "EntityGuid": "07287f71-2b8f-4ae7-b65c-fd4e6de097c7",
+      "EntityGuid": "e90bde48-e821-4ef3-ae4b-124180d9e1a2",
       "IsAncestorMetadata": true,
       "Overridden": [
         "EntityGuid"
@@ -63,7 +63,7 @@
       "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
       "NameGuid": "0bdd8dc0-49c5-46da-80c2-9cf9a1f79718",
       "Name": "AddApprovers",
-      "EntityGuid": "2857a00e-071c-4544-9817-8fc578345a61",
+      "EntityGuid": "6bc2cd93-97ed-49b5-bc90-06338a1b75d2",
       "IsAncestorMetadata": true,
       "Overridden": [
         "EntityGuid"
@@ -74,7 +74,7 @@
       "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
       "NameGuid": "cc8ea2b2-8042-468a-882a-c5e91038d213",
       "Name": "AddApproversExpanded",
-      "EntityGuid": "fa07a856-e949-4e6d-a46e-b5d33b370f0c",
+      "EntityGuid": "462cf763-bcc3-49f2-8018-94adb8c1fe39",
       "IsAncestorMetadata": true,
       "Overridden": [
         "EntityGuid"
@@ -85,7 +85,7 @@
       "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
       "NameGuid": "cb876dee-5969-4f02-8dd1-aa6fefcfb357",
       "Name": "RevokedDocumentsRights",
-      "EntityGuid": "69790742-277c-4dae-ac4b-8d0d0787c17a",
+      "EntityGuid": "bc56a9af-96cc-4a4d-b6be-003c5d08058b",
       "IsAncestorMetadata": true,
       "Overridden": [
         "EntityGuid"
@@ -95,7 +95,7 @@
       "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
       "NameGuid": "cee65d00-bbf9-4594-a4dd-3b78e7762556",
       "Name": "Addressees",
-      "EntityGuid": "29219184-0544-4f60-a751-8b45212f0850",
+      "EntityGuid": "c35e371b-9ed0-4ce4-9b44-033042772481",
       "IsAncestorMetadata": true,
       "Overridden": [
         "EntityGuid"
@@ -105,7 +105,7 @@
       "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
       "NameGuid": "e20790fb-47f7-4ed9-81b4-5a8868e98f48",
       "Name": "AddedAddenda",
-      "EntityGuid": "04b4e252-9937-407a-bbb0-78db8a0198a5",
+      "EntityGuid": "f22d82d9-a814-4f2a-9eb4-f1ac25e95dc9",
       "IsAncestorMetadata": true,
       "Overridden": [
         "EntityGuid"
@@ -115,7 +115,7 @@
       "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
       "NameGuid": "cf4b7cca-a1d3-42ba-a620-ae8577333b8e",
       "Name": "RemovedAddenda",
-      "EntityGuid": "3089d124-57a6-40fe-9f56-7fd832fb14a1",
+      "EntityGuid": "96e3670a-22ae-43f4-91ce-0286aa0c0022",
       "IsAncestorMetadata": true,
       "Overridden": [
         "EntityGuid"
@@ -125,7 +125,7 @@
   "PublicStructures": [],
   "ResourcesKeys": [],
   "RibbonCardMetadata": {
-    "NameGuid": "21937a0d-b8ff-4c52-8d37-92ef559f6ea3",
+    "NameGuid": "bda13184-89a1-446b-ab10-e09f33c27c04",
     "Name": "RibbonCard",
     "Categories": [],
     "Elements": [],
@@ -135,7 +135,7 @@
     "RibbonKind": "Card"
   },
   "RibbonCollectionMetadata": {
-    "NameGuid": "94bed3d8-e95f-4b79-875d-2aae44f1e80c",
+    "NameGuid": "b492ed19-c3cd-4055-813e-ef6b97c3f0ff",
     "Name": "RibbonCollection",
     "Categories": [],
     "Elements": [],

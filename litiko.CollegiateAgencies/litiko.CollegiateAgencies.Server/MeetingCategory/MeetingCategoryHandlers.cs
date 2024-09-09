@@ -7,4 +7,14 @@ using litiko.CollegiateAgencies.MeetingCategory;
 
 namespace litiko.CollegiateAgencies
 {
+  partial class MeetingCategoryServerHandlers
+  {
+
+    public override void Saving(Sungero.Domain.SavingEventArgs e)
+    {
+      Functions.MeetingCategory.SynchronizeSecretaryInRole(_obj);
+      Functions.MeetingCategory.SynchronizePresidentInRole(_obj);
+    }
+  }
+
 }

@@ -91,4 +91,16 @@
   <data name="ExplanatoryNoteKind" xml:space="preserve">
     <value>Пояснительная записка</value>
   </data>
+  <data name="RoleSecretaries" xml:space="preserve">
+    <value>Секретари КОУ</value>
+  </data>
+  <data name="DescriptionRoleSecreteries" xml:space="preserve">
+    <value>Секретари, указанные в категории заседаний</value>
+  </data>
+  <data name="RolePresidents" xml:space="preserve">
+    <value>Председатели КОУ</value>
+  </data>
+  <data name="DescriptionRolePresidents" xml:space="preserve">
+    <value>Председатели, указанные в категории заседаний</value>
+  </data>
 </root>

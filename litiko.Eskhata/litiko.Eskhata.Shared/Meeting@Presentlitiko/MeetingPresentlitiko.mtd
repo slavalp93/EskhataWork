@@ -32,6 +32,7 @@
       ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "NeedPassEntityToLookupEvent": true,
+      "OnlyRootEntityUsedInChildLookupEvent": true,
       "PreviousPropertyGuid": "91208770-2f88-4608-80f1-6230e396e63b"
     }
   ],

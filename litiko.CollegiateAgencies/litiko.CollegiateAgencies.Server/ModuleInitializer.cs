@@ -14,10 +14,14 @@ namespace litiko.CollegiateAgencies.Server
     {
       CreateDocumentTypes();
       CreateDocumentKinds();
+      CreateRoles();
       GrantRightsOnEntities();
       
       CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.Speaker, "Докладчик");
       CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.SecretaryByCat, "Секретарь по категории заседания");
+      CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.PresidentByCat, "Председатель по категории заседания");
+      CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.MeetingMembers, "Участники заседания");
+      CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.MeetingInvited, "Приглашенные сотрудники");
     }
     
     /// <summary>
@@ -133,6 +137,17 @@ namespace litiko.CollegiateAgencies.Server
         InitializationLogger.DebugFormat("Создана/обновлена роль {0}", description);        
       }
 
-    }       
+    }
+    
+    /// <summary>
+    /// Создать предопределенные роли.
+    /// </summary>
+    public static void CreateRoles()
+    {
+      InitializationLogger.Debug("Init: Create Default Roles");
+            
+      Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(Resources.RoleSecretaries, Resources.DescriptionRoleSecreteries, Constants.Module.RoleGuid.Secretaries);
+      Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(Resources.RolePresidents, Resources.DescriptionRolePresidents, Constants.Module.RoleGuid.Presidents);
+    }
   }
 }

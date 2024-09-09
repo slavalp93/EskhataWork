@@ -76,10 +76,10 @@
   <data name="CoverDescription_BringQuestion" xml:space="preserve">
     <value>Создание проекта решения</value>
   </data>
-  <data name="CoverAction_SolutionProjects" xml:space="preserve">
+  <data name="CoverAction_ProjectSolutions" xml:space="preserve">
     <value>Проекты решений</value>
   </data>
-  <data name="CoverDescription_SolutionProjects" xml:space="preserve">
+  <data name="CoverDescription_ProjectSolutions" xml:space="preserve">
     <value>Список проектов решений</value>
   </data>
   <data name="CoverAction_Extracts" xml:space="preserve">

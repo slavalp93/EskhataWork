@@ -1,6 +1,6 @@
 {
   "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
-  "NameGuid": "2857a00e-071c-4544-9817-8fc578345a61",
+  "NameGuid": "6bc2cd93-97ed-49b5-bc90-06338a1b75d2",
   "Name": "ApprovalTaskAddApprovers",
   "AccessRightsMode": "NoRight",
   "BaseGuid": "1b265c59-bc04-4bc0-b3d1-fd7ee58db393",

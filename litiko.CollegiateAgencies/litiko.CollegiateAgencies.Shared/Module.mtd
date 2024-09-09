@@ -51,10 +51,10 @@
         "PreviousItemGuid": "8d63c299-36f9-4ebb-949c-54ab7caa968b"
       },
       {
-        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
         "NameGuid": "8d63c299-36f9-4ebb-949c-54ab7caa968b",
-        "Name": "SolutionProjects",
-        "FunctionName": "SolutionProjects",
+        "Name": "ProjectSolutions",
+        "EntityTypeId": "38450693-6600-4c7b-a2a6-5ca6aa9edd21",
         "GroupId": "b694281e-a1e3-43d0-8edb-f542ce7f1f23",
         "PreviousItemGuid": "06cbec7c-9754-4ffc-a946-3423f3c6ee32"
       }
@@ -147,6 +147,15 @@
       "Value": "new System.Guid(\"58b9ed35-9c84-46cd-aa79-9b5ef5a82f5d\")"
     },
     {
+      "Name": "Agenda",
+      "ParentClasses": [
+        "Module",
+        "DocumentTypeGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"5261da93-7879-4210-b3db-c92fa894ab4d\")"
+    },
+    {
       "Name": "ExplanatoryNote",
       "ParentClasses": [
         "Module",
@@ -154,6 +163,24 @@
       ],
       "TypeName": "System.Guid",
       "Value": "new System.Guid(\"83c31ba0-0c56-4738-8450-a2a401bc9a2e\")"
+    },
+    {
+      "Name": "Minutes",
+      "ParentClasses": [
+        "Module",
+        "DocumentTypeGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"bb4780ff-b2c3-4044-a390-e9e110791bf6\")"
+    },
+    {
+      "Name": "Presidents",
+      "ParentClasses": [
+        "Module",
+        "RoleGuid"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"b576b6af-c159-416d-bb37-bc8bfed3210b\")"
     },
     {
       "Name": "ProjectSolution",
@@ -172,6 +199,15 @@
       ],
       "TypeName": "System.Guid",
       "Value": "new System.Guid(\"1e104576-8dd4-45be-ad53-e0c7ccabd9f0\")"
+    },
+    {
+      "Name": "Secretaries",
+      "ParentClasses": [
+        "Module",
+        "RoleGuid"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"56618558-3348-4293-9f89-69907ece3fc9\")"
     }
   ],
   "PublicStructures": [],
@@ -188,14 +224,18 @@
     "AlreadyIncludedMessage",
     "ScheduledMeetings",
     "NoRightsToChangeMeeting",
-    "ExplanatoryNoteKind"
+    "ExplanatoryNoteKind",
+    "RoleSecretaries",
+    "DescriptionRoleSecreteries",
+    "RolePresidents",
+    "DescriptionRolePresidents"
   ],
   "ServerAssemblyName": "litiko.CollegiateAgencies.Server",
   "ServerNamespace": "litiko.CollegiateAgencies.Server",
   "SharedAssemblyName": "litiko.CollegiateAgencies.Shared",
   "SharedNamespace": "litiko.CollegiateAgencies.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.1",
+  "Version": "0.0.1.2",
   "Widgets": [],
   "Versions": [
     {

@@ -18,6 +18,9 @@ namespace litiko.Eskhata
       _obj.State.Properties.Votinglitiko.IsRequired = true;
       _obj.State.Properties.Members.IsRequired = true;
       
+      _obj.State.Properties.Secretary.IsEnabled = _obj.MeetingCategorylitiko != null ? true : false;
+      _obj.State.Properties.President.IsEnabled = _obj.MeetingCategorylitiko != null ? true : false;
+      _obj.State.Properties.Members.IsEnabled = _obj.MeetingCategorylitiko != null ? true : false;
       _obj.State.Properties.Presentlitiko.IsEnabled = _obj.MeetingCategorylitiko != null ? true : false;
     }
 

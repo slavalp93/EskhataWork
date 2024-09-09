@@ -27,9 +27,12 @@
       "Code": "Employee",
       "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
       "HandledEvents": [
-        "ChangedShared"
+        "ChangedShared",
+        "LookupServer"
       ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "NeedPassEntityToLookupEvent": true,
+      "OnlyRootEntityUsedInChildLookupEvent": true,
       "PreviousPropertyGuid": "d521e940-9f06-41ba-b49b-54deab5245c4"
     },
     {

@@ -597,6 +597,31 @@
       "PreviousPropertyGuid": "5216a2ee-424e-490e-9570-bcc8aac8f118"
     }
   ],
+  "PublicFunctions": [
+    {
+      "Name": "GetMeetingCategoryMembers",
+      "Parameters": [
+        {
+          "Name": "meeting",
+          "ParameterType": "global::litiko.Eskhata.IMeeting",
+          "ParameterTypeFullName": "litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "onlyMembers",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        },
+        {
+          "Name": "withJobTitle",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    }
+  ],
   "PublicStructures": [],
   "ResourcesKeys": [],
   "RibbonCardMetadata": {

@@ -13,8 +13,15 @@ namespace litiko.CollegiateAgencies.Constants
 
       /// <summary> Приложение к документу </summary>
       [Sungero.Core.Public]
-      public static readonly Guid Addendum = Guid.Parse("58b9ed35-9c84-46cd-aa79-9b5ef5a82f5d");                         
+      public static readonly Guid Addendum = Guid.Parse("58b9ed35-9c84-46cd-aa79-9b5ef5a82f5d");
       
+      /// <summary> Повестка совещания </summary>
+      [Sungero.Core.Public]
+      public static readonly Guid Agenda = Guid.Parse("5261da93-7879-4210-b3db-c92fa894ab4d");      
+
+      /// <summary> Протокол совещания </summary>
+      [Sungero.Core.Public]
+      public static readonly Guid Minutes = Guid.Parse("bb4780ff-b2c3-4044-a390-e9e110791bf6");     
     }
     
     public static class DocumentKindGuids
@@ -28,6 +35,17 @@ namespace litiko.CollegiateAgencies.Constants
       public static readonly Guid ExplanatoryNote = Guid.Parse("83c31ba0-0c56-4738-8450-a2a401bc9a2e");      
      
       
+    }
+    
+    public static class RoleGuid
+    {
+      /// <summary> Секретари КОУ </summary>
+      [Sungero.Core.Public]
+      public static readonly Guid Secretaries = Guid.Parse("56618558-3348-4293-9f89-69907ece3fc9");
+      
+      /// <summary> Председатели КОУ </summary>
+      [Sungero.Core.Public]
+      public static readonly Guid Presidents = Guid.Parse("b576b6af-c159-416d-bb37-bc8bfed3210b");      
     }
   }
 }

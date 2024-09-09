@@ -75,6 +75,21 @@ namespace litiko.CollegiateAgencies.Server
         return null;      
       
       return string.Join(Environment.NewLine, projectSolution.Decided.Select(element => $"{element.Number}. {element.DecisionEN}"));
+    }
+
+    /// <summary>
+    /// Получить наименования приложений к проекту решения.
+    /// </summary>
+    /// <param name="docId">ИД проекта решения.</param>
+    /// <returns>Наименования приложений.</returns>
+    [Public]
+    public static string GetProjectSolutionAddendumSubjects(long docId)
+    {
+      var document = Projectsolutions.GetAll().Where(x => x.Id == docId).FirstOrDefault();
+      if (document == null)
+        return null;
+      
+      return string.Join(Environment.NewLine, document.Relations.GetRelated().Select(d => Sungero.Docflow.OfficialDocuments.As(d).Subject));
     }    
   }
 }

@@ -201,6 +201,9 @@
       ]
     }
   ],
+  "HandledEvents": [
+    "SavingServer"
+  ],
   "IconResourcesKeys": [],
   "IntegrationServiceName": "CollegiateAgenciesMeetingCategory",
   "OperationsClass": "",

@@ -37,6 +37,21 @@
           "NameGuid": "f6475c2d-6734-4cf6-90eb-eac64bd2d928",
           "Name": "SecretaryByCat",
           "Code": "SecretaryByCat"
+        },
+        {
+          "NameGuid": "de72d44e-b0b9-4d24-b953-a15784e90dbc",
+          "Name": "PresidentByCat",
+          "Code": "PresidentByCat"
+        },
+        {
+          "NameGuid": "3c1b6c0b-186e-4a96-bcfc-444f9577967b",
+          "Name": "MeetingMembers",
+          "Code": "MeetingMembers"
+        },
+        {
+          "NameGuid": "a7451575-23fa-4b5d-bb7d-0ad5434eef2d",
+          "Name": "MeetingInvited",
+          "Code": "MeetingInvited"
         }
       ],
       "IsAncestorMetadata": true,
@@ -44,6 +59,27 @@
         "Values"
       ],
       "Versions": []
+    }
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "GetRolePerformers",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "approvalRole",
+          "ParameterType": "global::litiko.CollegiateAgencies.IApprovalRole",
+          "ParameterTypeFullName": "litiko.CollegiateAgencies.IApprovalRole, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "task",
+          "ParameterType": "global::Sungero.Docflow.IApprovalTask",
+          "ParameterTypeFullName": "Sungero.Docflow.IApprovalTask, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.Company.IEmployee>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
     }
   ],
   "PublicStructures": [],

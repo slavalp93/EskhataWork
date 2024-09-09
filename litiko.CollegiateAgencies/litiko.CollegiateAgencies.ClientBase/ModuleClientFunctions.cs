@@ -8,23 +8,6 @@ namespace litiko.CollegiateAgencies.Client
 {
   public class ModuleFunctions
   {
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public virtual void MeetingMethods()
-    {
-      Dialogs.ShowMessage("В разработке");
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public virtual void MeetingCategories()
-    {
-      Dialogs.ShowMessage("В разработке");
-    }
-
     /// <summary>
     /// 
     /// </summary>
@@ -37,14 +20,6 @@ namespace litiko.CollegiateAgencies.Client
     /// 
     /// </summary>
     public virtual void Extracts()
-    {
-      Dialogs.ShowMessage("В разработке");
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public virtual void SolutionProjects()
     {
       Dialogs.ShowMessage("В разработке");
     }

@@ -91,4 +91,16 @@
   <data name="ExplanatoryNoteKind" xml:space="preserve">
     <value>Explanatory note</value>
   </data>
+  <data name="RoleSecretaries" xml:space="preserve">
+    <value>Secretaries</value>
+  </data>
+  <data name="DescriptionRoleSecreteries" xml:space="preserve">
+    <value>Secretaries listed in the meetings category</value>
+  </data>
+  <data name="RolePresidents" xml:space="preserve">
+    <value>Presidents</value>
+  </data>
+  <data name="DescriptionRolePresidents" xml:space="preserve">
+    <value>Presidents listed in the meetings category</value>
+  </data>
 </root>

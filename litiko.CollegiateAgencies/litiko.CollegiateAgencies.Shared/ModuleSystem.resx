@@ -79,11 +79,11 @@
   <data name="CoverDescription_BringQuestion" xml:space="preserve">
     <value>Create a solution project</value>
   </data>
-  <data name="CoverAction_SolutionProjects" xml:space="preserve">
-    <value>Solution projects</value>
+  <data name="CoverAction_ProjectSolutions" xml:space="preserve">
+    <value>Project solutions</value>
   </data>
-  <data name="CoverDescription_SolutionProjects" xml:space="preserve">
-    <value>List of solution projects</value>
+  <data name="CoverDescription_ProjectSolutions" xml:space="preserve">
+    <value>List of project solutions</value>
   </data>
   <data name="CoverAction_Extracts" xml:space="preserve">
     <value>Extracts from the protocols</value>
