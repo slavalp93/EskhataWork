@@ -10,8 +10,7 @@ namespace litiko.Eskhata
   {
 
     public override void BeforeExecute(Sungero.Reporting.Server.BeforeExecuteEventArgs e)
-    {
-      //AgendaTemplate.MeetingMembers = Sungero.Meetings.PublicFunctions.Meeting.Remote.GetMeetingMembersString(AgendaTemplate.Entity.Meeting, true, false);      
+    {      
       AgendaTemplate.MeetingMembers = litiko.Eskhata.PublicFunctions.Meeting.GetMeetingCategoryMembers(litiko.Eskhata.Meetings.As(AgendaTemplate.Entity.Meeting), false, false);
     }
 

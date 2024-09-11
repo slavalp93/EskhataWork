@@ -17,7 +17,8 @@ namespace litiko.Eskhata.Client
         e.AddInformation(litiko.Eskhata.Resources.VersionCreatedSuccessfully);
       }
       catch (Exception ex)
-      {        
+      {
+        e.AddError(ex.Message);
         throw;
       }      
     }

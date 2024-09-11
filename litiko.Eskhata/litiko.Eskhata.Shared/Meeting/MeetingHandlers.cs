@@ -12,7 +12,7 @@ namespace litiko.Eskhata
 
     public virtual void MeetingCategorylitikoChanged(litiko.Eskhata.Shared.MeetingMeetingCategorylitikoChangedEventArgs e)
     {
-var selectedCategory = e.NewValue;
+      var selectedCategory = e.NewValue;
       if (selectedCategory != null && !Equals(selectedCategory, e.OldValue))
       {
         if (selectedCategory.Members.Any())
@@ -42,30 +42,6 @@ var selectedCategory = e.NewValue;
 
         Functions.Meeting.SetQuorum(_obj, selectedCategory);
       }      
-    }
-  }
-
-  partial class MeetingProjectSolutionslitikoSharedHandlers
-  {
-
-    public virtual void ProjectSolutionslitikoProjectSolutionChanged(litiko.Eskhata.Shared.MeetingProjectSolutionslitikoProjectSolutionChangedEventArgs e)
-    {
-      var projectSolution = e.NewValue;
-      if (projectSolution != null)
-      {
-        _obj.Yes = projectSolution.Voting.Count(x => x.Yes.Value);
-        _obj.No = projectSolution.Voting.Count(x => x.No.Value);
-        _obj.Abstained = projectSolution.Voting.Count(x => x.Abstained.Value);
-        
-        _obj.Accepted = _obj.Yes > _obj.No ? true : false;
-      }
-      else
-      {
-        _obj.Yes = null;
-        _obj.No = null;
-        _obj.Abstained = null;
-        _obj.Accepted = null;
-      }
     }
   }
 

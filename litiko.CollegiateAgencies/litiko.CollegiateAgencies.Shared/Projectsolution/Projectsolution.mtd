@@ -5,6 +5,16 @@
   "AccessRightsMode": "Both",
   "Actions": [
     {
+      "NameGuid": "d021d43d-7949-4bdf-b0a0-4db25547f388",
+      "Name": "SendForApproval",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ],
+      "Versions": []
+    },
+    {
       "NameGuid": "4ea85c77-e6e8-4216-86da-e970532bafcd",
       "Name": "TransferFromAgenda",
       "ActionArea": "Card",
@@ -36,6 +46,48 @@
     {
       "Name": "GetProjectSolutionDecidedEN",
       "DisplayNameResourceCode": "GetProjectSolutionDecidedEN",
+      "IsConverter": true,
+      "Parameters": [
+        {
+          "Name": "projectSolution",
+          "ParameterType": "global::litiko.CollegiateAgencies.IProjectsolution",
+          "ParameterTypeFullName": "litiko.CollegiateAgencies.IProjectsolution, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetProjectSolutionDecidedMinutesEN",
+      "DisplayNameResourceCode": "GetProjectSolutionDecidedMinutesEN",
+      "IsConverter": true,
+      "Parameters": [
+        {
+          "Name": "projectSolution",
+          "ParameterType": "global::litiko.CollegiateAgencies.IProjectsolution",
+          "ParameterTypeFullName": "litiko.CollegiateAgencies.IProjectsolution, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetProjectSolutionDecidedMinutesRU",
+      "DisplayNameResourceCode": "GetProjectSolutionDecidedMinutesRU",
+      "IsConverter": true,
+      "Parameters": [
+        {
+          "Name": "projectSolution",
+          "ParameterType": "global::litiko.CollegiateAgencies.IProjectsolution",
+          "ParameterTypeFullName": "litiko.CollegiateAgencies.IProjectsolution, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetProjectSolutionDecidedMinutesTJ",
+      "DisplayNameResourceCode": "GetProjectSolutionDecidedMinutesTJ",
       "IsConverter": true,
       "Parameters": [
         {
@@ -87,11 +139,37 @@
   "FilterPanel": {
     "NameGuid": "80d3ce1a-9a72-443a-8b6c-6c6eef0c8d0f",
     "Name": "FilterPanel",
-    "Controls": [],
+    "Controls": [
+      {
+        "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+        "NameGuid": "1fcb3ea0-5470-4a83-bc54-a10322f40105",
+        "Name": "Registered",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "IsSelected"
+        ],
+        "ParentGuid": "80df9537-5493-472c-9bc3-1cd830f57507",
+        "Versions": []
+      }
+    ],
     "IsAncestorMetadata": true,
+    "Overridden": [
+      "Controls"
+    ],
     "Versions": []
   },
   "Forms": [
+    {
+      "$type": "Sungero.Metadata.InplaceFormMetadata, Sungero.Metadata",
+      "NameGuid": "30d15053-0c64-40f2-89b8-b68c0c9fd574",
+      "Name": "Tracking",
+      "Controls": [],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "SettingsResourceKey"
+      ],
+      "Versions": []
+    },
     {
       "$type": "Sungero.Metadata.InplaceFormMetadata, Sungero.Metadata",
       "NameGuid": "520df4ea-e554-4745-8d4f-018b6d022962",
@@ -340,7 +418,7 @@
           "Name": "InvitedEmployees",
           "ColumnNumber": 0,
           "ColumnSpan": 2,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiLikeEditorToCollectionBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiSelectFromListEditorToCollectionBinder",
           "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
           "PropertyGuid": "f6f0aa0d-78a7-475f-b447-fdcde7dd1808",
           "RowNumber": 10,
@@ -349,10 +427,6 @@
             {
               "Name": "NavigationPropertyGuid",
               "Value": "5bc984b1-244b-436b-9641-270da08a2732"
-            },
-            {
-              "Name": "IsDuplicatesAllowed",
-              "Value": false
             }
           ]
         },
@@ -362,7 +436,7 @@
           "Name": "InvitedExternal",
           "ColumnNumber": 0,
           "ColumnSpan": 2,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiLikeEditorToCollectionBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiSelectFromListEditorToCollectionBinder",
           "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
           "PropertyGuid": "5e3281ef-928b-45e7-9716-1a6a062c60d2",
           "RowNumber": 11,
@@ -371,10 +445,6 @@
             {
               "Name": "NavigationPropertyGuid",
               "Value": "87495758-8979-4955-abf3-832235667dd7"
-            },
-            {
-              "Name": "IsDuplicatesAllowed",
-              "Value": false
             }
           ]
         },
@@ -654,7 +724,8 @@
     }
   ],
   "HandledEvents": [
-    "CreatedServer"
+    "CreatedServer",
+    "WriteHistoryServer"
   ],
   "IconResourcesKeys": [],
   "IntegrationServiceName": "CollegiateAgenciesProjectsolution",
@@ -675,7 +746,6 @@
       "IsAncestorMetadata": true,
       "Overridden": [
         "IsVisibility",
-        "IsEnabled",
         "HandledEvents"
       ],
       "Versions": []
@@ -944,13 +1014,77 @@
       ],
       "ReturnType": "global::System.String",
       "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetProjectSolutionDecidedMinutesEN",
+      "Parameters": [
+        {
+          "Name": "projectSolution",
+          "ParameterType": "global::litiko.CollegiateAgencies.IProjectsolution",
+          "ParameterTypeFullName": "litiko.CollegiateAgencies.IProjectsolution, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetProjectSolutionDecidedMinutesRU",
+      "Parameters": [
+        {
+          "Name": "projectSolution",
+          "ParameterType": "global::litiko.CollegiateAgencies.IProjectsolution",
+          "ParameterTypeFullName": "litiko.CollegiateAgencies.IProjectsolution, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetProjectSolutionDecidedMinutesTJ",
+      "Parameters": [
+        {
+          "Name": "projectSolution",
+          "ParameterType": "global::litiko.CollegiateAgencies.IProjectsolution",
+          "ParameterTypeFullName": "litiko.CollegiateAgencies.IProjectsolution, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "ProcessIncludingInMeeting",
+      "Parameters": [
+        {
+          "Name": "projectsolution",
+          "ParameterType": "global::litiko.CollegiateAgencies.IProjectsolution",
+          "ParameterTypeFullName": "litiko.CollegiateAgencies.IProjectsolution, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "meeting",
+          "ParameterType": "global::litiko.Eskhata.IMeeting",
+          "ParameterTypeFullName": "litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "isFromMeeting",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
     }
   ],
   "PublicStructures": [],
   "ResourcesKeys": [
     "GetProjectSolutionDecidedRU",
     "GetProjectSolutionDecidedTJ",
-    "GetProjectSolutionDecidedEN"
+    "GetProjectSolutionDecidedEN",
+    "GetProjectSolutionDecidedMinutesRU",
+    "GetProjectSolutionDecidedMinutesTJ",
+    "GetProjectSolutionDecidedMinutesEN",
+    "TheExplanatoryNoteFieldIsNotFilledIn",
+    "Enum_Operation_SDChange"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "7843279e-9fe6-45ad-a2d8-49d455d35716",

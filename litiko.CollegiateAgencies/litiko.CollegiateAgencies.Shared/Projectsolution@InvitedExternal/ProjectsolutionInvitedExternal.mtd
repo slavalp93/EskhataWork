@@ -22,10 +22,10 @@
     {
       "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
       "NameGuid": "87495758-8979-4955-abf3-832235667dd7",
-      "Name": "Person",
+      "Name": "Contact",
       "CanBeSearch": false,
-      "Code": "Person",
-      "EntityGuid": "f5509cdc-ac0c-4507-a4d3-61d7a0a9b6f6",
+      "Code": "Contact",
+      "EntityGuid": "c8daaef9-a679-4a29-ac01-b93c1637c72e",
       "FlatListInStandaloneLookup": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "83c1a168-a6cd-4b53-a93c-5eda3e9c4b82"

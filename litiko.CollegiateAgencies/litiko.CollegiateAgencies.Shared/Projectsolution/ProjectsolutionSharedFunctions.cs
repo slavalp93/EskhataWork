@@ -11,15 +11,16 @@ namespace litiko.CollegiateAgencies.Shared
   {
     /// <summary>
     /// Обработка включения в совещание
-    /// </summary>       
-    public void ProcessIncludingInMeeting(litiko.Eskhata.IMeeting meeting)
+    /// </summary>
+    [Public]
+    public void ProcessIncludingInMeeting(litiko.Eskhata.IMeeting meeting, bool isFromMeeting)
     {
       if (meeting != null)
       {
         if (_obj.MeetingCategory != null && !Equals(_obj.MeetingCategory, meeting.MeetingCategorylitiko))
           meeting.MeetingCategorylitiko = _obj.MeetingCategory;
         
-        if (!meeting.ProjectSolutionslitiko.Any(x => Equals(x.ProjectSolution, _obj)))
+        if (!isFromMeeting && !meeting.ProjectSolutionslitiko.Any(x => Equals(x.ProjectSolution, _obj)))
           meeting.ProjectSolutionslitiko.AddNew().ProjectSolution = _obj;
         
         if (_obj.Speaker != null && !meeting.Members.Any(x => Equals(Sungero.Company.Employees.As(x.Member), _obj.Speaker)))
@@ -36,15 +37,17 @@ namespace litiko.CollegiateAgencies.Shared
 
         if (_obj.InvitedExternal.Any())
         {
-          foreach (Sungero.Parties.IPerson person in _obj.InvitedExternal.Where(x => x.Person != null).Select(x => x.Person))
+          foreach (Sungero.Parties.IContact contact in _obj.InvitedExternal.Where(x => x.Contact != null).Select(x => x.Contact))
           {
-            if (!meeting.InvitedExternallitiko.Any(x => Equals(x.Person, person)))
-              meeting.InvitedExternallitiko.AddNew().Person = person;
+            if (!meeting.InvitedExternallitiko.Any(x => Equals(x.Contact, contact)))
+              meeting.InvitedExternallitiko.AddNew().Contact = contact;
           }
         }        
         
+        /* Вынести из функции
         if (!meeting.State.IsInserted && meeting.State.IsChanged)
           meeting.Save();
+        */
       }    
     }
   }

@@ -59,12 +59,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="GetProjectSolutionDecidedRU" xml:space="preserve">
-    <value>Decision point (RU)</value>
+    <value>Decision points (RU)</value>
   </data>
   <data name="GetProjectSolutionDecidedTJ" xml:space="preserve">
-    <value>Decision point (TJ)</value>
+    <value>Decision points (TJ)</value>
   </data>
   <data name="GetProjectSolutionDecidedEN" xml:space="preserve">
-    <value>Decision point (EN)</value>
+    <value>Decision points (EN)</value>
+  </data>
+  <data name="GetProjectSolutionDecidedMinutesRU" xml:space="preserve">
+    <value>Decision points minutes (RU)</value>
+  </data>
+  <data name="GetProjectSolutionDecidedMinutesTJ" xml:space="preserve">
+    <value>Decision points minutes (TJ)</value>
+  </data>
+  <data name="GetProjectSolutionDecidedMinutesEN" xml:space="preserve">
+    <value>Decision points minutes (EN)</value>
+  </data>
+  <data name="TheExplanatoryNoteFieldIsNotFilledIn" xml:space="preserve">
+    <value>The Explanatory Note field is not filled in</value>
+  </data>
+  <data name="Enum_Operation_SDChange" xml:space="preserve">
+    <value>Change of property</value>
   </data>
 </root>

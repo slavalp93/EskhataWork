@@ -35,7 +35,7 @@
             <property name="Name">Meeting_Absentlitiko_Employee</property>
             <property name="FieldName">Employee</property>
             <property name="VisibleIndex">0</property>
-            <property name="Width">448</property>
+            <property name="Width">317</property>
             <property name="ActualWidth">41*</property>
           </property>
           <property name="Item2" isnull="true" iskey="true">
@@ -43,7 +43,7 @@
             <property name="Name">Meeting_Absentlitiko_Reason</property>
             <property name="FieldName">Reason</property>
             <property name="VisibleIndex">1</property>
-            <property name="Width">568</property>
+            <property name="Width">402</property>
             <property name="ActualWidth">52*</property>
           </property>
         </property>

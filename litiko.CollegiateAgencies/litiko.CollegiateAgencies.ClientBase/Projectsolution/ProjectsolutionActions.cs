@@ -9,11 +9,35 @@ namespace litiko.CollegiateAgencies.Client
 {
   partial class ProjectsolutionActions
   {
+
+    public override void SendForApproval(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      if (_obj.LeadingDocument == null)
+      {
+        e.AddWarning(litiko.CollegiateAgencies.Projectsolutions.Resources.TheExplanatoryNoteFieldIsNotFilledIn);
+        return;
+      }
+      
+      base.SendForApproval(e);
+    }
+
+    public override bool CanSendForApproval(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return base.CanSendForApproval(e);
+    }
+
     public virtual void CreateExplanatoryNote(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var addendum = Functions.Projectsolution.Remote.CreateExplanatoryNote();
+      var addendumId = addendum.Id;
       addendum.LeadingDocument = _obj;
-      addendum.Show();      
+      addendum.ShowModal();
+      
+      if (Sungero.Docflow.Addendums.GetAll().Any(x => x.Id == addendumId))
+      {
+        _obj.LeadingDocument = addendum;
+        _obj.Save();
+      }
     }
 
     public virtual bool CanCreateExplanatoryNote(Sungero.Domain.Client.CanExecuteActionArgs e)
@@ -40,7 +64,7 @@ namespace litiko.CollegiateAgencies.Client
       {
         var meeting = litiko.Eskhata.Meetings.As(Sungero.Meetings.PublicFunctions.Meeting.Remote.CreateMeeting());
         var meetingId = meeting.Id;
-        Functions.Projectsolution.ProcessIncludingInMeeting(_obj, meeting);
+        Functions.Projectsolution.ProcessIncludingInMeeting(_obj, meeting, false);
         
         meeting.ShowModal();
         
@@ -49,7 +73,7 @@ namespace litiko.CollegiateAgencies.Client
         {
           _obj.Meeting = meeting;
           _obj.IncludedInAgenda = true;
-          _obj.Save();
+          //_obj.Save();
         }
       }      
       #endregion
@@ -68,11 +92,11 @@ namespace litiko.CollegiateAgencies.Client
         {
           if (meeting.AccessRights.CanUpdate())
           {
-            Functions.Projectsolution.ProcessIncludingInMeeting(_obj, meeting);
+            Functions.Projectsolution.ProcessIncludingInMeeting(_obj, meeting, false);
             
             _obj.Meeting = meeting;
             _obj.IncludedInAgenda = true;
-            _obj.Save();
+            //_obj.Save();
           }
           else
           {

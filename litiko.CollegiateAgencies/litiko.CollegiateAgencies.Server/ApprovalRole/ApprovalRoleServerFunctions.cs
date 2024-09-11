@@ -38,7 +38,11 @@ namespace litiko.CollegiateAgencies.Server
           return meeting?.MeetingCategorylitiko?.Secretary;
         }
 
-        // Для протокола совещания...        
+        if (litiko.Eskhata.Minuteses.Is(document))
+        {
+          var meeting = litiko.Eskhata.Meetings.As(litiko.Eskhata.Minuteses.As(document).Meeting);
+          return meeting?.MeetingCategorylitiko?.Secretary;
+        }
             
         return null;
       }
@@ -56,7 +60,11 @@ namespace litiko.CollegiateAgencies.Server
           return meeting?.MeetingCategorylitiko?.President;
         }
         
-        // Для протокола совещания...
+        if (litiko.Eskhata.Minuteses.Is(document))
+        {
+          var meeting = litiko.Eskhata.Meetings.As(litiko.Eskhata.Minuteses.As(document).Meeting);
+          return meeting?.MeetingCategorylitiko?.President;
+        }                
         
         return null;
       }
@@ -79,35 +87,64 @@ namespace litiko.CollegiateAgencies.Server
       var result = new List<Sungero.Company.IEmployee>();
       var document = task.DocumentGroup.OfficialDocuments.FirstOrDefault();
       
+      if (document == null)
+        return null;
+      
       #region Участники совещания
       if (_obj.Type == litiko.CollegiateAgencies.ApprovalRole.Type.MeetingMembers)
       {
-        var agenda = litiko.Eskhata.Agendas.As(document);
-        if (agenda != null && agenda.Meeting != null)
+        if (litiko.Eskhata.Agendas.Is(document))
         {
-          foreach (var element in agenda.Meeting.Members.Where(x => x.Member != null && Sungero.Company.Employees.Is(x.Member)))
+          var agenda = litiko.Eskhata.Agendas.As(document);
+          if (agenda.Meeting != null)
           {
-            result.Add(Sungero.Company.Employees.As(element.Member));
-          }
+            foreach (var element in agenda.Meeting.Members.Where(x => x.Member != null && Sungero.Company.Employees.Is(x.Member)))
+            {
+              result.Add(Sungero.Company.Employees.As(element.Member));
+            }
+          }        
         }        
         
-        // Для протокола совещания...
+        if (litiko.Eskhata.Minuteses.Is(document))
+        {
+          var minutes = litiko.Eskhata.Minuteses.As(document);
+          if (minutes.Meeting != null)
+          {
+            foreach (var element in minutes.Meeting.Members.Where(x => x.Member != null && Sungero.Company.Employees.Is(x.Member)))
+            {
+              result.Add(Sungero.Company.Employees.As(element.Member));
+            }
+          }        
+        }                
       }
       #endregion
 
       #region Приглашенные сотрудники
       if (_obj.Type == litiko.CollegiateAgencies.ApprovalRole.Type.MeetingInvited)
       {
-        var agenda = litiko.Eskhata.Agendas.As(document);
-        if (agenda != null && agenda.Meeting != null)
+        if (litiko.Eskhata.Agendas.Is(document))
         {
-          foreach (var element in litiko.Eskhata.Meetings.As(agenda.Meeting).InvitedEmployeeslitiko.Where(x => x.Employee != null))
+          var agenda = litiko.Eskhata.Agendas.As(document);
+          if (agenda.Meeting != null)
           {
-            result.Add(element.Employee);
-          }
+            foreach (var element in litiko.Eskhata.Meetings.As(agenda.Meeting).InvitedEmployeeslitiko.Where(x => x.Employee != null))
+            {
+              result.Add(element.Employee);
+            }
+          }        
         }
         
-        // Для протокола совещания...
+        if (litiko.Eskhata.Minuteses.Is(document))
+        {
+          var minutes = litiko.Eskhata.Minuteses.As(document);
+          if (minutes.Meeting != null)
+          {
+            foreach (var element in litiko.Eskhata.Meetings.As(minutes.Meeting).InvitedEmployeeslitiko.Where(x => x.Employee != null))
+            {
+              result.Add(element.Employee);
+            }
+          }        
+        }
       }
       #endregion
       

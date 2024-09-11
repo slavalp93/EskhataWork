@@ -25,6 +25,22 @@ namespace litiko.CollegiateAgencies
   partial class ProjectsolutionServerHandlers
   {
 
+    public override void BeforeSaveHistory(Sungero.Content.DocumentHistoryEventArgs e)
+    {
+      base.BeforeSaveHistory(e);
+            
+      var isUpdateAction = e.Action == Sungero.CoreEntities.History.Action.Update;
+      if (!isUpdateAction)
+    	  return;
+      
+      var operation = new Enumeration("SDChange");
+      var changeList = litiko.CollegiateAgencies.PublicFunctions.Module.ChangeRequisites(_obj);
+      foreach (var comment in changeList)
+      {
+        e.Write(operation, null, comment);
+      }
+    }
+
     public override void Created(Sungero.Domain.CreatedEventArgs e)
     {
       base.Created(e);

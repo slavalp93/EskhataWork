@@ -264,7 +264,7 @@
           "Name": "InvitedEmployeeslitikolitiko",
           "ColumnNumber": 0,
           "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiLikeEditorToCollectionBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiSelectFromListEditorToCollectionBinder",
           "ParentGuid": "de3a35f0-d02f-491a-9feb-28b9ddef6626",
           "PropertyGuid": "0da680a4-6d12-4817-93ae-883d35f2887e",
           "RowNumber": 3,
@@ -273,10 +273,6 @@
             {
               "Name": "NavigationPropertyGuid",
               "Value": "fe819b3f-9ff0-4d41-afd8-75345e4c4b9a"
-            },
-            {
-              "Name": "IsDuplicatesAllowed",
-              "Value": false
             }
           ]
         },
@@ -286,7 +282,7 @@
           "Name": "InvitedExternallitikolitiko",
           "ColumnNumber": 0,
           "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiLikeEditorToCollectionBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiSelectFromListEditorToCollectionBinder",
           "ParentGuid": "de3a35f0-d02f-491a-9feb-28b9ddef6626",
           "PropertyGuid": "618c8f8e-63fc-4de2-acb1-7d15a088a69b",
           "RowNumber": 4,
@@ -295,10 +291,6 @@
             {
               "Name": "NavigationPropertyGuid",
               "Value": "de0a093b-987f-4491-9c50-0ef879350639"
-            },
-            {
-              "Name": "IsDuplicatesAllowed",
-              "Value": false
             }
           ]
         },
@@ -409,7 +401,8 @@
     }
   ],
   "HandledEvents": [
-    "RefreshClient"
+    "RefreshClient",
+    "SavingServer"
   ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "dbc0dd63-4d23-4f41-92ae-cab59bb70c8c",
@@ -444,6 +437,7 @@
       "NameGuid": "64cdabd0-76ac-47c1-bad4-16d59c54668a",
       "Name": "Numberlitiko",
       "Code": "Numberlitiko",
+      "IsRequired": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "e8218d8b-8c90-4f94-ad59-2b2a0561b74b"
     },
@@ -502,6 +496,11 @@
           "NameGuid": "c0dcf0ed-d484-40cb-adab-503e8a067c23",
           "Name": "extramural",
           "Code": "extramural"
+        },
+        {
+          "NameGuid": "773fb41a-8804-43f6-9a03-8fad7bc762de",
+          "Name": "IntExt",
+          "Code": "IntExt"
         },
         {
           "NameGuid": "1fa5036f-8a8c-4ef6-938c-455ed34a045f",
@@ -599,6 +598,23 @@
   ],
   "PublicFunctions": [
     {
+      "Name": "GetMeetingAbsentNumberedList",
+      "Parameters": [
+        {
+          "Name": "meeting",
+          "ParameterType": "global::litiko.Eskhata.IMeeting",
+          "ParameterTypeFullName": "litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "withJobTitle",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
       "Name": "GetMeetingCategoryMembers",
       "Parameters": [
         {
@@ -617,13 +633,60 @@
           "ParameterTypeFullName": "System.Boolean"
         }
       ],
-      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetMeetingInvitedNumberedList",
+      "Parameters": [
+        {
+          "Name": "meeting",
+          "ParameterType": "global::litiko.Eskhata.IMeeting",
+          "ParameterTypeFullName": "litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "withJobTitle",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetMeetingPresentNumberedList",
+      "Parameters": [
+        {
+          "Name": "meeting",
+          "ParameterType": "global::litiko.Eskhata.IMeeting",
+          "ParameterTypeFullName": "litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "withJobTitle",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetMeetingProjectSolutionsNumberedList",
+      "Parameters": [
+        {
+          "Name": "meeting",
+          "ParameterType": "global::litiko.Eskhata.IMeeting",
+          "ParameterTypeFullName": "litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces"
+        }
+      ],
       "ReturnType": "global::System.String",
       "ReturnTypeFullName": "System.String"
     }
   ],
   "PublicStructures": [],
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "NoRightsForUpdateDocument"
+  ],
   "RibbonCardMetadata": {
     "NameGuid": "b7b59d97-b6e4-46de-ba8f-0f82b8e09c3b",
     "Name": "RibbonCard",

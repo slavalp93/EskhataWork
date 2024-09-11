@@ -78,6 +78,48 @@ namespace litiko.CollegiateAgencies.Server
     }
 
     /// <summary>
+    /// Пункты решения протокола (RU).
+    /// </summary>
+    /// <param name="projectSolution">Проект решения.</param>
+    /// <returns>Значение табличного реквизита Постановили карточки Проекта решения вкладки Протокол.</returns>
+    [Public, Converter("GetProjectSolutionDecidedMinutesRU")]
+    public static string GetProjectSolutionDecidedMinutesRU(IProjectsolution projectSolution)
+    {
+      if (!projectSolution.DecidedMinutes.Any())
+        return null;      
+      
+      return string.Join(Environment.NewLine, projectSolution.DecidedMinutes.Select(element => $"{element.Number}. {element.DecisionRU}"));
+    }    
+
+    /// <summary>
+    /// Пункты решения протокола (TJ).
+    /// </summary>
+    /// <param name="projectSolution">Проект решения.</param>
+    /// <returns>Значение табличного реквизита Постановили карточки Проекта решения вкладки Протокол.</returns>
+    [Public, Converter("GetProjectSolutionDecidedMinutesTJ")]
+    public static string GetProjectSolutionDecidedMinutesTJ(IProjectsolution projectSolution)
+    {
+      if (!projectSolution.DecidedMinutes.Any())
+        return null;      
+      
+      return string.Join(Environment.NewLine, projectSolution.DecidedMinutes.Select(element => $"{element.Number}. {element.DecisionTJ}"));
+    }
+    
+    /// <summary>
+    /// Пункты решения протокола (EN).
+    /// </summary>
+    /// <param name="projectSolution">Проект решения.</param>
+    /// <returns>Значение табличного реквизита Постановили карточки Проекта решения вкладки Протокол.</returns>
+    [Public, Converter("GetProjectSolutionDecidedMinutesEN")]
+    public static string GetProjectSolutionDecidedMinutesEN(IProjectsolution projectSolution)
+    {
+      if (!projectSolution.DecidedMinutes.Any())
+        return null;      
+      
+      return string.Join(Environment.NewLine, projectSolution.DecidedMinutes.Select(element => $"{element.Number}. {element.DecisionEN}"));
+    }    
+    
+    /// <summary>
     /// Получить наименования приложений к проекту решения.
     /// </summary>
     /// <param name="docId">ИД проекта решения.</param>

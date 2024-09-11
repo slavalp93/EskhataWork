@@ -61,4 +61,7 @@
   <data name="Description" xml:space="preserve">
     <value />
   </data>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Agenda template</value>
+  </data>
 </root>

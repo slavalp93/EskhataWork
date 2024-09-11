@@ -131,6 +131,9 @@
   "IconResourcesKeys": [],
   "IntegrationServiceName": "IntegrationIntegrationMethod",
   "OperationsClass": "",
+  "Overridden": [
+    "IsVisible"
+  ],
   "Properties": [
     {
       "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",

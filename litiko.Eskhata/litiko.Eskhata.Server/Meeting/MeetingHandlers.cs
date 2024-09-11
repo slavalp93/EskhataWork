@@ -7,6 +7,38 @@ using litiko.Eskhata.Meeting;
 
 namespace litiko.Eskhata
 {
+  partial class MeetingProjectSolutionslitikoProjectSolutionPropertyFilteringServerHandler<T>
+  {
+
+    public virtual IQueryable<T> ProjectSolutionslitikoProjectSolutionFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e)
+    {
+      var meetingCategory = _root.MeetingCategorylitiko;
+      if (meetingCategory != null)
+        query = query.Where(x => Equals(x.MeetingCategory, meetingCategory) && !x.IncludedInAgenda.Value && x.InternalApprovalState == Sungero.Docflow.OfficialDocument.InternalApprovalState.Signed);
+      
+      return query;
+    }
+  }
+
+  partial class MeetingServerHandlers
+  {
+
+    public override void Saving(Sungero.Domain.SavingEventArgs e)
+    {
+      base.Saving(e);
+      
+      if (_obj.State.Properties.ProjectSolutionslitiko.IsChanged)
+      {
+        foreach (var element in _obj.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null))
+        {
+          var doc = element.ProjectSolution;
+          if (!Equals(doc.Meeting, _obj))
+            doc.Meeting = _obj;
+        }
+      }
+    }
+  }
+
   partial class MeetingAbsentlitikoEmployeePropertyFilteringServerHandler<T>
   {
 

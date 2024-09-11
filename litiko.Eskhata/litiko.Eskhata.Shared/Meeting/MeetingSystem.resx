@@ -166,4 +166,7 @@
   <data name="Property_ProjectSolutionslitiko" xml:space="preserve">
     <value>Issues on the agenda</value>
   </data>
+  <data name="Enum_Votinglitiko_IntExt" xml:space="preserve">
+    <value>Intramural/Extramural</value>
+  </data>
 </root>

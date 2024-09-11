@@ -67,4 +67,19 @@
   <data name="GetProjectSolutionDecidedEN" xml:space="preserve">
     <value>Пункты решения (EN)</value>
   </data>
+  <data name="GetProjectSolutionDecidedMinutesRU" xml:space="preserve">
+    <value>Пункты решения протокола (RU)</value>
+  </data>
+  <data name="GetProjectSolutionDecidedMinutesTJ" xml:space="preserve">
+    <value>Пункты решения протокола (TJ)</value>
+  </data>
+  <data name="GetProjectSolutionDecidedMinutesEN" xml:space="preserve">
+    <value>Пункты решения протокола (EN)</value>
+  </data>
+  <data name="TheExplanatoryNoteFieldIsNotFilledIn" xml:space="preserve">
+    <value>Не заполнено поле Пояснительная записка</value>
+  </data>
+  <data name="Enum_Operation_SDChange" xml:space="preserve">
+    <value>Изменение свойства</value>
+  </data>
 </root>

@@ -35,7 +35,8 @@
     "DefaultExportFormat",
     "DataSources",
     "Parameters",
-    "HandledEvents"
+    "HandledEvents",
+    "DisplayName"
   ],
   "Parameters": [
     {

@@ -210,6 +210,20 @@
       "Value": "new System.Guid(\"56618558-3348-4293-9f89-69907ece3fc9\")"
     }
   ],
+  "PublicFunctions": [
+    {
+      "Name": "ChangeRequisites",
+      "Parameters": [
+        {
+          "Name": "entity",
+          "ParameterType": "global::Sungero.Domain.Shared.IEntity",
+          "ParameterTypeFullName": "Sungero.Domain.Shared.IEntity, Sungero.Domain.Shared"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    }
+  ],
   "PublicStructures": [],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.CollegiateAgencies",
@@ -235,7 +249,7 @@
   "SharedAssemblyName": "litiko.CollegiateAgencies.Shared",
   "SharedNamespace": "litiko.CollegiateAgencies.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.2",
+  "Version": "0.0.1.3",
   "Widgets": [],
   "Versions": [
     {

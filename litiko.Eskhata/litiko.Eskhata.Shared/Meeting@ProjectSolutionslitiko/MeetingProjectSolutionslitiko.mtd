@@ -28,11 +28,14 @@
       "EntityGuid": "38450693-6600-4c7b-a2a6-5ca6aa9edd21",
       "FlatListInStandaloneLookup": true,
       "HandledEvents": [
-        "ChangedShared"
+        "LookupServer",
+        "ValueInputClient"
       ],
       "IsRequired": true,
       "IsSortingAllowed": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "NeedPassEntityToLookupEvent": true,
+      "OnlyRootEntityUsedInChildLookupEvent": true,
       "PreviousPropertyGuid": "9b98a53b-81ae-49af-8efb-732740520b80"
     },
     {
@@ -42,7 +45,6 @@
       "CanBeSearch": false,
       "Code": "Number",
       "IsRequired": true,
-      "IsUnique": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "9cb02c42-dbc8-4a44-86c5-6a01db892cfa"
     },
