@@ -230,13 +230,13 @@
     <value />
   </data>
   <data name="Action_CreateExplanatoryNote" xml:space="preserve">
-    <value>Create explanatory note</value>
+    <value>Create Explanatory note</value>
   </data>
   <data name="Action_CreateExplanatoryNoteDescription" xml:space="preserve">
-    <value>Create explanatory note</value>
+    <value>Create Explanatory note</value>
   </data>
   <data name="Action_CreateExplanatoryNoteHint" xml:space="preserve">
-    <value>Create explanatory note</value>
+    <value>Create Explanatory note</value>
   </data>
   <data name="Action_CreateExplanatoryNoteConfirmationMessage" xml:space="preserve">
     <value />
@@ -245,6 +245,36 @@
     <value />
   </data>
   <data name="Control_f6349905bee0438cae64af9df53ebe52_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateExtractProtocol" xml:space="preserve">
+    <value>Create Extract from protocol</value>
+  </data>
+  <data name="Action_CreateExtractProtocolDescription" xml:space="preserve">
+    <value>Create Extract from protocol</value>
+  </data>
+  <data name="Action_CreateExtractProtocolHint" xml:space="preserve">
+    <value>Create Extract from protocol</value>
+  </data>
+  <data name="Action_CreateExtractProtocolConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateExtractProtocolConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateResolution" xml:space="preserve">
+    <value>Create Resolution</value>
+  </data>
+  <data name="Action_CreateResolutionDescription" xml:space="preserve">
+    <value>Create Resolution</value>
+  </data>
+  <data name="Action_CreateResolutionHint" xml:space="preserve">
+    <value>Create Resolution</value>
+  </data>
+  <data name="Action_CreateResolutionConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateResolutionConfirmationDescription" xml:space="preserve">
     <value />
   </data>
 </root>

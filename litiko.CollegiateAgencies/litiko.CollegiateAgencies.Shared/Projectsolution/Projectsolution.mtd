@@ -37,6 +37,22 @@
       "GenerateHandler": true,
       "LargeIconName": "Action_CreateExplanatoryNote_large_f1800eac4e034fdb9e6120c4b5adc583.png",
       "SmallIconName": "Action_CreateExplanatoryNote_small_f1800eac4e034fdb9e6120c4b5adc583.png"
+    },
+    {
+      "NameGuid": "443a9bce-f920-4578-b7ed-e90b32828477",
+      "Name": "CreateExtractProtocol",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_CreateExtractProtocol_large_443a9bcef9204578b7ede90b32828477.png",
+      "SmallIconName": "Action_CreateExtractProtocol_small_443a9bcef9204578b7ede90b32828477.png"
+    },
+    {
+      "NameGuid": "0d4fec61-3229-49cc-8ee1-b38c15aad4d5",
+      "Name": "CreateResolution",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_CreateResolution_large_0d4fec61322949cc8ee1b38c15aad4d5.png",
+      "SmallIconName": "Action_CreateResolution_small_0d4fec61322949cc8ee1b38c15aad4d5.png"
     }
   ],
   "BaseGuid": "ce3e34ed-7be2-4426-a951-d5a70f966650",
@@ -997,11 +1013,25 @@
       "ReturnTypeFullName": "Sungero.Docflow.IAddendum, Sungero.Domain.Interfaces"
     },
     {
+      "Name": "CreateExtractProtocol",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "global::Sungero.Docflow.IAddendum",
+      "ReturnTypeFullName": "Sungero.Docflow.IAddendum, Sungero.Domain.Interfaces"
+    },
+    {
       "Name": "CreateProjectsolution",
       "IsRemote": true,
       "Placement": "Shared",
       "ReturnType": "global::litiko.CollegiateAgencies.IProjectsolution",
       "ReturnTypeFullName": "litiko.CollegiateAgencies.IProjectsolution, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "CreateResolution",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "global::Sungero.Docflow.IAddendum",
+      "ReturnTypeFullName": "Sungero.Docflow.IAddendum, Sungero.Domain.Interfaces"
     },
     {
       "Name": "GetProjectSolutionAddendumSubjects",
@@ -1106,7 +1136,7 @@
         "Name": "CreateAddendum",
         "ActionGuid": "723cfd10-8ed7-4a2d-881b-d498f3471eb6",
         "ButtonSize": "Large",
-        "Index": 1,
+        "Index": 3,
         "IsAncestorMetadata": true,
         "Overridden": [
           "Index"
@@ -1120,7 +1150,7 @@
         "Name": "CreateManyAddendum",
         "ActionGuid": "252eb98b-fadd-4c36-b110-feb9f6a82114",
         "ButtonSize": "Large",
-        "Index": 3,
+        "Index": 5,
         "IsAncestorMetadata": true,
         "Overridden": [
           "Index"
@@ -1134,7 +1164,7 @@
         "Name": "CreateCancellationAgreement",
         "ActionGuid": "d26be5f7-c51b-4c05-a102-cde46737669b",
         "ButtonSize": "Large",
-        "Index": 2,
+        "Index": 4,
         "IsAncestorMetadata": true,
         "Overridden": [
           "Index"
@@ -1148,6 +1178,24 @@
         "ActionGuid": "f1800eac-4e03-4fdb-9e61-20c4b5adc583",
         "ButtonSize": "Large",
         "Index": 0,
+        "ParentGuid": "05d63e9c-36c0-44c3-a7fd-b1a360e13fc0"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "162d186f-b3a4-4545-b94f-f9470d6e8272",
+        "Name": "CreateExtractProtocol",
+        "ActionGuid": "443a9bce-f920-4578-b7ed-e90b32828477",
+        "ButtonSize": "Large",
+        "Index": 1,
+        "ParentGuid": "05d63e9c-36c0-44c3-a7fd-b1a360e13fc0"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "1db34cbf-360a-42a6-8177-0bba1435ba5f",
+        "Name": "CreateResolution",
+        "ActionGuid": "0d4fec61-3229-49cc-8ee1-b38c15aad4d5",
+        "ButtonSize": "Large",
+        "Index": 2,
         "ParentGuid": "05d63e9c-36c0-44c3-a7fd-b1a360e13fc0"
       }
     ],

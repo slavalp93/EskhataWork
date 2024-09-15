@@ -61,11 +61,11 @@
   <data name="Enum_Type_Speaker" xml:space="preserve">
     <value>Докладчик</value>
   </data>
-  <data name="Enum_Type_SecretaryByCat" xml:space="preserve">
-    <value>Секретарь по категории заседания</value>
+  <data name="Enum_Type_MeetingSecretary" xml:space="preserve">
+    <value>Секретарь заседания</value>
   </data>
-  <data name="Enum_Type_PresidentByCat" xml:space="preserve">
-    <value>Председатель по категории заседания</value>
+  <data name="Enum_Type_MeetingPresident" xml:space="preserve">
+    <value>Председатель заседания</value>
   </data>
   <data name="Enum_Type_MeetingMembers" xml:space="preserve">
     <value>Участники совещания</value>

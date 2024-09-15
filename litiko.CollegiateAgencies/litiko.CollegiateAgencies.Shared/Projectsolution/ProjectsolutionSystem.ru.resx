@@ -212,15 +212,33 @@
     <value />
   </data>
   <data name="Action_CreateExplanatoryNote" xml:space="preserve">
-    <value>Создать пояснительную записку</value>
+    <value>Создать Пояснительную записку</value>
   </data>
   <data name="Action_CreateExplanatoryNoteHint" xml:space="preserve">
-    <value>Создать пояснительную записку</value>
+    <value>Создать Пояснительную записку</value>
   </data>
   <data name="Action_CreateExplanatoryNoteDescription" xml:space="preserve">
-    <value>Создать пояснительную записку</value>
+    <value>Создать Пояснительную записку</value>
   </data>
   <data name="Control_f6349905bee0438cae64af9df53ebe52_EmptyText" xml:space="preserve">
     <value />
+  </data>
+  <data name="Action_CreateExtractProtocol" xml:space="preserve">
+    <value>Создать Выписку из протокола</value>
+  </data>
+  <data name="Action_CreateExtractProtocolHint" xml:space="preserve">
+    <value>Создать Выписку из протокола</value>
+  </data>
+  <data name="Action_CreateExtractProtocolDescription" xml:space="preserve">
+    <value>Создать Выписку из протокола</value>
+  </data>
+  <data name="Action_CreateResolution" xml:space="preserve">
+    <value>Создать Постановление</value>
+  </data>
+  <data name="Action_CreateResolutionHint" xml:space="preserve">
+    <value>Создать Постановление</value>
+  </data>
+  <data name="Action_CreateResolutionDescription" xml:space="preserve">
+    <value>Создать Постановление</value>
   </data>
 </root>

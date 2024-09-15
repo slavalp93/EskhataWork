@@ -19,7 +19,7 @@ namespace litiko.Eskhata.Server
     public string GetMeetingCategoryMembers(bool onlyMembers, bool withJobTitle)
     {
       if (_obj.MeetingCategorylitiko == null)
-        return null;
+        return string.Empty;
       
       var employees = _obj.MeetingCategorylitiko.Members.Select(x => x.Member).ToList();
 
@@ -57,7 +57,10 @@ namespace litiko.Eskhata.Server
     [Public]
     public string GetMeetingPresentNumberedList(bool withJobTitle)
     {                  
-      var employees = _obj.Presentlitiko.Select(x => x.Employee).ToList();      
+      var employees = _obj.Presentlitiko.Select(x => x.Employee).ToList();
+      if (!employees.Any())
+        return string.Empty;
+      
       return Sungero.Company.PublicFunctions.Employee.Remote.GetEmployeesNumberedList(employees, withJobTitle);
     }
 
@@ -70,6 +73,9 @@ namespace litiko.Eskhata.Server
     public string GetMeetingAbsentNumberedList(bool withJobTitle)
     {                  
       var employees = _obj.Absentlitiko.Select(x => x.Employee).ToList();      
+      if (!employees.Any())
+        return string.Empty;
+      
       return Sungero.Company.PublicFunctions.Employee.Remote.GetEmployeesNumberedList(employees, withJobTitle);
     }
 
@@ -82,6 +88,9 @@ namespace litiko.Eskhata.Server
     public string GetMeetingInvitedNumberedList(bool withJobTitle)
     {                  
       var employees = _obj.InvitedEmployeeslitiko.Select(x => x.Employee).ToList();      
+      if (!employees.Any())
+        return string.Empty;
+      
       return Sungero.Company.PublicFunctions.Employee.Remote.GetEmployeesNumberedList(employees, withJobTitle);
     }
     
@@ -94,7 +103,7 @@ namespace litiko.Eskhata.Server
     public string GetMeetingProjectSolutionsNumberedList()
     {                        
       if (!_obj.ProjectSolutionslitiko.Any())
-        return null;
+        return string.Empty;
       
       return string.Join(Environment.NewLine, _obj.ProjectSolutionslitiko.Select(element => $"{element.Number}. {element.ProjectSolution.Subject}."));
     }    

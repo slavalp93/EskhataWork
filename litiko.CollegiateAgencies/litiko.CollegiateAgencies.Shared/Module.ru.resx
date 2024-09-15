@@ -103,4 +103,19 @@
   <data name="DescriptionRolePresidents" xml:space="preserve">
     <value>Председатели, указанные в категории заседаний</value>
   </data>
+  <data name="ExtractProtocolKind" xml:space="preserve">
+    <value>Выписка из протокола</value>
+  </data>
+  <data name="ResolutionKind" xml:space="preserve">
+    <value>Постановление</value>
+  </data>
+  <data name="MinutesTemplateNotFound" xml:space="preserve">
+    <value>Шаблон документа с именем {0} не найден.</value>
+  </data>
+  <data name="MeetingIsEmpty" xml:space="preserve">
+    <value>В документе не указано совещание.</value>
+  </data>
+  <data name="MeetingCategoryIsEmpty" xml:space="preserve">
+    <value>В совещании не указано категорию.</value>
+  </data>
 </root>

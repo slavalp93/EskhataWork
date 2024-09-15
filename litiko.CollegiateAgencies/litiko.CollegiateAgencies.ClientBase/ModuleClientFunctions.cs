@@ -17,14 +17,6 @@ namespace litiko.CollegiateAgencies.Client
     }
 
     /// <summary>
-    /// 
-    /// </summary>
-    public virtual void Extracts()
-    {
-      Dialogs.ShowMessage("В разработке");
-    }
-
-    /// <summary>
     /// Создать проект решения.
     /// </summary>
     public virtual void BringQuestion()

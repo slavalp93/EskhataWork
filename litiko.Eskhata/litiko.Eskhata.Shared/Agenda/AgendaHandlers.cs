@@ -17,9 +17,13 @@ namespace litiko.Eskhata
       var meeting = e.NewValue;
       if (meeting != null)
       {
-        _obj.RegistrationNumber = litiko.Eskhata.Meetings.As(meeting)?.Numberlitiko;
+        if (string.IsNullOrEmpty(_obj.RegistrationNumber))
+          _obj.RegistrationNumber = litiko.Eskhata.Meetings.As(meeting)?.Numberlitiko;
+        if (!_obj.RegistrationDate.HasValue)
+          _obj.RegistrationDate = Calendar.Now;
         
         _obj.OurSignatory = litiko.Eskhata.Meetings.As(meeting)?.Secretary;
+        
       }
     }
 

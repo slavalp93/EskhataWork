@@ -35,12 +35,12 @@
         },
         {
           "NameGuid": "f6475c2d-6734-4cf6-90eb-eac64bd2d928",
-          "Name": "SecretaryByCat",
+          "Name": "MeetingSecretary",
           "Code": "SecretaryByCat"
         },
         {
           "NameGuid": "de72d44e-b0b9-4d24-b953-a15784e90dbc",
-          "Name": "PresidentByCat",
+          "Name": "MeetingPresident",
           "Code": "PresidentByCat"
         },
         {

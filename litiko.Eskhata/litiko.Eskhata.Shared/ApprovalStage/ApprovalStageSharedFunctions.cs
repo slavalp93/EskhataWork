@@ -20,8 +20,8 @@ namespace litiko.Eskhata.Shared
         baseRoles.Add(DocflowEskhata.UnitManagerApprovalRole.Type.Signatory);
         baseRoles.Add(Archive.ApprovalRole.Type.Archivist);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.Speaker);
-        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.SecretaryByCat);
-        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.PresidentByCat);
+        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingSecretary);
+        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresident);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingMembers);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingInvited);
       }
@@ -31,7 +31,7 @@ namespace litiko.Eskhata.Shared
       if (_obj.StageType == Sungero.Docflow.ApprovalStage.StageType.SimpleAgr)
       {
         baseRoles.Add(Archive.ApprovalRole.Type.Archivist);
-        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.SecretaryByCat);
+        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingSecretary);
       }
       #endregion
       
@@ -42,6 +42,13 @@ namespace litiko.Eskhata.Shared
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingInvited);      
       }
       #endregion
+      
+      #region Регистрация
+      if (_obj.StageType == Sungero.Docflow.ApprovalStage.StageType.Register)
+      {
+        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingSecretary);
+      }
+      #endregion      
       
       return baseRoles;
     }

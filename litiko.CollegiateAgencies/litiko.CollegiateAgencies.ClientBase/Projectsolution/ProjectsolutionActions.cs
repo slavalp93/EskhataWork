@@ -9,6 +9,31 @@ namespace litiko.CollegiateAgencies.Client
 {
   partial class ProjectsolutionActions
   {
+    public virtual void CreateResolution(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var addendum = Functions.Projectsolution.Remote.CreateResolution();      
+      addendum.LeadingDocument = _obj;
+      addendum.OurSignatory = _obj.Meeting?.President;
+      addendum.Show();      
+    }
+
+    public virtual bool CanCreateResolution(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return !_obj.State.IsChanged && (Equals(Users.Current, Users.As(_obj.Meeting?.Secretary)) || Users.Current.IncludedIn(Roles.Administrators));
+    }
+
+    public virtual void CreateExtractProtocol(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var addendum = Functions.Projectsolution.Remote.CreateExtractProtocol();      
+      addendum.LeadingDocument = _obj;
+      addendum.Show();
+    }
+
+    public virtual bool CanCreateExtractProtocol(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return !_obj.State.IsChanged && (Equals(Users.Current, Users.As(_obj.Meeting?.Secretary)) || Users.Current.IncludedIn(Roles.Administrators));
+    }
+
 
     public override void SendForApproval(Sungero.Domain.Client.ExecuteActionArgs e)
     {
@@ -42,7 +67,7 @@ namespace litiko.CollegiateAgencies.Client
 
     public virtual bool CanCreateExplanatoryNote(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return true;
+      return !_obj.State.IsChanged && (Equals(Users.Current, _obj.Author) || Equals(Users.Current, Users.As(_obj.PreparedBy)) || Users.Current.IncludedIn(Roles.Administrators));
     }
 
     public virtual void IncludeInAgenda(Sungero.Domain.Client.ExecuteActionArgs e)
@@ -63,6 +88,7 @@ namespace litiko.CollegiateAgencies.Client
       if (result == btnCreateNew)
       {
         var meeting = litiko.Eskhata.Meetings.As(Sungero.Meetings.PublicFunctions.Meeting.Remote.CreateMeeting());
+        ((Sungero.Domain.Shared.IExtendedEntity)meeting).Params[Constants.Module.ParamNames.DontUpdateProjectSolution] = true;
         var meetingId = meeting.Id;
         Functions.Projectsolution.ProcessIncludingInMeeting(_obj, meeting, false);
         
@@ -72,8 +98,7 @@ namespace litiko.CollegiateAgencies.Client
         if (litiko.Eskhata.Meetings.GetAll().Any(x => x.Id == meetingId))
         {
           _obj.Meeting = meeting;
-          _obj.IncludedInAgenda = true;
-          //_obj.Save();
+          _obj.Save();                 
         }
       }      
       #endregion
@@ -92,11 +117,11 @@ namespace litiko.CollegiateAgencies.Client
         {
           if (meeting.AccessRights.CanUpdate())
           {
+            ((Sungero.Domain.Shared.IExtendedEntity)meeting).Params[Constants.Module.ParamNames.DontUpdateProjectSolution] = true;
             Functions.Projectsolution.ProcessIncludingInMeeting(_obj, meeting, false);
             
             _obj.Meeting = meeting;
-            _obj.IncludedInAgenda = true;
-            //_obj.Save();
+            _obj.Save();          
           }
           else
           {

@@ -18,22 +18,26 @@ namespace litiko.CollegiateAgencies.Shared
         query = query.Where(k => k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.ProjectSolution.ToString()).ToList();
       #endregion
       
-      #region Секретарь по категории совещания
-      if (_obj.Type == litiko.CollegiateAgencies.ApprovalRole.Type.SecretaryByCat)
+      #region Секретарь совещания
+      if (_obj.Type == litiko.CollegiateAgencies.ApprovalRole.Type.MeetingSecretary)
       {
         query = query.Where(k => k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.ProjectSolution.ToString() || 
                             k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.Agenda.ToString() ||
-                            k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.Minutes.ToString())
+                            k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.Minutes.ToString() ||
+                            k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.Addendum.ToString()
+                           )
           .ToList();
       }
       #endregion
 
-      #region Председатель по категории совещания
-      if (_obj.Type == litiko.CollegiateAgencies.ApprovalRole.Type.PresidentByCat)
+      #region Председатель совещания
+      if (_obj.Type == litiko.CollegiateAgencies.ApprovalRole.Type.MeetingPresident)
       {
         query = query.Where(k => k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.ProjectSolution.ToString() || 
                             k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.Agenda.ToString() ||
-                            k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.Minutes.ToString())
+                            k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.Minutes.ToString() ||
+                            k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.Addendum.ToString()
+                           )
           .ToList();
       }
       #endregion

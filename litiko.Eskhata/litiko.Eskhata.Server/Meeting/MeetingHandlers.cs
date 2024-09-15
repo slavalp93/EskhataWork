@@ -27,7 +27,7 @@ namespace litiko.Eskhata
     {
       base.Saving(e);
       
-      if (_obj.State.Properties.ProjectSolutionslitiko.IsChanged)
+      if (_obj.State.Properties.ProjectSolutionslitiko.IsChanged && !e.Params.Contains(litiko.CollegiateAgencies.PublicConstants.Module.ParamNames.DontUpdateProjectSolution))
       {
         foreach (var element in _obj.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null))
         {

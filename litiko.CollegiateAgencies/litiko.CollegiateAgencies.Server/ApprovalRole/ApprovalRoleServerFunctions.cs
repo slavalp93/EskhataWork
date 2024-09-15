@@ -26,8 +26,8 @@ namespace litiko.CollegiateAgencies.Server
       }        
       #endregion
       
-      #region Секретарь по категории
-      if (_obj.Type == litiko.CollegiateAgencies.ApprovalRole.Type.SecretaryByCat)
+      #region Секретарь совещания
+      if (_obj.Type == litiko.CollegiateAgencies.ApprovalRole.Type.MeetingSecretary)
       {      
         if (Projectsolutions.Is(document))          
           return Projectsolutions.As(document).MeetingCategory?.Secretary;
@@ -35,21 +35,33 @@ namespace litiko.CollegiateAgencies.Server
         if (litiko.Eskhata.Agendas.Is(document))
         {
           var meeting = litiko.Eskhata.Meetings.As(litiko.Eskhata.Agendas.As(document).Meeting);
-          return meeting?.MeetingCategorylitiko?.Secretary;
+          return meeting?.Secretary;
         }
 
         if (litiko.Eskhata.Minuteses.Is(document))
         {
           var meeting = litiko.Eskhata.Meetings.As(litiko.Eskhata.Minuteses.As(document).Meeting);
-          return meeting?.MeetingCategorylitiko?.Secretary;
+          return meeting?.Secretary;
         }
+        
+        if (litiko.Eskhata.Addendums.Is(document))
+        {
+          var docKindResolution = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(litiko.CollegiateAgencies.PublicConstants.Module.DocumentKindGuids.Resolution);
+          if (docKindResolution != null && Equals(document.DocumentKind, docKindResolution))
+          {
+            var meeting = litiko.Eskhata.Meetings.As(litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument).Meeting);
+            return meeting?.Secretary;
+          }
+          
+          return null;
+        }        
             
         return null;
       }
       #endregion
         
-      #region Председатель по категории
-      if (_obj.Type == litiko.CollegiateAgencies.ApprovalRole.Type.PresidentByCat)
+      #region Председатель совещания
+      if (_obj.Type == litiko.CollegiateAgencies.ApprovalRole.Type.MeetingPresident)
       {          
         if (Projectsolutions.Is(document))          
           return Projectsolutions.As(document).MeetingCategory?.President;
@@ -57,14 +69,26 @@ namespace litiko.CollegiateAgencies.Server
         if (litiko.Eskhata.Agendas.Is(document))
         {
           var meeting = litiko.Eskhata.Meetings.As(litiko.Eskhata.Agendas.As(document).Meeting);
-          return meeting?.MeetingCategorylitiko?.President;
+          return meeting?.President;
         }
         
         if (litiko.Eskhata.Minuteses.Is(document))
         {
           var meeting = litiko.Eskhata.Meetings.As(litiko.Eskhata.Minuteses.As(document).Meeting);
-          return meeting?.MeetingCategorylitiko?.President;
-        }                
+          return meeting?.President;
+        }
+
+        if (litiko.Eskhata.Addendums.Is(document))
+        {
+          var docKindResolution = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(litiko.CollegiateAgencies.PublicConstants.Module.DocumentKindGuids.Resolution);
+          if (docKindResolution != null && Equals(document.DocumentKind, docKindResolution))
+          {
+            var meeting = litiko.Eskhata.Meetings.As(litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument).Meeting);
+            return meeting?.President;
+          }
+          
+          return null;
+        }         
         
         return null;
       }

@@ -109,4 +109,7 @@
   <data name="CoverDescription_MeetingMethods" xml:space="preserve">
     <value>Открытие справочника способов проведения заседаний КОУ</value>
   </data>
+  <data name="sf_cb38418f_5195_46dc_9f2e_d0a281cc516b" xml:space="preserve">
+    <value>Выписки из протоколов</value>
+  </data>
 </root>

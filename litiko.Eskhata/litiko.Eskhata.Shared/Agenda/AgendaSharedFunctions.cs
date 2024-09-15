@@ -34,5 +34,41 @@ namespace litiko.Eskhata.Shared
       }
 
     }
+    
+    /// <summary>
+    /// Заполнить имя.
+    /// </summary>
+    public override void FillName()
+    {
+      var documentKind = _obj.DocumentKind;
+      
+      if (documentKind != null && !documentKind.GenerateDocumentName.Value && _obj.Name == Sungero.Docflow.Resources.DocumentNameAutotext)
+        _obj.Name = string.Empty;
+      
+      if (documentKind == null || !documentKind.GenerateDocumentName.Value)
+        return;
+      
+      var name = string.Empty;
+      if (_obj.Meeting != null)
+      {
+        var meeting = _obj.Meeting;
+        
+        /* Имя в формате:
+        <Вид документа> от <дата документа> по <тема совещания>.
+         */
+        string regDate = _obj.RegistrationDate.HasValue ? _obj.RegistrationDate.Value.ToString("dd.mm.yy") : string.Empty;
+        name += string.Format("{0} от {1} по {2}.", documentKind.ShortName, regDate, meeting.Name);
+      }
+      
+      if (string.IsNullOrWhiteSpace(name))
+        name = Sungero.Docflow.Resources.DocumentNameAutotext;
+      else if (documentKind != null)
+        name = documentKind.ShortName + name;
+      
+      name = Sungero.Docflow.PublicFunctions.Module.TrimSpecialSymbols(name);
+      
+      _obj.Name = Sungero.Docflow.PublicFunctions.OfficialDocument.AddClosingQuote(name, _obj);
+      
+    }    
   }
 }

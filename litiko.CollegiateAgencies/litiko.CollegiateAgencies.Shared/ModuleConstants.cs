@@ -32,9 +32,15 @@ namespace litiko.CollegiateAgencies.Constants
       
       /// <summary> Пояснительная записка </summary>
       [Sungero.Core.Public]
-      public static readonly Guid ExplanatoryNote = Guid.Parse("83c31ba0-0c56-4738-8450-a2a401bc9a2e");      
+      public static readonly Guid ExplanatoryNote = Guid.Parse("83c31ba0-0c56-4738-8450-a2a401bc9a2e");
      
-      
+      /// <summary> Выписка из протокола </summary>
+      [Sungero.Core.Public]
+      public static readonly Guid ExtractProtocol = Guid.Parse("7925bb14-ab32-40e7-96cf-656547d5f6a3");
+
+      /// <summary> Постановление </summary>
+      [Sungero.Core.Public]
+      public static readonly Guid Resolution = Guid.Parse("a145af0a-35bc-40ac-b616-8eb7418cf785");
     }
     
     public static class RoleGuid
@@ -47,5 +53,17 @@ namespace litiko.CollegiateAgencies.Constants
       [Sungero.Core.Public]
       public static readonly Guid Presidents = Guid.Parse("b576b6af-c159-416d-bb37-bc8bfed3210b");      
     }
+    
+    public static class ParamNames
+    {
+      /// <summary> Не обновлять Проект решения </summary>
+      [Sungero.Core.Public]
+      public const string DontUpdateProjectSolution = "DontUpdateProjectSolution";
+    }
+    
+   /// <summary> Наименование шаблона протокола совещания </summary>
+   [Sungero.Core.Public]
+   public const string MinutesTemplateName = "Шаблон протокола заседания КОУ (RU)";    
+    
   }
 }

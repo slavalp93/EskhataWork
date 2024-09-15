@@ -10548,9 +10548,9 @@ namespace FastReport
   <ReportPage Name="Page1" TopMargin="15.9" Watermark.Font="Arial, 60pt">
     <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="265.25">
       <TextObject Name="Text1" Top="41.45" Width="718.2" Height="28.35" Text="Заседание [Meeting.MeetingCategorylitiko.NameForTemplate]" HorzAlign="Center" Font="Palatino Linotype, 12pt, style=Bold"/>
-      <TextObject Name="Text2" Left="73.95" Top="126.05" Width="170.1" Height="18.9" Text="Место проведения:" Font="Palatino Linotype, 12pt"/>
-      <TextObject Name="Text3" Left="73.95" Top="163.85" Width="170.1" Height="18.9" Text="Дата/Время:" Font="Palatino Linotype, 12pt"/>
-      <TextObject Name="Text4" Left="73.95" Top="185.75" Width="170.1" Height="18.9" Text="Участники:" Font="Palatino Linotype, 12pt"/>
+      <TextObject Name="Text2" Left="45.6" Top="126.05" Width="198.45" Height="18.9" Text="Место проведения:" Font="Palatino Linotype, 12pt"/>
+      <TextObject Name="Text3" Left="45.6" Top="163.85" Width="198.45" Height="18.9" Text="Дата/Время:" Font="Palatino Linotype, 12pt"/>
+      <TextObject Name="Text4" Left="45.6" Top="185.75" Width="198.45" Height="18.9" Text="Участники:" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text5" Left="245.05" Top="126.05" Width="463.05" Height="37.8" Text="[Meeting.Location] [Meeting.MeetingMethodlitiko.Name]" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text6" Left="245.05" Top="163.85" Width="463.05" Height="18.9" Text="[Meeting.DateTime]" Font="Palatino Linotype, 12pt">
         <Formats>
@@ -10564,18 +10564,18 @@ namespace FastReport
       <TextObject Name="Text20" Top="9.45" Width="718.2" Height="28.35" HorzAlign="Center" Font="Palatino Linotype, 12pt, style=Bold"/>
     </ReportTitleBand>
     <ColumnHeaderBand Name="ColumnHeader1" Top="268.11" Width="718.2" Height="18.9">
-      <TextObject Name="Text14" Left="604.8" Width="113.4" Height="18.9" Border.Lines="All" Text="Приложение" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
+      <TextObject Name="Text14" Left="585.9" Width="132.3" Height="18.9" Border.Lines="All" Text="Приложение" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text10" Width="28.35" Height="18.9" Border.Lines="All" Text="№" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
-      <TextObject Name="Text11" Left="28.35" Width="349.65" Height="18.9" Border.Lines="All" Text="Тема повестки дня" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
-      <TextObject Name="Text12" Left="378" Width="94.5" Height="18.9" Border.Lines="All" Text="Регламент" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
-      <TextObject Name="Text13" Left="472.5" Width="132.3" Height="18.9" Border.Lines="All" Text="Докладчик" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
+      <TextObject Name="Text11" Left="28.35" Width="321.3" Height="18.9" Border.Lines="All" Text="Тема повестки дня" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
+      <TextObject Name="Text12" Left="349.65" Width="103.95" Height="18.9" Border.Lines="All" Text="Регламент" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
+      <TextObject Name="Text13" Left="453.6" Width="132.3" Height="18.9" Border.Lines="All" Text="Докладчик" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
     </ColumnHeaderBand>
     <DataBand Name="Data1" Top="289.86" Width="718.2" Height="18.9" DataSource="4d5dfb585d3f1b63194daa4a9b9c36a8">
       <TextObject Name="Text15" Width="28.35" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.Number]." Font="Palatino Linotype, 12pt"/>
-      <TextObject Name="Text16" Left="28.35" Width="349.65" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.ProjectSolution.Subject]" Font="Palatino Linotype, 12pt"/>
-      <TextObject Name="Text17" Left="378" Width="94.5" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.ProjectSolution.Regulations]" Font="Palatino Linotype, 12pt"/>
-      <TextObject Name="Text18" Left="472.5" Width="132.3" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.ProjectSolution.Speaker.Name]" Font="Palatino Linotype, 12pt"/>
-      <TextObject Name="Text19" Left="604.8" Width="113.4" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[litiko.CollegiateAgencies.PublicFunctions.Projectsolution.GetProjectSolutionAddendumSubjects([Meeting.ProjectSolutionslitiko.ProjectSolution.Id])]" Font="Palatino Linotype, 12pt"/>
+      <TextObject Name="Text16" Left="28.35" Width="321.3" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.ProjectSolution.Subject]" Font="Palatino Linotype, 12pt"/>
+      <TextObject Name="Text17" Left="349.65" Width="103.95" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.ProjectSolution.Regulations]" Font="Palatino Linotype, 12pt"/>
+      <TextObject Name="Text18" Left="453.6" Width="132.3" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.ProjectSolution.Speaker.Name]" Font="Palatino Linotype, 12pt"/>
+      <TextObject Name="Text19" Left="585.9" Width="132.3" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[litiko.CollegiateAgencies.PublicFunctions.Projectsolution.GetProjectSolutionAddendumSubjects([Meeting.ProjectSolutionslitiko.ProjectSolution.Id])]" Font="Palatino Linotype, 12pt"/>
     </DataBand>
   </ReportPage>
 </Report>

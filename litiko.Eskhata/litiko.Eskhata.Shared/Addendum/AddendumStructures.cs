@@ -4,6 +4,7 @@ using System.Linq;
 using Sungero.Core;
 using Sungero.CoreEntities;
 
-namespace litiko.Eskhata
+namespace litiko.Eskhata.Structures.Docflow.Addendum
 {
+
 }

@@ -34,6 +34,38 @@ namespace litiko.CollegiateAgencies.Server
       newDoc.DocumentKind = docKind;
       return newDoc;
     }    
+
+    /// <summary>
+    /// Создать выписку из протокола.
+    /// </summary>
+    /// <returns>Выписка из протокола.</returns>
+    [Remote, Public]
+    public static Sungero.Docflow.IAddendum CreateExtractProtocol()
+    {
+      var docKind = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(litiko.CollegiateAgencies.PublicConstants.Module.DocumentKindGuids.ExtractProtocol);
+      if (docKind == null)
+        return null;
+      
+      var newDoc = Sungero.Docflow.Addendums.Create();
+      newDoc.DocumentKind = docKind;
+      return newDoc;
+    } 
+
+    /// <summary>
+    /// Создать постановление.
+    /// </summary>
+    /// <returns>Постановление.</returns>
+    [Remote, Public]
+    public static Sungero.Docflow.IAddendum CreateResolution()
+    {
+      var docKind = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(litiko.CollegiateAgencies.PublicConstants.Module.DocumentKindGuids.Resolution);
+      if (docKind == null)
+        return null;
+      
+      var newDoc = Sungero.Docflow.Addendums.Create();
+      newDoc.DocumentKind = docKind;      
+      return newDoc;
+    }
     
     /// <summary>
     /// Пункты решения (RU).
@@ -129,7 +161,7 @@ namespace litiko.CollegiateAgencies.Server
     {
       var document = Projectsolutions.GetAll().Where(x => x.Id == docId).FirstOrDefault();
       if (document == null)
-        return null;
+        return string.Empty;
       
       return string.Join(Environment.NewLine, document.Relations.GetRelated().Select(d => Sungero.Docflow.OfficialDocuments.As(d).Subject));
     }    

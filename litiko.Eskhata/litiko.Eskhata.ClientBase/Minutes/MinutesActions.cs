@@ -12,8 +12,8 @@ namespace litiko.Eskhata.Client
     public override void CreateFromTemplate(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       try
-      {
-        litiko.Eskhata.Functions.Minutes.Remote.FillMinutesTemplate(_obj);
+      {       
+        litiko.CollegiateAgencies.PublicFunctions.Module.Remote.CreateMinutesBody(_obj, false);
         e.AddInformation(litiko.Eskhata.Resources.VersionCreatedSuccessfully);
       }
       catch (Exception ex)

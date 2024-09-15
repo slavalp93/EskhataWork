@@ -18,8 +18,8 @@ namespace litiko.CollegiateAgencies.Server
       GrantRightsOnEntities();
       
       CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.Speaker, "Докладчик");
-      CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.SecretaryByCat, "Секретарь по категории заседания");
-      CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.PresidentByCat, "Председатель по категории заседания");
+      CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.MeetingSecretary, "Секретарь заседания");
+      CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.MeetingPresident, "Председатель заседания");
       CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.MeetingMembers, "Участники заседания");
       CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.MeetingInvited, "Приглашенные сотрудники");
     }
@@ -79,6 +79,34 @@ namespace litiko.CollegiateAgencies.Server
                            Constants.Module.DocumentKindGuids.ExplanatoryNote,
                            false);
       #endregion     
+      
+      #region Выписка из протокола 
+      Sungero.Docflow.PublicInitializationFunctions.Module.
+        CreateDocumentKind(Resources.ExtractProtocolKind,
+                           Resources.ExtractProtocolKind,
+                           notNumerable,
+                           Sungero.Docflow.DocumentKind.DocumentFlow.Inner,
+                           true,
+                           false,
+                           Constants.Module.DocumentTypeGuids.Addendum,
+                           new Sungero.Domain.Shared.IActionInfo[] { Sungero.Docflow.OfficialDocuments.Info.Actions.SendForFreeApproval, Sungero.Docflow.OfficialDocuments.Info.Actions.SendForAcquaintance },
+                           Constants.Module.DocumentKindGuids.ExtractProtocol,
+                           false);
+      #endregion      
+      
+      #region Постановление 
+      Sungero.Docflow.PublicInitializationFunctions.Module.
+        CreateDocumentKind(Resources.ResolutionKind,
+                           Resources.ResolutionKind,
+                           registrable,
+                           Sungero.Docflow.DocumentKind.DocumentFlow.Inner,
+                           true,
+                           false,
+                           Constants.Module.DocumentTypeGuids.Addendum,
+                           new Sungero.Domain.Shared.IActionInfo[] { Sungero.Docflow.OfficialDocuments.Info.Actions.SendForFreeApproval, Sungero.Docflow.OfficialDocuments.Info.Actions.SendForApproval, Sungero.Docflow.OfficialDocuments.Info.Actions.SendForAcquaintance },
+                           Constants.Module.DocumentKindGuids.Resolution,
+                           false);
+      #endregion       
       
     }
     
