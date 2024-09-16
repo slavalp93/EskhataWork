@@ -58,4 +58,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="GetProjectSolutionDecidedMinutesEN" xml:space="preserve">
+    <value>Пункты решения протокола (EN)</value>
+  </data>
+  <data name="GetProjectSolutionDecidedMinutesRU" xml:space="preserve">
+    <value>Пункты решения протокола (RU)</value>
+  </data>
+  <data name="GetProjectSolutionDecidedMinutesTJ" xml:space="preserve">
+    <value>Пункты решения протокола (TJ)</value>
+  </data>
 </root>

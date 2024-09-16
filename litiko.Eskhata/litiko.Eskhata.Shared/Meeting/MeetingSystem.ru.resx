@@ -166,4 +166,10 @@
   <data name="Enum_Votinglitiko_IntExt" xml:space="preserve">
     <value>Очное/Заочное</value>
   </data>
+  <data name="Control_6fd2e547cb584fbc96649035091eb5ec_DisplayValue" xml:space="preserve">
+    <value>Обновить результаты голосования</value>
+  </data>
+  <data name="Control_67f7c031991a4fff93ef0de3bcfd09a8_DisplayValue" xml:space="preserve">
+    <value>Отправить на голосование</value>
+  </data>
 </root>

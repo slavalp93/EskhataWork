@@ -41,18 +41,32 @@ namespace litiko.CollegiateAgencies
   partial class ProjectsolutionDecidedMinutesSharedCollectionHandlers
   {
 
+    public virtual void DecidedMinutesDeleted(Sungero.Domain.Shared.CollectionPropertyDeletedEventArgs e)
+    {
+      int minNumber = 1;
+      foreach (var decision in _obj.DecidedMinutes)
+        decision.Number = minNumber++;      
+    }
+
     public virtual void DecidedMinutesAdded(Sungero.Domain.Shared.CollectionPropertyAddedEventArgs e)
     {
-      _added.Number = _obj.DecidedMinutes.Count;
+      _added.Number = (_obj.DecidedMinutes.Max(a => a.Number) ?? 0) + 1;
     }
   }
 
   partial class ProjectsolutionDecidedSharedCollectionHandlers
   {
 
+    public virtual void DecidedDeleted(Sungero.Domain.Shared.CollectionPropertyDeletedEventArgs e)
+    {
+      int minNumber = 1;
+      foreach (var decision in _obj.Decided)
+        decision.Number = minNumber++;      
+    }
+
     public virtual void DecidedAdded(Sungero.Domain.Shared.CollectionPropertyAddedEventArgs e)
     {
-      _added.Number = _obj.Decided.Count;
+      _added.Number = (_obj.Decided.Max(a => a.Number) ?? 0) + 1;
     }
   }
 

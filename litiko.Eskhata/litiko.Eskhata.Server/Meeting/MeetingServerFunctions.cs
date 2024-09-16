@@ -68,15 +68,33 @@ namespace litiko.Eskhata.Server
     /// Получить нумерованный список отсутствующих совещания.
     /// </summary>
     /// <param name="withJobTitle">Признак отображения должности.</param>
+    /// <param name="withReason">Признак отображения причины.</param>
     /// <returns>Нумерованный список отсутствующих совещания.</returns>
     [Public]
-    public string GetMeetingAbsentNumberedList(bool withJobTitle)
-    {                  
-      var employees = _obj.Absentlitiko.Select(x => x.Employee).ToList();      
-      if (!employees.Any())
+    public string GetMeetingAbsentNumberedList(bool withJobTitle, bool withReason = true)
+    {                        
+      if (!_obj.Absentlitiko.Any())
         return string.Empty;
       
-      return Sungero.Company.PublicFunctions.Employee.Remote.GetEmployeesNumberedList(employees, withJobTitle);
+      //return Sungero.Company.PublicFunctions.Employee.Remote.GetEmployeesNumberedList(employees, withJobTitle);      
+      
+      var employeesNumberedList = new List<string>();
+      int number = 1;
+      foreach (var element in _obj.Absentlitiko.Where(x => x.Employee != null))
+      {
+        var employee = element.Employee;
+        var reason = element.Reason;
+        var shortName = Sungero.Company.PublicFunctions.Employee.GetShortName(employee, true);
+        var employeeNumberedName = string.Format("{0}. {1}", number, shortName);
+        if (withJobTitle && employee.JobTitle != null && !string.IsNullOrWhiteSpace(employee.JobTitle.Name))
+          employeeNumberedName = string.Format("{0} – {1}", employeeNumberedName, employee.JobTitle.Name);
+        if (withReason && !string.IsNullOrWhiteSpace(reason))
+          employeeNumberedName = string.Format("{0} ({1})", employeeNumberedName, reason);
+        employeesNumberedList.Add(employeeNumberedName);
+        number++;
+      }
+      
+      return string.Join("\r\n", employeesNumberedList);                 
     }
 
     /// <summary>

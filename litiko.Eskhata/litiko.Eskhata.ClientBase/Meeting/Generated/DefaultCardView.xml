@@ -35,7 +35,7 @@
             <property name="Name">Meeting_Absentlitiko_Employee</property>
             <property name="FieldName">Employee</property>
             <property name="VisibleIndex">0</property>
-            <property name="Width">317</property>
+            <property name="Width">403</property>
             <property name="ActualWidth">41*</property>
           </property>
           <property name="Item2" isnull="true" iskey="true">
@@ -43,7 +43,7 @@
             <property name="Name">Meeting_Absentlitiko_Reason</property>
             <property name="FieldName">Reason</property>
             <property name="VisibleIndex">1</property>
-            <property name="Width">402</property>
+            <property name="Width">512</property>
             <property name="ActualWidth">52*</property>
           </property>
         </property>
@@ -58,7 +58,7 @@
         <property name="View" isnull="true" iskey="true">
           <property name="LinesPerRowMode">None</property>
           <property name="ColumnChooserState" isnull="true" iskey="true">
-            <property name="Location">937,-2</property>
+            <property name="Location">979,-2</property>
             <property name="Size">220,250</property>
           </property>
           <property name="AllowMoveColumnToDropArea">false</property>
@@ -76,58 +76,52 @@
         <property name="GroupCount">0</property>
         <property name="Columns" iskey="true" value="6">
           <property name="Item1" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">1</property>
             <property name="Visible">true</property>
             <property name="Name">Meeting_ProjectSolutionslitiko_ProjectSolution</property>
             <property name="FieldName">ProjectSolution</property>
-            <property name="VisibleIndex">1</property>
-            <property name="Width">863</property>
-            <property name="ActualWidth">64*</property>
+            <property name="VisibleIndex">0</property>
+            <property name="Width">118</property>
+            <property name="ActualWidth">10*</property>
           </property>
           <property name="Item2" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">0</property>
             <property name="Visible">true</property>
             <property name="Name">Meeting_ProjectSolutionslitiko_Number</property>
             <property name="FieldName">Number</property>
-            <property name="VisibleIndex">0</property>
-            <property name="Width">26</property>
-            <property name="ActualWidth">3*</property>
+            <property name="VisibleIndex">1</property>
+            <property name="Width">47</property>
+            <property name="ActualWidth">4*</property>
           </property>
           <property name="Item3" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">2</property>
             <property name="Visible">true</property>
             <property name="Name">Meeting_ProjectSolutionslitiko_Yes</property>
             <property name="FieldName">Yes</property>
             <property name="VisibleIndex">2</property>
-            <property name="Width">52</property>
+            <property name="Width">47</property>
             <property name="ActualWidth">4*</property>
           </property>
           <property name="Item4" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">3</property>
             <property name="Visible">true</property>
             <property name="Name">Meeting_ProjectSolutionslitiko_No</property>
             <property name="FieldName">No</property>
             <property name="VisibleIndex">3</property>
-            <property name="Width">90</property>
-            <property name="ActualWidth">7*</property>
+            <property name="Width">71</property>
+            <property name="ActualWidth">6*</property>
           </property>
           <property name="Item5" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">4</property>
             <property name="Visible">true</property>
             <property name="Name">Meeting_ProjectSolutionslitiko_Abstained</property>
             <property name="FieldName">Abstained</property>
             <property name="VisibleIndex">4</property>
-            <property name="Width">116</property>
+            <property name="Width">106</property>
             <property name="ActualWidth">9*</property>
           </property>
           <property name="Item6" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">5</property>
             <property name="Visible">true</property>
             <property name="Name">Meeting_ProjectSolutionslitiko_Accepted</property>
             <property name="FieldName">Accepted</property>
             <property name="VisibleIndex">5</property>
-            <property name="Width">129</property>
-            <property name="ActualWidth">10*</property>
+            <property name="Width">130</property>
+            <property name="ActualWidth">11*</property>
           </property>
         </property>
         <property name="GroupSummarySortInfo" iskey="true" value="0" />

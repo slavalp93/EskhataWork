@@ -50,6 +50,10 @@ namespace litiko.Eskhata
 
     public virtual void ProjectSolutionslitikoDeleted(Sungero.Domain.Shared.CollectionPropertyDeletedEventArgs e)
     {
+      int minNumber = 1;
+      foreach (var element in _obj.ProjectSolutionslitiko)
+        element.Number = minNumber++; 
+
       var doc = _deleted.ProjectSolution;
       if (doc != null && doc.AccessRights.CanUpdate())
       {
@@ -60,8 +64,8 @@ namespace litiko.Eskhata
     }
 
     public virtual void ProjectSolutionslitikoAdded(Sungero.Domain.Shared.CollectionPropertyAddedEventArgs e)
-    {
-      _added.Number = _obj.ProjectSolutionslitiko.Count;
+    {      
+      _added.Number = (_obj.ProjectSolutionslitiko.Max(a => a.Number) ?? 0) + 1;
     }
   }
 

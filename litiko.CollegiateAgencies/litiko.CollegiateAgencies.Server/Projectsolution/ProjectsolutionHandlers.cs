@@ -7,6 +7,27 @@ using litiko.CollegiateAgencies.Projectsolution;
 
 namespace litiko.CollegiateAgencies
 {
+  partial class ProjectsolutionVotingMemberPropertyFilteringServerHandler<T>
+  {
+
+    public virtual IQueryable<T> VotingMemberFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e)
+    {
+      if (_root.Meeting != null)
+      {
+        var members = _root.Meeting.Members.Where(x => x.Member != null).Select(x => x.Member).ToList();
+        query = query.Where(x => members.Contains(x));
+      }        
+      
+      if (_root.Voting.Any())
+      {
+        var alreadySelected = _root.Voting.Where(x => x.Member != null).Select(x => x.Member).ToList();
+        query = query.Where(x => !alreadySelected.Contains(x));
+      }        
+      
+      return query;
+    }
+  }
+
   partial class ProjectsolutionLeadingDocumentPropertyFilteringServerHandler<T>
   {
 

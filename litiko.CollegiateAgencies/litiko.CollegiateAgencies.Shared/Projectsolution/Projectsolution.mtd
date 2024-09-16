@@ -741,7 +741,8 @@
   ],
   "HandledEvents": [
     "CreatedServer",
-    "WriteHistoryServer"
+    "WriteHistoryServer",
+    "RefreshClient"
   ],
   "IconResourcesKeys": [],
   "IntegrationServiceName": "CollegiateAgenciesProjectsolution",
@@ -953,7 +954,8 @@
       "Code": "PSDecided",
       "EntityGuid": "424a6ac7-5a57-48da-81eb-8526233aaf1f",
       "HandledEvents": [
-        "AddedShared"
+        "AddedShared",
+        "DeletedShared"
       ],
       "IsShowedInList": false,
       "PreviousPropertyGuid": "db0b84ff-f593-4414-a3ec-79e48a537402"
@@ -989,7 +991,8 @@
       "Code": "Projectsolutio",
       "EntityGuid": "b28bfc74-14f6-4a88-945e-0f5324195e52",
       "HandledEvents": [
-        "AddedShared"
+        "AddedShared",
+        "DeletedShared"
       ],
       "IsShowedInList": false,
       "PreviousPropertyGuid": "caee5300-4df7-4382-89c1-3c1452f9adc6"

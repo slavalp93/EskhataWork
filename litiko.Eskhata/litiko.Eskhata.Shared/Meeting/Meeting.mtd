@@ -370,24 +370,32 @@
     {
       "$type": "Sungero.Metadata.InplaceFormMetadata, Sungero.Metadata",
       "NameGuid": "e36f46d2-cabe-4181-aebf-eea270776a13",
-      "Name": "Agendalitiko",
+      "Name": "ProjectSolutionslitiko",
       "Controls": [
         {
           "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
           "NameGuid": "61f64359-2b31-453b-9d09-c5b84ac94899",
-          "Name": "Mainlitiko"
+          "Name": "Mainlitiko",
+          "ColumnDefinitions": [
+            {
+              "Percentage": 50.0
+            },
+            {
+              "Percentage": 50.0
+            }
+          ]
         },
         {
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
           "NameGuid": "cfb084bb-cb3d-4ed0-9a7a-fa2aabbb1d86",
           "Name": "ProjectSolutionslitikolitiko",
           "ColumnNumber": 0,
-          "ColumnSpan": 1,
+          "ColumnSpan": 2,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.GridControlToChildCollectionBinder",
           "HeaderLocation": "None",
           "ParentGuid": "61f64359-2b31-453b-9d09-c5b84ac94899",
           "PropertyGuid": "3f359f92-84a1-49cc-afe7-a599e9c6c958",
-          "RowNumber": 0,
+          "RowNumber": 1,
           "RowSpan": 1,
           "Settings": [
             {
@@ -395,6 +403,34 @@
               "Value": true
             }
           ]
+        },
+        {
+          "$type": "Sungero.Metadata.HyperlinkControlMetadata, Sungero.Metadata",
+          "NameGuid": "6fd2e547-cb58-4fbc-9664-9035091eb5ec",
+          "Name": "UpdateVotinglitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.HyperlinkToSourceBinder",
+          "FunctionName": "UpdateVoting",
+          "HeaderLocation": "None",
+          "ParentGuid": "61f64359-2b31-453b-9d09-c5b84ac94899",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.HyperlinkControlMetadata, Sungero.Metadata",
+          "NameGuid": "67f7c031-991a-4fff-93ef-0de3bcfd09a8",
+          "Name": "Controllitiko",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.HyperlinkToSourceBinder",
+          "FunctionName": "SendToVote",
+          "HeaderLocation": "None",
+          "ParentGuid": "61f64359-2b31-453b-9d09-c5b84ac94899",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "ParentFormGuid": "fd229789-a1ab-4fd2-a52d-1e04ce2ab3f9"
@@ -607,6 +643,11 @@
         },
         {
           "Name": "withJobTitle",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        },
+        {
+          "Name": "withReason",
           "ParameterType": "global::System.Boolean",
           "ParameterTypeFullName": "System.Boolean"
         }

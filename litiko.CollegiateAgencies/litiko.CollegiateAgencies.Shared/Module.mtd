@@ -219,6 +219,14 @@
       "Value": "new System.Guid(\"7925bb14-ab32-40e7-96cf-656547d5f6a3\")"
     },
     {
+      "Name": "ExtractTemplateName",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Шаблон выписки из протокола заседания КОУ (RU)\""
+    },
+    {
       "Name": "Minutes",
       "ParentClasses": [
         "Module",
@@ -406,7 +414,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.5",
+  "Version": "0.0.1.6",
   "Widgets": [],
   "Versions": [
     {

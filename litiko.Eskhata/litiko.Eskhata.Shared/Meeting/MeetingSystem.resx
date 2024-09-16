@@ -169,4 +169,10 @@
   <data name="Enum_Votinglitiko_IntExt" xml:space="preserve">
     <value>Intramural/Extramural</value>
   </data>
+  <data name="Control_6fd2e547cb584fbc96649035091eb5ec_DisplayValue" xml:space="preserve">
+    <value>Update voting</value>
+  </data>
+  <data name="Control_67f7c031991a4fff93ef0de3bcfd09a8_DisplayValue" xml:space="preserve">
+    <value>Send to vote</value>
+  </data>
 </root>

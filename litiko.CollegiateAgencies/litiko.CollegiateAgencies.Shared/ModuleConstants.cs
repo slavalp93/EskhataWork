@@ -61,9 +61,13 @@ namespace litiko.CollegiateAgencies.Constants
       public const string DontUpdateProjectSolution = "DontUpdateProjectSolution";
     }
     
-   /// <summary> Наименование шаблона протокола совещания </summary>
+   /// <summary> Наименование шаблона Протокола совещания </summary>
    [Sungero.Core.Public]
    public const string MinutesTemplateName = "Шаблон протокола заседания КОУ (RU)";    
-    
+
+   /// <summary> Наименование шаблона Выписки из протокола совещания </summary>
+   [Sungero.Core.Public]
+   public const string ExtractTemplateName = "Шаблон выписки из протокола заседания КОУ (RU)";  
+   
   }
 }

@@ -10573,7 +10573,7 @@ namespace FastReport
     <DataBand Name="Data1" Top="289.86" Width="718.2" Height="18.9" DataSource="4d5dfb585d3f1b63194daa4a9b9c36a8">
       <TextObject Name="Text15" Width="28.35" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.Number]." Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text16" Left="28.35" Width="321.3" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.ProjectSolution.Subject]" Font="Palatino Linotype, 12pt"/>
-      <TextObject Name="Text17" Left="349.65" Width="103.95" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.ProjectSolution.Regulations]" Font="Palatino Linotype, 12pt"/>
+      <TextObject Name="Text17" Left="349.65" Width="103.95" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.ProjectSolution.Regulations]" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text18" Left="453.6" Width="132.3" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.ProjectSolution.Speaker.Name]" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text19" Left="585.9" Width="132.3" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[litiko.CollegiateAgencies.PublicFunctions.Projectsolution.GetProjectSolutionAddendumSubjects([Meeting.ProjectSolutionslitiko.ProjectSolution.Id])]" Font="Palatino Linotype, 12pt"/>
     </DataBand>

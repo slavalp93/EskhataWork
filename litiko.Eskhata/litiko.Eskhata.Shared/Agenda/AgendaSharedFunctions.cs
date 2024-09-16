@@ -61,9 +61,7 @@ namespace litiko.Eskhata.Shared
       }
       
       if (string.IsNullOrWhiteSpace(name))
-        name = Sungero.Docflow.Resources.DocumentNameAutotext;
-      else if (documentKind != null)
-        name = documentKind.ShortName + name;
+        name = Sungero.Docflow.Resources.DocumentNameAutotext;      
       
       name = Sungero.Docflow.PublicFunctions.Module.TrimSpecialSymbols(name);
       

@@ -132,9 +132,14 @@ namespace litiko.CollegiateAgencies.Server
       #region Предпроверки
       
       // Наличие "Шаблон протокола заседания КОУ"
-      var templateDoc = Sungero.Content.ElectronicDocuments.GetAll().Where(d => Sungero.Docflow.DocumentTemplates.Is(d) && d.Name == Constants.Module.MinutesTemplateName).FirstOrDefault();
+      var templateDoc = Sungero.Content.ElectronicDocuments.Null;
+      if (!isExtract)      
+        templateDoc = Sungero.Content.ElectronicDocuments.GetAll().Where(d => Sungero.Docflow.DocumentTemplates.Is(d) && d.Name == Constants.Module.MinutesTemplateName).FirstOrDefault();
+      else
+        templateDoc = Sungero.Content.ElectronicDocuments.GetAll().Where(d => Sungero.Docflow.DocumentTemplates.Is(d) && d.Name == Constants.Module.ExtractTemplateName).FirstOrDefault();
+
       if (templateDoc == null)
-        throw AppliedCodeException.Create(Resources.MinutesTemplateNotFoundFormat(Constants.Module.MinutesTemplateName));
+        throw AppliedCodeException.Create(Resources.MinutesTemplateNotFoundFormat(isExtract == true ? Constants.Module.ExtractTemplateName : Constants.Module.MinutesTemplateName));
             
       var meeting = litiko.Eskhata.Meetings.Null;
       if (litiko.Eskhata.Minuteses.Is(document))
@@ -171,14 +176,14 @@ namespace litiko.CollegiateAgencies.Server
       replacebleFields.Add("<PresidentFIO>", meeting.President != null ? Sungero.Company.PublicFunctions.Employee.GetShortName(meeting.President, true) : string.Empty);            
       replacebleFields.Add("<SecretaryFIO>", meeting.Secretary!= null ? Sungero.Company.PublicFunctions.Employee.GetShortName(meeting.Secretary, true) : string.Empty);            
       replacebleFields.Add("<PresentFIOList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingPresentNumberedList(meeting, false));            
-      replacebleFields.Add("<AbsentFIOList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingAbsentNumberedList(meeting, false));            
+      replacebleFields.Add("<AbsentFIOList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingAbsentNumberedList(meeting, false, true));            
       replacebleFields.Add("<InvitedFIOList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingInvitedNumberedList(meeting, false));                  
       replacebleFields.Add("<TextForMinutesRU>", !string.IsNullOrEmpty(meetingCategory.TextForTemplate) ? meetingCategory.TextForTemplate : string.Empty);            
       replacebleFields.Add("<Quorum>", meeting.Quorumlitiko.HasValue ? meeting.Info.Properties.Quorumlitiko.GetLocalizedValue(meeting.Quorumlitiko).ToLower() : string.Empty);
       
       if (!isExtract)
       {
-        replacebleFields.Add("<DocDate>", document.RegistrationDate.HasValue ? document.RegistrationDate.Value.ToString("dd.mm.yy") : string.Empty);            
+        replacebleFields.Add("<DocDate>", document.RegistrationDate.HasValue ? document.RegistrationDate.Value.ToString("dd.MM.yyyy") : string.Empty);            
         replacebleFields.Add("<DocNumber>", !string.IsNullOrEmpty(document.RegistrationNumber) ? document.RegistrationNumber : string.Empty);                  
         replacebleFields.Add("<AgendaList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingProjectSolutionsNumberedList(meeting));
         // Все решения по совещанию
@@ -207,7 +212,7 @@ namespace litiko.CollegiateAgencies.Server
         var minutes = litiko.Eskhata.Minuteses.GetAll().Where(x => Equals(x.Meeting, meeting)).FirstOrDefault();
         if (minutes != null)
         {
-          regDate = minutes.RegistrationDate.HasValue ? minutes.RegistrationDate.Value.ToString("dd.mm.yy") : string.Empty;
+          regDate = minutes.RegistrationDate.HasValue ? minutes.RegistrationDate.Value.ToString("dd.MM.yyyy") : string.Empty;
           regnumber = !string.IsNullOrEmpty(minutes.RegistrationNumber) ? minutes.RegistrationNumber : string.Empty;
         }
         replacebleFields.Add("<DocDate>", regDate);

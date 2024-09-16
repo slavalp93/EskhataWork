@@ -17,6 +17,50 @@
   ],
   "BaseGuid": "58b9ed35-9c84-46cd-aa79-9b5ef5a82f5d",
   "CanBeNavigationPropertyType": true,
+  "ConverterFunctions": [
+    {
+      "Name": "GetProjectSolutionDecidedMinutesEN",
+      "DisplayNameResourceCode": "GetProjectSolutionDecidedMinutesEN",
+      "IsConverter": true,
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::litiko.Eskhata.IAddendum",
+          "ParameterTypeFullName": "litiko.Eskhata.IAddendum, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetProjectSolutionDecidedMinutesRU",
+      "DisplayNameResourceCode": "GetProjectSolutionDecidedMinutesRU",
+      "IsConverter": true,
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::litiko.Eskhata.IAddendum",
+          "ParameterTypeFullName": "litiko.Eskhata.IAddendum, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetProjectSolutionDecidedMinutesTJ",
+      "DisplayNameResourceCode": "GetProjectSolutionDecidedMinutesTJ",
+      "IsConverter": true,
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::litiko.Eskhata.IAddendum",
+          "ParameterTypeFullName": "litiko.Eskhata.IAddendum, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    }
+  ],
   "CreationAreaMetadata": {
     "NameGuid": "01403d88-dd86-41ff-aa3b-40002653507a",
     "Name": "CreationArea",
@@ -32,6 +76,9 @@
     "IsAncestorMetadata": true,
     "Versions": []
   },
+  "HandledEvents": [
+    "RefreshClient"
+  ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "58b9ed35-9c84-46cd-aa79-9b5ef5a82f5d",
   "OpenCardByDefaultInCollection": true,
@@ -74,8 +121,50 @@
       "Versions": []
     }
   ],
+  "PublicFunctions": [
+    {
+      "Name": "GetProjectSolutionDecidedMinutesEN",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::litiko.Eskhata.IAddendum",
+          "ParameterTypeFullName": "litiko.Eskhata.IAddendum, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetProjectSolutionDecidedMinutesRU",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::litiko.Eskhata.IAddendum",
+          "ParameterTypeFullName": "litiko.Eskhata.IAddendum, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetProjectSolutionDecidedMinutesTJ",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::litiko.Eskhata.IAddendum",
+          "ParameterTypeFullName": "litiko.Eskhata.IAddendum, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    }
+  ],
   "PublicStructures": [],
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "GetProjectSolutionDecidedMinutesEN",
+    "GetProjectSolutionDecidedMinutesRU",
+    "GetProjectSolutionDecidedMinutesTJ"
+  ],
   "RibbonCardMetadata": {
     "NameGuid": "a966f1e0-a47c-4692-8021-206bb0d46f63",
     "Name": "RibbonCard",

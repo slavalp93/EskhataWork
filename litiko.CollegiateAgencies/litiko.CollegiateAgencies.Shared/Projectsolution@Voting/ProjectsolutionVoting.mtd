@@ -26,8 +26,13 @@
       "CanBeSearch": false,
       "Code": "Member",
       "EntityGuid": "b7905516-2be5-4931-961c-cb38d5677565",
+      "HandledEvents": [
+        "LookupServer"
+      ],
       "IsRequired": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "NeedPassEntityToLookupEvent": true,
+      "OnlyRootEntityUsedInChildLookupEvent": true,
       "PreviousPropertyGuid": "44ec7c55-51b6-4096-9c46-88d950ca837b"
     },
     {
@@ -37,7 +42,8 @@
       "CanBeSearch": false,
       "Code": "Yes",
       "HandledEvents": [
-        "ChangedShared"
+        "ChangedShared",
+        "ValueInputClient"
       ],
       "IsSortingAllowed": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
@@ -50,7 +56,8 @@
       "CanBeSearch": false,
       "Code": "No",
       "HandledEvents": [
-        "ChangedShared"
+        "ChangedShared",
+        "ValueInputClient"
       ],
       "IsSortingAllowed": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
@@ -63,7 +70,8 @@
       "CanBeSearch": false,
       "Code": "Abstained",
       "HandledEvents": [
-        "ChangedShared"
+        "ChangedShared",
+        "ValueInputClient"
       ],
       "IsSortingAllowed": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
