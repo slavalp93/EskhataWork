@@ -69,5 +69,14 @@ namespace litiko.CollegiateAgencies.Constants
    [Sungero.Core.Public]
    public const string ExtractTemplateName = "Шаблон выписки из протокола заседания КОУ (RU)";  
    
+   /// <summary> Имя правила согласования по голосованию </summary>
+   [Sungero.Core.Public]
+   public const string VotingApprovalRuleName = "Голосование";    
+   
+   /// <summary> Председатели КОУ </summary>
+   [Sungero.Core.Public]
+   public static readonly Guid ApprovalTaskAddendaGroupGuid = Guid.Parse("852b3e7d-f178-47d3-8fad-a64021065cfd");    
+   
+   
   }
 }

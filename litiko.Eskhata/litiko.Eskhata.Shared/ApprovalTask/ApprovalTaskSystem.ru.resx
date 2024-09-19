@@ -58,4 +58,91 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Property_Voterslitiko" xml:space="preserve">
+    <value>Обязательные</value>
+  </data>
+  <data name="ControlGroup_b5b71d13e783420d8d4d4916dd2b80f0" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_787ba8b7315b44aaa4414d8b4c4d0cfb" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_5ad7d1dfa5494ca2a75f92fff58ccdaa" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_5ad7d1dfa5494ca2a75f92fff58ccdaa_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_0ce73296e5eb4a70a38fd5628e84313e" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_0ce73296e5eb4a70a38fd5628e84313e_EmptyText" xml:space="preserve">
+    <value>Укажите правило согласования...</value>
+  </data>
+  <data name="ControlGroup_21c21d997a5d4f98a4a4cf07b9ff27f2" xml:space="preserve">
+    <value>Согласующие</value>
+  </data>
+  <data name="Resource_d80aab0860e34bb7aee8b502e5af7b8a" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_d80aab0860e34bb7aee8b502e5af7b8a_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_6ed6ac17ade74155b16ad48304172170" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_6ed6ac17ade74155b16ad48304172170_EmptyText" xml:space="preserve">
+    <value>Укажите дополнительных согласующих…</value>
+  </data>
+  <data name="ControlGroup_15f9016511bf45479fe80534c6ff71d3" xml:space="preserve">
+    <value>Другие участники</value>
+  </data>
+  <data name="Resource_2056e8929ee74fecb5b0f4bcce7ee3d2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_2056e8929ee74fecb5b0f4bcce7ee3d2_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_a8d21b6bd26b44b685f87d3bcd507b76" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_a8d21b6bd26b44b685f87d3bcd507b76_EmptyText" xml:space="preserve">
+    <value>Укажите наблюдателей…</value>
+  </data>
+  <data name="Resource_849cb74c651b4282bd1531b8a89f7fce" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_849cb74c651b4282bd1531b8a89f7fce_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_715a24ffc04a49d593fa2c95e0bcdf80" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_715a24ffc04a49d593fa2c95e0bcdf80_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_795d55293ed140429c36ff861221083b" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_795d55293ed140429c36ff861221083b_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_93dbe86017f4436aaa0690e310422029" xml:space="preserve">
+    <value>Отправка документов контрагенту</value>
+  </data>
+  <data name="Resource_bd2d5af22aee4269818130fce44aed6b" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_bd2d5af22aee4269818130fce44aed6b_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_fa5740aff9bb49ddb044d31ac3e078a3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_fa5740aff9bb49ddb044d31ac3e078a3_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_7225e25461ef433299de51c1a8550078" xml:space="preserve">
+    <value>Голосующие</value>
+  </data>
 </root>

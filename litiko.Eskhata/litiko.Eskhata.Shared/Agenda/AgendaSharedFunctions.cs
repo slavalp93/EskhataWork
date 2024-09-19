@@ -24,12 +24,7 @@ namespace litiko.Eskhata.Shared
         var meeting = litiko.Eskhata.Meetings.As(_obj.Meeting);
         if (meeting != null)
         {
-          approvalTask.OtherGroup.All.Add(meeting);
-          
-          foreach (var element in meeting.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null))
-          {
-            approvalTask.OtherGroup.All.Add(element.ProjectSolution);
-          }          
+          approvalTask.OtherGroup.All.Add(meeting);          
         }        
       }
 

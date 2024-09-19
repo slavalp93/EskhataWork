@@ -61,4 +61,10 @@
   <data name="NoRightsForUpdateDocument" xml:space="preserve">
     <value>У вас нет прав на изменение документа "{0}".</value>
   </data>
+  <data name="SendToVoteDialogTittle" xml:space="preserve">
+    <value>Выбор вопросов для голосования</value>
+  </data>
+  <data name="SendToVoteDialogQuestions" xml:space="preserve">
+    <value>Вопросы для отправки</value>
+  </data>
 </root>

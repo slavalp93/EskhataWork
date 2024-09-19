@@ -73,4 +73,7 @@
   <data name="Enum_Type_MeetingInvited" xml:space="preserve">
     <value>Invited employees</value>
   </data>
+  <data name="Enum_Type_MeetingPresentKOU" xml:space="preserve">
+    <value>Present members of the KOU</value>
+  </data>
 </root>

@@ -58,9 +58,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Property_CheckIncludeInAgendalitiko" xml:space="preserve">
-    <value>Контроль включения в повестку</value>
-  </data>
   <data name="Resource_bd72e6f067304d9a8d7046e2b2c9ac0e" xml:space="preserve">
     <value />
   </data>
@@ -78,5 +75,14 @@
   </data>
   <data name="Resource_44d74841352947a98e96a7b3c267ea05" xml:space="preserve">
     <value />
+  </data>
+  <data name="Enum_CustomStageTypelitiko_Voting" xml:space="preserve">
+    <value>Голосование</value>
+  </data>
+  <data name="Property_CustomStageTypelitiko" xml:space="preserve">
+    <value>Тип этапа</value>
+  </data>
+  <data name="Enum_CustomStageTypelitiko_IncludeInMeet" xml:space="preserve">
+    <value>Включение в повестку</value>
   </data>
 </root>

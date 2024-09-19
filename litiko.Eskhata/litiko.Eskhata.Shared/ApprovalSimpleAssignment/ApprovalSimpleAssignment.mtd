@@ -5,6 +5,33 @@
   "AccessRightsMode": "Instance",
   "Actions": [
     {
+      "NameGuid": "5ee99b98-940f-4ea4-8b65-79d3df146ee5",
+      "Name": "AddChildEntity",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ]
+    },
+    {
+      "NameGuid": "f27bf08f-e406-4a03-9eb5-fa8d0dfaac4d",
+      "Name": "CopyChildEntity",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ]
+    },
+    {
+      "NameGuid": "3f334f1e-d7a4-4ca5-bd1a-f26b35ccfae8",
+      "Name": "DeleteChildEntity",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ]
+    },
+    {
       "$type": "Sungero.Workflow.Shared.ExecutionResultActionMetadata, Sungero.Workflow.Shared",
       "NameGuid": "ed1007f2-937b-490d-9134-fde4e25bab1c",
       "Name": "Complete",
@@ -17,6 +44,46 @@
     }
   ],
   "AssociatedGuid": "1bc72831-b65e-4e1b-b722-011f844115bb",
+  "AttachmentGroups": [
+    {
+      "NameGuid": "08e1ef90-521f-41a1-a13f-c6f175007e54",
+      "Name": "DocumentGroup",
+      "Constraints": [],
+      "IsAncestorMetadata": true,
+      "IsAssociatedEntityGroup": true,
+      "IsEnabled": false,
+      "IsRequired": true,
+      "Overridden": [
+        "Title",
+        "Description"
+      ],
+      "Versions": []
+    },
+    {
+      "NameGuid": "852b3e7d-f178-47d3-8fad-a64021065cfd",
+      "Name": "AddendaGroup",
+      "Constraints": [],
+      "IsAncestorMetadata": true,
+      "IsAssociatedEntityGroup": true,
+      "Overridden": [
+        "Title",
+        "Description"
+      ],
+      "Versions": []
+    },
+    {
+      "NameGuid": "bd87e6b5-e247-485a-93bf-52f24a64af5a",
+      "Name": "OtherGroup",
+      "Constraints": [],
+      "IsAncestorMetadata": true,
+      "IsAssociatedEntityGroup": true,
+      "Overridden": [
+        "Title",
+        "Description"
+      ],
+      "Versions": []
+    }
+  ],
   "BaseGuid": "b0931934-7981-4139-a398-f0e39abbb981",
   "CanBeNavigationPropertyType": true,
   "CreationAreaMetadata": {
@@ -34,8 +101,171 @@
     "IsAncestorMetadata": true,
     "Versions": []
   },
+  "Forms": [
+    {
+      "$type": "Sungero.Metadata.WorkflowEntityStandaloneFormMetadata, Sungero.Workflow.Shared",
+      "NameGuid": "4cdcf4c9-8c8b-465d-894f-96798c200167",
+      "Name": "Card",
+      "Controls": [
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "22f862c7-51f8-4aeb-a666-fb50c5e781ab",
+          "Name": "SubjectControllitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.TextEditorToTextBinder",
+          "ParentGuid": "fd466d7c-e80b-46e0-87c7-8648751d1474",
+          "PropertyGuid": "f01c370b-01c7-444e-8067-eec938c3debb",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": [
+            {
+              "Name": "Height",
+              "Value": 40
+            }
+          ],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "d5a5e82d-517f-4493-996d-52e98faa2b4f",
+          "Name": "AuthorControllitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "91a80f6a-b8ad-4928-885a-ae889629bd30",
+          "PropertyGuid": "51a65ccf-9098-46d5-a853-c9a7f7e95d28",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "b69f7f9c-56e1-4eaf-9611-41b0eb692844",
+          "Name": "PerformerControllitiko",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "91a80f6a-b8ad-4928-885a-ae889629bd30",
+          "PropertyGuid": "4d924904-9c82-4187-ac18-b3620cf6ec87",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "e0977187-5db7-496c-96bd-d30539b4b0db",
+          "Name": "DeadlineControllitiko",
+          "ColumnNumber": 2,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
+          "ParentGuid": "91a80f6a-b8ad-4928-885a-ae889629bd30",
+          "PropertyGuid": "5380ec02-41db-47eb-8c29-18704454f122",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
+          "NameGuid": "91a80f6a-b8ad-4928-885a-ae889629bd30",
+          "Name": "ControlGrouplitiko",
+          "ColumnDefinitions": [
+            {
+              "Percentage": 33.33
+            },
+            {
+              "Percentage": 33.33
+            },
+            {
+              "Percentage": 33.33
+            }
+          ],
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "ParentGuid": "fd466d7c-e80b-46e0-87c7-8648751d1474",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
+          "NameGuid": "fd466d7c-e80b-46e0-87c7-8648751d1474",
+          "Name": "ControlGroup1litiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "ParentGuid": "ea8a2ab8-b43b-498f-b144-18e3613341d7",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "SharedNestedGroupsAlignment": true,
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.HeaderControlGroupMetadata, Sungero.Workflow.Shared",
+          "NameGuid": "ea8a2ab8-b43b-498f-b144-18e3613341d7",
+          "Name": "Headerlitiko",
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ThreadControlGroupMetadata, Sungero.Workflow.Shared",
+          "NameGuid": "5506d205-0826-4795-91cd-be765db1b8f2",
+          "Name": "Threadlitiko",
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.FooterControlGroupMetadata, Sungero.Workflow.Shared",
+          "NameGuid": "d7865c6f-e81e-4cb4-8a1c-a842990a3149",
+          "Name": "Footerlitiko",
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
+          "NameGuid": "25dd4cc3-349f-4d3b-8245-f70d485f6004",
+          "Name": "Votinglitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "ParentGuid": "d7865c6f-e81e-4cb4-8a1c-a842990a3149",
+          "RowNumber": 0,
+          "RowSpan": 1
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "75885f4d-7f47-4323-94ae-b991794c0ce3",
+          "Name": "Votinglitikolitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.GridControlToChildCollectionBinder",
+          "HeaderLocation": "Top",
+          "ParentGuid": "ea8a2ab8-b43b-498f-b144-18e3613341d7",
+          "PropertyGuid": "37fbb51b-f88b-4edc-932a-964d7f2d6c0d",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": [
+            {
+              "Name": "Height",
+              "Value": 150
+            },
+            {
+              "Name": "NeedExpand",
+              "Value": true
+            }
+          ]
+        }
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "Controls",
+        "UseAncestorControls",
+        "SettingsResourceKey"
+      ],
+      "Versions": []
+    }
+  ],
   "HandledEvents": [
-    "BeforeCompleteServer"
+    "BeforeCompleteServer",
+    "ShowingClient"
   ],
   "IconResourcesKeys": [],
   "IsVisibleThreadText": true,
@@ -45,8 +275,41 @@
   "Overridden": [
     "IsAutoGenerated"
   ],
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "96a6c2d9-380b-4507-9b77-300f4885d39d",
+      "Name": "CustomStageTypelitiko",
+      "Code": "CustomStageTyp",
+      "DirectValues": [
+        {
+          "NameGuid": "e0627931-d384-44d0-996c-089b843fb2b5",
+          "Name": "Voting",
+          "Code": "Voting"
+        },
+        {
+          "NameGuid": "2394a481-ecae-4335-ac80-58cebeca83d5",
+          "Name": "IncludeInMeet",
+          "Code": "IncludeInMeet"
+        }
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "c168ed44-761f-4e1b-801e-a27dd57e131f"
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "37fbb51b-f88b-4edc-932a-964d7f2d6c0d",
+      "Name": "Votinglitiko",
+      "Code": "Votinglitiko",
+      "EntityGuid": "d3c81c63-32fe-4558-85ad-c0a00a10c6ad",
+      "IsShowedInList": false,
+      "PreviousPropertyGuid": "96a6c2d9-380b-4507-9b77-300f4885d39d"
+    }
+  ],
   "PublicStructures": [],
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "ErrorVoteAllDecisions"
+  ],
   "RibbonCardMetadata": {
     "NameGuid": "bf464b78-d529-4a48-a827-6be1465f5b83",
     "Name": "RibbonCard",

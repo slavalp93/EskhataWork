@@ -118,4 +118,7 @@
   <data name="MeetingCategoryIsEmpty" xml:space="preserve">
     <value>В совещании не указано категорию.</value>
   </data>
+  <data name="HasActiveVotingTasks" xml:space="preserve">
+    <value>По некоторым документам есть активные задачи голосования.</value>
+  </data>
 </root>

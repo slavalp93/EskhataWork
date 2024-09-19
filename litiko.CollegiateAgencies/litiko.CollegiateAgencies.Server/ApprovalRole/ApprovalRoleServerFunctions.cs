@@ -172,7 +172,44 @@ namespace litiko.CollegiateAgencies.Server
       }
       #endregion
       
-      return result;      
+      #region Присутствующие члены КОУ
+      if (_obj.Type == litiko.CollegiateAgencies.ApprovalRole.Type.MeetingPresentKOU)
+      {
+        var meeting = litiko.Eskhata.Meetings.Null;
+        
+        if (litiko.Eskhata.Agendas.Is(document))
+        {
+          var agenda = litiko.Eskhata.Agendas.As(document);          
+          if (agenda.Meeting != null)
+            meeting = litiko.Eskhata.Meetings.As(agenda.Meeting);                                    
+        }
+        
+        if (litiko.Eskhata.Minuteses.Is(document))
+        {
+          var minutes = litiko.Eskhata.Minuteses.As(document);
+          if (minutes.Meeting != null)
+            meeting = litiko.Eskhata.Meetings.As(minutes.Meeting);
+        }
+        
+        if (meeting != null)
+        {
+          // Председатель
+          result.Add(meeting.President);
+            
+          // Присутствующие из членов КОУ            
+          if (meeting.MeetingCategorylitiko != null)
+          {
+            foreach (var element in meeting.Presentlitiko.Where(x => x.Employee != null ))
+            {
+              if (meeting.MeetingCategorylitiko.Members.Select(x => x.Member).Contains(element.Employee) && !result.Contains(element.Employee))
+                result.Add(element.Employee);
+            }            
+          }          
+        }
+      }
+      #endregion
+
+      return result;
     }
   }
 }

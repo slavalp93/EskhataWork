@@ -9,6 +9,7 @@ namespace litiko.Eskhata.Client
 {
   partial class AddendumActions
   {
+
     public override void CreateFromTemplate(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var docKindExtractProtocol = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(litiko.CollegiateAgencies.PublicConstants.Module.DocumentKindGuids.ExtractProtocol);

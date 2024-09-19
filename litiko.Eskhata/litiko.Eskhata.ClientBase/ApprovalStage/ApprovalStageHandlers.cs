@@ -10,11 +10,15 @@ namespace litiko.Eskhata
   partial class ApprovalStageClientHandlers
   {
 
-    public override void Showing(Sungero.Presentation.FormShowingEventArgs e)
+    public virtual IEnumerable<Enumeration> CustomStageTypelitikoFiltering(IEnumerable<Enumeration> query)
     {
-      base.Showing(e);
+      if (_obj.StageType != StageType.SimpleAgr || _obj.AllowSendToRework.GetValueOrDefault())
+        query = query.Where(q => !Equals(q, CustomStageTypelitiko.Voting));
       
-      _obj.State.Properties.CheckIncludeInAgendalitiko.IsVisible = _obj.StageType == Sungero.Docflow.ApprovalStage.StageType.SimpleAgr;
+      if (_obj.StageType != StageType.SimpleAgr)
+        query = query.Where(q => !Equals(q, CustomStageTypelitiko.IncludeInMeet));
+      
+      return query;
     }
   }
 

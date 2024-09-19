@@ -61,4 +61,10 @@
   <data name="NoRightsForUpdateDocument" xml:space="preserve">
     <value>You do not have permission to edit document "{0}".</value>
   </data>
+  <data name="SendToVoteDialogTittle" xml:space="preserve">
+    <value>Selecting voting questions</value>
+  </data>
+  <data name="SendToVoteDialogQuestions" xml:space="preserve">
+    <value>Questions to submit</value>
+  </data>
 </root>

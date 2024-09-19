@@ -21,8 +21,14 @@ namespace litiko.Eskhata
         .Where(s => s.Stage.StageType == Sungero.Docflow.ApprovalStage.StageType.SimpleAgr)
         .FirstOrDefault(s => s.Number == _obj.StageNumber);                  
       
-      if (stage != null && litiko.Eskhata.ApprovalStages.As(stage.Stage).CheckIncludeInAgendalitiko.Value && doc != null && litiko.CollegiateAgencies.Projectsolutions.Is(doc) && !litiko.CollegiateAgencies.Projectsolutions.As(doc).IncludedInAgenda.Value)
+      if (stage != null && litiko.Eskhata.ApprovalStages.As(stage.Stage).CustomStageTypelitiko == litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.IncludeInMeet && 
+          doc != null && litiko.CollegiateAgencies.Projectsolutions.Is(doc) && !litiko.CollegiateAgencies.Projectsolutions.As(doc).IncludedInAgenda.Value)
         e.AddError(litiko.CollegiateAgencies.Resources.DocumentIsNotIncludedInAgenda);
+      
+      var isVoiting = _obj.CustomStageTypelitiko == litiko.Eskhata.ApprovalSimpleAssignment.CustomStageTypelitiko.Voting;
+    
+      if (isVoiting && _obj.Votinglitiko.Any(d => !d.Yes.GetValueOrDefault() && !d.No.GetValueOrDefault() && !d.Abstained.GetValueOrDefault()))
+        e.AddError(litiko.Eskhata.ApprovalSimpleAssignments.Resources.ErrorVoteAllDecisions);      
 
     }
   }

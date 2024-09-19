@@ -7,6 +7,8 @@ using litiko.Eskhata.ApprovalSimpleAssignment;
 
 namespace litiko.Eskhata
 {
+
+
   partial class ApprovalSimpleAssignmentSharedHandlers
   {
 

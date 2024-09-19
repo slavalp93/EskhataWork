@@ -17,16 +17,23 @@ namespace litiko.Eskhata.Client
     {
       if (_obj.ProjectSolutionslitiko.Any())
       {
-        var dialog = Dialogs.CreateInputDialog("Выбор вопросов для голосования");
+        var dialog = Dialogs.CreateInputDialog(litiko.Eskhata.Meetings.Resources.SendToVoteDialogTittle);
         var btnOk = dialog.Buttons.AddOk();
-        var btnCancel = dialog.Buttons.AddCancel();
+        var btnCancel = dialog.Buttons.AddCancel();        
         
-        var projectSolutions = dialog.AddSelectMany("Вопросы для отправки", true, litiko.CollegiateAgencies.Projectsolutions.Null).From(_obj.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null).Select(x => x.ProjectSolution));
+        // Принудительно увеличиваем ширину диалога для корректного отображения кнопок.
+        var fakeControl = dialog.AddString("123456789012345678910123456789012345678910123456789012345678910", false);
+        fakeControl.IsVisible = false;        
+        
+        var psValue = dialog.AddSelectMany(litiko.Eskhata.Meetings.Resources.SendToVoteDialogQuestions, true, litiko.CollegiateAgencies.Projectsolutions.Null).From(_obj.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null).Select(x => x.ProjectSolution));
         
         var result = dialog.Show();
         if (result == btnOk)
         {
-          Dialogs.NotifyMessage(projectSolutions.Value.Count().ToString());
+          List<litiko.CollegiateAgencies.IProjectsolution> projectSolutions = psValue.Value.ToList();
+          var task = Functions.Meeting.Remote.CreateTaskForVoting(_obj, projectSolutions);
+          
+          task.ShowModal();
         }
       }
     }

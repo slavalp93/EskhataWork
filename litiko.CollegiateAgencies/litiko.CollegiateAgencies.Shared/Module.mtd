@@ -2,7 +2,22 @@
   "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
   "NameGuid": "8c6dc2cd-fe6a-4f89-b05c-494f454a9e68",
   "Name": "CollegiateAgencies",
-  "AsyncHandlers": [],
+  "AsyncHandlers": [
+    {
+      "NameGuid": "7bb24e6d-ca69-4975-8948-12875f7e714e",
+      "Name": "AddVoitingResults",
+      "DelayPeriod": 15,
+      "DelayStrategy": "ExponentialDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "3a35a92c-ac35-425b-aba3-c0fcdbcf8ac4",
+          "Name": "AssignmentId",
+          "ParameterType": "LongInteger"
+        }
+      ]
+    }
+  ],
   "ClientAssemblyName": "litiko.CollegiateAgencies.Client",
   "ClientBaseAssemblyName": "litiko.CollegiateAgencies.ClientBase",
   "ClientBaseNamespace": "litiko.CollegiateAgencies.ClientBase",
@@ -129,6 +144,10 @@
     {
       "ItemId": "cb38418f-5195-46dc-9f2e-d0a281cc516b",
       "PreviousItemId": "2b1feb20-ac60-46de-a63c-67309e3a6e70"
+    },
+    {
+      "ItemId": "a1b630d3-e1d2-4e70-90ef-e5b047027918",
+      "PreviousItemId": "cb38418f-5195-46dc-9f2e-d0a281cc516b"
     }
   ],
   "HandledEvents": [
@@ -190,6 +209,14 @@
       ],
       "TypeName": "System.Guid",
       "Value": "new System.Guid(\"5261da93-7879-4210-b3db-c92fa894ab4d\")"
+    },
+    {
+      "Name": "ApprovalTaskAddendaGroupGuid",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"852b3e7d-f178-47d3-8fad-a64021065cfd\")"
     },
     {
       "Name": "DontUpdateProjectSolution",
@@ -287,9 +314,31 @@
       ],
       "TypeName": "System.Guid",
       "Value": "new System.Guid(\"56618558-3348-4293-9f89-69907ece3fc9\")"
+    },
+    {
+      "Name": "VotingApprovalRuleName",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Голосование\""
     }
   ],
   "PublicFunctions": [
+    {
+      "Name": "AnyVoitingTasks",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "documentIds",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Int64>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    },
     {
       "Name": "ChangeRequisites",
       "Parameters": [
@@ -389,7 +438,8 @@
     "ResolutionKind",
     "MinutesTemplateNotFound",
     "MeetingIsEmpty",
-    "MeetingCategoryIsEmpty"
+    "MeetingCategoryIsEmpty",
+    "HasActiveVotingTasks"
   ],
   "ServerAssemblyName": "litiko.CollegiateAgencies.Server",
   "ServerNamespace": "litiko.CollegiateAgencies.Server",
@@ -414,7 +464,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.6",
+  "Version": "0.0.1.7",
   "Widgets": [],
   "Versions": [
     {

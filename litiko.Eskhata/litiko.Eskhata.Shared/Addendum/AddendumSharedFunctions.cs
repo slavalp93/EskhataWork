@@ -49,5 +49,22 @@ namespace litiko.Eskhata.Shared
       _obj.Name = Sungero.Docflow.PublicFunctions.OfficialDocument.AddClosingQuote(name, _obj);
       
     }
+    
+    /// <summary>
+    /// Установить обязательность свойств в зависимости от заполненных данных.
+    /// </summary>
+    public override void SetRequiredProperties()
+    {
+      base.SetRequiredProperties();
+
+      // Для Постановлений и Выписок из протокола - Содержание не обязательное поле
+      bool isSubjectrequired = _obj.State.Properties.Subject.IsRequired;
+      var docKindExtractProtocol = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(litiko.CollegiateAgencies.PublicConstants.Module.DocumentKindGuids.ExtractProtocol);
+      var docKindResolution = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(litiko.CollegiateAgencies.PublicConstants.Module.DocumentKindGuids.Resolution);                  
+      if ((docKindExtractProtocol != null && Equals(_obj.DocumentKind, docKindExtractProtocol)) || (docKindResolution != null && Equals(_obj.DocumentKind, docKindResolution)))
+        isSubjectrequired = false;
+      
+      _obj.State.Properties.Subject.IsRequired = isSubjectrequired;
+    }    
   }
 }

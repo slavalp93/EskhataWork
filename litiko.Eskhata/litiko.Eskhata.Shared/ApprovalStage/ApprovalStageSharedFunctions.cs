@@ -24,6 +24,7 @@ namespace litiko.Eskhata.Shared
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresident);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingMembers);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingInvited);
+        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresentKOU);
       }
       #endregion
       
@@ -32,6 +33,7 @@ namespace litiko.Eskhata.Shared
       {
         baseRoles.Add(Archive.ApprovalRole.Type.Archivist);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingSecretary);
+        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresentKOU);
       }
       #endregion
       
@@ -40,6 +42,8 @@ namespace litiko.Eskhata.Shared
       {
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingMembers);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingInvited);      
+        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingSecretary);
+        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresident);
       }
       #endregion
       

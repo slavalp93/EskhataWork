@@ -118,4 +118,7 @@
   <data name="MeetingCategoryIsEmpty" xml:space="preserve">
     <value>The meeting does not indicate a category.</value>
   </data>
+  <data name="HasActiveVotingTasks" xml:space="preserve">
+    <value>Some documents have active voting tasks.</value>
+  </data>
 </root>

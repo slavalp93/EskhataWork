@@ -34,6 +34,14 @@ namespace litiko.Eskhata.Server
         recipients.AddRange(litiko.CollegiateAgencies.PublicFunctions.ApprovalRole.Remote.GetRolePerformers(roleMeetingInvited, task));
       }
       
+      var roleMeetingPresentKOU = _obj.ApprovalRoles.Where(x => x.ApprovalRole.Type == litiko.CollegiateAgencies.ApprovalRole.Type.MeetingPresentKOU)
+        .Select(x => litiko.CollegiateAgencies.ApprovalRoles.As(x.ApprovalRole))
+        .Where(x => x != null).SingleOrDefault();
+      if (roleMeetingPresentKOU != null)
+      {
+        recipients.AddRange(litiko.CollegiateAgencies.PublicFunctions.ApprovalRole.Remote.GetRolePerformers(roleMeetingPresentKOU, task));
+      }      
+      
       return recipients;
     }
   }

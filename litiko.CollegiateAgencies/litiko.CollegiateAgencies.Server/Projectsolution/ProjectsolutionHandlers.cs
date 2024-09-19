@@ -15,6 +15,9 @@ namespace litiko.CollegiateAgencies
       if (_root.Meeting != null)
       {
         var members = _root.Meeting.Members.Where(x => x.Member != null).Select(x => x.Member).ToList();
+        if (_root.Meeting.President != null && !members.Contains(_root.Meeting.President))
+          members.Add(_root.Meeting.President);
+        
         query = query.Where(x => members.Contains(x));
       }        
       

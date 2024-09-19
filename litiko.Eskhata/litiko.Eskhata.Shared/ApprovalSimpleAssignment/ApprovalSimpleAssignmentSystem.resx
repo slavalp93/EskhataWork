@@ -58,4 +58,61 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Property_CustomStageTypelitiko" xml:space="preserve">
+    <value>CustomStageType</value>
+  </data>
+  <data name="Enum_CustomStageTypelitiko_Voting" xml:space="preserve">
+    <value>Voting</value>
+  </data>
+  <data name="Enum_CustomStageTypelitiko_IncludeInMeet" xml:space="preserve">
+    <value>Inclusion in the agenda</value>
+  </data>
+  <data name="Property_Votinglitiko" xml:space="preserve">
+    <value>Voting</value>
+  </data>
+  <data name="Resource_22f862c751f84aeba666fb50c5e781ab" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_22f862c751f84aeba666fb50c5e781ab_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_d5a5e82d517f4493996d52e98faa2b4f" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_d5a5e82d517f4493996d52e98faa2b4f_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_b69f7f9c56e14eaf961141b0eb692844" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_b69f7f9c56e14eaf961141b0eb692844_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_e09771875db7496c96bdd30539b4b0db" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_91a80f6ab8ad4928885aae889629bd30" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_fd466d7ce80b46e087c78648751d1474" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_ea8a2ab8b43b498fb14418e3613341d7" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_5506d2050826479591cdbe765db1b8f2" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_d7865c6fe81e4cb48a1ca842990a3149" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_7e6f1e1e963f44e28eb89f686fe4121f" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_360d36a5f0644a21b27482dc9abca0fe" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_25dd4cc3349f4d3b8245f70d485f6004" xml:space="preserve">
+    <value>Voting</value>
+  </data>
 </root>

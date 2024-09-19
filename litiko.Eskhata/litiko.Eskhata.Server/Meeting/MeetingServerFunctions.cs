@@ -125,5 +125,46 @@ namespace litiko.Eskhata.Server
       
       return string.Join(Environment.NewLine, _obj.ProjectSolutionslitiko.Select(element => $"{element.Number}. {element.ProjectSolution.Subject}."));
     }    
+    
+    /// <summary>
+    /// Создать задачу согласования по регламенту для голосования.
+    /// </summary>
+    /// <param name="projectSolutions">Список проектов решений.</param>    
+    [Remote(PackResultEntityEagerly = true)]
+    public Sungero.Docflow.IApprovalTask CreateTaskForVoting(List<litiko.CollegiateAgencies.IProjectsolution> projectSolutions)
+    {                        
+      if (!projectSolutions.Any())
+        return null;
+      
+      var agenda = Agendas.GetAll().Where(d => Equals(d.Meeting, _obj)).FirstOrDefault();
+      if (agenda == null)
+        return null;
+      
+      var votingApprovalRule = Sungero.Docflow.ApprovalRules.GetAll().Where(r => r.Name == litiko.CollegiateAgencies.PublicConstants.Module.VotingApprovalRuleName).FirstOrDefault();
+      if (votingApprovalRule == null)
+        return null;
+      
+      var task = Sungero.Docflow.ApprovalTasks.Create();
+      task.DocumentGroup.All.Add(agenda);            
+      foreach (var element in task.AddendaGroup.All)
+      {        
+        if (!projectSolutions.Select(x => x.Id).Contains(element.Id))
+          task.AddendaGroup.All.Remove(element);              
+      }      
+      foreach (var document in projectSolutions)
+      {
+        if (!task.AddendaGroup.All.Contains(document))
+          task.AddendaGroup.All.Add(document);
+      }
+
+      if (!task.OtherGroup.All.Contains(_obj))
+        task.OtherGroup.All.Add(_obj);
+      
+      task.Subject = "Голосование: " + _obj.Name;
+      task.ActiveText = "Прошу проголосовать.";
+      task.ApprovalRule = votingApprovalRule;      
+      
+      return task;
+    }
   }
 }

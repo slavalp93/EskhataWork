@@ -131,14 +131,14 @@
         },
         {
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
-          "NameGuid": "f6fc6c46-0629-4663-8e6b-4845ccdee88c",
-          "Name": "CheckIncludeInAgendalitikolitiko",
-          "ColumnNumber": 0,
+          "NameGuid": "d5e915fb-07dd-47e2-8798-eb80c6321b0b",
+          "Name": "CustomStageTypelitikolitiko",
+          "ColumnNumber": 1,
           "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
           "ParentGuid": "ee6445fd-4d53-4c43-a1bd-e7edf2d737b8",
-          "PropertyGuid": "09c83f5f-5857-47ca-8363-e3c4fd5f67ae",
-          "RowNumber": 4,
+          "PropertyGuid": "836b1898-a448-4910-9372-76f4d8bce756",
+          "RowNumber": 1,
           "RowSpan": 1,
           "Settings": []
         }
@@ -150,14 +150,23 @@
       "Versions": []
     }
   ],
-  "HandledEvents": [
-    "CreatedServer",
-    "ShowingClient"
-  ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "bbb34726-4316-4d87-a64d-9dcf74b654f4",
   "OperationsClass": "",
   "Properties": [
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "5b792013-2adb-4c04-982c-798e8af87664",
+      "Name": "AllowSendToRework",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
     {
       "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
       "NameGuid": "e7bb000c-7739-48ba-9854-4d55f0498a21",
@@ -181,11 +190,26 @@
       "Versions": []
     },
     {
-      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "09c83f5f-5857-47ca-8363-e3c4fd5f67ae",
-      "Name": "CheckIncludeInAgendalitiko",
-      "Code": "CheckAgenda",
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "836b1898-a448-4910-9372-76f4d8bce756",
+      "Name": "CustomStageTypelitiko",
+      "Code": "CustomStageTyp",
+      "DirectValues": [
+        {
+          "NameGuid": "9668a3b0-27b2-4cf4-97c8-eb159eb6a788",
+          "Name": "Voting",
+          "Code": "Voting"
+        },
+        {
+          "NameGuid": "0d156cb6-9b37-4490-8896-e0ebb9f3cbd7",
+          "Name": "IncludeInMeet",
+          "Code": "IncludeInMeet"
+        }
+      ],
+      "HandledEvents": [
+        "FilteringClient"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
       "PreviousPropertyGuid": "739e17c1-55ee-4319-a42c-12a0817daa24"
     }
   ],

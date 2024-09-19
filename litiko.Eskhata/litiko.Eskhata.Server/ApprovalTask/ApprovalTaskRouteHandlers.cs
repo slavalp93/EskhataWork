@@ -11,5 +11,56 @@ namespace litiko.Eskhata.Server
   partial class ApprovalTaskRouteHandlers
   {
 
+    public override void CompleteAssignment30(Sungero.Docflow.IApprovalSimpleAssignment assignment, Sungero.Docflow.Server.ApprovalSimpleAssignmentArguments e)
+    {
+      base.CompleteAssignment30(assignment, e);
+      
+      var CustomAssignment = litiko.Eskhata.ApprovalSimpleAssignments.As(assignment);
+      
+      // Передача результатов голосования в проекты решений.
+      if (CustomAssignment != null && CustomAssignment.CustomStageTypelitiko == litiko.Eskhata.ApprovalSimpleAssignment.CustomStageTypelitiko.Voting && assignment.Result == litiko.Eskhata.ApprovalSimpleAssignment.Result.Complete)
+      {
+        var asyncAddVoitingResults = litiko.CollegiateAgencies.AsyncHandlers.AddVoitingResults.Create();
+        asyncAddVoitingResults.AssignmentId = assignment.Id;        
+        asyncAddVoitingResults.ExecuteAsync();
+      }      
+    }
+
+    public override void StartAssignment30(Sungero.Docflow.IApprovalSimpleAssignment assignment, Sungero.Docflow.Server.ApprovalSimpleAssignmentArguments e)
+    {
+      base.StartAssignment30(assignment, e);
+      
+      var stage = _obj.ApprovalRule.Stages
+        .Where(s => s.Stage != null)
+        .Where(s => s.Stage.StageType == Sungero.Docflow.ApprovalStage.StageType.SimpleAgr)
+        .FirstOrDefault(s => s.Number == _obj.StageNumber);
+      
+      if (stage != null)
+      {
+        var CustomStage = litiko.Eskhata.ApprovalStages.As(stage.Stage);
+        var CustomAssignment = litiko.Eskhata.ApprovalSimpleAssignments.As(assignment);
+    
+        #region Голосование
+        if (CustomStage.CustomStageTypelitiko == litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.Voting)
+        {
+          CustomAssignment.CustomStageTypelitiko = litiko.Eskhata.ApprovalSimpleAssignment.CustomStageTypelitiko.Voting;
+          
+          var task = litiko.Eskhata.ApprovalTasks.As(assignment.Task);
+          int number = 1;
+          foreach (var document in task.AddendaGroup.All)
+          {
+            var projectSolution = litiko.CollegiateAgencies.Projectsolutions.As(document);
+            if (projectSolution != null)
+            {
+              var votingRecord = CustomAssignment.Votinglitiko.AddNew();
+              votingRecord.Number = number++;
+              votingRecord.Decision = projectSolution;
+            }
+          }          
+        }                                          
+        #endregion      
+      }      
+    }
+
   }
 }

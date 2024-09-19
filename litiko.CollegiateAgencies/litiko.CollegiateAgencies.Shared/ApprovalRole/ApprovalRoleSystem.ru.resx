@@ -73,4 +73,7 @@
   <data name="Enum_Type_MeetingInvited" xml:space="preserve">
     <value>Приглашенные сотрудники</value>
   </data>
+  <data name="Enum_Type_MeetingPresentKOU" xml:space="preserve">
+    <value>Присутствующие члены КОУ</value>
+  </data>
 </root>

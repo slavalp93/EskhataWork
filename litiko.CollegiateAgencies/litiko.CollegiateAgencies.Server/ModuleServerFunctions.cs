@@ -131,7 +131,7 @@ namespace litiko.CollegiateAgencies.Server
     {
       #region Предпроверки
       
-      // Наличие "Шаблон протокола заседания КОУ"
+      // Наличие "Шаблон протокола заседания КОУ" или "Шаблон выписки из протокола заседания КОУ (RU)"
       var templateDoc = Sungero.Content.ElectronicDocuments.Null;
       if (!isExtract)      
         templateDoc = Sungero.Content.ElectronicDocuments.GetAll().Where(d => Sungero.Docflow.DocumentTemplates.Is(d) && d.Name == Constants.Module.MinutesTemplateName).FirstOrDefault();
@@ -251,5 +251,37 @@ namespace litiko.CollegiateAgencies.Server
       
       #endregion
     }
+    
+    /// <summary>
+    /// Есть ли активные задачи с этапом голосование по документам.
+    /// </summary>
+    /// <param name="documentIds">Список ИД документов</param>
+    [Public, Remote(IsPure = true)]
+    public bool AnyVoitingTasks(List<long> documentIds)
+    {      
+      var documentsAddendaGroupGuid = litiko.CollegiateAgencies.PublicConstants.Module.ApprovalTaskAddendaGroupGuid;
+      var votingStage = litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.Voting;
+      var hasActiveTaskWithVotingStage = false;
+      
+      // Получить данные без учета прав доступа.
+      AccessRights.AllowRead(
+      () =>
+      {
+        var activeTasks = litiko.Eskhata.ApprovalTasks.GetAll()
+          .Where(t => t.Status == Sungero.Docflow.ApprovalTask.Status.InProcess)
+          .Where(t => t.AttachmentDetails.Any(g => g.GroupId == documentsAddendaGroupGuid && documentIds.Contains(g.AttachmentId.GetValueOrDefault())));
+              
+        foreach (var task in activeTasks)
+        {
+          if (litiko.Eskhata.PublicFunctions.ApprovalTask.HasCustomStage(task, votingStage))
+          {
+            hasActiveTaskWithVotingStage = true;
+            break;
+          }
+        }      
+      });
+    
+      return hasActiveTaskWithVotingStage;           
+    }    
   }
 }

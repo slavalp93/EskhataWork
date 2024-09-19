@@ -7,6 +7,50 @@ using litiko.Eskhata.ApprovalSimpleAssignment;
 
 namespace litiko.Eskhata.Client
 {
+  partial class ApprovalSimpleAssignmentAnyChildEntityActions
+  {
+    public override void AddChildEntity(Sungero.Domain.Client.ExecuteChildCollectionActionArgs e)
+    {
+      base.AddChildEntity(e);
+    }
+
+    public override bool CanAddChildEntity(Sungero.Domain.Client.CanExecuteChildCollectionActionArgs e)
+    {
+      var assignment = litiko.Eskhata.ApprovalSimpleAssignments.As(e.RootEntity);
+      var isVoiting = assignment != null ? assignment.CustomStageTypelitiko == litiko.Eskhata.ApprovalSimpleAssignment.CustomStageTypelitiko.Voting : false;
+      return base.CanAddChildEntity(e) && !isVoiting;
+    }
+
+    public override void CopyChildEntity(Sungero.Domain.Client.ExecuteChildCollectionActionArgs e)
+    {
+      base.CopyChildEntity(e);
+    }
+
+    public override bool CanCopyChildEntity(Sungero.Domain.Client.CanExecuteChildCollectionActionArgs e)
+    {
+      var assignment = litiko.Eskhata.ApprovalSimpleAssignments.As(e.RootEntity);
+      var isVoiting = assignment != null ? assignment.CustomStageTypelitiko == litiko.Eskhata.ApprovalSimpleAssignment.CustomStageTypelitiko.Voting : false;
+      return base.CanCopyChildEntity(e) && !isVoiting;
+    }
+
+  }
+
+  partial class ApprovalSimpleAssignmentAnyChildEntityCollectionActions
+  {
+    public override void DeleteChildEntity(Sungero.Domain.Client.ExecuteChildCollectionActionArgs e)
+    {
+      base.DeleteChildEntity(e);
+    }
+
+    public override bool CanDeleteChildEntity(Sungero.Domain.Client.CanExecuteChildCollectionActionArgs e)
+    {      
+      var assignment = litiko.Eskhata.ApprovalSimpleAssignments.As(e.RootEntity);
+      var isVoiting = assignment != null ? assignment.CustomStageTypelitiko == litiko.Eskhata.ApprovalSimpleAssignment.CustomStageTypelitiko.Voting : false;
+      return base.CanDeleteChildEntity(e) && !isVoiting;      
+    }
+
+  }
+
   partial class ApprovalSimpleAssignmentActions
   {
     public override void Complete(Sungero.Workflow.Client.ExecuteResultActionArgs e)
