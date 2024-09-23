@@ -55,6 +55,10 @@ namespace litiko.Eskhata.Shared
                               
       bool isVoting = this.HasCustomStage(litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.Voting);
       _obj.State.Properties.Voterslitiko.IsVisible = isVoting;
+      if (isVoting)
+      {
+        _obj.State.Properties.ReqApprovers.IsVisible = false;
+      }            
     }    
   }
 }

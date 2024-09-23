@@ -172,7 +172,7 @@ namespace litiko.CollegiateAgencies.Server
       replacebleFields.Add("<Forma>", meeting.Formalitiko.HasValue ? meeting.Info.Properties.Formalitiko.GetLocalizedValue(meeting.Formalitiko) : string.Empty);            
       replacebleFields.Add("<Method>", meeting.MeetingMethodlitiko != null ? meeting.MeetingMethodlitiko.Name : string.Empty);            
       replacebleFields.Add("<Location>", !string.IsNullOrEmpty(meeting.Location) ? meeting.Location : string.Empty);            
-      replacebleFields.Add("<PresidentJobTittle>", meeting.President != null ? meeting.President.JobTitle?.Name : string.Empty);            
+      replacebleFields.Add("<PresidentJobTittle>", meeting.President != null && meeting.President.JobTitle != null ? meeting.President.JobTitle.Name : string.Empty);            
       replacebleFields.Add("<PresidentFIO>", meeting.President != null ? Sungero.Company.PublicFunctions.Employee.GetShortName(meeting.President, true) : string.Empty);            
       replacebleFields.Add("<SecretaryFIO>", meeting.Secretary!= null ? Sungero.Company.PublicFunctions.Employee.GetShortName(meeting.Secretary, true) : string.Empty);            
       replacebleFields.Add("<PresentFIOList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingPresentNumberedList(meeting, false));            

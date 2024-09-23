@@ -67,4 +67,7 @@
   <data name="SendToVoteDialogQuestions" xml:space="preserve">
     <value>Вопросы для отправки</value>
   </data>
+  <data name="NotAccessToAction" xml:space="preserve">
+    <value>Действие доступно только секретарю заседания.</value>
+  </data>
 </root>

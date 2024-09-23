@@ -15,6 +15,12 @@ namespace litiko.Eskhata.Client
     /// </summary>       
     public void SendToVote()
     {
+      if (!Equals(Users.Current, Users.As(_obj.Secretary)) && !Users.Current.IncludedIn(Roles.Administrators))
+      {
+        Dialogs.ShowMessage(litiko.Eskhata.Meetings.Resources.NotAccessToAction);
+        return;
+      }      
+      
       if (_obj.ProjectSolutionslitiko.Any())
       {
         var dialog = Dialogs.CreateInputDialog(litiko.Eskhata.Meetings.Resources.SendToVoteDialogTittle);
@@ -43,6 +49,12 @@ namespace litiko.Eskhata.Client
     /// </summary>       
     public void UpdateVoting()
     {
+      if (!Equals(Users.Current, Users.As(_obj.Secretary)) && !Users.Current.IncludedIn(Roles.Administrators))
+      {
+        Dialogs.ShowMessage(litiko.Eskhata.Meetings.Resources.NotAccessToAction);
+        return;
+      }
+      
       if (_obj.ProjectSolutionslitiko.Any())
       {        
         foreach (var element in _obj.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null))

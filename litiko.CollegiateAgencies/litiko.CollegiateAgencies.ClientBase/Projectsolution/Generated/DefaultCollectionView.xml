@@ -29,17 +29,17 @@
         <property name="GroupCount">0</property>
         <property name="Columns" iskey="true" value="54">
           <property name="Item1" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">35</property>
+            <property name="ExtendedVisibleIndex">0</property>
             <property name="MinWidth">48</property>
             <property name="FixedWidth">true</property>
             <property name="Visible">true</property>
             <property name="FieldName">T</property>
             <property name="VisibleIndex">0</property>
             <property name="Width">48</property>
-            <property name="ActualWidth">6*</property>
+            <property name="ActualWidth">5*</property>
           </property>
           <property name="Item2" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">36</property>
+            <property name="ExtendedVisibleIndex">35</property>
             <property name="Visible">false</property>
             <property name="AutoFilterCondition">Equals</property>
             <property name="Name">Projectsolution_Id</property>
@@ -48,14 +48,14 @@
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item3" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">0</property>
+            <property name="ExtendedVisibleIndex">1</property>
             <property name="Visible">false</property>
             <property name="Name">Projectsolution_Index</property>
             <property name="FieldName">Index</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item4" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">1</property>
+            <property name="ExtendedVisibleIndex">2</property>
             <property name="Visible">false</property>
             <property name="AutoFilterCondition">Contains</property>
             <property name="Name">Projectsolution_DeliveryMethod</property>
@@ -63,7 +63,7 @@
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item5" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">2</property>
+            <property name="ExtendedVisibleIndex">3</property>
             <property name="Visible">false</property>
             <property name="AutoFilterCondition">Contains</property>
             <property name="Name">Projectsolution_CaseFile</property>
@@ -71,7 +71,7 @@
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item6" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">3</property>
+            <property name="ExtendedVisibleIndex">4</property>
             <property name="Visible">false</property>
             <property name="AutoFilterCondition">Equals</property>
             <property name="Name">Projectsolution_PlacedToCaseFileDate</property>
@@ -79,7 +79,7 @@
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item7" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">4</property>
+            <property name="ExtendedVisibleIndex">5</property>
             <property name="Visible">false</property>
             <property name="AutoFilterCondition">Equals</property>
             <property name="Name">Projectsolution_IsReturnRequired</property>
@@ -87,7 +87,7 @@
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item8" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">5</property>
+            <property name="ExtendedVisibleIndex">6</property>
             <property name="Visible">false</property>
             <property name="AutoFilterCondition">Contains</property>
             <property name="Name">Projectsolution_DeliveredTo</property>
@@ -95,7 +95,7 @@
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item9" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">6</property>
+            <property name="ExtendedVisibleIndex">7</property>
             <property name="Visible">false</property>
             <property name="AutoFilterCondition">Equals</property>
             <property name="Name">Projectsolution_ReturnDeadline</property>
@@ -103,7 +103,7 @@
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item10" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">7</property>
+            <property name="ExtendedVisibleIndex">8</property>
             <property name="Visible">false</property>
             <property name="AutoFilterCondition">Equals</property>
             <property name="Name">Projectsolution_ReturnDate</property>
@@ -111,7 +111,7 @@
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item11" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">8</property>
+            <property name="ExtendedVisibleIndex">9</property>
             <property name="Visible">false</property>
             <property name="AutoFilterCondition">Contains</property>
             <property name="Name">Projectsolution_RegistrationState</property>
@@ -119,7 +119,7 @@
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item12" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">9</property>
+            <property name="ExtendedVisibleIndex">10</property>
             <property name="Visible">false</property>
             <property name="AutoFilterCondition">Contains</property>
             <property name="Name">Projectsolution_InternalApprovalState</property>
@@ -127,7 +127,7 @@
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item13" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">10</property>
+            <property name="ExtendedVisibleIndex">11</property>
             <property name="Visible">false</property>
             <property name="AutoFilterCondition">Contains</property>
             <property name="Name">Projectsolution_ControlExecutionState</property>
@@ -135,7 +135,7 @@
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item14" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">11</property>
+            <property name="ExtendedVisibleIndex">12</property>
             <property name="Visible">false</property>
             <property name="AutoFilterCondition">Contains</property>
             <property name="Name">Projectsolution_LocationState</property>
@@ -143,7 +143,7 @@
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item15" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">12</property>
+            <property name="ExtendedVisibleIndex">13</property>
             <property name="Visible">false</property>
             <property name="AutoFilterCondition">Contains</property>
             <property name="Name">Projectsolution_ResponsibleForReturnEmployee</property>
@@ -151,77 +151,77 @@
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item16" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">13</property>
+            <property name="ExtendedVisibleIndex">14</property>
             <property name="Visible">false</property>
             <property name="Name">Projectsolution_Project</property>
             <property name="FieldName">Project.DisplayValue</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item17" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">14</property>
+            <property name="ExtendedVisibleIndex">15</property>
             <property name="Visible">false</property>
             <property name="Name">Projectsolution_ExchangeState</property>
             <property name="FieldName">ExchangeState</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item18" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">15</property>
+            <property name="ExtendedVisibleIndex">16</property>
             <property name="Visible">false</property>
             <property name="Name">Projectsolution_VerificationState</property>
             <property name="FieldName">VerificationState</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item19" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">16</property>
+            <property name="ExtendedVisibleIndex">17</property>
             <property name="Visible">false</property>
             <property name="Name">Projectsolution_PaperCount</property>
             <property name="FieldName">PaperCount</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item20" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">17</property>
+            <property name="ExtendedVisibleIndex">18</property>
             <property name="Visible">false</property>
             <property name="Name">Projectsolution_AddendaPaperCount</property>
             <property name="FieldName">AddendaPaperCount</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item21" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">18</property>
+            <property name="ExtendedVisibleIndex">19</property>
             <property name="Visible">false</property>
             <property name="Name">Projectsolution_StoredIn</property>
             <property name="FieldName">StoredIn</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item22" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">19</property>
+            <property name="ExtendedVisibleIndex">20</property>
             <property name="Visible">false</property>
             <property name="Name">Projectsolution_Topic</property>
             <property name="FieldName">Topic.DisplayValue</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item23" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">20</property>
+            <property name="ExtendedVisibleIndex">21</property>
             <property name="Visible">false</property>
             <property name="Name">Projectsolution_Subtopic</property>
             <property name="FieldName">Subtopic.DisplayValue</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item24" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">21</property>
+            <property name="ExtendedVisibleIndex">22</property>
             <property name="Visible">false</property>
             <property name="Name">Projectsolution_Archivelitiko</property>
             <property name="FieldName">Archivelitiko.DisplayValue</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item25" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">22</property>
+            <property name="ExtendedVisibleIndex">23</property>
             <property name="Visible">false</property>
             <property name="Name">Projectsolution_TransferredToArchivelitiko</property>
             <property name="FieldName">TransferredToArchivelitiko</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item26" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">39</property>
+            <property name="ExtendedVisibleIndex">41</property>
             <property name="Visible">false</property>
             <property name="AutoFilterCondition">Contains</property>
             <property name="Name">Projectsolution_Name</property>
@@ -230,16 +230,16 @@
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item27" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">43</property>
+            <property name="ExtendedVisibleIndex">44</property>
             <property name="Visible">true</property>
             <property name="AutoFilterCondition">Contains</property>
             <property name="Name">Projectsolution_Author</property>
             <property name="FieldName">Author.DisplayValue</property>
-            <property name="VisibleIndex">4</property>
+            <property name="VisibleIndex">6</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item28" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">37</property>
+            <property name="ExtendedVisibleIndex">36</property>
             <property name="Visible">true</property>
             <property name="AutoFilterCondition">Equals</property>
             <property name="Name">Projectsolution_HasRelations</property>
@@ -248,7 +248,7 @@
             <property name="ActualWidth">4*</property>
           </property>
           <property name="Item29" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">44</property>
+            <property name="ExtendedVisibleIndex">40</property>
             <property name="Visible">true</property>
             <property name="AutoFilterCondition">Equals</property>
             <property name="Name">Projectsolution_Created</property>
@@ -266,7 +266,7 @@
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item31" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">40</property>
+            <property name="ExtendedVisibleIndex">42</property>
             <property name="Visible">false</property>
             <property name="AutoFilterCondition">Contains</property>
             <property name="Name">Projectsolution_RegistrationNumber</property>
@@ -275,7 +275,7 @@
             <property name="ActualWidth">12*</property>
           </property>
           <property name="Item32" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">41</property>
+            <property name="ExtendedVisibleIndex">43</property>
             <property name="Visible">false</property>
             <property name="AutoFilterCondition">Equals</property>
             <property name="Name">Projectsolution_RegistrationDate</property>
@@ -293,7 +293,7 @@
             <property name="ActualWidth">13*</property>
           </property>
           <property name="Item34" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">23</property>
+            <property name="ExtendedVisibleIndex">24</property>
             <property name="Visible">false</property>
             <property name="AutoFilterCondition">Contains</property>
             <property name="Name">Projectsolution_LifeCycleState</property>
@@ -310,7 +310,7 @@
             <property name="ActualWidth">11*</property>
           </property>
           <property name="Item36" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">38</property>
+            <property name="ExtendedVisibleIndex">37</property>
             <property name="Visible">true</property>
             <property name="AutoFilterCondition">Contains</property>
             <property name="Name">Projectsolution_DocumentKind</property>
@@ -355,33 +355,34 @@
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item41" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">24</property>
+            <property name="ExtendedVisibleIndex">25</property>
             <property name="Visible">false</property>
             <property name="Name">Projectsolution_PreparedBy</property>
             <property name="FieldName">PreparedBy.DisplayValue</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item42" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">42</property>
+            <property name="ExtendedVisibleIndex">39</property>
             <property name="Visible">true</property>
             <property name="AutoFilterCondition">Contains</property>
             <property name="Name">Projectsolution_Subject</property>
             <property name="FieldName">Subject</property>
-            <property name="VisibleIndex">3</property>
+            <property name="VisibleIndex">4</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item43" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">25</property>
+            <property name="ExtendedVisibleIndex">26</property>
             <property name="Visible">false</property>
             <property name="Name">Projectsolution_SubjectTJ</property>
             <property name="FieldName">SubjectTJ</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item44" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">26</property>
-            <property name="Visible">false</property>
+            <property name="ExtendedVisibleIndex">38</property>
+            <property name="Visible">true</property>
             <property name="Name">Projectsolution_MeetingCategory</property>
             <property name="FieldName">MeetingCategory.DisplayValue</property>
+            <property name="VisibleIndex">3</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item45" isnull="true" iskey="true">
@@ -403,7 +404,7 @@
             <property name="Visible">true</property>
             <property name="Name">Projectsolution_IncludedInAgenda</property>
             <property name="FieldName">IncludedInAgenda</property>
-            <property name="VisibleIndex">6</property>
+            <property name="VisibleIndex">7</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item48" isnull="true" iskey="true">
@@ -411,7 +412,7 @@
             <property name="Visible">true</property>
             <property name="Name">Projectsolution_Meeting</property>
             <property name="FieldName">Meeting.DisplayValue</property>
-            <property name="VisibleIndex">7</property>
+            <property name="VisibleIndex">8</property>
             <property name="ActualWidth">NaN</property>
           </property>
           <property name="Item49" isnull="true" iskey="true">

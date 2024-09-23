@@ -277,4 +277,25 @@
   <data name="Action_CreateResolutionConfirmationDescription" xml:space="preserve">
     <value />
   </data>
+  <data name="FilterPanel_InclusionOnAgenda_fc3e3060a3c94d91a9a52f55108ba4bb" xml:space="preserve">
+    <value>Inclusion on the agenda</value>
+  </data>
+  <data name="FilterPanel_Included_4bb094616af64af6b54f2a3258c33cea" xml:space="preserve">
+    <value>Included</value>
+  </data>
+  <data name="FilterPanel_NotIncluded_cdcc3fd974754bb5881134ca40d98655" xml:space="preserve">
+    <value>Not included</value>
+  </data>
+  <data name="FilterPanel_All_73517607f74847fabb080e09d36632b3" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="FilterPanel_MeetingCategory_7b3268dc1cf04af7ab47dc2c1698da7f" xml:space="preserve">
+    <value>Meeting category</value>
+  </data>
+  <data name="FilterPanel_Speaker_ab9d4a7c16f3414383114d8e6500e6ff" xml:space="preserve">
+    <value>Speaker</value>
+  </data>
+  <data name="FilterPanel_Responsible_2b8b84386aa941c68be3fcab6d1dc72f" xml:space="preserve">
+    <value>Responsible</value>
+  </data>
 </root>

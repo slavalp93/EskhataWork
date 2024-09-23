@@ -9,14 +9,6 @@ namespace litiko.CollegiateAgencies.Client
   public class ModuleFunctions
   {
     /// <summary>
-    /// 
-    /// </summary>
-    public virtual void Resolutions()
-    {
-      Dialogs.ShowMessage("В разработке");
-    }
-
-    /// <summary>
     /// Создать проект решения.
     /// </summary>
     public virtual void BringQuestion()

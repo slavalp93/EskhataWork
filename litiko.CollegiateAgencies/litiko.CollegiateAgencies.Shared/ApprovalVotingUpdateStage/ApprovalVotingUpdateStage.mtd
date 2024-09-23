@@ -19,7 +19,11 @@
   },
   "IconResourcesKeys": [],
   "IntegrationServiceName": "CollegiateAgenciesApprovalVotingUpdateStage",
+  "IsVisible": false,
   "OperationsClass": "",
+  "Overridden": [
+    "IsVisible"
+  ],
   "PublicStructures": [],
   "ResourcesKeys": [
     "MeetingNotFound",

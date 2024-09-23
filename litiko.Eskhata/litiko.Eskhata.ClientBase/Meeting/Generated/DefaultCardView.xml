@@ -35,7 +35,7 @@
             <property name="Name">Meeting_Absentlitiko_Employee</property>
             <property name="FieldName">Employee</property>
             <property name="VisibleIndex">0</property>
-            <property name="Width">403</property>
+            <property name="Width">407</property>
             <property name="ActualWidth">41*</property>
           </property>
           <property name="Item2" isnull="true" iskey="true">
@@ -43,7 +43,7 @@
             <property name="Name">Meeting_Absentlitiko_Reason</property>
             <property name="FieldName">Reason</property>
             <property name="VisibleIndex">1</property>
-            <property name="Width">512</property>
+            <property name="Width">516</property>
             <property name="ActualWidth">52*</property>
           </property>
         </property>
@@ -58,7 +58,7 @@
         <property name="View" isnull="true" iskey="true">
           <property name="LinesPerRowMode">None</property>
           <property name="ColumnChooserState" isnull="true" iskey="true">
-            <property name="Location">979,-2</property>
+            <property name="Location">988,-2</property>
             <property name="Size">220,250</property>
           </property>
           <property name="AllowMoveColumnToDropArea">false</property>
@@ -81,7 +81,7 @@
             <property name="FieldName">ProjectSolution</property>
             <property name="VisibleIndex">0</property>
             <property name="Width">119</property>
-            <property name="ActualWidth">64*</property>
+            <property name="ActualWidth">10*</property>
           </property>
           <property name="Item2" isnull="true" iskey="true">
             <property name="Visible">true</property>

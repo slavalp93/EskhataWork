@@ -56,7 +56,12 @@ namespace litiko.Eskhata.Server
               votingRecord.Number = number++;
               votingRecord.Decision = projectSolution;
             }
-          }          
+          }
+
+          var subject = CustomStage.Subject.TrimEnd(new[] { ' ', '.', ':' });
+          var meeting = task.OtherGroup.All.Where(x => litiko.Eskhata.Meetings.Is(x)).FirstOrDefault();
+          if (meeting != null)
+            CustomAssignment.Subject = Sungero.Docflow.PublicFunctions.Module.TrimSpecialSymbols("{0}: {1}", subject, meeting.DisplayValue);
         }                                          
         #endregion      
       }      

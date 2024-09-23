@@ -65,7 +65,7 @@
     <value>Проект решения</value>
   </data>
   <data name="DocumentIsNotIncludedInAgenda" xml:space="preserve">
-    <value>Документ не включен в повестку</value>
+    <value>Вопрос не включен в повестку заседания.</value>
   </data>
   <data name="DialogTittle" xml:space="preserve">
     <value>Информация</value>

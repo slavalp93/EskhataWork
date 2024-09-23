@@ -65,7 +65,7 @@
     <value>Project solution</value>
   </data>
   <data name="DocumentIsNotIncludedInAgenda" xml:space="preserve">
-    <value>The document is not included in the agenda</value>
+    <value>The issue is not included on the meeting agenda.</value>
   </data>
   <data name="DialogTittle" xml:space="preserve">
     <value>Information</value>

@@ -10,6 +10,16 @@ namespace litiko.Eskhata
   partial class MeetingProjectSolutionslitikoClientHandlers
   {
 
+    public virtual void ProjectSolutionslitikoNoValueInput(Sungero.Presentation.IntegerValueInputEventArgs e)
+    {
+      _obj.Accepted = _obj.Yes > e.NewValue.GetValueOrDefault() ? true : false;
+    }
+
+    public virtual void ProjectSolutionslitikoYesValueInput(Sungero.Presentation.IntegerValueInputEventArgs e)
+    {
+      _obj.Accepted = e.NewValue.GetValueOrDefault() > _obj.No ? true : false;
+    }
+
     public virtual void ProjectSolutionslitikoProjectSolutionValueInput(litiko.Eskhata.Client.MeetingProjectSolutionslitikoProjectSolutionValueInputEventArgs e)
     {
       var projectSolution = e.NewValue;

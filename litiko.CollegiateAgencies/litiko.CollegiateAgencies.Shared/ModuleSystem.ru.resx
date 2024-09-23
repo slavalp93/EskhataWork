@@ -115,4 +115,88 @@
   <data name="AsyncHandler_Description_7bb24e6dca694975894812875f7e714e" xml:space="preserve">
     <value>Добавление результатов голосования</value>
   </data>
+  <data name="sf_87105749_5743_4b68_aa15_de344585a7f0" xml:space="preserve">
+    <value>Постановления</value>
+  </data>
+  <data name="FilterPanel_BusinessUnit_6a7faab5d8864cd581c6512a74437bb3" xml:space="preserve">
+    <value>Наша организация</value>
+  </data>
+  <data name="FilterPanel_Status_2e954abf1ffa4653b06ce3e3f7358b5b" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="FilterPanel_Registered_8e5dac570bf7478f836bc8ac4524faa1" xml:space="preserve">
+    <value>Зарегистрирован</value>
+  </data>
+  <data name="FilterPanel_Status_ae6306fecfe0483ca23f81a8afac79a0" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="FilterPanel_Period_8791617bb9c6475a9a9ebb8d8123a0fc" xml:space="preserve">
+    <value>Интервал времени</value>
+  </data>
+  <data name="FilterPanel_NotRegistered_f609bdafd13f4fba80c98f654095f831" xml:space="preserve">
+    <value>Не зарегистрирован</value>
+  </data>
+  <data name="FilterPanel_Period_68245994bca547dfacf8b11897583ae0" xml:space="preserve">
+    <value>Интервал времени</value>
+  </data>
+  <data name="FilterPanel_NotRegistered_7e1734aff94b4688a64cf86759e233a4" xml:space="preserve">
+    <value>Не зарегистрирован</value>
+  </data>
+  <data name="FilterPanel_Registered_bba39a7f1463432f8a116bf9a5e2f7da" xml:space="preserve">
+    <value>Зарегистрирован</value>
+  </data>
+  <data name="FilterPanel_Reserved_d7534e43c5cb48508eddc7ef854eddd4" xml:space="preserve">
+    <value>Зарезервирован</value>
+  </data>
+  <data name="FilterPanel_LastWeek_37d5ee1f3936432cbe9287bccfc3f06f" xml:space="preserve">
+    <value>Последние 7 дней</value>
+  </data>
+  <data name="FilterPanel_LastMonth_f27ff6fd29cb46b785326bcdd3472ab4" xml:space="preserve">
+    <value>Последние 30 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_53f1fa1e26b94654962a73d2d3911cc0" xml:space="preserve">
+    <value>Последние 90 дней</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_8e1f5b947c7d4c18962e04207746ba4f" xml:space="preserve">
+    <value>Произвольный период:</value>
+  </data>
+  <data name="FilterPanel_Department_12a583d4a46f4bb6ac3eebadef1569f5" xml:space="preserve">
+    <value>Подразделение</value>
+  </data>
+  <data name="FilterPanel_Reserved_3f7a850c598243c5a586d6604dc2e762" xml:space="preserve">
+    <value>Зарезервирован</value>
+  </data>
+  <data name="FilterPanel_LastWeek_6abc5e288a014abab1b0c8a76726c486" xml:space="preserve">
+    <value>Последние 7 дней</value>
+  </data>
+  <data name="FilterPanel_LastMonth_50b0d6182d6d4a1aa6289d1b9ecfb84b" xml:space="preserve">
+    <value>Последние 30 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_7683aa8c85f64cbeb5951e696d2e4be5" xml:space="preserve">
+    <value>Последние 90 дней</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_c315e3f3b50141a19f5cc04583993dd4" xml:space="preserve">
+    <value>Произвольный период:</value>
+  </data>
+  <data name="FilterPanel_Department_1d1decf6785d441c8cc8cab5a6208204" xml:space="preserve">
+    <value>Подразделение</value>
+  </data>
+  <data name="FilterPanel_Period_013b88f0d31b4758a60738be3054061b" xml:space="preserve">
+    <value>Интервал времени</value>
+  </data>
+  <data name="FilterPanel_LastWeek_30d8377eff1542f8ad1df6a5e008f7b9" xml:space="preserve">
+    <value>Последние 7 дней</value>
+  </data>
+  <data name="FilterPanel_LastMonth_39af93ea35844999aa57f7738a0f3254" xml:space="preserve">
+    <value>Последние 30 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Days_48bbe06440884da2ada10e0d934e3cb9" xml:space="preserve">
+    <value>Последние 90 дней</value>
+  </data>
+  <data name="FilterPanel_ManualPeriod_02be3c3fb4434d57a3d053ee01f8b2f8" xml:space="preserve">
+    <value>Произвольный период:</value>
+  </data>
+  <data name="FilterPanel_Department_7448e06495ce4f08b442e5a85bfea88f" xml:space="preserve">
+    <value>Подразделение</value>
+  </data>
 </root>

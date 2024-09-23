@@ -7,6 +7,35 @@ using litiko.CollegiateAgencies.Projectsolution;
 
 namespace litiko.CollegiateAgencies
 {
+  partial class ProjectsolutionFilteringServerHandler<T>
+  {
+
+    public override IQueryable<T> Filtering(IQueryable<T> query, Sungero.Domain.FilteringEventArgs e)
+    {
+      query = base.Filtering(query, e);
+      
+      if (_filter == null)
+        return query;      
+      
+      if (_filter.Included)
+        query = query.Where(d => d.IncludedInAgenda.GetValueOrDefault());
+      
+      if (_filter.NotIncluded)
+        query = query.Where(d => !d.IncludedInAgenda.GetValueOrDefault());
+      
+      if (_filter.MeetingCategory != null)
+        query = query.Where(d => Equals(d.MeetingCategory, _filter.MeetingCategory));
+      
+      if (_filter.Speaker != null)
+        query = query.Where(d => Equals(d.Speaker, _filter.Speaker));
+      
+      if (_filter.OurSignatory != null)
+        query = query.Where(d => Equals(d.OurSignatory, _filter.OurSignatory));       
+      
+      return query;
+    }
+  }
+
   partial class ProjectsolutionVotingMemberPropertyFilteringServerHandler<T>
   {
 

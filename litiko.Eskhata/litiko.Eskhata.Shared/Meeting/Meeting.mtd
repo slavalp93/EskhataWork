@@ -16,8 +16,58 @@
   "FilterPanel": {
     "NameGuid": "b0125fbd-3b91-4dbb-914a-689276216404",
     "Name": "FilterPanel",
-    "Controls": [],
+    "Controls": [
+      {
+        "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+        "NameGuid": "45934cda-6650-4ec3-bb56-658f3f017de5",
+        "Name": "My",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "IsSelected"
+        ],
+        "ParentGuid": "0cb975b0-13b7-4f83-8b64-61038616540d",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+        "NameGuid": "1606a9f7-3909-4c25-8d74-1dbd30f5db26",
+        "Name": "All",
+        "IsAncestorMetadata": true,
+        "IsSelected": true,
+        "Overridden": [
+          "IsSelected"
+        ],
+        "ParentGuid": "0cb975b0-13b7-4f83-8b64-61038616540d",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+        "NameGuid": "7ebaf87e-e6a5-4461-a646-a248a9dfdc54",
+        "Name": "CurrentWeek",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "IsSelected"
+        ],
+        "ParentGuid": "282bbd2a-ee31-4ca4-89bf-1879d20bea5d",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+        "NameGuid": "0de6d6a3-300c-4285-ace3-1147ec8a0d5b",
+        "Name": "ShowPeriod",
+        "IsAncestorMetadata": true,
+        "IsSelected": true,
+        "Overridden": [
+          "IsSelected"
+        ],
+        "ParentGuid": "282bbd2a-ee31-4ca4-89bf-1879d20bea5d",
+        "Versions": []
+      }
+    ],
     "IsAncestorMetadata": true,
+    "Overridden": [
+      "Controls"
+    ],
     "Versions": []
   },
   "Forms": [
@@ -421,7 +471,7 @@
         {
           "$type": "Sungero.Metadata.HyperlinkControlMetadata, Sungero.Metadata",
           "NameGuid": "67f7c031-991a-4fff-93ef-0de3bcfd09a8",
-          "Name": "Controllitiko",
+          "Name": "SendToVotellitiko",
           "ColumnNumber": 1,
           "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.HyperlinkToSourceBinder",
@@ -728,7 +778,8 @@
   "ResourcesKeys": [
     "NoRightsForUpdateDocument",
     "SendToVoteDialogTittle",
-    "SendToVoteDialogQuestions"
+    "SendToVoteDialogQuestions",
+    "NotAccessToAction"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "b7b59d97-b6e4-46de-ba8f-0f82b8e09c3b",

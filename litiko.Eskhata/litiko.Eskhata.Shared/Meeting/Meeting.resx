@@ -67,4 +67,7 @@
   <data name="SendToVoteDialogQuestions" xml:space="preserve">
     <value>Questions to submit</value>
   </data>
+  <data name="NotAccessToAction" xml:space="preserve">
+    <value>The action is available only to the meeting secretary.</value>
+  </data>
 </root>
