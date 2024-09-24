@@ -199,4 +199,10 @@
   <data name="FilterPanel_Department_7448e06495ce4f08b442e5a85bfea88f" xml:space="preserve">
     <value>Подразделение</value>
   </data>
+  <data name="JobDisplayName_a3cf794a74064447a42923201be41b81" xml:space="preserve">
+    <value>Рассылка уведомлений о приближении срока исполнения поручения</value>
+  </data>
+  <data name="JobDescription_a3cf794a74064447a42923201be41b81" xml:space="preserve">
+    <value>Рассылка уведомлений о приближении срока исполнения поручения</value>
+  </data>
 </root>

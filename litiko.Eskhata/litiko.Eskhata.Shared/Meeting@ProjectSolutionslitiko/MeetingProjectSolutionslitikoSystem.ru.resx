@@ -76,4 +76,16 @@
   <data name="Property_Accepted" xml:space="preserve">
     <value>Решение принято</value>
   </data>
+  <data name="Property_VotingType" xml:space="preserve">
+    <value>Тип голосования</value>
+  </data>
+  <data name="Enum_VotingType_Intramural" xml:space="preserve">
+    <value>Очное</value>
+  </data>
+  <data name="Enum_VotingType_Extramural" xml:space="preserve">
+    <value>Заочное</value>
+  </data>
+  <data name="Enum_VotingType_NoVoting" xml:space="preserve">
+    <value>Без голосования</value>
+  </data>
 </root>

@@ -10,6 +10,18 @@ namespace litiko.Eskhata
   partial class MeetingProjectSolutionslitikoClientHandlers
   {
 
+    public virtual IEnumerable<Enumeration> ProjectSolutionslitikoVotingTypeFiltering(IEnumerable<Enumeration> query)
+    {      
+      if (_obj.Meeting.Votinglitiko == litiko.Eskhata.Meeting.Votinglitiko.Intramural)
+        query = query.Where(q => !Equals(q, litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Extramural));
+      if (_obj.Meeting.Votinglitiko == litiko.Eskhata.Meeting.Votinglitiko.extramural)
+        query = query.Where(q => !Equals(q, litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Intramural));
+      if (_obj.Meeting.Votinglitiko == litiko.Eskhata.Meeting.Votinglitiko.NoVoting)
+        query = query.Where(q => Equals(q, litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.NoVoting));
+      
+      return query;
+    }
+
     public virtual void ProjectSolutionslitikoNoValueInput(Sungero.Presentation.IntegerValueInputEventArgs e)
     {
       _obj.Accepted = _obj.Yes > e.NewValue.GetValueOrDefault() ? true : false;

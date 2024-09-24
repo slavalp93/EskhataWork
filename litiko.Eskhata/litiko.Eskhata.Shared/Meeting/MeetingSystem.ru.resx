@@ -167,9 +167,9 @@
     <value>Очное/Заочное</value>
   </data>
   <data name="Control_6fd2e547cb584fbc96649035091eb5ec_DisplayValue" xml:space="preserve">
-    <value>Обновить результаты голосования</value>
+    <value>Обновить результаты заочного голосования</value>
   </data>
   <data name="Control_67f7c031991a4fff93ef0de3bcfd09a8_DisplayValue" xml:space="preserve">
-    <value>Отправить на голосование</value>
+    <value>Отправить на заочное голосование</value>
   </data>
 </root>

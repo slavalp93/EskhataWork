@@ -196,6 +196,15 @@
     }
   ],
   "IsolatedNamespace": "litiko.CollegiateAgencies.Isolated",
+  "Jobs": [
+    {
+      "NameGuid": "a3cf794a-7406-4447-a429-23201be41b81",
+      "Name": "SendNoticeAboutActionItemExecutionTaskEnd",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T06:00:00"
+    }
+  ],
   "PublicConstants": [
     {
       "Name": "Addendum",
@@ -444,7 +453,9 @@
     "MinutesTemplateNotFound",
     "MeetingIsEmpty",
     "MeetingCategoryIsEmpty",
-    "HasActiveVotingTasks"
+    "HasActiveVotingTasks",
+    "ExecutionPeriodEndsInFiveDays",
+    "ActionItemAssignment"
   ],
   "ServerAssemblyName": "litiko.CollegiateAgencies.Server",
   "ServerNamespace": "litiko.CollegiateAgencies.Server",
@@ -666,7 +677,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.8",
+  "Version": "0.0.1.9",
   "Widgets": [],
   "Versions": [
     {

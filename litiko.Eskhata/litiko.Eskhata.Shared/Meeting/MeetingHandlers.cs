@@ -66,6 +66,14 @@ namespace litiko.Eskhata
     public virtual void ProjectSolutionslitikoAdded(Sungero.Domain.Shared.CollectionPropertyAddedEventArgs e)
     {      
       _added.Number = (_obj.ProjectSolutionslitiko.Max(a => a.Number) ?? 0) + 1;
+      
+      // Тип голосования      
+      if (_obj.Votinglitiko == litiko.Eskhata.Meeting.Votinglitiko.Intramural)
+        _added.VotingType = litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Intramural;
+      if (_obj.Votinglitiko == litiko.Eskhata.Meeting.Votinglitiko.extramural)
+        _added.VotingType = litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Extramural;
+      if (_obj.Votinglitiko == litiko.Eskhata.Meeting.Votinglitiko.NoVoting)
+        _added.VotingType = litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.NoVoting;
     }
   }
 

@@ -121,4 +121,10 @@
   <data name="HasActiveVotingTasks" xml:space="preserve">
     <value>По некоторым документам есть активные задачи голосования.</value>
   </data>
+  <data name="ExecutionPeriodEndsInFiveDays" xml:space="preserve">
+    <value>Срок исполнения поручения заканчивается через 5 дней. Поручение: {0}</value>
+  </data>
+  <data name="ActionItemAssignment" xml:space="preserve">
+    <value>Задание по исполнению поручения: {0}</value>
+  </data>
 </root>

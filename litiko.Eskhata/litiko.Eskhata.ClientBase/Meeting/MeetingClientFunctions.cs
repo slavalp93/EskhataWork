@@ -21,7 +21,7 @@ namespace litiko.Eskhata.Client
         return;
       }      
       
-      if (_obj.ProjectSolutionslitiko.Any())
+      if (_obj.ProjectSolutionslitiko.Any(x => x.VotingType == litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Extramural))
       {
         var dialog = Dialogs.CreateInputDialog(litiko.Eskhata.Meetings.Resources.SendToVoteDialogTittle);
         var btnOk = dialog.Buttons.AddOk();
@@ -31,7 +31,8 @@ namespace litiko.Eskhata.Client
         var fakeControl = dialog.AddString("123456789012345678910123456789012345678910123456789012345678910", false);
         fakeControl.IsVisible = false;        
         
-        var psValue = dialog.AddSelectMany(litiko.Eskhata.Meetings.Resources.SendToVoteDialogQuestions, true, litiko.CollegiateAgencies.Projectsolutions.Null).From(_obj.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null).Select(x => x.ProjectSolution));
+        var psValue = dialog.AddSelectMany(litiko.Eskhata.Meetings.Resources.SendToVoteDialogQuestions, true, litiko.CollegiateAgencies.Projectsolutions.Null)
+          .From(_obj.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null && x.VotingType == litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Extramural).Select(x => x.ProjectSolution));
         
         var result = dialog.Show();
         if (result == btnOk)
@@ -45,7 +46,7 @@ namespace litiko.Eskhata.Client
     }
 
     /// <summary>
-    /// Обновить результаты голосования
+    /// Обновить результаты заочного голосования
     /// </summary>       
     public void UpdateVoting()
     {
@@ -57,7 +58,7 @@ namespace litiko.Eskhata.Client
       
       if (_obj.ProjectSolutionslitiko.Any())
       {        
-        foreach (var element in _obj.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null))
+        foreach (var element in _obj.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null && x.VotingType == litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Extramural))
         {
           var projectSolution = element.ProjectSolution;
           

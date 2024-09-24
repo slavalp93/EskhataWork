@@ -121,4 +121,10 @@
   <data name="HasActiveVotingTasks" xml:space="preserve">
     <value>Some documents have active voting tasks.</value>
   </data>
+  <data name="ExecutionPeriodEndsInFiveDays" xml:space="preserve">
+    <value>The assignment execution period ends in 5 days. Assignment: {0}</value>
+  </data>
+  <data name="ActionItemAssignment" xml:space="preserve">
+    <value>Action item execution assignment: {0}</value>
+  </data>
 </root>

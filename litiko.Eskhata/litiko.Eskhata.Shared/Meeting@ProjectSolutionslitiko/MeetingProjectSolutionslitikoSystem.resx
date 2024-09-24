@@ -76,4 +76,16 @@
   <data name="Property_Accepted" xml:space="preserve">
     <value>Accepted</value>
   </data>
+  <data name="Property_VotingType" xml:space="preserve">
+    <value>Voting type</value>
+  </data>
+  <data name="Enum_VotingType_Intramural" xml:space="preserve">
+    <value>Intramural</value>
+  </data>
+  <data name="Enum_VotingType_Extramural" xml:space="preserve">
+    <value>Extramural</value>
+  </data>
+  <data name="Enum_VotingType_NoVoting" xml:space="preserve">
+    <value>No voting</value>
+  </data>
 </root>

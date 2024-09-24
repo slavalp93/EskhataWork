@@ -89,6 +89,35 @@
       "Code": "Accepted",
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
       "PreviousPropertyGuid": "bf68ecc7-abd9-4421-acbf-4ad706d80064"
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "3584edb9-7572-4265-8139-45c1a14cc98f",
+      "Name": "VotingType",
+      "CanBeSearch": false,
+      "Code": "VotingType",
+      "DirectValues": [
+        {
+          "NameGuid": "60d14da9-f032-4efe-8664-3dd90b73346f",
+          "Name": "Intramural",
+          "Code": "Intramural"
+        },
+        {
+          "NameGuid": "157f9835-62ba-460b-a240-e3b5d2e611d5",
+          "Name": "Extramural",
+          "Code": "Extramural"
+        },
+        {
+          "NameGuid": "3e282ec0-1c45-4aea-983a-c9783a376785",
+          "Name": "NoVoting",
+          "Code": "NoVoting"
+        }
+      ],
+      "HandledEvents": [
+        "FilteringClient"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "63cf4a97-c5db-47da-a2e1-00873d4bd861"
     }
   ],
   "PublicStructures": [],
