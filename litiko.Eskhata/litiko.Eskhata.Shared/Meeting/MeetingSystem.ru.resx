@@ -172,4 +172,16 @@
   <data name="Control_67f7c031991a4fff93ef0de3bcfd09a8_DisplayValue" xml:space="preserve">
     <value>Отправить на заочное голосование</value>
   </data>
+  <data name="Action_CreateActionItemslitiko" xml:space="preserve">
+    <value>Создать поручения</value>
+  </data>
+  <data name="Action_CreateActionItemslitikoHint" xml:space="preserve">
+    <value>Создать поручения</value>
+  </data>
+  <data name="Action_CreateActionItemslitikoDescription" xml:space="preserve">
+    <value>Создание и отправка на исполнение поручений.</value>
+  </data>
+  <data name="Control_cc643b619dcd4614abf3c38b0cad0d0c_DisplayValue" xml:space="preserve">
+    <value>Перенести в другое заседание</value>
+  </data>
 </root>

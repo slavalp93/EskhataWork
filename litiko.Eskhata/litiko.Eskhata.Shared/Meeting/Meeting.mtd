@@ -3,6 +3,25 @@
   "NameGuid": "b5ca5dfe-ff12-4f99-a426-1573911ab8a0",
   "Name": "Meeting",
   "AccessRightsMode": "Both",
+  "Actions": [
+    {
+      "NameGuid": "f27bf08f-e406-4a03-9eb5-fa8d0dfaac4d",
+      "Name": "CopyChildEntity",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ]
+    },
+    {
+      "NameGuid": "52504c4c-02a7-40bf-b3e1-9899146db4c6",
+      "Name": "CreateActionItemslitiko",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_CreateActionItemslitiko_large_52504c4c02a740bfb3e19899146db4c6.png",
+      "SmallIconName": "Action_CreateActionItemslitiko_small_52504c4c02a740bfb3e19899146db4c6.png"
+    }
+  ],
   "BaseGuid": "dbc0dd63-4d23-4f41-92ae-cab59bb70c8c",
   "CanBeNavigationPropertyType": true,
   "CreationAreaMetadata": {
@@ -425,22 +444,14 @@
         {
           "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
           "NameGuid": "61f64359-2b31-453b-9d09-c5b84ac94899",
-          "Name": "Mainlitiko",
-          "ColumnDefinitions": [
-            {
-              "Percentage": 50.0
-            },
-            {
-              "Percentage": 50.0
-            }
-          ]
+          "Name": "Mainlitiko"
         },
         {
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
           "NameGuid": "cfb084bb-cb3d-4ed0-9a7a-fa2aabbb1d86",
           "Name": "ProjectSolutionslitikolitiko",
           "ColumnNumber": 0,
-          "ColumnSpan": 2,
+          "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.GridControlToChildCollectionBinder",
           "HeaderLocation": "None",
           "ParentGuid": "61f64359-2b31-453b-9d09-c5b84ac94899",
@@ -455,15 +466,50 @@
           ]
         },
         {
+          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
+          "NameGuid": "fdfb709f-5e86-47c0-9f50-726abeaa250f",
+          "Name": "ActionGrouplitiko",
+          "ColumnDefinitions": [
+            {
+              "Percentage": 33.33
+            },
+            {
+              "Percentage": 33.33
+            },
+            {
+              "Percentage": 33.33
+            }
+          ],
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "ParentGuid": "61f64359-2b31-453b-9d09-c5b84ac94899",
+          "RowNumber": 0,
+          "RowSpan": 1
+        },
+        {
+          "$type": "Sungero.Metadata.HyperlinkControlMetadata, Sungero.Metadata",
+          "NameGuid": "cc643b61-9dcd-4614-abf3-c38b0cad0d0c",
+          "Name": "MoveToAnotherlitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.HyperlinkToSourceBinder",
+          "FunctionName": "MoveToAnotherMeeting",
+          "HeaderLocation": "None",
+          "ParentGuid": "fdfb709f-5e86-47c0-9f50-726abeaa250f",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
           "$type": "Sungero.Metadata.HyperlinkControlMetadata, Sungero.Metadata",
           "NameGuid": "6fd2e547-cb58-4fbc-9664-9035091eb5ec",
           "Name": "UpdateVotinglitiko",
-          "ColumnNumber": 0,
+          "ColumnNumber": 1,
           "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.HyperlinkToSourceBinder",
           "FunctionName": "UpdateVoting",
           "HeaderLocation": "None",
-          "ParentGuid": "61f64359-2b31-453b-9d09-c5b84ac94899",
+          "ParentGuid": "fdfb709f-5e86-47c0-9f50-726abeaa250f",
           "RowNumber": 0,
           "RowSpan": 1,
           "Settings": []
@@ -472,12 +518,12 @@
           "$type": "Sungero.Metadata.HyperlinkControlMetadata, Sungero.Metadata",
           "NameGuid": "67f7c031-991a-4fff-93ef-0de3bcfd09a8",
           "Name": "SendToVotellitiko",
-          "ColumnNumber": 1,
+          "ColumnNumber": 2,
           "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.HyperlinkToSourceBinder",
           "FunctionName": "SendToVote",
           "HeaderLocation": "None",
-          "ParentGuid": "61f64359-2b31-453b-9d09-c5b84ac94899",
+          "ParentGuid": "fdfb709f-5e86-47c0-9f50-726abeaa250f",
           "RowNumber": 0,
           "RowSpan": 1,
           "Settings": []
@@ -594,6 +640,9 @@
           "Code": "NoVoting"
         }
       ],
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
       "PreviousPropertyGuid": "0d4cf420-46ad-42c1-92c7-1beca396a158"
     },
@@ -684,6 +733,37 @@
   ],
   "PublicFunctions": [
     {
+      "Name": "CreateActionItemsFromMeeting",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "meeting",
+          "ParameterType": "global::litiko.Eskhata.IMeeting",
+          "ParameterTypeFullName": "litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::Sungero.RecordManagement.IActionItemExecutionTask>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "CreateActionItemsFromMeetingDialog",
+      "Parameters": [
+        {
+          "Name": "meeting",
+          "ParameterType": "global::litiko.Eskhata.IMeeting",
+          "ParameterTypeFullName": "litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "e",
+          "ParameterType": "Sungero.Core.IValidationArgs"
+        }
+      ],
+      "Placement": "Client",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
       "Name": "GetMeetingAbsentNumberedList",
       "Parameters": [
         {
@@ -772,20 +852,50 @@
       ],
       "ReturnType": "global::System.String",
       "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "GetMinutes",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "meeting",
+          "ParameterType": "global::litiko.Eskhata.IMeeting",
+          "ParameterTypeFullName": "litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::litiko.Eskhata.IMinutes",
+      "ReturnTypeFullName": "litiko.Eskhata.IMinutes, Sungero.Domain.Interfaces"
     }
   ],
   "PublicStructures": [],
   "ResourcesKeys": [
     "NoRightsForUpdateDocument",
     "SendToVoteDialogTittle",
-    "SendToVoteDialogQuestions",
-    "NotAccessToAction"
+    "Questions",
+    "NotAccessToAction",
+    "ProtocolNotFound",
+    "NoExecutionActionItemsCreated",
+    "YouMustDeleteEntireLine",
+    "MoveToAnotherDialogTittle",
+    "InNewMeeting",
+    "Meeting"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "b7b59d97-b6e4-46de-ba8f-0f82b8e09c3b",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "e77d4423-6acb-449a-bbe0-500a231e8589",
+        "Name": "CreateActionItemslitikolitiko",
+        "ActionGuid": "52504c4c-02a7-40bf-b3e1-9899146db4c6",
+        "ButtonSize": "Large",
+        "Index": -1,
+        "ParentGuid": "f329dc86-efcb-484a-bdfd-999e6f96e971"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],

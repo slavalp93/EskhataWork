@@ -14,7 +14,12 @@ namespace litiko.Eskhata
     {
       var meetingCategory = _root.MeetingCategorylitiko;
       if (meetingCategory != null)
-        query = query.Where(x => Equals(x.MeetingCategory, meetingCategory) && !x.IncludedInAgenda.Value && x.InternalApprovalState == Sungero.Docflow.OfficialDocument.InternalApprovalState.Signed);
+        query = query.Where(x => Equals(x.MeetingCategory, meetingCategory) && !x.IncludedInAgenda.Value && 
+                            x.InternalApprovalState == Sungero.Docflow.OfficialDocument.InternalApprovalState.Signed 
+                           );      
+      
+      var alreadySelected = _root.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null).Select(x => x.ProjectSolution.Id).ToList();
+      query = query.Where(x => !alreadySelected.Contains(x.Id));            
       
       return query;
     }

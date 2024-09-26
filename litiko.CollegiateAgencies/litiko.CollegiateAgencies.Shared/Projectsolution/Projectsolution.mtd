@@ -15,14 +15,6 @@
       "Versions": []
     },
     {
-      "NameGuid": "4ea85c77-e6e8-4216-86da-e970532bafcd",
-      "Name": "TransferFromAgenda",
-      "ActionArea": "Card",
-      "GenerateHandler": true,
-      "LargeIconName": null,
-      "SmallIconName": null
-    },
-    {
       "NameGuid": "cc14188c-66bf-4e0c-99b6-305d0151b371",
       "Name": "IncludeInAgenda",
       "ActionArea": "Card",
@@ -885,7 +877,8 @@
     "CreatedServer",
     "WriteHistoryServer",
     "RefreshClient",
-    "FilteringServer"
+    "FilteringServer",
+    "CreatingFromServer"
   ],
   "IconResourcesKeys": [],
   "IntegrationServiceName": "CollegiateAgenciesProjectsolution",

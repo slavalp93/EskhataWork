@@ -160,21 +160,6 @@
   <data name="Control_868f64ab15924c08a250fa91c8b61da4_EmptyText" xml:space="preserve">
     <value>The essence of the issue submitted for consideration by the collegial body is indicated.</value>
   </data>
-  <data name="Action_TransferFromAgenda" xml:space="preserve">
-    <value>Transfer from agenda</value>
-  </data>
-  <data name="Action_TransferFromAgendaDescription" xml:space="preserve">
-    <value>Transfer from agenda</value>
-  </data>
-  <data name="Action_TransferFromAgendaHint" xml:space="preserve">
-    <value>Transfer from agenda</value>
-  </data>
-  <data name="Action_TransferFromAgendaConfirmationMessage" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Action_TransferFromAgendaConfirmationDescription" xml:space="preserve">
-    <value />
-  </data>
   <data name="Control_0c313a927f654cdb9c920647e5297395_DisplayValue" xml:space="preserve">
     <value>Transfer from agenda</value>
   </data>

@@ -207,6 +207,14 @@
   ],
   "PublicConstants": [
     {
+      "Name": "ActionItemExecutionTaskOtherGroupGuid",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"13a98dcd-c5ec-4fd0-a682-424613f615d4\")"
+    },
+    {
       "Name": "Addendum",
       "ParentClasses": [
         "Module",
@@ -231,6 +239,15 @@
       ],
       "TypeName": "System.Guid",
       "Value": "new System.Guid(\"852b3e7d-f178-47d3-8fad-a64021065cfd\")"
+    },
+    {
+      "Name": "CreationResolutions",
+      "ParentClasses": [
+        "Module",
+        "RoleGuid"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"bc3a6515-3348-4932-9cc6-fb57d8dfe8d5\")"
     },
     {
       "Name": "DontUpdateProjectSolution",
@@ -455,7 +472,9 @@
     "MeetingCategoryIsEmpty",
     "HasActiveVotingTasks",
     "ExecutionPeriodEndsInFiveDays",
-    "ActionItemAssignment"
+    "ActionItemAssignment",
+    "RoleCreationResolutions",
+    "DescriptionRoleCreationResolutions"
   ],
   "ServerAssemblyName": "litiko.CollegiateAgencies.Server",
   "ServerNamespace": "litiko.CollegiateAgencies.Server",
@@ -677,7 +696,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.9",
+  "Version": "0.0.1.10",
   "Widgets": [],
   "Versions": [
     {

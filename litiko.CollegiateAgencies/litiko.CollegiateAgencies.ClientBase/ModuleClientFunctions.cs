@@ -15,6 +15,6 @@ namespace litiko.CollegiateAgencies.Client
     {
       CollegiateAgencies.PublicFunctions.Projectsolution.Remote.CreateProjectsolution().Show();
     }
-
+    
   }
 }

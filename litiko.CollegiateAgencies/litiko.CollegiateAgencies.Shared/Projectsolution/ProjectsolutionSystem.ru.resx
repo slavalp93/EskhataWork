@@ -157,15 +157,6 @@
   <data name="Control_868f64ab15924c08a250fa91c8b61da4_EmptyText" xml:space="preserve">
     <value>Указывается суть вопроса, выносимого на рассмотрение коллегиального органа.</value>
   </data>
-  <data name="Action_TransferFromAgenda" xml:space="preserve">
-    <value>Перенести из повестки</value>
-  </data>
-  <data name="Action_TransferFromAgendaHint" xml:space="preserve">
-    <value>Перенести из повестки</value>
-  </data>
-  <data name="Action_TransferFromAgendaDescription" xml:space="preserve">
-    <value>Перенести из повестки</value>
-  </data>
   <data name="Control_0c313a927f654cdb9c920647e5297395_DisplayValue" xml:space="preserve">
     <value>Перенести из повестки</value>
   </data>

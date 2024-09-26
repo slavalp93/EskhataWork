@@ -19,7 +19,8 @@ namespace litiko.CollegiateAgencies.Client
 
     public virtual bool CanCreateResolution(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return !_obj.State.IsChanged && (Equals(Users.Current, Users.As(_obj.Meeting?.Secretary)) || Users.Current.IncludedIn(Roles.Administrators));
+      var roleCreationResolutions = Roles.GetAll(r => r.Sid == Constants.Module.RoleGuid.CreationResolutions).SingleOrDefault();            
+      return !_obj.State.IsChanged && (Users.Current.IncludedIn(roleCreationResolutions) || Users.Current.IncludedIn(Roles.Administrators));
     }
 
     public virtual void CreateExtractProtocol(Sungero.Domain.Client.ExecuteActionArgs e)
@@ -138,16 +139,6 @@ namespace litiko.CollegiateAgencies.Client
     public virtual bool CanIncludeInAgenda(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
       return Equals(Sungero.Company.Employees.As(Users.Current), _obj.MeetingCategory?.Secretary);
-    }
-
-    public virtual void TransferFromAgenda(Sungero.Domain.Client.ExecuteActionArgs e)
-    {
-      
-    }
-
-    public virtual bool CanTransferFromAgenda(Sungero.Domain.Client.CanExecuteActionArgs e)
-    {
-      return true;
     }
 
   }

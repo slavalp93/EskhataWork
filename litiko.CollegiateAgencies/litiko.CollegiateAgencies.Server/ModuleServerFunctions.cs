@@ -282,6 +282,8 @@ namespace litiko.CollegiateAgencies.Server
       });
     
       return hasActiveTaskWithVotingStage;           
-    }    
+    }
+
+    
   }
 }

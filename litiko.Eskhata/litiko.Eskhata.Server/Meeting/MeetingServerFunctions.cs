@@ -46,7 +46,7 @@ namespace litiko.Eskhata.Server
           employeesList.Add(fio);
       }
       
-      return string.Join(Environment.NewLine, employeesList);
+      return string.Join("\r\n", employeesList);
     } 
 
     /// <summary>
@@ -123,7 +123,7 @@ namespace litiko.Eskhata.Server
       if (!_obj.ProjectSolutionslitiko.Any())
         return string.Empty;
       
-      return string.Join(Environment.NewLine, _obj.ProjectSolutionslitiko.Select(element => $"{element.Number}. {element.ProjectSolution.Subject}."));
+      return string.Join("\r\n", _obj.ProjectSolutionslitiko.Select(element => $"{element.Number}. {element.ProjectSolution.Subject}."));
     }    
     
     /// <summary>
@@ -166,5 +166,92 @@ namespace litiko.Eskhata.Server
       
       return task;
     }
+
+    /// <summary>
+    /// Получить протокол.
+    /// </summary>
+    /// <returns>Протокол совещания.</returns>
+    [Remote, Public]
+    public virtual litiko.Eskhata.IMinutes GetMinutes()
+    {
+      return litiko.Eskhata.Minuteses.GetAll(d => Equals(d.Meeting, _obj)).FirstOrDefault();
+    }
+
+    /// <summary>
+    /// Получить обновленный список поручений.
+    /// </summary>
+    /// <param name="ids">Список Id поручений.</param>
+    /// <returns>Обновленный список поручений.</returns>
+    [Remote]
+    public static List<Sungero.RecordManagement.IActionItemExecutionTask> GetActionItemsExecutionTasks(List<long> ids)
+    {
+      return Sungero.RecordManagement.ActionItemExecutionTasks.GetAll(t => ids.Contains(t.Id)).ToList();
+    }    
+
+    /// <summary>
+    /// Удаление поручения, созданного по документу.
+    /// </summary>
+    /// <param name="actionItemId">ИД задачи, которую необходимо удалить.</param>
+    /// <returns>True, если удаление прошло успешно.</returns>
+    [Remote]
+    public static bool TryDeleteActionItemTask(long actionItemId)
+    {
+      try
+      {
+        var task = Sungero.RecordManagement.ActionItemExecutionTasks.Get(actionItemId);
+        if (task.AccessRights.CanDelete())
+          Sungero.RecordManagement.ActionItemExecutionTasks.Delete(task);
+        else
+          return false;
+      }
+      catch
+      {
+        return false;
+      }
+
+      return true;
+    }
+    
+    /// <summary>
+    /// Создать поручения по совещанию.
+    /// </summary>
+    /// <returns>Список созданных поручений.</returns>
+    [Remote, Public]
+    public virtual List<Sungero.RecordManagement.IActionItemExecutionTask> CreateActionItemsFromMeeting()
+    {      
+      var resultList = new List<Sungero.RecordManagement.IActionItemExecutionTask>();
+      
+      if (!_obj.ProjectSolutionslitiko.Any(x => x.ProjectSolution != null))      
+        return resultList;
+
+      var minutes = this.GetMinutes();
+      if (minutes == null)
+        return resultList;
+      
+      foreach (var element in _obj.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null))
+      {
+        var projectSolution = element.ProjectSolution;
+        foreach (var decision in projectSolution.DecidedMinutes.Where(x => !string.IsNullOrEmpty(x.DecisionRU) && x.Responsible != null)) //&& x.Date.HasValue
+        {
+          var actionItem = Sungero.RecordManagement.PublicFunctions.Module.Remote.CreateActionItemExecution(minutes);
+          actionItem.AssignedBy = _obj.President;
+          actionItem.IsUnderControl = true;
+          actionItem.Supervisor = _obj.Secretary;
+          actionItem.ActiveText = decision.DecisionRU;
+          actionItem.Assignee = decision.Responsible;
+          actionItem.Deadline = decision.Date;
+          
+          foreach (var property in actionItem.State.Properties)
+            property.IsRequired = false;          
+          
+          actionItem.Save();
+          
+          resultList.Add(actionItem);
+        }
+      }
+      
+      return resultList;
+    }
+       
   }
 }

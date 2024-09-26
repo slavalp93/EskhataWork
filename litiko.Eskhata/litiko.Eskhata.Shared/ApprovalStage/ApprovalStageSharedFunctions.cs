@@ -54,6 +54,13 @@ namespace litiko.Eskhata.Shared
       }
       #endregion      
       
+      #region Печать
+      if (_obj.StageType == Sungero.Docflow.ApprovalStage.StageType.Print)
+      {
+        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingSecretary);
+      }
+      #endregion       
+      
       return baseRoles;
     }
   }

@@ -9,6 +9,16 @@ namespace litiko.Eskhata.Client
 {
   partial class MinutesActions
   {
+    public override void CreateActionItems(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      base.CreateActionItems(e);
+    }
+
+    public override bool CanCreateActionItems(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return false; //base.CanCreateActionItems(e);
+    }
+
     public override void CreateFromTemplate(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       try

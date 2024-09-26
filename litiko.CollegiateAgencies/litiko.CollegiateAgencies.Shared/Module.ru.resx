@@ -127,4 +127,10 @@
   <data name="ActionItemAssignment" xml:space="preserve">
     <value>Задание по исполнению поручения: {0}</value>
   </data>
+  <data name="RoleCreationResolutions" xml:space="preserve">
+    <value>Создание постановлений</value>
+  </data>
+  <data name="DescriptionRoleCreationResolutions" xml:space="preserve">
+    <value>Сотрудники, имеющие право создания документов с видом Постановление.</value>
+  </data>
 </root>

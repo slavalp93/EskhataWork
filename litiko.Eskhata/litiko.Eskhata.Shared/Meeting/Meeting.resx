@@ -64,10 +64,28 @@
   <data name="SendToVoteDialogTittle" xml:space="preserve">
     <value>Selecting voting questions</value>
   </data>
-  <data name="SendToVoteDialogQuestions" xml:space="preserve">
-    <value>Questions to submit</value>
+  <data name="Questions" xml:space="preserve">
+    <value>Questions</value>
   </data>
   <data name="NotAccessToAction" xml:space="preserve">
     <value>The action is available only to the meeting secretary.</value>
+  </data>
+  <data name="ProtocolNotFound" xml:space="preserve">
+    <value>Protocol not found.</value>
+  </data>
+  <data name="NoExecutionActionItemsCreated" xml:space="preserve">
+    <value>There are no execution action items created.</value>
+  </data>
+  <data name="YouMustDeleteEntireLine" xml:space="preserve">
+    <value>To change the value, delete the entire line.</value>
+  </data>
+  <data name="MoveToAnotherDialogTittle" xml:space="preserve">
+    <value>Moving questions to another meeting</value>
+  </data>
+  <data name="InNewMeeting" xml:space="preserve">
+    <value>To a new meeting?</value>
+  </data>
+  <data name="Meeting" xml:space="preserve">
+    <value>Meeting</value>
   </data>
 </root>

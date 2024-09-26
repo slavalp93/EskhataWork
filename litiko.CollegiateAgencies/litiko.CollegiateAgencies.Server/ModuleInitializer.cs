@@ -180,6 +180,8 @@ namespace litiko.CollegiateAgencies.Server
             
       Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(Resources.RoleSecretaries, Resources.DescriptionRoleSecreteries, Constants.Module.RoleGuid.Secretaries);
       Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(Resources.RolePresidents, Resources.DescriptionRolePresidents, Constants.Module.RoleGuid.Presidents);
+      Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(Resources.RoleCreationResolutions, Resources.DescriptionRoleCreationResolutions, Constants.Module.RoleGuid.CreationResolutions);
+      
     }
     
     /// <summary>

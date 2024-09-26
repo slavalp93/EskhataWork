@@ -34,6 +34,12 @@ namespace litiko.Eskhata
 
     public virtual void ProjectSolutionslitikoProjectSolutionValueInput(litiko.Eskhata.Client.MeetingProjectSolutionslitikoProjectSolutionValueInputEventArgs e)
     {
+      if (e.OldValue != null && !Equals(e.NewValue, e.OldValue))
+      {
+        e.AddError(litiko.Eskhata.Meetings.Resources.YouMustDeleteEntireLine);
+        return;        
+      }
+      
       var projectSolution = e.NewValue;
       if (projectSolution != null)
       {
@@ -63,6 +69,30 @@ namespace litiko.Eskhata
 
   partial class MeetingClientHandlers
   {
+
+    public virtual void VotinglitikoValueInput(Sungero.Presentation.EnumerationValueInputEventArgs e)
+    {
+      var selectedType = e.NewValue;
+      Nullable<Enumeration> typeForTable = null;
+      if (selectedType != null)
+      {
+        if (selectedType == litiko.Eskhata.Meeting.Votinglitiko.extramural)
+          typeForTable = litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Extramural;
+        if (selectedType == litiko.Eskhata.Meeting.Votinglitiko.Intramural)
+          typeForTable = litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Intramural;
+        if (selectedType == litiko.Eskhata.Meeting.Votinglitiko.NoVoting)
+          typeForTable = litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.NoVoting;
+        if (selectedType == litiko.Eskhata.Meeting.Votinglitiko.IntExt)
+          typeForTable = null;
+      }
+      
+      foreach (var element in _obj.ProjectSolutionslitiko)
+      {
+        if (element.VotingType != typeForTable)
+          element.VotingType = typeForTable;
+      }
+
+    }
 
     public override void Refresh(Sungero.Presentation.FormRefreshEventArgs e)
     {

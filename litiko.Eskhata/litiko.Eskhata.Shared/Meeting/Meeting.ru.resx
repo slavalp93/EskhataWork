@@ -64,10 +64,28 @@
   <data name="SendToVoteDialogTittle" xml:space="preserve">
     <value>Выбор вопросов для голосования</value>
   </data>
-  <data name="SendToVoteDialogQuestions" xml:space="preserve">
-    <value>Вопросы для отправки</value>
+  <data name="Questions" xml:space="preserve">
+    <value>Вопросы</value>
   </data>
   <data name="NotAccessToAction" xml:space="preserve">
     <value>Действие доступно только секретарю заседания.</value>
+  </data>
+  <data name="ProtocolNotFound" xml:space="preserve">
+    <value>Протокол не найден.</value>
+  </data>
+  <data name="NoExecutionActionItemsCreated" xml:space="preserve">
+    <value>Нет созданных поручений.</value>
+  </data>
+  <data name="YouMustDeleteEntireLine" xml:space="preserve">
+    <value>Для изменения значения удалите всю строку.</value>
+  </data>
+  <data name="MoveToAnotherDialogTittle" xml:space="preserve">
+    <value>Перенос вопросов в другое заседание</value>
+  </data>
+  <data name="InNewMeeting" xml:space="preserve">
+    <value>В новое заседание?</value>
+  </data>
+  <data name="Meeting" xml:space="preserve">
+    <value>Заседание</value>
   </data>
 </root>

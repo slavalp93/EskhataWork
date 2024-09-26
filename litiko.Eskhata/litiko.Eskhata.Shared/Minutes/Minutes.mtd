@@ -5,6 +5,16 @@
   "AccessRightsMode": "Both",
   "Actions": [
     {
+      "NameGuid": "b086c44f-9c3e-499c-b018-811e1c67d4fa",
+      "Name": "CreateActionItems",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ],
+      "Versions": []
+    },
+    {
       "NameGuid": "bada190c-5ad2-4129-ab51-553b481492f0",
       "Name": "CreateFromTemplate",
       "GenerateHandler": true,

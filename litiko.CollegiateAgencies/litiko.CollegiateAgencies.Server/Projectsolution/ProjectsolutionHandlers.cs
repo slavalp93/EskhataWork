@@ -7,6 +7,62 @@ using litiko.CollegiateAgencies.Projectsolution;
 
 namespace litiko.CollegiateAgencies
 {
+  partial class ProjectsolutionCreatingFromServerHandler
+  {
+
+    public override void CreatingFrom(Sungero.Domain.CreatingFromEventArgs e)
+    {
+      //base.CreatingFrom(e);
+      
+      // Область регистрации.
+      e.Without(_info.Properties.RegistrationNumber);
+      e.Without(_info.Properties.RegistrationDate);
+      e.Without(_info.Properties.DocumentRegister);
+      e.Without(_info.Properties.DeliveryMethod);
+      e.Without(_info.Properties.CaseFile);
+      e.Without(_info.Properties.PlacedToCaseFileDate);
+      e.Without(_info.Properties.Tracking);
+      
+      // Область хранения.
+      e.Without(_info.Properties.PaperCount);
+      e.Without(_info.Properties.AddendaPaperCount);
+      e.Without(_info.Properties.StoredIn);
+
+      // Статусы жизненного цикла.
+      e.Without(_info.Properties.LifeCycleState);
+      e.Without(_info.Properties.RegistrationState);
+      e.Without(_info.Properties.VerificationState);
+      e.Without(_info.Properties.InternalApprovalState);
+      e.Without(_info.Properties.ExternalApprovalState);
+      e.Without(_info.Properties.ExecutionState);
+      e.Without(_info.Properties.ControlExecutionState);
+      e.Without(_info.Properties.LocationState);
+      e.Without(_info.Properties.ExchangeState);
+      
+      // Свойства "Подписал" и "Основание".
+      //e.Without(_info.Properties.OurSignatory);
+      //e.Without(_info.Properties.OurSigningReason);
+      
+      // Свойство "Исполнитель".
+      e.Without(_info.Properties.Assignee);
+      
+      e.Without(_info.Properties.LeadingDocument);
+      e.Without(_info.Properties.Meeting);
+      e.Without(_info.Properties.IncludedInAgenda);
+      
+      // Вкладка "Протокол"
+      e.Without(_info.Properties.ListenedRUMinutes);
+      e.Without(_info.Properties.ListenedTJMinutes);
+      e.Without(_info.Properties.ListenedENMinutes);
+      e.Without(_info.Properties.DecidedMinutes);
+
+      // Вкладка "Голосование"
+      e.Without(_info.Properties.Voting);
+      
+      e.Params.AddOrUpdate(Sungero.Docflow.PublicConstants.OfficialDocument.GrantAccessRightsToDocumentAsync, true);
+    }
+  }
+
   partial class ProjectsolutionFilteringServerHandler<T>
   {
 

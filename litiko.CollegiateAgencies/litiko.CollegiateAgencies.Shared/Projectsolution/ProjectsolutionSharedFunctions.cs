@@ -43,11 +43,6 @@ namespace litiko.CollegiateAgencies.Shared
               meeting.InvitedExternallitiko.AddNew().Contact = contact;
           }
         }        
-        
-        /* Вынести из функции
-        if (!meeting.State.IsInserted && meeting.State.IsChanged)
-          meeting.Save();
-        */
       }    
     }
   }

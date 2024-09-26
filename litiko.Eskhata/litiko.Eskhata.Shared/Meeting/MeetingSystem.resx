@@ -175,4 +175,25 @@
   <data name="Control_67f7c031991a4fff93ef0de3bcfd09a8_DisplayValue" xml:space="preserve">
     <value>Send to extramural vote</value>
   </data>
+  <data name="Action_CreateActionItemslitiko" xml:space="preserve">
+    <value>Create Action Items</value>
+  </data>
+  <data name="Action_CreateActionItemslitikoDescription" xml:space="preserve">
+    <value>Create action items and send them for execution.</value>
+  </data>
+  <data name="Action_CreateActionItemslitikoHint" xml:space="preserve">
+    <value>Create Action Items</value>
+  </data>
+  <data name="Action_CreateActionItemslitikoConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateActionItemslitikoConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_fdfb709f5e8647c09f50726abeaa250f" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_cc643b619dcd4614abf3c38b0cad0d0c_DisplayValue" xml:space="preserve">
+    <value>Move to another meeting</value>
+  </data>
 </root>

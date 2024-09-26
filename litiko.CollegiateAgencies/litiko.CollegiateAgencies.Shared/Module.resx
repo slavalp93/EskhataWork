@@ -127,4 +127,10 @@
   <data name="ActionItemAssignment" xml:space="preserve">
     <value>Action item execution assignment: {0}</value>
   </data>
+  <data name="RoleCreationResolutions" xml:space="preserve">
+    <value>Creation Resolutions</value>
+  </data>
+  <data name="DescriptionRoleCreationResolutions" xml:space="preserve">
+    <value>Employees who have the right to create documents with the Resolution kind.</value>
+  </data>
 </root>
