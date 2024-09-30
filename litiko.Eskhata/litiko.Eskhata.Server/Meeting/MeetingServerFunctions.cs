@@ -5,6 +5,19 @@ using Sungero.Core;
 using Sungero.CoreEntities;
 using litiko.Eskhata.Meeting;
 
+using System.IO;
+using System.Reflection;
+using CommonLibrary;
+using Sungero.Company;
+using Sungero.Content;
+using Sungero.CoreEntities.Server;
+using Sungero.Docflow.ApprovalStage;
+using Sungero.Docflow.OfficialDocument;
+using Sungero.Domain.Shared;
+using Sungero.Metadata;
+using Sungero.Parties;
+using Sungero.Workflow;
+
 namespace litiko.Eskhata.Server
 {
   partial class MeetingFunctions
@@ -252,6 +265,26 @@ namespace litiko.Eskhata.Server
       
       return resultList;
     }
+    
+    /// <summary>
+    /// Старт задач на исполнение поручений по совещанию.
+    /// </summary>
+    /// <param name="actionItems">Список задач для старта.</param>
+    [Public]
+    public virtual void StartActionItemTasksFromDialog(List<Sungero.RecordManagement.IActionItemExecutionTask> actionItems)
+    {
+      var taskIds = actionItems.Select(t => t.Id).ToList();      
+      
+      var completedNotification = litiko.Eskhata.Meetings.Resources.ActionItemsSentSeccessfully;
+      var startedNotification = litiko.Eskhata.Meetings.Resources.ActionItemCreateFromDialogNotification;
+      var errorNotification = litiko.Eskhata.Meetings.Resources.StartActionItemExecutionTasksErrorSolutionFormat(Environment.NewLine);
+
+      var startActionItemsAsyncHandler = Sungero.RecordManagement.AsyncHandlers.StartActionItemExecutionTasks.Create();
+      startActionItemsAsyncHandler.TaskIds = string.Join(",", taskIds);
+      if (Users.Current != null)
+        startActionItemsAsyncHandler.StartedByUserId = Users.Current.Id;
+      startActionItemsAsyncHandler.ExecuteAsync(startedNotification, completedNotification, errorNotification, Users.Current);
+    }    
        
   }
 }

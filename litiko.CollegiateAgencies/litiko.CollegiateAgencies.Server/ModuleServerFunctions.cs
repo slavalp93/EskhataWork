@@ -194,7 +194,7 @@ namespace litiko.CollegiateAgencies.Server
           var meetingResolutionInfo = new Structures.Module.MeetingResolutionInfo();
           meetingResolutionInfo.ProjectSolutionTittle = string.Format("{0}. Рассмотрение {1}", element.Number, projectSolution.Subject);
           meetingResolutionInfo.ListenedRU = !string.IsNullOrEmpty(projectSolution.ListenedRUMinutes) ? projectSolution.ListenedRUMinutes : string.Empty;
-          meetingResolutionInfo.Decigions = litiko.CollegiateAgencies.PublicFunctions.Projectsolution.GetProjectSolutionDecidedMinutesRU(projectSolution);
+          meetingResolutionInfo.Decigions = litiko.CollegiateAgencies.PublicFunctions.Projectsolution.GetProjectSolutionDecidedMinutesRU(projectSolution);          
           meetingResolutionInfo.VoutingYes = element.Yes.HasValue ? element.Yes.Value : 0;
           meetingResolutionInfo.VoutingNo = element.No.HasValue ? element.No.Value : 0;
           meetingResolutionInfo.VoutingAbstained = element.Abstained.HasValue ? element.Abstained.Value : 0;
@@ -224,12 +224,23 @@ namespace litiko.CollegiateAgencies.Server
         meetingResolutionInfo.ProjectSolutionTittle = string.Format("1. Рассмотрение {0}", projectSolution.Subject);
         meetingResolutionInfo.ListenedRU = !string.IsNullOrEmpty(projectSolution.ListenedRUMinutes) ? projectSolution.ListenedRUMinutes : string.Empty;
         meetingResolutionInfo.Decigions = litiko.CollegiateAgencies.PublicFunctions.Projectsolution.GetProjectSolutionDecidedMinutesRU(projectSolution);
-        meetingResolutionInfo.VoutingYes = projectSolution.Voting.Count(x => x.Yes.Value);
-        meetingResolutionInfo.VoutingNo = projectSolution.Voting.Count(x => x.No.Value);
-        meetingResolutionInfo.VoutingAbstained = projectSolution.Voting.Count(x => x.Abstained.Value);
-        meetingResolutionInfo.VoutingAccepted = meetingResolutionInfo.VoutingYes > meetingResolutionInfo.VoutingNo ? true : false;
+        
+        var votingrecord = meeting.ProjectSolutionslitiko.Where(x => Equals(x.ProjectSolution, projectSolution)).FirstOrDefault();
+        if (votingrecord != null)
+        {
+          meetingResolutionInfo.VoutingYes = votingrecord.Yes.HasValue ? votingrecord.Yes.Value : 0;
+          meetingResolutionInfo.VoutingNo = votingrecord.No.HasValue ? votingrecord.No.Value : 0;
+          meetingResolutionInfo.VoutingAbstained = votingrecord.Abstained.HasValue ? votingrecord.Abstained.Value : 0;                    
+        }
+        else
+        {
+          meetingResolutionInfo.VoutingYes = 0;
+          meetingResolutionInfo.VoutingNo = 0;
+          meetingResolutionInfo.VoutingAbstained = 0;
+        }
                   
-        meetingResolutions.Add(meetingResolutionInfo);                
+        meetingResolutionInfo.VoutingAccepted = meetingResolutionInfo.VoutingYes > meetingResolutionInfo.VoutingNo ? true : false;
+        meetingResolutions.Add(meetingResolutionInfo);
       }
 
       #endregion

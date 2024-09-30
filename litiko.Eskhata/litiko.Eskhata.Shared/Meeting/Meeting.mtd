@@ -866,6 +866,23 @@
       "Placement": "Shared",
       "ReturnType": "global::litiko.Eskhata.IMinutes",
       "ReturnTypeFullName": "litiko.Eskhata.IMinutes, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "StartActionItemTasksFromDialog",
+      "Parameters": [
+        {
+          "Name": "meeting",
+          "ParameterType": "global::litiko.Eskhata.IMeeting",
+          "ParameterTypeFullName": "litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "actionItems",
+          "ParameterType": "global::System.Collections.Generic.List<global::Sungero.RecordManagement.IActionItemExecutionTask>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
     }
   ],
   "PublicStructures": [],
@@ -879,7 +896,10 @@
     "YouMustDeleteEntireLine",
     "MoveToAnotherDialogTittle",
     "InNewMeeting",
-    "Meeting"
+    "Meeting",
+    "ActionItemsSentSeccessfully",
+    "ActionItemCreateFromDialogNotification",
+    "StartActionItemExecutionTasksErrorSolution"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "b7b59d97-b6e4-46de-ba8f-0f82b8e09c3b",

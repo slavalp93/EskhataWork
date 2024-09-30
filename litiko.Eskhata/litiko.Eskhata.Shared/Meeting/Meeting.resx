@@ -88,4 +88,13 @@
   <data name="Meeting" xml:space="preserve">
     <value>Meeting</value>
   </data>
+  <data name="ActionItemsSentSeccessfully" xml:space="preserve">
+    <value>Action items on meeting have been successfully sent for execution.</value>
+  </data>
+  <data name="ActionItemCreateFromDialogNotification" xml:space="preserve">
+    <value>After the system sends them to performers, you will see the message.</value>
+  </data>
+  <data name="StartActionItemExecutionTasksErrorSolution" xml:space="preserve">
+    <value>An error occurred while sending action items on meeting minutes.{0} {0}Add the missing data, and send it manually or contact your system administrator.</value>
+  </data>
 </root>

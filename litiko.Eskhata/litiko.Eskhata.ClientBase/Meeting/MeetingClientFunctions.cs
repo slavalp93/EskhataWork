@@ -380,7 +380,8 @@ namespace litiko.Eskhata.Client
                                     else
                                     {
                                       var tasksToStart = NoNeedFillPropertiesItems(dialogItems).ToList();
-                                      Sungero.Docflow.PublicFunctions.OfficialDocument.StartActionItemTasksFromDialog(minutes, tasksToStart);                                      
+                                      //Sungero.Docflow.PublicFunctions.OfficialDocument.StartActionItemTasksFromDialog(minutes, tasksToStart);                                      
+                                      litiko.Eskhata.PublicFunctions.Meeting.StartActionItemTasksFromDialog(_obj, tasksToStart);
                                       hasBeenSent = true;
                                       x.CloseAfterExecute = true;
                                     }
