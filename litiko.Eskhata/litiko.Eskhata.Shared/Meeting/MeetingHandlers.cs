@@ -15,6 +15,9 @@ namespace litiko.Eskhata
       var selectedCategory = e.NewValue;
       if (selectedCategory != null && !Equals(selectedCategory, e.OldValue))
       {
+        _obj.Members.Clear();
+        _obj.Presentlitiko.Clear();
+        
         if (selectedCategory.Members.Any())
         {
           foreach (var element in selectedCategory.Members.Where(x => x.Member != null).Select(x => x.Member))
@@ -55,11 +58,52 @@ namespace litiko.Eskhata
         element.Number = minNumber++; 
 
       var doc = _deleted.ProjectSolution;
-      if (doc != null && doc.AccessRights.CanUpdate())
+      if (doc != null)
       {
-        doc.Meeting = null;
-        doc.IncludedInAgenda = false;
-        doc.Save();
+        if (doc.AccessRights.CanUpdate())
+        {
+          doc.Meeting = null;
+          doc.IncludedInAgenda = false;
+          doc.Save();        
+        }
+        
+        #region Удалить приглашенных сотрудников        
+        if (_obj.InvitedEmployeeslitiko.Any(x => doc.InvitedEmployees.Any(y => Equals(y.Employee, x.Employee))))
+        {
+          List<Sungero.Company.IEmployee> employeesInDeleted = doc.InvitedEmployees.Select(empl => empl.Employee).ToList();
+          List<litiko.CollegiateAgencies.IProjectsolution> anotherPS = _obj.ProjectSolutionslitiko.Where(ps => !Equals(ps.ProjectSolution, doc)).Select(x => x.ProjectSolution).ToList();
+          List<Sungero.Company.IEmployee> employeesInAnotherPS = anotherPS.SelectMany(ps => ps.InvitedEmployees.Select(empl => empl.Employee)).ToList();
+          var employeesToDelete = employeesInDeleted
+            .Where(e1 => !employeesInAnotherPS.Any(e2 => e2.Id == e1.Id))
+            .ToList();
+          foreach (var employee in employeesToDelete)
+          {
+            foreach (var element in _obj.InvitedEmployeeslitiko.Where(x => Equals(employee, x.Employee)).ToList())
+            {
+              _obj.InvitedEmployeeslitiko.Remove(element);
+            }
+          }
+        }
+        #endregion
+        
+        #region Удалить приглашенных внешних        
+        if (_obj.InvitedExternallitiko.Any(x => doc.InvitedExternal.Any(y => Equals(y.Contact, x.Contact))))
+        {
+          List<Sungero.Parties.IContact> contactsInDeleted = doc.InvitedExternal.Select(c => c.Contact).ToList();
+          List<litiko.CollegiateAgencies.IProjectsolution> anotherPS = _obj.ProjectSolutionslitiko.Where(ps => !Equals(ps.ProjectSolution, doc)).Select(x => x.ProjectSolution).ToList();
+          List<Sungero.Parties.IContact> contactsInAnotherPS = anotherPS.SelectMany(ps => ps.InvitedExternal.Select(c => c.Contact)).ToList();
+          var contactsToDelete = contactsInDeleted
+            .Where(e1 => !contactsInAnotherPS.Any(e2 => e2.Id == e1.Id))
+            .ToList();
+          foreach (var contact in contactsToDelete)
+          {
+            foreach (var element in _obj.InvitedExternallitiko.Where(x => Equals(contact, x.Contact)).ToList())
+            {
+              _obj.InvitedExternallitiko.Remove(element);
+            }
+          }
+        }
+        #endregion        
       }
     }
 

@@ -104,7 +104,7 @@
     <value>Speaker</value>
   </data>
   <data name="Property_Regulations" xml:space="preserve">
-    <value>Regulations, h</value>
+    <value>Regulations, min</value>
   </data>
   <data name="Action_IncludeInAgenda" xml:space="preserve">
     <value>Include in agenda</value>
@@ -282,5 +282,8 @@
   </data>
   <data name="FilterPanel_Responsible_2b8b84386aa941c68be3fcab6d1dc72f" xml:space="preserve">
     <value>Responsible</value>
+  </data>
+  <data name="Control_178fd45b743a4edabc371ca47119c06d_DisplayValue" xml:space="preserve">
+    <value>Fill in voters</value>
   </data>
 </root>

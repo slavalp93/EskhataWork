@@ -82,4 +82,7 @@
   <data name="Enum_Operation_SDChange" xml:space="preserve">
     <value>Изменение свойства</value>
   </data>
+  <data name="OnlyForIntramural" xml:space="preserve">
+    <value>Доступно только для совещаний с типом голосования: Очное или Очное/Заочное.</value>
+  </data>
 </root>

@@ -10,6 +10,39 @@ namespace litiko.CollegiateAgencies.Shared
   partial class ProjectsolutionFunctions
   {
     /// <summary>
+    /// Обновить карточку документа.
+    /// </summary>
+    public override void RefreshDocumentForm()
+    {
+      base.RefreshDocumentForm();
+      var properties = _obj.State.Properties;
+      bool isEnabled = _obj.Meeting != null && litiko.Eskhata.PublicFunctions.Meeting.CurrentUserHasAccess(_obj.Meeting);
+      
+      #region Вкладка голосование      
+      bool votingTableAviabled = true;
+      if (_obj.Meeting != null && 
+          (_obj.Meeting.Votinglitiko.GetValueOrDefault() == litiko.Eskhata.Meeting.Votinglitiko.extramural || 
+           _obj.Meeting.Votinglitiko.GetValueOrDefault() == litiko.Eskhata.Meeting.Votinglitiko.Intramural)
+         )
+        votingTableAviabled = false;
+            
+      _obj.State.Properties.Voting.IsEnabled = isEnabled && votingTableAviabled;
+      #endregion
+      
+      #region Вкладка протокол
+      bool isСommitteeMember = _obj.Meeting != null && _obj.Meeting.MeetingCategorylitiko != null && (
+        _obj.Meeting.MeetingCategorylitiko.Members.Any(x => Equals(Sungero.Company.Employees.As(Users.Current), x.Member)) ||
+        Equals(_obj.Meeting.MeetingCategorylitiko.President, Sungero.Company.Employees.As(Users.Current))
+       );
+      
+      properties.ListenedRUMinutes.IsEnabled = isEnabled || isСommitteeMember;
+      properties.ListenedENMinutes.IsEnabled = isEnabled || isСommitteeMember;
+      properties.ListenedTJMinutes.IsEnabled = isEnabled || isСommitteeMember;
+      properties.DecidedMinutes.IsEnabled = isEnabled || isСommitteeMember;
+      #endregion
+    }
+
+    /// <summary>
     /// Обработка включения в совещание
     /// </summary>
     [Public]

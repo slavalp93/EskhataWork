@@ -57,6 +57,7 @@
       "HandledEvents": [
         "ValueInputClient"
       ],
+      "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "d30c8e6b-8ee3-4f78-a51e-a7656dea4d72"
     },
@@ -69,6 +70,7 @@
       "HandledEvents": [
         "ValueInputClient"
       ],
+      "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "d669a029-3481-4827-ba55-62ec9517be3d"
     },
@@ -78,6 +80,7 @@
       "Name": "Abstained",
       "CanBeSearch": false,
       "Code": "Abstained",
+      "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "99df568c-60e0-4b2c-b2d0-caaa4d0b1072"
     },

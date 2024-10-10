@@ -99,6 +99,7 @@ namespace litiko.Eskhata
       base.Refresh(e);
       
       _obj.State.Properties.MeetingCategorylitiko.IsRequired = true;
+      _obj.State.Properties.MeetingCategorylitiko.IsEnabled = _obj.State.IsInserted || _obj.ProjectSolutionslitiko.Any();
       _obj.State.Properties.Votinglitiko.IsRequired = true;
       _obj.State.Properties.Members.IsRequired = true;
       

@@ -333,7 +333,7 @@
           "Name": "InvitedEmployeeslitikolitiko",
           "ColumnNumber": 0,
           "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiSelectFromListEditorToCollectionBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiLikeEditorToCollectionBinder",
           "ParentGuid": "de3a35f0-d02f-491a-9feb-28b9ddef6626",
           "PropertyGuid": "0da680a4-6d12-4817-93ae-883d35f2887e",
           "RowNumber": 3,
@@ -351,7 +351,7 @@
           "Name": "InvitedExternallitikolitiko",
           "ColumnNumber": 0,
           "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiSelectFromListEditorToCollectionBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiLikeEditorToCollectionBinder",
           "ParentGuid": "de3a35f0-d02f-491a-9feb-28b9ddef6626",
           "PropertyGuid": "618c8f8e-63fc-4de2-acb1-7d15a088a69b",
           "RowNumber": 4,
@@ -606,7 +606,7 @@
         },
         {
           "NameGuid": "a6442bae-433a-4096-9d3d-dc6213573d1f",
-          "Name": "Online",
+          "Name": "Extramurallitiko",
           "Code": "Online"
         }
       ],
@@ -762,6 +762,19 @@
       "Placement": "Client",
       "ReturnType": "void",
       "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "CurrentUserHasAccess",
+      "Parameters": [
+        {
+          "Name": "meeting",
+          "ParameterType": "global::litiko.Eskhata.IMeeting",
+          "ParameterTypeFullName": "litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Client",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
     },
     {
       "Name": "GetMeetingAbsentNumberedList",

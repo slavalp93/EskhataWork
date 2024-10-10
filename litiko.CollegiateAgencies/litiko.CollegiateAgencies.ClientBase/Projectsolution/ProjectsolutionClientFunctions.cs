@@ -9,11 +9,45 @@ namespace litiko.CollegiateAgencies.Client
 {
   partial class ProjectsolutionFunctions
   {
+
+    /// <summary>
+    /// Заполнить голосующих
+    /// </summary>       
+    public void FillInVoters()
+    {
+      if (_obj.Meeting != null)
+      {
+        if (_obj.Meeting.Votinglitiko.GetValueOrDefault() == litiko.Eskhata.Meeting.Votinglitiko.extramural || _obj.Meeting.Votinglitiko.GetValueOrDefault() == litiko.Eskhata.Meeting.Votinglitiko.NoVoting)
+        {
+          Dialogs.ShowMessage(litiko.CollegiateAgencies.Projectsolutions.Resources.OnlyForIntramural);
+          return;        
+        }
+        
+        if (!litiko.Eskhata.PublicFunctions.Meeting.CurrentUserHasAccess(_obj.Meeting))
+        {
+          Dialogs.ShowMessage(litiko.Eskhata.Meetings.Resources.NotAccessToAction);
+          return;
+        }
+                
+        _obj.Voting.Clear();
+        foreach (var element in _obj.Meeting.Presentlitiko.Where(x => x.Employee != null))
+          _obj.Voting.AddNew().Member = element.Employee;
+
+      }
+      
+      
+    }
     /// <summary>
     /// Перенести вопросы и решения из повестки в протокол
     /// </summary>       
     public void TransferFromAgenda()
     {
+      if (_obj.Meeting == null || !litiko.Eskhata.PublicFunctions.Meeting.CurrentUserHasAccess(_obj.Meeting))
+      {
+        Dialogs.ShowMessage(litiko.Eskhata.Meetings.Resources.NotAccessToAction);
+        return;
+      }      
+      
       bool isConfirmed = true;
       if (_obj.ListenedRUMinutes != null || _obj.ListenedTJMinutes != null || _obj.ListenedENMinutes != null || _obj.DecidedMinutes.Any())
       {

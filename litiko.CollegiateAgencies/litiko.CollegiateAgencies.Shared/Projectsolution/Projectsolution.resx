@@ -82,4 +82,7 @@
   <data name="Enum_Operation_SDChange" xml:space="preserve">
     <value>Change of property</value>
   </data>
+  <data name="OnlyForIntramural" xml:space="preserve">
+    <value>Available only for meetings with voting type: Intramural or Intramural/Extramural.</value>
+  </data>
 </root>

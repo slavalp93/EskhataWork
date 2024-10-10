@@ -104,7 +104,7 @@
     <value>Докладчик</value>
   </data>
   <data name="Property_Regulations" xml:space="preserve">
-    <value>Регламент, ч</value>
+    <value>Регламент, мин</value>
   </data>
   <data name="Action_IncludeInAgenda" xml:space="preserve">
     <value>Включить в повестку</value>
@@ -252,5 +252,8 @@
   </data>
   <data name="FilterPanel_Responsible_2b8b84386aa941c68be3fcab6d1dc72f" xml:space="preserve">
     <value>Ответственный</value>
+  </data>
+  <data name="Control_178fd45b743a4edabc371ca47119c06d_DisplayValue" xml:space="preserve">
+    <value>Заполнить голосующих</value>
   </data>
 </root>

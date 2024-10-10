@@ -7,20 +7,6 @@ using litiko.CollegiateAgencies.Projectsolution;
 
 namespace litiko.CollegiateAgencies
 {
-  partial class ProjectsolutionClientHandlers
-  {
-
-    public override void Refresh(Sungero.Presentation.FormRefreshEventArgs e)
-    {
-      base.Refresh(e);
-      
-      bool votingTableAviabled = true;
-      if (_obj.Meeting != null && _obj.Meeting.Votinglitiko.GetValueOrDefault() == litiko.Eskhata.Meeting.Votinglitiko.extramural)
-        votingTableAviabled = false;
-      
-      _obj.State.Properties.Voting.IsEnabled = votingTableAviabled;
-    }
-  }
 
   partial class ProjectsolutionVotingClientHandlers
   {

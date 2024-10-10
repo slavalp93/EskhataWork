@@ -11,13 +11,23 @@ namespace litiko.Eskhata.Client
 {
   partial class MeetingFunctions
   {
-
+    /// <summary>
+    /// Есть ли права у текущего пользователя на выполнение действия?
+    /// </summary>
+    [Public]
+    public bool CurrentUserHasAccess()
+    {
+      return Equals(Users.Current, Users.As(_obj.Secretary)) || 
+        Users.Current.IncludedIn(Roles.Administrators) || 
+        Substitutions.UsersWhoSubstitute(Users.As(_obj.Secretary)).Any(u => Equals(u, Users.Current));
+    }
+    
     /// <summary>
     /// Перенести вопросы в другое заседание
     /// </summary>       
     public void MoveToAnotherMeeting()
     {
-      if (!Equals(Users.Current, Users.As(_obj.Secretary)) && !Users.Current.IncludedIn(Roles.Administrators))
+      if (!CurrentUserHasAccess())
       {
         Dialogs.ShowMessage(litiko.Eskhata.Meetings.Resources.NotAccessToAction);
         return;
@@ -95,7 +105,7 @@ namespace litiko.Eskhata.Client
     /// </summary>       
     public void SendToVote()
     {
-      if (!Equals(Users.Current, Users.As(_obj.Secretary)) && !Users.Current.IncludedIn(Roles.Administrators))
+      if (!CurrentUserHasAccess())
       {
         Dialogs.ShowMessage(litiko.Eskhata.Meetings.Resources.NotAccessToAction);
         return;
@@ -126,11 +136,11 @@ namespace litiko.Eskhata.Client
     }
 
     /// <summary>
-    /// Обновить результаты заочного голосования
+    /// Обновить результаты голосования
     /// </summary>       
     public void UpdateVoting()
-    {
-      if (!Equals(Users.Current, Users.As(_obj.Secretary)) && !Users.Current.IncludedIn(Roles.Administrators))
+    {      
+      if (!CurrentUserHasAccess())
       {
         Dialogs.ShowMessage(litiko.Eskhata.Meetings.Resources.NotAccessToAction);
         return;
@@ -138,7 +148,8 @@ namespace litiko.Eskhata.Client
       
       if (_obj.ProjectSolutionslitiko.Any())
       {        
-        foreach (var element in _obj.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null && x.VotingType == litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Extramural))
+        foreach (var element in _obj.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null && x.VotingType == litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Extramural || 
+                                                                 x.VotingType == litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Intramural))
         {
           var projectSolution = element.ProjectSolution;
           

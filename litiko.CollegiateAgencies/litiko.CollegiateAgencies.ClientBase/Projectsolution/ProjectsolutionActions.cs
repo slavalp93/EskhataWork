@@ -138,7 +138,9 @@ namespace litiko.CollegiateAgencies.Client
 
     public virtual bool CanIncludeInAgenda(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return Equals(Sungero.Company.Employees.As(Users.Current), _obj.MeetingCategory?.Secretary);
+      return Equals(Sungero.Company.Employees.As(Users.Current), _obj.MeetingCategory?.Secretary) || 
+        Substitutions.UsersWhoSubstitute(Users.As(_obj.MeetingCategory?.Secretary)).Any(u => Equals(u, Users.Current)) ||
+        Users.Current.IncludedIn(Roles.Administrators);
     }
 
   }

@@ -568,7 +568,7 @@
           "Name": "InvitedEmployees",
           "ColumnNumber": 0,
           "ColumnSpan": 2,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiSelectFromListEditorToCollectionBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiLikeEditorToCollectionBinder",
           "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
           "PropertyGuid": "f6f0aa0d-78a7-475f-b447-fdcde7dd1808",
           "RowNumber": 10,
@@ -586,7 +586,7 @@
           "Name": "InvitedExternal",
           "ColumnNumber": 0,
           "ColumnSpan": 2,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiSelectFromListEditorToCollectionBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiLikeEditorToCollectionBinder",
           "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
           "PropertyGuid": "5e3281ef-928b-45e7-9716-1a6a062c60d2",
           "RowNumber": 11,
@@ -852,18 +852,40 @@
         {
           "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
           "NameGuid": "c1bf57de-8c52-4fec-9fee-9d04026e30ef",
-          "Name": "MainGroup"
+          "Name": "MainGroup",
+          "ColumnDefinitions": [
+            {
+              "Percentage": 50.0
+            },
+            {
+              "Percentage": 50.0
+            }
+          ]
         },
         {
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
           "NameGuid": "c5a64bd8-9d8c-4558-ba9c-4467ff66ad25",
           "Name": "Voting",
           "ColumnNumber": 0,
-          "ColumnSpan": 1,
+          "ColumnSpan": 2,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.GridControlToChildCollectionBinder",
           "HeaderLocation": "Top",
           "ParentGuid": "c1bf57de-8c52-4fec-9fee-9d04026e30ef",
           "PropertyGuid": "806f6cff-1540-4ee6-988a-df7a07dd6eed",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.HyperlinkControlMetadata, Sungero.Metadata",
+          "NameGuid": "178fd45b-743a-4eda-bc37-1ca47119c06d",
+          "Name": "Control",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.HyperlinkToSourceBinder",
+          "FunctionName": "FillInVoters",
+          "HeaderLocation": "None",
+          "ParentGuid": "c1bf57de-8c52-4fec-9fee-9d04026e30ef",
           "RowNumber": 0,
           "RowSpan": 1,
           "Settings": []
@@ -876,7 +898,6 @@
   "HandledEvents": [
     "CreatedServer",
     "WriteHistoryServer",
-    "RefreshClient",
     "FilteringServer",
     "CreatingFromServer"
   ],
@@ -1009,7 +1030,7 @@
       "PreviousPropertyGuid": "e7751cb0-8cf7-4bd7-9f48-ec90874bfe0b"
     },
     {
-      "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
       "NameGuid": "54ff72f2-13fb-4fa2-a8f3-f8998398a188",
       "Name": "Regulations",
       "Code": "Regulations",
@@ -1253,7 +1274,8 @@
     "GetProjectSolutionDecidedMinutesTJ",
     "GetProjectSolutionDecidedMinutesEN",
     "TheExplanatoryNoteFieldIsNotFilledIn",
-    "Enum_Operation_SDChange"
+    "Enum_Operation_SDChange",
+    "OnlyForIntramural"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "7843279e-9fe6-45ad-a2d8-49d455d35716",
