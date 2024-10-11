@@ -1,0 +1,158 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "675f2bde-e949-4463-bead-9bee45c51bb8",
+  "Name": "RegulatoryDocuments",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "litiko.RegulatoryDocuments.Client",
+  "ClientBaseAssemblyName": "litiko.RegulatoryDocuments.ClientBase",
+  "ClientBaseNamespace": "litiko.RegulatoryDocuments.ClientBase",
+  "ClientNamespace": "litiko.RegulatoryDocuments.Client",
+  "Code": "Regulat",
+  "CompanyCode": "litiko",
+  "Cover": {
+    "NameGuid": "bd79b89f-096a-43ce-a153-f369ef8d5e16",
+    "Actions": [
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "0b06e072-7824-4d1b-b95d-77a1afc67210",
+        "Name": "OrgansForApproving",
+        "EntityTypeId": "b16a631d-fdeb-4491-a772-ec01b0c0dcf9",
+        "GroupId": "95221cef-e1dc-498a-ae3b-42f359fa0460",
+        "PreviousItemGuid": "ac20def2-202a-47f4-b309-afea3f20d066"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "56edde14-2e4d-4c08-84fb-da5a44c93e37",
+        "Name": "ControlOfApprovalDeadlines",
+        "FunctionName": "Function4",
+        "GroupId": "c4ce575d-c54a-4832-9117-fd4055649089"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "ac20def2-202a-47f4-b309-afea3f20d066",
+        "Name": "DeadlinesForRevision",
+        "EntityTypeId": "9dd1eca0-811d-40c9-b919-bf7263fdc6f5",
+        "GroupId": "95221cef-e1dc-498a-ae3b-42f359fa0460"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "d4a891d1-1af7-4a95-9bdb-84a207f4e4dd",
+        "Name": "RegulatoryDocuments",
+        "EntityTypeId": "9151081e-29d5-4c68-9204-68f04ff4d7e5",
+        "GroupId": "661232db-4921-4051-a2d7-35a159e48af8",
+        "PreviousItemGuid": "d6dfb772-872d-40f6-8f95-e75e436fd5be"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "d6dfb772-872d-40f6-8f95-e75e436fd5be",
+        "Name": "CreateRegulatoryDocument",
+        "FunctionName": "CreateRegulatoryDocument",
+        "GroupId": "661232db-4921-4051-a2d7-35a159e48af8"
+      }
+    ],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "6e85d0a4-f631-4f3f-8718-4e8f24a0e0b5",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [
+      {
+        "NameGuid": "661232db-4921-4051-a2d7-35a159e48af8",
+        "Name": "Douments",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconDouments_661232db49214051a2d735a159e48af8.png",
+        "TabId": "09a9ae85-0173-4faa-a52d-ad3896718743"
+      },
+      {
+        "NameGuid": "95221cef-e1dc-498a-ae3b-42f359fa0460",
+        "Name": "LinkedInformation",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconLinkedInformation_95221cefe1dc498aae3b42f359fa0460.png",
+        "PreviousItemGuid": "661232db-4921-4051-a2d7-35a159e48af8",
+        "TabId": "09a9ae85-0173-4faa-a52d-ad3896718743"
+      },
+      {
+        "NameGuid": "c4ce575d-c54a-4832-9117-fd4055649089",
+        "Name": "Reports",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconReports_c4ce575dc54a48329117fd4055649089.png",
+        "PreviousItemGuid": "95221cef-e1dc-498a-ae3b-42f359fa0460",
+        "TabId": "09a9ae85-0173-4faa-a52d-ad3896718743"
+      }
+    ],
+    "Header": {
+      "NameGuid": "311919d1-ecb2-4375-b357-9c3a9800e8a3",
+      "BackgroundPosition": "Stretch"
+    },
+    "Tabs": [
+      {
+        "NameGuid": "09a9ae85-0173-4faa-a52d-ad3896718743",
+        "Name": "Tab"
+      }
+    ]
+  },
+  "Dependencies": [
+    {
+      "Id": "78d05f91-7585-42b9-addc-5b14478d4680",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "9dd1eca0-811d-40c9-b919-bf7263fdc6f5"
+    },
+    {
+      "ItemId": "9151081e-29d5-4c68-9204-68f04ff4d7e5",
+      "PreviousItemId": "9dd1eca0-811d-40c9-b919-bf7263fdc6f5"
+    },
+    {
+      "ItemId": "b16a631d-fdeb-4491-a772-ec01b0c0dcf9",
+      "PreviousItemId": "9151081e-29d5-4c68-9204-68f04ff4d7e5"
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "litiko.RegulatoryDocuments",
+  "IsolatedAssemblyName": "litiko.RegulatoryDocuments.Isolated",
+  "IsolatedNamespace": "litiko.RegulatoryDocuments.Isolated",
+  "PublicConstants": [
+    {
+      "Name": "RegulatoryDocument",
+      "ParentClasses": [
+        "Module",
+        "DocumentTypeGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"9151081e-29d5-4c68-9204-68f04ff4d7e5\")"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "litiko.RegulatoryDocuments",
+  "ResourcesKeys": [
+    "RegulatoryDocumentType"
+  ],
+  "ServerAssemblyName": "litiko.RegulatoryDocuments.Server",
+  "ServerNamespace": "litiko.RegulatoryDocuments.Server",
+  "SharedAssemblyName": "litiko.RegulatoryDocuments.Shared",
+  "SharedNamespace": "litiko.RegulatoryDocuments.Shared",
+  "SpecialFolders": [],
+  "Version": "0.0.1.1",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

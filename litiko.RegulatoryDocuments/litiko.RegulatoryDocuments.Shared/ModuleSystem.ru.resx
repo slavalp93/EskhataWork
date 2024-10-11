@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Нормативные документы</value>
+  </data>
+  <data name="CoverGroup_Douments" xml:space="preserve">
+    <value>Документы</value>
+  </data>
+  <data name="CoverAction_CreateRegulatoryDocument" xml:space="preserve">
+    <value>Создать нормативный документ</value>
+  </data>
+  <data name="CoverDescription_CreateRegulatoryDocument" xml:space="preserve">
+    <value>Создание нормативного документа</value>
+  </data>
+  <data name="CoverTitle" xml:space="preserve">
+    <value>Нормативные документы</value>
+  </data>
+  <data name="CoverDescription" xml:space="preserve">
+    <value>Модуль предназначен для создания, хранения и поиска нормативных документов</value>
+  </data>
+  <data name="CoverAction_RegulatoryDocuments" xml:space="preserve">
+    <value>Реестр нормативных документов</value>
+  </data>
+  <data name="CoverDescription_RegulatoryDocuments" xml:space="preserve">
+    <value>Список нормативных документов</value>
+  </data>
+  <data name="CoverGroup_LinkedInformation" xml:space="preserve">
+    <value>Связанная информация</value>
+  </data>
+  <data name="CoverAction_DeadlinesForRevision" xml:space="preserve">
+    <value>Сроки пересмотра ВНД</value>
+  </data>
+  <data name="CoverDescription_DeadlinesForRevision" xml:space="preserve">
+    <value>Открытие справочника сроков пересмотра ВНД</value>
+  </data>
+  <data name="CoverAction_OrgansForApproving" xml:space="preserve">
+    <value>Органы утверждения ВНД</value>
+  </data>
+  <data name="CoverDescription_OrgansForApproving" xml:space="preserve">
+    <value>Открытие справочника утверждающих органов</value>
+  </data>
+  <data name="CoverGroup_Reports" xml:space="preserve">
+    <value>Отчеты</value>
+  </data>
+  <data name="CoverAction_ControlOfApprovalDeadlines" xml:space="preserve">
+    <value>Контроль сроков согласования ВНД</value>
+  </data>
+  <data name="CoverDescription_ControlOfApprovalDeadlines" xml:space="preserve">
+    <value>Список ВНД созданных/актуализированных за указанный период</value>
+  </data>
+</root>

@@ -21,8 +21,7 @@ namespace litiko.CollegiateAgencies.Shared
       #region Вкладка голосование      
       bool votingTableAviabled = true;
       if (_obj.Meeting != null && 
-          (_obj.Meeting.Votinglitiko.GetValueOrDefault() == litiko.Eskhata.Meeting.Votinglitiko.extramural || 
-           _obj.Meeting.Votinglitiko.GetValueOrDefault() == litiko.Eskhata.Meeting.Votinglitiko.Intramural)
+          (_obj.Meeting.Votinglitiko.GetValueOrDefault() == litiko.Eskhata.Meeting.Votinglitiko.extramural)
          )
         votingTableAviabled = false;
             

@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="DisplayName" xml:space="preserve">
+    <value>RegulatoryDocuments</value>
+  </data>
+  <data name="CoverTitle" xml:space="preserve">
+    <value>Regulatory documents</value>
+  </data>
+  <data name="CoverTab_Tab" xml:space="preserve">
+    <value>Tab</value>
+  </data>
+  <data name="CoverGroup_Douments" xml:space="preserve">
+    <value>Douments</value>
+  </data>
+  <data name="CoverAction_CreateRegulatoryDocument" xml:space="preserve">
+    <value>Create regulatory document</value>
+  </data>
+  <data name="CoverDescription_CreateRegulatoryDocument" xml:space="preserve">
+    <value>Creation of a regulatory document</value>
+  </data>
+  <data name="CoverDescription" xml:space="preserve">
+    <value>The module is designed for creating, storing and searching for regulatory documents</value>
+  </data>
+  <data name="CoverAction_RegulatoryDocuments" xml:space="preserve">
+    <value>Register of regulatory documents</value>
+  </data>
+  <data name="CoverDescription_RegulatoryDocuments" xml:space="preserve">
+    <value>List of regulatory documents</value>
+  </data>
+  <data name="CoverGroup_LinkedInformation" xml:space="preserve">
+    <value>Linked information</value>
+  </data>
+  <data name="CoverAction_DeadlinesForRevision" xml:space="preserve">
+    <value>Deadlines for revision of IRD</value>
+  </data>
+  <data name="CoverDescription_DeadlinesForRevision" xml:space="preserve">
+    <value>Opening the deadline for revision of IRD reference</value>
+  </data>
+  <data name="CoverAction_OrgansForApproving" xml:space="preserve">
+    <value>Organs for approving IRD</value>
+  </data>
+  <data name="CoverDescription_OrgansForApproving" xml:space="preserve">
+    <value>Opening the organ for approving IRD reference</value>
+  </data>
+  <data name="CoverGroup_Reports" xml:space="preserve">
+    <value>Reports</value>
+  </data>
+  <data name="CoverAction_ControlOfApprovalDeadlines" xml:space="preserve">
+    <value>Control of approval deadlines of IRD</value>
+  </data>
+  <data name="CoverDescription_ControlOfApprovalDeadlines" xml:space="preserve">
+    <value>List of IRD created/updated for the specified period</value>
+  </data>
+</root>
