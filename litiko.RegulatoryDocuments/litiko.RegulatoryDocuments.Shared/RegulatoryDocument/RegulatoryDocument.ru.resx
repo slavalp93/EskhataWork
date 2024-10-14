@@ -58,4 +58,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="NeedFillOrganForApproving" xml:space="preserve">
+    <value>Орган утверждения является обязательным для отправки по регламенту Нового документа и Изменения.</value>
+  </data>
+  <data name="DaysUntilUpdate" xml:space="preserve">
+    <value>Дней до актуализации: {0}</value>
+  </data>
+  <data name="ActionAvailableToClerks" xml:space="preserve">
+    <value>Действие доступно делопроизводителям</value>
+  </data>
 </root>

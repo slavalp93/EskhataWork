@@ -18,5 +18,15 @@ namespace litiko.Eskhata.Server
     {
       return Sungero.Docflow.SimpleDocuments.Create();
     }
+    
+    /// <summary>
+    /// Создать приказ.
+    /// </summary>
+    /// <returns>Приказ.</returns>
+    [Remote, Public]
+    public static litiko.Eskhata.IOrder CreateOrder()
+    {
+      return litiko.Eskhata.Orders.Create();
+    }    
   }
 }

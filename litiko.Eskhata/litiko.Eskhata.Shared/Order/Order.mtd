@@ -206,6 +206,15 @@
       "PreviousPropertyGuid": "c53b9190-1502-4de8-82d8-972d4af935db"
     }
   ],
+  "PublicFunctions": [
+    {
+      "Name": "CreateOrder",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "global::litiko.Eskhata.IOrder",
+      "ReturnTypeFullName": "litiko.Eskhata.IOrder, Sungero.Domain.Interfaces"
+    }
+  ],
   "PublicStructures": [],
   "ResourcesKeys": [
     "NotAccessToExecute"

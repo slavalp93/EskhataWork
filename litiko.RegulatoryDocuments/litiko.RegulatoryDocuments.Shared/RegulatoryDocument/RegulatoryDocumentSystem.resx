@@ -97,4 +97,55 @@
   <data name="Enum_Type_IsUpdate" xml:space="preserve">
     <value>Update without change</value>
   </data>
+  <data name="Property_IsRequirements" xml:space="preserve">
+    <value>Requirements of the Bank's accounting policies</value>
+  </data>
+  <data name="Property_IsRecommendations" xml:space="preserve">
+    <value>Internal audit recommendations</value>
+  </data>
+  <data name="Property_IsRelatedToStructure" xml:space="preserve">
+    <value>Related to the structure of the bank</value>
+  </data>
+  <data name="Property_ProcessManager" xml:space="preserve">
+    <value>Process Manager</value>
+  </data>
+  <data name="Property_OrganForApproving" xml:space="preserve">
+    <value>Approved</value>
+  </data>
+  <data name="Property_DateBegin" xml:space="preserve">
+    <value>Start date</value>
+  </data>
+  <data name="Property_DateRevision" xml:space="preserve">
+    <value>Revision date</value>
+  </data>
+  <data name="Property_DateUpdate" xml:space="preserve">
+    <value>Update date</value>
+  </data>
+  <data name="Property_ForWhom" xml:space="preserve">
+    <value>For</value>
+  </data>
+  <data name="Enum_ForWhom_ForManagement" xml:space="preserve">
+    <value>management staff</value>
+  </data>
+  <data name="Enum_ForWhom_ForAll" xml:space="preserve">
+    <value>all users</value>
+  </data>
+  <data name="Property_LegalAct" xml:space="preserve">
+    <value>Legal act</value>
+  </data>
+  <data name="Action_CreateNormativeOrder" xml:space="preserve">
+    <value>Create order</value>
+  </data>
+  <data name="Action_CreateNormativeOrderDescription" xml:space="preserve">
+    <value>Creating a new document with the kind Order for approval of IRD</value>
+  </data>
+  <data name="Action_CreateNormativeOrderHint" xml:space="preserve">
+    <value>Creating a new document with the kind Order for approval of IRD</value>
+  </data>
+  <data name="Action_CreateNormativeOrderConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateNormativeOrderConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
 </root>

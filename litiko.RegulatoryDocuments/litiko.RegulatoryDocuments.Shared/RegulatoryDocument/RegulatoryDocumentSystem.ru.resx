@@ -97,4 +97,49 @@
   <data name="Enum_Type_IsUpdate" xml:space="preserve">
     <value>Актуализация без изменения</value>
   </data>
+  <data name="Property_IsRequirements" xml:space="preserve">
+    <value>Требования учетной политики Банка</value>
+  </data>
+  <data name="Property_IsRecommendations" xml:space="preserve">
+    <value>Рекомендации внутреннего аудита </value>
+  </data>
+  <data name="Property_IsRelatedToStructure" xml:space="preserve">
+    <value>Связано со структурой банка</value>
+  </data>
+  <data name="Property_ProcessManager" xml:space="preserve">
+    <value>Руководитель процесса</value>
+  </data>
+  <data name="Property_OrganForApproving" xml:space="preserve">
+    <value>Утверждено</value>
+  </data>
+  <data name="Property_DateBegin" xml:space="preserve">
+    <value>Введение в действие с</value>
+  </data>
+  <data name="Property_DateRevision" xml:space="preserve">
+    <value>Дата пересмотра</value>
+  </data>
+  <data name="Property_DateUpdate" xml:space="preserve">
+    <value>Дата актуализации</value>
+  </data>
+  <data name="Property_ForWhom" xml:space="preserve">
+    <value>Для</value>
+  </data>
+  <data name="Enum_ForWhom_ForManagement" xml:space="preserve">
+    <value>руководящего состава</value>
+  </data>
+  <data name="Enum_ForWhom_ForAll" xml:space="preserve">
+    <value>всех пользователей</value>
+  </data>
+  <data name="Property_LegalAct" xml:space="preserve">
+    <value>Правовой акт</value>
+  </data>
+  <data name="Action_CreateNormativeOrder" xml:space="preserve">
+    <value>Создать приказ</value>
+  </data>
+  <data name="Action_CreateNormativeOrderHint" xml:space="preserve">
+    <value>Создание нового документа с видом Приказ об утверждении ВНД.</value>
+  </data>
+  <data name="Action_CreateNormativeOrderDescription" xml:space="preserve">
+    <value>Создание нового документа с видом Приказ об утверждении ВНД.</value>
+  </data>
 </root>

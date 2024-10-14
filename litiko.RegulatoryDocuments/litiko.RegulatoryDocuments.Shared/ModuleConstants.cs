@@ -5,6 +5,12 @@ namespace litiko.RegulatoryDocuments.Constants
 {
   public static class Module
   {
+
+    /// <summary>
+    /// Наименование группы регистрации "Общий отдел"
+    /// </summary>
+    public const string RegGroupGeneralDepartment = "Общий отдел";
+    
     public static class DocumentTypeGuids
     {
       /// <summary> Нормативный документ </summary>

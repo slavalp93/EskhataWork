@@ -10,5 +10,10 @@ namespace litiko.RegulatoryDocuments
   partial class RegulatoryDocumentClientHandlers
   {
 
+    public virtual void DateUpdateValueInput(Sungero.Presentation.DateTimeValueInputEventArgs e)
+    {      
+      _obj.State.Controls.DaysUntilUpdaate.Refresh();
+    }
   }
+
 }

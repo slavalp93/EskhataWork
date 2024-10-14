@@ -7,6 +7,38 @@ using litiko.RegulatoryDocuments.RegulatoryDocument;
 
 namespace litiko.RegulatoryDocuments
 {
+  partial class RegulatoryDocumentLegalActPropertyFilteringServerHandler<T>
+  {
+
+    public virtual IQueryable<T> LegalActFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e)
+    {
+      return query.Where(d => litiko.Eskhata.Orders.Is(d) || litiko.Eskhata.Minuteses.Is(d));
+    }
+  }
+
+  partial class RegulatoryDocumentServerHandlers
+  {
+
+    public override void BeforeSave(Sungero.Domain.BeforeSaveEventArgs e)
+    {
+      base.BeforeSave(e);
+      
+      // Обновить связь с Правовым актом
+      if (_obj.LegalAct != null && _obj.LegalAct.AccessRights.CanRead() &&
+          !_obj.Relations.GetRelated(Sungero.Docflow.PublicConstants.Module.SimpleRelationName).Contains(_obj.LegalAct))
+        _obj.Relations.AddOrUpdate(Sungero.Docflow.PublicConstants.Module.SimpleRelationName, _obj.State.Properties.LegalAct.OriginalValue, _obj.LegalAct);                  
+    }
+
+    public override void Created(Sungero.Domain.CreatedEventArgs e)
+    {
+      base.Created(e);
+      
+      _obj.IsRequirements = false;
+      _obj.IsRecommendations = false;
+      _obj.IsRelatedToStructure = false;
+    }
+  }
+
   partial class RegulatoryDocumentLeadingDocumentPropertyFilteringServerHandler<T>
   {
 

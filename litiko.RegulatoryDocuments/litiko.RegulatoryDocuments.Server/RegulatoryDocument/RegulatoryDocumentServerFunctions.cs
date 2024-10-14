@@ -9,6 +9,25 @@ namespace litiko.RegulatoryDocuments.Server
 {
   partial class RegulatoryDocumentFunctions
   {
+
+    /// <summary>
+    /// Отобразить кол-во дней до актуализации
+    /// </summary>       
+    [Remote]
+    public StateView GetDaysUntilUpdate()
+    {
+      var daysCount = 0;
+      if (_obj.DateUpdate.HasValue){
+        TimeSpan diff = _obj.DateUpdate.Value - Calendar.Today;
+        daysCount = diff.Days;
+      }
+      var stateView = StateView.Create();
+      var block = stateView.AddBlock();
+      block.AddLabel(litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.DaysUntilUpdateFormat(daysCount));
+      
+      return stateView;
+    }
+    
     /// <summary>
     /// Создать нормативный документ.
     /// </summary>
