@@ -165,9 +165,12 @@ namespace litiko.Eskhata.Client
           if (!Equals(element.Abstained, votedAbstained))
             element.Abstained = votedAbstained;
                     
-          var isAccepted = element.Yes > element.No;
-          if (!Equals(element.Accepted, isAccepted))
-            element.Accepted = isAccepted;
+          if (!projectSolution.Voting.Any(x => !x.Yes.GetValueOrDefault() && !x.No.GetValueOrDefault() && !x.Abstained.GetValueOrDefault()))
+          {
+            var isAccepted = element.Yes > element.No;
+            if (!Equals(element.Accepted, isAccepted))
+              element.Accepted = isAccepted;          
+          }          
         }
       }
     }

@@ -14,6 +14,7 @@ namespace litiko.RegulatoryDocuments.Server
     {
       CreateDocumentTypes();
       GrantRightsOnEntities();
+      CreateApprovalRole(litiko.RegulatoryDocuments.ApprovalRole.Type.ProcessManager, "Руководитель процесса");
     }
     
     /// <summary>
@@ -42,6 +43,29 @@ namespace litiko.RegulatoryDocuments.Server
         OrganForApprovings.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Read);
         OrganForApprovings.AccessRights.Save();
       }            
-    }        
+    }
+    
+    /// <summary>
+    /// Создание роли.
+    /// </summary>
+    public static void CreateApprovalRole(Enumeration roleType, string description)
+    {
+
+      var role = ApprovalRoles.GetAll().Where(r => Equals(r.Type, roleType)).FirstOrDefault();
+      if (role == null)
+      {
+        role = ApprovalRoles.Create();
+        role.Type = roleType;
+      }
+      if (role.Description != description)
+        role.Description = description;
+      
+      if (role.State.IsChanged || role.State.IsInserted)
+      {
+        role.Save();
+        InitializationLogger.DebugFormat("Создана/обновлена роль {0}", description);        
+      }
+
+    }    
   }
 }

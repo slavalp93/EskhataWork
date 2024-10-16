@@ -61,4 +61,10 @@
   <data name="RegulatoryDocumentType" xml:space="preserve">
     <value>Нормативный документ</value>
   </data>
+  <data name="CreateVersionFromFileDiaolog_Tittle" xml:space="preserve">
+    <value>Создание версии из файла</value>
+  </data>
+  <data name="CreateVersionFromFileDiaolog_File" xml:space="preserve">
+    <value>Файл</value>
+  </data>
 </root>

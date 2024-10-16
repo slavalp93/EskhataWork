@@ -9,6 +9,65 @@ namespace litiko.RegulatoryDocuments.Client
 {
   partial class RegulatoryDocumentActions
   {
+    public virtual void CreateUpdate(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var newDoc = litiko.RegulatoryDocuments.PublicFunctions.RegulatoryDocument.Remote.CreateRegulatoryDocument();
+      
+      newDoc.Type = litiko.RegulatoryDocuments.RegulatoryDocument.Type.IsUpdate;
+      newDoc.LeadingDocument = _obj;
+      
+      newDoc.Show();      
+    }
+
+    public virtual bool CanCreateUpdate(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return !_obj.State.IsInserted && !_obj.State.IsChanged && _obj.AccessRights.CanUpdate();
+    }
+
+    public virtual void CreateChange(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var newDoc = litiko.RegulatoryDocuments.PublicFunctions.RegulatoryDocument.Remote.CreateRegulatoryDocument();            
+      
+      newDoc.Type = litiko.RegulatoryDocuments.RegulatoryDocument.Type.IsChange;
+      newDoc.LeadingDocument = _obj;      
+      
+      newDoc.Show();
+    }
+
+    public virtual bool CanCreateChange(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return !_obj.State.IsInserted && !_obj.State.IsChanged && _obj.AccessRights.CanUpdate();
+    }
+
+
+    public virtual void CopyVersionOnRU(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var version = _obj.Versions.Where(x => x.Note == litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnRU).FirstOrDefault();
+      if (version == null)
+        Functions.Module.CreateFromFileDialog(_obj, litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnRU.ToString());
+      else
+        version.Open();       
+    }
+
+    public virtual bool CanCopyVersionOnRU(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return !_obj.State.IsInserted && !_obj.State.IsChanged && _obj.AccessRights.CanUpdateBody() && _obj.Language.HasValue && _obj.Language.Value == litiko.RegulatoryDocuments.RegulatoryDocument.Language.Tj;
+    }
+
+    public virtual void CopyVersionOnTJ(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var version = _obj.Versions.Where(x => x.Note == litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnTJ).FirstOrDefault();
+      if (version == null)
+        Functions.Module.CreateFromFileDialog(_obj, litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnTJ.ToString());
+      else
+        version.Open();      
+    }
+
+    public virtual bool CanCopyVersionOnTJ(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return !_obj.State.IsInserted && !_obj.State.IsChanged && _obj.AccessRights.CanUpdateBody() && _obj.Language.HasValue && _obj.Language.Value == litiko.RegulatoryDocuments.RegulatoryDocument.Language.Ru;
+    }
+
     public virtual void CreateNormativeOrder(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var roleClerks = Sungero.Docflow.PublicFunctions.DocumentRegister.Remote.GetClerks();

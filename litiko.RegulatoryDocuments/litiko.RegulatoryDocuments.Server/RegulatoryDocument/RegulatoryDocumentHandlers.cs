@@ -26,7 +26,12 @@ namespace litiko.RegulatoryDocuments
       // Обновить связь с Правовым актом
       if (_obj.LegalAct != null && _obj.LegalAct.AccessRights.CanRead() &&
           !_obj.Relations.GetRelated(Sungero.Docflow.PublicConstants.Module.SimpleRelationName).Contains(_obj.LegalAct))
-        _obj.Relations.AddOrUpdate(Sungero.Docflow.PublicConstants.Module.SimpleRelationName, _obj.State.Properties.LegalAct.OriginalValue, _obj.LegalAct);                  
+        _obj.Relations.AddOrUpdate(Sungero.Docflow.PublicConstants.Module.SimpleRelationName, _obj.State.Properties.LegalAct.OriginalValue, _obj.LegalAct);
+      
+      // Обновить связь с Основным ВНД
+      if (_obj.LeadingDocument != null && _obj.LeadingDocument.AccessRights.CanRead() &&
+          !_obj.Relations.GetRelatedFrom(Sungero.Docflow.PublicConstants.Module.BasisRelationName).Contains(_obj.LeadingDocument))
+        _obj.Relations.AddFromOrUpdate(Sungero.Docflow.PublicConstants.Module.BasisRelationName, _obj.State.Properties.LeadingDocument.OriginalValue, _obj.LeadingDocument);      
     }
 
     public override void Created(Sungero.Domain.CreatedEventArgs e)

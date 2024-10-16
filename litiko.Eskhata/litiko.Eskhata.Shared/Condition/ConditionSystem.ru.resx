@@ -61,4 +61,13 @@
   <data name="Enum_ConditionType_ChiefAccountant" xml:space="preserve">
     <value>Согласование с Главным бухгалтером</value>
   </data>
+  <data name="Enum_ConditionType_IsRequirements" xml:space="preserve">
+    <value>Требования учетной политики Банка</value>
+  </data>
+  <data name="Enum_ConditionType_IsRecommendat" xml:space="preserve">
+    <value>Рекомендации внутреннего аудита</value>
+  </data>
+  <data name="Enum_ConditionType_IsRelatedStruct" xml:space="preserve">
+    <value>Связано со структурой банка</value>
+  </data>
 </root>

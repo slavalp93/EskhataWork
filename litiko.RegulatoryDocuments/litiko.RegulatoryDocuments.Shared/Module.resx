@@ -61,4 +61,10 @@
   <data name="RegulatoryDocumentType" xml:space="preserve">
     <value>Regulatory document</value>
   </data>
+  <data name="CreateVersionFromFileDiaolog_Tittle" xml:space="preserve">
+    <value>Creating a version from a file</value>
+  </data>
+  <data name="CreateVersionFromFileDiaolog_File" xml:space="preserve">
+    <value>File</value>
+  </data>
 </root>

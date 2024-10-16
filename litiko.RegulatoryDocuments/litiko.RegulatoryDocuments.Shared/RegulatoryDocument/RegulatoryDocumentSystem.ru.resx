@@ -142,4 +142,40 @@
   <data name="Action_CreateNormativeOrderDescription" xml:space="preserve">
     <value>Создание нового документа с видом Приказ об утверждении ВНД.</value>
   </data>
+  <data name="Action_CopyVersionOnTJ" xml:space="preserve">
+    <value>Копия на тадж. языке</value>
+  </data>
+  <data name="Action_CopyVersionOnTJHint" xml:space="preserve">
+    <value>Создать (из файла) или открыть версию с примечанием «Версия на тадж. языке»</value>
+  </data>
+  <data name="Action_CopyVersionOnTJDescription" xml:space="preserve">
+    <value>Создание (из файла) или открытие версии с примечанием «Версия на тадж. языке»</value>
+  </data>
+  <data name="Action_CopyVersionOnRU" xml:space="preserve">
+    <value>Копия на рус. языке</value>
+  </data>
+  <data name="Action_CopyVersionOnRUHint" xml:space="preserve">
+    <value>Создать (из файла) или открыть версию с примечанием «Версия на рус. языке»</value>
+  </data>
+  <data name="Action_CopyVersionOnRUDescription" xml:space="preserve">
+    <value>Создание (из файла) или открытие версии с примечанием «Версия на рус. языке»</value>
+  </data>
+  <data name="Action_CreateChange" xml:space="preserve">
+    <value>Создать изменение</value>
+  </data>
+  <data name="Action_CreateChangeHint" xml:space="preserve">
+    <value>Создать новый ВНД с типом изменение</value>
+  </data>
+  <data name="Action_CreateChangeDescription" xml:space="preserve">
+    <value>Создание нового ВНД с типом изменение</value>
+  </data>
+  <data name="Action_CreateUpdate" xml:space="preserve">
+    <value>Создать актуализацию</value>
+  </data>
+  <data name="Action_CreateUpdateHint" xml:space="preserve">
+    <value>Создать новый ВНД с типом актуализация</value>
+  </data>
+  <data name="Action_CreateUpdateDescription" xml:space="preserve">
+    <value>Создание нового ВНД с типом актуализация</value>
+  </data>
 </root>

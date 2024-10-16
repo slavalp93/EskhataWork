@@ -32,6 +32,21 @@
           "NameGuid": "25189ead-4e6b-4d2b-b6d0-607d358c7379",
           "Name": "ChiefAccountant",
           "Code": "ChiefAccountant"
+        },
+        {
+          "NameGuid": "be7f4a42-bdfa-4a39-990f-43e10bd5c877",
+          "Name": "IsRequirements",
+          "Code": "IsRequirements"
+        },
+        {
+          "NameGuid": "f848c54c-f108-4ed3-838b-b82d0867cb84",
+          "Name": "IsRecommendat",
+          "Code": "IsRecommendat"
+        },
+        {
+          "NameGuid": "57e09810-6002-47ae-a032-e5560b61dc0f",
+          "Name": "IsRelatedStruct",
+          "Code": "IsRelatedStruct"
         }
       ],
       "IsAncestorMetadata": true,
@@ -98,7 +113,16 @@
   ],
   "PublicStructures": [],
   "ResourcesKeys": [
-    "ChiefAccountantConditionName"
+    "ChiefAccountantConditionName",
+    "IsRequirementsIsNotFilledInIRG",
+    "SelectApprovalRuleWithoutIsRequirementsCondition",
+    "IsRecommendationsIsNotFilledInIRG",
+    "SelectApprovalRuleWithoutIsRecommendationsCondition",
+    "IsRelatedToStructureIsNotFilledInIRG",
+    "SelectApprovalRuleWithoutIsRelatedToStructureCondition",
+    "IsRequirementsConditionName",
+    "IsRelatedStructConditionName",
+    "IsRecommendatConditionName"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "997055c7-5c5b-49af-9ebd-5a00efff04ca",

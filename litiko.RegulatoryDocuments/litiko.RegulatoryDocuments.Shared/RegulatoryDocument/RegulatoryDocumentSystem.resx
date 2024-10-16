@@ -148,4 +148,64 @@
   <data name="Action_CreateNormativeOrderConfirmationDescription" xml:space="preserve">
     <value />
   </data>
+  <data name="Action_CopyVersionOnTJ" xml:space="preserve">
+    <value>Copy at the taj. language</value>
+  </data>
+  <data name="Action_CopyVersionOnTJDescription" xml:space="preserve">
+    <value>Creating (from a file) or opening a version with the note “Taj version language"</value>
+  </data>
+  <data name="Action_CopyVersionOnTJHint" xml:space="preserve">
+    <value>Create (from a file) or open a version with the note “Taj version language"</value>
+  </data>
+  <data name="Action_CopyVersionOnTJConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CopyVersionOnTJConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CopyVersionOnRU" xml:space="preserve">
+    <value>Copy at the rus. language</value>
+  </data>
+  <data name="Action_CopyVersionOnRUDescription" xml:space="preserve">
+    <value>Creating (from a file) or opening a version with the note “Rus version language"</value>
+  </data>
+  <data name="Action_CopyVersionOnRUHint" xml:space="preserve">
+    <value>Create (from a file) or open a version with the note “Rus version language"</value>
+  </data>
+  <data name="Action_CopyVersionOnRUConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CopyVersionOnRUConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateChange" xml:space="preserve">
+    <value>Create сhange</value>
+  </data>
+  <data name="Action_CreateChangeDescription" xml:space="preserve">
+    <value>Creating a new IRD with the change type</value>
+  </data>
+  <data name="Action_CreateChangeHint" xml:space="preserve">
+    <value>Create a new IRD with type change</value>
+  </data>
+  <data name="Action_CreateChangeConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateChangeConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateUpdate" xml:space="preserve">
+    <value>Create update</value>
+  </data>
+  <data name="Action_CreateUpdateDescription" xml:space="preserve">
+    <value>Creating a new IRD with the update type</value>
+  </data>
+  <data name="Action_CreateUpdateHint" xml:space="preserve">
+    <value>Create a new IRD with type update</value>
+  </data>
+  <data name="Action_CreateUpdateConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateUpdateConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
 </root>

@@ -67,4 +67,13 @@
   <data name="ActionAvailableToClerks" xml:space="preserve">
     <value>Action available to clerks</value>
   </data>
+  <data name="VersionNoteOnTJ" xml:space="preserve">
+    <value>Taj version language</value>
+  </data>
+  <data name="VersionNoteOnRU" xml:space="preserve">
+    <value>Rus version language</value>
+  </data>
+  <data name="VersionInName" xml:space="preserve">
+    <value>(Version {0})</value>
+  </data>
 </root>

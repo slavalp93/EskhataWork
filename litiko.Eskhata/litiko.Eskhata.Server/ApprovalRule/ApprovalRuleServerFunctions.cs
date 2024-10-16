@@ -21,6 +21,12 @@ namespace litiko.Eskhata.Server
         var conditions = this.GetChiefAccountantConditionsInRoute(route).Where(c => c.StepNumber != conditionStep.StepNumber).ToList();
         possibleStage = true;
       }
+      
+      if (conditionType == Eskhata.Condition.ConditionType.IsRecommendat || conditionType == Eskhata.Condition.ConditionType.IsRelatedStruct || conditionType == Eskhata.Condition.ConditionType.IsRequirements)
+      {                
+        possibleStage = true;
+      }      
+      
       return possibleStage;
     }
     
@@ -28,6 +34,6 @@ namespace litiko.Eskhata.Server
     {
       return route.Where(e => _obj.Conditions.Any(c => Equals(c.Number, e.StepNumber) && c.Condition.ConditionType ==
                                                   Eskhata.Condition.ConditionType.ChiefAccountant)).ToList();
-    }
+    }        
   }
 }

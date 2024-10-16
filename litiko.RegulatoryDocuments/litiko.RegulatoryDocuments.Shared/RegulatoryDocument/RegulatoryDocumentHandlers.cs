@@ -10,6 +10,62 @@ namespace litiko.RegulatoryDocuments
   partial class RegulatoryDocumentSharedHandlers
   {
 
+    public override void LeadingDocumentChanged(Sungero.Docflow.Shared.OfficialDocumentLeadingDocumentChangedEventArgs e)
+    {
+      base.LeadingDocumentChanged(e);
+      
+      if (e.NewValue != null && !Equals(e.NewValue, e.OldValue))
+      {
+        var leadingDoc = litiko.RegulatoryDocuments.RegulatoryDocuments.As(e.NewValue);
+        
+        if (leadingDoc != null)
+        {
+          if (_obj.DocumentKind == null)
+            _obj.DocumentKind = leadingDoc.DocumentKind;
+          
+          if (string.IsNullOrWhiteSpace(_obj.Subject))
+            _obj.Subject = leadingDoc.Subject;
+          
+          if (_obj.ProcessManager == null)
+            _obj.ProcessManager = leadingDoc.ProcessManager;
+          
+          if (!_obj.Language.HasValue)
+            _obj.Language = leadingDoc.Language;
+          
+          if (_obj.OnRequest == null)
+            _obj.OnRequest = leadingDoc.OnRequest;
+          
+          if (_obj.LegalAct == null)
+            _obj.LegalAct = leadingDoc.LegalAct;
+          
+          if (!Equals(_obj.IsRequirements, leadingDoc.IsRequirements))
+            _obj.IsRequirements = leadingDoc.IsRequirements;
+          
+          if (!Equals(_obj.IsRelatedToStructure, leadingDoc.IsRelatedToStructure))
+            _obj.IsRelatedToStructure = leadingDoc.IsRelatedToStructure;
+          
+          if (!Equals(_obj.IsRecommendations, leadingDoc.IsRecommendations))
+            _obj.IsRecommendations = leadingDoc.IsRecommendations;
+          
+          if (_obj.OrganForApproving == null)
+            _obj.OrganForApproving = leadingDoc.OrganForApproving;
+          
+          if (_obj.ForWhom == null)
+            _obj.ForWhom = leadingDoc.ForWhom;        
+        }        
+      }                  
+    }
+
+    public virtual void VersionNumberChanged(Sungero.Domain.Shared.IntegerPropertyChangedEventArgs e)
+    {
+      FillName();
+    }
+
+    public virtual void LanguageChanged(Sungero.Domain.Shared.EnumerationPropertyChangedEventArgs e)
+    {
+      FillName();
+    }
+
     public virtual void DateBeginChanged(Sungero.Domain.Shared.DateTimePropertyChangedEventArgs e)
     {
       var dateBegin = e.NewValue;

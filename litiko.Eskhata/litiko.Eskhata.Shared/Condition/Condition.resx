@@ -61,4 +61,31 @@
   <data name="ChiefAccountantConditionName" xml:space="preserve">
     <value>Approval from the Chief Accountant?</value>
   </data>
+  <data name="IsRequirementsIsNotFilledInIRG" xml:space="preserve">
+    <value>The attribute "Requirements of the Bank's accounting policy" is not indicated in the IRD card.</value>
+  </data>
+  <data name="SelectApprovalRuleWithoutIsRequirementsCondition" xml:space="preserve">
+    <value>To send document for approval, select an approval rule that does not contain the "Requirements of the Bank's accounting policies" condition.</value>
+  </data>
+  <data name="IsRecommendationsIsNotFilledInIRG" xml:space="preserve">
+    <value>The attribute "Internal audit recommendations" is not indicated in the IRD card.</value>
+  </data>
+  <data name="SelectApprovalRuleWithoutIsRecommendationsCondition" xml:space="preserve">
+    <value>To send document for approval, select an approval rule that does not contain the "Internal audit recommendations" condition.</value>
+  </data>
+  <data name="IsRelatedToStructureIsNotFilledInIRG" xml:space="preserve">
+    <value>The attribute "Related to the structure of the bank" is not indicated in the IRD card.</value>
+  </data>
+  <data name="SelectApprovalRuleWithoutIsRelatedToStructureCondition" xml:space="preserve">
+    <value>To send document for approval, select an approval rule that does not contain the "Related to the structure of the bank" condition.</value>
+  </data>
+  <data name="IsRequirementsConditionName" xml:space="preserve">
+    <value>Requirements of the Bank's accounting policy?</value>
+  </data>
+  <data name="IsRelatedStructConditionName" xml:space="preserve">
+    <value>Related to the structure of the bank?</value>
+  </data>
+  <data name="IsRecommendatConditionName" xml:space="preserve">
+    <value>Internal audit recommendations?</value>
+  </data>
 </root>

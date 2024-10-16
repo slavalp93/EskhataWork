@@ -37,5 +37,12 @@ namespace litiko.RegulatoryDocuments.Server
     {
       return RegulatoryDocuments.Create();
     }
+    
+    /**/
+    [Public]
+    public void Test(){
+      return;
+    }
+    /**/
   }
 }

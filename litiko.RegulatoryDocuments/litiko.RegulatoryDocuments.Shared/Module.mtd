@@ -97,6 +97,11 @@
       "IsSolutionModule": true,
       "MaxVersion": "",
       "MinVersion": ""
+    },
+    {
+      "Id": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
     }
   ],
   "ExplorerTreeOrder": [
@@ -110,6 +115,10 @@
     {
       "ItemId": "b16a631d-fdeb-4491-a772-ec01b0c0dcf9",
       "PreviousItemId": "9151081e-29d5-4c68-9204-68f04ff4d7e5"
+    },
+    {
+      "ItemId": "ce259250-73f9-4d79-96d1-3f4d41e4b108",
+      "PreviousItemId": "b16a631d-fdeb-4491-a772-ec01b0c0dcf9"
     }
   ],
   "HandledEvents": [
@@ -136,14 +145,16 @@
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.RegulatoryDocuments",
   "ResourcesKeys": [
-    "RegulatoryDocumentType"
+    "RegulatoryDocumentType",
+    "CreateVersionFromFileDiaolog_Tittle",
+    "CreateVersionFromFileDiaolog_File"
   ],
   "ServerAssemblyName": "litiko.RegulatoryDocuments.Server",
   "ServerNamespace": "litiko.RegulatoryDocuments.Server",
   "SharedAssemblyName": "litiko.RegulatoryDocuments.Shared",
   "SharedNamespace": "litiko.RegulatoryDocuments.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.2",
+  "Version": "0.0.1.3",
   "Widgets": [],
   "Versions": [
     {

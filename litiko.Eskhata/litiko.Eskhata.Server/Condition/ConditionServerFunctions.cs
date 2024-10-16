@@ -15,8 +15,17 @@ namespace litiko.Eskhata.Server
       {
         if (_obj.ConditionType == ConditionType.ChiefAccountant)
           return litiko.Eskhata.Conditions.Resources.ChiefAccountantConditionName;
+        
+        if (_obj.ConditionType == ConditionType.IsRequirements)
+          return litiko.Eskhata.Conditions.Resources.IsRequirementsConditionName;
+        
+        if (_obj.ConditionType == ConditionType.IsRelatedStruct)
+          return litiko.Eskhata.Conditions.Resources.IsRelatedStructConditionName;
+
+        if (_obj.ConditionType == ConditionType.IsRecommendat)
+          return litiko.Eskhata.Conditions.Resources.IsRecommendatConditionName;        
       }
       return base.GetConditionName();
-    }
+    }    
   }
 }

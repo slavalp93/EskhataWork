@@ -61,4 +61,31 @@
   <data name="ChiefAccountantConditionName" xml:space="preserve">
     <value>Согласование с Главным бухгалтером?</value>
   </data>
+  <data name="IsRequirementsIsNotFilledInIRG" xml:space="preserve">
+    <value>Признак "Требования учетной политики Банка" не указан в карточке ВНД.</value>
+  </data>
+  <data name="SelectApprovalRuleWithoutIsRequirementsCondition" xml:space="preserve">
+    <value>Для отправки документа на согласование выберите регламент без условия "Требования учетной политики Банка".</value>
+  </data>
+  <data name="IsRecommendationsIsNotFilledInIRG" xml:space="preserve">
+    <value>Признак "Рекомендации внутреннего аудита" не указан в карточке ВНД.</value>
+  </data>
+  <data name="SelectApprovalRuleWithoutIsRecommendationsCondition" xml:space="preserve">
+    <value>Для отправки документа на согласование выберите регламент без условия "Рекомендации внутреннего аудита".</value>
+  </data>
+  <data name="IsRelatedToStructureIsNotFilledInIRG" xml:space="preserve">
+    <value>Признак "Связано со структурой банка " не указан в карточке ВНД.</value>
+  </data>
+  <data name="SelectApprovalRuleWithoutIsRelatedToStructureCondition" xml:space="preserve">
+    <value>Для отправки документа на согласование выберите регламент без условия "Связано со структурой банка".</value>
+  </data>
+  <data name="IsRequirementsConditionName" xml:space="preserve">
+    <value>Требования учетной политики Банка?</value>
+  </data>
+  <data name="IsRelatedStructConditionName" xml:space="preserve">
+    <value>Связано со структурой банка?</value>
+  </data>
+  <data name="IsRecommendatConditionName" xml:space="preserve">
+    <value>Рекомендации внутреннего аудита?</value>
+  </data>
 </root>

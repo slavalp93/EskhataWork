@@ -61,4 +61,13 @@
   <data name="Enum_ConditionType_ChiefAccountant" xml:space="preserve">
     <value>Approving of the Chief Accountant</value>
   </data>
+  <data name="Enum_ConditionType_IsRequirements" xml:space="preserve">
+    <value>Requirements of the Bank's accounting policies</value>
+  </data>
+  <data name="Enum_ConditionType_IsRecommendat" xml:space="preserve">
+    <value>Internal audit recommendations</value>
+  </data>
+  <data name="Enum_ConditionType_IsRelatedStruct" xml:space="preserve">
+    <value>Related to the structure of the bank</value>
+  </data>
 </root>

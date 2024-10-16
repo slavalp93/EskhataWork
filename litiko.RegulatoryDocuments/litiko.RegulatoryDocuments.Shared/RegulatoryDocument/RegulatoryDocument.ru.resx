@@ -67,4 +67,13 @@
   <data name="ActionAvailableToClerks" xml:space="preserve">
     <value>Действие доступно делопроизводителям</value>
   </data>
+  <data name="VersionNoteOnTJ" xml:space="preserve">
+    <value>Версия на тадж. языке</value>
+  </data>
+  <data name="VersionNoteOnRU" xml:space="preserve">
+    <value>Версия на рус. языке</value>
+  </data>
+  <data name="VersionInName" xml:space="preserve">
+    <value>(Версия {0})</value>
+  </data>
 </root>
