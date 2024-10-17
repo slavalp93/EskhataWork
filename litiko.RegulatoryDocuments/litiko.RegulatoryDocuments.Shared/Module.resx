@@ -67,4 +67,7 @@
   <data name="CreateVersionFromFileDiaolog_File" xml:space="preserve">
     <value>File</value>
   </data>
+  <data name="NeedFillLegalActAndDateBegin" xml:space="preserve">
+    <value>In the document card you must fill in the following fields: “Legal act” and “Start date”.</value>
+  </data>
 </root>

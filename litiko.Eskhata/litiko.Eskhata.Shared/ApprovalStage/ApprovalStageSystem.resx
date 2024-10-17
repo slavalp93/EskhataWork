@@ -85,4 +85,7 @@
   <data name="Enum_CustomStageTypelitiko_IncludeInMeet" xml:space="preserve">
     <value>Inclusion in the agenda</value>
   </data>
+  <data name="Enum_CustomStageTypelitiko_ControlIRD" xml:space="preserve">
+    <value>IRD. Control of the legal act and the date of entry into force</value>
+  </data>
 </root>

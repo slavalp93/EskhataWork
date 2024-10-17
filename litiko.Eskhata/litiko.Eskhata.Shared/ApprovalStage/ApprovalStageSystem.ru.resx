@@ -85,4 +85,7 @@
   <data name="Enum_CustomStageTypelitiko_IncludeInMeet" xml:space="preserve">
     <value>Включение в повестку</value>
   </data>
+  <data name="Enum_CustomStageTypelitiko_ControlIRD" xml:space="preserve">
+    <value>ВНД. Контроль правового акта и Даты введения в действие</value>
+  </data>
 </root>

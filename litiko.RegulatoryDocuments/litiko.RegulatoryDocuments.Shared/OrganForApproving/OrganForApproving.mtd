@@ -41,6 +41,32 @@
           "RowNumber": 0,
           "RowSpan": 1,
           "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "c0183243-d90d-42c1-9235-b40bbb0088cc",
+          "Name": "NameTJ",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "27609c13-c49e-4870-ae57-f0558e76f244",
+          "PropertyGuid": "0ee88fe7-a41c-409b-88df-6efc90ecf190",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "4093be7d-9bcf-445d-b795-e78ff789972f",
+          "Name": "Status",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+          "ParentGuid": "27609c13-c49e-4870-ae57-f0558e76f244",
+          "PropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": []
         }
       ]
     }
@@ -72,6 +98,7 @@
       "Code": "Name",
       "IsDisplayValue": true,
       "IsQuickSearchAllowed": true,
+      "IsRequired": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1"
     },

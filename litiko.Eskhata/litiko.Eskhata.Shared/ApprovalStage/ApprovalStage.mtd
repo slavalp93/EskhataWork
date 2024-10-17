@@ -204,6 +204,11 @@
           "NameGuid": "0d156cb6-9b37-4490-8896-e0ebb9f3cbd7",
           "Name": "IncludeInMeet",
           "Code": "IncludeInMeet"
+        },
+        {
+          "NameGuid": "65f60a3f-3ced-4057-b95a-71c8abe92d56",
+          "Name": "ControlIRD",
+          "Code": "ControlIRD"
         }
       ],
       "HandledEvents": [

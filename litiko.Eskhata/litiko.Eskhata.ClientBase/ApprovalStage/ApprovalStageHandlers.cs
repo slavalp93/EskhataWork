@@ -18,6 +18,9 @@ namespace litiko.Eskhata
       if (_obj.StageType != StageType.SimpleAgr)
         query = query.Where(q => !Equals(q, CustomStageTypelitiko.IncludeInMeet));
       
+      if (_obj.StageType != StageType.Sign)
+        query = query.Where(q => !Equals(q, CustomStageTypelitiko.ControlIRD));      
+      
       return query;
     }
   }

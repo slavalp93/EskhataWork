@@ -70,4 +70,31 @@
   <data name="Enum_ConditionType_IsRelatedStruct" xml:space="preserve">
     <value>Связано со структурой банка</value>
   </data>
+  <data name="Enum_ConditionType_IRDType" xml:space="preserve">
+    <value>Тип ВНД</value>
+  </data>
+  <data name="Property_IRDTypelitiko" xml:space="preserve">
+    <value>Тип ВНД</value>
+  </data>
+  <data name="Enum_IRDTypelitiko_IsNew" xml:space="preserve">
+    <value>Новый</value>
+  </data>
+  <data name="Enum_IRDTypelitiko_IsChange" xml:space="preserve">
+    <value>Изменение</value>
+  </data>
+  <data name="Enum_IRDTypelitiko_IsUpdate" xml:space="preserve">
+    <value>Актуализация без изменения</value>
+  </data>
+  <data name="Resource_8ce822b64be04603b9905ec7aec95ece" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_8ce822b64be04603b9905ec7aec95ece_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Enum_ConditionType_OrganForApprov" xml:space="preserve">
+    <value>Орган утверждения</value>
+  </data>
+  <data name="Property_OrganForApprovinglitiko" xml:space="preserve">
+    <value>Орган утверждения</value>
+  </data>
 </root>

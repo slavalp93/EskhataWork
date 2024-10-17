@@ -27,9 +27,41 @@ namespace litiko.Eskhata.Shared
       baseConditions[RegulatoryDocuments.PublicConstants.Module.DocumentTypeGuids.RegulatoryDocument.ToString()].Add(Eskhata.Condition.ConditionType.IsRecommendat);
       baseConditions[RegulatoryDocuments.PublicConstants.Module.DocumentTypeGuids.RegulatoryDocument.ToString()].Add(Eskhata.Condition.ConditionType.IsRelatedStruct);
       baseConditions[RegulatoryDocuments.PublicConstants.Module.DocumentTypeGuids.RegulatoryDocument.ToString()].Add(Eskhata.Condition.ConditionType.IsRequirements);
+      baseConditions[RegulatoryDocuments.PublicConstants.Module.DocumentTypeGuids.RegulatoryDocument.ToString()].Add(Eskhata.Condition.ConditionType.IRDType);
+      baseConditions[RegulatoryDocuments.PublicConstants.Module.DocumentTypeGuids.RegulatoryDocument.ToString()].Add(Eskhata.Condition.ConditionType.OrganForApprov);
       
       return baseConditions;
     }
+    
+    /// <summary>
+    /// Сменить доступность реквизитов.
+    /// </summary>    
+    public override void ChangePropertiesAccess()
+    {
+      base.ChangePropertiesAccess();
+          
+      var isIRDType = _obj.ConditionType == ConditionType.IRDType;         
+      _obj.State.Properties.IRDTypelitiko.IsVisible = isIRDType;
+      _obj.State.Properties.IRDTypelitiko.IsRequired = isIRDType;
+      
+      var isOrganForApprovType = _obj.ConditionType == ConditionType.OrganForApprov;         
+      _obj.State.Properties.OrganForApprovinglitiko.IsVisible = isOrganForApprovType;
+      _obj.State.Properties.OrganForApprovinglitiko.IsRequired = isOrganForApprovType;      
+    }
+
+    /// <summary>
+    /// Очистка скрытых свойств.
+    /// </summary>    
+    public override void ClearHiddenProperties()
+    {
+      base.ClearHiddenProperties();
+          
+      if (!_obj.State.Properties.IRDTypelitiko.IsVisible)
+        _obj.IRDTypelitiko = null;
+      
+      if (!_obj.State.Properties.OrganForApprovinglitiko.IsVisible)
+        _obj.OrganForApprovinglitiko = null;      
+    }    
     
     /// <summary>
     /// Проверить условие.
@@ -51,7 +83,7 @@ namespace litiko.Eskhata.Shared
                    string.Empty);
         
         return Sungero.Docflow.Structures.ConditionBase.ConditionResult.
-          Create(null, "Условие не может быть вычислено. Отправляемый документ не того вида.");
+          Create(null, litiko.Eskhata.Conditions.Resources.CannotComputeCondition);
       }
       
       if (_obj.ConditionType == ConditionType.IsRequirements)
@@ -61,7 +93,25 @@ namespace litiko.Eskhata.Shared
         return this.CheckIsRelatedStruct(document, task);
       
       if (_obj.ConditionType == ConditionType.IsRecommendat)
-        return this.CheckIsRecommendat(document, task);        
+        return this.CheckIsRecommendat(document, task);
+
+      if (_obj.ConditionType == ConditionType.IRDType)
+      {
+        var regulatoryDocument = litiko.RegulatoryDocuments.RegulatoryDocuments.As(document);
+        if (regulatoryDocument != null)
+          return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(regulatoryDocument.Type == _obj.IRDTypelitiko, string.Empty);
+        else
+          return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(null, litiko.Eskhata.Conditions.Resources.CannotComputeCondition);
+      }
+      
+      if (_obj.ConditionType == ConditionType.OrganForApprov)
+      {
+        var regulatoryDocument = litiko.RegulatoryDocuments.RegulatoryDocuments.As(document);
+        if (regulatoryDocument != null)
+          return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(regulatoryDocument.OrganForApproving == _obj.OrganForApprovinglitiko, string.Empty);
+        else
+          return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(null, litiko.Eskhata.Conditions.Resources.CannotComputeCondition);
+      }      
       
       return base.CheckCondition(document, task);
     }    
@@ -124,7 +174,7 @@ namespace litiko.Eskhata.Shared
       }
 
       return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(null, Conditions.Resources.SelectApprovalRuleWithoutIsRelatedToStructureCondition);
-    }
+    }       
     
   }
 }

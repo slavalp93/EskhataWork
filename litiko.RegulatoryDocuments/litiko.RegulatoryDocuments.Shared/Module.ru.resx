@@ -67,4 +67,7 @@
   <data name="CreateVersionFromFileDiaolog_File" xml:space="preserve">
     <value>Файл</value>
   </data>
+  <data name="NeedFillLegalActAndDateBegin" xml:space="preserve">
+    <value>В карточке документа необходимо заполнить поля: "Правовой акт" и "Введение в действие с".</value>
+  </data>
 </root>

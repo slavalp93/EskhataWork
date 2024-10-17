@@ -23,7 +23,15 @@ namespace litiko.Eskhata.Server
           return litiko.Eskhata.Conditions.Resources.IsRelatedStructConditionName;
 
         if (_obj.ConditionType == ConditionType.IsRecommendat)
-          return litiko.Eskhata.Conditions.Resources.IsRecommendatConditionName;        
+          return litiko.Eskhata.Conditions.Resources.IsRecommendatConditionName;
+        
+        // "Тип ВНД – {0}?"
+        if (_obj.ConditionType == ConditionType.IRDType)
+          return litiko.Eskhata.Conditions.Resources.IRDTypeConditionNameFormat(Conditions.Info.Properties.IRDTypelitiko.GetLocalizedValue(_obj.IRDTypelitiko));
+        
+        // "Орган утверждения – {0}?"
+        if (_obj.ConditionType == ConditionType.OrganForApprov)
+          return litiko.Eskhata.Conditions.Resources.OrganForApprovConditionNameFormat(_obj.OrganForApprovinglitiko);        
       }
       return base.GetConditionName();
     }    

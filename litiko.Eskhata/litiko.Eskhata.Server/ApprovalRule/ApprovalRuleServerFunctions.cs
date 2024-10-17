@@ -22,7 +22,9 @@ namespace litiko.Eskhata.Server
         possibleStage = true;
       }
       
-      if (conditionType == Eskhata.Condition.ConditionType.IsRecommendat || conditionType == Eskhata.Condition.ConditionType.IsRelatedStruct || conditionType == Eskhata.Condition.ConditionType.IsRequirements)
+      if (conditionType == Eskhata.Condition.ConditionType.IsRecommendat || conditionType == Eskhata.Condition.ConditionType.IsRelatedStruct || 
+          conditionType == Eskhata.Condition.ConditionType.IsRequirements || conditionType == Eskhata.Condition.ConditionType.IRDType || 
+          conditionType == Eskhata.Condition.ConditionType.IRDType)
       {                
         possibleStage = true;
       }      

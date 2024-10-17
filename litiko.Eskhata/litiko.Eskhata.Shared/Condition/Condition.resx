@@ -88,4 +88,13 @@
   <data name="IsRecommendatConditionName" xml:space="preserve">
     <value>Internal audit recommendations?</value>
   </data>
+  <data name="IRDTypeConditionName" xml:space="preserve">
+    <value>Type of IRD – {0}?</value>
+  </data>
+  <data name="CannotComputeCondition" xml:space="preserve">
+    <value>The condition cannot be evaluated. The document you are sending is of the wrong type.</value>
+  </data>
+  <data name="OrganForApprovConditionName" xml:space="preserve">
+    <value>Organ for approving – {0}?</value>
+  </data>
 </root>

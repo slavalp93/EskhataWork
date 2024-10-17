@@ -208,4 +208,58 @@
   <data name="Action_CreateUpdateConfirmationDescription" xml:space="preserve">
     <value />
   </data>
+  <data name="FilterPanel_LifeCycleState_976e63d5b6274cfe97c7dc62fa7bffca" xml:space="preserve">
+    <value>Life cycle state</value>
+  </data>
+  <data name="FilterPanel_Draft_d6452bbcdf104287bdbb466643796b4c" xml:space="preserve">
+    <value>Draft</value>
+  </data>
+  <data name="FilterPanel_Active_94f0bc422a034fe182b8f01995e92fa8" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="FilterPanel_Obsolete_85bde5946f29458a9c28be81cffb8241" xml:space="preserve">
+    <value>Obsolete</value>
+  </data>
+  <data name="FilterPanel_RevisionOverdue_4b7a06fa9d8047dfbbfb11cbd22f8e09" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
+  <data name="FilterPanel_UpdateUntilEndOfMonth_c71463293db8400dbf0aac45a1d8adb7" xml:space="preserve">
+    <value>Until the end of the month</value>
+  </data>
+  <data name="FilterPanel_RevisionDate_1911559bd2e94b9199743d204a39e54a" xml:space="preserve">
+    <value>Revision date</value>
+  </data>
+  <data name="FilterPanel_RevisionUntilEndOfMonth_ef5fbf104771426d96d4580e7983af47" xml:space="preserve">
+    <value>Until the end of the month</value>
+  </data>
+  <data name="FilterPanel_RevisionNoLaterThanThreeMonths_183eb61d407d43e3ad0653cd09510388" xml:space="preserve">
+    <value>No later than 3 months</value>
+  </data>
+  <data name="FilterPanel_RevisionNoLaterThanSixMonths_00eea55906634526b276e20211bbde62" xml:space="preserve">
+    <value>No later than 6 months</value>
+  </data>
+  <data name="FilterPanel_RevisionNoLaterThanNineMonths_3f2cf459013f446cb1467b1a92df280f" xml:space="preserve">
+    <value>No later than 9 months</value>
+  </data>
+  <data name="FilterPanel_RevisionManualPeriod_3135a0e755ca4d1aa07974820e07dba4" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="FilterPanel_UpdateDate_ecf1726c4ce24435b663760025959c22" xml:space="preserve">
+    <value>Update date</value>
+  </data>
+  <data name="FilterPanel_UpdateNoLaterThanThreeMonths_13325c91339d42d0941fac32e407a629" xml:space="preserve">
+    <value>No later than 3 months</value>
+  </data>
+  <data name="FilterPanel_UpdateNoLaterThanSixMonths_620ea72147ba4dc9adef822d9143769c" xml:space="preserve">
+    <value>No later than 6 months</value>
+  </data>
+  <data name="FilterPanel_UpdateNoLaterThanNineMonths_ea00ecadf56548b692fd9a603a17ebc9" xml:space="preserve">
+    <value>No later than 9 months</value>
+  </data>
+  <data name="FilterPanel_UpdateManualPeriod_740e43feb511456c9bcfdde748ac99e7" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="FilterPanel_UpdateOverdue_e786621d55a14372ba1f78b446160925" xml:space="preserve">
+    <value>Overdue</value>
+  </data>
 </root>
