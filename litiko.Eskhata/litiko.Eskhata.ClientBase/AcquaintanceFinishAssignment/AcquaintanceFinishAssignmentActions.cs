@@ -9,6 +9,31 @@ namespace litiko.Eskhata.Client
 {
   partial class AcquaintanceFinishAssignmentActions
   {
+    public override void ShowAcquaintanceReport(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      //base.ShowAcquaintanceReport(e);
+      if (!_obj.DocumentGroup.OfficialDocuments.Any())
+      {
+        e.AddError(AcquaintanceTasks.Resources.DocumentCantBeEmpty);
+        return;
+      }           
+      
+      var task = AcquaintanceTasks.As(_obj.Task);
+      var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
+      if (document != null && task != null)
+      {
+        var report = litiko.RecordManagementEskhata.Reports.GetAcquaintanceApprovalSheet();
+        report.Document = document;
+        report.Task = task;
+        report.Open();
+      }
+    }
+
+    public override bool CanShowAcquaintanceReport(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return base.CanShowAcquaintanceReport(e);
+    }
+
     public virtual void ConvertToPDFWithAcqList(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();

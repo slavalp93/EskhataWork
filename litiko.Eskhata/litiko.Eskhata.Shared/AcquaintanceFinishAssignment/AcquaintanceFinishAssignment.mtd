@@ -5,6 +5,16 @@
   "AccessRightsMode": "Instance",
   "Actions": [
     {
+      "NameGuid": "e1177907-35eb-45f4-94f8-8691b6d7748b",
+      "Name": "ShowAcquaintanceReport",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ],
+      "Versions": []
+    },
+    {
       "NameGuid": "72dd6556-9792-46bd-9ce6-0631995479e0",
       "Name": "ConvertToPDFWithAcqList",
       "ActionArea": "Card",

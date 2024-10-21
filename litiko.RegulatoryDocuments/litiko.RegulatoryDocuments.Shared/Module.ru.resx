@@ -70,4 +70,10 @@
   <data name="NeedFillLegalActAndDateBegin" xml:space="preserve">
     <value>В карточке документа необходимо заполнить поля: "Правовой акт" и "Введение в действие с".</value>
   </data>
+  <data name="RevisionNoticeSubject" xml:space="preserve">
+    <value>Через {0} месяцев наступает дата пересмотра нормативного документа: {1}</value>
+  </data>
+  <data name="RegulatoryDocument" xml:space="preserve">
+    <value>Нормативный документ: {0}</value>
+  </data>
 </root>

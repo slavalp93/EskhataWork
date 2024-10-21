@@ -84,8 +84,8 @@ namespace litiko.RegulatoryDocuments.Shared
         if (!string.IsNullOrWhiteSpace(_obj.Subject))
           name += " " + _obj.Subject;
         
-        if (_obj.VersionNumber.HasValue)
-          name += " " + litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionInNameFormat(_obj.VersionNumber.Value);
+        if (!string.IsNullOrWhiteSpace(_obj.VersionNumber))
+          name += " " + litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionInNameFormat(_obj.VersionNumber);
         
         if (_obj.Language.HasValue)
           name += " " + _obj.Info.Properties.Language.GetLocalizedValue(_obj.Language);

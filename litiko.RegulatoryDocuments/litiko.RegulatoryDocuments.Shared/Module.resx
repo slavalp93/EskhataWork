@@ -70,4 +70,10 @@
   <data name="NeedFillLegalActAndDateBegin" xml:space="preserve">
     <value>In the document card you must fill in the following fields: “Legal act” and “Start date”.</value>
   </data>
+  <data name="RevisionNoticeSubject" xml:space="preserve">
+    <value>After {0} months, the date for revision of the regulatory document comes: {1}</value>
+  </data>
+  <data name="RegulatoryDocument" xml:space="preserve">
+    <value>Regulatory document: {0}</value>
+  </data>
 </root>

@@ -58,4 +58,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Action_NotAgreelitiko" xml:space="preserve">
+    <value>Не согласен</value>
+  </data>
+  <data name="Action_NotAgreelitikoHint" xml:space="preserve">
+    <value>Выполнить согласование с результатом "Не согласен"</value>
+  </data>
+  <data name="Action_NotAgreelitikoDescription" xml:space="preserve">
+    <value>Выполнение согласования с результатом "Не согласен"</value>
+  </data>
+  <data name="Action_NotAgreelitikoConfirmationMessage" xml:space="preserve">
+    <value>Действительно выполнить согласование с результатом "Не согласен"?</value>
+  </data>
+  <data name="Property_IsNotAgreeResultlitiko" xml:space="preserve">
+    <value>Выполнено с результатом "Не согласен"</value>
+  </data>
 </root>

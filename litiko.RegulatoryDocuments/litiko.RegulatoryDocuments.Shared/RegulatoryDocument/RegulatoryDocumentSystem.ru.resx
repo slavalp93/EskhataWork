@@ -232,4 +232,13 @@
   <data name="FilterPanel_UpdateOverdue_e786621d55a14372ba1f78b446160925" xml:space="preserve">
     <value>Просрочено</value>
   </data>
+  <data name="Action_CreateProjectSolution" xml:space="preserve">
+    <value>Вынести вопрос на КОУ</value>
+  </data>
+  <data name="Action_CreateProjectSolutionHint" xml:space="preserve">
+    <value>Вынести вопрос на КОУ</value>
+  </data>
+  <data name="Action_CreateProjectSolutionDescription" xml:space="preserve">
+    <value>Вынести вопрос на КОУ</value>
+  </data>
 </root>

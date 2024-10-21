@@ -106,4 +106,10 @@
   <data name="CoverDescription_ControlOfApprovalDeadlines" xml:space="preserve">
     <value>Список ВНД созданных/актуализированных за указанный период</value>
   </data>
+  <data name="JobDisplayName_72bf996270794b008bf68d3a2ce378bd" xml:space="preserve">
+    <value>Рассылка уведомлений о необходимости пересмотра ВНД</value>
+  </data>
+  <data name="JobDescription_72bf996270794b008bf68d3a2ce378bd" xml:space="preserve">
+    <value>Рассылка уведомлений о необходимости пересмотра ВНД</value>
+  </data>
 </root>

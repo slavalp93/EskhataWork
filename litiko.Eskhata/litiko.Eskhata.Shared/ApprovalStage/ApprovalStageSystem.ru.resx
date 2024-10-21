@@ -88,4 +88,7 @@
   <data name="Enum_CustomStageTypelitiko_ControlIRD" xml:space="preserve">
     <value>ВНД. Контроль правового акта и Даты введения в действие</value>
   </data>
+  <data name="Property_AllowResultNotAgreelitiko" xml:space="preserve">
+    <value>Разрешить вариант выполнения "Не согласен"</value>
+  </data>
 </root>

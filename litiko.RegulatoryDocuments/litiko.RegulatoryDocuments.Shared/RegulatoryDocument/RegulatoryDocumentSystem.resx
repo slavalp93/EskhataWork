@@ -262,4 +262,19 @@
   <data name="FilterPanel_UpdateOverdue_e786621d55a14372ba1f78b446160925" xml:space="preserve">
     <value>Overdue</value>
   </data>
+  <data name="Action_CreateProjectSolution" xml:space="preserve">
+    <value>Submit the issue to the KOU</value>
+  </data>
+  <data name="Action_CreateProjectSolutionDescription" xml:space="preserve">
+    <value>Submit the issue to the KOU</value>
+  </data>
+  <data name="Action_CreateProjectSolutionHint" xml:space="preserve">
+    <value>Submit the issue to the KOU</value>
+  </data>
+  <data name="Action_CreateProjectSolutionConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateProjectSolutionConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
 </root>

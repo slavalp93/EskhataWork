@@ -88,4 +88,7 @@
   <data name="Enum_CustomStageTypelitiko_ControlIRD" xml:space="preserve">
     <value>IRD. Control of the legal act and the date of entry into force</value>
   </data>
+  <data name="Property_AllowResultNotAgreelitiko" xml:space="preserve">
+    <value>Allow execution result "Not agree"</value>
+  </data>
 </root>

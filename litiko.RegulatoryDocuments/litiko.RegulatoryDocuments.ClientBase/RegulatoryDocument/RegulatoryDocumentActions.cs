@@ -9,6 +9,27 @@ namespace litiko.RegulatoryDocuments.Client
 {
   partial class RegulatoryDocumentActions
   {
+    public virtual void CreateProjectSolution(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var newDoc = litiko.CollegiateAgencies.PublicFunctions.Projectsolution.Remote.CreateProjectsolution();
+      var docId = newDoc.Id;
+      
+      newDoc.ShowModal();
+      
+      var createdDoc = litiko.CollegiateAgencies.Projectsolutions.GetAll(x => x.Id == docId).FirstOrDefault();
+      if (createdDoc != null)
+      {          
+        // Связать с текщим документом
+        if (!_obj.Relations.GetRelated(Sungero.Docflow.PublicConstants.Module.SimpleRelationName).Contains(createdDoc))
+          _obj.Relations.Add(Sungero.Docflow.PublicConstants.Module.SimpleRelationName, createdDoc);
+      }
+    }
+
+    public virtual bool CanCreateProjectSolution(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+       return !_obj.State.IsInserted && !_obj.State.IsChanged;
+    }
+
     public virtual void CreateUpdate(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var newDoc = litiko.RegulatoryDocuments.PublicFunctions.RegulatoryDocument.Remote.CreateRegulatoryDocument();
@@ -76,7 +97,10 @@ namespace litiko.RegulatoryDocuments.Client
         var doc = litiko.Eskhata.PublicFunctions.Order.Remote.CreateOrder();
         var docKind = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(litiko.RecordManagementEskhata.PublicConstants.Module.DocumentKindGuids.NormativeOrder);
         if (docKind != null)
+        {
           doc.DocumentKind = docKind;
+          doc.LeadingDocument = _obj;
+        }
         
         var docId = doc.Id;
         doc.ShowModal();

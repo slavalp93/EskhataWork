@@ -66,5 +66,18 @@ namespace litiko.Eskhata.Shared
       
       return baseRoles;
     }
+    
+    /// <summary>
+    /// Установить видимость свойств.
+    /// </summary>
+    public override void SetPropertiesVisibility()
+    {
+      base.SetPropertiesVisibility();
+            
+      var properties = _obj.State.Properties;
+      var type = _obj.StageType;            
+      var isApprovers = type == StageType.Approvers;
+      properties.AllowResultNotAgreelitiko.IsVisible = isApprovers;
+    }
   }
 }

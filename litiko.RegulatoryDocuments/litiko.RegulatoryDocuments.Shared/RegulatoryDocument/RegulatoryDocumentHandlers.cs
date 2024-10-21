@@ -51,12 +51,15 @@ namespace litiko.RegulatoryDocuments
             _obj.OrganForApproving = leadingDoc.OrganForApproving;
           
           if (_obj.ForWhom == null)
-            _obj.ForWhom = leadingDoc.ForWhom;        
+            _obj.ForWhom = leadingDoc.ForWhom;
+
+          if (leadingDoc.HasVersions && !_obj.HasVersions)
+            _obj.CreateVersionFrom(leadingDoc.LastVersion.Body.Read(), leadingDoc.LastVersion.AssociatedApplication.Extension);
         }        
       }                  
     }
 
-    public virtual void VersionNumberChanged(Sungero.Domain.Shared.IntegerPropertyChangedEventArgs e)
+    public virtual void VersionNumberChanged(Sungero.Domain.Shared.StringPropertyChangedEventArgs e)
     {
       FillName();
     }

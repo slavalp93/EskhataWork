@@ -109,4 +109,10 @@
   <data name="CoverDescription_ControlOfApprovalDeadlines" xml:space="preserve">
     <value>List of IRD created/updated for the specified period</value>
   </data>
+  <data name="JobDisplayName_72bf996270794b008bf68d3a2ce378bd" xml:space="preserve">
+    <value>Sending notifications about the need to revise IRD</value>
+  </data>
+  <data name="JobDescription_72bf996270794b008bf68d3a2ce378bd" xml:space="preserve">
+    <value>Sending notifications about the need to revise IRD</value>
+  </data>
 </root>
