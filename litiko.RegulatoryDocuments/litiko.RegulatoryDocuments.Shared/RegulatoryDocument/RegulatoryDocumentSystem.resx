@@ -277,4 +277,34 @@
   <data name="Action_CreateProjectSolutionConfirmationDescription" xml:space="preserve">
     <value />
   </data>
+  <data name="Action_ShowActOnTheRelevanceReport" xml:space="preserve">
+    <value>Act on the relevance IRD</value>
+  </data>
+  <data name="Action_ShowActOnTheRelevanceReportDescription" xml:space="preserve">
+    <value>Generating and opening the report "Act on the relevance of IRD"</value>
+  </data>
+  <data name="Action_ShowActOnTheRelevanceReportHint" xml:space="preserve">
+    <value>Generate and open the report “Act on the relevance of IRD”</value>
+  </data>
+  <data name="Action_ShowActOnTheRelevanceReportConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowActOnTheRelevanceReportConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowApprovalSheetIRDReport" xml:space="preserve">
+    <value>Approval sheet IRD</value>
+  </data>
+  <data name="Action_ShowApprovalSheetIRDReportDescription" xml:space="preserve">
+    <value>Generating and opening the report "Approval sheet IRD"</value>
+  </data>
+  <data name="Action_ShowApprovalSheetIRDReportHint" xml:space="preserve">
+    <value>Generate and open the report “Approval sheet IRD”</value>
+  </data>
+  <data name="Action_ShowApprovalSheetIRDReportConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowApprovalSheetIRDReportConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
 </root>

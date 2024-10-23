@@ -58,10 +58,16 @@ namespace litiko.Eskhata.Shared
       base.SetRequiredProperties();
 
       // Для Постановлений и Выписок из протокола - Содержание не обязательное поле
+      // + Акт об актуальности ВНД и Лист согласования ВНД 
       bool isSubjectrequired = _obj.State.Properties.Subject.IsRequired;
       var docKindExtractProtocol = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(litiko.CollegiateAgencies.PublicConstants.Module.DocumentKindGuids.ExtractProtocol);
-      var docKindResolution = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(litiko.CollegiateAgencies.PublicConstants.Module.DocumentKindGuids.Resolution);                  
-      if ((docKindExtractProtocol != null && Equals(_obj.DocumentKind, docKindExtractProtocol)) || (docKindResolution != null && Equals(_obj.DocumentKind, docKindResolution)))
+      var docKindResolution = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(litiko.CollegiateAgencies.PublicConstants.Module.DocumentKindGuids.Resolution);
+      var docKindActOnTheRelevance = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(litiko.RegulatoryDocuments.PublicConstants.Module.DocumentKindGuids.ActOnTheRelevance);
+      var docKindApprovalSheetIRD = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(litiko.RegulatoryDocuments.PublicConstants.Module.DocumentKindGuids.ApprovalSheetIRD);
+      if ((docKindExtractProtocol != null && Equals(_obj.DocumentKind, docKindExtractProtocol)) || 
+          (docKindActOnTheRelevance != null && Equals(_obj.DocumentKind, docKindActOnTheRelevance)) ||
+          (docKindApprovalSheetIRD != null && Equals(_obj.DocumentKind, docKindApprovalSheetIRD))
+         )
         isSubjectrequired = false;
       
       _obj.State.Properties.Subject.IsRequired = isSubjectrequired;

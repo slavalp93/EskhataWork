@@ -241,4 +241,22 @@
   <data name="Action_CreateProjectSolutionDescription" xml:space="preserve">
     <value>Вынести вопрос на КОУ</value>
   </data>
+  <data name="Action_ShowActOnTheRelevanceReport" xml:space="preserve">
+    <value>Акт об актуальности ВНД</value>
+  </data>
+  <data name="Action_ShowActOnTheRelevanceReportHint" xml:space="preserve">
+    <value>Сформировать и открыть отчет "Акт об актуальности ВНД"</value>
+  </data>
+  <data name="Action_ShowActOnTheRelevanceReportDescription" xml:space="preserve">
+    <value>Формирование и открытие отчета "Акт об актуальности ВНД"</value>
+  </data>
+  <data name="Action_ShowApprovalSheetIRDReport" xml:space="preserve">
+    <value>Лист согласования ВНД</value>
+  </data>
+  <data name="Action_ShowApprovalSheetIRDReportHint" xml:space="preserve">
+    <value>Сформировать и открыть отчет "Лист согласования ВНД"</value>
+  </data>
+  <data name="Action_ShowApprovalSheetIRDReportDescription" xml:space="preserve">
+    <value>Формирование и открытие отчета "Лист согласования ВНД"</value>
+  </data>
 </root>

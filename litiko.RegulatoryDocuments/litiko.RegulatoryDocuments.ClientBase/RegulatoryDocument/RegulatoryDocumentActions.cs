@@ -9,6 +9,30 @@ namespace litiko.RegulatoryDocuments.Client
 {
   partial class RegulatoryDocumentActions
   {
+    public virtual void ShowApprovalSheetIRDReport(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var report = Reports.GetApprovalSheetIRD();
+      report.Entity = _obj;
+      report.Open();
+    }
+
+    public virtual bool CanShowApprovalSheetIRDReport(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return !_obj.State.IsChanged && !_obj.State.IsInserted;
+    }
+
+    public virtual void ShowActOnTheRelevanceReport(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var report = Reports.GetActOnTheRelevance();
+      report.Entity = _obj;
+      report.Open();
+    }
+
+    public virtual bool CanShowActOnTheRelevanceReport(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return !_obj.State.IsChanged && !_obj.State.IsInserted;
+    }
+
     public virtual void CreateProjectSolution(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var newDoc = litiko.CollegiateAgencies.PublicFunctions.Projectsolution.Remote.CreateProjectsolution();

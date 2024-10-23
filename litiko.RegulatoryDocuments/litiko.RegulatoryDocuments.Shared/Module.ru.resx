@@ -76,4 +76,22 @@
   <data name="RegulatoryDocument" xml:space="preserve">
     <value>Нормативный документ: {0}</value>
   </data>
+  <data name="RevisionOverdueNoticeSubject" xml:space="preserve">
+    <value>Просрочен пересмотр нормативного документа: {0}</value>
+  </data>
+  <data name="UpdateNoticeSubject" xml:space="preserve">
+    <value>Через {0} месяцев наступает дата актуализации нормативного документа: {1}</value>
+  </data>
+  <data name="ActOnTheRelevance" xml:space="preserve">
+    <value>Акт об актуальности ВНД</value>
+  </data>
+  <data name="ApprovalSheetIRD" xml:space="preserve">
+    <value>Лист согласования ВНД</value>
+  </data>
+  <data name="DocumentIsNotIRG" xml:space="preserve">
+    <value>Документ не является ВНД.</value>
+  </data>
+  <data name="DocumentNotFound" xml:space="preserve">
+    <value>Не найден документ.</value>
+  </data>
 </root>

@@ -14,11 +14,6 @@ namespace litiko.RegulatoryDocuments
     {
       Functions.RegulatoryDocument.SetRequiredProperties(_obj);
     }
-
-    public virtual void DateUpdateValueInput(Sungero.Presentation.DateTimeValueInputEventArgs e)
-    {      
-      _obj.State.Controls.DaysUntilUpdaate.Refresh();
-    }
   }
 
 }

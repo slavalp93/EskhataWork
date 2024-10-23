@@ -13,8 +13,11 @@ namespace litiko.RegulatoryDocuments.Server
     public override void Initializing(Sungero.Domain.ModuleInitializingEventArgs e)
     {
       CreateDocumentTypes();
+      CreateDocumentKinds();
       GrantRightsOnEntities();
-      CreateApprovalRole(litiko.RegulatoryDocuments.ApprovalRole.Type.ProcessManager, "Руководитель процесса");
+      CreateApprovalRole(litiko.RegulatoryDocuments.ApprovalRole.Type.ProcessManager, "Руководитель процесса");      
+      CreateActOnRelevanceStage();
+      CreateApprovalSheetStage();
     }
     
     /// <summary>
@@ -26,6 +29,54 @@ namespace litiko.RegulatoryDocuments.Server
       Sungero.Docflow.PublicInitializationFunctions.Module.CreateDocumentType(Resources.RegulatoryDocumentType, RegulatoryDocument.ClassTypeGuid, Sungero.Docflow.DocumentType.DocumentFlow.Inner, true);
     }
 
+    /// <summary>
+    /// Создать виды документов.
+    /// </summary>    
+    public static void CreateDocumentKinds()
+    {
+      
+      #region Settings
+      InitializationLogger.Debug("Init: Create document kinds.");
+      
+      var registrable = Sungero.Docflow.DocumentKind.NumberingType.Registrable;
+      var numerable = Sungero.Docflow.DocumentKind.NumberingType.Numerable;
+      var notNumerable = Sungero.Docflow.DocumentKind.NumberingType.NotNumerable;
+      
+      var actions = new Sungero.Domain.Shared.IActionInfo[] {
+        Sungero.Docflow.OfficialDocuments.Info.Actions.SendForFreeApproval        
+      };
+      #endregion
+      
+      #region Акт об актуальности ВНД
+      Sungero.Docflow.PublicInitializationFunctions.Module.
+        CreateDocumentKind(Resources.ActOnTheRelevance,
+                           Resources.ActOnTheRelevance,
+                           notNumerable,
+                           Sungero.Docflow.DocumentKind.DocumentFlow.Inner,
+                           true,
+                           false,
+                           litiko.CollegiateAgencies.PublicConstants.Module.DocumentTypeGuids.Addendum,
+                           actions,
+                           Constants.Module.DocumentKindGuids.ActOnTheRelevance,
+                           false);
+      #endregion
+      
+      #region Лист согласования ВНД
+      Sungero.Docflow.PublicInitializationFunctions.Module.
+        CreateDocumentKind(Resources.ApprovalSheetIRD,
+                           Resources.ApprovalSheetIRD,
+                           notNumerable,
+                           Sungero.Docflow.DocumentKind.DocumentFlow.Inner,
+                           true,
+                           false,
+                           litiko.CollegiateAgencies.PublicConstants.Module.DocumentTypeGuids.Addendum,
+                           actions,
+                           Constants.Module.DocumentKindGuids.ApprovalSheetIRD,
+                           false);
+      #endregion      
+      
+    }    
+    
     /// <summary>
     /// Выдать права на сущности модуля.
     /// </summary>
@@ -66,6 +117,34 @@ namespace litiko.RegulatoryDocuments.Server
         InitializationLogger.DebugFormat("Создана/обновлена роль {0}", description);        
       }
 
+    }    
+    
+    /// <summary>
+    /// Создание записи нового типа сценария "Этап формирования Акта об актуальности ВНД".
+    /// </summary>
+    public static void CreateActOnRelevanceStage()
+    {
+      InitializationLogger.DebugFormat("Init: Create Stage of Creating act on relevance.");
+      if (CreateActOnRelevanceStages.GetAll().Any())
+        return;
+      var stage = CreateActOnRelevanceStages.Create();
+      stage.Name = "Формирование Акта об актуальности ВНД";
+      stage.TimeoutInHours = 4;
+      stage.Save();
+    }
+    
+    /// <summary>
+    /// Создание записи нового типа сценария "Этап формирования Листа согласования ВНД".
+    /// </summary>
+    public static void CreateApprovalSheetStage()
+    {
+      InitializationLogger.DebugFormat("Init: Create Stage of Creating approval sheet IRD.");
+      if (CreateApprovalSheetStages.GetAll().Any())
+        return;
+      var stage = CreateApprovalSheetStages.Create();
+      stage.Name = "Формирование Листа согласования ВНД";
+      stage.TimeoutInHours = 4;
+      stage.Save();
     }    
   }
 }

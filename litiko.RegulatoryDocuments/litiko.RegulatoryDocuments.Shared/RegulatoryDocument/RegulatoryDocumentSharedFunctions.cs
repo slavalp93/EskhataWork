@@ -45,6 +45,8 @@ namespace litiko.RegulatoryDocuments.Shared
       
       // "Дата актуализации" - доступно для изменения Группе регистрации "Общий отдел", Автору, Руководителю процесса
       _obj.State.Properties.DateUpdate.IsEnabled = isEnabled || Equals(Users.Current, Users.As(_obj.PreparedBy)) || Equals(Users.Current, Users.As(_obj.ProcessManager));
+      
+      _obj.State.Controls.DaysUntilUpdaate.Refresh();
     }
     
     /// <summary>

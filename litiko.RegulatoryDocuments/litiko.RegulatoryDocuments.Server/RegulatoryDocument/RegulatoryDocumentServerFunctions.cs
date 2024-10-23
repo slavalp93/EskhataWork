@@ -17,7 +17,8 @@ namespace litiko.RegulatoryDocuments.Server
     public StateView GetDaysUntilUpdate()
     {
       var daysCount = 0;
-      if (_obj.DateUpdate.HasValue){
+      if (_obj.DateUpdate.HasValue)
+      {
         TimeSpan diff = _obj.DateUpdate.Value - Calendar.Today;
         daysCount = diff.Days;
       }

@@ -76,4 +76,22 @@
   <data name="RegulatoryDocument" xml:space="preserve">
     <value>Regulatory document: {0}</value>
   </data>
+  <data name="RevisionOverdueNoticeSubject" xml:space="preserve">
+    <value>The revision of the regulatory document is overdue: {0}</value>
+  </data>
+  <data name="UpdateNoticeSubject" xml:space="preserve">
+    <value>After {0} months, the date for update of the regulatory document comes: {1}</value>
+  </data>
+  <data name="ActOnTheRelevance" xml:space="preserve">
+    <value>Act on the relevance IRD</value>
+  </data>
+  <data name="ApprovalSheetIRD" xml:space="preserve">
+    <value>Approval sheet IRD</value>
+  </data>
+  <data name="DocumentIsNotIRG" xml:space="preserve">
+    <value>The document is not an IRD.</value>
+  </data>
+  <data name="DocumentNotFound" xml:space="preserve">
+    <value>Document not found.</value>
+  </data>
 </root>

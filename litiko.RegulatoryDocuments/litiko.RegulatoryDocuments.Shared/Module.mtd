@@ -120,6 +120,22 @@
     {
       "ItemId": "ce259250-73f9-4d79-96d1-3f4d41e4b108",
       "PreviousItemId": "b16a631d-fdeb-4491-a772-ec01b0c0dcf9"
+    },
+    {
+      "ItemId": "efbe3b14-8cc4-4420-8afe-c60553095655",
+      "PreviousItemId": "ce259250-73f9-4d79-96d1-3f4d41e4b108"
+    },
+    {
+      "ItemId": "3697999d-5281-499d-a95d-0bc8f12dcf28",
+      "PreviousItemId": "efbe3b14-8cc4-4420-8afe-c60553095655"
+    },
+    {
+      "ItemId": "d7e17caa-6eee-4e41-90af-4218af7b73f3",
+      "PreviousItemId": "3697999d-5281-499d-a95d-0bc8f12dcf28"
+    },
+    {
+      "ItemId": "93fdbe21-5048-419a-9f76-704edccdf9ba",
+      "PreviousItemId": "d7e17caa-6eee-4e41-90af-4218af7b73f3"
     }
   ],
   "HandledEvents": [
@@ -138,9 +154,34 @@
       "GenerateHandler": true,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T06:15:00"
+    },
+    {
+      "NameGuid": "7f0389a1-3015-44f1-a862-06a2494e8f02",
+      "Name": "SendNoticeAboutUpdateIRD",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T06:30:00"
     }
   ],
   "PublicConstants": [
+    {
+      "Name": "ActOnTheRelevance",
+      "ParentClasses": [
+        "Module",
+        "DocumentKindGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"a5844c56-6930-4850-8964-1e64caed94ef\")"
+    },
+    {
+      "Name": "ApprovalSheetIRD",
+      "ParentClasses": [
+        "Module",
+        "DocumentKindGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"475db1f5-2cb8-494d-8b4e-4faf8ba2a675\")"
+    },
     {
       "Name": "RegulatoryDocument",
       "ParentClasses": [
@@ -160,14 +201,20 @@
     "CreateVersionFromFileDiaolog_File",
     "NeedFillLegalActAndDateBegin",
     "RevisionNoticeSubject",
-    "RegulatoryDocument"
+    "RegulatoryDocument",
+    "RevisionOverdueNoticeSubject",
+    "UpdateNoticeSubject",
+    "ActOnTheRelevance",
+    "ApprovalSheetIRD",
+    "DocumentIsNotIRG",
+    "DocumentNotFound"
   ],
   "ServerAssemblyName": "litiko.RegulatoryDocuments.Server",
   "ServerNamespace": "litiko.RegulatoryDocuments.Server",
   "SharedAssemblyName": "litiko.RegulatoryDocuments.Shared",
   "SharedNamespace": "litiko.RegulatoryDocuments.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.7",
+  "Version": "0.0.1.8",
   "Widgets": [],
   "Versions": [
     {

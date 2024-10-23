@@ -1,0 +1,42 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "d7e17caa-6eee-4e41-90af-4218af7b73f3",
+  "Name": "ActOnTheRelevance",
+  "AccessRightsMode": "NoRight",
+  "AssociatedGuid": "9151081e-29d5-4c68-9204-68f04ff4d7e5",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [
+    {
+      "NameGuid": "26e88f36-d898-4096-9d40-79ccb320640b",
+      "Name": "Doc",
+      "EntityType": "9151081e-29d5-4c68-9204-68f04ff4d7e5"
+    }
+  ],
+  "DefaultExportFormat": "Pdf",
+  "ExportFormats": [
+    "Pdf"
+  ],
+  "IconResourcesKeys": [],
+  "IntegrationServiceName": "RegulatoryDocumentsActOnTheRelevance",
+  "Overridden": [
+    "AccessRightsMode",
+    "PublicConstants",
+    "PublicStructures",
+    "DisplayName",
+    "Description",
+    "Parameters",
+    "DataSources"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "1bfd6cab-d751-43e8-82e0-d2e9102edf72",
+      "Name": "Entity",
+      "EntityType": "9151081e-29d5-4c68-9204-68f04ff4d7e5",
+      "InternalDataTypeName": "litiko.RegulatoryDocuments.IRegulatoryDocument, Sungero.Domain.Interfaces",
+      "IsRequired": true
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "Versions": []
+}

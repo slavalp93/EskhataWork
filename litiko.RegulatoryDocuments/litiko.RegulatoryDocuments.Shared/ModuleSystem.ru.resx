@@ -112,4 +112,10 @@
   <data name="JobDescription_72bf996270794b008bf68d3a2ce378bd" xml:space="preserve">
     <value>Рассылка уведомлений о необходимости пересмотра ВНД</value>
   </data>
+  <data name="JobDisplayName_7f0389a1301544f1a86206a2494e8f02" xml:space="preserve">
+    <value>Рассылка уведомлений о необходимости актуализации ВНД</value>
+  </data>
+  <data name="JobDescription_7f0389a1301544f1a86206a2494e8f02" xml:space="preserve">
+    <value>Рассылка уведомлений о необходимости актуализации ВНД</value>
+  </data>
 </root>

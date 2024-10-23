@@ -26,98 +26,102 @@ namespace litiko.RegulatoryDocuments
       if (_filter.DocumentKind != null)
         query = query.Where(d => Equals(d.DocumentKind, _filter.DocumentKind));            
             
-      #region Фильтр по Дате пересмотра      
-      var periodBegin = Calendar.SqlMinValue;
-      var periodEnd = Calendar.SqlMaxValue;
-      
-      if (_filter.RevisionOverdue)
-      {        
-        periodEnd = Calendar.UserToday.AddDays(-1).EndOfDay();
-      }
-      
-      if (_filter.RevisionUntilEndOfMonth)
+      #region Фильтр по Дате пересмотра
+      if (_filter.RevisionOverdue || _filter.RevisionUntilEndOfMonth || _filter.RevisionNoLaterThanThreeMonths || _filter.RevisionNoLaterThanSixMonths || _filter.RevisionNoLaterThanNineMonths || _filter.RevisionManualPeriod)
       {
-        periodBegin = Calendar.UserToday.BeginningOfDay();
-        periodEnd = Calendar.UserToday.EndOfMonth();
-      }
-      
-      if (_filter.RevisionNoLaterThanThreeMonths)
-      {
-        periodBegin = Calendar.UserToday.BeginningOfDay();
-        periodEnd = Calendar.UserToday.AddMonths(3);
-      }
-      
-      if (_filter.RevisionNoLaterThanSixMonths)
-      {
-        periodBegin = Calendar.UserToday.BeginningOfDay();
-        periodEnd = Calendar.UserToday.AddMonths(6);
-      }
-      
-      if (_filter.RevisionNoLaterThanNineMonths)
-      {
-        periodBegin = Calendar.UserToday.BeginningOfDay();
-        periodEnd = Calendar.UserToday.AddMonths(9);
-      }
-      
-      if (_filter.RevisionManualPeriod)
-      {
-        periodBegin = _filter.RevisionDateRangeFrom ?? Calendar.SqlMinValue;
-        periodEnd = _filter.RevisionDateRangeTo ?? Calendar.SqlMaxValue;
-      }
-      
-      var serverPeriodBegin = Equals(Calendar.SqlMinValue, periodBegin) ? periodBegin : Sungero.Docflow.PublicFunctions.Module.Remote.GetTenantDateTimeFromUserDay(periodBegin);
-      var serverPeriodEnd = Equals(Calendar.SqlMaxValue, periodEnd) ? periodEnd : periodEnd.EndOfDay().FromUserTime();
-      var clientPeriodEnd = !Equals(Calendar.SqlMaxValue, periodEnd) ? periodEnd.AddDays(1) : Calendar.SqlMaxValue;
-      query = query.Where(j => (j.DateRevision.Between(serverPeriodBegin, serverPeriodEnd) ||
-                                j.DateRevision == periodBegin) && j.DateRevision != clientPeriodEnd);      
-      
+        var periodBegin = Calendar.SqlMinValue;
+        var periodEnd = Calendar.SqlMaxValue;
+        
+        if (_filter.RevisionOverdue)
+        {        
+          periodEnd = Calendar.UserToday.AddDays(-1).EndOfDay();
+        }
+        
+        if (_filter.RevisionUntilEndOfMonth)
+        {
+          periodBegin = Calendar.UserToday.BeginningOfDay();
+          periodEnd = Calendar.UserToday.EndOfMonth();
+        }
+        
+        if (_filter.RevisionNoLaterThanThreeMonths)
+        {
+          periodBegin = Calendar.UserToday.BeginningOfDay();
+          periodEnd = Calendar.UserToday.AddMonths(3);
+        }
+        
+        if (_filter.RevisionNoLaterThanSixMonths)
+        {
+          periodBegin = Calendar.UserToday.BeginningOfDay();
+          periodEnd = Calendar.UserToday.AddMonths(6);
+        }
+        
+        if (_filter.RevisionNoLaterThanNineMonths)
+        {
+          periodBegin = Calendar.UserToday.BeginningOfDay();
+          periodEnd = Calendar.UserToday.AddMonths(9);
+        }
+        
+        if (_filter.RevisionManualPeriod)
+        {
+          periodBegin = _filter.RevisionDateRangeFrom ?? Calendar.SqlMinValue;
+          periodEnd = _filter.RevisionDateRangeTo ?? Calendar.SqlMaxValue;
+        }
+        
+        var serverPeriodBegin = Equals(Calendar.SqlMinValue, periodBegin) ? periodBegin : Sungero.Docflow.PublicFunctions.Module.Remote.GetTenantDateTimeFromUserDay(periodBegin);
+        var serverPeriodEnd = Equals(Calendar.SqlMaxValue, periodEnd) ? periodEnd : periodEnd.EndOfDay().FromUserTime();
+        var clientPeriodEnd = !Equals(Calendar.SqlMaxValue, periodEnd) ? periodEnd.AddDays(1) : Calendar.SqlMaxValue;
+        query = query.Where(j => (j.DateRevision.Between(serverPeriodBegin, serverPeriodEnd) ||
+                                  j.DateRevision == periodBegin) && j.DateRevision != clientPeriodEnd);        
+      }          
       #endregion
       
-      #region Фильтр по Дате актуализации      
-      var periodBegin2 = Calendar.SqlMinValue;
-      var periodEnd2 = Calendar.SqlMaxValue;      
-      
-      if (_filter.UpdateOverdue)
-      {        
-        periodEnd = Calendar.UserToday.AddDays(-1).EndOfDay();
-      }
-
-      if (_filter.UpdateUntilEndOfMonth)
+      #region Фильтр по Дате актуализации
+      if (_filter.UpdateOverdue || _filter.UpdateUntilEndOfMonth || _filter.UpdateNoLaterThanThreeMonths || _filter.UpdateNoLaterThanSixMonths || _filter.UpdateNoLaterThanNineMonths || _filter.UpdateManualPeriod)
       {
-        periodBegin2 = Calendar.UserToday.BeginningOfDay();
-        periodEnd2 = Calendar.UserToday.EndOfMonth();
-      }
-      
-      if (_filter.UpdateNoLaterThanThreeMonths)
-      {
-        periodBegin2 = Calendar.UserToday.BeginningOfDay();
-        periodEnd2 = Calendar.UserToday.AddMonths(3);
-      }
-      
-      if (_filter.UpdateNoLaterThanSixMonths)
-      {
-        periodBegin2 = Calendar.UserToday.BeginningOfDay();
-        periodEnd2 = Calendar.UserToday.AddMonths(6);
-      }
-      
-      if (_filter.UpdateNoLaterThanNineMonths)
-      {
-        periodBegin2 = Calendar.UserToday.BeginningOfDay();
-        periodEnd2 = Calendar.UserToday.AddMonths(9);
-      }
-      
-      if (_filter.UpdateManualPeriod)
-      {
-        periodBegin2 = _filter.UpdateDateRangeFrom ?? Calendar.SqlMinValue;
-        periodEnd2 = _filter.UpdateDateRangeTo ?? Calendar.SqlMaxValue;
-      }
-      
-      var serverPeriodBegin2 = Equals(Calendar.SqlMinValue, periodBegin2) ? periodBegin2 : Sungero.Docflow.PublicFunctions.Module.Remote.GetTenantDateTimeFromUserDay(periodBegin2);
-      var serverPeriodEnd2 = Equals(Calendar.SqlMaxValue, periodEnd2) ? periodEnd2 : periodEnd2.EndOfDay().FromUserTime();
-      var clientPeriodEnd2 = !Equals(Calendar.SqlMaxValue, periodEnd2) ? periodEnd2.AddDays(1) : Calendar.SqlMaxValue;
-      query = query.Where(j => (j.DateUpdate.Between(serverPeriodBegin2, serverPeriodEnd2) ||
-                                j.DateUpdate == periodBegin2) && j.DateUpdate != clientPeriodEnd2);      
-      
+        var periodBegin = Calendar.SqlMinValue;
+        var periodEnd = Calendar.SqlMaxValue;      
+        
+        if (_filter.UpdateOverdue)
+        {        
+          periodEnd = Calendar.UserToday.AddDays(-1).EndOfDay();
+        }
+  
+        if (_filter.UpdateUntilEndOfMonth)
+        {
+          periodBegin = Calendar.UserToday.BeginningOfDay();
+          periodEnd = Calendar.UserToday.EndOfMonth();
+        }
+        
+        if (_filter.UpdateNoLaterThanThreeMonths)
+        {
+          periodBegin = Calendar.UserToday.BeginningOfDay();
+          periodEnd = Calendar.UserToday.AddMonths(3);
+        }
+        
+        if (_filter.UpdateNoLaterThanSixMonths)
+        {
+          periodBegin = Calendar.UserToday.BeginningOfDay();
+          periodEnd = Calendar.UserToday.AddMonths(6);
+        }
+        
+        if (_filter.UpdateNoLaterThanNineMonths)
+        {
+          periodBegin = Calendar.UserToday.BeginningOfDay();
+          periodEnd = Calendar.UserToday.AddMonths(9);
+        }
+        
+        if (_filter.UpdateManualPeriod)
+        {
+          periodBegin = _filter.UpdateDateRangeFrom ?? Calendar.SqlMinValue;
+          periodEnd = _filter.UpdateDateRangeTo ?? Calendar.SqlMaxValue;
+        }
+        
+        var serverPeriodBegin = Equals(Calendar.SqlMinValue, periodBegin) ? periodBegin : Sungero.Docflow.PublicFunctions.Module.Remote.GetTenantDateTimeFromUserDay(periodBegin);
+        var serverPeriodEnd = Equals(Calendar.SqlMaxValue, periodEnd) ? periodEnd : periodEnd.EndOfDay().FromUserTime();
+        var clientPeriodEnd = !Equals(Calendar.SqlMaxValue, periodEnd) ? periodEnd.AddDays(1) : Calendar.SqlMaxValue;
+        query = query.Where(j => (j.DateUpdate.Between(serverPeriodBegin, serverPeriodEnd) ||
+                                  j.DateUpdate == periodBegin) && j.DateUpdate != clientPeriodEnd);
+      }          
       #endregion      
       
       return query;

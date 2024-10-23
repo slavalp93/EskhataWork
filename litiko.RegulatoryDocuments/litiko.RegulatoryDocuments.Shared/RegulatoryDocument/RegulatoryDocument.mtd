@@ -61,6 +61,23 @@
       "GenerateHandler": true,
       "LargeIconName": "Action_CreateProjectSolution_large_0379e223ad1b4b22bf89bae8a0a8b514.png",
       "SmallIconName": "Action_CreateProjectSolution_small_0379e223ad1b4b22bf89bae8a0a8b514.png"
+    },
+    {
+      "NameGuid": "e8a329fc-bb37-4915-9ffe-0e29980638cf",
+      "Name": "ShowActOnTheRelevanceReport",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_ShowActOnTheRelevanceReport_large_e8a329fcbb3749159ffe0e29980638cf.png",
+      "SmallIconName": "Action_ShowActOnTheRelevanceReport_small_e8a329fcbb3749159ffe0e29980638cf.png"
+    },
+    {
+      "NameGuid": "5cbd71f3-3688-420b-bb13-f9d1b786308e",
+      "Name": "ShowApprovalSheetIRDReport",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_ShowActOnTheRelevanceReport1_large_5cbd71f33688420bbb13f9d1b786308e.png",
+      "SmallIconName": "Action_ShowActOnTheRelevanceReport1_small_5cbd71f33688420bbb13f9d1b786308e.png",
+      "Versions": []
     }
   ],
   "BaseGuid": "ce3e34ed-7be2-4426-a951-d5a70f966650",
@@ -753,9 +770,6 @@
       "NameGuid": "9266ff22-d32f-4433-acaf-f6a4cbad3bda",
       "Name": "DateUpdate",
       "Code": "DateUpdate",
-      "HandledEvents": [
-        "ValueInputClient"
-      ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
       "PreviousPropertyGuid": "33579bd4-322a-47a5-82d5-3b430e103cc7"
     },
@@ -924,6 +938,24 @@
         "ButtonSize": "Large",
         "Index": 5,
         "ParentGuid": "05d63e9c-36c0-44c3-a7fd-b1a360e13fc0"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "173f5340-0c15-4ff2-abc9-79a149bd84f7",
+        "Name": "ShowActOnTheRelevanceReport",
+        "ActionGuid": "e8a329fc-bb37-4915-9ffe-0e29980638cf",
+        "ButtonSize": "Large",
+        "Index": 3,
+        "ParentGuid": "9a84f93c-07e4-4320-a7fb-6c7b9ef14a0e"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "5acc75ee-99b6-42e4-b700-029e414c6a5b",
+        "Name": "ShowApprovalSheetIRDReport",
+        "ActionGuid": "5cbd71f3-3688-420b-bb13-f9d1b786308e",
+        "ButtonSize": "Large",
+        "Index": 4,
+        "ParentGuid": "9a84f93c-07e4-4320-a7fb-6c7b9ef14a0e"
       }
     ],
     "Groups": [],

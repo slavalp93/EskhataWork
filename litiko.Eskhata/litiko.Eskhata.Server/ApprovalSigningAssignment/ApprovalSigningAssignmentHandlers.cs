@@ -12,8 +12,6 @@ namespace litiko.Eskhata
 
     public override void BeforeComplete(Sungero.Workflow.Server.BeforeCompleteEventArgs e)
     {
-      base.BeforeComplete(e);
-      
       if (_obj.Result.Value == Result.Sign || _obj.Result.Value == Result.ConfirmSign)
       {
         var doc = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
@@ -32,7 +30,9 @@ namespace litiko.Eskhata
             e.AddError(litiko.RegulatoryDocuments.Resources.NeedFillLegalActAndDateBegin);
         }
         #endregion
-      }
+      }      
+      
+      base.BeforeComplete(e);
     }
   }
 
