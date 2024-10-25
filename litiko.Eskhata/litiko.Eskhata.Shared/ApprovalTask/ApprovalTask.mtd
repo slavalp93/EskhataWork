@@ -538,7 +538,9 @@
     }
   ],
   "PublicStructures": [],
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "InReportForRework"
+  ],
   "RibbonCardMetadata": {
     "NameGuid": "bda13184-89a1-446b-ab10-e09f33c27c04",
     "Name": "RibbonCard",

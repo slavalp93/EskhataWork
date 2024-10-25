@@ -9,6 +9,28 @@ namespace litiko.RegulatoryDocuments.Client
 {
   partial class RegulatoryDocumentActions
   {
+    public virtual void ShowControlApprovingIRDReport(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var report = Reports.GetControlApprovingIRD();
+      report.DocumentId = _obj.Id;
+      report.Open();
+    }
+
+    public virtual bool CanShowControlApprovingIRDReport(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return !_obj.State.IsChanged && !_obj.State.IsInserted;
+    }
+
+    public override void ApprovalForm(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      base.ApprovalForm(e);
+    }
+
+    public override bool CanApprovalForm(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return false;
+    }
+
     public virtual void ShowApprovalSheetIRDReport(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var report = Reports.GetApprovalSheetIRD();

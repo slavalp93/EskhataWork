@@ -19,7 +19,11 @@
   },
   "IconResourcesKeys": [],
   "IntegrationServiceName": "RegulatoryDocumentsCreateActOnRelevanceStage",
+  "IsVisible": false,
   "OperationsClass": "",
+  "Overridden": [
+    "IsVisible"
+  ],
   "PublicStructures": [],
   "ResourcesKeys": [
     "DocKindNotFound"

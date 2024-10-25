@@ -3,10 +3,13 @@
   <query key="Query">
     <default><![CDATA[select 
 	number, 
+	docid,
+	taskauthor,
 	performer,
 	department,
-	result,
-	comment
+	created,
+	complated,
+	result
 from litiko_apprsheetird
 where reportsessionid = @ReportSessionId
 order by number]]></default>

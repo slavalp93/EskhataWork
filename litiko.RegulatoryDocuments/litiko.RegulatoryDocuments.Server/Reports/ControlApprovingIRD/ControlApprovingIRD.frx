@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" ReferencedAssemblies="System.dll&#13;&#10;System.Core.dll&#13;&#10;System.Drawing.dll&#13;&#10;System.Windows.Forms.dll&#13;&#10;System.Data.dll&#13;&#10;System.Xml.dll&#13;&#10;Sungero.Domain.Shared&#13;&#10;Sungero.CoreEntities.Shared&#13;&#10;Sungero.Reporting.Shared&#13;&#10;CommonLibrary&#13;&#10;Sungero.Localization&#13;&#10;Sungero.Declension&#13;&#10;Sungero.Domain.Interfaces&#13;&#10;litiko.RegulatoryDocuments.Shared&#13;&#10;litiko.RegulatoryDocuments.Server" ReportInfo.CreatorVersion="2020.2.12.0">
+  <ScriptText>using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+using FastReport;
+using FastReport.Data;
+using FastReport.Dialog;
+using FastReport.Barcode;
+using FastReport.Table;
+using FastReport.Utils;
+using Sungero.Domain.Shared;
+using Sungero.CoreEntities;
+using Sungero.Core;
+using Resources = litiko.RegulatoryDocuments.Reports.Resources;
+
+
+namespace FastReport
+{
+  public class ReportScript
+  {
+  }
+}
+  </ScriptText>
+  <Dictionary>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${Query}">
+        <Column Name="number" DataType="System.Int32" PropName="Column"/>
+        <Column Name="docid" DataType="System.Int64" PropName="Column"/>
+        <Column Name="taskauthor" DataType="System.String" PropName="Column"/>
+        <Column Name="performer" DataType="System.String" PropName="Column"/>
+        <Column Name="department" DataType="System.String" PropName="Column"/>
+        <Column Name="created" DataType="System.DateTime" PropName="Column"/>
+        <Column Name="complated" DataType="System.DateTime" PropName="Column"/>
+        <Column Name="result" DataType="System.String" PropName="Column"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
+    <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="a5d859e7-c8cb-491f-b7d6-82ab480f4e51" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="ReportSessionId" Id="92dab0ce-0392-446b-82cf-0b52ef8de202" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="DateBegin" Id="98095059-64a2-4295-b5f4-3cd7dd925947" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="DateEnd" Id="f3c471c0-dac7-4bc6-94ad-03fbc1379eca" IsRequired="false" IsCollection="false" InternalDataType="System.DateTime" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+    <SungeroParameter Name="DocumentId" Id="bf1b16f8-3799-48a6-90e2-b1ae7ad1321a" IsRequired="false" IsCollection="false" InternalDataType="System.Int64" IsSimpleDataType="true" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
+  </Dictionary>
+  <ReportPage Name="Page1" Landscape="true" PaperWidth="297" PaperHeight="210" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle1" Width="1047.06" Height="132.3">
+      <TextObject Name="Text1" Width="1048.95" Height="37.8" Text="Отчет по срокам согласования ВНД с подразделениями" HorzAlign="Center" VertAlign="Center" Font="Calibri, 11pt, style=Bold"/>
+      <TextObject Name="Text5" Top="56.7" Width="481.95" Height="75.6" Border.Lines="All" Fill.Color="Silver" Text="Подразделение / Ответственный которому отправлено для рассмотрения" HorzAlign="Center" VertAlign="Center" Font="Calibri, 11pt, style=Bold"/>
+      <TextObject Name="Text6" Left="481.95" Top="56.7" Width="141.75" Height="75.6" Border.Lines="All" Fill.Color="Silver" Text="Дата отправления для рассмотрения / согласования" HorzAlign="Center" VertAlign="Center" Font="Calibri, 11pt, style=Bold"/>
+      <TextObject Name="Text7" Left="623.7" Top="56.7" Width="141.75" Height="75.6" Border.Lines="All" Fill.Color="Silver" Text="Дата рассмотрения / согласования" HorzAlign="Center" VertAlign="Center" Font="Calibri, 11pt, style=Bold"/>
+      <TextObject Name="Text8" Left="765.45" Top="56.7" Width="141.75" Height="75.6" Border.Lines="All" Fill.Color="Silver" Text="Результат выполнения" HorzAlign="Center" VertAlign="Center" Font="Calibri, 11pt, style=Bold"/>
+      <TextObject Name="Text9" Left="907.2" Top="56.7" Width="141.75" Height="75.6" Border.Lines="All" Fill.Color="Silver" Text="Срок рассмотрения / согласования, в днях" HorzAlign="Center" VertAlign="Center" Font="Calibri, 11pt, style=Bold"/>
+      <TextObject Name="Text2" Left="-9.45" Top="37.8" Width="1058.4" Height="18.9" Text="[IIf([DocumentId] == 0, &quot;Фильтр по дате создания документа с: &quot; + FormatDateTime([DateBegin], &quot;dd.MM.yyyy&quot;) + &quot; по: &quot; + FormatDateTime([DateEnd], &quot;dd.MM.yyyy&quot;), &quot;&quot;)]" Font="Arial, 10pt">
+        <Formats>
+          <GeneralFormat/>
+          <GeneralFormat/>
+        </Formats>
+      </TextObject>
+    </ReportTitleBand>
+    <GroupHeaderBand Name="GroupHeader1" Top="136.3" Width="1047.06" Height="37.8" Condition="[Table.docid]">
+      <TextObject Name="Text11" Width="1048.95" Height="37.8" Border.Lines="All" Fill.Color="WhiteSmoke" CanGrow="true" CanShrink="true" GrowToBottom="true" CanBreak="false" Text="[Row#]. [Sungero.Docflow.OfficialDocuments.Get([Table.docid]).Name]&#13;&#10;Инициатор: [Table.taskauthor]" VertAlign="Center" Font="Calibri, 11pt, style=Bold"/>
+      <DataBand Name="Data1" Top="178.1" Width="1047.06" Height="37.8" CanGrow="true" DataSource="Table">
+        <TextObject Name="Text14" Left="481.95" Width="141.75" Height="37.8" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" CanBreak="false" Text="[FormatDateTime([Table.created],&quot;dd.MM.yyyy HH:mm&quot;)]" HorzAlign="Center" VertAlign="Center" Font="Calibri, 11pt"/>
+        <TextObject Name="Text15" Left="623.7" Width="141.75" Height="37.8" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" CanBreak="false" Text="[FormatDateTime([Table.complated],&quot;dd.MM.yyyy HH:mm&quot;)]" HorzAlign="Center" VertAlign="Center" Font="Calibri, 11pt"/>
+        <TextObject Name="Text16" Left="765.45" Width="141.75" Height="37.8" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" CanBreak="false" Text="[Table.result]" HorzAlign="Center" VertAlign="Center" Font="Calibri, 11pt"/>
+        <TextObject Name="Text17" Left="907.2" Width="141.75" Height="37.8" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" CanBreak="false" Text="[Math.Round(Sungero.CoreEntities.WorkingTime.GetDurationInWorkingHours([Table.created], [Table.complated]) / 8, 2)]" HorzAlign="Center" VertAlign="Center" Font="Calibri, 11pt"/>
+        <TextObject Name="Text13" Width="481.95" Height="37.8" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" CanBreak="false" Text="[Table.department], [Table.performer]" VertAlign="Center" Font="Calibri, 11pt"/>
+      </DataBand>
+    </GroupHeaderBand>
+  </ReportPage>
+</Report>

@@ -110,7 +110,7 @@
     <value>Руководитель процесса</value>
   </data>
   <data name="Property_OrganForApproving" xml:space="preserve">
-    <value>Утверждено</value>
+    <value>Орган утверждения</value>
   </data>
   <data name="Property_DateBegin" xml:space="preserve">
     <value>Введение в действие с</value>
@@ -258,5 +258,14 @@
   </data>
   <data name="Action_ShowApprovalSheetIRDReportDescription" xml:space="preserve">
     <value>Формирование и открытие отчета "Лист согласования ВНД"</value>
+  </data>
+  <data name="Action_ShowControlApprovingIRDReport" xml:space="preserve">
+    <value>Контроль сроков согласования ВНД</value>
+  </data>
+  <data name="Action_ShowControlApprovingIRDReportHint" xml:space="preserve">
+    <value>Контроль сроков согласования ВНД</value>
+  </data>
+  <data name="Action_ShowControlApprovingIRDReportDescription" xml:space="preserve">
+    <value>Контроль сроков согласования ВНД</value>
   </data>
 </root>

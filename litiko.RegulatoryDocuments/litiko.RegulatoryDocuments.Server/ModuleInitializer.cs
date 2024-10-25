@@ -18,6 +18,7 @@ namespace litiko.RegulatoryDocuments.Server
       CreateApprovalRole(litiko.RegulatoryDocuments.ApprovalRole.Type.ProcessManager, "Руководитель процесса");      
       CreateActOnRelevanceStage();
       CreateApprovalSheetStage();
+      CreateReportsTables();
     }
     
     /// <summary>
@@ -145,6 +146,16 @@ namespace litiko.RegulatoryDocuments.Server
       stage.Name = "Формирование Листа согласования ВНД";
       stage.TimeoutInHours = 4;
       stage.Save();
+    }    
+    
+    /// <summary>
+    /// Создание таблиц для отчетов
+    /// </summary>
+    public static void CreateReportsTables()
+    {
+      var approvalSheetIRDTableName = Constants.Module.SourceTableName;      
+      Sungero.Docflow.PublicFunctions.Module.DropReportTempTables(new[] { approvalSheetIRDTableName});
+      Sungero.Docflow.PublicFunctions.Module.ExecuteSQLCommandFormat(Queries.Module.CreateApprovalSheetIRDTable, new[] { approvalSheetIRDTableName });      
     }    
   }
 }

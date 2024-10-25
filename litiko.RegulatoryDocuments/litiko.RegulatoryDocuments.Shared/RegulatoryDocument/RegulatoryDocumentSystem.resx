@@ -110,7 +110,7 @@
     <value>Process Manager</value>
   </data>
   <data name="Property_OrganForApproving" xml:space="preserve">
-    <value>Approved</value>
+    <value>Organ for approving</value>
   </data>
   <data name="Property_DateBegin" xml:space="preserve">
     <value>Start date</value>
@@ -305,6 +305,21 @@
     <value />
   </data>
   <data name="Action_ShowApprovalSheetIRDReportConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowControlApprovingIRDReport" xml:space="preserve">
+    <value>Control approving IRD</value>
+  </data>
+  <data name="Action_ShowControlApprovingIRDReportDescription" xml:space="preserve">
+    <value>Control approving IRD</value>
+  </data>
+  <data name="Action_ShowControlApprovingIRDReportHint" xml:space="preserve">
+    <value>Control approving IRD</value>
+  </data>
+  <data name="Action_ShowControlApprovingIRDReportConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowControlApprovingIRDReportConfirmationDescription" xml:space="preserve">
     <value />
   </data>
 </root>

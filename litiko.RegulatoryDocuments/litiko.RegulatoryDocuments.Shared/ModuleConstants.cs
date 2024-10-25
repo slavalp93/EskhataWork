@@ -10,6 +10,11 @@ namespace litiko.RegulatoryDocuments.Constants
     /// Наименование группы регистрации "Общий отдел"
     /// </summary>
     public const string RegGroupGeneralDepartment = "Общий отдел";
+
+    /// <summary>
+    /// Таблица для отчетов по согласованию ВНД
+    /// </summary>    
+    public const string SourceTableName = "litiko_ApprSheetIRD";
     
     public static class DocumentTypeGuids
     {

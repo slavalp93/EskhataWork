@@ -21,11 +21,12 @@
         "PreviousItemGuid": "ac20def2-202a-47f4-b309-afea3f20d066"
       },
       {
-        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "$type": "Sungero.Metadata.CoverReportActionMetadata, Sungero.Reporting.Shared",
         "NameGuid": "56edde14-2e4d-4c08-84fb-da5a44c93e37",
         "Name": "ControlOfApprovalDeadlines",
-        "FunctionName": "Function4",
-        "GroupId": "c4ce575d-c54a-4832-9117-fd4055649089"
+        "CoverActionPresenterTypeName": "Sungero.Reporting.Client.CoverReportActionPresenter, Sungero.Reporting.Client",
+        "GroupId": "c4ce575d-c54a-4832-9117-fd4055649089",
+        "ReportId": "e6cd8c28-812a-4bdd-b9e9-43f8f3619edf"
       },
       {
         "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
@@ -136,6 +137,10 @@
     {
       "ItemId": "93fdbe21-5048-419a-9f76-704edccdf9ba",
       "PreviousItemId": "d7e17caa-6eee-4e41-90af-4218af7b73f3"
+    },
+    {
+      "ItemId": "e6cd8c28-812a-4bdd-b9e9-43f8f3619edf",
+      "PreviousItemId": "93fdbe21-5048-419a-9f76-704edccdf9ba"
     }
   ],
   "HandledEvents": [
@@ -192,7 +197,90 @@
       "Value": "new System.Guid(\"9151081e-29d5-4c68-9204-68f04ff4d7e5\")"
     }
   ],
-  "PublicStructures": [],
+  "PublicFunctions": [
+    {
+      "Name": "GetApprovalSheetIRDData",
+      "Parameters": [
+        {
+          "Name": "documentIds",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Int64>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "reportSessionId",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "ReturnType": "global::System.Collections.Generic.List<global::litiko.RegulatoryDocuments.Structures.Module.IApprovalSheetLine>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    }
+  ],
+  "PublicStructures": [
+    {
+      "Name": "ApprovalSheetLine",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "Number",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "DocId",
+          "TypeFullName": "global::System.Int64"
+        },
+        {
+          "Name": "TaskId",
+          "TypeFullName": "global::System.Int64"
+        },
+        {
+          "Name": "AssignmentId",
+          "TypeFullName": "global::System.Int64"
+        },
+        {
+          "Name": "TaskAuthor",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Performer",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Department",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Created",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.DateTime>"
+        },
+        {
+          "Name": "Complated",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.DateTime>"
+        },
+        {
+          "Name": "Result",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "Comment",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "ReportSessionId",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        }
+      ],
+      "StructureNamespace": "litiko.RegulatoryDocuments.Structures.Module"
+    }
+  ],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.RegulatoryDocuments",
   "ResourcesKeys": [
@@ -214,7 +302,7 @@
   "SharedAssemblyName": "litiko.RegulatoryDocuments.Shared",
   "SharedNamespace": "litiko.RegulatoryDocuments.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.8",
+  "Version": "0.0.1.9",
   "Widgets": [],
   "Versions": [
     {

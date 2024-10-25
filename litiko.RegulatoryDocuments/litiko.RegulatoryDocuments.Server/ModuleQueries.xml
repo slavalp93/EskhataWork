@@ -1,3 +1,35 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <queries>
+  <query key="CreateApprovalSheetIRDTable">
+    <mssql><![CDATA[create table {0}
+(
+  [Number] int,
+  [DocId] bigint,
+  [TaskId] bigint,
+  [AssignmentId] bigint,
+  [TaskAuthor] nvarchar(max),
+  [Performer] nvarchar(max),
+  [Department] nvarchar(max),
+  [Created] datetime,
+  [Complated] datetime,
+  [Result] nvarchar(max),
+  [Comment] nvarchar(max),
+  [ReportSessionId] nvarchar(max) NOT NULL
+)]]></mssql>
+    <postgres><![CDATA[CREATE TABLE {0}
+(
+  "number" int,
+  "docid" bigint,
+  "taskid" bigint,
+  "assignmentid" bigint,
+  "taskauthor" citext,
+  "performer" citext,
+  "department" citext,
+  "created" timestamp,
+  "complated" timestamp,
+  "result" citext,
+  "comment" citext,
+  "reportsessionid" citext NOT NULL
+);]]></postgres>
+  </query>
 </queries>

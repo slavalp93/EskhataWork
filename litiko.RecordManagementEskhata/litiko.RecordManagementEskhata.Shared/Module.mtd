@@ -161,6 +161,17 @@
       "ReturnType": "Eskhata.Module.Docflow.Structures.Module.IConversionToPdfResult"
     },
     {
+      "Name": "GetAcquaintanceReport",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "Sungero.Reporting.IReport"
+    },
+    {
       "Name": "GetActionItemCompletionData",
       "Parameters": [
         {
@@ -288,7 +299,7 @@
   "SharedAssemblyName": "litiko.RecordManagementEskhata.Shared",
   "SharedNamespace": "litiko.RecordManagementEskhata.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.47",
+  "Version": "0.0.1.48",
   "Widgets": [],
   "Versions": [
     {

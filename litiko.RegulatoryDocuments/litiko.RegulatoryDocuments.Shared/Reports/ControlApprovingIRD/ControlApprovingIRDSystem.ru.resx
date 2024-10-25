@@ -58,7 +58,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InReportForRework" xml:space="preserve">
-    <value>For rework</value>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Контроль сроков согласования ВНД</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Список ВНД, созданных / актуализованных за указанный период</value>
   </data>
 </root>

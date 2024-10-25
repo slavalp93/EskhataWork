@@ -1,0 +1,61 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "e6cd8c28-812a-4bdd-b9e9-43f8f3619edf",
+  "Name": "ControlApprovingIRD",
+  "AssociatedGuid": "675f2bde-e949-4463-bead-9bee45c51bb8",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Excel",
+  "ExportFormats": [
+    "Excel"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "AfterExecuteServer",
+    "BeforeExecuteClient"
+  ],
+  "IconResourcesKeys": [],
+  "IntegrationServiceName": "RegulatoryDocumentsControlApprovingIRD",
+  "Overridden": [
+    "PublicConstants",
+    "PublicStructures",
+    "DisplayName",
+    "Description",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "HandledEvents",
+    "Parameters"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "92dab0ce-0392-446b-82cf-0b52ef8de202",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "98095059-64a2-4295-b5f4-3cd7dd925947",
+      "Name": "DateBegin",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "f3c471c0-dac7-4bc6-94ad-03fbc1379eca",
+      "Name": "DateEnd",
+      "InternalDataTypeName": "System.DateTime",
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "bf1b16f8-3799-48a6-90e2-b1ae7ad1321a",
+      "Name": "DocumentId",
+      "InternalDataTypeName": "System.Int64",
+      "IsSimpleDataType": true
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "DialogTittle",
+    "DateBegin",
+    "DateEnd"
+  ],
+  "Versions": []
+}

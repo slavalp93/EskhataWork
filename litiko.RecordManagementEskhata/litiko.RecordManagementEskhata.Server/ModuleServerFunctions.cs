@@ -371,6 +371,26 @@ namespace litiko.RecordManagementEskhata.Server
       
       return tasks;
     }
+
+    /// <summary>
+    /// Получить отчет "Лист ознакомления".
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <returns>Отчет.</returns>
+    [Public]
+    public virtual Sungero.Reporting.IReport GetAcquaintanceReport(Sungero.Docflow.IOfficialDocument document)
+    {
+      var tasks = Sungero.Docflow.PublicFunctions.OfficialDocument.Remote.GetAcquaintanceTasks(document);
+      if (tasks.Any())
+      {
+        var report = Reports.GetAcquaintanceApprovalSheet();
+        report.Document = document;
+        report.Task = tasks.Last();
+        return report;      
+      }
+      
+      return null;
+    }
     
     #region private
     private int IsNBT(Sungero.Docflow.IDocumentKind kind)

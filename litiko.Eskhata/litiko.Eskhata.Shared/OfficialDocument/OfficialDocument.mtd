@@ -3,6 +3,18 @@
   "NameGuid": "5fa2c3b4-7436-4ce6-884b-a2e30457f75b",
   "Name": "OfficialDocument",
   "AccessRightsMode": "Both",
+  "Actions": [
+    {
+      "NameGuid": "9ebf6a2d-a0bd-4de1-b8be-7221c7bd6e92",
+      "Name": "ShowAcquaintanceReport",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ],
+      "Versions": []
+    }
+  ],
   "BaseGuid": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
   "CanBeNavigationPropertyType": true,
   "CreationAreaMetadata": {

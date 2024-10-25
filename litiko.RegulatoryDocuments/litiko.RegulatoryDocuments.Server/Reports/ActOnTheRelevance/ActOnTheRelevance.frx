@@ -30,7 +30,16 @@ namespace FastReport
 }
   </ScriptText>
   <Dictionary>
-    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]"/>
+    <SungeroSqlDataConnection Name="Sungero_Connection" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties" ConnectionStringExpression="[SungeroConnectionString]">
+      <TableDataSource Name="Table" DataType="System.Int32" Enabled="true" CanEdit="true" SelectCommand="${Query}">
+        <Column Name="number" DataType="System.Int32" PropName="Column"/>
+        <Column Name="performer" DataType="System.String" PropName="Column"/>
+        <Column Name="department" DataType="System.String" PropName="Column"/>
+        <Column Name="result" DataType="System.String" PropName="Column"/>
+        <Column Name="comment" DataType="System.String" PropName="Column"/>
+        <CommandParameter Name="ReportSessionId" DataType="16" IsDbType="true" Expression="[ReportSessionId]"/>
+      </TableDataSource>
+    </SungeroSqlDataConnection>
     <SungeroEntityDataSource Name="Doc" Restrictions="DontModify, DontEdit, HideAllProperties" ReferenceName="Doc" DataType="System.Collections.Generic.List`1[[litiko.RegulatoryDocuments.IRegulatoryDocument, Sungero.Domain.Interfaces]]" Enabled="true" EntityTypeId="9151081e-29d5-4c68-9204-68f04ff4d7e5">
       <Column Name="Id" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int64]]"/>
       <Column Name="LastVersionSignatureType" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int32]]"/>
@@ -65,10 +74,10 @@ namespace FastReport
       <Column Name="VersionsLocked" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
       <Column Name="RegistrationNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
       <Column Name="RegistrationDate" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.DateTime]]"/>
-      <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
       <Column Name="ExecutionState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
       <Column Name="Subject" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
       <Column Name="Note" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
+      <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
       <Column Name="Language" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
       <Column Name="VersionNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
       <Column Name="Type" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
@@ -247,10 +256,10 @@ namespace FastReport
           <Column Name="VersionsLocked" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
           <Column Name="RegistrationNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           <Column Name="RegistrationDate" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.DateTime]]"/>
-          <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
           <Column Name="ExecutionState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
           <Column Name="Subject" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           <Column Name="Note" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
+          <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
           <Column Name="Language" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
           <Column Name="VersionNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           <Column Name="Type" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
@@ -640,10 +649,10 @@ namespace FastReport
             <Column Name="VersionsLocked" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
             <Column Name="RegistrationNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
             <Column Name="RegistrationDate" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.DateTime]]"/>
-            <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="ExecutionState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Subject" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
             <Column Name="Note" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
+            <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Language" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="VersionNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
             <Column Name="Type" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
@@ -1105,10 +1114,10 @@ namespace FastReport
           <Column Name="VersionsLocked" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
           <Column Name="RegistrationNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           <Column Name="RegistrationDate" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.DateTime]]"/>
-          <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
           <Column Name="ExecutionState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
           <Column Name="Subject" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           <Column Name="Note" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
+          <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
           <Column Name="Language" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
           <Column Name="VersionNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           <Column Name="Type" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
@@ -1498,10 +1507,10 @@ namespace FastReport
             <Column Name="VersionsLocked" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
             <Column Name="RegistrationNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
             <Column Name="RegistrationDate" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.DateTime]]"/>
-            <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="ExecutionState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Subject" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
             <Column Name="Note" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
+            <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Language" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="VersionNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
             <Column Name="Type" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
@@ -6126,10 +6135,10 @@ namespace FastReport
         <Column Name="VersionsLocked" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
         <Column Name="RegistrationNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
         <Column Name="RegistrationDate" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.DateTime]]"/>
-        <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
         <Column Name="ExecutionState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
         <Column Name="Subject" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
         <Column Name="Note" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
+        <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
         <Column Name="Language" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
         <Column Name="VersionNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
         <Column Name="Type" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
@@ -6247,10 +6256,10 @@ namespace FastReport
             <Column Name="VersionsLocked" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
             <Column Name="RegistrationNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
             <Column Name="RegistrationDate" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.DateTime]]"/>
-            <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="ExecutionState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Subject" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
             <Column Name="Note" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
+            <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Language" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="VersionNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
             <Column Name="Type" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
@@ -6388,10 +6397,10 @@ namespace FastReport
             <Column Name="VersionsLocked" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
             <Column Name="RegistrationNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
             <Column Name="RegistrationDate" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.DateTime]]"/>
-            <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="ExecutionState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Subject" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
             <Column Name="Note" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
+            <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Language" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="VersionNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
             <Column Name="Type" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
@@ -7683,10 +7692,10 @@ namespace FastReport
           <Column Name="VersionsLocked" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
           <Column Name="RegistrationNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           <Column Name="RegistrationDate" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.DateTime]]"/>
-          <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
           <Column Name="ExecutionState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
           <Column Name="Subject" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           <Column Name="Note" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
+          <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
           <Column Name="Language" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
           <Column Name="VersionNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           <Column Name="Type" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
@@ -8076,10 +8085,10 @@ namespace FastReport
             <Column Name="VersionsLocked" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
             <Column Name="RegistrationNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
             <Column Name="RegistrationDate" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.DateTime]]"/>
-            <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="ExecutionState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Subject" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
             <Column Name="Note" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
+            <Column Name="LifeCycleState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Language" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="VersionNumber" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
             <Column Name="Type" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
@@ -11657,22 +11666,23 @@ namespace FastReport
     </SungeroEntityDataSource>
     <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="e8388a6f-efe3-4809-83c1-82dbf59e566a" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
     <SungeroParameter Name="Entity" Restrictions="DontModify, DontEdit, DontDelete" Id="1bfd6cab-d751-43e8-82e0-d2e9102edf72" IsRequired="true" IsCollection="false" InternalDataType="litiko.RegulatoryDocuments.IRegulatoryDocument, Sungero.Domain.Interfaces" IsSimpleDataType="false" EntityTypeId="9151081e-29d5-4c68-9204-68f04ff4d7e5"/>
+    <SungeroParameter Name="ReportSessionId" Id="6a8b3ea7-8e00-432f-b3da-5859df0d9ded" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
   </Dictionary>
   <ReportPage Name="Page1" LeftMargin="20" RightMargin="15" BottomMargin="11" Watermark.Font="Arial, 60pt">
-    <ReportTitleBand Name="ReportTitle1" Width="661.5" Height="311.85">
+    <ReportTitleBand Name="ReportTitle1" Width="661.5" Height="311.85" Guides="236.25">
       <RichObject Name="Rich1" Width="661.5" Height="292.95" Text="{\rtf1\ansi\ansicpg1251\deff0\nouicompat\deflang1049{\fonttbl{\f0\fnil\fcharset204 Times New Roman;}{\f1\fnil\fcharset0 Times New Roman;}}&#13;&#10;{\*\generator Riched20 10.0.19041}\viewkind4\uc1 &#13;&#10;\pard\hyphpar0\widctlpar\qc\tx993\b\f0\fs24\lang1058\'d1\'e0\'ed\'e0\'e4 \'ee\'e8\'e4 \'e1\'e0 \'e0\'ea\'f2\'f3\'e0\'eb\u1251? \'e1\'f3\'e4\'e0\'ed\'e8 \u1203?\'f3\u1207?\u1207?\'e0\'f2\'e8 \'ec\'e5\'fa\'b8\'f0\'e8\'e8 \'e4\'ee\'f5\'e8\'eb\u1251? (\u1202?\'cc\'c4)\f1\lang1033\par&#13;&#10;\f0\lang1058\'c0\'ea\'f2 \'ee\'e1 \'e0\'ea\'f2\'f3\'e0\'eb\'fc\'ed\'ee\'f1\'f2\'e8 \'e2\'ed\'f3\'f2\'f0\'e5\'ed\'ed\'e5\'e3\'ee \'ed\'ee\'f0\'ec\'e0\'f2\'e8\'e2\'ed\'ee\'e3\'ee \'e4\'ee\'ea\'f3\'ec\'e5\'ed\'f2\'e0 (\'c2\'cd\'c4)\f1\lang1033\par&#13;&#10;&#13;&#10;\pard\hyphpar0\widctlpar\qj\tx993\f0\lang1058\'f8. \'d5\'f3\u1207?\'e0\'ed\'e4\tab\tab\tab\tab\tab\tab\tab\tab\'d1\'e0\'ed\'e0: \f1\lang1033\par&#13;&#10;\f0\lang1058\'e3. \'d5\'f3\'e4\'e6\'e0\'ed\'e4\tab\tab\tab\tab\tab\tab\tab\tab\'c4\'e0\'f2\'e0:\f1\lang1033  \b0 [FormatDateTime([Date],&quot;dd.MM.yyyy&quot;)]\par&#13;&#10;\f0\lang1058\'d1\'e0\'ed\'e0\'e4\'e8 \'ec\'e0\'e7\'ea\'f3\'f0 \'e0\'e7 \'f2\'e0\'f0\'e0\'f4\'e8 \'ec\'ee: \'f0\'ee\u1203?\'e1\'e0\'f0\'e8 \u1207?\'e0\'f0\'e0\'b8\'ed [Doc.ProcessManager.Name]\f1\lang1033  \f0\lang1058\'e2\'e0 \'ec\'e5\'ed\'e5\u1207?\'e5\'f0\'e8 \u1207?\'e0\'f0\'e0\'b8\'ed [Doc.PreparedBy.Name] \'e4\'e0\'f0 \'e8\'ed \'e1\'ee\'f0\'e0 \'f2\'e0\'f0\'f2\'e8\'e1 \'e4\'ee\'e4\'e0 \'f8\'f3\'e4, \'ea\'e8 \'f2\'e0\u1203?\'f0\'e8\'f0\'e8 \'e0\'ec\'e0\'eb\'ea\'f3\'ed\'e0\'ed\'e4\'e0\'e8 \u1203?\'f3\u1207?\u1207?\'e0\'f2(\u1203?\'ee) \par&#13;&#10;\ul [Doc.Name]\f1\lang1033  \par&#13;&#10;\ulnone\f0\lang1058\'e1\'e0 \'f2\'e0\'eb\'e0\'e1\'ee\'f2\u1203?\'ee\'e8 \'e0\'ec\'e0\'eb\'ea\'f3\'ed\'e0\'ed\'e4\'e0\'e8 \u1179?\'ee\'ed\'f3\'ed\'e3\'f3\'e7\'ee\'f0\u1251?, \'f1\'e0\'ed\'e0\'e4\u1203?\'ee\'e8 \'ec\'e5\'fa\'b8\'f0\'e8\'e8 \'c1\'cc\'d2 \'e2\'e0 \'f2\'e0\'f0\'f2\'e8\'e1\u1203?\'ee\'e8 \'e0\'ec\'e0\'eb\'ea\'f3\'ed\'e0\'ed\'e4\'e0\'e8 \'e1\'ee\'ed\'ea \'ec\'f3\'f2\'ee\'e1\'e8\u1179?\'e0\'f2 \'ec\'e5\'ea\'f3\'ed\'e0\'e4(\'ed\'e4). \f1\lang1033\par&#13;&#10;\par&#13;&#10;\f0\lang1058\'cd\'e0\'f1\'f2\'ee\'ff\'f9\'e8\'e9 \'e0\'ea\'f2 \'f1\'ee\'f1\'f2\'e0\'e2\'eb\'e5\'ed \'ed\'e0\'ec\'e8: \'f0\'f3\'ea\'ee\'e2\'ee\'e4\'e8\'f2\'e5\'eb\'e5\'ec \'ef\'f0\'ee\'f6\'e5\'f1\'f1\'e0 [Doc.ProcessManager.Name] \'e8 \'ec\'e5\'ed\'e5\'e4\'e6\'e5\'f0\'ee\'ec \'ef\'f0\'ee\'f6\'e5\'f1\'f1\'e0 [Doc.PreparedBy.Name] \'ee \'f2\'ee\'ec, \'f7\'f2\'ee \'f2\'e5\'ea\'f3\'f9\'e0\'ff \'e2\'e5\'f0\'f1\'e8\'ff \'e4\'ee\'ea\'f3\'ec\'e5\'ed\'f2\'e0(\'ee\'e2) \par&#13;&#10;\ul [Doc.Name]\f1\lang1033  \ulnone\par&#13;&#10;c\f0\lang1058\'ee\'ee\'f2\'e2\'e5\'f2\'f1\'f2\'e2\'f3\'e5\'f2(\'fe\'f2) \'f2\'f0\'e5\'e1\'ee\'e2\'e0\'ed\'e8\'ff\'ec \'e7\'e0\'ea\'ee\'ed\'ee\'e4\'e0\'f2\'e5\'eb\'fc\'f1\'f2\'e2\'e0, \'ed\'ee\'f0\'ec\'e0\'f2\'e8\'e2\'ed\'fb\'ec \'e0\'ea\'f2\'e0\'ec \'cd\'c1\'d2, \'e4\'e5\'e9\'f1\'f2\'e2\'f3\'fe\'f9\'e8\'ec \'ef\'f0\'ee\'f6\'e5\'e4\'f3\'f0\'e0\'ec \'c1\'e0\'ed\'ea\'e0. \f1\lang1033\par&#13;&#10;&#13;&#10;\pard\f0\lang1049\par&#13;&#10;}&#13;&#10;"/>
     </ReportTitleBand>
-    <DataBand Name="Data1" Top="395.45" Width="661.5" Height="18.9" CanGrow="true">
-      <TextObject Name="Text6" Width="28.35" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
-      <TextObject Name="Text7" Left="28.35" Width="151.2" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
-      <TextObject Name="Text8" Left="179.55" Width="151.2" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
-      <TextObject Name="Text9" Left="330.75" Width="170.1" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
-      <TextObject Name="Text10" Left="500.85" Width="160.65" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
+    <DataBand Name="Data1" Top="395.45" Width="661.5" Height="18.9" CanGrow="true" DataSource="Table">
+      <TextObject Name="Text6" Width="28.35" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.number]." VertAlign="Center" Font="Times New Roman, 12pt"/>
+      <TextObject Name="Text7" Left="28.35" Width="189" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.performer]" VertAlign="Center" Font="Times New Roman, 12pt"/>
+      <TextObject Name="Text8" Left="217.35" Width="141.75" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.department]" VertAlign="Center" Font="Times New Roman, 12pt"/>
+      <TextObject Name="Text9" Left="359.1" Width="141.75" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.result]" VertAlign="Center" Font="Times New Roman, 12pt"/>
+      <TextObject Name="Text10" Left="500.85" Width="160.65" Height="18.9" Border.Lines="All" CanGrow="true" GrowToBottom="true" Text="[Table.comment]" VertAlign="Center" Font="Times New Roman, 12pt"/>
       <DataHeaderBand Name="DataHeader1" Top="315.85" Width="661.5" Height="75.6">
         <TextObject Name="Text1" Width="28.35" Height="75.6" Border.Lines="All" Fill.Color="Silver" Text="№" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
-        <TextObject Name="Text2" Left="28.35" Width="151.2" Height="75.6" Border.Lines="All" Fill.Color="Silver" Text="Сохторҳои мувофиқакунанда&#13;&#10;Согласовывающие структуры" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
-        <TextObject Name="Text3" Left="179.55" Width="151.2" Height="75.6" Border.Lines="All" Fill.Color="Silver" Text="Сохтор&#13;&#10;Структура" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
-        <TextObject Name="Text4" Left="330.75" Width="170.1" Height="75.6" Border.Lines="All" Fill.Color="Silver" Text="Ҳуҷҷат актуалӣ аст:&#13;&#10;Документ актуален:" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
+        <TextObject Name="Text2" Left="28.35" Width="189" Height="75.6" Border.Lines="All" Fill.Color="Silver" Text="Сохторҳои мувофиқакунанда&#13;&#10;Согласовывающие структуры" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
+        <TextObject Name="Text3" Left="217.35" Width="141.75" Height="75.6" Border.Lines="All" Fill.Color="Silver" Text="Сохтор&#13;&#10;Структура" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
+        <TextObject Name="Text4" Left="359.1" Width="141.75" Height="75.6" Border.Lines="All" Fill.Color="Silver" Text="Ҳуҷҷат актуалӣ аст:&#13;&#10;Документ актуален:" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
         <TextObject Name="Text5" Left="500.85" Width="160.65" Height="75.6" Border.Lines="All" Fill.Color="Silver" Text="Шарҳ / Коммен-тарии" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
       </DataHeaderBand>
     </DataBand>

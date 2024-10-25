@@ -8,15 +8,6 @@ namespace litiko.RegulatoryDocuments.Client
 {
   public class ModuleFunctions
   {
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public virtual void Function4()
-    {
-      Dialogs.NotifyMessage("В разработке...");
-    }
-
     /// <summary>
     /// Создать нормативный документ
     /// </summary>

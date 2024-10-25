@@ -87,6 +87,7 @@ namespace FastReport
           <TableCell Name="Cell5" Border.Lines="All" Text="Подпись" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
         </TableRow>
       </TableObject>
+      <PictureObject Name="Picture1" Left="9.45" Top="9.45" Width="198.45" Height="47.25" Fill.Color="White" Image="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"/>
     </ReportTitleBand>
     <GroupHeaderBand Name="GroupHeader1" Top="196.4" Width="971.46" Height="37.8" CanGrow="true" CanShrink="true" Condition="[Table.TaskId]">
       <TextObject Name="Text21" Left="45.36" Width="894.35" Height="37.8" Border.Lines="All" Fill.Color="WhiteSmoke" CanGrow="true" CanBreak="false" Text="[Table.TaskDisplayName]&#13;&#10;[Table.AssignmentId]" Font="Times New Roman, 12pt" TextRenderType="HtmlTags"/>
@@ -110,7 +111,58 @@ namespace FastReport
       </DataBand>
     </GroupHeaderBand>
     <ReportSummaryBand Name="ReportSummary1" Top="317.04" Width="971.46" Height="37.8">
-      <TextObject Name="Text3" Left="45.36" Width="894.35" Height="37.8" Text="Лист принял: ____________________________________________ Дата_________________________" VertAlign="Bottom" Font="Times New Roman, 12pt"/>
+      <TextObject Name="Text3" Left="45.36" Width="110" Height="37.8" Text="Лист принял:" VertAlign="Bottom" Font="Times New Roman, 12pt"/>
+      <TextObject Name="Text22" Left="152.65" Width="308.45" Height="37.8" Text="[Author]" VertAlign="Bottom" Font="Times New Roman, 12pt, style=Underline"/>
+      <TextObject Name="Text23" Left="472.5" Width="53.3" Height="37.8" Text="Дата:" VertAlign="Bottom" Font="Times New Roman, 12pt"/>
+      <TextObject Name="Text4" Left="526.2" Width="406.35" Height="37.8" Text="[FormatDateTime([Date],&quot;dd.MM.yyyy&quot;)]" VertAlign="Bottom" Font="Times New Roman, 12pt, style=Underline"/>
+    </ReportSummaryBand>
+  </ReportPage>
+  <ReportPage Name="Page2" Landscape="true" PaperWidth="297" PaperHeight="210" LeftMargin="20" RightMargin="20" Watermark.Font="Arial, 60pt">
+    <ReportTitleBand Name="ReportTitle2" Width="971.46" Height="189">
+      <TextObject Name="Text24" Top="77.6" Width="973.35" Height="18.9" Text="Варақаи шиносоӣ" HorzAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
+      <TextObject Name="Text25" Top="95.5" Width="973.35" Height="56.7" CanGrow="true" Text="Ҳуҷҷат барои шиносоӣ: [DocName]&#13;&#10;Сохтор: [DepartmentName]" HorzAlign="Center" Font="Times New Roman, 12pt"/>
+      <TableObject Name="Table1" Left="45.36" Top="151.2" Width="894.34" Height="37.04" GrowToBottom="true">
+        <TableColumn Name="Column11" Width="37.04"/>
+        <TableColumn Name="Column12" Width="301.27"/>
+        <TableColumn Name="Column13" Width="198.45"/>
+        <TableColumn Name="Column14" Width="178.79"/>
+        <TableColumn Name="Column15" Width="178.79"/>
+        <TableRow Name="Row3" Height="37.04">
+          <TableCell Name="Cell11" Border.Lines="All" Text="№" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
+          <TableCell Name="Cell12" Border.Lines="All" Text="Ному насаб" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
+          <TableCell Name="Cell13" Border.Lines="All" Text="Вазифа" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
+          <TableCell Name="Cell14" Border.Lines="All" Text="Санаи шинос шудан" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
+          <TableCell Name="Cell15" Border.Lines="All" Text="Имзо" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt, style=Bold"/>
+        </TableRow>
+      </TableObject>
+      <PictureObject Name="Picture2" Left="9.45" Top="9.45" Width="198.45" Height="47.25" Image="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"/>
+    </ReportTitleBand>
+    <GroupHeaderBand Name="GroupHeader2" Top="193" Width="971.46" Height="37.8" CanGrow="true" CanShrink="true" Condition="[Table.TaskId]">
+      <TextObject Name="Text26" Left="45.25" Width="894.35" Height="37.8" Border.Lines="All" Fill.Color="WhiteSmoke" CanGrow="true" CanBreak="false" Text="[Table.TaskDisplayName]&#13;&#10;[Table.AssignmentId]" Font="Times New Roman, 12pt" TextRenderType="HtmlTags"/>
+      <DataBand Name="Data2" Top="234.8" Width="971.46" Height="75.6" CanGrow="true" DataSource="Table">
+        <TableObject Name="Table1" Left="45.25" Width="894.34" Height="74.84">
+          <TableColumn Name="Column16" Width="37.04"/>
+          <TableColumn Name="Column17" Width="301.27"/>
+          <TableColumn Name="Column18" Width="198.45"/>
+          <TableColumn Name="Column19" Width="178.79"/>
+          <TableColumn Name="Column20" Width="178.79"/>
+          <TableRow Name="Row4" Height="74.84">
+            <TableCell Name="Cell16" Border.Lines="All" Text="[Row#]." HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt"/>
+            <TableCell Name="Cell17" Border.Lines="All" Text="[Table.ShortName]" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt"/>
+            <TableCell Name="Cell18" Border.Lines="All" Text="[Table.JobTitle]" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt"/>
+            <TableCell Name="Cell19" Border.Lines="All" Text="[Table.AcquaintanceDate]" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt"/>
+            <TableCell Name="Cell20" Border.Lines="All" HorzAlign="Center" VertAlign="Center" Font="Times New Roman, 12pt">
+              <BarcodeObject Name="Barcode2" Left="61.61" Top="9.45" Width="55.65" Height="55.65" AutoSize="false" Text="[Table.AssignmentHyperlink]" ShowText="false" AllowExpressions="true" Barcode="QR Code" Barcode.ErrorCorrection="L" Barcode.Encoding="UTF8" Barcode.QuietZone="false"/>
+            </TableCell>
+          </TableRow>
+        </TableObject>
+      </DataBand>
+    </GroupHeaderBand>
+    <ReportSummaryBand Name="ReportSummary2" Top="314.4" Width="971.46" Height="37.8">
+      <TextObject Name="Text27" Left="45.25" Width="176.15" Height="37.8" Text="Варақаро қабул намуд:" VertAlign="Bottom" Font="Times New Roman, 12pt"/>
+      <TextObject Name="Text28" Left="218.69" Width="242.3" Height="37.8" Text="[Author]" VertAlign="Bottom" Font="Times New Roman, 12pt, style=Underline"/>
+      <TextObject Name="Text29" Left="472.39" Width="53.3" Height="37.8" Text="Сана:" VertAlign="Bottom" Font="Times New Roman, 12pt"/>
+      <TextObject Name="Text30" Left="526.09" Width="406.35" Height="37.8" Text="[FormatDateTime([Date],&quot;dd.MM.yyyy&quot;)]" VertAlign="Bottom" Font="Times New Roman, 12pt, style=Underline"/>
     </ReportSummaryBand>
   </ReportPage>
 </Report>

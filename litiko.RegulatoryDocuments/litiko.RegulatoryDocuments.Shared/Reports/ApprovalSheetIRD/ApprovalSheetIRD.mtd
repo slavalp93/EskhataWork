@@ -17,7 +17,8 @@
     "Pdf"
   ],
   "HandledEvents": [
-    "BeforeExecuteServer"
+    "BeforeExecuteServer",
+    "AfterExecuteServer"
   ],
   "IconResourcesKeys": [],
   "IntegrationServiceName": "RegulatoryDocumentsActOnTheRelevance",
@@ -40,6 +41,11 @@
       "EntityType": "9151081e-29d5-4c68-9204-68f04ff4d7e5",
       "InternalDataTypeName": "litiko.RegulatoryDocuments.IRegulatoryDocument, Sungero.Domain.Interfaces",
       "IsRequired": true
+    },
+    {
+      "NameGuid": "dc0bc83f-8205-4ae8-b0c9-62f3632ccd3d",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String"
     }
   ],
   "PublicStructures": [],
