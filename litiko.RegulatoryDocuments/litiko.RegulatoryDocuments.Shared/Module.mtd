@@ -131,8 +131,16 @@
       "PreviousItemId": "efbe3b14-8cc4-4420-8afe-c60553095655"
     },
     {
-      "ItemId": "d7e17caa-6eee-4e41-90af-4218af7b73f3",
+      "ItemId": "b4dafa03-efef-4442-9108-1a57bcbb54fc",
       "PreviousItemId": "3697999d-5281-499d-a95d-0bc8f12dcf28"
+    },
+    {
+      "ItemId": "fe6cd98f-2f6b-41ad-8c19-8a7d1730967d",
+      "PreviousItemId": "b4dafa03-efef-4442-9108-1a57bcbb54fc"
+    },
+    {
+      "ItemId": "d7e17caa-6eee-4e41-90af-4218af7b73f3",
+      "PreviousItemId": "fe6cd98f-2f6b-41ad-8c19-8a7d1730967d"
     },
     {
       "ItemId": "93fdbe21-5048-419a-9f76-704edccdf9ba",
@@ -302,7 +310,7 @@
   "SharedAssemblyName": "litiko.RegulatoryDocuments.Shared",
   "SharedNamespace": "litiko.RegulatoryDocuments.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.9",
+  "Version": "0.0.1.10",
   "Widgets": [],
   "Versions": [
     {

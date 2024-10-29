@@ -16,9 +16,9 @@ namespace litiko.RegulatoryDocuments.Server
       CreateDocumentKinds();
       GrantRightsOnEntities();
       CreateApprovalRole(litiko.RegulatoryDocuments.ApprovalRole.Type.ProcessManager, "Руководитель процесса");      
-      CreateActOnRelevanceStage();
-      CreateApprovalSheetStage();
       CreateReportsTables();
+      
+      CreateApprovalFunctionStages();
     }
     
     /// <summary>
@@ -118,7 +118,20 @@ namespace litiko.RegulatoryDocuments.Server
         InitializationLogger.DebugFormat("Создана/обновлена роль {0}", description);        
       }
 
-    }    
+    }
+
+    /// <summary>
+    /// Создание записей в этапах сценарии.
+    /// </summary>
+    public static void CreateApprovalFunctionStages()
+    {
+      CreateActOnRelevanceStage();
+      CreateApprovalSheetStage();
+      CreateChangeStatusDocumentStage();
+      CreateAddRelatedDocInAttStage();
+    }
+    
+    #region CreateApprovalFunctionStages()
     
     /// <summary>
     /// Создание записи нового типа сценария "Этап формирования Акта об актуальности ВНД".
@@ -146,7 +159,39 @@ namespace litiko.RegulatoryDocuments.Server
       stage.Name = "Формирование Листа согласования ВНД";
       stage.TimeoutInHours = 4;
       stage.Save();
-    }    
+    } 
+
+    /// <summary>
+    /// Создание записи нового типа сценария "Этап изменения статуса документа".
+    /// </summary>
+    public static void CreateChangeStatusDocumentStage()
+    {
+      InitializationLogger.DebugFormat("Init: Create Stage of changing document status.");
+      if (ChangeStatusDocumentStages.GetAll().Any())
+        return;
+      var stage = ChangeStatusDocumentStages.Create();
+      stage.Name = "Изменение статуса документа: Действующий, Подписан";
+      stage.TimeoutInHours = 4;
+      stage.LifeCycleState = litiko.RegulatoryDocuments.ChangeStatusDocumentStage.LifeCycleState.Active;
+      stage.InternalApprovalState = litiko.RegulatoryDocuments.ChangeStatusDocumentStage.InternalApprovalState.Signed;
+      stage.Save();
+    }     
+
+    /// <summary>
+    /// Создание записи нового типа сценария "Этап добавления связанного документа во вложения задачи".
+    /// </summary>
+    public static void CreateAddRelatedDocInAttStage()
+    {
+      InitializationLogger.DebugFormat("Init: Create Stage of adding related document in task attachments.");
+      if (AddRelatedDocInAttStages.GetAll().Any())
+        return;
+      var stage = AddRelatedDocInAttStages.Create();
+      stage.Name = "Добавление связанного документа во вложения задачи";
+      stage.TimeoutInHours = 4;
+      stage.Save();
+    } 
+    
+    #endregion
     
     /// <summary>
     /// Создание таблиц для отчетов

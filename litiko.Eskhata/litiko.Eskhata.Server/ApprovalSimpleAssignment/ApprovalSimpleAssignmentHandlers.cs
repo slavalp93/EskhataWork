@@ -21,14 +21,27 @@ namespace litiko.Eskhata
         .Where(s => s.Stage.StageType == Sungero.Docflow.ApprovalStage.StageType.SimpleAgr)
         .FirstOrDefault(s => s.Number == _obj.StageNumber);                  
       
-      if (stage != null && litiko.Eskhata.ApprovalStages.As(stage.Stage).CustomStageTypelitiko == litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.IncludeInMeet && 
+      #region КОУ. Контроль включения в повестку.      
+      if (stage != null && litiko.Eskhata.ApprovalStages.As(stage.Stage).CustomStageTypelitiko == litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.IncludeInMeet &&
           doc != null && litiko.CollegiateAgencies.Projectsolutions.Is(doc) && !litiko.CollegiateAgencies.Projectsolutions.As(doc).IncludedInAgenda.Value)
         e.AddError(litiko.CollegiateAgencies.Resources.DocumentIsNotIncludedInAgenda);
+      #endregion
       
+      #region КОУ. Контроль при голосовании.      
       var isVoiting = _obj.CustomStageTypelitiko == litiko.Eskhata.ApprovalSimpleAssignment.CustomStageTypelitiko.Voting;
-    
       if (isVoiting && _obj.Votinglitiko.Any(d => !d.Yes.GetValueOrDefault() && !d.No.GetValueOrDefault() && !d.Abstained.GetValueOrDefault()))
-        e.AddError(litiko.Eskhata.ApprovalSimpleAssignments.Resources.ErrorVoteAllDecisions);      
+        e.AddError(litiko.Eskhata.ApprovalSimpleAssignments.Resources.ErrorVoteAllDecisions);
+      #endregion
+      
+      #region ВНД. Контроль заполнения полей: "Правовой акт" и "Введение в действие с". 
+      if (stage != null && doc != null && litiko.Eskhata.ApprovalStages.As(stage.Stage).CustomStageTypelitiko == litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.ControlIRD &&
+          litiko.RegulatoryDocuments.RegulatoryDocuments.Is(doc))
+      {
+        var regulatoryDocument = litiko.RegulatoryDocuments.RegulatoryDocuments.As(doc);
+        if (regulatoryDocument.LegalAct == null || !regulatoryDocument.DateBegin.HasValue)
+          e.AddError(litiko.RegulatoryDocuments.Resources.NeedFillLegalActAndDateBegin);
+      }
+      #endregion      
 
     }
   }

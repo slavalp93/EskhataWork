@@ -26,7 +26,7 @@ namespace litiko.Eskhata.Client
 
     public virtual bool CanNotAgreelitiko(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return _obj.Addressee == null && _obj.DocumentGroup.OfficialDocuments.Any();
+      return _obj.Addressee == null && _obj.DocumentGroup.OfficialDocuments.Any() && _obj.Status == Sungero.Docflow.ApprovalAssignment.Status.InProcess;
     }
 
   }

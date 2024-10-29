@@ -29,6 +29,11 @@ namespace litiko.RegulatoryDocuments
         else      
           e.Cancel = true;      
       }
+      else
+      {
+        ControlApprovingIRD.DateBegin = Calendar.SqlMinValue;
+        ControlApprovingIRD.DateEnd = Calendar.SqlMaxValue;
+      }
     }
 
   }

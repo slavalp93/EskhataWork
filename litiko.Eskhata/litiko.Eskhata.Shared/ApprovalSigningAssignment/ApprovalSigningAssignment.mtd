@@ -21,9 +21,6 @@
     "IsAncestorMetadata": true,
     "Versions": []
   },
-  "HandledEvents": [
-    "BeforeCompleteServer"
-  ],
   "IconResourcesKeys": [],
   "IsVisibleThreadText": true,
   "LayeredFromGuid": "db516acc-0f02-4ea7-960a-08f3f734db4f",

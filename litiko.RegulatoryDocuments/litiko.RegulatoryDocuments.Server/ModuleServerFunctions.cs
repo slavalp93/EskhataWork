@@ -83,7 +83,7 @@ namespace litiko.RegulatoryDocuments.Server
         }
         
         reportLine.Result = performResult;
-        reportLine.Comment = assignment.ActiveText;
+        reportLine.Comment = assignment.ActiveText == Sungero.Docflow.ApprovalTasks.Resources.Endorsed ? string.Empty : assignment.ActiveText;
         reportLine.ReportSessionId = reportSessionId;
         
         dataList.Add(reportLine);        

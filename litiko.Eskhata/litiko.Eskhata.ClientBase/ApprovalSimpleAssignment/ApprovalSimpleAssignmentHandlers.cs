@@ -51,7 +51,7 @@ namespace litiko.Eskhata
     {
       base.Showing(e);
       
-      //_obj.State.Properties.Votinglitiko.IsVisible = _obj.CustomStageTypelitiko == litiko.Eskhata.ApprovalSimpleAssignment.CustomStageTypelitiko.Voting;
+      _obj.State.Properties.Votinglitiko.IsVisible = _obj.CustomStageTypelitiko == litiko.Eskhata.ApprovalSimpleAssignment.CustomStageTypelitiko.Voting;
     }
 
   }
