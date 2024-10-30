@@ -1194,6 +1194,24 @@
       "ReturnTypeFullName": "Sungero.Docflow.IAddendum, Sungero.Domain.Interfaces"
     },
     {
+      "Name": "DocumentAttachedInMainGroup",
+      "Parameters": [
+        {
+          "Name": "projectsolution",
+          "ParameterType": "global::litiko.CollegiateAgencies.IProjectsolution",
+          "ParameterTypeFullName": "litiko.CollegiateAgencies.IProjectsolution, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "task",
+          "ParameterType": "global::Sungero.Workflow.ITask",
+          "ParameterTypeFullName": "Sungero.Workflow.ITask, Sungero.Workflow.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
       "Name": "GetProjectSolutionAddendumSubjects",
       "Parameters": [
         {

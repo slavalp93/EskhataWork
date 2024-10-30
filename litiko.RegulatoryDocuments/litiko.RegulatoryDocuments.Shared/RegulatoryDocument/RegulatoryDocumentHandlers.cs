@@ -20,38 +20,84 @@ namespace litiko.RegulatoryDocuments
         
         if (leadingDoc != null)
         {
-          if (_obj.DocumentKind == null)
-            _obj.DocumentKind = leadingDoc.DocumentKind;
+          if (_obj.Type == litiko.RegulatoryDocuments.RegulatoryDocument.Type.IsChange)
+          {
+            if (_obj.DocumentKind == null)
+              _obj.DocumentKind = leadingDoc.DocumentKind;
+            
+            if (string.IsNullOrWhiteSpace(_obj.Subject))
+              _obj.Subject = leadingDoc.Subject;
+            
+            if (_obj.ProcessManager == null)
+              _obj.ProcessManager = leadingDoc.ProcessManager;
+            
+            if (!_obj.Language.HasValue)
+              _obj.Language = leadingDoc.Language;
+            
+            if (_obj.OnRequest == null)
+              _obj.OnRequest = leadingDoc.OnRequest;            
+            
+            if (!Equals(_obj.IsRequirements, leadingDoc.IsRequirements))
+              _obj.IsRequirements = leadingDoc.IsRequirements;
+            
+            if (!Equals(_obj.IsRelatedToStructure, leadingDoc.IsRelatedToStructure))
+              _obj.IsRelatedToStructure = leadingDoc.IsRelatedToStructure;
+            
+            if (!Equals(_obj.IsRecommendations, leadingDoc.IsRecommendations))
+              _obj.IsRecommendations = leadingDoc.IsRecommendations;
+            
+            if (_obj.OrganForApproving == null)
+              _obj.OrganForApproving = leadingDoc.OrganForApproving;
+            
+            if (_obj.ForWhom == null)
+              _obj.ForWhom = leadingDoc.ForWhom;            
+          }
           
-          if (string.IsNullOrWhiteSpace(_obj.Subject))
-            _obj.Subject = leadingDoc.Subject;
+          if (_obj.Type == litiko.RegulatoryDocuments.RegulatoryDocument.Type.IsUpdate)
+          {
+            if (_obj.DocumentKind == null)
+              _obj.DocumentKind = leadingDoc.DocumentKind;
+            
+            if (string.IsNullOrWhiteSpace(_obj.Subject))
+              _obj.Subject = leadingDoc.Subject;
+            
+            if (_obj.ProcessManager == null)
+              _obj.ProcessManager = leadingDoc.ProcessManager;
+            
+            if (!_obj.Language.HasValue)
+              _obj.Language = leadingDoc.Language;
+            
+            if (_obj.OnRequest == null)
+              _obj.OnRequest = leadingDoc.OnRequest;            
+            
+            if (!Equals(_obj.IsRequirements, leadingDoc.IsRequirements))
+              _obj.IsRequirements = leadingDoc.IsRequirements;
+            
+            if (!Equals(_obj.IsRelatedToStructure, leadingDoc.IsRelatedToStructure))
+              _obj.IsRelatedToStructure = leadingDoc.IsRelatedToStructure;
+            
+            if (!Equals(_obj.IsRecommendations, leadingDoc.IsRecommendations))
+              _obj.IsRecommendations = leadingDoc.IsRecommendations;
+            
+            if (_obj.OrganForApproving == null)
+              _obj.OrganForApproving = leadingDoc.OrganForApproving;
+            
+            if (_obj.ForWhom == null)
+              _obj.ForWhom = leadingDoc.ForWhom;    
+
+            if (_obj.LegalAct == null)
+              _obj.LegalAct = leadingDoc.LegalAct;
+
+            if (string.IsNullOrEmpty(_obj.VersionNumber))
+              _obj.VersionNumber = leadingDoc.VersionNumber;
+            
+            if (!_obj.DateBegin.HasValue)
+              _obj.DateBegin = leadingDoc.DateBegin;
+            
+            if (!_obj.DateRevision.HasValue)
+              _obj.DateRevision = leadingDoc.DateRevision;
+          }          
           
-          if (_obj.ProcessManager == null)
-            _obj.ProcessManager = leadingDoc.ProcessManager;
-          
-          if (!_obj.Language.HasValue)
-            _obj.Language = leadingDoc.Language;
-          
-          if (_obj.OnRequest == null)
-            _obj.OnRequest = leadingDoc.OnRequest;
-          
-          if (_obj.LegalAct == null)
-            _obj.LegalAct = leadingDoc.LegalAct;
-          
-          if (!Equals(_obj.IsRequirements, leadingDoc.IsRequirements))
-            _obj.IsRequirements = leadingDoc.IsRequirements;
-          
-          if (!Equals(_obj.IsRelatedToStructure, leadingDoc.IsRelatedToStructure))
-            _obj.IsRelatedToStructure = leadingDoc.IsRelatedToStructure;
-          
-          if (!Equals(_obj.IsRecommendations, leadingDoc.IsRecommendations))
-            _obj.IsRecommendations = leadingDoc.IsRecommendations;
-          
-          if (_obj.OrganForApproving == null)
-            _obj.OrganForApproving = leadingDoc.OrganForApproving;
-          
-          if (_obj.ForWhom == null)
-            _obj.ForWhom = leadingDoc.ForWhom;
 
           if (leadingDoc.HasVersions && !_obj.HasVersions)
           {

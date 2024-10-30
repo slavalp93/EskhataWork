@@ -65,10 +65,18 @@ namespace litiko.RegulatoryDocuments.Client
       var createdDoc = litiko.CollegiateAgencies.Projectsolutions.GetAll(x => x.Id == docId).FirstOrDefault();
       if (createdDoc != null)
       {          
+        /*
         // Связать с текщим документом: ВНД - Приложение к ПР
         if (!_obj.Relations.GetRelatedFrom(Sungero.Docflow.PublicConstants.Module.AddendumRelationName).Contains(createdDoc))
         {
           _obj.Relations.AddFrom(Sungero.Docflow.PublicConstants.Module.AddendumRelationName, createdDoc);
+          _obj.Relations.Save();
+        }       
+        */
+        // Связать с текщим документом: тип связи - Прочее
+        if (!_obj.Relations.GetRelatedFrom(Sungero.Docflow.PublicConstants.Module.SimpleRelationName).Contains(createdDoc))
+        {
+          _obj.Relations.AddFrom(Sungero.Docflow.PublicConstants.Module.SimpleRelationName, createdDoc);
           _obj.Relations.Save();
         }       
       }

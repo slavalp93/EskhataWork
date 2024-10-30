@@ -23,29 +23,28 @@ namespace litiko.RegulatoryDocuments.Server
         
       try
       {
-        var relatedDocument = Sungero.Content.ElectronicDocuments.Null;
+        var relatedDocuments = new List<Sungero.Content.IElectronicDocument>();
+        //var relatedDocument = Sungero.Content.ElectronicDocuments.Null;
         if (_obj.RelationDirection == litiko.RegulatoryDocuments.AddRelatedDocInAttStage.RelationDirection.RelatedFrom)
-          relatedDocument = document.Relations.GetRelatedFrom(_obj.RelationType.Name)
-            .Where(d => Sungero.Docflow.OfficialDocuments.Is(d) && Equals(Sungero.Docflow.OfficialDocuments.As(d).DocumentKind, _obj.DocumentKind))
-            .FirstOrDefault();
+          relatedDocuments.AddRange(document.Relations.GetRelatedFrom(_obj.RelationType.Name)
+                                    .Where(d => Sungero.Docflow.OfficialDocuments.Is(d) && Equals(Sungero.Docflow.OfficialDocuments.As(d).DocumentKind, _obj.DocumentKind)));
         else
-          relatedDocument = document.Relations.GetRelated(_obj.RelationType.Name)
-            .Where(d => Sungero.Docflow.OfficialDocuments.Is(d) && Equals(Sungero.Docflow.OfficialDocuments.As(d).DocumentKind, _obj.DocumentKind))
-            .FirstOrDefault();          
-        if (relatedDocument != null)
+          relatedDocuments.AddRange(document.Relations.GetRelated(_obj.RelationType.Name)
+                                    .Where(d => Sungero.Docflow.OfficialDocuments.Is(d) && Equals(Sungero.Docflow.OfficialDocuments.As(d).DocumentKind, _obj.DocumentKind)));
+        foreach (var relatedDocument in relatedDocuments)
         {
-          if (!approvalTask.OtherGroup.All.Contains(relatedDocument))
-          {
-            approvalTask.OtherGroup.All.Add(relatedDocument);
-            approvalTask.Save();
-          }
-          
+          if (!approvalTask.OtherGroup.All.Contains(relatedDocument))          
+            approvalTask.OtherGroup.All.Add(relatedDocument);            
+                    
           if (_obj.CopyAccessRights.GetValueOrDefault())
           {            
             Sungero.Docflow.PublicFunctions.OfficialDocument.CopyAccessRightsToDocument(document, Sungero.Docflow.OfficialDocuments.As(relatedDocument), Guid.Empty);
             relatedDocument.AccessRights.Save();
           }
         }
+        
+        if (approvalTask.State.IsChanged)
+          approvalTask.Save();
 
       }
       catch (Exception ex)

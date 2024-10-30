@@ -31,8 +31,8 @@ namespace litiko.RegulatoryDocuments
       }
       else
       {
-        ControlApprovingIRD.DateBegin = Calendar.SqlMinValue;
-        ControlApprovingIRD.DateEnd = Calendar.SqlMaxValue;
+        ControlApprovingIRD.DateBegin = Calendar.GetDate(1900, 12, 31);
+        ControlApprovingIRD.DateEnd = Calendar.GetDate(2500, 12, 31);
       }
     }
 

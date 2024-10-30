@@ -76,6 +76,9 @@
     "IsAncestorMetadata": true,
     "Versions": []
   },
+  "HandledEvents": [
+    "BeforeSaveServer"
+  ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "58b9ed35-9c84-46cd-aa79-9b5ef5a82f5d",
   "OpenCardByDefaultInCollection": true,

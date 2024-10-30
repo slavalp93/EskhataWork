@@ -7,6 +7,23 @@ using litiko.Eskhata.Addendum;
 
 namespace litiko.Eskhata
 {
+  partial class AddendumServerHandlers
+  {
+
+    public override void BeforeSave(Sungero.Domain.BeforeSaveEventArgs e)
+    {
+      base.BeforeSave(e);
+      
+      if (_obj.LeadingDocument != null && _obj.LeadingDocument.AccessRights.CanRead())
+      {
+        var relatedIRDs = _obj.LeadingDocument.Relations.GetRelated(Sungero.Docflow.PublicConstants.Module.SimpleRelationName)
+          .Where(d => litiko.RegulatoryDocuments.RegulatoryDocuments.Is(d));
+        foreach (var document in relatedIRDs)
+          _obj.Relations.Add(Sungero.Docflow.PublicConstants.Module.SimpleRelationName, document);
+      }
+    }
+  }
+
   partial class AddendumLeadingDocumentPropertyFilteringServerHandler<T>
   {
 

@@ -77,5 +77,24 @@ namespace litiko.CollegiateAgencies.Shared
         }        
       }    
     }
+    
+    /// <summary>
+    /// Обработать добавление документа как основного вложения в задачу.
+    /// </summary>
+    /// <param name="task">Задача.</param>
+    /// <remarks>Только для задач, создаваемых пользователем вручную.</remarks>
+    [Public]
+    public override void DocumentAttachedInMainGroup(Sungero.Workflow.ITask task)
+    {      
+      var approvalTask = Sungero.Docflow.ApprovalTasks.As(task);
+      if (approvalTask != null)
+      {
+        var relatedIRDs = _obj.Relations.GetRelated(Sungero.Docflow.PublicConstants.Module.SimpleRelationName)
+          .Where(d => litiko.RegulatoryDocuments.RegulatoryDocuments.Is(d));
+        foreach (var document in relatedIRDs)
+          approvalTask.OtherGroup.All.Add(document);
+      }
+
+    }    
   }
 }

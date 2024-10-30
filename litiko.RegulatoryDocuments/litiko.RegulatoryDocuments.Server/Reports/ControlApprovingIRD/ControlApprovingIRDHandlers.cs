@@ -21,7 +21,7 @@ namespace litiko.RegulatoryDocuments
       
       if (ControlApprovingIRD.DocumentId.Value == 0)
         documentIds.AddRange(litiko.RegulatoryDocuments.RegulatoryDocuments.GetAll()
-          .Where(d => d.Created.HasValue && d.Created.Between(ControlApprovingIRD.DateBegin.Value, ControlApprovingIRD.DateEnd.Value))
+                             .Where(d => d.Created.HasValue && d.Created.Between(ControlApprovingIRD.DateBegin.Value.BeginningOfDay(), ControlApprovingIRD.DateEnd.Value.EndOfDay()))
           .Select(d => d.Id)
           .ToList());
       else
