@@ -76,4 +76,7 @@
   <data name="VersionInName" xml:space="preserve">
     <value>(Версия {0})</value>
   </data>
+  <data name="NoAccessToCreateVersion" xml:space="preserve">
+    <value>У вас недостаточно прав для создания версии.</value>
+  </data>
 </root>

@@ -21,7 +21,7 @@ namespace litiko.RegulatoryDocuments.Client
     /// </summary>
     /// <param name="document">Документ, для которого создается версия.</param>
     /// <param name="versionNote">Примечание к создаваемой версии.</param>
-    public virtual void CreateFromFileDialog(Sungero.Docflow.IOfficialDocument document, string versionNote)
+    public virtual void CreateFromFileDialog(Sungero.Docflow.IOfficialDocument document, string versionNote, string currentVersionNote)
     {
       var dialog = Dialogs.CreateInputDialog(Resources.CreateVersionFromFileDiaolog_Tittle);
       dialog.Width = 500;
@@ -38,7 +38,10 @@ namespace litiko.RegulatoryDocuments.Client
                                     var fileContent = fileSelector.Value.Content;
                                     var fileName = fileSelector.Value.Name;
                                     using (var memory = new System.IO.MemoryStream(fileContent))
-                                    {
+                                    {                                      
+                                      if (document.LastVersion != null && !string.IsNullOrEmpty(currentVersionNote) && document.LastVersion.Note != currentVersionNote)
+                                        document.LastVersion.Note = currentVersionNote;
+                                      
                                       var ext = System.IO.Path.GetExtension(fileName).TrimStart('.').ToLower();
                                       var version = document.CreateVersionFrom(memory, ext);
                                       version.Note = versionNote;

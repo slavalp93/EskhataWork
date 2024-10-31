@@ -104,28 +104,38 @@ namespace litiko.RegulatoryDocuments.Client
     {
       var version = _obj.Versions.Where(x => x.Note == litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnRU).FirstOrDefault();
       if (version == null)
-        Functions.Module.CreateFromFileDialog(_obj, litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnRU.ToString());
+      {
+        if (_obj.AccessRights.CanUpdate())
+          Functions.Module.CreateFromFileDialog(_obj, litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnRU.ToString(), litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnTJ.ToString());
+        else
+          e.AddInformation(litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.NoAccessRightsToCreateVersion);
+      }        
       else
         version.Open();       
     }
 
     public virtual bool CanCopyVersionOnRU(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return !_obj.State.IsInserted && !_obj.State.IsChanged && _obj.AccessRights.CanUpdateBody() && _obj.Language.HasValue && _obj.Language.Value == litiko.RegulatoryDocuments.RegulatoryDocument.Language.Tj;
+      return !_obj.State.IsInserted && !_obj.State.IsChanged;
     }
 
     public virtual void CopyVersionOnTJ(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var version = _obj.Versions.Where(x => x.Note == litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnTJ).FirstOrDefault();
       if (version == null)
-        Functions.Module.CreateFromFileDialog(_obj, litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnTJ.ToString());
+      {
+        if (_obj.AccessRights.CanUpdate())
+          Functions.Module.CreateFromFileDialog(_obj, litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnTJ.ToString(), litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnRU.ToString());
+        else
+          e.AddInformation(litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.NoAccessRightsToCreateVersion);      
+      }        
       else
         version.Open();      
     }
 
     public virtual bool CanCopyVersionOnTJ(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return !_obj.State.IsInserted && !_obj.State.IsChanged && _obj.AccessRights.CanUpdateBody() && _obj.Language.HasValue && _obj.Language.Value == litiko.RegulatoryDocuments.RegulatoryDocument.Language.Ru;
+      return !_obj.State.IsInserted && !_obj.State.IsChanged;
     }
 
     public virtual void CreateNormativeOrder(Sungero.Domain.Client.ExecuteActionArgs e)

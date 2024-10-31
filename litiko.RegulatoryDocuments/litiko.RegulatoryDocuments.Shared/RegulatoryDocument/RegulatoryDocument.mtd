@@ -852,7 +852,8 @@
     "ActionAvailableToClerks",
     "VersionNoteOnTJ",
     "VersionNoteOnRU",
-    "VersionInName"
+    "VersionInName",
+    "NoAccessToCreateVersion"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "48b3383b-684c-44d1-ae0a-127d7809150f",
