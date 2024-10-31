@@ -16,6 +16,12 @@ namespace litiko.RegulatoryDocuments.Constants
     /// </summary>    
     public const string SourceTableName = "litiko_ApprSheetIRD";
     
+    /// <summary>
+    /// Имя параметра для сохранения связи ВНД с ПР
+    /// </summary>
+    [Sungero.Core.Public]
+    public const string CreatedFromIRD_ID = "CreatedFromIRD_ID";    
+    
     public static class DocumentTypeGuids
     {
       /// <summary> Нормативный документ </summary>

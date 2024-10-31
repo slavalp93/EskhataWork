@@ -899,7 +899,8 @@
     "CreatedServer",
     "WriteHistoryServer",
     "FilteringServer",
-    "CreatingFromServer"
+    "CreatingFromServer",
+    "BeforeSaveServer"
   ],
   "IconResourcesKeys": [],
   "IntegrationServiceName": "CollegiateAgenciesProjectsolution",

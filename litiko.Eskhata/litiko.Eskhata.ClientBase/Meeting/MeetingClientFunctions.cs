@@ -130,7 +130,13 @@ namespace litiko.Eskhata.Client
           List<litiko.CollegiateAgencies.IProjectsolution> projectSolutions = psValue.Value.ToList();
           var task = Functions.Meeting.Remote.CreateTaskForVoting(_obj, projectSolutions);
           
-          task.ShowModal();
+          if (task != null)
+            task.ShowModal();
+          else
+          {
+            Dialogs.ShowMessage(litiko.Eskhata.Meetings.Resources.VotingTaskIsNotCreated);
+            return;          
+          }
         }
       }
     }

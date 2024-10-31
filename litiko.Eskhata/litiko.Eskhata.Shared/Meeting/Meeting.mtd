@@ -912,7 +912,8 @@
     "Meeting",
     "ActionItemsSentSeccessfully",
     "ActionItemCreateFromDialogNotification",
-    "StartActionItemExecutionTasksErrorSolution"
+    "StartActionItemExecutionTasksErrorSolution",
+    "VotingTaskIsNotCreated"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "b7b59d97-b6e4-46de-ba8f-0f82b8e09c3b",

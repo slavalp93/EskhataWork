@@ -134,6 +134,20 @@ namespace litiko.CollegiateAgencies
   partial class ProjectsolutionServerHandlers
   {
 
+    public override void BeforeSave(Sungero.Domain.BeforeSaveEventArgs e)
+    {
+      base.BeforeSave(e);
+            
+      object paramValue;
+      if (((Sungero.Domain.Shared.IExtendedEntity)_obj).Params.TryGetValue(litiko.RegulatoryDocuments.PublicConstants.Module.CreatedFromIRD_ID, out paramValue))
+      {
+        var IdIRD = (long)paramValue;
+        var regulatoryDocument = litiko.RegulatoryDocuments.RegulatoryDocuments.Get(IdIRD);
+        if (!_obj.Relations.GetRelated(Sungero.Docflow.PublicConstants.Module.SimpleRelationName).Contains(regulatoryDocument))
+          _obj.Relations.Add(Sungero.Docflow.PublicConstants.Module.SimpleRelationName, regulatoryDocument);
+      }
+    }
+
     public override void BeforeSaveHistory(Sungero.Content.DocumentHistoryEventArgs e)
     {
       base.BeforeSaveHistory(e);

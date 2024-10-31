@@ -196,6 +196,14 @@
       "Value": "new System.Guid(\"475db1f5-2cb8-494d-8b4e-4faf8ba2a675\")"
     },
     {
+      "Name": "CreatedFromIRD_ID",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"CreatedFromIRD_ID\""
+    },
+    {
       "Name": "RegulatoryDocument",
       "ParentClasses": [
         "Module",
@@ -310,7 +318,7 @@
   "SharedAssemblyName": "litiko.RegulatoryDocuments.Shared",
   "SharedNamespace": "litiko.RegulatoryDocuments.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.11",
+  "Version": "0.0.1.12",
   "Widgets": [],
   "Versions": [
     {

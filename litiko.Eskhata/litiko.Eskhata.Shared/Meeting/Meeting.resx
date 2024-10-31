@@ -97,4 +97,7 @@
   <data name="StartActionItemExecutionTasksErrorSolution" xml:space="preserve">
     <value>An error occurred while sending action items on meeting minutes.{0} {0}Add the missing data, and send it manually or contact your system administrator.</value>
   </data>
+  <data name="VotingTaskIsNotCreated" xml:space="preserve">
+    <value>Failed to create task. Check for an agenda and approval rules.</value>
+  </data>
 </root>

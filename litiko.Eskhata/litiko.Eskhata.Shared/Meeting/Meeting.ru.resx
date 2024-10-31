@@ -97,4 +97,7 @@
   <data name="StartActionItemExecutionTasksErrorSolution" xml:space="preserve">
     <value>Произошла ошибка при отправке поручений по совещанию.{0} {0}Дозаполните данные и отправьте их вручную или обратитесь к администратору.</value>
   </data>
+  <data name="VotingTaskIsNotCreated" xml:space="preserve">
+    <value>Не удалось создать задачу. Проверьте наличие повестки и правила согласования.</value>
+  </data>
 </root>
