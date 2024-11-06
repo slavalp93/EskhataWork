@@ -79,8 +79,8 @@
   <data name="Property_VersionNumber" xml:space="preserve">
     <value>Номер версии</value>
   </data>
-  <data name="Property_OnRequest" xml:space="preserve">
-    <value>По запросу</value>
+  <data name="Action_CreateExplanatoryNote" xml:space="preserve">
+    <value>Создать Пояснительную записку</value>
   </data>
   <data name="Property_LeadingDocument" xml:space="preserve">
     <value>Основной ВНД</value>
@@ -267,5 +267,11 @@
   </data>
   <data name="Action_ShowControlApprovingIRDReportDescription" xml:space="preserve">
     <value>Контроль сроков согласования ВНД</value>
+  </data>
+  <data name="Action_CreateExplanatoryNoteHint" xml:space="preserve">
+    <value>Создать Пояснительную записку</value>
+  </data>
+  <data name="Action_CreateExplanatoryNoteDescription" xml:space="preserve">
+    <value>Создать Пояснительную записку</value>
   </data>
 </root>

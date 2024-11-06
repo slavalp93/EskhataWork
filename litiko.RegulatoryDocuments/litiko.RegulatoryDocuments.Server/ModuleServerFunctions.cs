@@ -20,7 +20,10 @@ namespace litiko.RegulatoryDocuments.Server
     public List<Structures.Module.IApprovalSheetLine> GetApprovalSheetIRDData(List<long> documentIds, string reportSessionId)
     {
       var dataList = new List<Structures.Module.IApprovalSheetLine>();
-            
+      
+      if (documentIds == null) 
+        return dataList;
+      
       var docGuid = litiko.RegulatoryDocuments.PublicConstants.Module.DocumentTypeGuids.RegulatoryDocument;
       var approvalTaskDocumentGroupGuid = Sungero.Docflow.PublicConstants.Module.TaskMainGroup.ApprovalTask;
       var approvalTasks = Sungero.Docflow.ApprovalTasks.GetAll()        
@@ -29,7 +32,7 @@ namespace litiko.RegulatoryDocuments.Server
                     att.GroupId == approvalTaskDocumentGroupGuid));
             
       var approvalAssignments = Sungero.Workflow.Assignments.GetAll()
-        .Where(x => approvalTasks.Contains(x.Task))
+        .Where(x => x.Task != null && approvalTasks.Contains(x.Task))        
         .Where(x => Sungero.Docflow.ApprovalAssignments.Is(x) || Sungero.Docflow.ApprovalManagerAssignments.Is(x))
         .OrderBy(x => x.Created);
       
@@ -45,8 +48,18 @@ namespace litiko.RegulatoryDocuments.Server
         reportLine.TaskId = assignment.Task.Id;
         reportLine.AssignmentId = assignment.Id;
         reportLine.TaskAuthor = assignment.Task.Author.Name;
-        reportLine.Performer = Equals(assignment.Performer, assignment.CompletedBy) ? assignment.Performer.Name : string.Format("{0} за {1}", assignment.CompletedBy.Name, assignment.Performer.Name);
-        reportLine.Department = Equals(assignment.Performer, assignment.CompletedBy) ? Sungero.Company.Employees.As(assignment.Performer).Department.Name : Sungero.Company.Employees.As(assignment.CompletedBy).Department.Name;
+        
+        //reportLine.Performer = Equals(assignment.Performer, assignment.CompletedBy) ? assignment.Performer.Name : string.Format("{0} за {1}", assignment.CompletedBy.Name, assignment.Performer.Name);
+        var performerName = assignment.Performer?.Name ?? string.Empty;
+        var completedByName = assignment.CompletedBy?.Name ?? string.Empty;
+        reportLine.Performer = Equals(assignment.Performer, assignment.CompletedBy) 
+            ? performerName 
+            : $"{completedByName} за {performerName}";        
+        
+        var departmentName = Sungero.Company.Employees.As(assignment.Performer)?.Department?.Name ?? string.Empty;
+        var completedByDepartmentName = Sungero.Company.Employees.As(assignment.CompletedBy)?.Department?.Name ?? string.Empty;
+        reportLine.Department = Equals(assignment.Performer, assignment.CompletedBy) ? departmentName : completedByDepartmentName;
+        
         reportLine.Created = assignment.Created;
         reportLine.Complated = assignment.Completed;
         

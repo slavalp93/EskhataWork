@@ -140,6 +140,22 @@ namespace litiko.RegulatoryDocuments
   partial class RegulatoryDocumentServerHandlers
   {
 
+    public override void Saved(Sungero.Domain.SavedEventArgs e)
+    {
+      base.Saved(e);
+      
+      #region При изменении Состояния ВНД на Действующий - менять Состояние Основного ВНД на Устаревший.      
+      var lifeCycleStateChanged = _obj.LifeCycleState != null && !Equals(_obj.LifeCycleState, _obj.State.Properties.LifeCycleState.OriginalValue);
+      if (lifeCycleStateChanged && _obj.LifeCycleState == Sungero.Docflow.OfficialDocument.LifeCycleState.Active && 
+          _obj.LeadingDocument != null && _obj.LeadingDocument.LifeCycleState != Sungero.Docflow.OfficialDocument.LifeCycleState.Obsolete)
+      {
+        var asyncHandler = litiko.RegulatoryDocuments.AsyncHandlers.SetObsoleteLifeCircleStage.Create();
+        asyncHandler.DocumentID = _obj.LeadingDocument.Id;
+        asyncHandler.ExecuteAsync();
+      }
+      #endregion       
+    }
+
     public override void Saving(Sungero.Domain.SavingEventArgs e)
     {
       base.Saving(e);
@@ -151,7 +167,8 @@ namespace litiko.RegulatoryDocuments
       var processManager = _obj.ProcessManager;
       if (processManager != null && !_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, processManager))
         _obj.AccessRights.Grant(processManager, DefaultAccessRightsTypes.Change);      
-      #endregion
+      #endregion            
+           
     }
 
     public override void BeforeSave(Sungero.Domain.BeforeSaveEventArgs e)
@@ -166,7 +183,16 @@ namespace litiko.RegulatoryDocuments
       // Обновить связь с Основным ВНД
       if (_obj.LeadingDocument != null && _obj.LeadingDocument.AccessRights.CanRead() &&
           !_obj.Relations.GetRelatedFrom(Sungero.Docflow.PublicConstants.Module.BasisRelationName).Contains(_obj.LeadingDocument))
-        _obj.Relations.AddFromOrUpdate(Sungero.Docflow.PublicConstants.Module.BasisRelationName, _obj.State.Properties.LeadingDocument.OriginalValue, _obj.LeadingDocument);      
+        _obj.Relations.AddFromOrUpdate(Sungero.Docflow.PublicConstants.Module.BasisRelationName, _obj.State.Properties.LeadingDocument.OriginalValue, _obj.LeadingDocument);
+      
+      // Переименовать версию в соответствии с языком текущего документа
+      if (_obj.Language.HasValue && _obj.LastVersion != null && _obj.Versions.Count == 1)
+      {
+        if (_obj.Language.Value == litiko.RegulatoryDocuments.RegulatoryDocument.Language.Ru && _obj.LastVersion.Note != litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnRU.ToString())
+          _obj.LastVersion.Note = litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnRU.ToString();
+        if (_obj.Language.Value == litiko.RegulatoryDocuments.RegulatoryDocument.Language.Tj && _obj.LastVersion.Note != litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnTJ.ToString())
+          _obj.LastVersion.Note = litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnTJ.ToString();
+      }
     }
 
     public override void Created(Sungero.Domain.CreatedEventArgs e)

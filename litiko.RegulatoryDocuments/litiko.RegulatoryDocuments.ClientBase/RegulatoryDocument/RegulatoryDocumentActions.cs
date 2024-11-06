@@ -9,6 +9,21 @@ namespace litiko.RegulatoryDocuments.Client
 {
   partial class RegulatoryDocumentActions
   {
+    public virtual void CreateExplanatoryNote(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var addendum = litiko.CollegiateAgencies.PublicFunctions.Projectsolution.Remote.CreateExplanatoryNote();
+      if (addendum != null)
+      {
+        addendum.LeadingDocument = _obj;
+        addendum.Show();      
+      }
+    }
+
+    public virtual bool CanCreateExplanatoryNote(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return !_obj.State.IsChanged && (Equals(Users.Current, _obj.Author) || Equals(Users.Current, Users.As(_obj.PreparedBy)) || Users.Current.IncludedIn(Roles.Administrators));
+    }
+
     public virtual void ShowControlApprovingIRDReport(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var report = Reports.GetControlApprovingIRD();

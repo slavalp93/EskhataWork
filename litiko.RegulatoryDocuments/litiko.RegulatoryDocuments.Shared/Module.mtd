@@ -2,7 +2,22 @@
   "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
   "NameGuid": "675f2bde-e949-4463-bead-9bee45c51bb8",
   "Name": "RegulatoryDocuments",
-  "AsyncHandlers": [],
+  "AsyncHandlers": [
+    {
+      "NameGuid": "f057f494-3a77-4b77-96bc-8b44ff01bf3f",
+      "Name": "SetObsoleteLifeCircleStage",
+      "DelayPeriod": 15,
+      "DelayStrategy": "ExponentialDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "fc8183bf-b466-4b1b-baf8-63e3d4ba1cca",
+          "Name": "DocumentID",
+          "ParameterType": "LongInteger"
+        }
+      ]
+    }
+  ],
   "ClientAssemblyName": "litiko.RegulatoryDocuments.Client",
   "ClientBaseAssemblyName": "litiko.RegulatoryDocuments.ClientBase",
   "ClientBaseNamespace": "litiko.RegulatoryDocuments.ClientBase",
@@ -139,8 +154,12 @@
       "PreviousItemId": "b4dafa03-efef-4442-9108-1a57bcbb54fc"
     },
     {
-      "ItemId": "d7e17caa-6eee-4e41-90af-4218af7b73f3",
+      "ItemId": "272448e7-d150-4bd4-8b7c-014b01c22674",
       "PreviousItemId": "fe6cd98f-2f6b-41ad-8c19-8a7d1730967d"
+    },
+    {
+      "ItemId": "d7e17caa-6eee-4e41-90af-4218af7b73f3",
+      "PreviousItemId": "272448e7-d150-4bd4-8b7c-014b01c22674"
     },
     {
       "ItemId": "93fdbe21-5048-419a-9f76-704edccdf9ba",
@@ -318,7 +337,7 @@
   "SharedAssemblyName": "litiko.RegulatoryDocuments.Shared",
   "SharedNamespace": "litiko.RegulatoryDocuments.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.13",
+  "Version": "0.0.1.14",
   "Widgets": [],
   "Versions": [
     {

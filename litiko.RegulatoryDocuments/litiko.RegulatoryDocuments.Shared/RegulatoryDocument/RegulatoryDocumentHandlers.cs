@@ -32,10 +32,7 @@ namespace litiko.RegulatoryDocuments
               _obj.ProcessManager = leadingDoc.ProcessManager;
             
             if (!_obj.Language.HasValue)
-              _obj.Language = leadingDoc.Language;
-            
-            if (_obj.OnRequest == null)
-              _obj.OnRequest = leadingDoc.OnRequest;            
+              _obj.Language = leadingDoc.Language;                     
             
             if (!Equals(_obj.IsRequirements, leadingDoc.IsRequirements))
               _obj.IsRequirements = leadingDoc.IsRequirements;
@@ -65,10 +62,7 @@ namespace litiko.RegulatoryDocuments
               _obj.ProcessManager = leadingDoc.ProcessManager;
             
             if (!_obj.Language.HasValue)
-              _obj.Language = leadingDoc.Language;
-            
-            if (_obj.OnRequest == null)
-              _obj.OnRequest = leadingDoc.OnRequest;            
+              _obj.Language = leadingDoc.Language;                     
             
             if (!Equals(_obj.IsRequirements, leadingDoc.IsRequirements))
               _obj.IsRequirements = leadingDoc.IsRequirements;
@@ -100,15 +94,15 @@ namespace litiko.RegulatoryDocuments
           
 
           if (leadingDoc.HasVersions && !_obj.HasVersions)
-          {
-            _obj.CreateVersionFrom(leadingDoc.LastVersion.Body.Read(), leadingDoc.LastVersion.AssociatedApplication.Extension);
+          {            
+            _obj.CreateVersionFrom(leadingDoc.LastVersion.Body.Read(), leadingDoc.LastVersion.BodyAssociatedApplication.Extension);
             
             if (leadingDoc.Language.GetValueOrDefault() == RegulatoryDocument.Language.Ru)
             {
               var versionOnTJ = leadingDoc.Versions.Where(x => x.Note == litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnTJ).FirstOrDefault();
               if (versionOnTJ != null)
               {
-                var version = _obj.CreateVersionFrom(versionOnTJ.Body.Read(), versionOnTJ.AssociatedApplication.Extension);
+                var version = _obj.CreateVersionFrom(versionOnTJ.Body.Read(), versionOnTJ.BodyAssociatedApplication.Extension);
                 version.Note = litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnTJ;
               }            
             }            
@@ -118,7 +112,7 @@ namespace litiko.RegulatoryDocuments
               var versionOnRU = leadingDoc.Versions.Where(x => x.Note == litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnRU).FirstOrDefault();
               if (versionOnRU != null)
               {
-                var version = _obj.CreateVersionFrom(versionOnRU.Body.Read(), versionOnRU.AssociatedApplication.Extension);
+                var version = _obj.CreateVersionFrom(versionOnRU.Body.Read(), versionOnRU.BodyAssociatedApplication.Extension);
                 version.Note = litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnRU;
               }                        
             }
@@ -149,9 +143,12 @@ namespace litiko.RegulatoryDocuments
           
         if (deadLine != null)
         {
-          var newRevisionDaate = Calendar.GetDate(dateBegin.Value.Year + deadLine.Deadline.Value, dateBegin.Value.Month, dateBegin.Value.Day);
-          if (_obj.DateRevision != newRevisionDaate)
-            _obj.DateRevision = newRevisionDaate;
+          var newRevisionDate = Calendar.GetDate(dateBegin.Value.Year + deadLine.Deadline.Value, dateBegin.Value.Month, dateBegin.Value.Day);
+          if (_obj.DateRevision != newRevisionDate)
+            _obj.DateRevision = newRevisionDate;
+          
+          if (_obj.DateUpdate != newRevisionDate)
+            _obj.DateUpdate = newRevisionDate;
         }      
       }
       else

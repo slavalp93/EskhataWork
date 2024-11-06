@@ -213,6 +213,24 @@
       "Placement": "Shared",
       "ReturnType": "global::litiko.Eskhata.IOrder",
       "ReturnTypeFullName": "litiko.Eskhata.IOrder, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "DocumentAttachedInMainGroup",
+      "Parameters": [
+        {
+          "Name": "order",
+          "ParameterType": "global::litiko.Eskhata.IOrder",
+          "ParameterTypeFullName": "litiko.Eskhata.IOrder, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "task",
+          "ParameterType": "global::Sungero.Workflow.ITask",
+          "ParameterTypeFullName": "Sungero.Workflow.ITask, Sungero.Workflow.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
     }
   ],
   "PublicStructures": [],

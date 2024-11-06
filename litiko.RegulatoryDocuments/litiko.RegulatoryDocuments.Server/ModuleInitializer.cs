@@ -129,6 +129,7 @@ namespace litiko.RegulatoryDocuments.Server
       CreateApprovalSheetStage();
       CreateChangeStatusDocumentStage();
       CreateAddRelatedDocInAttStage();
+      CreateConvertIRDtoPDFStage();
     }
     
     #region CreateApprovalFunctionStages()
@@ -187,6 +188,20 @@ namespace litiko.RegulatoryDocuments.Server
         return;
       var stage = AddRelatedDocInAttStages.Create();
       stage.Name = "Добавление связанного документа во вложения задачи";
+      stage.TimeoutInHours = 4;
+      stage.Save();
+    } 
+
+    /// <summary>
+    /// Создание записи нового типа сценария "Этап преобразования версий ВНД в ПДФ".
+    /// </summary>
+    public static void CreateConvertIRDtoPDFStage()
+    {
+      InitializationLogger.DebugFormat("Init: Create Stage of converting IRD versions to PDF.");
+      if (ConvertIRDtoPDFStages.GetAll().Any())
+        return;
+      var stage = ConvertIRDtoPDFStages.Create();
+      stage.Name = "Преобразования версий ВНД в pdf";
       stage.TimeoutInHours = 4;
       stage.Save();
     } 
