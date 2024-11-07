@@ -18,9 +18,10 @@ namespace litiko.CollegiateAgencies.Isolated.DocumentBodyCreator
     /// </summary>
     /// <param name="inputStream">Входящий поток тела шаблона</param>
     /// <param name="minutesTemplateInfo">Значения параметров для замены в шаблоне</param>
+    /// <param name="isVoting">Необходимость добавления результатов голосования</param>
     /// <returns>Исходящий поток заполненного шаблона</returns>
     [Public]
-    public Stream FillMinutesBodyByTemplate(Stream inputStream, Dictionary<string, string> replacebleFields, List<litiko.CollegiateAgencies.Structures.Module.IMeetingResolutionInfo> meetingResolutions)
+    public Stream FillMinutesBodyByTemplate(Stream inputStream, Dictionary<string, string> replacebleFields, List<litiko.CollegiateAgencies.Structures.Module.IMeetingResolutionInfo> meetingResolutions, bool isVoting)
     {
       try
       {                        
@@ -51,6 +52,7 @@ namespace litiko.CollegiateAgencies.Isolated.DocumentBodyCreator
           foreach (var resolutionInfo in meetingResolutions)
           {
             builder.ParagraphFormat.LeftIndent = 7.0866;
+            builder.ParagraphFormat.FirstLineIndent = 0;
             builder.Font.Bold = true;
             builder.Writeln(resolutionInfo.ProjectSolutionTittle);
                                         
@@ -72,16 +74,19 @@ namespace litiko.CollegiateAgencies.Isolated.DocumentBodyCreator
             builder.Writeln(string.Join(Environment.NewLine, resolutionInfo.Decigions));
             builder.InsertParagraph();                    
 
-            builder.ParagraphFormat.LeftIndent = 40.251888;
-            builder.ParagraphFormat.FirstLineIndent = 0;
-            builder.Font.Bold = true;
-            builder.Writeln("Результат голосования:");
-            builder.Writeln(string.Format("«За» - {0} голосов", resolutionInfo.VoutingYes));
-            builder.Writeln(string.Format("«Против» - {0} голосов", resolutionInfo.VoutingNo));
-            builder.Writeln(string.Format("«Воздержавшихся» - {0} голосов", resolutionInfo.VoutingAbstained));
-            string isAccepted = resolutionInfo.VoutingAccepted.HasValue && resolutionInfo.VoutingAccepted.Value ? "Да" : "Нет";
-            builder.Writeln("Решение принято - " + isAccepted);
-            builder.InsertParagraph();                    
+            if (isVoting)
+            {
+              builder.ParagraphFormat.LeftIndent = 40.251888;
+              builder.ParagraphFormat.FirstLineIndent = 0;
+              builder.Font.Bold = true;
+              builder.Writeln("Результат голосования:");
+              builder.Writeln(string.Format("«За» - {0} голосов", resolutionInfo.VoutingYes));
+              builder.Writeln(string.Format("«Против» - {0} голосов", resolutionInfo.VoutingNo));
+              builder.Writeln(string.Format("«Воздержавшихся» - {0} голосов", resolutionInfo.VoutingAbstained));
+              string isAccepted = resolutionInfo.VoutingAccepted.HasValue && resolutionInfo.VoutingAccepted.Value ? "Да" : "Нет";
+              builder.Writeln("Решение принято - " + isAccepted);
+              builder.InsertParagraph();            
+            }
           }
         }        
         

@@ -30,8 +30,12 @@ namespace litiko.CollegiateAgencies.Client
         }
                 
         _obj.Voting.Clear();
+        if (_obj.Meeting.President != null)
+          _obj.Voting.AddNew().Member = _obj.Meeting.President;
+            
         foreach (var element in _obj.Meeting.Presentlitiko.Where(x => x.Employee != null))
-          _obj.Voting.AddNew().Member = element.Employee;
+          if (!_obj.Voting.Any(x => Equals(x.Member, element.Employee)))
+            _obj.Voting.AddNew().Member = element.Employee;
 
       }
       

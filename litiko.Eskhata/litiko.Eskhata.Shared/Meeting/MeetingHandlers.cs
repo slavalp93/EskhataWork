@@ -7,6 +7,17 @@ using litiko.Eskhata.Meeting;
 
 namespace litiko.Eskhata
 {
+  partial class MeetingAbsentlitikoSharedCollectionHandlers
+  {
+
+    public virtual void AbsentlitikoDeleted(Sungero.Domain.Shared.CollectionPropertyDeletedEventArgs e)
+    {
+      var deletedEmployee = _deleted.Employee;
+      if (deletedEmployee != null && !_obj.Presentlitiko.Any(x => Equals(deletedEmployee, x.Employee)))
+        _obj.Presentlitiko.AddNew().Employee = deletedEmployee;
+    }
+  }
+
   partial class MeetingSharedHandlers
   {
 
@@ -127,6 +138,11 @@ namespace litiko.Eskhata
     public virtual void PresentlitikoDeleted(Sungero.Domain.Shared.CollectionPropertyDeletedEventArgs e)
     {
       Functions.Meeting.SetQuorum(_obj, _obj.MeetingCategorylitiko);
+      
+      var deletedEmployee = _deleted.Employee;
+      if (deletedEmployee != null && !_obj.Absentlitiko.Any(x => Equals(deletedEmployee, x.Employee)))
+        _obj.Absentlitiko.AddNew().Employee = deletedEmployee;
+      
     }
 
     public virtual void PresentlitikoAdded(Sungero.Domain.Shared.CollectionPropertyAddedEventArgs e)

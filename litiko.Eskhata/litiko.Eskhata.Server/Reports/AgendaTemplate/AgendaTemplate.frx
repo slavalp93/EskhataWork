@@ -8055,6 +8055,7 @@ namespace FastReport
             <Column Name="No" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int32]]"/>
             <Column Name="Abstained" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int32]]"/>
             <Column Name="Accepted" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
+            <Column Name="VotingType" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Meeting" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces"/>
             <Column Name="ProjectSolution" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="litiko.CollegiateAgencies.IProjectsolution, Sungero.Domain.Interfaces"/>
           </SungeroEntityDataSource>
@@ -8172,6 +8173,7 @@ namespace FastReport
             <Column Name="No" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int32]]"/>
             <Column Name="Abstained" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int32]]"/>
             <Column Name="Accepted" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
+            <Column Name="VotingType" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Meeting" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces"/>
             <Column Name="ProjectSolution" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="litiko.CollegiateAgencies.IProjectsolution, Sungero.Domain.Interfaces"/>
           </SungeroEntityDataSource>
@@ -8387,6 +8389,7 @@ namespace FastReport
             <Column Name="No" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int32]]"/>
             <Column Name="Abstained" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int32]]"/>
             <Column Name="Accepted" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
+            <Column Name="VotingType" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Meeting" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces"/>
             <Column Name="ProjectSolution" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="litiko.CollegiateAgencies.IProjectsolution, Sungero.Domain.Interfaces"/>
           </SungeroEntityDataSource>
@@ -8598,6 +8601,7 @@ namespace FastReport
             <Column Name="No" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int32]]"/>
             <Column Name="Abstained" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int32]]"/>
             <Column Name="Accepted" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
+            <Column Name="VotingType" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Meeting" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces"/>
             <Column Name="ProjectSolution" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="litiko.CollegiateAgencies.IProjectsolution, Sungero.Domain.Interfaces"/>
           </SungeroEntityDataSource>
@@ -8814,6 +8818,7 @@ namespace FastReport
             <Column Name="No" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int32]]"/>
             <Column Name="Abstained" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int32]]"/>
             <Column Name="Accepted" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
+            <Column Name="VotingType" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Meeting" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces"/>
             <Column Name="ProjectSolution" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="litiko.CollegiateAgencies.IProjectsolution, Sungero.Domain.Interfaces"/>
           </SungeroEntityDataSource>
@@ -8987,6 +8992,7 @@ namespace FastReport
         <Column Name="No" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int32]]"/>
         <Column Name="Abstained" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int32]]"/>
         <Column Name="Accepted" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
+        <Column Name="VotingType" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
         <Column Name="Meeting" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces">
           <Column Name="Id" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int64]]"/>
           <Column Name="Status" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
@@ -9034,6 +9040,7 @@ namespace FastReport
             <Column Name="No" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int32]]"/>
             <Column Name="Abstained" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int32]]"/>
             <Column Name="Accepted" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
+            <Column Name="VotingType" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Meeting" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="litiko.Eskhata.IMeeting, Sungero.Domain.Interfaces"/>
             <Column Name="ProjectSolution" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="litiko.CollegiateAgencies.IProjectsolution, Sungero.Domain.Interfaces"/>
           </SungeroEntityDataSource>
@@ -9140,7 +9147,7 @@ namespace FastReport
           <Column Name="Note" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           <Column Name="Subject" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           <Column Name="SubjectTJ" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
-          <Column Name="Regulations" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Double]]"/>
+          <Column Name="Regulations" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int32]]"/>
           <Column Name="IncludedInAgenda" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Boolean]]"/>
           <Column Name="LocationState" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           <Column Name="ListenedRU" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
@@ -10546,11 +10553,11 @@ namespace FastReport
     <SungeroParameter Name="MeetingMembers" Id="acc55e34-721c-4f82-8950-cc16a4d13c58" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
   </Dictionary>
   <ReportPage Name="Page1" TopMargin="15.9" Watermark.Font="Arial, 60pt">
-    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="265.25">
+    <ReportTitleBand Name="ReportTitle1" Width="718.2" Height="284.15">
       <TextObject Name="Text1" Top="41.45" Width="718.2" Height="28.35" Text="Заседание [Meeting.MeetingCategorylitiko.NameForTemplate]" HorzAlign="Center" Font="Palatino Linotype, 12pt, style=Bold"/>
       <TextObject Name="Text2" Left="45.6" Top="126.05" Width="198.45" Height="18.9" Text="Место проведения:" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text3" Left="45.6" Top="163.85" Width="198.45" Height="18.9" Text="Дата/Время:" Font="Palatino Linotype, 12pt"/>
-      <TextObject Name="Text4" Left="45.6" Top="185.75" Width="198.45" Height="18.9" Text="Участники:" Font="Palatino Linotype, 12pt"/>
+      <TextObject Name="Text4" Left="45.6" Top="212.75" Width="198.45" Height="18.9" Text="Участники:" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text5" Left="245.05" Top="126.05" Width="463.05" Height="37.8" Text="[Meeting.Location] [Meeting.MeetingMethodlitiko.Name]" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text6" Left="245.05" Top="163.85" Width="463.05" Height="18.9" Text="[Meeting.DateTime]" Font="Palatino Linotype, 12pt">
         <Formats>
@@ -10558,19 +10565,21 @@ namespace FastReport
           <GeneralFormat/>
         </Formats>
       </TextObject>
-      <TextObject Name="Text7" Left="245.05" Top="185.75" Width="463.05" Height="28.35" Text="[MeetingMembers]" Font="Palatino Linotype, 12pt"/>
+      <TextObject Name="Text7" Left="245.05" Top="212.75" Width="463.05" Height="28.35" Text="[MeetingMembers]" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text8" Top="85.8" Width="718.2" Height="18.9" Text="ОАО «Банк Эсхата» № [Doc.RegistrationNumber]" HorzAlign="Center" Font="Palatino Linotype, 12pt, style=Bold"/>
-      <TextObject Name="Text9" Top="236.25" Width="718.2" Height="18.9" Text="ПОВЕСТКА ДНЯ" HorzAlign="Center" Font="Palatino Linotype, 12pt, style=Bold"/>
+      <TextObject Name="Text9" Top="263.25" Width="718.2" Height="18.9" Text="ПОВЕСТКА ДНЯ" HorzAlign="Center" Font="Palatino Linotype, 12pt, style=Bold"/>
       <TextObject Name="Text20" Top="9.45" Width="718.2" Height="28.35" HorzAlign="Center" Font="Palatino Linotype, 12pt, style=Bold"/>
+      <TextObject Name="Text21" Left="45.25" Top="189" Width="198.45" Height="18.9" Text="Длительность:" Font="Palatino Linotype, 12pt"/>
+      <TextObject Name="Text22" Left="244.7" Top="189" Width="463.05" Height="28.35" Text="[Meeting.Duration] ч." Font="Palatino Linotype, 12pt"/>
     </ReportTitleBand>
-    <ColumnHeaderBand Name="ColumnHeader1" Top="268.11" Width="718.2" Height="18.9">
+    <ColumnHeaderBand Name="ColumnHeader1" Top="287.48" Width="718.2" Height="18.9">
       <TextObject Name="Text14" Left="585.9" Width="132.3" Height="18.9" Border.Lines="All" Text="Приложение" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text10" Width="28.35" Height="18.9" Border.Lines="All" Text="№" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text11" Left="28.35" Width="321.3" Height="18.9" Border.Lines="All" Text="Тема повестки дня" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text12" Left="349.65" Width="103.95" Height="18.9" Border.Lines="All" Text="Регламент" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text13" Left="453.6" Width="132.3" Height="18.9" Border.Lines="All" Text="Докладчик" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
     </ColumnHeaderBand>
-    <DataBand Name="Data1" Top="289.86" Width="718.2" Height="18.9" DataSource="4d5dfb585d3f1b63194daa4a9b9c36a8">
+    <DataBand Name="Data1" Top="309.72" Width="718.2" Height="18.9" DataSource="4d5dfb585d3f1b63194daa4a9b9c36a8">
       <TextObject Name="Text15" Width="28.35" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.Number]." Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text16" Left="28.35" Width="321.3" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.ProjectSolution.Subject]" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text17" Left="349.65" Width="103.95" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.ProjectSolution.Regulations]" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>

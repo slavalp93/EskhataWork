@@ -171,7 +171,7 @@
   "IsolatedAssemblyName": "litiko.CollegiateAgencies.Isolated",
   "IsolatedFunctions": [
     {
-      "NameGuid": "377e156f-5a79-4af4-a0a4-9eb4f1264f21",
+      "NameGuid": "e582c894-6a14-4db4-b3b5-739bcef5d655",
       "Name": "FillMinutesBodyByTemplate",
       "IsolatedAreaId": "ff738b72-b42f-494d-adaf-be32d268cc2d",
       "Parameters": [
@@ -189,6 +189,11 @@
           "Name": "meetingResolutions",
           "ParameterType": "global::System.Collections.Generic.List<global::litiko.CollegiateAgencies.Structures.Module.IMeetingResolutionInfo>",
           "ParameterTypeFullName": "System.Collections.Generic.List`1[[litiko.CollegiateAgencies.Structures.Module.IMeetingResolutionInfo, Sungero.Domain.Interfaces]]"
+        },
+        {
+          "Name": "isVoting",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
         }
       ],
       "ReturnType": "global::System.IO.Stream",
@@ -696,7 +701,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.26",
+  "Version": "0.0.1.27",
   "Widgets": [],
   "Versions": [
     {

@@ -134,6 +134,34 @@ namespace litiko.CollegiateAgencies
   partial class ProjectsolutionServerHandlers
   {
 
+    public override void Saving(Sungero.Domain.SavingEventArgs e)
+    {
+      base.Saving(e);
+      
+      #region Выдать права
+      if (_obj.AccessRights.StrictMode != Sungero.Core.AccessRightsStrictMode.Enhanced)
+      {
+        // Ответственный за подготовку - Изменение
+        var ourSignatory = _obj.OurSignatory;
+        if (ourSignatory != null && !_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, ourSignatory))
+          _obj.AccessRights.Grant(ourSignatory, DefaultAccessRightsTypes.Change);
+        
+        // Докладчик - Изменение
+        var speaker = _obj.Speaker;
+        if (speaker != null && !_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, speaker))
+          _obj.AccessRights.Grant(speaker, DefaultAccessRightsTypes.Change);
+  
+        // Приглашенные сотрудники - Просмотр      
+        foreach (var element in _obj.InvitedEmployees.Where(x => x.Employee != null))
+        {
+          var invitedEmployee = element.Employee;
+          if (!_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Read, invitedEmployee))
+          _obj.AccessRights.Grant(invitedEmployee, DefaultAccessRightsTypes.Read);
+        }                  
+      }            
+      #endregion      
+    }
+
     public override void BeforeSave(Sungero.Domain.BeforeSaveEventArgs e)
     {
       base.BeforeSave(e);

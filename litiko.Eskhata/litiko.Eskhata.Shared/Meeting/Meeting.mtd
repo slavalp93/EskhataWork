@@ -693,6 +693,9 @@
       "Name": "Absentlitiko",
       "Code": "MeetingAbsentl",
       "EntityGuid": "8db8dd7f-7826-4202-9b55-d78cfc572f88",
+      "HandledEvents": [
+        "DeletedShared"
+      ],
       "IsShowedInList": false,
       "PreviousPropertyGuid": "683bbb3f-8e33-4dab-aefd-17f212357dba"
     },

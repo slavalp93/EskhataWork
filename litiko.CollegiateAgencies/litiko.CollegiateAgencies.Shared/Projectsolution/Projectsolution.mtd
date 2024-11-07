@@ -577,6 +577,10 @@
             {
               "Name": "NavigationPropertyGuid",
               "Value": "5bc984b1-244b-436b-9641-270da08a2732"
+            },
+            {
+              "Name": "IsDuplicatesAllowed",
+              "Value": false
             }
           ]
         },
@@ -586,7 +590,7 @@
           "Name": "InvitedExternal",
           "ColumnNumber": 0,
           "ColumnSpan": 2,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiLikeEditorToCollectionBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiSelectFromListEditorToCollectionBinder",
           "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
           "PropertyGuid": "5e3281ef-928b-45e7-9716-1a6a062c60d2",
           "RowNumber": 11,
@@ -900,7 +904,8 @@
     "WriteHistoryServer",
     "FilteringServer",
     "CreatingFromServer",
-    "BeforeSaveServer"
+    "BeforeSaveServer",
+    "SavingServer"
   ],
   "IconResourcesKeys": [],
   "IntegrationServiceName": "CollegiateAgenciesProjectsolution",
