@@ -92,7 +92,8 @@ namespace litiko.CollegiateAgencies.Shared
         var relatedIRDs = _obj.Relations.GetRelated(Sungero.Docflow.PublicConstants.Module.SimpleRelationName)
           .Where(d => litiko.RegulatoryDocuments.RegulatoryDocuments.Is(d));
         foreach (var document in relatedIRDs)
-          approvalTask.OtherGroup.All.Add(document);
+          if (!approvalTask.OtherGroup.All.Contains(document))
+            approvalTask.OtherGroup.All.Add(document);
       }
 
     }    

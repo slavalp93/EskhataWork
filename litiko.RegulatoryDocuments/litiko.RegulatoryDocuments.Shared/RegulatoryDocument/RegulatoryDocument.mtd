@@ -775,6 +775,9 @@
       "NameGuid": "33579bd4-322a-47a5-82d5-3b430e103cc7",
       "Name": "DateRevision",
       "Code": "DateRevision",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
       "PreviousPropertyGuid": "c764c24d-d022-44fe-b5ea-e1ef5cec6f71"
     },

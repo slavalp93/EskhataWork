@@ -21,7 +21,7 @@ namespace litiko.CollegiateAgencies.Isolated.DocumentBodyCreator
     /// <param name="isVoting">Необходимость добавления результатов голосования</param>
     /// <returns>Исходящий поток заполненного шаблона</returns>
     [Public]
-    public Stream FillMinutesBodyByTemplate(Stream inputStream, Dictionary<string, string> replacebleFields, List<litiko.CollegiateAgencies.Structures.Module.IMeetingResolutionInfo> meetingResolutions, bool isVoting)
+    public Stream FillMinutesBodyByTemplate(Stream inputStream, Dictionary<string, string> replacebleFields, List<litiko.CollegiateAgencies.Structures.Module.IMeetingResolutionInfo> meetingResolutions)
     {
       try
       {                        
@@ -74,7 +74,7 @@ namespace litiko.CollegiateAgencies.Isolated.DocumentBodyCreator
             builder.Writeln(string.Join(Environment.NewLine, resolutionInfo.Decigions));
             builder.InsertParagraph();                    
 
-            if (isVoting)
+            if (resolutionInfo.WithVoting)
             {
               builder.ParagraphFormat.LeftIndent = 40.251888;
               builder.ParagraphFormat.FirstLineIndent = 0;

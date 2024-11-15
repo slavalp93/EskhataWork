@@ -133,4 +133,43 @@
   <data name="JobDescription_0f7f09fe1d33410384c547b389580edd" xml:space="preserve">
     <value>Integration. OKVED</value>
   </data>
+  <data name="CoverDescription" xml:space="preserve">
+    <value>The module is designed to configure and maintain integrations with external systems.</value>
+  </data>
+  <data name="CoverTab_Tab" xml:space="preserve">
+    <value>Tab</value>
+  </data>
+  <data name="CoverGroup_Documents" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="CoverAction_ExchangeDocument" xml:space="preserve">
+    <value>ExchangeDocument</value>
+  </data>
+  <data name="CoverDescription_ExchangeDocument" xml:space="preserve">
+    <value>List of outgoing/incoming xml exchange packages.</value>
+  </data>
+  <data name="CoverGroup_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="CoverAction_IntegrationMethod" xml:space="preserve">
+    <value>Integration methods</value>
+  </data>
+  <data name="CoverDescription_IntegrationMethod" xml:space="preserve">
+    <value>List of integration methods</value>
+  </data>
+  <data name="CoverAction_IntegrationSystem" xml:space="preserve">
+    <value>Integration systems</value>
+  </data>
+  <data name="CoverDescription_IntegrationSystem" xml:space="preserve">
+    <value>List of integration systems</value>
+  </data>
+  <data name="CoverAction_ModuleJobs" xml:space="preserve">
+    <value>Jobs</value>
+  </data>
+  <data name="CoverDescription_ModuleJobs" xml:space="preserve">
+    <value>List of module background processes</value>
+  </data>
+  <data name="sf_96d31d03_06b2_4266_8058_815ecc7bad28" xml:space="preserve">
+    <value>Module jobs</value>
+  </data>
 </root>

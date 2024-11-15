@@ -35,7 +35,9 @@
     "Versions": []
   },
   "DocumentVersionCreationSources": [
-    "Template"
+    "Template",
+    "File",
+    "Scanner"
   ],
   "ExtraSearchProperties": [],
   "FilterPanel": {

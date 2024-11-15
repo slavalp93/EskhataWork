@@ -29,6 +29,11 @@ namespace litiko.CollegiateAgencies.Structures.Module
     public string Decigions { get; set; }
     
     /// <summary>
+    /// С голосованием?
+    /// </summary>
+    public bool WithVoting { get; set; }    
+    
+    /// <summary>
     /// Кол-во голосов - «За»
     /// </summary>
     public int? VoutingYes { get; set; }

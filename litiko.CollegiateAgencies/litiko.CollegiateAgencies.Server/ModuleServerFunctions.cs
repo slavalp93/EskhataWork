@@ -200,7 +200,8 @@ namespace litiko.CollegiateAgencies.Server
             projectSolution.DecidedMinutes.Select(
               decided => $"{element.Number}.{decided.Number}. {decided.DecisionRU}"
             ));
-          
+                    
+          meetingResolutionInfo.WithVoting = element.VotingType.HasValue && element.VotingType != litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.NoVoting;
           meetingResolutionInfo.VoutingYes = element.Yes.HasValue ? element.Yes.Value : 0;
           meetingResolutionInfo.VoutingNo = element.No.HasValue ? element.No.Value : 0;
           meetingResolutionInfo.VoutingAbstained = element.Abstained.HasValue ? element.Abstained.Value : 0;
@@ -234,12 +235,14 @@ namespace litiko.CollegiateAgencies.Server
         var votingrecord = meeting.ProjectSolutionslitiko.Where(x => Equals(x.ProjectSolution, projectSolution)).FirstOrDefault();
         if (votingrecord != null)
         {
+          meetingResolutionInfo.WithVoting = votingrecord.VotingType.HasValue && votingrecord.VotingType != litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.NoVoting;
           meetingResolutionInfo.VoutingYes = votingrecord.Yes.HasValue ? votingrecord.Yes.Value : 0;
           meetingResolutionInfo.VoutingNo = votingrecord.No.HasValue ? votingrecord.No.Value : 0;
           meetingResolutionInfo.VoutingAbstained = votingrecord.Abstained.HasValue ? votingrecord.Abstained.Value : 0;                    
         }
         else
         {
+          meetingResolutionInfo.WithVoting = false;
           meetingResolutionInfo.VoutingYes = 0;
           meetingResolutionInfo.VoutingNo = 0;
           meetingResolutionInfo.VoutingAbstained = 0;
@@ -252,9 +255,8 @@ namespace litiko.CollegiateAgencies.Server
       #endregion
       
       #region Формирование тела по шаблону
-      
-      bool isVoting = meeting.Votinglitiko.HasValue && meeting.Votinglitiko != litiko.Eskhata.Meeting.Votinglitiko.NoVoting;      
-      var resultStream = litiko.CollegiateAgencies.IsolatedFunctions.DocumentBodyCreator.FillMinutesBodyByTemplate(templateDoc.LastVersion.Body.Read() , replacebleFields, meetingResolutions, isVoting);
+            
+      var resultStream = litiko.CollegiateAgencies.IsolatedFunctions.DocumentBodyCreator.FillMinutesBodyByTemplate(templateDoc.LastVersion.Body.Read() , replacebleFields, meetingResolutions);
       
       // Выключить error-логирование при доступе к зашифрованным бинарным данным/версии.
       AccessRights.SuppressSecurityEvents(

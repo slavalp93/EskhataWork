@@ -130,4 +130,46 @@
   <data name="JobDescription_0f7f09fe1d33410384c547b389580edd" xml:space="preserve">
     <value>Интеграция. ОКВЭД</value>
   </data>
+  <data name="CoverTitle" xml:space="preserve">
+    <value>Интеграция</value>
+  </data>
+  <data name="CoverDescription" xml:space="preserve">
+    <value>Модуль предназначен для настройки и сопровождения интеграций с внешними системами.</value>
+  </data>
+  <data name="CoverTab_Tab" xml:space="preserve">
+    <value>Tab</value>
+  </data>
+  <data name="CoverGroup_Documents" xml:space="preserve">
+    <value>Документы</value>
+  </data>
+  <data name="CoverAction_ExchangeDocument" xml:space="preserve">
+    <value>Документы обмена</value>
+  </data>
+  <data name="CoverDescription_ExchangeDocument" xml:space="preserve">
+    <value>Список исходящих/входящих xml-пакетов обмена.</value>
+  </data>
+  <data name="CoverGroup_Settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="CoverAction_IntegrationMethod" xml:space="preserve">
+    <value>Методы интеграции</value>
+  </data>
+  <data name="CoverDescription_IntegrationMethod" xml:space="preserve">
+    <value>Список методов интеграции</value>
+  </data>
+  <data name="CoverAction_IntegrationSystem" xml:space="preserve">
+    <value>Интеграционные системы</value>
+  </data>
+  <data name="CoverDescription_IntegrationSystem" xml:space="preserve">
+    <value>Список интеграционных систем</value>
+  </data>
+  <data name="sf_96d31d03_06b2_4266_8058_815ecc7bad28" xml:space="preserve">
+    <value>Фоновые процессы</value>
+  </data>
+  <data name="CoverAction_ModuleJobs" xml:space="preserve">
+    <value>Фоновые процессы</value>
+  </data>
+  <data name="CoverDescription_ModuleJobs" xml:space="preserve">
+    <value>Список фоновых процессов модуля</value>
+  </data>
 </root>

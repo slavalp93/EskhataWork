@@ -10,6 +10,11 @@ namespace litiko.RegulatoryDocuments
   partial class RegulatoryDocumentSharedHandlers
   {
 
+    public virtual void DateRevisionChanged(Sungero.Domain.Shared.DateTimePropertyChangedEventArgs e)
+    {
+      _obj.DateUpdate = e.NewValue;      
+    }
+
     public override void LeadingDocumentChanged(Sungero.Docflow.Shared.OfficialDocumentLeadingDocumentChangedEventArgs e)
     {
       base.LeadingDocumentChanged(e);
@@ -145,10 +150,7 @@ namespace litiko.RegulatoryDocuments
         {
           var newRevisionDate = Calendar.GetDate(dateBegin.Value.Year + deadLine.Deadline.Value, dateBegin.Value.Month, dateBegin.Value.Day);
           if (_obj.DateRevision != newRevisionDate)
-            _obj.DateRevision = newRevisionDate;
-          
-          if (_obj.DateUpdate != newRevisionDate)
-            _obj.DateUpdate = newRevisionDate;
+            _obj.DateRevision = newRevisionDate;          
         }      
       }
       else

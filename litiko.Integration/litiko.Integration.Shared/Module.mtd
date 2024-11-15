@@ -27,18 +27,70 @@
   "CompanyCode": "litiko",
   "Cover": {
     "NameGuid": "264f85fb-4c17-48f7-89be-5964ce9d985d",
-    "Actions": [],
+    "Actions": [
+      {
+        "$type": "Sungero.Metadata.CoverComputableFolderActionMetadata, Sungero.Metadata",
+        "NameGuid": "11298db7-de90-4617-b8bf-2bde0c8b5036",
+        "Name": "ModuleJobs",
+        "ComputableFolderId": "96d31d03-06b2-4266-8058-815ecc7bad28",
+        "GroupId": "40d8951b-5674-4678-b8d8-991d7645ddaa",
+        "PreviousItemGuid": "42de999f-ddd5-4076-b091-7f3fc041bdd1"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "21951356-83a6-41e8-a72d-86fd4a76f5b4",
+        "Name": "IntegrationMethod",
+        "EntityTypeId": "5f22554a-11f9-4be7-930c-06aebb26f765",
+        "GroupId": "40d8951b-5674-4678-b8d8-991d7645ddaa"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "42de999f-ddd5-4076-b091-7f3fc041bdd1",
+        "Name": "IntegrationSystem",
+        "EntityTypeId": "658be504-4305-47af-a3e6-eb99f30a421c",
+        "GroupId": "40d8951b-5674-4678-b8d8-991d7645ddaa",
+        "PreviousItemGuid": "21951356-83a6-41e8-a72d-86fd4a76f5b4"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "81185b9b-430e-4d39-bc1f-9a1b76db2a3a",
+        "Name": "ExchangeDocument",
+        "EntityTypeId": "47dff28c-fde9-4a44-b908-da0167e51457",
+        "GroupId": "0db013cc-c54e-4d09-8330-4f45268bd3ea"
+      }
+    ],
     "Background": null,
     "Footer": {
       "NameGuid": "d42adca8-7393-44f7-a9c2-96e12c0b43b8",
       "BackgroundPosition": "Stretch"
     },
-    "Groups": [],
+    "Groups": [
+      {
+        "NameGuid": "0db013cc-c54e-4d09-8330-4f45268bd3ea",
+        "Name": "Documents",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconDocuments_0db013ccc54e4d0983304f45268bd3ea.png",
+        "TabId": "a512eb2d-9dde-48ed-b549-433c4ac2ce74"
+      },
+      {
+        "NameGuid": "40d8951b-5674-4678-b8d8-991d7645ddaa",
+        "Name": "Settings",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconSettings_40d8951b56744678b8d8991d7645ddaa.png",
+        "PreviousItemGuid": "0db013cc-c54e-4d09-8330-4f45268bd3ea",
+        "TabId": "a512eb2d-9dde-48ed-b549-433c4ac2ce74"
+      }
+    ],
     "Header": {
       "NameGuid": "3a8e39b4-e735-4975-9b89-804aaeff8137",
       "BackgroundPosition": "Stretch"
     },
-    "Tabs": []
+    "Tabs": [
+      {
+        "NameGuid": "a512eb2d-9dde-48ed-b549-433c4ac2ce74",
+        "Name": "Tab"
+      }
+    ]
   },
   "Dependencies": [
     {
@@ -60,6 +112,10 @@
     {
       "ItemId": "5f22554a-11f9-4be7-930c-06aebb26f765",
       "PreviousItemId": "658be504-4305-47af-a3e6-eb99f30a421c"
+    },
+    {
+      "ItemId": "96d31d03-06b2-4266-8058-815ecc7bad28",
+      "PreviousItemId": "5f22554a-11f9-4be7-930c-06aebb26f765"
     }
   ],
   "HandledEvents": [
@@ -314,8 +370,26 @@
   "ServerNamespace": "litiko.Integration.Server",
   "SharedAssemblyName": "litiko.Integration.Shared",
   "SharedNamespace": "litiko.Integration.Shared",
-  "SpecialFolders": [],
-  "Version": "0.0.1.62",
+  "SpecialFolders": [
+    {
+      "NameGuid": "96d31d03-06b2-4266-8058-815ecc7bad28",
+      "Name": "ModuleJobs",
+      "DefaultContentType": "56c16259-fa13-4474-98fc-3f517cc4ed02",
+      "DisplayType": "Module",
+      "FilterPanel": {
+        "NameGuid": "417e201b-5791-49b9-a86e-0062c095fb2b",
+        "Name": "FilterPanel",
+        "Controls": []
+      },
+      "HandledEvents": [
+        "DataQueryServer"
+      ],
+      "IsShow": true,
+      "Kind": "Computable",
+      "NeedShowMarkedCount": false
+    }
+  ],
+  "Version": "0.0.1.65",
   "Widgets": [],
   "Versions": [
     {

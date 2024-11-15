@@ -279,6 +279,7 @@ namespace litiko.Integration.Server
         throw AppliedCodeException.Create(string.Format("Integration method {0} not found", integrationMethodName));
       
       // Проверить, есть ли документы обмена, на которые еще не получен ответ
+      /*
       var exchDocs = ExchangeDocuments.GetAll().Where(d => d.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.Awaiting || d.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart
                                                      && Equals(d.IntegrationMethod, integrationMethod)).Select(d => d.Id);
       if (exchDocs.Any())
@@ -286,7 +287,7 @@ namespace litiko.Integration.Server
         Logger.DebugFormat("Pending requests found: {0}", exchDocs.ToString());
         return;
       }
-            
+      */      
       var exchDoc = Integration.ExchangeDocuments.Create();
       exchDoc.IntegrationMethod = integrationMethod;      
       exchDoc.Save();

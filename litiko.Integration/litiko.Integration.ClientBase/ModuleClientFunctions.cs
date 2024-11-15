@@ -9,5 +9,12 @@ namespace litiko.Integration.Client
   public class ModuleFunctions
   {
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public virtual void Function1()      
+    {
+    }
+
   }
 }
