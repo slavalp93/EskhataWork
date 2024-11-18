@@ -136,10 +136,10 @@ namespace litiko.CollegiateAgencies
 
     public override void Saving(Sungero.Domain.SavingEventArgs e)
     {
-      base.Saving(e);
+      base.Saving(e);      
       
       #region Выдать права
-      if (_obj.AccessRights.StrictMode != Sungero.Core.AccessRightsStrictMode.Enhanced)
+      if (_obj.AccessRights.StrictMode == Sungero.Core.AccessRightsStrictMode.None)
       {
         // Ответственный за подготовку - Изменение
         var ourSignatory = _obj.OurSignatory;
@@ -157,9 +157,21 @@ namespace litiko.CollegiateAgencies
           var invitedEmployee = element.Employee;
           if (!_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Read, invitedEmployee))
           _obj.AccessRights.Grant(invitedEmployee, DefaultAccessRightsTypes.Read);
-        }                  
+        }
+
+        // Переводчик
+        var roleTranslator = Roles.GetAll(r => r.Sid == Constants.Module.RoleGuid.Translator).FirstOrDefault();
+        if (roleTranslator != null)
+        {
+          foreach (var element in roleTranslator.RecipientLinks)
+          {
+            if (!_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, element.Member))
+              _obj.AccessRights.Grant(element.Member, DefaultAccessRightsTypes.Change);
+          }
+        }
       }            
       #endregion      
+      
     }
 
     public override void BeforeSave(Sungero.Domain.BeforeSaveEventArgs e)

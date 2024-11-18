@@ -181,6 +181,7 @@ namespace litiko.CollegiateAgencies.Server
       Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(Resources.RoleSecretaries, Resources.DescriptionRoleSecreteries, Constants.Module.RoleGuid.Secretaries);
       Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(Resources.RolePresidents, Resources.DescriptionRolePresidents, Constants.Module.RoleGuid.Presidents);
       Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(Resources.RoleCreationResolutions, Resources.DescriptionRoleCreationResolutions, Constants.Module.RoleGuid.CreationResolutions);
+      CreateSingleUserRole(Resources.RoleTranslator, Resources.RoleTranslator, Constants.Module.RoleGuid.Translator);
       
     }
     
@@ -222,6 +223,48 @@ namespace litiko.CollegiateAgencies.Server
       stage.Name = "Обновление результатов голосования в совещании";
       stage.TimeoutInHours = 4;
       stage.Save();
+    }    
+    
+    /// <summary>
+    /// Создать роль с одним участником.
+    /// </summary>
+    /// <param name="roleName">Название роли.</param>
+    /// <param name="roleDescription">Описание роли.</param>
+    /// <param name="roleGuid">Guid роли. Игнорирует имя.</param>
+    /// <returns>Новая роль.</returns>
+    [Public]
+    public static IRole CreateSingleUserRole(string roleName, string roleDescription, Guid roleGuid)
+    {
+      InitializationLogger.DebugFormat("Init: Create Role {0}", roleName);
+      var role = Roles.GetAll(r => r.Sid == roleGuid).FirstOrDefault();
+      
+      if (role == null)
+      {
+        role = Roles.Create();
+        role.Name = roleName;
+        role.Description = roleDescription;
+        role.Sid = roleGuid;
+        role.IsSystem = true;
+        role.IsSingleUser = true;
+        role.RecipientLinks.AddNew().Member = Users.Current;
+        role.Save();
+      }
+      else
+      {
+        if (role.Name != roleName)
+        {
+          InitializationLogger.DebugFormat("Role '{0}'(Sid = {1}) renamed as '{2}'", role.Name, role.Sid, roleName);
+          role.Name = roleName;
+          role.Save();
+        }
+        if (role.Description != roleDescription)
+        {
+          InitializationLogger.DebugFormat("Role '{0}'(Sid = {1}) update Description '{2}'", role.Name, role.Sid, roleDescription);
+          role.Description = roleDescription;
+          role.Save();
+        }
+      }
+      return role;
     }    
   }
 }

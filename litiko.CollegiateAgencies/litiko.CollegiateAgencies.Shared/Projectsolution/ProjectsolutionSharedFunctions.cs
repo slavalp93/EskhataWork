@@ -34,10 +34,17 @@ namespace litiko.CollegiateAgencies.Shared
         Equals(_obj.Meeting.MeetingCategorylitiko.President, Sungero.Company.Employees.As(Users.Current))
        );
       
-      properties.ListenedRUMinutes.IsEnabled = isEnabled || isСommitteeMember;
-      properties.ListenedENMinutes.IsEnabled = isEnabled || isСommitteeMember;
-      properties.ListenedTJMinutes.IsEnabled = isEnabled || isСommitteeMember;
-      properties.DecidedMinutes.IsEnabled = isEnabled || isСommitteeMember;
+      // Роль переводчик
+      var isTranslator = false;
+      var roleTranslator = Roles.GetAll(r => r.Sid == Constants.Module.RoleGuid.Translator).FirstOrDefault();
+      if (roleTranslator != null && Users.Current.IncludedIn(roleTranslator))
+        isTranslator = true;
+      
+      properties.ListenedRUMinutes.IsEnabled = isEnabled || isСommitteeMember || isTranslator;
+      properties.ListenedENMinutes.IsEnabled = isEnabled || isСommitteeMember || isTranslator;
+      properties.ListenedTJMinutes.IsEnabled = isEnabled || isСommitteeMember || isTranslator;
+      properties.DecidedMinutes.IsEnabled = isEnabled || isСommitteeMember || isTranslator;
+      
       #endregion
     }
 

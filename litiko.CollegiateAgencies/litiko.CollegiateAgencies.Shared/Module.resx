@@ -133,4 +133,7 @@
   <data name="DescriptionRoleCreationResolutions" xml:space="preserve">
     <value>Employees who have the right to create documents with the Resolution kind.</value>
   </data>
+  <data name="RoleTranslator" xml:space="preserve">
+    <value>Translator</value>
+  </data>
 </root>

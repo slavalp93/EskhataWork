@@ -56,6 +56,10 @@ namespace litiko.CollegiateAgencies.Constants
       /// <summary> Создание постановлений </summary>
       [Sungero.Core.Public]
       public static readonly Guid CreationResolutions = Guid.Parse("bc3a6515-3348-4932-9cc6-fb57d8dfe8d5");            
+      
+      /// <summary> Создание постановлений </summary>
+      [Sungero.Core.Public]
+      public static readonly Guid Translator = Guid.Parse("61b23bd1-ca9a-457a-9afc-5873168cea60");                  
     }
     
     public static class ParamNames

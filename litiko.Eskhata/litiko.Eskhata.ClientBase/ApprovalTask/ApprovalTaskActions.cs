@@ -26,6 +26,7 @@ namespace litiko.Eskhata.Client
       
       base.Start(e);
       
+
       var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
       
       // TODO Возможны ошибки при блокировках...
@@ -107,7 +108,7 @@ namespace litiko.Eskhata.Client
         }        
       }
       #endregion      
-      
+
     }
 
     public override bool CanStart(Sungero.Domain.Client.CanExecuteActionArgs e)

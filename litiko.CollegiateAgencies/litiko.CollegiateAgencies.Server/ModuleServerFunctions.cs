@@ -9,6 +9,7 @@ namespace litiko.CollegiateAgencies.Server
 {
   public class ModuleFunctions
   {
+    
     /// <summary>
     /// Проверка изменения свойства
     /// </summary>

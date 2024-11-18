@@ -133,4 +133,7 @@
   <data name="DescriptionRoleCreationResolutions" xml:space="preserve">
     <value>Сотрудники, имеющие право создания документов с видом Постановление.</value>
   </data>
+  <data name="RoleTranslator" xml:space="preserve">
+    <value>Переводчик</value>
+  </data>
 </root>

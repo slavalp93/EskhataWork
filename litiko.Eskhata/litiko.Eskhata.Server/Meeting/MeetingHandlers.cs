@@ -30,8 +30,9 @@ namespace litiko.Eskhata
 
     public override void Saving(Sungero.Domain.SavingEventArgs e)
     {
+
       base.Saving(e);
-      
+            
       if (_obj.State.Properties.ProjectSolutionslitiko.IsChanged && !e.Params.Contains(litiko.CollegiateAgencies.PublicConstants.Module.ParamNames.DontUpdateProjectSolution))
       {
         foreach (var element in _obj.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null))
@@ -41,6 +42,7 @@ namespace litiko.Eskhata
             doc.Meeting = _obj;
         }
       }
+
     }
   }
 
