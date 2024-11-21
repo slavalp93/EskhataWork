@@ -16,6 +16,7 @@ namespace litiko.RecordManagementEskhata.Server
       CreateReportsTables();
       CreateConvertOrdToPdfStage();
       Reports.AccessRights.Grant(Reports.GetDocflowReport().Info, Roles.AllUsers, DefaultReportAccessRightsTypes.Execute);
+      Reports.AccessRights.Grant(Reports.GetAcquaintanceApprovalSheet().Info, Roles.AllUsers, DefaultReportAccessRightsTypes.Execute);
     }
     
     public static void CreateDocumentKinds()

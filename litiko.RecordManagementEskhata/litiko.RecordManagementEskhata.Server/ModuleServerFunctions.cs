@@ -123,8 +123,19 @@ namespace litiko.RecordManagementEskhata.Server
       
       Sungero.Docflow.PublicFunctions.Module.LogPdfConverting("Start converting to PDF", document, version);
       
-      // Получить тело версии для преобразования в PDF.
-      var body = Sungero.Docflow.PublicFunctions.OfficialDocument.GetBodyToConvertToPdf(document, version, isSignatureMark);
+      // Получить тело версии для преобразования в PDF.      
+      var body = Sungero.Docflow.Structures.OfficialDocument.VersionBody.Create();      
+      if (version.PublicBody == null || version.PublicBody.Size == 0)
+      {
+        body.Body = Sungero.Docflow.PublicFunctions.Module.GetBinaryData(version.Body);
+        body.Extension = version.BodyAssociatedApplication.Extension;
+      }
+      else
+      {
+        body.Body = Sungero.Docflow.PublicFunctions.Module.GetBinaryData(version.PublicBody);
+        body.Extension = version.AssociatedApplication.Extension;
+      }      
+      
       if (body == null || body.Body == null || body.Body.Length == 0)
       {
         Sungero.Docflow.PublicFunctions.Module.LogPdfConverting("Cannot get version body", document, version);
