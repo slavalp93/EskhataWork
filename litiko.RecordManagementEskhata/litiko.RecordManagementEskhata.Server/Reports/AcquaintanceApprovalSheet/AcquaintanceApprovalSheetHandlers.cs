@@ -25,7 +25,10 @@ namespace litiko.RecordManagementEskhata
       var calledFromDocument = sourceDocument != null;
       var selectedVersionNumber = AcquaintanceApprovalSheet.DocumentVersion;
       
-      var versionNumber = sourceTask.AcquaintanceVersions.First(v => v.IsMainDocument == true).Number.Value;
+      var versionNumber = 1;
+      var acquaintanceVersion = sourceTask.AcquaintanceVersions.FirstOrDefault(v => v.IsMainDocument == true);
+      if (acquaintanceVersion != null)
+        versionNumber = acquaintanceVersion.Number.Value;      
       
       var tasks = new List<Sungero.RecordManagement.IAcquaintanceTask>();
       
