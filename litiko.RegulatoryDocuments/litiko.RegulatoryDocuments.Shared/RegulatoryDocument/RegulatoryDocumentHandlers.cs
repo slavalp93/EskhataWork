@@ -99,27 +99,19 @@ namespace litiko.RegulatoryDocuments
           
 
           if (leadingDoc.HasVersions && !_obj.HasVersions)
-          {            
-            _obj.CreateVersionFrom(leadingDoc.LastVersion.Body.Read(), leadingDoc.LastVersion.BodyAssociatedApplication.Extension);
-            
-            if (leadingDoc.Language.GetValueOrDefault() == RegulatoryDocument.Language.Ru)
+          {                                    
+            var versionOnRU = leadingDoc.Versions.Where(x => x.Note == litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnRU).FirstOrDefault();
+            if (versionOnRU != null)
             {
-              var versionOnTJ = leadingDoc.Versions.Where(x => x.Note == litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnTJ).FirstOrDefault();
-              if (versionOnTJ != null)
-              {
-                var version = _obj.CreateVersionFrom(versionOnTJ.Body.Read(), versionOnTJ.BodyAssociatedApplication.Extension);
-                version.Note = litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnTJ;
-              }            
+              var version = _obj.CreateVersionFrom(versionOnRU.Body.Read(), versionOnRU.BodyAssociatedApplication.Extension);
+              version.Note = litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnRU;
             }            
             
-            if (leadingDoc.Language.GetValueOrDefault() == RegulatoryDocument.Language.Tj)
+            var versionOnTJ = leadingDoc.Versions.Where(x => x.Note == litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnTJ).FirstOrDefault();
+            if (versionOnTJ != null)
             {
-              var versionOnRU = leadingDoc.Versions.Where(x => x.Note == litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnRU).FirstOrDefault();
-              if (versionOnRU != null)
-              {
-                var version = _obj.CreateVersionFrom(versionOnRU.Body.Read(), versionOnRU.BodyAssociatedApplication.Extension);
-                version.Note = litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnRU;
-              }                        
+              var version = _obj.CreateVersionFrom(versionOnTJ.Body.Read(), versionOnTJ.BodyAssociatedApplication.Extension);
+              version.Note = litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.VersionNoteOnTJ;
             }
           }
         }        
