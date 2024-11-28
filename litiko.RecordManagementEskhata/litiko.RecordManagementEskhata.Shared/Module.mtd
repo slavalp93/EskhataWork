@@ -98,6 +98,15 @@
       "Value": "new System.Guid(\"9018466b-9bdc-4179-8046-af55bbf1d624\")"
     },
     {
+      "Name": "BranchOrderEds",
+      "ParentClasses": [
+        "Module",
+        "DocumentKindGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"9018466b-9bdc-4179-8046-af55bbf1d624\")"
+    },
+    {
       "Name": "CharmanOrder",
       "ParentClasses": [
         "Module",
@@ -292,7 +301,8 @@
     "Completed",
     "InWork",
     "Expired",
-    "All"
+    "All",
+    "BranchOrderEds"
   ],
   "ServerAssemblyName": "litiko.RecordManagementEskhata.Server",
   "ServerNamespace": "litiko.RecordManagementEskhata.Server",

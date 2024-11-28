@@ -88,4 +88,7 @@
   <data name="All" xml:space="preserve">
     <value>All</value>
   </data>
+  <data name="BranchOrderEds" xml:space="preserve">
+    <value>Branch order (EDS)</value>
+  </data>
 </root>

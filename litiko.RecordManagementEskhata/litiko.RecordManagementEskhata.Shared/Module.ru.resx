@@ -88,4 +88,7 @@
   <data name="All" xml:space="preserve">
     <value>Все</value>
   </data>
+  <data name="BranchOrderEds" xml:space="preserve">
+    <value>Приказ по филиалу (ЭЦП) / Приказ</value>
+  </data>
 </root>

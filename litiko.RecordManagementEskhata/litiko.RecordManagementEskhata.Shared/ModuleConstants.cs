@@ -31,6 +31,10 @@ namespace litiko.RecordManagementEskhata.Constants
       /// <summary> Приказ по филиалу </summary>
       [Sungero.Core.Public]
       public static readonly Guid BranchOrder = Guid.Parse("9018466b-9bdc-4179-8046-af55bbf1d624");
+      
+      /// <summary> Приказ по филиалу (ЭЦП) </summary>
+      [Sungero.Core.Public]
+      public static readonly Guid BranchOrderEds = Guid.Parse("9018466b-9bdc-4179-8046-af55bbf1d624");
     }
   }
 }

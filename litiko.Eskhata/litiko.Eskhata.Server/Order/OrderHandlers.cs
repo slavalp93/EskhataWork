@@ -13,7 +13,8 @@ namespace litiko.Eskhata
     public override IQueryable<T> AssigneeFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e)
     {
       query = base.AssigneeFiltering(query, e);
-      if (_obj.DocumentKind == Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(RecordManagementEskhata.PublicConstants.Module.DocumentKindGuids.BranchOrder))
+      if (_obj.DocumentKind == Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(RecordManagementEskhata.PublicConstants.Module.DocumentKindGuids.BranchOrder) ||
+         _obj.DocumentKind == Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(RecordManagementEskhata.PublicConstants.Module.DocumentKindGuids.BranchOrderEds))
       {
         string extCode = Eskhata.Departments.As(Sungero.Company.Employees.Current?.Department)?.ExternalCodelitiko;
         if (!string.IsNullOrEmpty(extCode) && extCode.Length > 6)

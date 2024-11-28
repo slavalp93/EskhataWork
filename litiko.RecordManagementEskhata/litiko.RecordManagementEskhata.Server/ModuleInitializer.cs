@@ -90,6 +90,20 @@ namespace litiko.RecordManagementEskhata.Server
                            Constants.Module.DocumentKindGuids.BranchOrder,
                            false);
       #endregion
+      
+      #region Приказ по филиалу (ЭЦП)
+      Sungero.Docflow.PublicInitializationFunctions.Module.
+        CreateDocumentKind(litiko.RecordManagementEskhata.Resources.BranchOrderEds,
+                           litiko.RecordManagementEskhata.Resources.BranchOrderEds,
+                           registrable,
+                           Sungero.Docflow.DocumentKind.DocumentFlow.Inner,
+                           true,
+                           false,
+                           Constants.Module.DocumentTypeGuids.Order,
+                           actions,
+                           Constants.Module.DocumentKindGuids.BranchOrderEds,
+                           false);
+      #endregion
     }
     
     public static void CreateReportsTables()

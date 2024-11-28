@@ -5,6 +5,16 @@
   "AccessRightsMode": "Both",
   "Actions": [
     {
+      "NameGuid": "14ecec8f-f34b-46af-b0b1-bc9ded6086f0",
+      "Name": "Register",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ],
+      "Versions": []
+    },
+    {
       "NameGuid": "6af467db-ce34-492b-9ebd-f04132b99201",
       "Name": "CreateChecklist",
       "ActionArea": "CardAndCollection",

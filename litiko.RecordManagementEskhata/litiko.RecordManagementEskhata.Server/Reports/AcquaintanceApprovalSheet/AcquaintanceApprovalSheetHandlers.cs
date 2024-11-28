@@ -28,7 +28,7 @@ namespace litiko.RecordManagementEskhata
       var versionNumber = 1;
       var acquaintanceVersion = sourceTask.AcquaintanceVersions.FirstOrDefault(v => v.IsMainDocument == true);
       if (acquaintanceVersion != null)
-        versionNumber = acquaintanceVersion.Number.Value;      
+        versionNumber = acquaintanceVersion.Number.Value;
       
       var tasks = new List<Sungero.RecordManagement.IAcquaintanceTask>();
       
@@ -150,13 +150,6 @@ namespace litiko.RecordManagementEskhata
           }
           var taskAuthorLine = $"Ознакомил/провел обучение: {Sungero.Company.Employees.As(task.Author)?.JobTitle?.Name} - {task.Author?.Name}";
           newLine.AssignmentId = taskAuthorLine;
-          if (task.IsElectronicAcquaintance == true)
-          {
-            string jobTitle = Eskhata.JobTitles.As(employee.JobTitle)?.NameTGlitiko;
-            newLine.AssignmentHyperlink = string.IsNullOrEmpty(jobTitle) ?
-              string.Format("{0};{1}{2}", newLine.ShortName, Environment.NewLine, Hyperlinks.Get(sourceDocument)) :
-              string.Format("{0} {1};{2}{3}", jobTitle, newLine.ShortName, Environment.NewLine, Hyperlinks.Get(sourceDocument));
-          }
           
           var isCompleted = assignment.Status == Sungero.Workflow.Task.Status.Completed;
           if (isCompleted)
@@ -177,6 +170,14 @@ namespace litiko.RecordManagementEskhata
             else if (!Equals(assignment.ActiveText, Sungero.RecordManagement.Reports.Resources.AcquaintanceReport.AcquaintedDefaultResult.ToString()))
             {
               newLine.Note += string.Format("\"{0}\"", assignment.ActiveText);
+            }
+            
+            if (task.IsElectronicAcquaintance == true)
+            {
+              string jobTitle = Eskhata.JobTitles.As(employee.JobTitle)?.NameTGlitiko;
+              newLine.AssignmentHyperlink = string.IsNullOrEmpty(jobTitle) ?
+                string.Format("{0};{1}{2}", newLine.ShortName, Environment.NewLine, Hyperlinks.Get(sourceDocument)) :
+                string.Format("{0} {1};{2}{3}", jobTitle, newLine.ShortName, Environment.NewLine, Hyperlinks.Get(sourceDocument));
             }
           }
           

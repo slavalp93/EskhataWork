@@ -9,6 +9,23 @@ namespace litiko.Eskhata.Client
 {
   partial class IncomingLetterActions
   {
+    public override void Register(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var oldNumber = _obj.RegistrationNumber;
+      base.Register(e);
+      if (_obj.RegistrationNumber != oldNumber && string.IsNullOrEmpty(_obj.RegistrationNumber))
+      {
+        _obj.RegistrationDepartment = Departments.As(Sungero.Company.Employees.Current?.Department);
+        _obj.Save();
+      }
+      
+    }
+
+    public override bool CanRegister(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return base.CanRegister(e);
+    }
+
 
 
     public virtual bool CanCreateChecklist(Sungero.Domain.Client.CanExecuteActionArgs e)
