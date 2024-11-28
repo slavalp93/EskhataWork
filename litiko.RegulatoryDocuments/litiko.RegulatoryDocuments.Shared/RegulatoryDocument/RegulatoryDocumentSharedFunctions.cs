@@ -31,7 +31,7 @@ namespace litiko.RegulatoryDocuments.Shared
     {
       base.RefreshDocumentForm();
       
-      // "Введение в действие с", "Дата пересмотра" - доступно для изменения Группе регистрации "Общий отдел"
+      // "Дата пересмотра" - доступно для изменения Группе регистрации "Общий отдел"
       bool isEnabled = false;
       var regGroup = Sungero.Docflow.RegistrationGroups.GetAll(x => x.Status == Sungero.Docflow.RegistrationGroup.Status.Active && 
                                                                x.Name == litiko.RegulatoryDocuments.Constants.Module.RegGroupGeneralDepartment)
@@ -40,7 +40,7 @@ namespace litiko.RegulatoryDocuments.Shared
       if (regGroup != null && Users.Current.IncludedIn(regGroup))
         isEnabled = true;
       
-      _obj.State.Properties.DateBegin.IsEnabled = isEnabled;
+      //_obj.State.Properties.DateBegin.IsEnabled = isEnabled;
       _obj.State.Properties.DateRevision.IsEnabled = isEnabled;
       
       // "Дата актуализации" - доступно для изменения Группе регистрации "Общий отдел", Автору, Руководителю процесса
