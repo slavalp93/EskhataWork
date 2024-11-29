@@ -13,7 +13,7 @@ namespace litiko.Eskhata.Client
     {
       var oldNumber = _obj.RegistrationNumber;
       base.Register(e);
-      if (_obj.RegistrationNumber != oldNumber && string.IsNullOrEmpty(_obj.RegistrationNumber))
+      if (_obj.RegistrationNumber != oldNumber && !string.IsNullOrEmpty(_obj.RegistrationNumber))
       {
         _obj.RegistrationDepartment = Departments.As(Sungero.Company.Employees.Current?.Department);
         _obj.Save();
