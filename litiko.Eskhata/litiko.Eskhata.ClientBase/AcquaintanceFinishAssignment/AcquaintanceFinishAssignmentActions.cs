@@ -25,6 +25,7 @@ namespace litiko.Eskhata.Client
         var report = litiko.RecordManagementEskhata.Reports.GetAcquaintanceApprovalSheet();
         report.Document = document;
         report.Task = task;
+        report.CalledFromDocument = false;
         report.Open();
       }
     }

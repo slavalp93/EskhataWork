@@ -111,6 +111,12 @@
       "Name": "ElectronicAcquaintance",
       "InternalDataTypeName": "System.Boolean",
       "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "0a5e98ac-2980-47ab-a38c-97a970543ef2",
+      "Name": "CalledFromDocument",
+      "InternalDataTypeName": "System.Boolean",
+      "IsSimpleDataType": true
     }
   ],
   "PublicStructures": [],

@@ -22,7 +22,7 @@ namespace litiko.RecordManagementEskhata
       AcquaintanceApprovalSheet.DocName = sourceDocument.Name;
       AcquaintanceApprovalSheet.Department = sourceDocument.Department;
       AcquaintanceApprovalSheet.DepartmentName = AcquaintanceApprovalSheet.Department.Name;
-      var calledFromDocument = sourceDocument != null && sourceTask == null;
+      var calledFromDocument = AcquaintanceApprovalSheet.CalledFromDocument == null ? true : AcquaintanceApprovalSheet.CalledFromDocument.Value;
       var selectedVersionNumber = AcquaintanceApprovalSheet.DocumentVersion;
       
       var versionNumber = 1;
