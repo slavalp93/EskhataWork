@@ -179,6 +179,7 @@ namespace litiko.RecordManagementEskhata.Server
       var report = Reports.GetAcquaintanceApprovalSheet();
       report.Document = document;
       report.Task = task;
+      report.CalledFromDocument = false;
       try
       {
         using (var reportPdf = report.Export())

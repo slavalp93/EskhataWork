@@ -66,9 +66,13 @@ namespace litiko.Eskhata
       {
         string extCode = Eskhata.Departments.As(Sungero.Company.Employees.Current?.Department)?.ExternalCodelitiko;
         if (!string.IsNullOrEmpty(extCode) && extCode.Length > 6)
+        {
           extCode = extCode.Substring(0,7);
+        }
         if (string.IsNullOrEmpty(extCode))
+        {
           return query;
+        }
         
         query = query.Where(x => Eskhata.Departments.Is(x.Department) &&
                             Eskhata.Departments.As(x.Department).ExternalCodelitiko.StartsWith(extCode));
