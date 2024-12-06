@@ -15,7 +15,8 @@ namespace litiko.Eskhata
       query = base.ActionItemPartsAssigneeFiltering(query, e);
       
       var document = _obj.ActionItemExecutionTask.DocumentsGroup.OfficialDocuments.FirstOrDefault();
-      if (document?.DocumentKind == Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(RecordManagementEskhata.PublicConstants.Module.DocumentKindGuids.BranchOrder))
+      if (document?.DocumentKind == Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(RecordManagementEskhata.PublicConstants.Module.DocumentKindGuids.BranchOrder) ||
+          document?.DocumentKind == Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(RecordManagementEskhata.PublicConstants.Module.DocumentKindGuids.BranchOrderEds))
       {
         string extCode = Eskhata.Departments.As(Sungero.Company.Employees.Current?.Department)?.ExternalCodelitiko;
         if (!string.IsNullOrEmpty(extCode) && extCode.Length > 6)
