@@ -286,4 +286,7 @@
   <data name="Control_178fd45b743a4edabc371ca47119c06d_DisplayValue" xml:space="preserve">
     <value>Fill in voters</value>
   </data>
+  <data name="Property_QuestionGroup" xml:space="preserve">
+    <value>Question group</value>
+  </data>
 </root>

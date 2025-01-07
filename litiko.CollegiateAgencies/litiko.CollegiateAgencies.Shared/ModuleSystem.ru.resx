@@ -205,4 +205,10 @@
   <data name="JobDescription_a3cf794a74064447a42923201be41b81" xml:space="preserve">
     <value>Рассылка уведомлений о приближении срока исполнения поручения</value>
   </data>
+  <data name="CoverAction_QuestionGroup" xml:space="preserve">
+    <value>Группа вопросов</value>
+  </data>
+  <data name="CoverDescription_QuestionGroup" xml:space="preserve">
+    <value>Открытие справочника групп вопросов</value>
+  </data>
 </root>

@@ -217,6 +217,7 @@ namespace litiko.CollegiateAgencies
 
     public virtual IQueryable<T> SpeakerFiltering(IQueryable<T> query, Sungero.Domain.PropertyFilteringEventArgs e)
     {
+      /* Deleted 07.01.2025
       var roleDepartmentManagers = Roles.GetAll().Where(x => x.Sid == Sungero.Docflow.PublicConstants.Module.RoleGuid.DepartmentManagersRole).FirstOrDefault();
       if (roleDepartmentManagers != null)
       {
@@ -227,6 +228,7 @@ namespace litiko.CollegiateAgencies
         }
         query = query.Where(c => employees.Contains(c));
       }
+      */
       return query;
     }
   }

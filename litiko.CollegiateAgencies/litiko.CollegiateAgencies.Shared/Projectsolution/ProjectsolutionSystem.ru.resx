@@ -256,4 +256,7 @@
   <data name="Control_178fd45b743a4edabc371ca47119c06d_DisplayValue" xml:space="preserve">
     <value>Заполнить голосующих</value>
   </data>
+  <data name="Property_QuestionGroup" xml:space="preserve">
+    <value>Группа вопросов</value>
+  </data>
 </root>

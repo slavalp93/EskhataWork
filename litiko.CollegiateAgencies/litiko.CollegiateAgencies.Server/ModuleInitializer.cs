@@ -133,6 +133,9 @@ namespace litiko.CollegiateAgencies.Server
 
         Projectsolutions.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Create);
         Projectsolutions.AccessRights.Save();
+        
+        QuestionGroups.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Read);
+        QuestionGroups.AccessRights.Save();
       }
       
       // "Ответственные за совещания"
@@ -144,6 +147,14 @@ namespace litiko.CollegiateAgencies.Server
         
         MeetingMethods.AccessRights.Grant(meetingResponsible, DefaultAccessRightsTypes.Create);
         MeetingMethods.AccessRights.Save();
+      }
+      
+      // "Секретари КОУ"
+      var secretariesKOU = Roles.GetAll().Where(r => r.Sid == Constants.Module.RoleGuid.Secretaries).FirstOrDefault();
+      if (secretariesKOU != null)
+      {
+        QuestionGroups.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Create);
+        QuestionGroups.AccessRights.Save();        
       }
       
     }    

@@ -847,26 +847,36 @@ namespace litiko.Integration.Server
               if (!string.IsNullOrEmpty(isEmployeeEmail) && employee.Email != isEmployeeEmail)
               {                
                 Logger.DebugFormat("Change Email: current:{0}, new:{1}", employee.Email, isEmployeeEmail);
-                employee.Email = isEmployeeEmail;                   
-              }
-              
-              bool needNotify = !string.IsNullOrEmpty(employee.Email) ? true : false;
-              if (employee.NeedNotifyAssignmentsSummary != needNotify)
-              {
-                Logger.DebugFormat("Change NeedNotifyAssignmentsSummary: current:{0}, new:{1}", employee.NeedNotifyAssignmentsSummary, needNotify);
-                employee.NeedNotifyAssignmentsSummary = needNotify;
+                employee.Email = isEmployeeEmail;
+                
+                bool needNotify = !string.IsNullOrEmpty(employee.Email) ? true : false;
+                if (employee.NeedNotifyAssignmentsSummary != needNotify)
+                {
+                  Logger.DebugFormat("Change NeedNotifyAssignmentsSummary: current:{0}, new:{1}", employee.NeedNotifyAssignmentsSummary, needNotify);
+                  employee.NeedNotifyAssignmentsSummary = needNotify;
+                }
+  
+                if (employee.NeedNotifyExpiredAssignments != needNotify)
+                {
+                  Logger.DebugFormat("Change NeedNotifyExpiredAssignments: current:{0}, new:{1}", employee.NeedNotifyExpiredAssignments, needNotify);
+                  employee.NeedNotifyExpiredAssignments = needNotify;
+                }
+  
+                if (employee.NeedNotifyNewAssignments != needNotify)
+                {
+                  Logger.DebugFormat("Change NeedNotifyNewAssignments: current:{0}, new:{1}", employee.NeedNotifyNewAssignments, needNotify);
+                  employee.NeedNotifyNewAssignments = needNotify;
+                }                
               }
 
-              if (employee.NeedNotifyExpiredAssignments != needNotify)
+              if (string.IsNullOrEmpty(employee.Email))
               {
-                Logger.DebugFormat("Change NeedNotifyExpiredAssignments: current:{0}, new:{1}", employee.NeedNotifyExpiredAssignments, needNotify);
-                employee.NeedNotifyExpiredAssignments = needNotify;
-              }
-
-              if (employee.NeedNotifyNewAssignments != needNotify)
-              {
-                Logger.DebugFormat("Change NeedNotifyNewAssignments: current:{0}, new:{1}", employee.NeedNotifyNewAssignments, needNotify);
-                employee.NeedNotifyNewAssignments = needNotify;
+                if (employee.NeedNotifyAssignmentsSummary != false)
+                  employee.NeedNotifyAssignmentsSummary = false;
+                if (employee.NeedNotifyExpiredAssignments != false)
+                  employee.NeedNotifyExpiredAssignments = false;
+                if (employee.NeedNotifyNewAssignments != false)
+                  employee.NeedNotifyNewAssignments = false;                
               }
               
               if (employee.State.IsInserted || employee.State.IsChanged)

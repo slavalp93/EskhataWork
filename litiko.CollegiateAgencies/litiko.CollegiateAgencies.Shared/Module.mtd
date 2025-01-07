@@ -72,6 +72,14 @@
         "EntityTypeId": "38450693-6600-4c7b-a2a6-5ca6aa9edd21",
         "GroupId": "b694281e-a1e3-43d0-8edb-f542ce7f1f23",
         "PreviousItemGuid": "06cbec7c-9754-4ffc-a946-3423f3c6ee32"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "bb70cb4e-3f2b-4bae-bcc1-1276cca99c78",
+        "Name": "QuestionGroup",
+        "EntityTypeId": "f52953f6-067d-459d-a585-8f288aeeed1d",
+        "GroupId": "e55d6d7e-273f-4c5d-8c47-efa43ae1bd69",
+        "PreviousItemGuid": "28fe0ad2-2e19-49eb-a77d-a7fdcd8e68f1"
       }
     ],
     "Background": null,
@@ -153,6 +161,10 @@
     {
       "ItemId": "a1b630d3-e1d2-4e70-90ef-e5b047027918",
       "PreviousItemId": "2b1feb20-ac60-46de-a63c-67309e3a6e70"
+    },
+    {
+      "ItemId": "f52953f6-067d-459d-a585-8f288aeeed1d",
+      "PreviousItemId": "a1b630d3-e1d2-4e70-90ef-e5b047027918"
     }
   ],
   "HandledEvents": [
@@ -734,7 +746,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.42",
+  "Version": "0.0.1.43",
   "Widgets": [],
   "Versions": [
     {

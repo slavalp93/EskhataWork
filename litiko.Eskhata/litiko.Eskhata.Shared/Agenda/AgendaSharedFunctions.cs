@@ -52,7 +52,7 @@ namespace litiko.Eskhata.Shared
         /* Имя в формате:
         <Вид документа> от <дата документа> по <тема совещания>.
          */
-        string regDate = _obj.RegistrationDate.HasValue ? _obj.RegistrationDate.Value.ToString("dd.mm.yy") : string.Empty;
+        string regDate = _obj.RegistrationDate.HasValue ? _obj.RegistrationDate.Value.ToString("dd.MM.yy") : string.Empty;
         name += string.Format("{0} от {1} по {2}.", documentKind.ShortName, regDate, meeting.Name);
       }
       
