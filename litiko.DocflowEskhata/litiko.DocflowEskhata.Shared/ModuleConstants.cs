@@ -55,6 +55,10 @@ namespace litiko.DocflowEskhata.Constants
       [Sungero.Core.Public]
       public static readonly Guid OutgoingCorrespondence = Guid.Parse("3613e9ac-8ffa-4d8b-9dbc-cc8a7f7ed1de");
       
+      /// <summary> Исходящая корреспонденция по доверенности </summary>
+      [Sungero.Core.Public]
+      public static readonly Guid OutgoingPoACorrespondence = Guid.Parse("4a530f9c-593b-4b7e-a8af-2ef8b6d33029");
+      
       /// <summary> Исходящая корреспонденция в НБТ </summary>
       [Sungero.Core.Public]
       public static readonly Guid OutgoingCorrespondenceNBT = Guid.Parse("fe13dbab-cdca-49df-b39d-b0ed5fab0465");

@@ -74,7 +74,7 @@ namespace litiko.RecordManagementEskhata.Server
           row.Signature = string.IsNullOrEmpty(jobTitle) ?
             string.Format("{0};{1}{2}", signature.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document)) :
             string.Format("{0} {1};{2}{3}", jobTitle, signature.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document));
-          row.Date = signature.SigningDate.ToString();
+          row.Date = signature.SigningDate.FromUtcTime().ToString();
           row.ReportSessionId = reportSessionId;
           approvalList.Add(row);
         }

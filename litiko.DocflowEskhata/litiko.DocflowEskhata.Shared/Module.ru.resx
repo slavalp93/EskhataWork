@@ -91,4 +91,7 @@
   <data name="OutgoingCorrespondenceNBT" xml:space="preserve">
     <value>Исходящая корреспонденция в НБТ</value>
   </data>
+  <data name="OutgoingPoACorrespondence" xml:space="preserve">
+    <value>Исходящая корреспонденция по доверенности</value>
+  </data>
 </root>

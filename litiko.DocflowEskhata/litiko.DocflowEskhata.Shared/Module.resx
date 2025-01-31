@@ -91,4 +91,7 @@
   <data name="OutgoingCorrespondenceNBT" xml:space="preserve">
     <value>Outgoing correspondence to the NBT</value>
   </data>
+  <data name="OutgoingPoACorrespondence" xml:space="preserve">
+    <value>Outgoing correspondence by power of attorney</value>
+  </data>
 </root>

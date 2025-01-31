@@ -45,6 +45,11 @@ namespace litiko.RecordManagementEskhata.Server
         rep.Document = document;
         using (var approvalSheetPdf = rep.Export())
         {
+          if (approvalSheetPdf.Length == 0)
+          {
+            return result;
+          }
+          
           using (var pdfDocumentStream = Sungero.Docflow.IsolatedFunctions.PdfConverter.MergePdf(document.LastVersion.PublicBody.Read(), approvalSheetPdf))
           {
             if (pdfDocumentStream != null)

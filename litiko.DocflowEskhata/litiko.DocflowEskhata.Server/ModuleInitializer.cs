@@ -168,6 +168,20 @@ namespace litiko.DocflowEskhata.Server
                            false);
       #endregion
       
+      #region Исходящая корреспонденция по доверенности
+      Sungero.Docflow.PublicInitializationFunctions.Module.
+        CreateDocumentKind(litiko.DocflowEskhata.Resources.OutgoingPoACorrespondence,
+                           litiko.DocflowEskhata.Resources.OutgoingPoACorrespondence,
+                           registrable,
+                           Sungero.Docflow.DocumentKind.DocumentFlow.Outgoing,
+                           true,
+                           false,
+                           Constants.Module.DocumentTypeGuids.OutgoingLetter,
+                           actions,
+                           Constants.Module.DocumentKindGuids.OutgoingPoACorrespondence,
+                           false);
+      #endregion
+      
       #region Исходящая корреспонденция в НБТ
       Sungero.Docflow.PublicInitializationFunctions.Module.
         CreateDocumentKind(litiko.DocflowEskhata.Resources.OutgoingCorrespondenceNBT,
