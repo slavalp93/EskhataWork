@@ -284,7 +284,7 @@ namespace litiko.Eskhata.Server
       if (Users.Current != null)
         startActionItemsAsyncHandler.StartedByUserId = Users.Current.Id;
       startActionItemsAsyncHandler.ExecuteAsync(startedNotification, completedNotification, errorNotification, Users.Current);
-    }    
+    }        
        
   }
 }

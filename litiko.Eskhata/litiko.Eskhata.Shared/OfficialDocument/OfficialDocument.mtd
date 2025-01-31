@@ -5,6 +5,16 @@
   "AccessRightsMode": "Both",
   "Actions": [
     {
+      "NameGuid": "228f2bab-7091-4731-a6e2-3742eeaf9ff5",
+      "Name": "Sign",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ],
+      "Versions": []
+    },
+    {
       "NameGuid": "9ebf6a2d-a0bd-4de1-b8be-7221c7bd6e92",
       "Name": "ShowAcquaintanceReport",
       "GenerateHandler": true,

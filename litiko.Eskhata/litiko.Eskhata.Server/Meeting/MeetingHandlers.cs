@@ -31,7 +31,23 @@ namespace litiko.Eskhata
     public override void Saving(Sungero.Domain.SavingEventArgs e)
     {
 
-      base.Saving(e);
+      #region 31.01.2025 из базовой обработки убрано выдачу прав на документы по совещанию
+      // base.Saving(e);
+      
+      // Выдать права на совещание.
+      var secretary = _obj.Secretary;
+      if (secretary != null && !_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, secretary))
+        _obj.AccessRights.Grant(secretary, DefaultAccessRightsTypes.Change);
+      
+      var president = _obj.President;
+      if (president != null && !_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, president))
+        _obj.AccessRights.Grant(president, DefaultAccessRightsTypes.Change);
+
+      var members = _obj.Members.Select(m => m.Member).ToList();
+      foreach (var member in members)
+        if (!_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Read, member))
+          _obj.AccessRights.Grant(member, DefaultAccessRightsTypes.Read);      
+      #endregion
             
       if (_obj.State.Properties.ProjectSolutionslitiko.IsChanged && !e.Params.Contains(litiko.CollegiateAgencies.PublicConstants.Module.ParamNames.DontUpdateProjectSolution))
       {

@@ -58,25 +58,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="OKPOerror" xml:space="preserve">
-    <value>OKPO cannot exceed 16 characters</value>
-  </data>
-  <data name="INNNonRezidentError" xml:space="preserve">
-    <value>For non-resident organizations, the TIN cannot exceed 12 characters</value>
-  </data>
-  <data name="INNRezidentError" xml:space="preserve">
-    <value>For resident organizations, the TIN cannot exceed 9 characters</value>
-  </data>
-  <data name="INNNonRezidentPersonError" xml:space="preserve">
-    <value>For non-resident individuals, the TIN cannot exceed 12 characters</value>
-  </data>
-  <data name="INNRezidentPersonError" xml:space="preserve">
-    <value>For resident individuals, the TIN cannot exceed 9 characters</value>
-  </data>
-  <data name="VersionCreatedSuccessfully" xml:space="preserve">
-    <value>Document version created successfully</value>
-  </data>
-  <data name="LastVersionApproved" xml:space="preserve">
-    <value>Signing is not available because the latest version of the document has already been signed with an approving signature.</value>
-  </data>
 </root>

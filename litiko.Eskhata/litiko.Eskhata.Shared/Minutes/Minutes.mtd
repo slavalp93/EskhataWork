@@ -42,6 +42,9 @@
     "IsAncestorMetadata": true,
     "Versions": []
   },
+  "HandledEvents": [
+    "SavingServer"
+  ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "bb4780ff-b2c3-4044-a390-e9e110791bf6",
   "OpenCardByDefaultInCollection": true,

@@ -76,4 +76,7 @@
   <data name="VersionCreatedSuccessfully" xml:space="preserve">
     <value>Версия документа создана успешно</value>
   </data>
+  <data name="LastVersionApproved" xml:space="preserve">
+    <value>Подписание недоступно т.к. последняя версия документа уже подписана утверждающей подписью.</value>
+  </data>
 </root>

@@ -254,6 +254,10 @@
     {
       "ItemId": "e013327e-c8d9-4e7f-85d7-150756599d06",
       "PreviousItemId": "2d42f670-9f9e-41ca-b982-cc7d67975d24"
+    },
+    {
+      "ItemId": "7123eb2a-4721-467b-82c4-1705bda70d45",
+      "PreviousItemId": "e013327e-c8d9-4e7f-85d7-150756599d06"
     }
   ],
   "IconResourcesKeys": [],
@@ -288,7 +292,8 @@
     "INNRezidentError",
     "INNNonRezidentPersonError",
     "INNRezidentPersonError",
-    "VersionCreatedSuccessfully"
+    "VersionCreatedSuccessfully",
+    "LastVersionApproved"
   ],
   "ServerAssemblyName": "litiko.Eskhata.Server",
   "ServerNamespace": "litiko.Eskhata.Server",
