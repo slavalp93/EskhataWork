@@ -196,15 +196,23 @@ namespace litiko.CollegiateAgencies.Server
           // Председатель
           result.Add(meeting.President);
             
-          // Присутствующие из членов КОУ            
-          if (meeting.MeetingCategorylitiko != null)
+          // Присутствующие из членов КОУ
+//          if (meeting.MeetingCategorylitiko != null)
+//          {
+//            foreach (var element in meeting.Presentlitiko.Where(x => x.Employee != null ))
+//            {
+//              if (meeting.MeetingCategorylitiko.Members.Select(x => x.Member).Contains(element.Employee) && !result.Contains(element.Employee))
+//                result.Add(element.Employee);
+//            }            
+//          }          
+          
+          // 03.02.2025 Все из поля Присутствовали
+          foreach (var element in meeting.Presentlitiko.Where(x => x.Employee != null ))
           {
-            foreach (var element in meeting.Presentlitiko.Where(x => x.Employee != null ))
-            {
-              if (meeting.MeetingCategorylitiko.Members.Select(x => x.Member).Contains(element.Employee) && !result.Contains(element.Employee))
-                result.Add(element.Employee);
-            }            
-          }          
+            if (!result.Contains(element.Employee))
+              result.Add(element.Employee);
+          }
+          
         }
       }
       #endregion
