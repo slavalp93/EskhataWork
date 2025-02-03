@@ -7,25 +7,6 @@ using litiko.Eskhata.OfficialDocument;
 
 namespace litiko.Eskhata.Client
 {
-  partial class OfficialDocumentCollectionActions
-  {
-    public override void Sign(Sungero.Domain.Client.ExecuteActionArgs e)
-    {
-      if (_objs.Any(d => d.LastVersionApproved.GetValueOrDefault()))
-      {
-        Dialogs.NotifyMessage(litiko.Eskhata.Resources.LastVersionApproved);
-        return;
-      }      
-      
-      base.Sign(e);
-    }
-
-    public override bool CanSign(Sungero.Domain.Client.CanExecuteActionArgs e)
-    {
-      return base.CanSign(e);
-    }
-
-  }
 
 
   partial class OfficialDocumentActions

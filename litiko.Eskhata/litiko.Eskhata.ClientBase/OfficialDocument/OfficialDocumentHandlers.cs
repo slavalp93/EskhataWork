@@ -10,6 +10,18 @@ namespace litiko.Eskhata
   partial class OfficialDocumentClientHandlers
   {
 
+    public override void ShowingSignDialog(Sungero.Domain.Client.ShowingSignDialogEventArgs e)
+    {
+      base.ShowingSignDialog(e);
+      
+      if (_obj.LastVersionApproved.GetValueOrDefault())
+      {
+        e.CanApprove = false;
+        e.CanEndorse = false;
+        e.Hint.Add(litiko.Eskhata.Resources.LastVersionApproved);
+      }       
+    }
+
     public override void Refresh(Sungero.Presentation.FormRefreshEventArgs e)
     {
       base.Refresh(e);
