@@ -155,8 +155,7 @@ namespace litiko.RecordManagementEskhata
           if (isCompleted)
           {
             // Дата ознакомления.
-            var completed = Calendar.ToUserTime(assignment.Completed.Value);
-            newLine.AcquaintanceDate = Sungero.Docflow.PublicFunctions.Module.ToShortDateShortTime(completed.FromUtcTime());
+            newLine.AcquaintanceDate = Sungero.Docflow.PublicFunctions.Module.ToShortDateShortTime(assignment.Completed.Value.FromUtcTime());
             
             // Примечание.
             if (!Equals(assignment.CompletedBy, assignment.Performer))

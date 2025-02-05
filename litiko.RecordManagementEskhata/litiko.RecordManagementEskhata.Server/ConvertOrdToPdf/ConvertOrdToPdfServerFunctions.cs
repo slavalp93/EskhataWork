@@ -41,14 +41,16 @@ namespace litiko.RecordManagementEskhata.Server
       
       try
       {
+        var rows = RecordManagementEskhata.PublicFunctions.Module.GetApprovalSheetOrdReportTable(document, string.Empty);
+        if (!rows.Any())
+        {
+          return result;
+        }
+        
         var rep = Reports.GetApprovalSheetOrd();
         rep.Document = document;
         using (var approvalSheetPdf = rep.Export())
         {
-          if (approvalSheetPdf.Length == 0)
-          {
-            return result;
-          }
           
           using (var pdfDocumentStream = Sungero.Docflow.IsolatedFunctions.PdfConverter.MergePdf(document.LastVersion.PublicBody.Read(), approvalSheetPdf))
           {
