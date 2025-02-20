@@ -62,10 +62,11 @@ namespace litiko.CollegiateAgencies.Isolated.DocumentBodyCreator
             builder.Font.Bold = false;
             builder.Writeln(resolutionInfo.ListenedRU);
             builder.Writeln("После рассмотрения представленного предложения члены " + nameForTemplate);
-
+            
             builder.ParagraphFormat.LeftIndent = 7.0866;
             builder.ParagraphFormat.FirstLineIndent = 0;
             builder.Font.Bold = true;
+            builder.InsertParagraph();
             builder.Writeln("ПОСТАНОВИЛИ:");
                     
             builder.Font.Bold = false;

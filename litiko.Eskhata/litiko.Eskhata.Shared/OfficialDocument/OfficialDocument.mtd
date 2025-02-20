@@ -202,6 +202,29 @@
       "PreviousPropertyGuid": "afeb04ab-abe9-4388-a17e-344e90743c09"
     }
   ],
+  "PublicFunctions": [
+    {
+      "Name": "GetEndorsingAuthorSignature",
+      "Parameters": [
+        {
+          "Name": "officialDocument",
+          "ParameterType": "global::litiko.Eskhata.IOfficialDocument",
+          "ParameterTypeFullName": "litiko.Eskhata.IOfficialDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "versionId",
+          "ParameterType": "global::System.Int64",
+          "ParameterTypeFullName": "System.Int64"
+        },
+        {
+          "Name": "includeExternalSignature",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        }
+      ],
+      "ReturnType": "Sungero.Domain.Shared.ISignature"
+    }
+  ],
   "PublicStructures": [],
   "ResourcesKeys": [],
   "RibbonCardMetadata": {

@@ -98,6 +98,11 @@
       "IsSolutionModule": true,
       "MaxVersion": "",
       "MinVersion": ""
+    },
+    {
+      "Id": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
     }
   ],
   "ExplorerTreeOrder": [

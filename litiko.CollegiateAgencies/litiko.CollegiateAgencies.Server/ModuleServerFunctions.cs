@@ -229,7 +229,12 @@ namespace litiko.CollegiateAgencies.Server
         
         // Решения только по конкретному Проекту решения                  
         var meetingResolutionInfo = new Structures.Module.MeetingResolutionInfo();
-        meetingResolutionInfo.ProjectSolutionTittle = string.Format("1. Рассмотрение {0}", projectSolution.Subject);
+        
+        var meetingProjectSolutionNumber = projectSolution?.Meeting.ProjectSolutionslitiko.Where(ps => Equals(ps.ProjectSolution, projectSolution))
+          .Select(ps => ps.Number)
+          .FirstOrDefault();
+        
+        meetingResolutionInfo.ProjectSolutionTittle = string.Format("{0}. Рассмотрение {1}", meetingProjectSolutionNumber, projectSolution.Subject);
         meetingResolutionInfo.ListenedRU = !string.IsNullOrEmpty(projectSolution.ListenedRUMinutes) ? projectSolution.ListenedRUMinutes : string.Empty;
         meetingResolutionInfo.Decigions = litiko.CollegiateAgencies.PublicFunctions.Projectsolution.GetProjectSolutionDecidedMinutesRU(projectSolution);
         

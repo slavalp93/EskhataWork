@@ -64,6 +64,7 @@ namespace litiko.Eskhata.Module.Docflow.Server
           }
           pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddRegistrationData(pdfDocumentStream, document.RegistrationNumber, document.RegistrationDate);
           
+          #region ⚓^ - утверждающая подпись Подписанта
           var signatureForQR = Sungero.Docflow.PublicFunctions.OfficialDocument.GetSignatureForMark(document, version.Id);
           if (signatureForQR != null)
           {
@@ -73,8 +74,23 @@ namespace litiko.Eskhata.Module.Docflow.Server
               string.Format("{0};{1} {2}", signatureForQR.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document)) :
               string.Format("{0} {1};{2} {3}", jobTitle, signatureForQR.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document));
             
-            pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddSignatureQRStamp(pdfDocumentStream, qrText, "⚓^");
+            pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddSignatureQRStamp(pdfDocumentStream, qrText, "⚓^");            
           }
+          #endregion
+          
+          #region ⚓s - согласующая подпись Автора
+          var endorsingAuthorSignature = litiko.Eskhata.PublicFunctions.OfficialDocument.GetEndorsingAuthorSignature(litiko.Eskhata.OfficialDocuments.As(document), version.Id, false);
+          if (endorsingAuthorSignature != null)
+          {
+            var signatory = Sungero.Company.Employees.As(endorsingAuthorSignature.Signatory);
+            string jobTitle = Eskhata.JobTitles.As(signatory.JobTitle)?.NameTGlitiko;
+            var qrText = string.IsNullOrEmpty(jobTitle) ?
+              string.Format("{0};{1} {2}", endorsingAuthorSignature.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document)) :
+              string.Format("{0} {1};{2} {3}", jobTitle, endorsingAuthorSignature.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document));
+            
+            pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddSignatureQRStamp(pdfDocumentStream, qrText, "⚓s");              
+          }
+          #endregion
           
         }
         catch (Exception ex)
