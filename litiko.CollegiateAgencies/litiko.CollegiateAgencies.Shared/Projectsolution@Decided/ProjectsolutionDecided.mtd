@@ -36,6 +36,7 @@
       "Name": "DecisionTJ",
       "CanBeSearch": false,
       "Code": "DecisionTJ",
+      "IsRequired": true,
       "IsSortingAllowed": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultilineStringEditorToTextBinder",
       "PreviousPropertyGuid": "58b9a96e-4e77-4d60-9f17-e6b8a5f9fbf8"

@@ -19,14 +19,29 @@ namespace litiko.CollegiateAgencies.Structures.Module
     public string ProjectSolutionTittle { get; set; }
     
     /// <summary>
+    /// Проект решения - заголовок TJ
+    /// </summary>
+    public string ProjectSolutionTittleTJ { get; set; }    
+    
+    /// <summary>
     /// Слушали (RU)
     /// </summary>
     public string ListenedRU { get; set; }    
     
     /// <summary>
+    /// Слушали (TJ)
+    /// </summary>
+    public string ListenedTJ { get; set; }     
+    
+    /// <summary>
     /// Решения
     /// </summary>
     public string Decigions { get; set; }
+    
+    /// <summary>
+    /// Решения
+    /// </summary>
+    public string DecigionsTJ { get; set; }    
     
     /// <summary>
     /// С голосованием?

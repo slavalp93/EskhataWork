@@ -70,4 +70,7 @@
   <data name="CollectionDisplayName" xml:space="preserve">
     <value>Meeting methods</value>
   </data>
+  <data name="Property_NameTJ" xml:space="preserve">
+    <value>Name (TJ)</value>
+  </data>
 </root>

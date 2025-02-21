@@ -616,6 +616,21 @@
       "PreviousPropertyGuid": "b6883ea8-c626-4f05-985c-8fd0c5f69503"
     }
   ],
+  "PublicFunctions": [
+    {
+      "Name": "GetShortNameTJ",
+      "Parameters": [
+        {
+          "Name": "person",
+          "ParameterType": "global::litiko.Eskhata.IPerson",
+          "ParameterTypeFullName": "litiko.Eskhata.IPerson, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    }
+  ],
   "PublicStructures": [],
   "ResourcesKeys": [],
   "RibbonCardMetadata": {

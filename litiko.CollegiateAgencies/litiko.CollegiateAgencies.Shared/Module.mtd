@@ -369,6 +369,15 @@
       "Value": "new System.Guid(\"1e104576-8dd4-45be-ad53-e0c7ccabd9f0\")"
     },
     {
+      "Name": "ProtocolOfBoardMeeting",
+      "ParentClasses": [
+        "Module",
+        "DocumentKindGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"78e82c45-506b-4faf-bf95-b9fedc776f37\")"
+    },
+    {
       "Name": "Resolution",
       "ParentClasses": [
         "Module",
@@ -463,12 +472,27 @@
           "TypeFullName": "global::System.String"
         },
         {
+          "Name": "ProjectSolutionTittleTJ",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
           "Name": "ListenedRU",
           "IsNullable": true,
           "TypeFullName": "global::System.String"
         },
         {
+          "Name": "ListenedTJ",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
           "Name": "Decigions",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "DecigionsTJ",
           "IsNullable": true,
           "TypeFullName": "global::System.String"
         },
@@ -528,7 +552,8 @@
     "ActionItemAssignment",
     "RoleCreationResolutions",
     "DescriptionRoleCreationResolutions",
-    "RoleTranslator"
+    "RoleTranslator",
+    "ProtocolOfBoardMeetingKind"
   ],
   "ServerAssemblyName": "litiko.CollegiateAgencies.Server",
   "ServerNamespace": "litiko.CollegiateAgencies.Server",
@@ -750,7 +775,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.48",
+  "Version": "0.0.1.51",
   "Widgets": [],
   "Versions": [
     {

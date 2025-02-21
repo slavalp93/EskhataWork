@@ -131,17 +131,20 @@ namespace litiko.CollegiateAgencies.Server
     public void CreateMinutesBody(Sungero.Docflow.IOfficialDocument document, bool isExtract)
     {
       #region Предпроверки
+            
+      var templateDoc = Sungero.Docflow.DocumentTemplates.GetAll().Where(d => d.DocumentKinds.Any(k => Equals(k.DocumentKind, document.DocumentKind))).FirstOrDefault();      
       
-      // Наличие "Шаблон протокола заседания КОУ" или "Шаблон выписки из протокола заседания КОУ (RU)"
-      var templateDoc = Sungero.Content.ElectronicDocuments.Null;
-      if (!isExtract)      
+      /*
+      // Наличие "Шаблон протокола заседания КОУ" или "Шаблон выписки из протокола заседания КОУ (RU)"      
+      if (!isExtract)
         templateDoc = Sungero.Content.ElectronicDocuments.GetAll().Where(d => Sungero.Docflow.DocumentTemplates.Is(d) && d.Name == Constants.Module.MinutesTemplateName).FirstOrDefault();
       else
         templateDoc = Sungero.Content.ElectronicDocuments.GetAll().Where(d => Sungero.Docflow.DocumentTemplates.Is(d) && d.Name == Constants.Module.ExtractTemplateName).FirstOrDefault();
-
+      */
+     
       if (templateDoc == null)
-        throw AppliedCodeException.Create(Resources.MinutesTemplateNotFoundFormat(isExtract == true ? Constants.Module.ExtractTemplateName : Constants.Module.MinutesTemplateName));
-            
+        throw AppliedCodeException.Create(Resources.MinutesTemplateNotFoundFormat(document.DocumentKind.Name));            
+      
       var meeting = litiko.Eskhata.Meetings.Null;
       if (litiko.Eskhata.Minuteses.Is(document))
         meeting = litiko.Eskhata.Meetings.As(litiko.Eskhata.Minuteses.As(document).Meeting);
@@ -165,21 +168,49 @@ namespace litiko.CollegiateAgencies.Server
       string nameForTemplate = !string.IsNullOrEmpty(meetingCategory.NameForTemplate) ? meetingCategory.NameForTemplate : string.Empty;      
       replacebleFields.Add("<CategoryNameForTemplateUpper>", nameForTemplate.ToUpper());
       replacebleFields.Add("<CategoryNameForTemplate>", nameForTemplate);
+      string nameForTemplateTJ = !string.IsNullOrEmpty(meetingCategory.NameForTemplateTJ) ? meetingCategory.NameForTemplateTJ : string.Empty;      
+      replacebleFields.Add("<CategoryNameForTemplateTJUpper>", nameForTemplateTJ.ToUpper());
+      replacebleFields.Add("<CategoryNameForTemplateTJ>", nameForTemplateTJ);
+      
       if (meeting.MeetingTypelitiko.HasValue)
       {        
         replacebleFields.Add("<Type>", meeting.MeetingTypelitiko == litiko.Eskhata.Meeting.MeetingTypelitiko.Regular ? "ОЧЕРЕДНОГО" : "ВНЕОЧЕРЕДНОГО");
         replacebleFields.Add("<Type2>", meeting.Info.Properties.MeetingTypelitiko.GetLocalizedValue(meeting.MeetingTypelitiko).ToLower());
+        replacebleFields.Add("<TypeTJ>", meeting.MeetingTypelitiko == litiko.Eskhata.Meeting.MeetingTypelitiko.Regular ? "НАВБАТЙ" : "ГАЙРИНАВБАТЙ");
+        replacebleFields.Add("<TypeTJ2>", meeting.MeetingTypelitiko == litiko.Eskhata.Meeting.MeetingTypelitiko.Regular ? "НАВБАТЙ".ToLower() : "ГАЙРИНАВБАТЙ".ToLower());
       }            
-      replacebleFields.Add("<Forma>", meeting.Formalitiko.HasValue ? meeting.Info.Properties.Formalitiko.GetLocalizedValue(meeting.Formalitiko) : string.Empty);            
-      replacebleFields.Add("<Method>", meeting.MeetingMethodlitiko != null ? meeting.MeetingMethodlitiko.Name : string.Empty);            
+      if (meeting.Formalitiko.HasValue)
+      {
+        replacebleFields.Add("<Forma>", meeting.Formalitiko.HasValue ? meeting.Info.Properties.Formalitiko.GetLocalizedValue(meeting.Formalitiko) : string.Empty);  
+        replacebleFields.Add("<FormaTJ>", meeting.Formalitiko == litiko.Eskhata.Meeting.Formalitiko.Intramural ? "Шахсан" : "Мукотиба");       
+      }            
+      
+      replacebleFields.Add("<Method>", meeting.MeetingMethodlitiko != null ? meeting.MeetingMethodlitiko.Name : string.Empty);
+      replacebleFields.Add("<MethodTJ>", meeting.MeetingMethodlitiko != null ? !string.IsNullOrEmpty(meeting.MeetingMethodlitiko.NameTJ) ? meeting.MeetingMethodlitiko.NameTJ : string.Empty : string.Empty);
+      
       replacebleFields.Add("<Location>", !string.IsNullOrEmpty(meeting.Location) ? meeting.Location : string.Empty);            
       replacebleFields.Add("<PresidentJobTittle>", meeting.President != null && meeting.President.JobTitle != null ? meeting.President.JobTitle.Name : string.Empty);            
-      replacebleFields.Add("<PresidentFIO>", meeting.President != null ? Sungero.Company.PublicFunctions.Employee.GetShortName(meeting.President, true) : string.Empty);            
-      replacebleFields.Add("<SecretaryFIO>", meeting.Secretary!= null ? Sungero.Company.PublicFunctions.Employee.GetShortName(meeting.Secretary, true) : string.Empty);            
-      replacebleFields.Add("<PresentFIOList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingPresentNumberedList(meeting, false));            
-      replacebleFields.Add("<AbsentFIOList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingAbsentNumberedList(meeting, false, true));            
-      replacebleFields.Add("<InvitedFIOList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingInvitedNumberedList(meeting, false));                  
-      replacebleFields.Add("<TextForMinutesRU>", !string.IsNullOrEmpty(meetingCategory.TextForTemplate) ? meetingCategory.TextForTemplate : string.Empty);            
+      string presidentJobTittleTJ = meeting.President != null && meeting.President.JobTitle != null ? litiko.Eskhata.JobTitles.As(meeting.President.JobTitle).NameTGlitiko : string.Empty;      
+      replacebleFields.Add("<PresidentJobTittleTJ>", !string.IsNullOrEmpty(presidentJobTittleTJ) ? presidentJobTittleTJ : string.Empty);
+      replacebleFields.Add("<PresidentFIO>", meeting.President != null ? Sungero.Company.PublicFunctions.Employee.GetShortName(meeting.President, true) : string.Empty);
+      string presidentFIOTJ = meeting.President != null ? litiko.Eskhata.PublicFunctions.Person.GetShortNameTJ(litiko.Eskhata.People.As(meeting.President.Person)) : string.Empty;
+      replacebleFields.Add("<PresidentFIOTJ>", !string.IsNullOrEmpty(presidentFIOTJ) ? presidentFIOTJ : string.Empty);
+      
+      replacebleFields.Add("<SecretaryFIO>", meeting.Secretary!= null ? Sungero.Company.PublicFunctions.Employee.GetShortName(meeting.Secretary, true) : string.Empty);
+      string secretaryFIOTJ = meeting.Secretary!= null ? litiko.Eskhata.PublicFunctions.Person.GetShortNameTJ(litiko.Eskhata.People.As(meeting.Secretary.Person)) : string.Empty;
+      replacebleFields.Add("<SecretaryFIOTJ>", !string.IsNullOrEmpty(secretaryFIOTJ) ? secretaryFIOTJ : string.Empty);
+      
+      replacebleFields.Add("<PresentFIOList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingPresentNumberedList(meeting, false, false));            
+      replacebleFields.Add("<PresentFIOListTJ>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingPresentNumberedList(meeting, false, true));            
+      
+      replacebleFields.Add("<AbsentFIOList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingAbsentNumberedList(meeting, false, true, false));
+      replacebleFields.Add("<AbsentFIOListTJ>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingAbsentNumberedList(meeting, false, true, true));
+      
+      replacebleFields.Add("<InvitedFIOList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingInvitedNumberedList(meeting, false, false));                  
+      replacebleFields.Add("<InvitedFIOListTJ>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingInvitedNumberedList(meeting, false, true));                  
+      
+      replacebleFields.Add("<TextForMinutesRU>", !string.IsNullOrEmpty(meetingCategory.TextForTemplate) ? meetingCategory.TextForTemplate : string.Empty);
+      replacebleFields.Add("<TextForMinutesTJ>", !string.IsNullOrEmpty(meetingCategory.TextForTemplateTJ) ? meetingCategory.TextForTemplateTJ : string.Empty);
       replacebleFields.Add("<Quorum>", meeting.Quorumlitiko.HasValue ? meeting.Info.Properties.Quorumlitiko.GetLocalizedValue(meeting.Quorumlitiko).ToLower() : string.Empty);
       
       if (!isExtract)
@@ -194,13 +225,21 @@ namespace litiko.CollegiateAgencies.Server
           
           var meetingResolutionInfo = new Structures.Module.MeetingResolutionInfo();
           meetingResolutionInfo.ProjectSolutionTittle = string.Format("{0}. Рассмотрение {1}", element.Number, projectSolution.Subject);
+          meetingResolutionInfo.ProjectSolutionTittleTJ = string.Format("{0}. Баррасии {1}", element.Number, projectSolution.Subject);
           meetingResolutionInfo.ListenedRU = !string.IsNullOrEmpty(projectSolution.ListenedRUMinutes) ? projectSolution.ListenedRUMinutes : string.Empty;
-          //meetingResolutionInfo.Decigions = litiko.CollegiateAgencies.PublicFunctions.Projectsolution.GetProjectSolutionDecidedMinutesRU(projectSolution);          
+          meetingResolutionInfo.ListenedTJ = !string.IsNullOrEmpty(projectSolution.ListenedTJMinutes) ? projectSolution.ListenedTJMinutes : string.Empty;
+          
           meetingResolutionInfo.Decigions = string.Join(
             Environment.NewLine, 
             projectSolution.DecidedMinutes.Select(
               decided => $"{element.Number}.{decided.Number}. {decided.DecisionRU}"
             ));
+          
+          meetingResolutionInfo.DecigionsTJ = string.Join(
+            Environment.NewLine, 
+            projectSolution.DecidedMinutes.Select(
+              decided => $"{element.Number}.{decided.Number}. {decided.DecisionTJ}"
+            ));          
                     
           meetingResolutionInfo.WithVoting = element.VotingType.HasValue && element.VotingType != litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.NoVoting;
           meetingResolutionInfo.VoutingYes = element.Yes.HasValue ? element.Yes.Value : 0;

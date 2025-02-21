@@ -41,6 +41,11 @@ namespace litiko.CollegiateAgencies.Constants
       /// <summary> Постановление </summary>
       [Sungero.Core.Public]
       public static readonly Guid Resolution = Guid.Parse("a145af0a-35bc-40ac-b616-8eb7418cf785");
+      
+      /// <summary> Протокол заседания Правления </summary>
+      [Sungero.Core.Public]
+      public static readonly Guid ProtocolOfBoardMeeting = Guid.Parse("78e82c45-506b-4faf-bf95-b9fedc776f37");
+      
     }
     
     public static class RoleGuid

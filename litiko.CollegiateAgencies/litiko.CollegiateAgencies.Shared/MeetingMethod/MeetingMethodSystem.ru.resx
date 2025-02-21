@@ -70,4 +70,7 @@
   <data name="CollectionDisplayName" xml:space="preserve">
     <value>Способы проведения совещаний</value>
   </data>
+  <data name="Property_NameTJ" xml:space="preserve">
+    <value>Имя (TJ)</value>
+  </data>
 </root>

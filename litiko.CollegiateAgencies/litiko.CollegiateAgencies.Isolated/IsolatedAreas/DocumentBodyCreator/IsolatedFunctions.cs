@@ -91,6 +91,65 @@ namespace litiko.CollegiateAgencies.Isolated.DocumentBodyCreator
           }
         }        
         
+        found = false;
+        foreach (Run run in document.GetChildNodes(NodeType.Run, true))
+        {                
+          var t = run.GetText();
+          if (run.Text.Contains("ResolutionListTJ"))
+          {
+            found = true;
+            builder.MoveTo(run);
+            run.Remove();
+            break;
+          }
+        }
+
+        if (found)
+        {
+          string nameForTemplateTJ = string.Empty;
+          replacebleFields.TryGetValue("<CategoryNameForTemplateTJ>", out nameForTemplateTJ);
+          
+          foreach (var resolutionInfo in meetingResolutions)
+          {
+            builder.ParagraphFormat.LeftIndent = 7.0866;
+            builder.ParagraphFormat.FirstLineIndent = 0;
+            builder.Font.Bold = true;
+            builder.Writeln(resolutionInfo.ProjectSolutionTittleTJ);
+                                        
+            builder.ParagraphFormat.LeftIndent = 5.102352;
+            builder.ParagraphFormat.FirstLineIndent = 35.433;
+            builder.Write("Шунида шуд: ");
+            builder.Font.Bold = false;
+            builder.Writeln(resolutionInfo.ListenedTJ);
+            builder.Writeln("Пас аз баррасии пешниҳоди муаррифишуда аъзоёни " + nameForTemplateTJ);
+            
+            builder.ParagraphFormat.LeftIndent = 7.0866;
+            builder.ParagraphFormat.FirstLineIndent = 0;
+            builder.Font.Bold = true;
+            builder.InsertParagraph();
+            builder.Writeln("ҚАРОР КАРДАНД:");
+                    
+            builder.Font.Bold = false;
+            builder.ParagraphFormat.LeftIndent = 14.1732;
+            builder.ParagraphFormat.FirstLineIndent = 28.3464;                    
+            builder.Writeln(string.Join(Environment.NewLine, resolutionInfo.DecigionsTJ));
+            builder.InsertParagraph();                    
+
+            if (resolutionInfo.WithVoting)
+            {
+              builder.ParagraphFormat.LeftIndent = 40.251888;
+              builder.ParagraphFormat.FirstLineIndent = 0;
+              builder.Font.Bold = true;
+              builder.Writeln("Натиҷаи овоздиҳӣ:");
+              builder.Writeln(string.Format("«Тарафдор» - {0} овоз", resolutionInfo.VoutingYes));
+              builder.Writeln(string.Format("«Муқобил» - {0} овоз", resolutionInfo.VoutingNo));
+              builder.Writeln(string.Format("«Худдорӣ кард» - {0} овоз", resolutionInfo.VoutingAbstained));
+              string isAccepted = resolutionInfo.VoutingAccepted.HasValue && resolutionInfo.VoutingAccepted.Value ? "Бале" : "Не";
+              builder.Writeln("Карор кабул карда шуд - " + isAccepted);
+              builder.InsertParagraph();            
+            }
+          }
+        }
         
         var resultStream = new MemoryStream();
         document.Save(resultStream, SaveFormat.Docx);        

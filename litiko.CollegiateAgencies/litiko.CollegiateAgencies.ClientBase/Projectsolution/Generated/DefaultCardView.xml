@@ -31,7 +31,7 @@
             <property name="Name">Projectsolution_Decided_DecisionRU</property>
             <property name="FieldName">DecisionRU</property>
             <property name="VisibleIndex">1</property>
-            <property name="Width">187</property>
+            <property name="Width">277</property>
             <property name="ActualWidth">38*</property>
           </property>
           <property name="Item2" isnull="true" iskey="true">
@@ -40,7 +40,7 @@
             <property name="Name">Projectsolution_Decided_DecisionTJ</property>
             <property name="FieldName">DecisionTJ</property>
             <property name="VisibleIndex">2</property>
-            <property name="Width">79</property>
+            <property name="Width">117</property>
             <property name="ActualWidth">16*</property>
           </property>
           <property name="Item3" isnull="true" iskey="true">
@@ -49,7 +49,7 @@
             <property name="Name">Projectsolution_Decided_DecisionEN</property>
             <property name="FieldName">DecisionEN</property>
             <property name="VisibleIndex">3</property>
-            <property name="Width">84</property>
+            <property name="Width">124</property>
             <property name="ActualWidth">17*</property>
           </property>
           <property name="Item4" isnull="true" iskey="true">
@@ -58,7 +58,7 @@
             <property name="Name">Projectsolution_Decided_Number</property>
             <property name="FieldName">Number</property>
             <property name="VisibleIndex">0</property>
-            <property name="Width">59</property>
+            <property name="Width">88</property>
             <property name="ActualWidth">12*</property>
           </property>
         </property>

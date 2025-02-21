@@ -112,6 +112,33 @@ namespace litiko.CollegiateAgencies.Server
                            false);
       #endregion       
       
+      #region Протокол заседания Правления        
+      var externalLink = Sungero.Docflow.PublicFunctions.Module.GetExternalLink(Sungero.Docflow.Server.DocumentKind.ClassTypeGuid, Constants.Module.DocumentKindGuids.ProtocolOfBoardMeeting);      
+      if (externalLink == null)
+      {
+        var documentKind = Sungero.Docflow.DocumentKinds.GetAll().Where(k => k.Name == Resources.ProtocolOfBoardMeetingKind).FirstOrDefault();
+        if (documentKind != null)
+          Sungero.Docflow.PublicFunctions.Module.CreateExternalLink(documentKind, Constants.Module.DocumentKindGuids.ProtocolOfBoardMeeting);
+        else
+        {
+          Sungero.Docflow.PublicInitializationFunctions.Module.CreateDocumentKind(Resources.ProtocolOfBoardMeetingKind,
+                           Resources.ProtocolOfBoardMeetingKind,
+                           registrable,
+                           Sungero.Docflow.DocumentKind.DocumentFlow.Inner,
+                           true,
+                           false,
+                           Constants.Module.DocumentTypeGuids.Minutes,
+                           new Sungero.Domain.Shared.IActionInfo[] { Sungero.Docflow.OfficialDocuments.Info.Actions.SendForFreeApproval, 
+                             Sungero.Docflow.OfficialDocuments.Info.Actions.SendForApproval, 
+                             Sungero.Docflow.OfficialDocuments.Info.Actions.SendForAcquaintance,
+                             Sungero.Docflow.OfficialDocuments.Info.Actions.SendActionItem
+                           },
+                           Constants.Module.DocumentKindGuids.ProtocolOfBoardMeeting,
+                           false);          
+        }
+      }
+      #endregion
+      
     }
     
     /// <summary>

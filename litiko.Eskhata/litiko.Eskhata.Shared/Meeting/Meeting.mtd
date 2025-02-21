@@ -796,6 +796,11 @@
           "Name": "withReason",
           "ParameterType": "global::System.Boolean",
           "ParameterTypeFullName": "System.Boolean"
+        },
+        {
+          "Name": "inTJ",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
         }
       ],
       "ReturnType": "global::System.String",
@@ -835,6 +840,11 @@
           "Name": "withJobTitle",
           "ParameterType": "global::System.Boolean",
           "ParameterTypeFullName": "System.Boolean"
+        },
+        {
+          "Name": "inTJ",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
         }
       ],
       "ReturnType": "global::System.String",
@@ -850,6 +860,11 @@
         },
         {
           "Name": "withJobTitle",
+          "ParameterType": "global::System.Boolean",
+          "ParameterTypeFullName": "System.Boolean"
+        },
+        {
+          "Name": "inTJ",
           "ParameterType": "global::System.Boolean",
           "ParameterTypeFullName": "System.Boolean"
         }

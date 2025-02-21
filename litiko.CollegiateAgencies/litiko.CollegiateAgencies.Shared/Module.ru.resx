@@ -110,7 +110,7 @@
     <value>Постановление</value>
   </data>
   <data name="MinutesTemplateNotFound" xml:space="preserve">
-    <value>Шаблон документа с именем {0} не найден.</value>
+    <value>Шаблон документа для вида {0} не найден.</value>
   </data>
   <data name="MeetingIsEmpty" xml:space="preserve">
     <value>В документе не указано совещание.</value>
@@ -135,5 +135,8 @@
   </data>
   <data name="RoleTranslator" xml:space="preserve">
     <value>Переводчик</value>
+  </data>
+  <data name="ProtocolOfBoardMeetingKind" xml:space="preserve">
+    <value>Протокол заседания Правления</value>
   </data>
 </root>
