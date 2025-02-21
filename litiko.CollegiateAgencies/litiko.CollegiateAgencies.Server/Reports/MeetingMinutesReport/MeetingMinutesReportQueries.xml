@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<queries>
+  <query key="ReportData">
+    <mssql><![CDATA[SELECT
+	meetingMinutes.Id AS MeetingMinutesId,
+	meetingMinutes.RegNumber_Docflow_Sungero AS MeetingMinutesRegNumber,
+	meetingMinutes.RegDate_Docflow_Sungero AS MeetingMinutesRegDate,
+	meetingMinutes.[Name] AS MeetingMinutesName,
+	meetingMinutes.MinutesMeeting_Meeting_Sungero AS MeetingId,
+	meeting.[Name] AS MeetingName,
+	meeting.Category_Eskhata_litiko AS MeetingCategoryId,
+	REPLACE((
+		SELECT CONVERT(NVARCHAR, ROW_NUMBER() OVER (ORDER BY meetingProjectSolution.Id)) + '. ' + projectSolution.[Name] + '\n'
+		FROM [dbo].[litiko_Eskhata_MeetingPS] AS meetingProjectSolution
+		LEFT JOIN [dbo].[Sungero_Content_EDoc] AS projectSolution ON meetingProjectSolution.[ProjectSolutio] = projectSolution.[Id]
+		WHERE meetingProjectSolution.[Meeting] = meeting.[Id]
+		FOR XML PATH('')
+	), '\n', '<br>') AS [Description]
+FROM [dbo].[Sungero_Content_EDoc] AS meetingMinutes
+LEFT JOIN [dbo].[Sungero_Meeting_Meeting] AS meeting ON meetingMinutes.[MinutesMeeting_Meeting_Sungero] = meeting.[Id]
+WHERE meetingMinutes.[Discriminator] = 'BB4780FF-B2C3-4044-A390-E9E110791BF6'
+AND meetingMinutes.RegDate_Docflow_Sungero BETWEEN @MeetingMinutesDateFrom AND @MeetingMinutesDateTo
+AND meeting.Category_Eskhata_litiko = @MeetingCategoryId
+ORDER BY meetingMinutes.Id]]></mssql>
+  </query>
+</queries>

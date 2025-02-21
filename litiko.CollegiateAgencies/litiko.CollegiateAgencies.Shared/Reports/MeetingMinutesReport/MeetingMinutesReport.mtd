@@ -1,0 +1,54 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "0896e8c1-b6c1-4159-bfaa-74e636e74091",
+  "Name": "MeetingMinutesReport",
+  "AssociatedGuid": "8c6dc2cd-fe6a-4f89-b05c-494f454a9e68",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Word",
+  "ExportFormats": [
+    "Word"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteClient"
+  ],
+  "IconResourcesKeys": [],
+  "IntegrationServiceName": "CollegiateAgenciesMeetingMinutesReport",
+  "Overridden": [
+    "PublicConstants",
+    "PublicStructures",
+    "HandledEvents",
+    "DisplayName",
+    "Parameters",
+    "ExportFormats",
+    "DefaultExportFormat"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "6fbd2c88-ae40-48f5-b195-75f2f6a7e3fd",
+      "Name": "MeetingMinutesDateFrom",
+      "InternalDataTypeName": "System.DateTime",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "9d699828-26c2-4620-ae51-89a1f69f9268",
+      "Name": "MeetingMinutesDateTo",
+      "InternalDataTypeName": "System.DateTime",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "2879b468-a15c-4f3e-923b-09968fa6b67f",
+      "Name": "MeetingCategoryId",
+      "InternalDataTypeName": "System.Int64",
+      "IsRequired": true,
+      "IsSimpleDataType": true
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "MeetingMinutesReportTitle"
+  ],
+  "Versions": []
+}
