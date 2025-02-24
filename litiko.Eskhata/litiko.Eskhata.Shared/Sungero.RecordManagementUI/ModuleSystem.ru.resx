@@ -58,4 +58,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="sf_e14e6272_0a0f_41dd_ba9f_462146eefc6a" xml:space="preserve">
+    <value>Регистрация приказов и распоряжений</value>
+  </data>
+  <data name="FilterPanel_StateGrouplitiko_e428f13155874de59d2265333b7f1514" xml:space="preserve">
+    <value>Задания</value>
+  </data>
+  <data name="FilterPanel_InProcesslitiko_958522ffd6af4f7a9d7cb0703a933d80" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="FilterPanel_Alllitiko_a31eda88a967459bb0f26ff03a65e721" xml:space="preserve">
+    <value>Все</value>
+  </data>
+  <data name="FilterPanel_Periodlitiko_b89e031ca9304ed68d0008f888c17947" xml:space="preserve">
+    <value>Получены за последние</value>
+  </data>
+  <data name="FilterPanel_Last30Dayslitiko_aecef85f922f459591b3b9252661bb4d" xml:space="preserve">
+    <value>30 дней</value>
+  </data>
+  <data name="FilterPanel_Last90Dayslitiko_7c70e6b15cd64b67aa2c7e895a103084" xml:space="preserve">
+    <value>90 дней</value>
+  </data>
+  <data name="FilterPanel_Last180Dayslitiko_8bf5d16126844297bc45c4dc0073f764" xml:space="preserve">
+    <value>180 дней</value>
+  </data>
 </root>

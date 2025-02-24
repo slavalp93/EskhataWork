@@ -9,7 +9,12 @@
   "ClientBaseNamespace": "litiko.Eskhata.Module.RecordManagementUI.ClientBase",
   "Code": "RecMaUI",
   "CompanyCode": "Sungero",
-  "ExplorerTreeOrder": [],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "e14e6272-0a0f-41dd-ba9f-462146eefc6a",
+      "PreviousItemId": "bd7ced8f-379e-4cda-9f18-a28193b8d53b"
+    }
+  ],
   "IconResourcesKeys": [],
   "Importance": "High",
   "IsLicensed": true,
@@ -18,7 +23,93 @@
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.Eskhata.Module.RecordManagementUI",
   "ResourcesKeys": [],
-  "SpecialFolders": [],
+  "SpecialFolders": [
+    {
+      "NameGuid": "e14e6272-0a0f-41dd-ba9f-462146eefc6a",
+      "Name": "OrdersAndCompanyDirectiveslitiko",
+      "DefaultContentType": "ea683a63-273e-43ae-bcf1-7a443698008a",
+      "DisplayType": "Inbox",
+      "FilterPanel": {
+        "NameGuid": "05efe60c-f1e5-4ba9-abe4-794d3d7e44b6",
+        "Name": "FilterPanel",
+        "Controls": [
+          {
+            "$type": "Sungero.Metadata.FilterGroupMetadata, Sungero.Metadata",
+            "NameGuid": "e428f131-5587-4de5-9d22-65333b7f1514",
+            "Name": "StateGrouplitiko"
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListMetadata, Sungero.Metadata",
+            "NameGuid": "58b38881-3308-4f48-b68b-ee5185914460",
+            "Name": "Statelitiko",
+            "ParentGuid": "e428f131-5587-4de5-9d22-65333b7f1514"
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "958522ff-d6af-4f7a-9d7c-b0703a933d80",
+            "Name": "InProcesslitiko",
+            "IsSelected": true,
+            "ParentGuid": "58b38881-3308-4f48-b68b-ee5185914460"
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "a31eda88-a967-459b-b0f2-6ff03a65e721",
+            "Name": "Alllitiko",
+            "ParentGuid": "58b38881-3308-4f48-b68b-ee5185914460",
+            "PreviousGuid": "958522ff-d6af-4f7a-9d7c-b0703a933d80"
+          },
+          {
+            "$type": "Sungero.Metadata.FilterGroupMetadata, Sungero.Metadata",
+            "NameGuid": "b89e031c-a930-4ed6-8d00-08f888c17947",
+            "Name": "Periodlitiko",
+            "PreviousGuid": "e428f131-5587-4de5-9d22-65333b7f1514"
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListMetadata, Sungero.Metadata",
+            "NameGuid": "05e4a811-5953-4508-adf3-1df6afbbb05a",
+            "Name": "Periodlitiko",
+            "MasterControlId": "a31eda88-a967-459b-b0f2-6ff03a65e721",
+            "ParentGuid": "b89e031c-a930-4ed6-8d00-08f888c17947"
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "aecef85f-922f-4595-91b3-b9252661bb4d",
+            "Name": "Last30Dayslitiko",
+            "ParentGuid": "05e4a811-5953-4508-adf3-1df6afbbb05a"
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "7c70e6b1-5cd6-4b67-aa2c-7e895a103084",
+            "Name": "Last90Dayslitiko",
+            "IsSelected": true,
+            "ParentGuid": "05e4a811-5953-4508-adf3-1df6afbbb05a",
+            "PreviousGuid": "aecef85f-922f-4595-91b3-b9252661bb4d"
+          },
+          {
+            "$type": "Sungero.Metadata.FilterListItemMetadata, Sungero.Metadata",
+            "NameGuid": "8bf5d161-2684-4297-bc45-c4dc0073f764",
+            "Name": "Last180Dayslitiko",
+            "ParentGuid": "05e4a811-5953-4508-adf3-1df6afbbb05a",
+            "PreviousGuid": "7c70e6b1-5cd6-4b67-aa2c-7e895a103084"
+          }
+        ]
+      },
+      "HandledEvents": [
+        "DataQueryServer"
+      ],
+      "IsShow": true,
+      "IsViewSettingsByFolder": true,
+      "Kind": "Computable",
+      "NeedShowMarkedCount": true,
+      "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17",
+      "SupportedDescendantsTypes": [
+        "1c498bb7-d503-471b-8f84-34c09db16609",
+        "3d2ed69e-f4f2-41fa-b639-e3bac8a379a4",
+        "ccb43446-aa67-4608-a37a-259eff27e68a",
+        "8d2eeaed-9598-418e-b403-3d5df0cc0aa3"
+      ]
+    }
+  ],
   "Version": "4.8.138.0",
   "Widgets": [],
   "Versions": [

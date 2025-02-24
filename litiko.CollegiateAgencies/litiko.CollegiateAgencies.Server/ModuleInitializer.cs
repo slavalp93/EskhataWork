@@ -149,7 +149,7 @@ namespace litiko.CollegiateAgencies.Server
       InitializationLogger.Debug("Init: Grant rights on entities.");
       
       // "Все пользователи"
-      var roleAllUsers = Roles.AllUsers;      
+      var roleAllUsers = Roles.AllUsers;
       if (roleAllUsers != null)
       {
         MeetingCategories.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Read);
@@ -181,7 +181,16 @@ namespace litiko.CollegiateAgencies.Server
       if (secretariesKOU != null)
       {
         QuestionGroups.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Create);
-        QuestionGroups.AccessRights.Save();        
+        QuestionGroups.AccessRights.Save();
+        
+        Reports.AccessRights.Grant(Reports.GetMeetingMinutesReport().Info, secretariesKOU, DefaultReportAccessRightsTypes.Execute);
+      }
+      
+      // "Администраторы"
+      var roleAdmins = Roles.Administrators;
+      if (roleAdmins != null)
+      {
+        Reports.AccessRights.Grant(Reports.GetMeetingMinutesReport().Info, roleAdmins, DefaultReportAccessRightsTypes.Execute);
       }
       
     }    
