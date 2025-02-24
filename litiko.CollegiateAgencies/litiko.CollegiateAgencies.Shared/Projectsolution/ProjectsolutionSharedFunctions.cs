@@ -18,8 +18,8 @@ namespace litiko.CollegiateAgencies.Shared
       var properties = _obj.State.Properties;
       bool isEnabled = _obj.Meeting != null && litiko.Eskhata.PublicFunctions.Meeting.CurrentUserHasAccess(_obj.Meeting);
       
-      properties.ListenedTJ.IsRequired = true;
-      properties.ListenedTJMinutes.IsRequired = true;      
+      properties.ListenedTJ.IsRequired = true;      
+      
       
       #region Вкладка голосование      
       bool votingTableAviabled = true;

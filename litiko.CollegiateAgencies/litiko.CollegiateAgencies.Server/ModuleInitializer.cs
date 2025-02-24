@@ -184,14 +184,7 @@ namespace litiko.CollegiateAgencies.Server
         QuestionGroups.AccessRights.Save();
         
         Reports.AccessRights.Grant(Reports.GetMeetingMinutesReport().Info, secretariesKOU, DefaultReportAccessRightsTypes.Execute);
-      }
-      
-      // "Администраторы"
-      var roleAdmins = Roles.Administrators;
-      if (roleAdmins != null)
-      {
-        Reports.AccessRights.Grant(Reports.GetMeetingMinutesReport().Info, roleAdmins, DefaultReportAccessRightsTypes.Execute);
-      }
+      }      
       
     }    
     

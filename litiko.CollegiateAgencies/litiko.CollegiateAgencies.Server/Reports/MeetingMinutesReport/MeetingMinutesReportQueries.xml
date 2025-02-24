@@ -2,33 +2,35 @@
 <queries>
   <query key="ReportData">
     <postgres><![CDATA[SELECT
-    meetingMinutes."Id" AS "MeetingMinutesId",
-    meetingMinutes."RegNumber_Docflow_Sungero" AS "MeetingMinutesRegNumber",
-    meetingMinutes."RegDate_Docflow_Sungero" AS "MeetingMinutesRegDate",
-    meetingMinutes."Name" AS "MeetingMinutesName",
-    meetingMinutes."MinutesMeeting_Meeting_Sungero" AS "MeetingId",
-    meeting."Name" AS "MeetingName",
-    meeting."Category_Eskhata_litiko" AS "MeetingCategoryId",
+    meetingMinutes."id" AS "MeetingMinutesId",
+    meetingMinutes."regnumber_docflow_sungero" AS "MeetingMinutesRegNumber",
+    meetingMinutes."regdate_docflow_sungero" AS "MeetingMinutesRegDate",
+    meetingMinutes."name" AS "MeetingMinutesName",
+    meetingMinutes."minutesmeeting_meeting_sungero" AS "MeetingId",
+    meeting."name" AS "MeetingName",
+    meeting."category_eskhata_litiko" AS "MeetingCategoryId",
     -- Concatenating project solutions with row numbers
     REPLACE(
         (
-            SELECT STRING_AGG(
-                CAST(ROW_NUMBER() OVER (ORDER BY meetingProjectSolution."Id") AS TEXT) || '. ' || projectSolution."Name", 
-                E'\n'
-            )
-            FROM "litiko_Eskhata_MeetingPS" AS meetingProjectSolution
-            LEFT JOIN "Sungero_Content_EDoc" AS projectSolution 
-                ON meetingProjectSolution."ProjectSolutio" = projectSolution."Id"
-            WHERE meetingProjectSolution."Meeting" = meeting."Id"
+            SELECT STRING_AGG(row_numbered."RowText", E'\n')
+            FROM (
+                SELECT 
+                    CAST(ROW_NUMBER() OVER (ORDER BY meetingprojectsolution."id") AS TEXT) || '. ' || projectsolution."name" AS "RowText"
+                FROM "litiko_eskhata_meetingps" AS meetingProjectSolution
+                LEFT JOIN "sungero_content_edoc" AS projectSolution 
+                    ON meetingProjectSolution."projectsolutio" = projectSolution."id"
+                WHERE meetingProjectSolution."meeting" = meeting."id"
+            ) AS row_numbered
         ), 
         E'\n', '<br>'
     ) AS "Description"
-FROM "Sungero_Content_EDoc" AS meetingMinutes
-LEFT JOIN "Sungero_Meeting_Meeting" AS meeting ON meetingMinutes."MinutesMeeting_Meeting_Sungero" = meeting."Id"
+FROM "sungero_content_edoc" AS meetingMinutes
+LEFT JOIN "sungero_meeting_meeting" AS meeting 
+    ON meetingMinutes."minutesmeeting_meeting_sungero" = meeting."id"
 WHERE 
-    meetingMinutes."Discriminator" = 'BB4780FF-B2C3-4044-A390-E9E110791BF6'
-    AND meetingMinutes."RegDate_Docflow_Sungero" BETWEEN @MeetingMinutesDateFrom AND @MeetingMinutesDateTo
-    AND meeting."Category_Eskhata_litiko" = @MeetingCategoryId
-ORDER BY meetingMinutes."Id";]]></postgres>
+    meetingMinutes."discriminator" = 'BB4780FF-B2C3-4044-A390-E9E110791BF6'
+    AND meetingMinutes."regdate_docflow_sungero" BETWEEN @MeetingMinutesDateFrom AND @MeetingMinutesDateTo
+    AND meeting."category_eskhata_litiko" = @MeetingCategoryId
+ORDER BY meetingMinutes."id";]]></postgres>
   </query>
 </queries>
