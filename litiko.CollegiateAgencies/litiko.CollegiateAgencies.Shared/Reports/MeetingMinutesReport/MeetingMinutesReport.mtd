@@ -48,7 +48,10 @@
   ],
   "PublicStructures": [],
   "ResourcesKeys": [
-    "MeetingMinutesReportTitle"
+    "MeetingMinutesReportTitle",
+    "MeetingCategory",
+    "DateTo",
+    "DateFrom"
   ],
   "Versions": []
 }

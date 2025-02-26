@@ -16,9 +16,9 @@ namespace litiko.CollegiateAgencies
       var currentDate = Sungero.Core.Calendar.Now;
       var beginningofMonth = Sungero.Core.Calendar.BeginningOfMonth(currentDate);
       
-      var meetingMinutesDateFrom = dialog.AddDate("С", true, beginningofMonth);
-      var meetingMinutesDateTo = dialog.AddDate("По", true, currentDate);
-      var category = dialog.AddSelect("Категория заседания", true, CollegiateAgencies.MeetingCategories.Null);
+      var meetingMinutesDateFrom = dialog.AddDate(litiko.CollegiateAgencies.Reports.Resources.MeetingMinutesReport.DateFrom, true, beginningofMonth);
+      var meetingMinutesDateTo = dialog.AddDate(litiko.CollegiateAgencies.Reports.Resources.MeetingMinutesReport.DateTo, true, currentDate);
+      var category = dialog.AddSelect(litiko.CollegiateAgencies.Reports.Resources.MeetingMinutesReport.MeetingCategory, true, CollegiateAgencies.MeetingCategories.Null);
       
       if (dialog.Show() == DialogButtons.Ok)
       {

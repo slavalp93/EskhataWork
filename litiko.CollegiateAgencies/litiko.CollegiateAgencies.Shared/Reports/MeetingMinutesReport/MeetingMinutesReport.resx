@@ -61,4 +61,13 @@
   <data name="MeetingMinutesReportTitle" xml:space="preserve">
     <value>Meeting minutes report</value>
   </data>
+  <data name="MeetingCategory" xml:space="preserve">
+    <value>Meeting category</value>
+  </data>
+  <data name="DateTo" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="DateFrom" xml:space="preserve">
+    <value>From</value>
+  </data>
 </root>
