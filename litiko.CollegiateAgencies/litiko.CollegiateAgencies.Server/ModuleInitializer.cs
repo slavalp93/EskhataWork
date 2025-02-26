@@ -184,7 +184,8 @@ namespace litiko.CollegiateAgencies.Server
         QuestionGroups.AccessRights.Save();
         
         Reports.AccessRights.Grant(Reports.GetMeetingMinutesReport().Info, secretariesKOU, DefaultReportAccessRightsTypes.Execute);
-      }
+      }      
+      
     }    
     
     /// <summary>

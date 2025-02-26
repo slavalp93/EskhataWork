@@ -252,8 +252,8 @@ namespace litiko.CollegiateAgencies.Server
         
       }
       else
-      {
-        var projectSolution = litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument);                
+      {                
+        var projectSolution = litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument);
         var regDate = string.Empty;
         var regnumber = string.Empty;
         var minutes = litiko.Eskhata.Minuteses.GetAll().Where(x => Equals(x.Meeting, meeting)).FirstOrDefault();
@@ -263,19 +263,23 @@ namespace litiko.CollegiateAgencies.Server
           regnumber = !string.IsNullOrEmpty(minutes.RegistrationNumber) ? minutes.RegistrationNumber : string.Empty;
         }
         replacebleFields.Add("<DocDate>", regDate);
-        replacebleFields.Add("<DocNumber>", regnumber);
-        replacebleFields.Add("<AgendaList>", !string.IsNullOrEmpty(projectSolution.Subject) ? projectSolution.Subject : string.Empty);
+        replacebleFields.Add("<DocNumber>", regnumber);        
         
         // Решения только по конкретному Проекту решения                  
-        var meetingResolutionInfo = new Structures.Module.MeetingResolutionInfo();
-        
+        var meetingResolutionInfo = new Structures.Module.MeetingResolutionInfo();        
+
         var meetingProjectSolutionNumber = projectSolution?.Meeting.ProjectSolutionslitiko.Where(ps => Equals(ps.ProjectSolution, projectSolution))
           .Select(ps => ps.Number)
           .FirstOrDefault();
         
+        replacebleFields.Add("<AgendaList>", !string.IsNullOrEmpty(projectSolution.Subject) ? string.Format("... {0}. {1}", meetingProjectSolutionNumber, projectSolution.Subject) : string.Empty);
+        
         meetingResolutionInfo.ProjectSolutionTittle = string.Format("{0}. Рассмотрение {1}", meetingProjectSolutionNumber, projectSolution.Subject);
         meetingResolutionInfo.ListenedRU = !string.IsNullOrEmpty(projectSolution.ListenedRUMinutes) ? projectSolution.ListenedRUMinutes : string.Empty;
-        meetingResolutionInfo.Decigions = litiko.CollegiateAgencies.PublicFunctions.Projectsolution.GetProjectSolutionDecidedMinutesRU(projectSolution);
+        
+        string originalResult = litiko.CollegiateAgencies.PublicFunctions.Projectsolution.GetProjectSolutionDecidedMinutesRU(projectSolution);
+        meetingResolutionInfo.Decigions = string.Join("\n", originalResult.Split(new[] { '\n' }, StringSplitOptions.None)
+                                                      .Select((line, index) => $"{meetingProjectSolutionNumber}.{line}"));
         
         var votingrecord = meeting.ProjectSolutionslitiko.Where(x => Equals(x.ProjectSolution, projectSolution)).FirstOrDefault();
         if (votingrecord != null)

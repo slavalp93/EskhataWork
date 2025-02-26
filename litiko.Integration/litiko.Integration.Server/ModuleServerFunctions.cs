@@ -2364,11 +2364,13 @@ namespace litiko.Integration.Server
         jobTittle.Name = isJobTittleNameRU;       
       }
       
+      /* отключено 25.02.2025 по просьбе Муниры
       if (jobTittle.NameTGlitiko != isJobTittleNameTG)
       {
         Logger.DebugFormat("Change JobTittle.NameTG: current:{0}, new:{1}", jobTittle.NameTGlitiko, isJobTittleNameTG);
         jobTittle.NameTGlitiko = isJobTittleNameTG;       
       }      
+      */
       
       var result = Structures.Module.ProcessingJobTittleResult.Create(jobTittle, false);
       if (jobTittle.State.IsChanged || jobTittle.State.IsInserted)

@@ -78,7 +78,7 @@ namespace litiko.CollegiateAgencies.Server
       if (!projectSolution.Decided.Any())
         return null;      
       
-      return string.Join(Environment.NewLine, projectSolution.Decided.Select(element => $"{element.Number}. {element.DecisionRU}"));
+      return string.Join("\n", projectSolution.Decided.Select(element => $"{element.Number}. {element.DecisionRU}"));
     } 
 
     /// <summary>
@@ -92,7 +92,7 @@ namespace litiko.CollegiateAgencies.Server
       if (!projectSolution.Decided.Any())
         return null;      
       
-      return string.Join(Environment.NewLine, projectSolution.Decided.Select(element => $"{element.Number}. {element.DecisionTJ}"));
+      return string.Join("\n", projectSolution.Decided.Select(element => $"{element.Number}. {element.DecisionTJ}"));
     }  
 
     /// <summary>
@@ -106,7 +106,7 @@ namespace litiko.CollegiateAgencies.Server
       if (!projectSolution.Decided.Any())
         return null;      
       
-      return string.Join(Environment.NewLine, projectSolution.Decided.Select(element => $"{element.Number}. {element.DecisionEN}"));
+      return string.Join("\n", projectSolution.Decided.Select(element => $"{element.Number}. {element.DecisionEN}"));
     }
 
     /// <summary>
@@ -120,7 +120,7 @@ namespace litiko.CollegiateAgencies.Server
       if (!projectSolution.DecidedMinutes.Any())
         return null;      
       
-      return string.Join(Environment.NewLine, projectSolution.DecidedMinutes.Select(element => $"{element.Number}. {element.DecisionRU}"));
+      return string.Join("\n", projectSolution.DecidedMinutes.Select(element => $"{element.Number}. {element.DecisionRU}"));
     }    
 
     /// <summary>
@@ -134,7 +134,7 @@ namespace litiko.CollegiateAgencies.Server
       if (!projectSolution.DecidedMinutes.Any())
         return null;      
       
-      return string.Join(Environment.NewLine, projectSolution.DecidedMinutes.Select(element => $"{element.Number}. {element.DecisionTJ}"));
+      return string.Join("\n", projectSolution.DecidedMinutes.Select(element => $"{element.Number}. {element.DecisionTJ}"));
     }
     
     /// <summary>
@@ -148,7 +148,7 @@ namespace litiko.CollegiateAgencies.Server
       if (!projectSolution.DecidedMinutes.Any())
         return null;      
       
-      return string.Join(Environment.NewLine, projectSolution.DecidedMinutes.Select(element => $"{element.Number}. {element.DecisionEN}"));
+      return string.Join("\n", projectSolution.DecidedMinutes.Select(element => $"{element.Number}. {element.DecisionEN}"));
     }    
     
     /// <summary>
@@ -163,7 +163,7 @@ namespace litiko.CollegiateAgencies.Server
       if (document == null)
         return string.Empty;
       
-      return string.Join(Environment.NewLine, document.Relations.GetRelated().Select(d => Sungero.Docflow.OfficialDocuments.As(d).Subject));
+      return string.Join("\n", document.Relations.GetRelated().Select(d => Sungero.Docflow.OfficialDocuments.As(d).Subject));
     }    
   }
 }
