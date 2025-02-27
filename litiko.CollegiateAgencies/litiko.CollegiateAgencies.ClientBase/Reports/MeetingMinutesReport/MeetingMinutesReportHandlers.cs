@@ -25,6 +25,8 @@ namespace litiko.CollegiateAgencies
         MeetingMinutesReport.MeetingMinutesDateFrom = meetingMinutesDateFrom.Value;
         MeetingMinutesReport.MeetingMinutesDateTo = meetingMinutesDateTo.Value;
         MeetingMinutesReport.MeetingCategoryId = category.Value.Id;
+        MeetingMinutesReport.MeetingCategoryPresident = category.Value.President.Person.ShortName;
+        MeetingMinutesReport.MeetingCategoryNameForTemplate = category.Value.NameForTemplate;
       }
       else
       {

@@ -27,6 +27,9 @@
       "PreviousItemId": "28589c51-3530-4612-a004-c820a50ff1df"
     }
   ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
   "IconResourcesKeys": [],
   "Importance": "High",
   "IsLicensed": true,

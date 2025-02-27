@@ -44,6 +44,16 @@
       "InternalDataTypeName": "System.Int64",
       "IsRequired": true,
       "IsSimpleDataType": true
+    },
+    {
+      "NameGuid": "99739628-5c29-4fd8-854e-124b311042b3",
+      "Name": "MeetingCategoryPresident",
+      "InternalDataTypeName": "System.String"
+    },
+    {
+      "NameGuid": "beb9a6e5-c0d4-44ca-a5be-5900188247e3",
+      "Name": "MeetingCategoryNameForTemplate",
+      "InternalDataTypeName": "System.String"
     }
   ],
   "PublicStructures": [],
