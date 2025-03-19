@@ -11,6 +11,7 @@ using System.Net.Http.Headers;
 using System.Xml.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Net;
 
 namespace litiko.Integration.Server
 {
@@ -30,20 +31,27 @@ namespace litiko.Integration.Server
     public string SendRequestToIS(IIntegrationMethod method, IExchangeDocument exchDoc, long lastId)
     {
       var errorMessage = string.Empty;
-      
-      string application_key = "10.10.202.171/Integration/odata/Integration/ProcessResponseFromIS##";            
-      string url = method.IntegrationSystem.ServiceUrl;
-      var xmlRequestBody = string.Empty;
 
-      if (method.Name == "R_DR_GET_COMPANY")
-        xmlRequestBody = Integration.Resources.RequestXMLTemplateForCompanyFormat(exchDoc.Id, application_key, method.Name, lastId, exchDoc.Counterparty.TIN);
-      else if (method.Name == "R_DR_GET_BANK")
-        xmlRequestBody = Integration.Resources.RequestXMLTemplateForBankFormat(exchDoc.Id, application_key, method.Name, lastId, Eskhata.Banks.As(exchDoc.Counterparty).BIC);
-      else
-        xmlRequestBody = Integration.Resources.RequestXMLTemplateFormat(exchDoc.Id, application_key, method.Name, lastId);
-      
       try
-      {
+      {      
+        //string application_key = "10.10.202.171/Integration/odata/Integration/ProcessResponseFromIS##";                  
+        Uri uri = new Uri(Hyperlinks.Get(exchDoc));      
+        string ipAdress = Dns.GetHostAddresses(uri.Host).FirstOrDefault().ToString();
+  
+        //string application_key = $"{uri.Scheme}://{uri.Host}/" +"Integration/odata/Integration/ProcessResponseFromIS##";
+        //string application_key = $"{ipAdress}/Integration/odata/Integration/ProcessResponseFromIS##";
+        string application_key = $"{uri.Host}/Integration/odata/Integration/ProcessResponseFromIS##";
+        
+        string url = method.IntegrationSystem.ServiceUrl;
+        var xmlRequestBody = string.Empty;
+  
+        if (method.Name == "R_DR_GET_COMPANY")
+          xmlRequestBody = Integration.Resources.RequestXMLTemplateForCompanyFormat(exchDoc.Id, application_key, method.Name, lastId, exchDoc.Counterparty.TIN);
+        else if (method.Name == "R_DR_GET_BANK")
+          xmlRequestBody = Integration.Resources.RequestXMLTemplateForBankFormat(exchDoc.Id, application_key, method.Name, lastId, Eskhata.Banks.As(exchDoc.Counterparty).BIC);
+        else
+          xmlRequestBody = Integration.Resources.RequestXMLTemplateFormat(exchDoc.Id, application_key, method.Name, lastId);      
+
         if (method.SaveRequestToIS.Value)
         {
           using (var xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(xmlRequestBody)))
