@@ -10,6 +10,11 @@ namespace litiko.Integration.Server
   public partial class ModuleInitializer
   {
 
+    public override bool IsModuleVisible()
+    {
+      return Users.Current.IncludedIn(Constants.Module.SynchronizationResponsibleRoleGuid) || Users.Current.IncludedIn(Roles.Administrators);
+    }
+
     public override void Initializing(Sungero.Domain.ModuleInitializingEventArgs e)
     {      
       CreateIntegrationSystem("ABS");

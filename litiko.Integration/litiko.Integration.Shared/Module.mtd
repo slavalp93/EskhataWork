@@ -124,7 +124,8 @@
     }
   ],
   "HandledEvents": [
-    "InitializingServer"
+    "InitializingServer",
+    "VisibilityServer"
   ],
   "IconResourcesKeys": [],
   "Importance": "Medium",

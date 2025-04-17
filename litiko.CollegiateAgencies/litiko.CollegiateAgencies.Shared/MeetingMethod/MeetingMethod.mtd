@@ -74,6 +74,9 @@
   "IconResourcesKeys": [],
   "IntegrationServiceName": "CollegiateAgenciesMeetingMethods",
   "OperationsClass": "",
+  "Overridden": [
+    "IsVisible"
+  ],
   "Properties": [
     {
       "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",

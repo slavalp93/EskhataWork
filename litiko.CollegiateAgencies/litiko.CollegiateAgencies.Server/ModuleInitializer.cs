@@ -152,27 +152,27 @@ namespace litiko.CollegiateAgencies.Server
       var roleAllUsers = Roles.AllUsers;
       if (roleAllUsers != null)
       {
-        MeetingCategories.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Read);
-        MeetingCategories.AccessRights.Save();
+        //MeetingCategories.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Read);
+        //MeetingCategories.AccessRights.Save();
 
-        MeetingMethods.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Read);
-        MeetingMethods.AccessRights.Save();
+        //MeetingMethods.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Read);
+        //MeetingMethods.AccessRights.Save();
 
         Projectsolutions.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Create);
         Projectsolutions.AccessRights.Save();
         
-        QuestionGroups.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Read);
-        QuestionGroups.AccessRights.Save();
+        //QuestionGroups.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Read);
+        //QuestionGroups.AccessRights.Save();
       }
       
       // "Ответственные за совещания"
       var meetingResponsible = Roles.GetAll().Where(n => n.Sid == Sungero.Meetings.PublicConstants.Module.MeetingResponsibleRole).FirstOrDefault();
       if (meetingResponsible != null)
       {
-        MeetingCategories.AccessRights.Grant(meetingResponsible, DefaultAccessRightsTypes.Create);
+        MeetingCategories.AccessRights.Grant(meetingResponsible, DefaultAccessRightsTypes.FullAccess);
         MeetingCategories.AccessRights.Save();
         
-        MeetingMethods.AccessRights.Grant(meetingResponsible, DefaultAccessRightsTypes.Create);
+        MeetingMethods.AccessRights.Grant(meetingResponsible, DefaultAccessRightsTypes.FullAccess);
         MeetingMethods.AccessRights.Save();
       }
       
@@ -180,7 +180,7 @@ namespace litiko.CollegiateAgencies.Server
       var secretariesKOU = Roles.GetAll().Where(r => r.Sid == Constants.Module.RoleGuid.Secretaries).FirstOrDefault();
       if (secretariesKOU != null)
       {
-        QuestionGroups.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Create);
+        QuestionGroups.AccessRights.Grant(secretariesKOU, DefaultAccessRightsTypes.FullAccess);
         QuestionGroups.AccessRights.Save();
         
         Reports.AccessRights.Grant(Reports.GetMeetingMinutesReport().Info, secretariesKOU, DefaultReportAccessRightsTypes.Execute);

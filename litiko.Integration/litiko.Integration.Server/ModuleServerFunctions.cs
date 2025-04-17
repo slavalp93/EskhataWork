@@ -827,7 +827,7 @@ namespace litiko.Integration.Server
                   employee.PersonnelNumber = isPersonnelNumber;              
                 }
 
-                if (employee.Phone != isPhone)
+                if (employee.Name != "Сайфидинов Акмалчон Толибчонович" && employee.Phone != isPhone)
                 {
                   Logger.DebugFormat("Change Phone: current:{0}, new:{1}", employee.Phone, isPhone);
                   employee.Phone = isPhone;              

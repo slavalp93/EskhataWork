@@ -1,0 +1,51 @@
+{
+  "$type": "Sungero.Metadata.LayerModuleMetadata, Sungero.Metadata",
+  "NameGuid": "4e8f6a59-d901-4b2a-8648-2d991a5509be",
+  "Name": "Parties",
+  "AssociatedGuid": "78d05f91-7585-42b9-addc-5b14478d4680",
+  "AsyncHandlers": [
+    {
+      "NameGuid": "668982ea-29e3-4f4c-9908-6d1dfca2b51a",
+      "Name": "UpdateContactName",
+      "DelayPeriod": 15,
+      "DelayStrategy": "ExponentialDelayStrategy",
+      "IsAncestorMetadata": true,
+      "Parameters": [
+        {
+          "NameGuid": "4fe583aa-47d9-4821-8425-15ed866c7b38",
+          "Name": "PersonId",
+          "ParameterType": "LongInteger"
+        }
+      ]
+    }
+  ],
+  "BaseGuid": "243b34ec-8425-4c7e-b66f-27f7b9c8f38d",
+  "ClientBaseAssemblyName": "litiko.Eskhata.ClientBase",
+  "ClientBaseNamespace": "litiko.Eskhata.Module.Parties.ClientBase",
+  "Code": "Parties",
+  "CompanyCode": "Sungero",
+  "ExplorerTreeOrder": [],
+  "HandledEvents": [
+    "VisibilityServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "LayeredFromGuid": "243b34ec-8425-4c7e-b66f-27f7b9c8f38d",
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "litiko.Eskhata.Module.Parties",
+  "ResourcesKeys": [],
+  "SpecialFolders": [],
+  "Version": "4.8.138.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "LayerModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    }
+  ]
+}

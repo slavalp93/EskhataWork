@@ -5,7 +5,7 @@ using Sungero.Core;
 using Sungero.CoreEntities;
 using Sungero.Domain.Initialization;
 
-namespace litiko.Eskhata.Module.Commons.Server
+namespace litiko.Eskhata.Module.Parties.Server
 {
   public partial class ModuleInitializer
   {
@@ -13,13 +13,13 @@ namespace litiko.Eskhata.Module.Commons.Server
     public override bool IsModuleVisible()
     {
       //return base.IsModuleVisible();
-      
+            
       // "Ответственные за контрагентов"
       return Users.Current.IncludedIn(Sungero.Docflow.PublicConstants.Module.RoleGuid.CounterpartiesResponsibleRole) ||
         // "Ответственные за договоры"
         Users.Current.IncludedIn(Sungero.Docflow.PublicConstants.Module.RoleGuid.ContractsResponsible) ||
         // "Администраторы"
-        Users.Current.IncludedIn(Roles.Administrators);      
+        Users.Current.IncludedIn(Roles.Administrators);
     }
   }
 }

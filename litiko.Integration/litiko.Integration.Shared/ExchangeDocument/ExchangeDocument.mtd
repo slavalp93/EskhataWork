@@ -211,6 +211,8 @@
     "RefreshClient",
     "CreatedServer"
   ],
+  "HideFromCreationArea": true,
+  "HideFromNavigationEditorCreationArea": true,
   "IconName": "ExchangeDocument.ico",
   "IconResourcesKeys": [],
   "IntegrationServiceName": "IntegrationExchangeDocument",
@@ -222,7 +224,10 @@
     "CanBeUsedInIntegration",
     "IconName",
     "DocumentVersionCreationSources",
-    "OpenCardByDefaultInCollection"
+    "OpenCardByDefaultInCollection",
+    "HideFromCreationArea",
+    "HideFromNavigationEditorCreationArea",
+    "IsAutoCreated"
   ],
   "Properties": [
     {
