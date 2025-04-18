@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="sf_aa0058a3_d88f_4fd5_aacd_f702a20ac194" xml:space="preserve">
+    <value>Registration of orders and instructions</value>
+  </data>
+  <data name="FilterPanel_StateGrouplitiko_e915982c542647309dcf9756c61f5a2e" xml:space="preserve">
+    <value>Assignments</value>
+  </data>
+  <data name="FilterPanel_InProcesslitiko_4bfa9152696e4fdbb19a11c0793e6aac" xml:space="preserve">
+    <value>In Process</value>
+  </data>
+  <data name="FilterPanel_Alllitiko_bf9e256985894da98c78653456a57e87" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="FilterPanel_PeriodGrouplitiko_69ec37c9f4ca4f48bd2be104d6fc0ccc" xml:space="preserve">
+    <value>Received in the last</value>
+  </data>
+  <data name="FilterPanel_Last30Dayslitiko_46a66c967e884f79838e5d11b01037a0" xml:space="preserve">
+    <value>30 Days</value>
+  </data>
+  <data name="FilterPanel_Last90Dayslitiko_ea35b05eaa454b3dbf1e3620ca379ff1" xml:space="preserve">
+    <value>90 Days</value>
+  </data>
+  <data name="FilterPanel_Last180Dayslitiko_f5b8ac3b00114903a163cf5e76b169c8" xml:space="preserve">
+    <value>180 Days</value>
+  </data>
+  <data name="sf_cc82e202_18ef_43a1_b68d_4179693bb664" xml:space="preserve">
+    <value>Registration of incoming letters</value>
+  </data>
+  <data name="sf_694361cc_f02e_446c_ba26_efb805d50c57" xml:space="preserve">
+    <value>Registration of outgoing letters</value>
+  </data>
+  <data name="sf_c3ed6a01_3b32_4cf5_8864_9b6bb0613ddd" xml:space="preserve">
+    <value>Registration of regulatory documents</value>
+  </data>
+  <data name="FilterPanel_StateGrouplitiko_43840ff6c70a409eae50f0e77e97fbd3" xml:space="preserve">
+    <value>Assignments</value>
+  </data>
+  <data name="FilterPanel_StateGrouplitiko_9599d89699ca4431b12de0986f100927" xml:space="preserve">
+    <value>Assignments</value>
+  </data>
+  <data name="FilterPanel_StateGrouplitiko_82431c2991c84f76aabf852757aceefe" xml:space="preserve">
+    <value>Assignments</value>
+  </data>
+  <data name="FilterPanel_Alllitiko_c92317818465421fbde8f80a3ccfe121" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="FilterPanel_Alllitiko_0d69bd82cc4d44258087541dec04edd4" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="FilterPanel_Alllitiko_2124b7eabe314778b99b0fc0da382acd" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="FilterPanel_InProcesslitiko_efea82a77b5a49e8a252243742384e4c" xml:space="preserve">
+    <value>In Process</value>
+  </data>
+  <data name="FilterPanel_InProcesslitiko_30c5c1f86d2e48d38166a1010fdb4491" xml:space="preserve">
+    <value>In Process</value>
+  </data>
+  <data name="FilterPanel_InProcesslitiko_59aa9682af9949c5ac81e146bcd33811" xml:space="preserve">
+    <value>In Process</value>
+  </data>
+  <data name="FilterPanel_PeriodGrouplitiko_fd1a47d2a26c4f0d949a29e9d64b0520" xml:space="preserve">
+    <value>Received in the last</value>
+  </data>
+  <data name="FilterPanel_PeriodGrouplitiko_b90efb42e3684b62914575a7aa041c17" xml:space="preserve">
+    <value>Received in the last</value>
+  </data>
+  <data name="FilterPanel_PeriodGrouplitiko_041a9a416788430b923e6810194ae8c5" xml:space="preserve">
+    <value>Received in the last</value>
+  </data>
+  <data name="FilterPanel_Last30Dayslitiko_18e55022995246e3bc4dc9f5d6cbd81f" xml:space="preserve">
+    <value>30 Days</value>
+  </data>
+  <data name="FilterPanel_Last30Dayslitiko_4955dd11ba5b4566ab2e0cd0d410154e" xml:space="preserve">
+    <value>30 Days</value>
+  </data>
+  <data name="FilterPanel_Last30Dayslitiko_cf998960d10f4d549dc046644b7dcdeb" xml:space="preserve">
+    <value>30 Days</value>
+  </data>
+  <data name="FilterPanel_Last90Dayslitiko_73970dce8ad34bb6ab2f2ca30dad97ce" xml:space="preserve">
+    <value>90 Days</value>
+  </data>
+  <data name="FilterPanel_Last90Dayslitiko_cf91e982247747e09449490a88dfa55e" xml:space="preserve">
+    <value>90 Days</value>
+  </data>
+  <data name="FilterPanel_Last90Dayslitiko_4a4d04cabc7c43c6a852f280a900b630" xml:space="preserve">
+    <value>90 Days</value>
+  </data>
+  <data name="FilterPanel_Last180Dayslitiko_9a663d19414f48a484af9894c275baa1" xml:space="preserve">
+    <value>180 Days</value>
+  </data>
+  <data name="FilterPanel_Last180Dayslitiko_81d861eee4074ad8b3d67315778082bf" xml:space="preserve">
+    <value>180 Days</value>
+  </data>
+  <data name="FilterPanel_Last180Dayslitiko_8f619d4d1c5840329ed93521546416c9" xml:space="preserve">
+    <value>180 Days</value>
+  </data>
+</root>
