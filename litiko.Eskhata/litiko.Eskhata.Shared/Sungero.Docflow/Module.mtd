@@ -494,6 +494,9 @@
     "Versions": []
   },
   "ExplorerTreeOrder": [],
+  "HandledEvents": [
+    "VisibilityServer"
+  ],
   "IconResourcesKeys": [],
   "Importance": "Low",
   "IsolatedAreas": [],
