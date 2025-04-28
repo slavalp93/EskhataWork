@@ -68,7 +68,11 @@
   ],
   "IconResourcesKeys": [],
   "IntegrationServiceName": "CollegiateAgenciesQuestionGroup",
+  "IsVisible": false,
   "OperationsClass": "",
+  "Overridden": [
+    "IsVisible"
+  ],
   "Properties": [
     {
       "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
