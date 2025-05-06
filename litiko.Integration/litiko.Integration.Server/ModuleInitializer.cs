@@ -97,6 +97,8 @@ namespace litiko.Integration.Server
         IntegrationSystems.AccessRights.Save();
         IntegrationMethods.AccessRights.Grant(roleSynchronizationResponsible, DefaultAccessRightsTypes.Change);
         IntegrationMethods.AccessRights.Save();
+        ExchangeQueues.AccessRights.Grant(roleSynchronizationResponsible, DefaultAccessRightsTypes.FullAccess);
+        ExchangeQueues.AccessRights.Save();
       }
       
       // "Ответственные за контрагентов"
@@ -108,7 +110,9 @@ namespace litiko.Integration.Server
         IntegrationSystems.AccessRights.Grant(roleCounterpartiesResponsible, DefaultAccessRightsTypes.Read);
         IntegrationSystems.AccessRights.Save();
         IntegrationMethods.AccessRights.Grant(roleCounterpartiesResponsible, DefaultAccessRightsTypes.Read);
-        IntegrationMethods.AccessRights.Save();        
+        IntegrationMethods.AccessRights.Save();
+        ExchangeQueues.AccessRights.Grant(roleCounterpartiesResponsible, DefaultAccessRightsTypes.Create);
+        ExchangeQueues.AccessRights.Save();
       }      
     }
   }

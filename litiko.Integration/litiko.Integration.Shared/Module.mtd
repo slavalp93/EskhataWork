@@ -17,6 +17,45 @@
           "ParameterType": "LongInteger"
         }
       ]
+    },
+    {
+      "NameGuid": "f4675093-3c57-401f-807d-c9c8a4bdfc3d",
+      "Name": "UpdateExchangeDoc",
+      "DelayPeriod": 1,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "1465985c-4665-4fcb-8628-3bca42425a17",
+          "Name": "RequestToISInfo",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "29ab96ee-75fa-4c21-8809-ae360b599ac0",
+          "Name": "StatusRequestToIS",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "98f96344-0b8c-4397-897c-93dcc031b4ca",
+          "Name": "IncreaseNumberOfPackages",
+          "ParameterType": "Boolean"
+        },
+        {
+          "NameGuid": "b4eed454-4b0a-4c2b-b205-08fd36e7d297",
+          "Name": "RequestToRXInfo",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "ba4a66f5-17fb-4722-8ed2-1d2b300587c8",
+          "Name": "StatusRequestToRX",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "f53a32c0-931b-4c90-950f-6af47155731c",
+          "Name": "DocId",
+          "ParameterType": "LongInteger"
+        }
+      ]
     }
   ],
   "ClientAssemblyName": "litiko.Integration.Client",
@@ -121,6 +160,10 @@
     {
       "ItemId": "96d31d03-06b2-4266-8058-815ecc7bad28",
       "PreviousItemId": "5f22554a-11f9-4be7-930c-06aebb26f765"
+    },
+    {
+      "ItemId": "794b9791-d0ed-47ba-8f0e-bfa4e8184211",
+      "PreviousItemId": "96d31d03-06b2-4266-8058-815ecc7bad28"
     }
   ],
   "HandledEvents": [
@@ -395,7 +438,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.98",
+  "Version": "0.0.1.102",
   "Widgets": [],
   "Versions": [
     {

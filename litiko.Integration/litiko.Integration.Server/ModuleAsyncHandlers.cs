@@ -13,6 +13,101 @@ namespace litiko.Integration.Server
   {
 
     /// <summary>
+    /// Интеграция. Обновление документа обмена.
+    /// </summary>
+    /// <param name="args"></param>    
+    public virtual void UpdateExchangeDoc(litiko.Integration.Server.AsyncHandlerInvokeArgs.UpdateExchangeDocInvokeArgs args)
+    {
+      var logPostfix = string.Format("ExchangeDocId = '{0}'", args.DocId);
+      var logPrefix = "Integration. Async handler UpdateExchangeDoc.";
+      Logger.DebugFormat("{0} Start. {1}", logPrefix, logPostfix);
+      
+      var exchDoc =  Integration.ExchangeDocuments.GetAll().Where(d => d.Id == args.DocId).FirstOrDefault();      
+      if (exchDoc == null)
+      {
+        Logger.ErrorFormat("{0} ExchangeDocument with id = {1} not found.", logPrefix, args.DocId);
+        args.Retry = false;
+        return;
+      }
+      
+      if (!Locks.TryLock(exchDoc))
+      {
+        // При неудачной попытке делаем запись в лог и отправляем обработчик на повтор.
+        Logger.ErrorFormat("{0} ExchangeDocument with id = {1} is locked. Sent to retry", logPrefix, args.DocId);
+        args.Retry = true;
+        return;
+      }
+      
+      try
+      {
+        if (!string.IsNullOrEmpty(args.StatusRequestToIS) && exchDoc.StatusRequestToIS?.ToString() != args.StatusRequestToIS)
+        {
+          switch (args.StatusRequestToIS)
+          {
+            case "Created":
+              exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Created;
+              break;
+            case "Sent":
+              exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Sent;
+              break;              
+            case "Error":
+              exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
+              break;                
+          }
+        }
+        
+        if (!string.IsNullOrEmpty(args.RequestToISInfo) && exchDoc.RequestToISInfo != args.RequestToISInfo)
+          exchDoc.RequestToISInfo = args.RequestToISInfo;
+        
+        if (!string.IsNullOrEmpty(args.StatusRequestToRX) && exchDoc.StatusRequestToRX?.ToString() != args.StatusRequestToRX)
+        {
+          switch (args.StatusRequestToRX)
+          {
+            case "Awaiting":
+              exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Awaiting;
+              break;
+            case "ReceivedPart":
+              if (exchDoc.StatusRequestToRX.GetValueOrDefault() == Integration.ExchangeDocument.StatusRequestToRX.Awaiting || exchDoc.StatusRequestToRX.GetValueOrDefault() == null)
+                exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;              
+              break;              
+            case "ReceivedFull":
+              if (exchDoc.StatusRequestToRX.GetValueOrDefault() == Integration.ExchangeDocument.StatusRequestToRX.Awaiting || exchDoc.StatusRequestToRX.GetValueOrDefault() == null || exchDoc.StatusRequestToRX.GetValueOrDefault() == Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart)
+                exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
+              break;
+            case "Error":
+              exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
+              break;              
+          }          
+        }
+        
+        if (!string.IsNullOrEmpty(args.RequestToRXInfo) && exchDoc.RequestToRXInfo != args.RequestToRXInfo)
+          exchDoc.RequestToRXInfo = args.RequestToRXInfo.Length >= 1000 ? args.RequestToRXInfo.Substring(0, 999) : args.RequestToRXInfo;        
+        
+        if (args.IncreaseNumberOfPackages)
+          exchDoc.RequestToRXPacketCount++;
+        
+        if (exchDoc.State.IsChanged)
+          exchDoc.Save();
+        
+      }
+      catch (Exception ex)
+      {
+        var errorMessage = string.Format("{0}. An error occured. ErrorMessage – {1}, StackTrace - {2}. {3}", logPrefix, ex.Message, ex.StackTrace, logPostfix);
+        Logger.Error(errorMessage);
+        args.Retry = true;
+        //exchDoc.RequestToRXInfo = ex.Message.Length >= 1000 ? ex.Message.Substring(0, 999) : ex.Message;          
+      }
+      finally
+      {
+        // Снимаем блокировку с сущности.
+        Locks.Unlock(exchDoc);
+      }      
+      
+      // Логируем завершение работы обработчика.
+      Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);       
+    }
+
+    /// <summary>
     /// Интеграция. Обработка данных из интегрированной системы.
     /// </summary>
     /// <param name="args"></param>
@@ -46,6 +141,67 @@ namespace litiko.Integration.Server
         versionFullXML = exchDoc.Versions.Where(v => v.Note == Integration.Resources.VersionRequestToRXFull && v.AssociatedApplication.Extension == "xml" && v.Body.Size > 0).FirstOrDefault();
         if (versionFullXML == null)
         {
+          var exchQueues = Integration.ExchangeQueues.GetAll().Where(q => Equals(q.ExchangeDocument, exchDoc) && q.Name.StartsWith(Integration.Resources.VersionRequestToRX_));
+          if (exchQueues.Count() > 0)
+          {
+            Logger.DebugFormat("{0} Creating full xml version. Packets count: {1}. {2}", logPrefix, exchDoc.RequestToRXPacketCount, logPostfix);
+            List<XElement> dataElements = new List<XElement>();
+            XElement headElement = null;
+            XElement requestElement = null;
+            
+            foreach (var exchQueue in exchQueues)
+            {
+              using (var xmlStream = new MemoryStream(exchQueue.Xml))
+              {
+                XDocument doc = XDocument.Load(xmlStream);
+                var elements = doc.Descendants("Data").Elements("element");
+                dataElements.AddRange(elements);
+                if (headElement == null && requestElement == null)
+                {
+                  headElement = doc.Root.Element("head");
+                  requestElement = doc.Root.Element("request");
+                }                
+              }
+            }
+
+            // Создание новой версии XML
+            if (dataElements.Any())
+            {
+              using (MemoryStream ms = new MemoryStream())
+              {            
+                XmlWriterSettings xws = new XmlWriterSettings();
+                xws.OmitXmlDeclaration = false;
+                xws.Indent = true;
+                
+                using (XmlWriter xw = XmlWriter.Create(ms, xws))
+                {
+                  // Копирование структуры request без <Data>
+                  XElement newRequestElement = new XElement(requestElement);
+                  newRequestElement.Element("Data").Remove();
+          
+                  // Создание нового элемента <Data> с объединенными элементами
+                  XElement newDataElement = new XElement("Data", dataElements);
+          
+                  // Добавление нового <Data> к запросу
+                  newRequestElement.Add(newDataElement);
+                  
+                  // Создание нового XML документа
+                  XDocument newDoc = new XDocument(
+                    new XDeclaration("1.0", "UTF-8", null),  
+                    new XElement("root", headElement, newRequestElement)
+                  );
+                  newDoc.WriteTo(xw);
+                }
+                
+                exchDoc.CreateVersionFrom(ms, "xml");
+                exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;              
+                Logger.DebugFormat("{0} Full xml version created. {1}", logPrefix, logPostfix);
+                versionFullXML = exchDoc.LastVersion;  
+              }                            
+            }            
+          }
+          
+          /*          
           if (exchDoc.RequestToRXPacketCount > 1)
           {
             Logger.DebugFormat("{0} Creating full xml version. Packets count: {1}. {2}", logPrefix, exchDoc.RequestToRXPacketCount, logPostfix);
@@ -122,6 +278,7 @@ namespace litiko.Integration.Server
               versionFullXML = VersionWithPackage;
             }            
           }
+          */
           
           if (exchDoc.State.IsChanged)
             exchDoc.Save();        

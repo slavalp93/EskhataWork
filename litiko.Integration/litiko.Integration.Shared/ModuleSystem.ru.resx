@@ -172,4 +172,7 @@
   <data name="CoverDescription_ModuleJobs" xml:space="preserve">
     <value>Список фоновых процессов модуля</value>
   </data>
+  <data name="AsyncHandler_Description_f46750933c57401f807dc9c8a4bdfc3d" xml:space="preserve">
+    <value>AsyncHandler</value>
+  </data>
 </root>

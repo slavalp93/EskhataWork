@@ -30,8 +30,15 @@ namespace litiko.Integration.Server
     [Public, Remote]
     public string SendRequestToIS(IIntegrationMethod method, IExchangeDocument exchDoc, long lastId)
     {
+      var logPostfix = string.Format("ExchangeDocId = '{0}'", exchDoc.Id);
+      var logPrefix = "Integration. SendRequestToIS.";      
+      Logger.DebugFormat("{0} Start. {1}", logPrefix, logPostfix);
+      
       var errorMessage = string.Empty;
-
+      
+      var statusRequestToIS = exchDoc.StatusRequestToIS;
+      var requestToISInfo = exchDoc.RequestToISInfo;
+      
       try
       {      
         //string application_key = "10.10.202.171/Integration/odata/Integration/ProcessResponseFromIS##";                  
@@ -54,12 +61,20 @@ namespace litiko.Integration.Server
 
         if (method.SaveRequestToIS.Value)
         {
+          /*
           using (var xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(xmlRequestBody)))
-          {
+          {            
             exchDoc.CreateVersionFrom(xmlStream, "xml");
             exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToISFormat(lastId);
-            exchDoc.Save();
-          }                
+            // exchDoc.Save();            
+          }
+          */
+            
+          var exchQueue = ExchangeQueues.Create();
+          exchQueue.ExchangeDocument = exchDoc;
+          exchQueue.Xml = Encoding.UTF8.GetBytes(xmlRequestBody);
+          exchQueue.Name = Integration.Resources.VersionRequestToISFormat(lastId);
+          exchQueue.Save();
         } 
         
         using (HttpClient client = new HttpClient())
@@ -92,32 +107,49 @@ namespace litiko.Integration.Server
             if (state == "1")
             {
               Logger.DebugFormat("Response successful. State message: {0}", stateMsg);
-              exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Sent;            
+              statusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Sent;
+              //if (exchDoc.StatusRequestToIS != Integration.ExchangeDocument.StatusRequestToIS.Sent)
+              //  exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Sent;
             }
             else
             {
               Logger.DebugFormat("Response failed. State message: {0}", stateMsg);
-              exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
+              statusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
+              //if (exchDoc.StatusRequestToIS != Integration.ExchangeDocument.StatusRequestToIS.Error)
+              //  exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
             }
             
-            exchDoc.RequestToISInfo = stateMsg;
+            //if (exchDoc.RequestToISInfo != stateMsg)
+            //  exchDoc.RequestToISInfo = stateMsg;
+            requestToISInfo = stateMsg;
             
             // Сохранение ответа
             if (method.SaveResponseFromIS.Value)
             {
+              /*
               using (var xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(responseBody)))
               {
                 exchDoc.CreateVersionFrom(xmlStream, "xml");
                 exchDoc.LastVersion.Note = Integration.Resources.VersionResponseFromISFormat(lastId);              
-              }                
+              }
+              */
+              
+              var exchQueue = ExchangeQueues.Create();
+              exchQueue.ExchangeDocument = exchDoc;
+              exchQueue.Xml = Encoding.UTF8.GetBytes(responseBody);
+              exchQueue.Name = Integration.Resources.VersionResponseFromISFormat(lastId);
+              exchQueue.Save();             
             }
           }
           else
           {             
             errorMessage = string.Format("Response is not valid XML: {0}", responseBody);
-            Logger.Error(errorMessage);
-            exchDoc.RequestToISInfo = errorMessage;
-            exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
+            /*
+            if (exchDoc.RequestToISInfo != errorMessage)
+              exchDoc.RequestToISInfo = errorMessage;
+            if (exchDoc.StatusRequestToIS != Integration.ExchangeDocument.StatusRequestToIS.Error)
+              exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
+            */
           }          
         }
       }
@@ -125,29 +157,51 @@ namespace litiko.Integration.Server
       {
         // Обработка исключений сети и HTTP
         errorMessage = string.Format("Request error: {0}", e.Message);
-        Logger.DebugFormat(errorMessage);                
-        exchDoc.RequestToISInfo = errorMessage;
-        exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
       }
       catch (XmlException e)
       {
         // Обработка ошибок XML парсинга
         errorMessage = string.Format("XML error: {0}", e.Message);
-        Logger.DebugFormat(errorMessage);                
-        exchDoc.RequestToISInfo = errorMessage;
-        exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;                
       }
       catch (Exception e)
       {
         // Обработка других ошибок
-        errorMessage = string.Format("Unexpected error: {0}", e.Message);
-        Logger.DebugFormat(errorMessage);                
-        exchDoc.RequestToISInfo = errorMessage;
-        exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;         
+        errorMessage = string.Format("Unexpected error: {0}", e.Message);    
       }          
                   
+      if (!string.IsNullOrEmpty(errorMessage))
+      {
+        requestToISInfo = errorMessage;
+        statusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
+        Logger.Error(errorMessage);
+      }
+      
+      if (exchDoc.StatusRequestToIS != statusRequestToIS || exchDoc.RequestToISInfo != requestToISInfo)
+      {
+        // Обновляем exchDoc асинхронным обработчиком
+        var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
+        asyncHandler.DocId = exchDoc.Id;
+        asyncHandler.RequestToISInfo = requestToISInfo;
+        asyncHandler.StatusRequestToIS = statusRequestToIS.ToString();
+        asyncHandler.IncreaseNumberOfPackages = false;
+        asyncHandler.ExecuteAsync();
+      }
+      
+      /*
       if (exchDoc.State.IsChanged)
-        exchDoc.Save();
+      {
+        try
+        {
+          exchDoc.Save();
+        }
+        catch (Exception ex)
+        {
+          errorMessage = string.Format("{0} Error saving. Message: {2} {1}", logPrefix, logPostfix, ex.Message);
+          Logger.Error(errorMessage);          
+        }
+      }
+      */
+      Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);
       
       return errorMessage;
     }        
@@ -159,15 +213,20 @@ namespace litiko.Integration.Server
     /// <returns>xml с информацией о результате сохранения в RX</returns>
     [Public(WebApiRequestType = RequestType.Post)]
     public byte[] ProcessResponseFromIS(byte[] xmlData)
-    {                  
+    {                            
       using (var xmlStream = new MemoryStream(xmlData))
       {
+        var logPrefix = "Integration. ProcessResponseFromIS.";
+        Logger.DebugFormat("{0} Start.", logPrefix);  
+      
         var session_id_str = string.Empty;        
         long session_id;
         var dictionary = string.Empty;
         var lastId_str = string.Empty;
         long lastId;
         var invalidParamValue = "???";
+        bool increaseNumberOfPackages = false;
+        string errorMessage = string.Empty;        
         
         XmlDocument xmlDoc = new XmlDocument();
         xmlDoc.Load(xmlStream);                
@@ -176,86 +235,139 @@ namespace litiko.Integration.Server
         #region Предпроверки
         XmlNode session_id_Node = root.SelectSingleNode("//head/session_id");
         if (session_id_Node == null)
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(invalidParamValue, invalidParamValue, 2, "session_id node is absent"));
+        {
+          errorMessage = "session_id node is absent";
+          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);
+          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(invalidParamValue, invalidParamValue, 2, errorMessage));
+        }
         else
           session_id_str = session_id_Node.InnerText;
 
         if (!long.TryParse(session_id_str, out session_id))
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(invalidParamValue, invalidParamValue, 2, "Invalid value in session_id"));        
+        {
+          errorMessage = "Invalid value in session_id";
+          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);          
+          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(invalidParamValue, invalidParamValue, 2, errorMessage));
+        }
+        var logPostfix = string.Format("ExchangeDocId = '{0}'", session_id);
         
         XmlNode dictionary_Node = root.SelectSingleNode("//request/dictionary");
         if (dictionary_Node == null)
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, invalidParamValue, 2, "dictionary node is absent"));
+        {
+          errorMessage = "dictionary node is absent";
+          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);          
+          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, invalidParamValue, 2, errorMessage));
+        }
         else
           dictionary = dictionary_Node.InnerText;
         
         if (string.IsNullOrEmpty(dictionary) || string.IsNullOrWhiteSpace(dictionary))
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, invalidParamValue, 2, "Invalid value in dictionary"));
-          
+        {
+          errorMessage = "Invalid value in dictionary";
+          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);                    
+          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, invalidParamValue, 2, errorMessage));
+        }
+        
         XmlNode lastId_Node = root.SelectSingleNode("//request/lastId");
         if (lastId_Node == null)
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, "lastId node is absent"));
+        {
+          errorMessage = "lastId node is absent";
+          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);                              
+          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
+        }
         else
           lastId_str = lastId_Node.InnerText;
         
         if (!long.TryParse(lastId_str, out lastId))
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, "Invalid value in lastId"));        
+        {
+          errorMessage = "Invalid value in lastId";
+          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);              
+          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
+        }
         
         XmlNode data_Node = root.SelectSingleNode("//request/Data");
         if (data_Node == null)
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, "Data node is absent"));                       
-        
-        #endregion
-        
+        {
+          errorMessage = "Data node is absent";
+          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);                        
+          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
+        }
+                
         var exchDoc = ExchangeDocuments.GetAll().Where(d => d.Id == session_id).FirstOrDefault();
         if (exchDoc == null)
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, "Request for session id not found. Session Id=" +session_id.ToString()));        
+        {
+          errorMessage = "Request for session id not found. Session Id=" +session_id.ToString();
+          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);           
+          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
+        }
         
+        #endregion
+                
+        var statusRequestToRX = exchDoc.StatusRequestToRX;
+        var requestToRXInfo = exchDoc.RequestToRXInfo;
+          
         try
         {
+          
           // сохранить xml в новую версию
-          exchDoc.CreateVersionFrom(xmlStream, "xml");
-          exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFormat(lastId);
+          //exchDoc.CreateVersionFrom(xmlStream, "xml");
+          //exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFormat(lastId);
+          
+          var exchQueue = ExchangeQueues.Create();
+          exchQueue.ExchangeDocument = exchDoc;
+          exchQueue.Xml = xmlData;
+          exchQueue.Name = Integration.Resources.VersionRequestToRXFormat(lastId);
+          exchQueue.Save();
+          increaseNumberOfPackages = true;
           
           // обновить статусы в exchDoc
           if (lastId > 0)
-            exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;
+            statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;
           else
-            exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
+            statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
           
-          exchDoc.RequestToRXPacketCount++;
-          exchDoc.RequestToRXInfo = "Saved";
-          exchDoc.Save(); 
+          //exchDoc.RequestToRXPacketCount++;
+          //if (exchDoc.RequestToRXInfo != "Saved")
+          //  exchDoc.RequestToRXInfo = "Saved";
+          if (requestToRXInfo != "Saved")
+            requestToRXInfo = "Saved";                    
         }
         catch (Exception ex)
         {
-          Logger.Error(ex.Message);
-          try
-          {
-            exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
-            exchDoc.RequestToRXInfo = ex.Message;
-            exchDoc.Save();
-          }
-          catch (Exception exSave)
-          {
-            Logger.Error("Can`t save error in exchange document id:" +exchDoc.Id +"Error: " + exSave.Message);            
-          }                    
+          errorMessage = ex.Message;          
+          Logger.ErrorFormat("{0} ErrorMessage: {1}.{2}", logPrefix, errorMessage, logPostfix);
+          statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
+          requestToRXInfo = ex.Message;                      
           return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, ex.Message));
         }
-                
-        if (lastId > 0)
-          // вызвать получение остальной части пакета
-          SendRequestToIS(exchDoc.IntegrationMethod, exchDoc, lastId);
-        else
-        {
-          // запустить обработчик пакета
-          var asyncHandler = Integration.AsyncHandlers.ImportData.Create();
-          asyncHandler.ExchangeDocId = exchDoc.Id;
-          asyncHandler.ExecuteAsync();
-        }
         
+        // Обновляем exchDoc асинхронным обработчиком
+        var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
+        asyncHandler.DocId = exchDoc.Id;
+        asyncHandler.StatusRequestToRX = statusRequestToRX.ToString();
+        asyncHandler.RequestToRXInfo = requestToRXInfo;
+        asyncHandler.IncreaseNumberOfPackages = increaseNumberOfPackages;
+        asyncHandler.ExecuteAsync();
+        
+        if (string.IsNullOrEmpty(errorMessage))
+        {
+          if (lastId > 0)
+            // вызвать получение остальной части пакета
+            SendRequestToIS(exchDoc.IntegrationMethod, exchDoc, lastId);
+          else
+          {
+            Thread.Sleep(3000); // Пауза на 3 сек.
+            
+            // запустить обработчик пакета
+            var asyncHandlerImportData = Integration.AsyncHandlers.ImportData.Create();
+            asyncHandlerImportData.ExchangeDocId = exchDoc.Id;
+            asyncHandlerImportData.ExecuteAsync();
+          }        
+        }                
+        
+        Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);
         return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 1, "Saved"));
-      }            
+      }      
     }
 
     [Public, Remote(IsPure = true)]
