@@ -356,7 +356,7 @@ namespace litiko.Integration.Server
             SendRequestToIS(exchDoc.IntegrationMethod, exchDoc, lastId);
           else
           {
-            Thread.Sleep(3000); // Пауза на 3 сек.
+            Thread.Sleep(5000); // Пауза на 5 сек.
             
             // запустить обработчик пакета
             var asyncHandlerImportData = Integration.AsyncHandlers.ImportData.Create();
