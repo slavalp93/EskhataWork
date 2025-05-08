@@ -1,0 +1,87 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "a7956e06-684e-4566-828c-8b4e6d491517",
+  "Name": "HiringContractCollection",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "HiringContract",
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "f1293346-8fae-470f-862e-8a6edd2b8238",
+      "Name": "Hiring",
+      "CanBeSearch": false,
+      "Code": "BaseReference",
+      "EntityGuid": "de45cd2b-22d5-4cda-9a47-6b0937d74055",
+      "IsReferenceToRootEntity": true,
+      "IsShowedInList": false
+    },
+    {
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d6806480-de5d-4599-bf67-a7786fe9cfb3",
+      "Name": "Number",
+      "CanBeSearch": false,
+      "Code": "Number",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "f1293346-8fae-470f-862e-8a6edd2b8238"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "e5762065-a391-4fc6-93a0-054bf11046a3",
+      "Name": "FixedTermContract",
+      "CanBeSearch": false,
+      "Code": "FixedTermContr",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "d6806480-de5d-4599-bf67-a7786fe9cfb3"
+    },
+    {
+      "$type": "Sungero.Metadata.DateTimePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "8edf666e-02ec-435a-9db9-43e7357f6065",
+      "Name": "ContractTermFrom",
+      "CanBeSearch": false,
+      "Code": "ConctTermFrom",
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
+      "PreviousPropertyGuid": "e5762065-a391-4fc6-93a0-054bf11046a3"
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "506959d3-c258-402f-a53c-bea3b8200987",
+      "Name": "ContractTermUntil",
+      "CanBeSearch": false,
+      "Code": "ContractTermUn",
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "8edf666e-02ec-435a-9db9-43e7357f6065"
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "c85f4e5f-08fc-4c20-94fb-7588d7daf996",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "870d5941-db20-49ff-acd4-625baaa30585",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

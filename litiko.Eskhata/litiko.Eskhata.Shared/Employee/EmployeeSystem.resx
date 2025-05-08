@@ -58,4 +58,76 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Property_DepCodelitiko" xml:space="preserve">
+    <value>Department code</value>
+  </data>
+  <data name="ControlGroup_0b3bb168612249a59633c5b81742ae05" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="Resource_eed275ac8ecd4713b4a7c62538d15f64" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_eed275ac8ecd4713b4a7c62538d15f64_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_151a86740f1e43758410f5a847a2f478" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_151a86740f1e43758410f5a847a2f478_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_7d3fe74917c14f7daf93c5a06f0ff356" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_7d3fe74917c14f7daf93c5a06f0ff356_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_6063a679a4ef4013a981516a8d5614cf" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_6063a679a4ef4013a981516a8d5614cf_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_ccba1597307a4bbca652a2ce60f6009b" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_ccba1597307a4bbca652a2ce60f6009b_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_fa5a42b89bb94b5d8352280a109a96c0" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_8fd91d31742d436298477ab019995687" xml:space="preserve">
+    <value>Contact information</value>
+  </data>
+  <data name="Resource_3bf6932f6e724dac98a8b3ecc51a73fa" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_3bf6932f6e724dac98a8b3ecc51a73fa_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_6f30f9f4f8be4450af88387bff34c91d" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_6f30f9f4f8be4450af88387bff34c91d_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_2c0826c892f34f649c8aa320b064db91" xml:space="preserve">
+    <value>Notify by email</value>
+  </data>
+  <data name="Resource_50c7db6979c34492b7cede8dcd393913" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_7111a8f90aac448fb27d1af9bd223726" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_b70c726b4c8c48f99167ed32c2057858" xml:space="preserve">
+    <value />
+  </data>
+  <data name="FilterPanel_DepCodelitiko_4baa10ba06e946ffab1688024ac5f30d" xml:space="preserve">
+    <value>Department code</value>
+  </data>
+  <data name="FilterPanel_DepCodelitiko_0a6e6049b6aa4d1dbfe798a321c1dd04" xml:space="preserve">
+    <value>Department code</value>
+  </data>
 </root>

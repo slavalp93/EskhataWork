@@ -1,0 +1,75 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "0d90f4f1-8222-475f-a40c-3504a9d0cd05",
+  "Name": "HRProcess",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "litiko.HRProcess.Client",
+  "ClientBaseAssemblyName": "litiko.HRProcess.ClientBase",
+  "ClientBaseNamespace": "litiko.HRProcess.ClientBase",
+  "ClientNamespace": "litiko.HRProcess.Client",
+  "Code": "HRProce",
+  "CompanyCode": "litiko",
+  "Cover": {
+    "NameGuid": "8b2369e7-d825-4f3d-bb75-bb326590abcb",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "17192580-2359-4d00-8118-f86ae2d43e62",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "3cb7272d-ac41-41b7-b6c7-34d443229cba",
+      "BackgroundPosition": "Stretch"
+    },
+    "Tabs": []
+  },
+  "Dependencies": [
+    {
+      "Id": "78d05f91-7585-42b9-addc-5b14478d4680",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "1ee478a3-d923-4d66-bff5-ef666efe670a"
+    },
+    {
+      "ItemId": "de45cd2b-22d5-4cda-9a47-6b0937d74055",
+      "PreviousItemId": "1ee478a3-d923-4d66-bff5-ef666efe670a"
+    }
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "litiko.HRProcess",
+  "IsolatedAssemblyName": "litiko.HRProcess.Isolated",
+  "IsolatedNamespace": "litiko.HRProcess.Isolated",
+  "IsVisible": false,
+  "Overridden": [
+    "IsVisible"
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "litiko.HRProcess",
+  "ResourcesKeys": [],
+  "ServerAssemblyName": "litiko.HRProcess.Server",
+  "ServerNamespace": "litiko.HRProcess.Server",
+  "SharedAssemblyName": "litiko.HRProcess.Shared",
+  "SharedNamespace": "litiko.HRProcess.Shared",
+  "SpecialFolders": [],
+  "Version": "0.0.1.4",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

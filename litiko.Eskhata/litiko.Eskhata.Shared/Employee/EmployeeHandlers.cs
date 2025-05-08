@@ -7,8 +7,5 @@ using litiko.Eskhata.Employee;
 
 namespace litiko.Eskhata
 {
-  partial class EmployeeSharedHandlers
-  {
 
-  }
 }

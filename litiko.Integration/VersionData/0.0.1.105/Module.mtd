@@ -1,0 +1,453 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "bcd99a93-c094-4b33-baf5-758d44efa2ef",
+  "Name": "Integration",
+  "AsyncHandlers": [
+    {
+      "NameGuid": "1007271d-3b8a-4a9d-b314-f41bf1286170",
+      "Name": "ImportData",
+      "DelayPeriod": 5,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "MaxRetryCount": 4,
+      "Parameters": [
+        {
+          "NameGuid": "b490961f-ef83-4fb6-8d58-c50b4ae34bea",
+          "Name": "ExchangeDocId",
+          "ParameterType": "LongInteger"
+        }
+      ]
+    },
+    {
+      "NameGuid": "f4675093-3c57-401f-807d-c9c8a4bdfc3d",
+      "Name": "UpdateExchangeDoc",
+      "DelayPeriod": 1,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "1465985c-4665-4fcb-8628-3bca42425a17",
+          "Name": "RequestToISInfo",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "29ab96ee-75fa-4c21-8809-ae360b599ac0",
+          "Name": "StatusRequestToIS",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "98f96344-0b8c-4397-897c-93dcc031b4ca",
+          "Name": "IncreaseNumberOfPackages",
+          "ParameterType": "Boolean"
+        },
+        {
+          "NameGuid": "b4eed454-4b0a-4c2b-b205-08fd36e7d297",
+          "Name": "RequestToRXInfo",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "ba4a66f5-17fb-4722-8ed2-1d2b300587c8",
+          "Name": "StatusRequestToRX",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "f53a32c0-931b-4c90-950f-6af47155731c",
+          "Name": "DocId",
+          "ParameterType": "LongInteger"
+        }
+      ]
+    }
+  ],
+  "ClientAssemblyName": "litiko.Integration.Client",
+  "ClientBaseAssemblyName": "litiko.Integration.ClientBase",
+  "ClientBaseNamespace": "litiko.Integration.ClientBase",
+  "ClientNamespace": "litiko.Integration.Client",
+  "Code": "Integra",
+  "CompanyCode": "litiko",
+  "Cover": {
+    "NameGuid": "264f85fb-4c17-48f7-89be-5964ce9d985d",
+    "Actions": [
+      {
+        "$type": "Sungero.Metadata.CoverComputableFolderActionMetadata, Sungero.Metadata",
+        "NameGuid": "11298db7-de90-4617-b8bf-2bde0c8b5036",
+        "Name": "ModuleJobs",
+        "ComputableFolderId": "96d31d03-06b2-4266-8058-815ecc7bad28",
+        "GroupId": "40d8951b-5674-4678-b8d8-991d7645ddaa",
+        "PreviousItemGuid": "42de999f-ddd5-4076-b091-7f3fc041bdd1"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "21951356-83a6-41e8-a72d-86fd4a76f5b4",
+        "Name": "IntegrationMethod",
+        "EntityTypeId": "5f22554a-11f9-4be7-930c-06aebb26f765",
+        "GroupId": "40d8951b-5674-4678-b8d8-991d7645ddaa"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "42de999f-ddd5-4076-b091-7f3fc041bdd1",
+        "Name": "IntegrationSystem",
+        "EntityTypeId": "658be504-4305-47af-a3e6-eb99f30a421c",
+        "GroupId": "40d8951b-5674-4678-b8d8-991d7645ddaa",
+        "PreviousItemGuid": "21951356-83a6-41e8-a72d-86fd4a76f5b4"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "81185b9b-430e-4d39-bc1f-9a1b76db2a3a",
+        "Name": "ExchangeDocument",
+        "EntityTypeId": "47dff28c-fde9-4a44-b908-da0167e51457",
+        "GroupId": "0db013cc-c54e-4d09-8330-4f45268bd3ea"
+      }
+    ],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "d42adca8-7393-44f7-a9c2-96e12c0b43b8",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [
+      {
+        "NameGuid": "0db013cc-c54e-4d09-8330-4f45268bd3ea",
+        "Name": "Documents",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconDocuments_0db013ccc54e4d0983304f45268bd3ea.png",
+        "TabId": "a512eb2d-9dde-48ed-b549-433c4ac2ce74"
+      },
+      {
+        "NameGuid": "40d8951b-5674-4678-b8d8-991d7645ddaa",
+        "Name": "Settings",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconSettings_40d8951b56744678b8d8991d7645ddaa.png",
+        "PreviousItemGuid": "0db013cc-c54e-4d09-8330-4f45268bd3ea",
+        "TabId": "a512eb2d-9dde-48ed-b549-433c4ac2ce74"
+      }
+    ],
+    "Header": {
+      "NameGuid": "3a8e39b4-e735-4975-9b89-804aaeff8137",
+      "BackgroundPosition": "Stretch"
+    },
+    "Tabs": [
+      {
+        "NameGuid": "a512eb2d-9dde-48ed-b549-433c4ac2ce74",
+        "Name": "Tab"
+      }
+    ]
+  },
+  "Dependencies": [
+    {
+      "Id": "78d05f91-7585-42b9-addc-5b14478d4680",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    },
+    {
+      "Id": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "47dff28c-fde9-4a44-b908-da0167e51457",
+      "PreviousItemId": "02414d2b-5484-4774-b22c-7ca8715691e2"
+    },
+    {
+      "ItemId": "658be504-4305-47af-a3e6-eb99f30a421c",
+      "PreviousItemId": "47dff28c-fde9-4a44-b908-da0167e51457"
+    },
+    {
+      "ItemId": "5f22554a-11f9-4be7-930c-06aebb26f765",
+      "PreviousItemId": "658be504-4305-47af-a3e6-eb99f30a421c"
+    },
+    {
+      "ItemId": "96d31d03-06b2-4266-8058-815ecc7bad28",
+      "PreviousItemId": "5f22554a-11f9-4be7-930c-06aebb26f765"
+    },
+    {
+      "ItemId": "794b9791-d0ed-47ba-8f0e-bfa4e8184211",
+      "PreviousItemId": "96d31d03-06b2-4266-8058-815ecc7bad28"
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer",
+    "VisibilityServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "litiko.Integration",
+  "IsolatedAssemblyName": "litiko.Integration.Isolated",
+  "IsolatedNamespace": "litiko.Integration.Isolated",
+  "Jobs": [
+    {
+      "NameGuid": "84443891-a824-44dd-8bba-fa74c19505e1",
+      "Name": "GetDepartments",
+      "GenerateHandler": true,
+      "IsEnabled": false,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T00:00:00"
+    },
+    {
+      "NameGuid": "3b371135-10d3-4828-943d-12ef13f39e31",
+      "Name": "GetBusinessUnits",
+      "GenerateHandler": true,
+      "IsEnabled": false,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "20708545-3d61-492d-9b8c-e9cee3281235",
+      "Name": "GetEmployees",
+      "GenerateHandler": true,
+      "IsEnabled": false,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "23a2bc5c-e588-4a48-970c-fe90ec6662df",
+      "Name": "GetCompanyKinds",
+      "GenerateHandler": true,
+      "IsEnabled": false,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "cca63b4b-e1b9-4c79-b323-a8382062ddc8",
+      "Name": "GetCountries",
+      "GenerateHandler": true,
+      "IsEnabled": false,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "2add48cc-84a3-4144-adab-c435482ce936",
+      "Name": "GetEcolog",
+      "GenerateHandler": true,
+      "IsEnabled": false,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "bdb06ee3-a597-4904-965d-4ee3b39c6fa4",
+      "Name": "GetMaterialStatuses",
+      "GenerateHandler": true,
+      "IsEnabled": false,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "202442d0-e5f5-4d63-b589-fcd2b9875e28",
+      "Name": "GetOKFS",
+      "GenerateHandler": true,
+      "IsEnabled": false,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "8960cd48-7ffd-4d8b-a319-37170d3d87b9",
+      "Name": "GetOKONH",
+      "GenerateHandler": true,
+      "IsEnabled": false,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "99c50527-e3fe-4a8c-93b8-1f2369547f2e",
+      "Name": "GetOKOPF",
+      "GenerateHandler": true,
+      "IsEnabled": false,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "0f7f09fe-1d33-4103-84c5-47b389580edd",
+      "Name": "GetOKVED",
+      "GenerateHandler": true,
+      "IsEnabled": false,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    }
+  ],
+  "PublicConstants": [
+    {
+      "Name": "SynchronizationResponsibleRoleGuid",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"6F98BA36-3B7F-4767-8369-88A65578DC5A\")"
+    }
+  ],
+  "PublicFunctions": [
+    {
+      "Name": "CreateExchangeDocument",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "global::litiko.Integration.IExchangeDocument",
+      "ReturnTypeFullName": "litiko.Integration.IExchangeDocument, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetVersion",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "exchDocId",
+          "ParameterType": "global::System.Int64",
+          "ParameterTypeFullName": "System.Int64"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::Sungero.Content.IElectronicDocumentVersions",
+      "ReturnTypeFullName": "Sungero.Content.IElectronicDocumentVersions, Sungero.Content.Shared"
+    },
+    {
+      "Name": "ProcessResponseFromIS",
+      "Parameters": [
+        {
+          "Name": "xmlData",
+          "ParameterType": "System.Byte[]"
+        }
+      ],
+      "ReturnType": "System.Byte[]",
+      "WebApiRequestType": "Post"
+    },
+    {
+      "Name": "R_DR_GET_BANK",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "exchDocID",
+          "ParameterType": "global::System.Int64",
+          "ParameterTypeFullName": "System.Int64"
+        },
+        {
+          "Name": "counterparty",
+          "ParameterType": "global::litiko.Eskhata.ICounterparty",
+          "ParameterTypeFullName": "litiko.Eskhata.ICounterparty, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "R_DR_GET_COMPANY",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "exchDocID",
+          "ParameterType": "global::System.Int64",
+          "ParameterTypeFullName": "System.Int64"
+        },
+        {
+          "Name": "counterparty",
+          "ParameterType": "global::litiko.Eskhata.ICounterparty",
+          "ParameterTypeFullName": "litiko.Eskhata.ICounterparty, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "SendRequestToIS",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "method",
+          "ParameterType": "global::litiko.Integration.IIntegrationMethod",
+          "ParameterTypeFullName": "litiko.Integration.IIntegrationMethod, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "exchDoc",
+          "ParameterType": "global::litiko.Integration.IExchangeDocument",
+          "ParameterTypeFullName": "litiko.Integration.IExchangeDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "lastId",
+          "ParameterType": "global::System.Int64",
+          "ParameterTypeFullName": "System.Int64"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "WaitForGettingDataFromIS",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "exchDoc",
+          "ParameterType": "global::litiko.Integration.IExchangeDocument",
+          "ParameterTypeFullName": "litiko.Integration.IExchangeDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "intervalMilliseconds",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        },
+        {
+          "Name": "maxAttempts",
+          "ParameterType": "global::System.Int32",
+          "ParameterTypeFullName": "System.Int32"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Boolean",
+      "ReturnTypeFullName": "System.Boolean"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "litiko.Integration",
+  "ResourcesKeys": [
+    "VersionRequestToRX",
+    "ResponseXMLTemplate",
+    "RequestXMLTemplate",
+    "VersionRequestToIS",
+    "VersionRequestToRXFull",
+    "VersionResponseFromIS",
+    "NoticeSubjectForErrorTask",
+    "AvailableActionMessage",
+    "RequestXMLTemplateForCompany",
+    "RequestXMLTemplateForBank",
+    "ResponseNotReceived",
+    "DataUpdatedSuccessfully",
+    "IntegrationMethodNotFound",
+    "VersionRequestToRX_"
+  ],
+  "ServerAssemblyName": "litiko.Integration.Server",
+  "ServerNamespace": "litiko.Integration.Server",
+  "SharedAssemblyName": "litiko.Integration.Shared",
+  "SharedNamespace": "litiko.Integration.Shared",
+  "SpecialFolders": [
+    {
+      "NameGuid": "96d31d03-06b2-4266-8058-815ecc7bad28",
+      "Name": "ModuleJobs",
+      "DefaultContentType": "56c16259-fa13-4474-98fc-3f517cc4ed02",
+      "DisplayType": "Module",
+      "FilterPanel": {
+        "NameGuid": "417e201b-5791-49b9-a86e-0062c095fb2b",
+        "Name": "FilterPanel",
+        "Controls": []
+      },
+      "HandledEvents": [
+        "DataQueryServer"
+      ],
+      "IsShow": true,
+      "Kind": "Computable",
+      "NeedShowMarkedCount": false
+    }
+  ],
+  "Version": "0.0.1.105",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

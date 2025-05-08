@@ -1,0 +1,119 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "234051d3-0b61-44d1-bdde-35788cde0b78",
+  "Name": "HiringPassportDetailsCollection",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "HiringPassport",
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "91ad5950-0319-4212-b7ef-5d7f7710749d",
+      "Name": "Hiring",
+      "CanBeSearch": false,
+      "Code": "BaseReference",
+      "EntityGuid": "de45cd2b-22d5-4cda-9a47-6b0937d74055",
+      "IsReferenceToRootEntity": true,
+      "IsShowedInList": false
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "2d55cddc-0b9c-4c0a-a6aa-8e768025e962",
+      "Name": "Type",
+      "CanBeSearch": false,
+      "Code": "Type",
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "91ad5950-0319-4212-b7ef-5d7f7710749d"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "800277e7-6a58-4717-a2fb-f1a38ed31a5b",
+      "Name": "Series",
+      "CanBeSearch": false,
+      "Code": "Series",
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "2d55cddc-0b9c-4c0a-a6aa-8e768025e962"
+    },
+    {
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "86610706-63de-449e-a740-26fbbf76c076",
+      "Name": "Number",
+      "CanBeSearch": false,
+      "Code": "Number",
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "800277e7-6a58-4717-a2fb-f1a38ed31a5b"
+    },
+    {
+      "$type": "Sungero.Metadata.DateTimePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "8c283f2a-fbb0-49ab-9a79-8fb45ad0264d",
+      "Name": "DateOfIssue",
+      "CanBeSearch": false,
+      "Code": "DateOfIssue",
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
+      "PreviousPropertyGuid": "86610706-63de-449e-a740-26fbbf76c076"
+    },
+    {
+      "$type": "Sungero.Metadata.DateTimePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "ce846952-a4ca-4a52-b7a3-b9fb5b71e98c",
+      "Name": "DateOfExpiry",
+      "CanBeSearch": false,
+      "Code": "DateOfExpiry",
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
+      "PreviousPropertyGuid": "8c283f2a-fbb0-49ab-9a79-8fb45ad0264d"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "7d04824d-ed41-4bac-a675-e73e350fe98b",
+      "Name": "IssuedBy",
+      "CanBeSearch": false,
+      "Code": "IssuedBy",
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "ce846952-a4ca-4a52-b7a3-b9fb5b71e98c"
+    },
+    {
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "8beaa54b-0770-4442-9f1f-3f9689f31bc2",
+      "Name": "TIN",
+      "CanBeSearch": false,
+      "Code": "TIN",
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "7d04824d-ed41-4bac-a675-e73e350fe98b"
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "e24d1d28-3d14-48ff-9540-97273234f271",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "b045c168-273a-40ed-aef8-00861dd70a53",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

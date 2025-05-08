@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ControlGroup_30fe46b4466546c1991b6a4e32b7a18f" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_Employee" xml:space="preserve">
+    <value>Employee</value>
+  </data>
+  <data name="Property_Branch" xml:space="preserve">
+    <value>Branch</value>
+  </data>
+  <data name="Property_Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="Property_Position" xml:space="preserve">
+    <value>Position</value>
+  </data>
+  <data name="Property_FilePath" xml:space="preserve">
+    <value>File path</value>
+  </data>
+  <data name="Property_PersonnelID" xml:space="preserve">
+    <value>Personnel ID</value>
+  </data>
+  <data name="Property_Individual" xml:space="preserve">
+    <value>Individual</value>
+  </data>
+  <data name="Property_StaffType" xml:space="preserve">
+    <value>Staff type</value>
+  </data>
+  <data name="Enum_StaffType_Staff" xml:space="preserve">
+    <value>Штатный</value>
+  </data>
+  <data name="Enum_StaffType_Contractor" xml:space="preserve">
+    <value>Внештатный</value>
+  </data>
+  <data name="Enum_StaffType_Temporary" xml:space="preserve">
+    <value>Временный</value>
+  </data>
+  <data name="Property_StaffPosition" xml:space="preserve">
+    <value>Staff position</value>
+  </data>
+  <data name="Property_PositionCategory" xml:space="preserve">
+    <value>Position category</value>
+  </data>
+  <data name="Property_Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Property_JobView" xml:space="preserve">
+    <value>Job view</value>
+  </data>
+  <data name="Property_TypeOfWork" xml:space="preserve">
+    <value>Type of work</value>
+  </data>
+  <data name="Property_WorkingCondition" xml:space="preserve">
+    <value>Working condition</value>
+  </data>
+  <data name="Property_CategoryOfPosition" xml:space="preserve">
+    <value>Category of position</value>
+  </data>
+  <data name="Property_FullTimeEquivalent" xml:space="preserve">
+    <value>Full time equivalent</value>
+  </data>
+  <data name="Property_Salary" xml:space="preserve">
+    <value>Salary</value>
+  </data>
+  <data name="Property_Mentor" xml:space="preserve">
+    <value>Mentor</value>
+  </data>
+  <data name="Property_PassportDetailsCollection" xml:space="preserve">
+    <value>Passport details</value>
+  </data>
+  <data name="Property_ContractCollection" xml:space="preserve">
+    <value>Contract</value>
+  </data>
+  <data name="Property_FullTimeOrTemporary" xml:space="preserve">
+    <value>Full time or temporary</value>
+  </data>
+  <data name="ControlGroup_755592f6e99e4f3882f0cfea89e1148c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_b97f2146f65a4dd784ed7c46413017f5" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_993fd73dc924429f8b1ae91fb0ec4083" xml:space="preserve">
+    <value />
+  </data>
+</root>
