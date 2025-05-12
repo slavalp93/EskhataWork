@@ -321,6 +321,19 @@
   "Properties": [
     {
       "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "98a7cb2f-c674-46a3-aa0a-e04caca19a2e",
+      "Name": "Department",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
       "NameGuid": "b61ee498-fdc7-4009-857b-4d77020dabf8",
       "Name": "JobTitle",
       "IsAncestorMetadata": true,

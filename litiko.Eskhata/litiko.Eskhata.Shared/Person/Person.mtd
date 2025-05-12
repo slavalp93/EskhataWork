@@ -513,9 +513,6 @@
       "Versions": []
     }
   ],
-  "HandledEvents": [
-    "ShowingClient"
-  ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "f5509cdc-ac0c-4507-a4d3-61d7a0a9b6f6",
   "OperationsClass": "",

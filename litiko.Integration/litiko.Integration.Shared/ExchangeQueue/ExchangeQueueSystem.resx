@@ -76,4 +76,22 @@
   <data name="Property_Xml" xml:space="preserve">
     <value>Xml</value>
   </data>
+  <data name="Action_OpenXML" xml:space="preserve">
+    <value>OpenXML</value>
+  </data>
+  <data name="Action_OpenXMLDescription" xml:space="preserve">
+    <value>OpenXML</value>
+  </data>
+  <data name="Action_OpenXMLHint" xml:space="preserve">
+    <value>OpenXML</value>
+  </data>
+  <data name="Action_OpenXMLConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_OpenXMLConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Actions_c0b4550dafd0436e9711ec63bbbfcc16" xml:space="preserve">
+    <value>Actions</value>
+  </data>
 </root>

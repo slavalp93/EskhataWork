@@ -2,6 +2,16 @@
   "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
   "NameGuid": "794b9791-d0ed-47ba-8f0e-bfa4e8184211",
   "Name": "ExchangeQueue",
+  "Actions": [
+    {
+      "NameGuid": "10618264-99dd-4f9a-8ceb-355094ddb0c3",
+      "Name": "OpenXML",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_OpenXML_large_1061826499dd4f9a8ceb355094ddb0c3.png",
+      "SmallIconName": "Action_OpenXML_small_1061826499dd4f9a8ceb355094ddb0c3.png"
+    }
+  ],
   "BaseGuid": "04581d26-0780-4cfd-b3cd-c2cafc5798b0",
   "CanBeNavigationPropertyType": true,
   "Code": "ExchangeQueue",
@@ -44,6 +54,9 @@
         }
       ]
     }
+  ],
+  "HandledEvents": [
+    "ClosingClient"
   ],
   "HideFromCreationArea": true,
   "HideFromNavigationEditorCreationArea": true,
@@ -92,8 +105,27 @@
     "NameGuid": "170e9f3b-f831-4c00-99eb-bc6a2b5abe8d",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
-    "Groups": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "79daa7c7-99b9-4adc-9b3b-8abf8722d081",
+        "Name": "OpenXML",
+        "ActionGuid": "10618264-99dd-4f9a-8ceb-355094ddb0c3",
+        "ButtonSize": "Large",
+        "Index": 0,
+        "ParentGuid": "c0b4550d-afd0-436e-9711-ec63bbbfcc16"
+      }
+    ],
+    "Groups": [
+      {
+        "NameGuid": "c0b4550d-afd0-436e-9711-ec63bbbfcc16",
+        "Name": "Actions",
+        "IconName": null,
+        "Index": 21,
+        "ParentGuid": "21a31627-5f58-4416-8c4a-90f538ee2e57",
+        "SmallIconName": null
+      }
+    ],
     "IsAncestorMetadata": true,
     "Pages": [],
     "RibbonKind": "Card"

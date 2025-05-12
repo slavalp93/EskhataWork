@@ -67,11 +67,11 @@ namespace litiko.Integration.Server
               exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Awaiting;
               break;
             case "ReceivedPart":
-              if (exchDoc.StatusRequestToRX.GetValueOrDefault() == Integration.ExchangeDocument.StatusRequestToRX.Awaiting || exchDoc.StatusRequestToRX.GetValueOrDefault() == null)
+              if (exchDoc.StatusRequestToRX == null || exchDoc.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.Awaiting)
                 exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;              
               break;              
-            case "ReceivedFull":
-              if (exchDoc.StatusRequestToRX.GetValueOrDefault() == Integration.ExchangeDocument.StatusRequestToRX.Awaiting || exchDoc.StatusRequestToRX.GetValueOrDefault() == null || exchDoc.StatusRequestToRX.GetValueOrDefault() == Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart)
+            case "ReceivedAll":
+              if (exchDoc.StatusRequestToRX == null || exchDoc.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.Awaiting || exchDoc.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart)
                 exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
               break;
             case "Error":
