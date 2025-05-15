@@ -18,6 +18,13 @@ namespace litiko.Integration.Server
   public class ModuleFunctions
   {
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public void Function1()
+    {
+    }
+
     #region Отправка / получение ответа от внешней информационной системы
     
     /// <summary>
