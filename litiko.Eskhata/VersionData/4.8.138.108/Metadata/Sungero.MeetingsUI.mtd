@@ -1,0 +1,55 @@
+{
+  "$type": "Sungero.Metadata.LayerModuleMetadata, Sungero.Metadata",
+  "NameGuid": "f0809770-09b2-4fc8-8854-9254bbc93e43",
+  "Name": "MeetingsUI",
+  "AssociatedGuid": "78d05f91-7585-42b9-addc-5b14478d4680",
+  "AsyncHandlers": [],
+  "BaseGuid": "6ea9a047-b597-42eb-8f90-da8c559dd057",
+  "ClientBaseAssemblyName": "litiko.Eskhata.ClientBase",
+  "ClientBaseNamespace": "litiko.Eskhata.Module.MeetingsUI.ClientBase",
+  "Code": "MeetUI",
+  "CompanyCode": "Sungero",
+  "Cover": {
+    "NameGuid": "fce72d75-7f1e-448a-8165-8836c6246ff9",
+    "Actions": [
+      {
+        "$type": "Sungero.Metadata.CoverReportActionMetadata, Sungero.Reporting.Shared",
+        "NameGuid": "3b796ba1-cada-4cde-8161-622be902f04d",
+        "Name": "MeetingMinutesReportlitiko",
+        "CoverActionPresenterTypeName": "Sungero.Reporting.Client.CoverReportActionPresenter, Sungero.Reporting.Client",
+        "GroupId": "f835ecc9-a394-4ae3-aa36-40fee5802e1a",
+        "PreviousItemGuid": "da8e1569-7f25-4b5c-9fbe-2587c9ae1b19",
+        "ReportId": "0896e8c1-b6c1-4159-bfaa-74e636e74091"
+      }
+    ],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Overridden": [
+      "Actions"
+    ],
+    "Tabs": [],
+    "Versions": []
+  },
+  "ExplorerTreeOrder": [],
+  "IconResourcesKeys": [],
+  "Importance": "High",
+  "IsLicensed": true,
+  "LayeredFromGuid": "6ea9a047-b597-42eb-8f90-da8c559dd057",
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "litiko.Eskhata.Module.MeetingsUI",
+  "ResourcesKeys": [],
+  "SpecialFolders": [],
+  "Version": "4.8.138.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "LayerModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    }
+  ]
+}

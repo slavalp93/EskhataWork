@@ -1,0 +1,33 @@
+{
+  "$type": "Sungero.Metadata.LayerModuleMetadata, Sungero.Metadata",
+  "NameGuid": "f80b5c93-c387-40dc-969b-005addc52b56",
+  "Name": "ADIntegrationCore",
+  "AssociatedGuid": "78d05f91-7585-42b9-addc-5b14478d4680",
+  "AsyncHandlers": [],
+  "BaseGuid": "10731f77-ea04-4ba8-b1c2-e680f9fa88ad",
+  "ClientBaseAssemblyName": "litiko.Eskhata.ClientBase",
+  "ClientBaseNamespace": "litiko.Eskhata.Module.ADIntegrationCore.ClientBase",
+  "Code": "ADInte1",
+  "CompanyCode": "DirRX",
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "IsVisible": false,
+  "LayeredFromGuid": "10731f77-ea04-4ba8-b1c2-e680f9fa88ad",
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "litiko.Eskhata.Module.ADIntegrationCore",
+  "ResourcesKeys": [],
+  "SpecialFolders": [],
+  "Version": "4.8.0.9",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "LayerModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    }
+  ]
+}

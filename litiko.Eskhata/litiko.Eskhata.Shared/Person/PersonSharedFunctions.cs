@@ -29,5 +29,25 @@ namespace litiko.Eskhata.Shared
       
       return Sungero.Parties.PublicFunctions.Module.GetSurnameAndInitialsInTenantCulture(firstName, middleName, lastName);
     }
+    
+    /// <summary>
+    /// Получить ФИО на тадж. языке
+    /// </summary>        
+    /// <returns>ФИО.</returns>
+    [Public]
+    public virtual string GetNameTJ()
+    {      
+      var lastName = _obj.LastNameTGlitiko;
+      var firstName = _obj.FirstNameTGlitiko;
+      var middleName = _obj.MiddleNameTGlitiko;            
+      
+      using (TenantInfo.Culture.SwitchTo())
+      {
+        if (string.IsNullOrEmpty(middleName))
+          return Sungero.Parties.People.Resources.FullNameWithoutMiddleFormat(firstName, lastName);
+        else
+          return Sungero.Parties.People.Resources.FullNameFormat(firstName, middleName, lastName);
+      }
+    }    
   }
 }

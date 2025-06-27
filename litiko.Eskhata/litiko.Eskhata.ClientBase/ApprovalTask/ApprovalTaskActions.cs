@@ -67,7 +67,28 @@ namespace litiko.Eskhata.Client
                 projectSolution.AccessRights.SetStrictMode(AccessRightsStrictMode.Enhanced);
                 projectSolution.AccessRights.Save();
               }                
-            }              
+            }
+
+            // Права на связанные с ПР документы
+            var employees = new List<Sungero.Company.IEmployee>();
+            employees.Add(president);
+            foreach (var element in categoryMembers)            
+              employees.Add(element.Member);              
+            
+            var linkedDocs = projectSolution.Relations.GetRelated();
+            foreach (var linkedDoc in linkedDocs)
+            {
+              foreach (var employee in employees)
+              {
+                if (!linkedDoc.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, employee))
+                {
+                  var asyncHandler = CollegiateAgencies.AsyncHandlers.AddAccessRights.Create();
+                  asyncHandler.DocId = linkedDoc.Id;
+                  asyncHandler.EmployeeId = employee.Id;
+                  asyncHandler.ExecuteAsync();                   
+                }
+              }            
+            }                        
           }        
         }        
       }
@@ -103,7 +124,28 @@ namespace litiko.Eskhata.Client
                   projectSolution.AccessRights.Save();
                 }
               }                
-            }              
+            }
+
+            // Права на связанные с ПР документы
+            var employees = new List<Sungero.Company.IEmployee>();
+            employees.Add(president);
+            foreach (var element in categoryMembers)
+              employees.Add(element.Employee);              
+            
+            var linkedDocs = projectSolution.Relations.GetRelated();
+            foreach (var linkedDoc in linkedDocs)
+            {
+              foreach (var employee in employees)
+              {
+                if (!linkedDoc.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, employee))
+                {
+                  var asyncHandler = CollegiateAgencies.AsyncHandlers.AddAccessRights.Create();
+                  asyncHandler.DocId = linkedDoc.Id;
+                  asyncHandler.EmployeeId = employee.Id;
+                  asyncHandler.ExecuteAsync();                   
+                }
+              }            
+            }            
           }        
         }        
       }

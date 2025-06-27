@@ -8,6 +8,28 @@ namespace litiko.CollegiateAgencies.Server
 {
   public class ModuleAsyncHandlers
   {
+
+    /// <summary>
+    /// Добавить права на изменение документа.
+    /// </summary>
+    /// <param name="args"></param>    
+    public virtual void AddAccessRights(litiko.CollegiateAgencies.Server.AsyncHandlerInvokeArgs.AddAccessRightsInvokeArgs args)
+    {
+      if (args.RetryIteration > 100)
+      {        
+        args.Retry = false;
+        return;
+      }
+      
+      var document = Sungero.Content.ElectronicDocuments.Get(args.DocId);
+      var employee = Sungero.Company.Employees.Get(args.EmployeeId);
+      if (!document.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, employee))
+      {
+        document.AccessRights.Grant(employee, DefaultAccessRightsTypes.Change);
+        document.AccessRights.Save();
+      }
+    }
+    
     /// <summary>
     /// Добавить результат голосования в проеты решений.
     /// </summary>

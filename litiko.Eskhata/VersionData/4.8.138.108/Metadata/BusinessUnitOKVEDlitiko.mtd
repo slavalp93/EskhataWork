@@ -1,0 +1,61 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "ae6b0569-8483-42e7-a2c4-bcf5677d0e90",
+  "Name": "BusinessUnitOKVEDlitiko",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "BUOKVED",
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "594c437f-8882-452c-a253-59412447d1dc",
+      "Name": "BusinessUnit",
+      "CanBeSearch": false,
+      "Code": "Recipient",
+      "EntityGuid": "f8d19a5a-b434-4606-bd5c-66fd90c64b3c",
+      "IsReferenceToRootEntity": true,
+      "IsShowedInList": false
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "0d663bb6-9106-481f-8059-cc64d18eac92",
+      "Name": "OKVED",
+      "CanBeSearch": false,
+      "Code": "OKVED",
+      "EntityGuid": "539ec71a-7f00-425b-b7cc-494426732339",
+      "FlatListInStandaloneLookup": true,
+      "IsShowedInList": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "594c437f-8882-452c-a253-59412447d1dc"
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "832bd715-a8ff-46b0-a322-d618d4156ea9",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "378cb198-394a-49c4-b2b0-e83673cd20b6",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

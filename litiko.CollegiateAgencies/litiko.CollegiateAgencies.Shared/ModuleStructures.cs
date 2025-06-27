@@ -24,9 +24,19 @@ namespace litiko.CollegiateAgencies.Structures.Module
     public string ProjectSolutionTittleTJ { get; set; }    
     
     /// <summary>
+    /// Фамилия, иницалы и должность Докладчика в винительном падеже (RU)
+    /// </summary>
+    public string SpeakerRU { get; set; }
+    
+    /// <summary>
+    /// Фамилия, иницалы Докладчика (TJ)
+    /// </summary>
+    public string SpeakerTJ { get; set; }    
+    
+    /// <summary>
     /// Слушали (RU)
     /// </summary>
-    public string ListenedRU { get; set; }    
+    public string ListenedRU { get; set; }
     
     /// <summary>
     /// Слушали (TJ)

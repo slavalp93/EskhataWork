@@ -60,6 +60,7 @@ namespace litiko.CollegiateAgencies.Isolated.DocumentBodyCreator
             builder.ParagraphFormat.FirstLineIndent = 35.433;
             builder.Write("Слушали: ");
             builder.Font.Bold = false;
+            builder.Writeln(resolutionInfo.SpeakerRU);
             builder.Writeln(resolutionInfo.ListenedRU);
             builder.Writeln("После рассмотрения представленного предложения члены " + nameForTemplate);
             
@@ -84,7 +85,17 @@ namespace litiko.CollegiateAgencies.Isolated.DocumentBodyCreator
               builder.Writeln(string.Format("«За» - {0} голосов", resolutionInfo.VoutingYes));
               builder.Writeln(string.Format("«Против» - {0} голосов", resolutionInfo.VoutingNo));
               builder.Writeln(string.Format("«Воздержавшихся» - {0} голосов", resolutionInfo.VoutingAbstained));
-              string isAccepted = resolutionInfo.VoutingAccepted.HasValue && resolutionInfo.VoutingAccepted.Value ? "Да" : "Нет";
+              string isAccepted = string.Empty;
+              if (resolutionInfo.VoutingAccepted.HasValue && resolutionInfo.VoutingAccepted.Value)
+              {
+                if (resolutionInfo.VoutingNo == 0 && resolutionInfo.VoutingAbstained == 0)
+                  isAccepted = "Единогласно";
+                else
+                  isAccepted = "Большинством голосов";
+              }
+              else
+                isAccepted = "Нет";
+              
               builder.Writeln("Решение принято - " + isAccepted);
               builder.InsertParagraph();            
             }
@@ -120,6 +131,7 @@ namespace litiko.CollegiateAgencies.Isolated.DocumentBodyCreator
             builder.ParagraphFormat.FirstLineIndent = 35.433;
             builder.Write("Шунида шуд: ");
             builder.Font.Bold = false;
+            builder.Writeln(resolutionInfo.SpeakerTJ);
             builder.Writeln(resolutionInfo.ListenedTJ);
             builder.Writeln("Пас аз баррасии пешниҳоди муаррифишуда аъзоёни " + nameForTemplateTJ);
             
@@ -143,8 +155,17 @@ namespace litiko.CollegiateAgencies.Isolated.DocumentBodyCreator
               builder.Writeln("Натиҷаи овоздиҳӣ:");
               builder.Writeln(string.Format("«Тарафдор» - {0} овоз", resolutionInfo.VoutingYes));
               builder.Writeln(string.Format("«Муқобил» - {0} овоз", resolutionInfo.VoutingNo));
-              builder.Writeln(string.Format("«Худдорӣ кард» - {0} овоз", resolutionInfo.VoutingAbstained));
-              string isAccepted = resolutionInfo.VoutingAccepted.HasValue && resolutionInfo.VoutingAccepted.Value ? "Бале" : "Не";
+              builder.Writeln(string.Format("«Худдорӣ кард» - {0} овоз", resolutionInfo.VoutingAbstained));              
+              string isAccepted = string.Empty;
+              if (resolutionInfo.VoutingAccepted.HasValue && resolutionInfo.VoutingAccepted.Value)
+              {
+                if (resolutionInfo.VoutingNo == 0 && resolutionInfo.VoutingAbstained == 0)
+                  isAccepted = "Якдилона";
+                else
+                  isAccepted = "Бо аксарияти овоз";
+              }
+              else
+                isAccepted = "Не";              
               builder.Writeln("Карор кабул карда шуд - " + isAccepted);
               builder.InsertParagraph();            
             }

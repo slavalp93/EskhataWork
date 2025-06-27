@@ -211,4 +211,7 @@
   <data name="CoverDescription_QuestionGroup" xml:space="preserve">
     <value>Открытие справочника групп вопросов</value>
   </data>
+  <data name="AsyncHandler_Description_3f3708e56be54998a23a85b916fd72d7" xml:space="preserve">
+    <value>AsyncHandler</value>
+  </data>
 </root>

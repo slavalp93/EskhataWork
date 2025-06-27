@@ -274,7 +274,27 @@
   "InterfaceNamespace": "litiko.Eskhata",
   "IsolatedAssemblyName": "litiko.Eskhata.Isolated",
   "IsolatedNamespace": "litiko.Eskhata.Isolated",
-  "OrderedSpecialFolders": [],
+  "OrderedSpecialFolders": [
+    {
+      "NameGuid": "aa0058a3-d88f-4fd5-aacd-f702a20ac194",
+      "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17"
+    },
+    {
+      "NameGuid": "cc82e202-18ef-43a1-b68d-4179693bb664",
+      "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17",
+      "PreviousGuid": "aa0058a3-d88f-4fd5-aacd-f702a20ac194"
+    },
+    {
+      "NameGuid": "694361cc-f02e-446c-ba26-efb805d50c57",
+      "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17",
+      "PreviousGuid": "cc82e202-18ef-43a1-b68d-4179693bb664"
+    },
+    {
+      "NameGuid": "c3ed6a01-3b32-4cf5-8864-9b6bb0613ddd",
+      "ParentFolderId": "eb72a985-606c-4647-ba0c-1389928a4e17",
+      "PreviousGuid": "694361cc-f02e-446c-ba26-efb805d50c57"
+    }
+  ],
   "PublicFunctions": [
     {
       "Name": "CreateArchiveListByCaseFiles",
@@ -308,7 +328,7 @@
   "SharedAssemblyName": "litiko.Eskhata.Shared",
   "SharedNamespace": "litiko.Eskhata.Shared",
   "SpecialFolders": [],
-  "Version": "4.8.138.108",
+  "Version": "4.8.138.109",
   "Widgets": [],
   "Versions": [
     {

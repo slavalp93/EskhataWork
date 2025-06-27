@@ -1,0 +1,58 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "46b4e57b-2486-4bed-a043-32236f869cbb",
+  "Name": "AgendaTemplate",
+  "AccessRightsMode": "NoRight",
+  "AssociatedGuid": "55f340f0-96e4-4b40-9625-d1c5bfc08f5c",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [
+    {
+      "NameGuid": "b35bf502-927f-4859-95ee-4770f66e6cf8",
+      "Name": "Doc",
+      "EntityType": "55f340f0-96e4-4b40-9625-d1c5bfc08f5c"
+    },
+    {
+      "NameGuid": "1249f8ba-36af-4397-a767-916e5c93a956",
+      "Name": "Meeting",
+      "EntityType": "b5ca5dfe-ff12-4f99-a426-1573911ab8a0"
+    }
+  ],
+  "DefaultExportFormat": "Word",
+  "ExportFormats": [
+    "Word",
+    "Pdf"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "IntegrationServiceName": "EskhataAgendaTemplate",
+  "Overridden": [
+    "AccessRightsMode",
+    "PublicConstants",
+    "PublicStructures",
+    "ExportFormats",
+    "DefaultExportFormat",
+    "DataSources",
+    "Parameters",
+    "HandledEvents",
+    "DisplayName"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "1bfd6cab-d751-43e8-82e0-d2e9102edf72",
+      "Name": "Entity",
+      "EntityType": "55f340f0-96e4-4b40-9625-d1c5bfc08f5c",
+      "InternalDataTypeName": "litiko.Eskhata.IAgenda, Sungero.Domain.Interfaces",
+      "IsRequired": true
+    },
+    {
+      "NameGuid": "acc55e34-721c-4f82-8950-cc16a4d13c58",
+      "Name": "MeetingMembers",
+      "InternalDataTypeName": "System.String"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "Versions": []
+}

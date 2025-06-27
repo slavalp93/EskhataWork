@@ -16,6 +16,25 @@
           "ParameterType": "LongInteger"
         }
       ]
+    },
+    {
+      "NameGuid": "3f3708e5-6be5-4998-a23a-85b916fd72d7",
+      "Name": "AddAccessRights",
+      "DelayPeriod": 5,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "03923522-78e0-4c62-a076-e4bcbda1b326",
+          "Name": "EmployeeId",
+          "ParameterType": "LongInteger"
+        },
+        {
+          "NameGuid": "8a3118c4-9d99-43d1-8d08-00b46f5ac28f",
+          "Name": "DocId",
+          "ParameterType": "LongInteger"
+        }
+      ]
     }
   ],
   "ClientAssemblyName": "litiko.CollegiateAgencies.Client",
@@ -477,6 +496,16 @@
           "TypeFullName": "global::System.String"
         },
         {
+          "Name": "SpeakerRU",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
+          "Name": "SpeakerTJ",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        },
+        {
           "Name": "ListenedRU",
           "IsNullable": true,
           "TypeFullName": "global::System.String"
@@ -775,7 +804,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.73",
+  "Version": "0.0.1.74",
   "Widgets": [],
   "Versions": [
     {

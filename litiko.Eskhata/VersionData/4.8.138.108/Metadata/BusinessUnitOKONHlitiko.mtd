@@ -1,0 +1,61 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "4e638bbf-d97e-405a-bc3a-4f1d31aef728",
+  "Name": "BusinessUnitOKONHlitiko",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "BUOKONH",
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "73a398bd-72e4-4b80-ba82-6bfa7e2c6518",
+      "Name": "BusinessUnit",
+      "CanBeSearch": false,
+      "Code": "Recipient",
+      "EntityGuid": "f8d19a5a-b434-4606-bd5c-66fd90c64b3c",
+      "IsReferenceToRootEntity": true,
+      "IsShowedInList": false
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "362a51c2-e634-4e80-bcbf-fc21e81b5c3b",
+      "Name": "OKONH",
+      "CanBeSearch": false,
+      "Code": "OKONH",
+      "EntityGuid": "28e5b3f5-3283-41a4-bf61-2231b1702a1b",
+      "FlatListInStandaloneLookup": true,
+      "IsShowedInList": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "73a398bd-72e4-4b80-ba82-6bfa7e2c6518"
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "4c6e3479-ba06-4e5d-b3e8-edac3de7a0c2",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "1246004a-4a49-44b5-ab26-4f773d903be5",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

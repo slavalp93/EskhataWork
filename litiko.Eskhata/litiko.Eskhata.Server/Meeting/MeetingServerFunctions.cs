@@ -62,34 +62,59 @@ namespace litiko.Eskhata.Server
       return string.Join("\r\n", employeesList);
     } 
 
+    
+    /// <summary>
+    /// Получить нумерованный список сотрудников.
+    /// </summary>
+    /// <param name="employees">Список сотрудников.</param>
+    /// <param name="withJobTitle">Признак отображения должности сотрудников.</param>    
+    /// <param name="withShortName">Признак формирования короткого ФИО.</param>    
+    /// <returns>Строка с нумерованным списком сотрудников.</returns>
+    [Public]
+    public static string GetEmployeesNumberedList(List<litiko.Eskhata.IEmployee> employees, bool withJobTitle, bool withShortName, bool inTJ)
+    {
+      if (!employees.Any())
+        return null;      
+      
+      var employeesNumberedList = new List<string>();
+      foreach (var employee in employees)
+      {
+        if (!inTJ)
+        {
+          var name = withShortName ? Sungero.Company.PublicFunctions.Employee.GetShortName(Sungero.Company.Employees.As(employee), true) : employee.Name;
+          var employeeNumberedName = string.Format("{0}. {1}", employees.IndexOf(employee) + 1, name);
+          if (withJobTitle && employee.JobTitle != null && !string.IsNullOrWhiteSpace(employee.JobTitle.Name))
+            employeeNumberedName = string.Format("{0} – {1}", employeeNumberedName, employee.JobTitle.Name);
+          employeesNumberedList.Add(employeeNumberedName);        
+        }
+        else
+        {
+          var name = withShortName ? litiko.Eskhata.PublicFunctions.Person.GetShortNameTJ(People.As(employee.Person)) : litiko.Eskhata.PublicFunctions.Person.GetNameTJ(People.As(employee.Person));
+          var employeeNumberedName = string.Format("{0}. {1}", employees.IndexOf(employee) + 1, name);
+          if (withJobTitle && employee.JobTitle != null && !string.IsNullOrWhiteSpace(JobTitles.As(employee.JobTitle).NameTGlitiko))
+            employeeNumberedName = string.Format("{0} – {1}", employeeNumberedName, JobTitles.As(employee.JobTitle).NameTGlitiko);
+          employeesNumberedList.Add(employeeNumberedName);          
+         
+        }
+      }
+      
+      return string.Join("\r\n", employeesNumberedList);
+    }    
+    
+    
     /// <summary>
     /// Получить нумерованный список присутствующих совещания.
     /// </summary>
     /// <param name="withJobTitle">Признак отображения должности.</param>
     /// <returns>Нумерованный список присутствующих совещания.</returns>
     [Public]
-    public string GetMeetingPresentNumberedList(bool withJobTitle, bool inTJ = false)
+    public string GetMeetingPresentNumberedList(bool withJobTitle, bool inTJ = false, bool withShortName = false)
     {                  
-      var employees = _obj.Presentlitiko.Select(x => x.Employee).ToList();
+      var employees = _obj.Presentlitiko.Select(x => litiko.Eskhata.Employees.As(x.Employee)).ToList();
       if (!employees.Any())
         return string.Empty;
       
-      if (!inTJ)
-        return Sungero.Company.PublicFunctions.Employee.Remote.GetEmployeesNumberedList(employees, withJobTitle);
-      else
-      {        
-        var employeesNumberedList = new List<string>();
-        foreach (IEmployee employee in employees)
-        {
-          var shortName = litiko.Eskhata.PublicFunctions.Person.GetShortNameTJ(People.As(employee.Person));
-          var employeeNumberedName = string.Format("{0}. {1}", employees.IndexOf(employee) + 1, shortName);
-          if (withJobTitle && employee.JobTitle != null && !string.IsNullOrWhiteSpace(JobTitles.As(employee.JobTitle).NameTGlitiko))
-            employeeNumberedName = string.Format("{0} – {1}", employeeNumberedName, JobTitles.As(employee.JobTitle).NameTGlitiko);
-          employeesNumberedList.Add(employeeNumberedName);
-        }
-        
-        return string.Join("\r\n", employeesNumberedList);        
-      }
+      return GetEmployeesNumberedList(employees, withJobTitle, withShortName, inTJ);      
     }
 
     /// <summary>
@@ -99,12 +124,10 @@ namespace litiko.Eskhata.Server
     /// <param name="withReason">Признак отображения причины.</param>
     /// <returns>Нумерованный список отсутствующих совещания.</returns>
     [Public]
-    public string GetMeetingAbsentNumberedList(bool withJobTitle, bool withReason = true, bool inTJ = false)
+    public string GetMeetingAbsentNumberedList(bool withJobTitle, bool withReason = true, bool inTJ = false, bool withShortName = false)
     {                        
       if (!_obj.Absentlitiko.Any())
-        return string.Empty;
-      
-      //return Sungero.Company.PublicFunctions.Employee.Remote.GetEmployeesNumberedList(employees, withJobTitle);      
+        return string.Empty;            
       
       var employeesNumberedList = new List<string>();
       int number = 1;
@@ -112,12 +135,12 @@ namespace litiko.Eskhata.Server
       {
         var employee = element.Employee;
         var reason = element.Reason;
-        string shortName = string.Empty;
-        if (!inTJ)
-          shortName = Sungero.Company.PublicFunctions.Employee.GetShortName(employee, true);
+        string name = string.Empty;
+        if (!inTJ)          
+          name = withShortName ? Sungero.Company.PublicFunctions.Employee.GetShortName(Sungero.Company.Employees.As(employee), true) : employee.Name;
         else
-          shortName = PublicFunctions.Person.GetShortNameTJ(People.As(employee.Person));
-        var employeeNumberedName = string.Format("{0}. {1}", number, shortName);
+          name = withShortName ? litiko.Eskhata.PublicFunctions.Person.GetShortNameTJ(People.As(employee.Person)) : litiko.Eskhata.PublicFunctions.Person.GetNameTJ(People.As(employee.Person));
+        var employeeNumberedName = string.Format("{0}. {1}", number, name);
         if (withJobTitle && employee.JobTitle != null)
         {
           if (!inTJ && !string.IsNullOrWhiteSpace(employee.JobTitle.Name))
@@ -141,28 +164,13 @@ namespace litiko.Eskhata.Server
     /// <param name="withJobTitle">Признак отображения должности.</param>
     /// <returns>Нумерованный список приглашенных совещания.</returns>
     [Public]
-    public string GetMeetingInvitedNumberedList(bool withJobTitle, bool inTJ = false)
+    public string GetMeetingInvitedNumberedList(bool withJobTitle, bool inTJ = false, bool withShortName = false)
     {                  
-      var employees = _obj.InvitedEmployeeslitiko.Select(x => x.Employee).ToList();      
+      var employees = _obj.InvitedEmployeeslitiko.Select(x => litiko.Eskhata.Employees.As(x.Employee)).ToList();
       if (!employees.Any())
         return string.Empty;
       
-      if (!inTJ)
-        return Sungero.Company.PublicFunctions.Employee.Remote.GetEmployeesNumberedList(employees, withJobTitle);
-      else
-      {
-        var employeesNumberedList = new List<string>();
-        foreach (IEmployee employee in employees)
-        {
-          var shortName = litiko.Eskhata.PublicFunctions.Person.GetShortNameTJ(People.As(employee.Person));
-          var employeeNumberedName = string.Format("{0}. {1}", employees.IndexOf(employee) + 1, shortName);
-          if (withJobTitle && employee.JobTitle != null && !string.IsNullOrWhiteSpace(JobTitles.As(employee.JobTitle).NameTGlitiko))
-            employeeNumberedName = string.Format("{0} – {1}", employeeNumberedName, JobTitles.As(employee.JobTitle).NameTGlitiko);
-          employeesNumberedList.Add(employeeNumberedName);
-        }
-        
-        return string.Join("\r\n", employeesNumberedList);         
-      }
+      return GetEmployeesNumberedList(employees, withJobTitle, withShortName, inTJ);      
     }
     
     /// <summary>
@@ -175,8 +183,13 @@ namespace litiko.Eskhata.Server
     {                        
       if (!_obj.ProjectSolutionslitiko.Any())
         return string.Empty;
-      
-      return string.Join("\r\n", _obj.ProjectSolutionslitiko.Select(element => $"{element.Number}. {element.ProjectSolution.Subject}."));
+            
+      return string.Join(
+        "\r\n", 
+        _obj.ProjectSolutionslitiko
+            .OrderBy(element => element.Number)
+            .Select(element => $"{element.Number}. {element.ProjectSolution.Subject}.")
+    );
     }    
     
     /// <summary>

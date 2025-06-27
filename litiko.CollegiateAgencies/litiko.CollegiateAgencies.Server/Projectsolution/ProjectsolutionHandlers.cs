@@ -169,6 +169,24 @@ namespace litiko.CollegiateAgencies
               _obj.AccessRights.Grant(element.Member, DefaultAccessRightsTypes.Change);
           }
         }
+        
+        // Члены категория заседания - Изменение
+        if (_obj.MeetingCategory != null)
+        {
+          var categoryMembers = new List<Sungero.Company.IEmployee>();
+          if (_obj.MeetingCategory.President != null)
+            categoryMembers.Add(_obj.MeetingCategory.President);
+          if (_obj.MeetingCategory.Secretary != null)
+            categoryMembers.Add(_obj.MeetingCategory.Secretary);          
+          foreach (Sungero.Company.IEmployee member in _obj.MeetingCategory.Members.Where(x => x.Member != null).Select(x => x.Member))
+            categoryMembers.Add(member);                              
+          
+          foreach (var employee in categoryMembers)
+          {
+            if (!_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, employee))
+              _obj.AccessRights.Grant(employee, DefaultAccessRightsTypes.Change);                        
+          }                   
+        }
       }            
       #endregion      
       
