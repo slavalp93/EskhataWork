@@ -20,7 +20,10 @@ namespace litiko.Eskhata.Server
       if (document.LeadingDocument != null && litiko.CollegiateAgencies.Projectsolutions.Is(document.LeadingDocument) && !litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument).DecidedMinutes.Any())              
         return null;      
       
-      return string.Join("\n", litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument).DecidedMinutes.Select(element => $"{element.Number}. {element.DecisionRU}"));
+      return string.Join("\n", litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument).DecidedMinutes
+                         .OrderBy(element => element.Number)
+                         .Select(element => $"{element.Number}. {element.DecisionRU}")
+                        );
     }    
 
     /// <summary>
@@ -34,7 +37,10 @@ namespace litiko.Eskhata.Server
       if (document.LeadingDocument != null && litiko.CollegiateAgencies.Projectsolutions.Is(document.LeadingDocument) && !litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument).DecidedMinutes.Any())              
         return null;      
       
-      return string.Join("\n", litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument).DecidedMinutes.Select(element => $"{element.Number}. {element.DecisionTJ}"));
+      return string.Join("\n", litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument).DecidedMinutes
+                         .OrderBy(element => element.Number)
+                         .Select(element => $"{element.Number}. {element.DecisionTJ}")
+                        );
     }
     
     /// <summary>
@@ -48,7 +54,10 @@ namespace litiko.Eskhata.Server
       if (document.LeadingDocument != null && litiko.CollegiateAgencies.Projectsolutions.Is(document.LeadingDocument) && !litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument).DecidedMinutes.Any())              
         return null;       
       
-      return string.Join("\n", litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument).DecidedMinutes.Select(element => $"{element.Number}. {element.DecisionEN}"));
+      return string.Join("\n", litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument).DecidedMinutes
+                         .OrderBy(element => element.Number)
+                         .Select(element => $"{element.Number}. {element.DecisionEN}")
+                        );
     } 
   }
 }

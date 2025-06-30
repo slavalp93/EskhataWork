@@ -139,4 +139,10 @@
   <data name="ProtocolOfBoardMeetingKind" xml:space="preserve">
     <value>Протокол заседания Правления</value>
   </data>
+  <data name="NoVersionMessage" xml:space="preserve">
+    <value>Перед отправкой документа необходимо создать его версию.</value>
+  </data>
+  <data name="SaveObjectMessage" xml:space="preserve">
+    <value>Сохраните карточку перед созданием версии из шаблона.</value>
+  </data>
 </root>

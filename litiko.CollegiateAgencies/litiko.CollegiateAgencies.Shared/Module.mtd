@@ -582,7 +582,9 @@
     "RoleCreationResolutions",
     "DescriptionRoleCreationResolutions",
     "RoleTranslator",
-    "ProtocolOfBoardMeetingKind"
+    "ProtocolOfBoardMeetingKind",
+    "NoVersionMessage",
+    "SaveObjectMessage"
   ],
   "ServerAssemblyName": "litiko.CollegiateAgencies.Server",
   "ServerNamespace": "litiko.CollegiateAgencies.Server",
@@ -804,7 +806,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.74",
+  "Version": "0.0.1.76",
   "Widgets": [],
   "Versions": [
     {

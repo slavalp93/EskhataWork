@@ -9,6 +9,22 @@ namespace litiko.Eskhata.Client
 {
   partial class MinutesActions
   {
+    public override void SendForApproval(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      if (!_obj.HasVersions || _obj.LastVersion.Body == null)
+      {
+        Dialogs.ShowMessage(litiko.CollegiateAgencies.Resources.NoVersionMessage, MessageType.Warning);
+        throw new OperationCanceledException();
+      }      
+      
+      base.SendForApproval(e);
+    }
+
+    public override bool CanSendForApproval(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return base.CanSendForApproval(e);
+    }
+
     public override void CreateActionItems(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       base.CreateActionItems(e);

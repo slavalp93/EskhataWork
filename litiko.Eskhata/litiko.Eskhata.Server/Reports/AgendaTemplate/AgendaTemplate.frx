@@ -8121,6 +8121,7 @@ namespace FastReport
             <Column Name="Id" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int64]]"/>
             <Column Name="Status" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Name" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
+            <Column Name="NameTJ" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           </Column>
         </Column>
       </SungeroEntityDataSource>
@@ -8239,6 +8240,7 @@ namespace FastReport
             <Column Name="Id" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int64]]"/>
             <Column Name="Status" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Name" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
+            <Column Name="NameTJ" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           </Column>
         </Column>
         <Column Name="Employee" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="Sungero.Company.IEmployee, Sungero.Domain.Interfaces">
@@ -8455,6 +8457,7 @@ namespace FastReport
             <Column Name="Id" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int64]]"/>
             <Column Name="Status" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Name" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
+            <Column Name="NameTJ" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           </Column>
         </Column>
         <Column Name="Contact" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="Sungero.Parties.IContact, Sungero.Domain.Interfaces">
@@ -8667,6 +8670,7 @@ namespace FastReport
             <Column Name="Id" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int64]]"/>
             <Column Name="Status" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Name" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
+            <Column Name="NameTJ" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           </Column>
         </Column>
         <Column Name="Employee" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="Sungero.Company.IEmployee, Sungero.Domain.Interfaces">
@@ -8884,6 +8888,7 @@ namespace FastReport
             <Column Name="Id" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int64]]"/>
             <Column Name="Status" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Name" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
+            <Column Name="NameTJ" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           </Column>
         </Column>
         <Column Name="Employee" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="Sungero.Company.IEmployee, Sungero.Domain.Interfaces">
@@ -9106,6 +9111,7 @@ namespace FastReport
             <Column Name="Id" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int64]]"/>
             <Column Name="Status" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
             <Column Name="Name" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
+            <Column Name="NameTJ" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           </Column>
         </Column>
         <Column Name="ProjectSolution" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="litiko.CollegiateAgencies.IProjectsolution, Sungero.Domain.Interfaces">
@@ -9659,6 +9665,11 @@ namespace FastReport
             <Column Name="President" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="Sungero.Company.IEmployee, Sungero.Domain.Interfaces"/>
             <Column Name="MeetingCategorylitiko" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="litiko.CollegiateAgencies.IMeetingCategory, Sungero.Domain.Interfaces"/>
             <Column Name="MeetingMethodlitiko" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="litiko.CollegiateAgencies.IMeetingMethod, Sungero.Domain.Interfaces"/>
+          </Column>
+          <Column Name="QuestionGroup" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="litiko.CollegiateAgencies.IQuestionGroup, Sungero.Domain.Interfaces">
+            <Column Name="Id" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int64]]"/>
+            <Column Name="Status" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
+            <Column Name="Name" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
           </Column>
         </Column>
       </SungeroEntityDataSource>
@@ -10546,6 +10557,7 @@ namespace FastReport
         <Column Name="Id" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[System.Int64]]"/>
         <Column Name="Status" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.Nullable`1[[Sungero.Core.Enumeration, Sungero.Domain.Shared]]"/>
         <Column Name="Name" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
+        <Column Name="NameTJ" Restrictions="DontModify, DontEdit, HideAllProperties" DataType="System.String"/>
       </Column>
     </SungeroEntityDataSource>
     <SungeroParameter Name="SungeroConnectionString" Restrictions="DontModify, DontEdit, DontDelete, HideAllProperties, DontShow" Id="cca0075a-46fd-4276-8082-970e6720fc7d" IsRequired="false" IsCollection="false" InternalDataType="System.String" IsSimpleDataType="false" EntityTypeId="00000000-0000-0000-0000-000000000000"/>
@@ -10570,19 +10582,22 @@ namespace FastReport
       <TextObject Name="Text9" Top="263.25" Width="718.2" Height="18.9" Text="ПОВЕСТКА ДНЯ" HorzAlign="Center" Font="Palatino Linotype, 12pt, style=Bold"/>
       <TextObject Name="Text20" Top="9.45" Width="718.2" Height="28.35" HorzAlign="Center" Font="Palatino Linotype, 12pt, style=Bold"/>
     </ReportTitleBand>
-    <ColumnHeaderBand Name="ColumnHeader1" Top="287.48" Width="718.2" Height="18.9">
+    <ColumnHeaderBand Name="ColumnHeader1" Top="288.15" Width="718.2" Height="18.9">
       <TextObject Name="Text14" Left="585.9" Width="132.3" Height="18.9" Border.Lines="All" Text="Приложение" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text10" Width="28.35" Height="18.9" Border.Lines="All" Text="№" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text11" Left="28.35" Width="321.3" Height="18.9" Border.Lines="All" Text="Тема повестки дня" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text12" Left="349.65" Width="103.95" Height="18.9" Border.Lines="All" Text="Регламент" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text13" Left="453.6" Width="132.3" Height="18.9" Border.Lines="All" Text="Докладчик" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
     </ColumnHeaderBand>
-    <DataBand Name="Data1" Top="309.72" Width="718.2" Height="18.9" DataSource="4d5dfb585d3f1b63194daa4a9b9c36a8">
+    <DataBand Name="Data1" Top="311.05" Width="718.2" Height="18.9" DataSource="4d5dfb585d3f1b63194daa4a9b9c36a8">
       <TextObject Name="Text15" Width="28.35" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.Number]." Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text16" Left="28.35" Width="321.3" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.ProjectSolution.Subject]" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text17" Left="349.65" Width="103.95" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.ProjectSolution.Regulations]" HorzAlign="Center" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text18" Left="453.6" Width="132.3" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[Meeting.ProjectSolutionslitiko.ProjectSolution.Speaker.Name]" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text19" Left="585.9" Width="132.3" Height="18.9" Border.Lines="All" CanGrow="true" CanShrink="true" GrowToBottom="true" Text="[litiko.CollegiateAgencies.PublicFunctions.Projectsolution.GetProjectSolutionAddendumSubjects([Meeting.ProjectSolutionslitiko.ProjectSolution.Id])]" Font="Palatino Linotype, 12pt"/>
+      <Sort>
+        <Sort Expression="Meeting.ProjectSolutionslitiko.Number"/>
+      </Sort>
     </DataBand>
   </ReportPage>
 </Report>

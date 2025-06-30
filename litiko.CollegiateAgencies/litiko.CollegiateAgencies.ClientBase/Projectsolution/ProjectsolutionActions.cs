@@ -44,6 +44,12 @@ namespace litiko.CollegiateAgencies.Client
         return;
       }
       
+      if (!_obj.HasVersions || _obj.LastVersion.Body == null)
+      {
+        Dialogs.ShowMessage(litiko.CollegiateAgencies.Resources.NoVersionMessage, MessageType.Warning);
+        throw new OperationCanceledException();
+      }      
+      
       base.SendForApproval(e);
     }
 

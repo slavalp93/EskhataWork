@@ -139,4 +139,10 @@
   <data name="ProtocolOfBoardMeetingKind" xml:space="preserve">
     <value>Minutes of the Board meeting</value>
   </data>
+  <data name="NoVersionMessage" xml:space="preserve">
+    <value>Before sending a document, you must create a version of it.</value>
+  </data>
+  <data name="SaveObjectMessage" xml:space="preserve">
+    <value>Save the card before creating a version from the template.</value>
+  </data>
 </root>

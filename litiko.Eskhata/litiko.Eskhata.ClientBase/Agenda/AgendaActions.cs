@@ -9,8 +9,30 @@ namespace litiko.Eskhata.Client
 {
   partial class AgendaActions
   {
+    public override void SendForApproval(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      if (!_obj.HasVersions || _obj.LastVersion.Body == null)
+      {
+        Dialogs.ShowMessage(litiko.CollegiateAgencies.Resources.NoVersionMessage, MessageType.Warning);
+        throw new OperationCanceledException();
+      }
+      
+      base.SendForApproval(e);
+    }
+
+    public override bool CanSendForApproval(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return base.CanSendForApproval(e);
+    }
+
     public override void CreateFromTemplate(Sungero.Domain.Client.ExecuteActionArgs e)
     {
+      if (_obj.State.IsInserted)
+      {
+        Dialogs.ShowMessage(litiko.CollegiateAgencies.Resources.SaveObjectMessage, MessageType.Warning);
+        throw new OperationCanceledException();
+      }      
+      
       try
       {
         litiko.Eskhata.Functions.Agenda.Remote.FillAgendaTemplate(_obj);
@@ -25,7 +47,7 @@ namespace litiko.Eskhata.Client
 
     public override bool CanCreateFromTemplate(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return base.CanCreateFromTemplate(e) && !_obj.State.IsInserted;
+      return base.CanCreateFromTemplate(e);
     }
 
   }
