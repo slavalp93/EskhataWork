@@ -69,4 +69,7 @@
 Доступные форматы: С4, B4.
 </value>
   </data>
+  <data name="Property_StandardResponse" xml:space="preserve">
+    <value>Стандартный ответ</value>
+  </data>
 </root>

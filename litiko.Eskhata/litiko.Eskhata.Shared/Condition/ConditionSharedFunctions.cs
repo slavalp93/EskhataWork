@@ -30,44 +30,52 @@ namespace litiko.Eskhata.Shared
       baseConditions[RegulatoryDocuments.PublicConstants.Module.DocumentTypeGuids.RegulatoryDocument.ToString()].Add(Eskhata.Condition.ConditionType.IRDType);
       baseConditions[RegulatoryDocuments.PublicConstants.Module.DocumentTypeGuids.RegulatoryDocument.ToString()].Add(Eskhata.Condition.ConditionType.OrganForApprov);
       
+      baseConditions[DocflowEskhata.PublicConstants.Module.DocumentTypeGuids.OutgoingLetter.ToString()].Add(Eskhata.Condition.ConditionType.StandardRespons);
+
       return baseConditions;
     }
     
     /// <summary>
     /// Сменить доступность реквизитов.
-    /// </summary>    
+    /// </summary>
     public override void ChangePropertiesAccess()
     {
       base.ChangePropertiesAccess();
-          
-      var isIRDType = _obj.ConditionType == ConditionType.IRDType;         
+      
+      var isIRDType = _obj.ConditionType == ConditionType.IRDType;
       _obj.State.Properties.IRDTypelitiko.IsVisible = isIRDType;
       _obj.State.Properties.IRDTypelitiko.IsRequired = isIRDType;
       
-      var isOrganForApprovType = _obj.ConditionType == ConditionType.OrganForApprov;         
+      var isOrganForApprovType = _obj.ConditionType == ConditionType.OrganForApprov;
       _obj.State.Properties.OrganForApprovinglitiko.IsVisible = isOrganForApprovType;
-      _obj.State.Properties.OrganForApprovinglitiko.IsRequired = isOrganForApprovType;      
+      _obj.State.Properties.OrganForApprovinglitiko.IsRequired = isOrganForApprovType;
+      
+      var isStandardResponse = _obj.ConditionType == ConditionType.StandardRespons;
+      _obj.State.Properties.StandardResponse.IsVisible = isStandardResponse;
     }
 
     /// <summary>
     /// Очистка скрытых свойств.
-    /// </summary>    
+    /// </summary>
     public override void ClearHiddenProperties()
     {
       base.ClearHiddenProperties();
-          
+      
       if (!_obj.State.Properties.IRDTypelitiko.IsVisible)
         _obj.IRDTypelitiko = null;
       
       if (!_obj.State.Properties.OrganForApprovinglitiko.IsVisible)
-        _obj.OrganForApprovinglitiko = null;      
-    }    
+        _obj.OrganForApprovinglitiko = null;
+      
+      if (!_obj.State.Properties.StandardResponse.IsVisible)
+        _obj.StandardResponse = null;
+    }
     
     /// <summary>
     /// Проверить условие.
     /// </summary>
     /// <param name="document">Документ.</param>
-    /// <param name="task">Задача на согласование.</param>    
+    /// <param name="task">Задача на согласование.</param>
     public override Sungero.Docflow.Structures.ConditionBase.ConditionResult CheckCondition(Sungero.Docflow.IOfficialDocument document, Sungero.Docflow.IApprovalTask task)
     {
       if (_obj.ConditionType == Eskhata.Condition.ConditionType.ChiefAccountant)
@@ -111,16 +119,27 @@ namespace litiko.Eskhata.Shared
           return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(regulatoryDocument.OrganForApproving == _obj.OrganForApprovinglitiko, string.Empty);
         else
           return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(null, litiko.Eskhata.Conditions.Resources.CannotComputeCondition);
-      }      
+      }
+      
+      if (_obj.ConditionType == Eskhata.Condition.ConditionType.StandardRespons)
+      {
+        if (Eskhata.OutgoingDocumentBases.Is(document) && _obj.StandardResponse != null)
+          return Sungero.Docflow.Structures.ConditionBase.ConditionResult.
+            Create(Eskhata.OutgoingDocumentBases.As(document).StandardResponse == _obj.StandardResponse,
+                   string.Empty);
+        
+        return Sungero.Docflow.Structures.ConditionBase.ConditionResult.
+          Create(null, litiko.Eskhata.Conditions.Resources.CannotComputeCondition);
+      }
       
       return base.CheckCondition(document, task);
-    }    
+    }
     
     /// <summary>
     /// Проверить условие "Требования учетной политики Банка".
     /// </summary>
     /// <param name="document">Документ.</param>
-    /// <param name="task">Задача на согласование.</param>    
+    /// <param name="task">Задача на согласование.</param>
     public virtual Sungero.Docflow.Structures.ConditionBase.ConditionResult CheckIsRequirements(Sungero.Docflow.IOfficialDocument document, Sungero.Docflow.IApprovalTask task)
     {
       if (litiko.RegulatoryDocuments.RegulatoryDocuments.Is(document))
@@ -140,7 +159,7 @@ namespace litiko.Eskhata.Shared
     /// Проверить условие "Рекомендации внутреннего аудита".
     /// </summary>
     /// <param name="document">Документ.</param>
-    /// <param name="task">Задача на согласование.</param>    
+    /// <param name="task">Задача на согласование.</param>
     public virtual Sungero.Docflow.Structures.ConditionBase.ConditionResult CheckIsRecommendat(Sungero.Docflow.IOfficialDocument document, Sungero.Docflow.IApprovalTask task)
     {
       if (litiko.RegulatoryDocuments.RegulatoryDocuments.Is(document))
@@ -160,7 +179,7 @@ namespace litiko.Eskhata.Shared
     /// Проверить условие "Связано со структурой банка".
     /// </summary>
     /// <param name="document">Документ.</param>
-    /// <param name="task">Задача на согласование.</param>    
+    /// <param name="task">Задача на согласование.</param>
     public virtual Sungero.Docflow.Structures.ConditionBase.ConditionResult CheckIsRelatedStruct(Sungero.Docflow.IOfficialDocument document, Sungero.Docflow.IApprovalTask task)
     {
       if (litiko.RegulatoryDocuments.RegulatoryDocuments.Is(document))
@@ -174,7 +193,7 @@ namespace litiko.Eskhata.Shared
       }
 
       return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(null, Conditions.Resources.SelectApprovalRuleWithoutIsRelatedToStructureCondition);
-    }       
+    }
     
   }
 }

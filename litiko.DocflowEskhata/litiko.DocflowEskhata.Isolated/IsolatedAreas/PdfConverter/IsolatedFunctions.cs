@@ -11,7 +11,7 @@ namespace litiko.DocflowEskhata.Isolated.PdfConverter
   public class IsolatedFunctions
   {
     [Public]
-    public Stream AddRegistrationData(Stream inputStream, string registrationNumber, DateTime? registrationDate)
+    public Stream AddRegistrationData(Stream inputStream, string registrationNumber, DateTime? registrationDate, DateTime? outgoingLetterDate, string outgoingLetterNo)
     {
       var pdfStamper = this.CreatePdfStamper();
       try
@@ -26,6 +26,9 @@ namespace litiko.DocflowEskhata.Isolated.PdfConverter
         outputStream = pdfStamper.ReplacePhraseInPdf(outputStream, "⚓ мм", month);
         outputStream = pdfStamper.ReplacePhraseInPdf(outputStream, "⚓ дд", day);
         
+        string stamp = GenerateRegistrationStampHtml(registrationNumber, registrationDate, outgoingLetterNo, outgoingLetterDate);
+        outputStream = pdfStamper.AddHtmlMark(outputStream, stamp, "⚓&");
+        
         return outputStream;
         
       }
@@ -36,19 +39,58 @@ namespace litiko.DocflowEskhata.Isolated.PdfConverter
       }
     }
     
+    private string GenerateRegistrationStampHtml(string registrationNumber, DateTime? registrationDate, string outgoingLetterNo, DateTime? outgoingLetterDate)
+    {
+      string regDay = registrationDate?.ToString("dd") ?? "";
+      string regMonth = registrationDate?.ToString("MM") ?? "";
+      string regYear = registrationDate?.ToString("yyyy") ?? "";
+
+      string outDay = outgoingLetterDate?.ToString("dd") ?? "";
+      string outMonth = outgoingLetterDate?.ToString("MM") ?? "";
+      string outYear = outgoingLetterDate?.ToString("yyyy") ?? "";
+
+      bool hasOutgoing = !string.IsNullOrWhiteSpace(outgoingLetterNo) || outgoingLetterDate != null;
+
+      var sb = new System.Text.StringBuilder();
+      sb.AppendLine("<table style='border-collapse: collapse; font-family: Arial; font-size: 12px;'>");
+
+      // Перша строка
+      sb.AppendLine("  <tr>");
+      sb.AppendLine("    <td style='font-weight: bold; padding-right: 5px;'>Сод. №</td>");
+      sb.AppendLine($"    <td style='padding-right: 10px;'>{registrationNumber}</td>");
+      sb.AppendLine("    <td style='font-weight: bold; padding-right: 5px;'>аз</td>");
+      sb.AppendLine($"    <td>«{regDay}» {regMonth} {regYear}</td>");
+      sb.AppendLine("  </tr>");
+
+      if (hasOutgoing)
+      {
+        // Друга строка
+        sb.AppendLine("  <tr>");
+        sb.AppendLine("    <td style='font-weight: bold; padding-right: 5px;'>Ба №</td>");
+        sb.AppendLine($"    <td style='padding-right: 10px;'>{outgoingLetterNo}</td>");
+        sb.AppendLine("    <td style='font-weight: bold; padding-right: 5px;'>аз</td>");
+        sb.AppendLine($"    <td>«{outDay}» {outMonth} {outYear}</td>");
+        sb.AppendLine("  </tr>");
+      }
+
+      sb.AppendLine("</table>");
+
+      return sb.ToString();
+    }
+
     [Public]
     public Stream AddSignatureQRStamp(Stream inputStream, string qrText, string phrase)
-    {      
+    {
       var pdfStamper = CreatePdfStamper();
       try
-      {        
+      {
         return pdfStamper.AddQRStampToDocument(inputStream, qrText, phrase, 6, 80);
       }
       catch (Exception e)
       {
         Logger.Error("Cannot add stamp", e);
         throw new AppliedCodeException("Cannot add stamp");
-      }      
+      }
     }
     
     public virtual litiko.DocflowEskhata.Isolated.PdfConverter.Eskhata_PdfStamper CreatePdfStamper()

@@ -93,6 +93,14 @@
         "EntityGuid"
       ],
       "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "7632cb2f-333f-440b-bb62-739898ec4ffb",
+      "Name": "StandardResponse",
+      "Code": "StandardRespon",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "215b3cf6-d277-4830-9ab4-2e1afbf2da7e"
     }
   ],
   "PublicStructures": [],

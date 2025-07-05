@@ -68,4 +68,7 @@ Hold the CTRL key and click the items in a list to choose them.
     <value>Print Envelope.
 Available sizes: С4, B4.</value>
   </data>
+  <data name="Property_StandardResponse" xml:space="preserve">
+    <value>Standard response</value>
+  </data>
 </root>

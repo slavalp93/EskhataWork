@@ -62,7 +62,15 @@ namespace litiko.Eskhata.Module.Docflow.Server
           {
             pdfDocumentStream = Sungero.Docflow.IsolatedFunctions.PdfConverter.AddRegistrationStamp(pdfDocumentStream, htmlStamp, 1, rightIndent, bottomIndent);
           }
-          pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddRegistrationData(pdfDocumentStream, document.RegistrationNumber, document.RegistrationDate);
+          DateTime? outgoingDate = null;
+          var outgoingNo = string.Empty;
+          var response = OutgoingDocumentBases.As(document)?.InResponseTo;
+          if(response != null)
+          {
+            outgoingDate = response.RegistrationDate;
+            outgoingNo = response.RegistrationNumber;
+          }
+          pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddRegistrationData(pdfDocumentStream, document.RegistrationNumber, document.RegistrationDate, outgoingDate, outgoingNo);
           
           #region ⚓^ - утверждающая подпись Подписанта
           var signatureForQR = Sungero.Docflow.PublicFunctions.OfficialDocument.GetSignatureForMark(document, version.Id);
@@ -74,7 +82,7 @@ namespace litiko.Eskhata.Module.Docflow.Server
               string.Format("{0};{1} {2}", signatureForQR.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document)) :
               string.Format("{0} {1};{2} {3}", jobTitle, signatureForQR.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document));
             
-            pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddSignatureQRStamp(pdfDocumentStream, qrText, "⚓^");            
+            pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddSignatureQRStamp(pdfDocumentStream, qrText, "⚓^");
           }
           #endregion
           
@@ -88,7 +96,7 @@ namespace litiko.Eskhata.Module.Docflow.Server
               string.Format("{0};{1} {2}", endorsingAuthorSignature.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document)) :
               string.Format("{0} {1};{2} {3}", jobTitle, endorsingAuthorSignature.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document));
             
-            pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddSignatureQRStamp(pdfDocumentStream, qrText, "⚓s");              
+            pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddSignatureQRStamp(pdfDocumentStream, qrText, "⚓s");
           }
           #endregion
           

@@ -66,7 +66,7 @@
   "IsolatedAssemblyName": "litiko.DocflowEskhata.Isolated",
   "IsolatedFunctions": [
     {
-      "NameGuid": "c0367f4f-bc46-4254-b34a-f24c83eb862c",
+      "NameGuid": "722c5fcb-1728-4b0e-aed8-40d01fb948bc",
       "Name": "AddRegistrationData",
       "IsolatedAreaId": "34bf9e51-a4f9-4420-8e33-989fe35e2845",
       "Parameters": [
@@ -84,6 +84,16 @@
           "Name": "registrationDate",
           "ParameterType": "global::System.Nullable<global::System.DateTime>",
           "ParameterTypeFullName": "System.Nullable`1[[System.DateTime]]"
+        },
+        {
+          "Name": "outgoingLetterDate",
+          "ParameterType": "global::System.Nullable<global::System.DateTime>",
+          "ParameterTypeFullName": "System.Nullable`1[[System.DateTime]]"
+        },
+        {
+          "Name": "outgoingLetterNo",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
         }
       ],
       "ReturnType": "global::System.IO.Stream",

@@ -97,4 +97,10 @@
   <data name="Property_OrganForApprovinglitiko" xml:space="preserve">
     <value>Organ for approving</value>
   </data>
+  <data name="Property_StandardResponse" xml:space="preserve">
+    <value>Standard response</value>
+  </data>
+  <data name="Enum_ConditionType_StandardRespons" xml:space="preserve">
+    <value>Standard response</value>
+  </data>
 </root>
