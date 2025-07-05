@@ -22,10 +22,11 @@ namespace litiko.CollegiateAgencies.Server
       }
       
       var document = Sungero.Content.ElectronicDocuments.Get(args.DocId);
-      var employee = Sungero.Company.Employees.Get(args.EmployeeId);
-      if (!document.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, employee))
+      //var employee = Sungero.Company.Employees.Get(args.EmployeeId);
+      var recepient = Recipients.Get(args.EmployeeId);
+      if (!document.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, recepient))
       {
-        document.AccessRights.Grant(employee, DefaultAccessRightsTypes.Change);
+        document.AccessRights.Grant(recepient, DefaultAccessRightsTypes.Change);
         document.AccessRights.Save();
       }
     }

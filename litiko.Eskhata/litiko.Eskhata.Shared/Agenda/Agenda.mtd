@@ -56,7 +56,8 @@
     }
   ],
   "HandledEvents": [
-    "BeforeSaveServer"
+    "BeforeSaveServer",
+    "SavingServer"
   ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "5261da93-7879-4210-b3db-c92fa894ab4d",

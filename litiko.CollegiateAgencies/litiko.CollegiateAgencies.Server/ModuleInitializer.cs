@@ -222,6 +222,7 @@ namespace litiko.CollegiateAgencies.Server
       Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(Resources.RolePresidents, Resources.DescriptionRolePresidents, Constants.Module.RoleGuid.Presidents);
       Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(Resources.RoleCreationResolutions, Resources.DescriptionRoleCreationResolutions, Constants.Module.RoleGuid.CreationResolutions);
       CreateSingleUserRole(Resources.RoleTranslator, Resources.RoleTranslator, Constants.Module.RoleGuid.Translator);
+      Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(Resources.RoleAdditionalBoardMembers, Resources.DescriptionAdditionalBoardMembers, Constants.Module.RoleGuid.AdditionalBoardMembers);
       
     }
     

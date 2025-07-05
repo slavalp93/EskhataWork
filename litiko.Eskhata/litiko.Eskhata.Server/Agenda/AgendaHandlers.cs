@@ -10,6 +10,23 @@ namespace litiko.Eskhata
   partial class AgendaServerHandlers
   {
 
+    public override void Saving(Sungero.Domain.SavingEventArgs e)
+    {
+      base.Saving(e);
+      
+      // Выдать права роли "Дополнительные члены Правления"
+      var meeting = litiko.Eskhata.Meetings.As(_obj.Meeting);
+      if (meeting != null && meeting?.MeetingCategorylitiko?.Name == "Заседание Правления")
+      {                                
+        var roleAdditionalBoardMembers = Roles.GetAll(r => r.Sid == litiko.CollegiateAgencies.PublicConstants.Module.RoleGuid.AdditionalBoardMembers).FirstOrDefault();
+        if (roleAdditionalBoardMembers != null)
+        {
+          if (!_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, roleAdditionalBoardMembers))
+            _obj.AccessRights.Grant(roleAdditionalBoardMembers, DefaultAccessRightsTypes.Change);             
+        }                
+      }        
+    }
+
     public override void BeforeSave(Sungero.Domain.BeforeSaveEventArgs e)
     {
       base.BeforeSave(e);

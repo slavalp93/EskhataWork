@@ -28,13 +28,14 @@ namespace litiko.Eskhata.Client
       
 
       var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
+      var roleAdditionalBoardMembers = Roles.GetAll(r => r.Sid == litiko.CollegiateAgencies.PublicConstants.Module.RoleGuid.AdditionalBoardMembers).FirstOrDefault();
       
       // TODO Возможны ошибки при блокировках...
       #region При отправке Повестки совещания на Проекты решений: выдать права Председателю и Членам комитета и !!! включить строгий доступ !!!
       if (document != null && litiko.Eskhata.Agendas.Is(document))
       {               
         var agenda = litiko.Eskhata.Agendas.As(document);
-        var meeting = litiko.Eskhata.Meetings.As(agenda?.Meeting);
+        var meeting = litiko.Eskhata.Meetings.As(agenda?.Meeting);        
         if (meeting != null)        
         {         
           var president = meeting.President;
@@ -60,6 +61,13 @@ namespace litiko.Eskhata.Client
                   projectSolution.AccessRights.Save();
                 }
               }
+                            
+              // "Дополнительные члены Правления"
+              if (projectSolution.MeetingCategory?.Name == "Заседание Правления" && roleAdditionalBoardMembers != null)
+              {                                
+                if (!projectSolution.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, roleAdditionalBoardMembers))
+                  projectSolution.AccessRights.Grant(roleAdditionalBoardMembers, DefaultAccessRightsTypes.Change);             
+              }              
                 
               // Установить усиленный строгий доступ
               if (projectSolution.AccessRights.CanSetStrictMode(AccessRightsStrictMode.Enhanced))
@@ -87,8 +95,20 @@ namespace litiko.Eskhata.Client
                   asyncHandler.EmployeeId = employee.Id;
                   asyncHandler.ExecuteAsync();                   
                 }
-              }            
-            }                        
+              }
+              
+              // "Дополнительные члены Правления"
+              if (projectSolution.MeetingCategory?.Name == "Заседание Правления" && roleAdditionalBoardMembers != null)
+              {                                
+                if (!linkedDoc.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, roleAdditionalBoardMembers))
+                {
+                  var asyncHandler = CollegiateAgencies.AsyncHandlers.AddAccessRights.Create();
+                  asyncHandler.DocId = linkedDoc.Id;
+                  asyncHandler.EmployeeId = roleAdditionalBoardMembers.Id;
+                  asyncHandler.ExecuteAsync();                   
+                }
+              }               
+            }
           }        
         }        
       }
@@ -144,7 +164,19 @@ namespace litiko.Eskhata.Client
                   asyncHandler.EmployeeId = employee.Id;
                   asyncHandler.ExecuteAsync();                   
                 }
-              }            
+              }
+
+              // "Дополнительные члены Правления"
+              if (projectSolution.MeetingCategory?.Name == "Заседание Правления" && roleAdditionalBoardMembers != null)
+              {                                
+                if (!linkedDoc.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, roleAdditionalBoardMembers))
+                {
+                  var asyncHandler = CollegiateAgencies.AsyncHandlers.AddAccessRights.Create();
+                  asyncHandler.DocId = linkedDoc.Id;
+                  asyncHandler.EmployeeId = roleAdditionalBoardMembers.Id;
+                  asyncHandler.ExecuteAsync();                   
+                }
+              }              
             }            
           }        
         }        

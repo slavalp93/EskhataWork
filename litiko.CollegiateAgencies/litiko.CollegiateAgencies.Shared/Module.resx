@@ -145,4 +145,10 @@
   <data name="SaveObjectMessage" xml:space="preserve">
     <value>Save the card before creating a version from the template.</value>
   </data>
+  <data name="RoleAdditionalBoardMembers" xml:space="preserve">
+    <value>Additional Board members</value>
+  </data>
+  <data name="DescriptionAdditionalBoardMembers" xml:space="preserve">
+    <value>Участникам роли выдаются права на просмотр на документы заседаний Правления</value>
+  </data>
 </root>

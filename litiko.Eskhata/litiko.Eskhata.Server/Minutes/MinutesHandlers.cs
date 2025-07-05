@@ -81,6 +81,18 @@ namespace litiko.Eskhata
       if (e.Params.Contains(Sungero.Docflow.Constants.OfficialDocument.RepeatRegister))
         e.Params.Remove(Sungero.Docflow.Constants.OfficialDocument.RepeatRegister);      
       #endregion
+      
+      // Выдать права роли "Дополнительные члены Правления"
+      var meeting = litiko.Eskhata.Meetings.As(_obj.Meeting);
+      if (meeting != null && meeting?.MeetingCategorylitiko?.Name == "Заседание Правления")
+      {                                
+        var roleAdditionalBoardMembers = Roles.GetAll(r => r.Sid == litiko.CollegiateAgencies.PublicConstants.Module.RoleGuid.AdditionalBoardMembers).FirstOrDefault();
+        if (roleAdditionalBoardMembers != null)
+        {
+          if (!_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, roleAdditionalBoardMembers))
+            _obj.AccessRights.Grant(roleAdditionalBoardMembers, DefaultAccessRightsTypes.Change);             
+        }                
+      }       
     }
   }
 

@@ -194,40 +194,99 @@ namespace litiko.CollegiateAgencies.Server
       replacebleFields.Add("<PresidentJobTittle>", meeting.President != null && meeting.President.JobTitle != null ? meeting.President.JobTitle.Name : string.Empty);            
       string presidentJobTittleTJ = meeting.President != null && meeting.President.JobTitle != null ? litiko.Eskhata.JobTitles.As(meeting.President.JobTitle).NameTGlitiko : string.Empty;      
       replacebleFields.Add("<PresidentJobTittleTJ>", !string.IsNullOrEmpty(presidentJobTittleTJ) ? presidentJobTittleTJ : string.Empty);
-      replacebleFields.Add("<PresidentFIO>", meeting.President != null ? Sungero.Company.PublicFunctions.Employee.GetShortName(meeting.President, true) : string.Empty);
+      replacebleFields.Add("<PresidentFIO>", meeting.President != null ? Sungero.Company.PublicFunctions.Employee.GetShortName(meeting.President, true) : string.Empty);      
+      replacebleFields.Add("<PresidentFIOlong>", meeting.President != null ? meeting.President.Name : string.Empty);      
       string presidentFIOTJ = meeting.President != null ? litiko.Eskhata.PublicFunctions.Person.GetShortNameTJ(litiko.Eskhata.People.As(meeting.President.Person)) : string.Empty;
       replacebleFields.Add("<PresidentFIOTJ>", !string.IsNullOrEmpty(presidentFIOTJ) ? presidentFIOTJ : string.Empty);
+      string presidentFIOTJlong = meeting.President != null ? litiko.Eskhata.PublicFunctions.Person.GetNameTJ(litiko.Eskhata.People.As(meeting.President.Person)) : string.Empty;
+      replacebleFields.Add("<PresidentFIOTJlong>", !string.IsNullOrEmpty(presidentFIOTJlong) ? presidentFIOTJlong : string.Empty);
       
       replacebleFields.Add("<SecretaryFIO>", meeting.Secretary!= null ? Sungero.Company.PublicFunctions.Employee.GetShortName(meeting.Secretary, true) : string.Empty);
+      replacebleFields.Add("<SecretaryFIOlong>", meeting.Secretary!= null ? meeting.Secretary.Name : string.Empty);
       string secretaryFIOTJ = meeting.Secretary!= null ? litiko.Eskhata.PublicFunctions.Person.GetShortNameTJ(litiko.Eskhata.People.As(meeting.Secretary.Person)) : string.Empty;
       replacebleFields.Add("<SecretaryFIOTJ>", !string.IsNullOrEmpty(secretaryFIOTJ) ? secretaryFIOTJ : string.Empty);
+      string secretaryFIOTJlong = meeting.Secretary!= null ? litiko.Eskhata.PublicFunctions.Person.GetNameTJ(litiko.Eskhata.People.As(meeting.Secretary.Person)) : string.Empty;
+      replacebleFields.Add("<SecretaryFIOTJlong>", !string.IsNullOrEmpty(secretaryFIOTJlong) ? secretaryFIOTJlong : string.Empty);
       
-      replacebleFields.Add("<PresentFIOList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingPresentNumberedList(meeting, false, false, false));       
-      replacebleFields.Add("<PresentFIOListTJ>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingPresentNumberedList(meeting, false, true, false));
+      //replacebleFields.Add("<PresentFIOList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingPresentNumberedList(meeting, false, false, false));       
+      List<string> presentFIOList = meeting.Presentlitiko
+        .Where(x => x?.Employee != null)
+        .OrderBy(x => x.Employee.Name)
+        .Select(x => x.Employee.Name)
+        .ToList();
       
-      replacebleFields.Add("<AbsentFIOList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingAbsentNumberedList(meeting, false, true, false, false));
-      replacebleFields.Add("<AbsentFIOListTJ>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingAbsentNumberedList(meeting, false, true, true, false));
+      //replacebleFields.Add("<PresentFIOListTJ>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingPresentNumberedList(meeting, false, true, false));
+      List<string> presentFIOListTJ = meeting.Presentlitiko
+        .Where(x => x?.Employee != null)
+        .Select(x => litiko.Eskhata.PublicFunctions.Person.GetNameTJ(litiko.Eskhata.People.As(x.Employee.Person)))
+        .OrderBy(name => name)
+        .ToList();                 
       
-      replacebleFields.Add("<InvitedFIOList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingInvitedNumberedList(meeting, false, false, true));                  
-      replacebleFields.Add("<InvitedFIOListTJ>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingInvitedNumberedList(meeting, false, true, true));                  
+      //replacebleFields.Add("<AbsentFIOList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingAbsentNumberedList(meeting, false, true, false, false));
+      List<string> absentFIOList = meeting.Absentlitiko
+        .Where(x => x?.Employee != null)
+        .OrderBy(x => x.Employee.Name)
+        .Select(x => x.Employee.Name)
+        .ToList();
+      
+      //replacebleFields.Add("<AbsentFIOListTJ>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingAbsentNumberedList(meeting, false, true, true, false));
+      List<string> absentFIOListTJ = meeting.Absentlitiko
+        .Where(x => x?.Employee != null)
+        .Select(x => litiko.Eskhata.PublicFunctions.Person.GetNameTJ(litiko.Eskhata.People.As(x.Employee.Person)))
+        .OrderBy(name => name)
+        .ToList();
+      
+      //replacebleFields.Add("<InvitedFIOList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingInvitedNumberedList(meeting, false, false, true));                  
+      var invitedFIOList = meeting.InvitedEmployeeslitiko
+        .Where(x => x?.Employee != null)
+        .Select(x =>
+        {
+          var employee = Sungero.Company.Employees.As(x.Employee);
+          var shortName = employee != null
+              ? Sungero.Company.PublicFunctions.Employee.GetShortName(employee, true)
+              : string.Empty;
+          var jobTitle = x.Employee.JobTitle?.Name ?? string.Empty;
+  
+          return $"{shortName} - {jobTitle}";
+        })
+      .OrderBy(name => name)
+      .ToList();     
+      
+      //replacebleFields.Add("<InvitedFIOListTJ>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingInvitedNumberedList(meeting, false, true, true));      
+      var invitedFIOListTJ = meeting.InvitedEmployeeslitiko
+        .Where(x => x?.Employee != null)
+        .Select(x =>
+        {
+          var employee = litiko.Eskhata.People.As(x.Employee.Person);
+          var shortName = employee != null
+              ? litiko.Eskhata.PublicFunctions.Person.GetNameTJ(employee)
+              : string.Empty;
+          var jobTitle = litiko.Eskhata.JobTitles.As(x.Employee.JobTitle)?.NameTGlitiko ?? string.Empty;
+  
+          return $"{shortName} - {jobTitle}";
+        })
+      .OrderBy(name => name)
+      .ToList();
       
       replacebleFields.Add("<TextForMinutesRU>", !string.IsNullOrEmpty(meetingCategory.TextForTemplate) ? meetingCategory.TextForTemplate : string.Empty);
       replacebleFields.Add("<TextForMinutesTJ>", !string.IsNullOrEmpty(meetingCategory.TextForTemplateTJ) ? meetingCategory.TextForTemplateTJ : string.Empty);
       replacebleFields.Add("<Quorum>", meeting.Quorumlitiko.HasValue ? meeting.Info.Properties.Quorumlitiko.GetLocalizedValue(meeting.Quorumlitiko).ToLower() : string.Empty);
-      
+      List<string> agendaList = new List<string>();
       if (!isExtract)
       {
         replacebleFields.Add("<DocDate>", document.RegistrationDate.HasValue ? document.RegistrationDate.Value.ToString("dd.MM.yyyy") : string.Empty);            
         replacebleFields.Add("<DocNumber>", !string.IsNullOrEmpty(document.RegistrationNumber) ? document.RegistrationNumber : string.Empty);                  
-        replacebleFields.Add("<AgendaList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingProjectSolutionsNumberedList(meeting));
+        //replacebleFields.Add("<AgendaList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingProjectSolutionsNumberedList(meeting));
         // Все решения по совещанию
         foreach (var element in meeting.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null).OrderBy(x => x.Number))
         {
           var projectSolution = element.ProjectSolution;
           
+          agendaList.Add($"Рассмотрение вопроса {projectSolution.Subject}");
+          
           var meetingResolutionInfo = new Structures.Module.MeetingResolutionInfo();
-          meetingResolutionInfo.ProjectSolutionTittle = string.Format("{0}. Рассмотрение {1}", element.Number, projectSolution.Subject);
-          meetingResolutionInfo.ProjectSolutionTittleTJ = string.Format("{0}. Баррасии {1}", element.Number, projectSolution.Subject);
+          meetingResolutionInfo.ProjectSolutionTittle = string.Format("Рассмотрение вопроса {1}", element.Number, projectSolution.Subject);
+          meetingResolutionInfo.ProjectSolutionTittleTJ = string.Format("Баррасии {1}", element.Number, projectSolution.Subject);
           
           string speaker = string.Empty;
           if (projectSolution.Speaker != null)
@@ -241,21 +300,35 @@ namespace litiko.CollegiateAgencies.Server
           
           meetingResolutionInfo.ListenedRU = !string.IsNullOrEmpty(projectSolution.ListenedRUMinutes) ? projectSolution.ListenedRUMinutes : string.Empty;
           meetingResolutionInfo.ListenedTJ = !string.IsNullOrEmpty(projectSolution.ListenedTJMinutes) ? projectSolution.ListenedTJMinutes : string.Empty;
-                    
+/*                    
           meetingResolutionInfo.Decigions = string.Join(
             Environment.NewLine,
             projectSolution.DecidedMinutes
               .OrderBy(decided => decided.Number)
               .Select(decided => $"{element.Number}.{decided.Number}. {decided.DecisionRU}")
           );
-          
+*/
+          meetingResolutionInfo.Decigions = string.Join(
+            Environment.NewLine,
+            projectSolution.DecidedMinutes
+              .OrderBy(decided => decided.Number)
+              .Select(decided => decided.DecisionRU)
+          );
+/*          
           meetingResolutionInfo.DecigionsTJ = string.Join(
             Environment.NewLine, 
             projectSolution.DecidedMinutes
               .OrderBy(decided => decided.Number)
               .Select(decided => $"{element.Number}.{decided.Number}. {decided.DecisionTJ}"
             ));          
-                    
+*/
+          meetingResolutionInfo.DecigionsTJ = string.Join(
+            Environment.NewLine, 
+            projectSolution.DecidedMinutes
+              .OrderBy(decided => decided.Number)
+              .Select(decided => decided.DecisionTJ
+            )); 
+
           meetingResolutionInfo.WithVoting = element.VotingType.HasValue && element.VotingType != litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.NoVoting;
           meetingResolutionInfo.VoutingYes = element.Yes.HasValue ? element.Yes.Value : 0;
           meetingResolutionInfo.VoutingNo = element.No.HasValue ? element.No.Value : 0;
@@ -269,6 +342,8 @@ namespace litiko.CollegiateAgencies.Server
       else
       {                
         var projectSolution = litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument);
+        agendaList.Add($"Рассмотрение вопроса {projectSolution.Subject}");
+        
         var regDate = string.Empty;
         var regnumber = string.Empty;
         var minutes = litiko.Eskhata.Minuteses.GetAll().Where(x => Equals(x.Meeting, meeting)).FirstOrDefault();
@@ -287,7 +362,7 @@ namespace litiko.CollegiateAgencies.Server
           .Select(ps => ps.Number)
           .FirstOrDefault();
         
-        replacebleFields.Add("<AgendaList>", !string.IsNullOrEmpty(projectSolution.Subject) ? string.Format("... {0}. {1}", meetingProjectSolutionNumber, projectSolution.Subject) : string.Empty);
+        //replacebleFields.Add("<AgendaList>", !string.IsNullOrEmpty(projectSolution.Subject) ? string.Format("... {0}. {1}", meetingProjectSolutionNumber, projectSolution.Subject) : string.Empty);
         
         string speaker = string.Empty;
         if (projectSolution.Speaker != null)
@@ -299,7 +374,7 @@ namespace litiko.CollegiateAgencies.Server
         meetingResolutionInfo.SpeakerRU = speaker;
         meetingResolutionInfo.SpeakerTJ = projectSolution.Speaker != null ? litiko.Eskhata.PublicFunctions.Person.GetShortNameTJ(litiko.Eskhata.People.As(projectSolution.Speaker.Person)) : string.Empty;        
         
-        meetingResolutionInfo.ProjectSolutionTittle = string.Format("{0}. Рассмотрение {1}", meetingProjectSolutionNumber, projectSolution.Subject);
+        meetingResolutionInfo.ProjectSolutionTittle = string.Format("Рассмотрение вопроса {1}", meetingProjectSolutionNumber, projectSolution.Subject);
         meetingResolutionInfo.ListenedRU = !string.IsNullOrEmpty(projectSolution.ListenedRUMinutes) ? projectSolution.ListenedRUMinutes : string.Empty;
         
         string originalResult = litiko.CollegiateAgencies.PublicFunctions.Projectsolution.GetProjectSolutionDecidedMinutesRU(projectSolution);
@@ -330,7 +405,16 @@ namespace litiko.CollegiateAgencies.Server
       
       #region Формирование тела по шаблону
             
-      var resultStream = litiko.CollegiateAgencies.IsolatedFunctions.DocumentBodyCreator.FillMinutesBodyByTemplate(templateDoc.LastVersion.Body.Read() , replacebleFields, meetingResolutions);
+      var resultStream = litiko.CollegiateAgencies.IsolatedFunctions.DocumentBodyCreator.FillMinutesBodyByTemplate(templateDoc.LastVersion.Body.Read(),
+                                                                                                                   replacebleFields,
+                                                                                                                   presentFIOList,
+                                                                                                                   presentFIOListTJ,
+                                                                                                                   absentFIOList,
+                                                                                                                   absentFIOListTJ,
+                                                                                                                   invitedFIOList,
+                                                                                                                   invitedFIOListTJ,
+                                                                                                                   agendaList,
+                                                                                                                   meetingResolutions);
       
       // Выключить error-логирование при доступе к зашифрованным бинарным данным/версии.
       AccessRights.SuppressSecurityEvents(

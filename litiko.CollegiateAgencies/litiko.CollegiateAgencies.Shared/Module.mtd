@@ -230,7 +230,7 @@
   "IsolatedAssemblyName": "litiko.CollegiateAgencies.Isolated",
   "IsolatedFunctions": [
     {
-      "NameGuid": "df5979df-323f-4c6b-a60e-984ca66d9d26",
+      "NameGuid": "7c62fab2-445e-4b4c-a24e-9f70c8654b7a",
       "Name": "FillMinutesBodyByTemplate",
       "IsolatedAreaId": "ff738b72-b42f-494d-adaf-be32d268cc2d",
       "Parameters": [
@@ -243,6 +243,41 @@
           "Name": "replacebleFields",
           "ParameterType": "global::System.Collections.Generic.Dictionary<global::System.String, global::System.String>",
           "ParameterTypeFullName": "System.Collections.Generic.Dictionary`2[[System.String],[System.String]]"
+        },
+        {
+          "Name": "presentFIOList",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.String>",
+          "ParameterTypeFullName": "System.Collections.Generic.List`1[[System.String]]"
+        },
+        {
+          "Name": "presentFIOListTJ",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.String>",
+          "ParameterTypeFullName": "System.Collections.Generic.List`1[[System.String]]"
+        },
+        {
+          "Name": "absentFIOList",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.String>",
+          "ParameterTypeFullName": "System.Collections.Generic.List`1[[System.String]]"
+        },
+        {
+          "Name": "absentFIOListTJ",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.String>",
+          "ParameterTypeFullName": "System.Collections.Generic.List`1[[System.String]]"
+        },
+        {
+          "Name": "invitedFIOList",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.String>",
+          "ParameterTypeFullName": "System.Collections.Generic.List`1[[System.String]]"
+        },
+        {
+          "Name": "invitedFIOListTJ",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.String>",
+          "ParameterTypeFullName": "System.Collections.Generic.List`1[[System.String]]"
+        },
+        {
+          "Name": "agendaList",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.String>",
+          "ParameterTypeFullName": "System.Collections.Generic.List`1[[System.String]]"
         },
         {
           "Name": "meetingResolutions",
@@ -281,6 +316,15 @@
       ],
       "TypeName": "System.Guid",
       "Value": "new System.Guid(\"58b9ed35-9c84-46cd-aa79-9b5ef5a82f5d\")"
+    },
+    {
+      "Name": "AdditionalBoardMembers",
+      "ParentClasses": [
+        "Module",
+        "RoleGuid"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"b1cea7fe-3950-43eb-97ab-70c36e81b2fa\")"
     },
     {
       "Name": "Agenda",
@@ -584,7 +628,9 @@
     "RoleTranslator",
     "ProtocolOfBoardMeetingKind",
     "NoVersionMessage",
-    "SaveObjectMessage"
+    "SaveObjectMessage",
+    "RoleAdditionalBoardMembers",
+    "DescriptionAdditionalBoardMembers"
   ],
   "ServerAssemblyName": "litiko.CollegiateAgencies.Server",
   "ServerNamespace": "litiko.CollegiateAgencies.Server",
@@ -806,7 +852,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.77",
+  "Version": "0.0.1.79",
   "Widgets": [],
   "Versions": [
     {

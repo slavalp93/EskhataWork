@@ -145,4 +145,7 @@
   <data name="SaveObjectMessage" xml:space="preserve">
     <value>Сохраните карточку перед созданием версии из шаблона.</value>
   </data>
+  <data name="RoleAdditionalBoardMembers" xml:space="preserve">
+    <value>Дополнительные члены Правления</value>
+  </data>
 </root>

@@ -34,7 +34,9 @@ namespace litiko.Eskhata.Server
       if (_obj.MeetingCategorylitiko == null)
         return string.Empty;
       
-      var employees = _obj.MeetingCategorylitiko.Members.Select(x => x.Member).ToList();
+      var employees = _obj.MeetingCategorylitiko.Members
+        .OrderBy(x => x.Member.Name)
+        .Select(x => x.Member).ToList();
 
       if (_obj.Secretary != null)
         employees.Insert(0, _obj.Secretary);
@@ -73,34 +75,49 @@ namespace litiko.Eskhata.Server
     [Public]
     public static string GetEmployeesNumberedList(List<litiko.Eskhata.IEmployee> employees, bool withJobTitle, bool withShortName, bool inTJ)
     {
-      if (!employees.Any())
-        return null;      
-      
-      var employeesNumberedList = new List<string>();
-      foreach (var employee in employees)
-      {
-        if (!inTJ)
-        {
-          var name = withShortName ? Sungero.Company.PublicFunctions.Employee.GetShortName(Sungero.Company.Employees.As(employee), true) : employee.Name;
-          var employeeNumberedName = string.Format("{0}. {1}", employees.IndexOf(employee) + 1, name);
-          if (withJobTitle && employee.JobTitle != null && !string.IsNullOrWhiteSpace(employee.JobTitle.Name))
-            employeeNumberedName = string.Format("{0} – {1}", employeeNumberedName, employee.JobTitle.Name);
-          employeesNumberedList.Add(employeeNumberedName);        
-        }
-        else
-        {
-          var name = withShortName ? litiko.Eskhata.PublicFunctions.Person.GetShortNameTJ(People.As(employee.Person)) : litiko.Eskhata.PublicFunctions.Person.GetNameTJ(People.As(employee.Person));
-          var employeeNumberedName = string.Format("{0}. {1}", employees.IndexOf(employee) + 1, name);
-          if (withJobTitle && employee.JobTitle != null && !string.IsNullOrWhiteSpace(JobTitles.As(employee.JobTitle).NameTGlitiko))
-            employeeNumberedName = string.Format("{0} – {1}", employeeNumberedName, JobTitles.As(employee.JobTitle).NameTGlitiko);
-          employeesNumberedList.Add(employeeNumberedName);          
-         
-        }
-      }
-      
-      return string.Join("\r\n", employeesNumberedList);
-    }    
+        if (employees == null || !employees.Any())
+            return null;
     
+        // Сортировка по имени (в зависимости от языка)
+        var sortedEmployees = inTJ
+            ? employees.OrderBy(e => litiko.Eskhata.PublicFunctions.Person.GetNameTJ(People.As(e.Person))).ToList()
+            : employees.OrderBy(e => e.Name).ToList();
+    
+        var employeesNumberedList = new List<string>();
+    
+        for (int i = 0; i < sortedEmployees.Count; i++)
+        {
+            var employee = sortedEmployees[i];
+            string name;
+    
+            if (!inTJ)
+            {
+                name = withShortName
+                    ? Sungero.Company.PublicFunctions.Employee.GetShortName(Sungero.Company.Employees.As(employee), true)
+                    : employee.Name;
+    
+                var employeeNumberedName = $"{i + 1}. {name}";
+                if (withJobTitle && employee.JobTitle != null && !string.IsNullOrWhiteSpace(employee.JobTitle.Name))
+                    employeeNumberedName += $" – {employee.JobTitle.Name}";
+    
+                employeesNumberedList.Add(employeeNumberedName);
+            }
+            else
+            {
+                name = withShortName
+                    ? litiko.Eskhata.PublicFunctions.Person.GetShortNameTJ(People.As(employee.Person))
+                    : litiko.Eskhata.PublicFunctions.Person.GetNameTJ(People.As(employee.Person));
+    
+                var employeeNumberedName = $"{i + 1}. {name}";
+                if (withJobTitle && employee.JobTitle != null && !string.IsNullOrWhiteSpace(JobTitles.As(employee.JobTitle).NameTGlitiko))
+                    employeeNumberedName += $" – {JobTitles.As(employee.JobTitle).NameTGlitiko}";
+    
+                employeesNumberedList.Add(employeeNumberedName);
+            }
+        }
+    
+        return string.Join("\r\n", employeesNumberedList);
+    }       
     
     /// <summary>
     /// Получить нумерованный список присутствующих совещания.
@@ -183,14 +200,14 @@ namespace litiko.Eskhata.Server
     {                        
       if (!_obj.ProjectSolutionslitiko.Any())
         return string.Empty;
-            
+
       return string.Join(
         "\r\n", 
         _obj.ProjectSolutionslitiko
             .OrderBy(element => element.Number)
             .Select(element => $"{element.Number}. {element.ProjectSolution.Subject}.")
-    );
-    }    
+           );
+    }
     
     /// <summary>
     /// Создать задачу согласования по регламенту для голосования.

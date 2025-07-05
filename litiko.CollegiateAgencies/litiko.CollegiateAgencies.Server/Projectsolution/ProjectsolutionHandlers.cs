@@ -187,6 +187,17 @@ namespace litiko.CollegiateAgencies
               _obj.AccessRights.Grant(employee, DefaultAccessRightsTypes.Change);                        
           }                   
         }
+        
+        // "Дополнительные члены Правления"
+        if (_obj.MeetingCategory?.Name == "Заседание Правления")
+        {
+          var roleAdditionalBoardMembers = Roles.GetAll(r => r.Sid == PublicConstants.Module.RoleGuid.AdditionalBoardMembers).FirstOrDefault();
+          if (roleAdditionalBoardMembers != null)
+          {
+            if (!_obj.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, roleAdditionalBoardMembers))
+              _obj.AccessRights.Grant(roleAdditionalBoardMembers, DefaultAccessRightsTypes.Change);             
+          }        
+        }
       }            
       #endregion      
       
