@@ -52,7 +52,7 @@ namespace litiko.DocflowEskhata.Isolated.PdfConverter
       bool hasOutgoing = !string.IsNullOrWhiteSpace(outgoingLetterNo) || outgoingLetterDate != null;
 
       var sb = new System.Text.StringBuilder();
-      sb.AppendLine("<table style='border-collapse: collapse; font-family: Arial; font-size: 12px;'>");
+      sb.AppendLine("<table style='border-collapse: collapse; font-family: Arial; font-size: 12px'>");
 
       // Перша строка
       sb.AppendLine("  <tr>");
@@ -72,6 +72,8 @@ namespace litiko.DocflowEskhata.Isolated.PdfConverter
         sb.AppendLine($"    <td>«{outDay}» {outMonth} {outYear}</td>");
         sb.AppendLine("  </tr>");
       }
+      
+      sb.AppendLine("  <tr><td colspan='4' style='padding-top: 25px; font-size: 1px;'>&nbsp;</td></tr>");
 
       sb.AppendLine("</table>");
 
