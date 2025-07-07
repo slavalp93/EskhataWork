@@ -97,4 +97,7 @@
   <data name="OrganForApprovConditionName" xml:space="preserve">
     <value>Орган утверждения – {0}?</value>
   </data>
+  <data name="StandardResponseConditionName" xml:space="preserve">
+    <value>Стандартный ответ?</value>
+  </data>
 </root>

@@ -31,9 +31,12 @@ namespace litiko.Eskhata.Server
         
         // "Орган утверждения – {0}?"
         if (_obj.ConditionType == ConditionType.OrganForApprov)
-          return litiko.Eskhata.Conditions.Resources.OrganForApprovConditionNameFormat(_obj.OrganForApprovinglitiko);        
+          return litiko.Eskhata.Conditions.Resources.OrganForApprovConditionNameFormat(_obj.OrganForApprovinglitiko);
+
+        if (_obj.ConditionType == ConditionType.StandardRespons)
+          return litiko.Eskhata.Conditions.Resources.StandardResponseConditionName;
       }
       return base.GetConditionName();
-    }    
+    }
   }
 }

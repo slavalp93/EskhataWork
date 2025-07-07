@@ -106,6 +106,9 @@
       "Versions": []
     }
   ],
+  "HandledEvents": [
+    "CreatedServer"
+  ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "3f6f31c3-16e2-457e-9f88-48b254a500d2",
   "OperationsClass": "",
@@ -271,7 +274,8 @@
     "IsRecommendatConditionName",
     "IRDTypeConditionName",
     "CannotComputeCondition",
-    "OrganForApprovConditionName"
+    "OrganForApprovConditionName",
+    "StandardResponseConditionName"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "997055c7-5c5b-49af-9ebd-5a00efff04ca",

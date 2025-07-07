@@ -116,36 +116,35 @@ namespace litiko.DocflowEskhata.Isolated.PdfConverter
       }
     }
     
-    public static bool CheckIfExtensionIsSupportedForAnchorSearch(string extension)
-    {
-      var supportedFormatsForAnchorSearchList = new List<string>() { "pdf", "docx", "doc", "rtf", "xls", "xlsx",
-        "odt", "ods", "txt" };
-      
-      return supportedFormatsForAnchorSearchList.Contains(extension.ToLower());
-    }
-    
     public virtual Aspose.Pdf.PdfPageStamp CreateStampFromHtml(string html)
     {
       try
       {
         Aspose.Pdf.HtmlLoadOptions objLoadOptions = new Aspose.Pdf.HtmlLoadOptions();
         objLoadOptions.PageInfo.Margin = new Aspose.Pdf.MarginInfo(0, 0, 0, 0);
+        objLoadOptions.PageInfo.Width = 500;
+        objLoadOptions.PageInfo.Height = 200;
         Aspose.Pdf.Document stampDoc;
+        
         using (var htmlStamp = new MemoryStream(Encoding.UTF8.GetBytes(html)))
           stampDoc = new Aspose.Pdf.Document(htmlStamp, objLoadOptions);
         var firstPage = stampDoc.Pages[1];
         var contentBox = firstPage.CalculateContentBBox();
-        objLoadOptions.PageInfo.Width = contentBox.Width;
-        objLoadOptions.PageInfo.Height = contentBox.Height;
-        using (var htmlStamp = new MemoryStream(Encoding.UTF8.GetBytes(html)))
-          stampDoc = new Aspose.Pdf.Document(htmlStamp, objLoadOptions);
-        if (stampDoc.Pages.Count > 0)
-        {
-          var mark = new Aspose.Pdf.PdfPageStamp(stampDoc.Pages[1]);
-          mark.Background = false;
-          return mark;
-        }
-        return null;
+        firstPage.SetPageSize(contentBox.Width, contentBox.Height);
+        var mark = new Aspose.Pdf.PdfPageStamp(firstPage);
+        mark.Background = false;
+        return mark;
+        //objLoadOptions.PageInfo.Width = contentBox.Width;
+        //objLoadOptions.PageInfo.Height = contentBox.Height;
+        //using (var htmlStamp = new MemoryStream(Encoding.UTF8.GetBytes(html)))
+        //  stampDoc = new Aspose.Pdf.Document(htmlStamp, objLoadOptions);
+        //if (stampDoc.Pages.Count > 0)
+        //{
+        //  var mark = new Aspose.Pdf.PdfPageStamp(stampDoc.Pages[1]);
+        //  mark.Background = false;
+        //  return mark;
+        //}
+        //return null;
       }
       catch (Exception ex)
       {
