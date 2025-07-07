@@ -282,11 +282,11 @@ namespace litiko.CollegiateAgencies.Server
         {
           var projectSolution = element.ProjectSolution;
           
-          agendaList.Add($"Рассмотрение вопроса {projectSolution.Subject}");
+          agendaList.Add($"Рассмотрение вопроса: {projectSolution.Subject}");
           
           var meetingResolutionInfo = new Structures.Module.MeetingResolutionInfo();
-          meetingResolutionInfo.ProjectSolutionTittle = string.Format("Рассмотрение вопроса {1}", element.Number, projectSolution.Subject);
-          meetingResolutionInfo.ProjectSolutionTittleTJ = string.Format("Баррасии {1}", element.Number, projectSolution.Subject);
+          meetingResolutionInfo.ProjectSolutionTittle = string.Format("Рассмотрение вопроса: {1}", element.Number, projectSolution.Subject);
+          meetingResolutionInfo.ProjectSolutionTittleTJ = string.Format("Баррасии: {1}", element.Number, projectSolution.Subject);
           
           string speaker = string.Empty;
           if (projectSolution.Speaker != null)
@@ -342,7 +342,7 @@ namespace litiko.CollegiateAgencies.Server
       else
       {                
         var projectSolution = litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument);
-        agendaList.Add($"Рассмотрение вопроса {projectSolution.Subject}");
+        agendaList.Add($"Рассмотрение вопроса: {projectSolution.Subject}");
         
         var regDate = string.Empty;
         var regnumber = string.Empty;
@@ -374,7 +374,7 @@ namespace litiko.CollegiateAgencies.Server
         meetingResolutionInfo.SpeakerRU = speaker;
         meetingResolutionInfo.SpeakerTJ = projectSolution.Speaker != null ? litiko.Eskhata.PublicFunctions.Person.GetShortNameTJ(litiko.Eskhata.People.As(projectSolution.Speaker.Person)) : string.Empty;        
         
-        meetingResolutionInfo.ProjectSolutionTittle = string.Format("Рассмотрение вопроса {1}", meetingProjectSolutionNumber, projectSolution.Subject);
+        meetingResolutionInfo.ProjectSolutionTittle = string.Format("Рассмотрение вопроса: {1}", meetingProjectSolutionNumber, projectSolution.Subject);
         meetingResolutionInfo.ListenedRU = !string.IsNullOrEmpty(projectSolution.ListenedRUMinutes) ? projectSolution.ListenedRUMinutes : string.Empty;
         
         string originalResult = litiko.CollegiateAgencies.PublicFunctions.Projectsolution.GetProjectSolutionDecidedMinutesRU(projectSolution);
