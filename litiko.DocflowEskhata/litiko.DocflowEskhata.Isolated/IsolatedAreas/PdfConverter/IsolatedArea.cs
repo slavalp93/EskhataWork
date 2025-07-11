@@ -25,9 +25,10 @@ namespace litiko.DocflowEskhata.Isolated.PdfConverter
   public class Eskhata_PdfStamper
   {
     public const int BottomIndent = 20;
-    
     public Stream ReplacePhraseInPdf(System.IO.Stream inputStream, string searchPhrase, string replacingText)
     {
+      
+      
       var outputStream = new MemoryStream();
       try
       {
@@ -294,81 +295,6 @@ namespace litiko.DocflowEskhata.Isolated.PdfConverter
       MemoryStream imageStream = new MemoryStream();
       barCodeBitmap.Save(imageStream, ImageFormat.Png);
       return imageStream;
-    }
-    
-    public int GetLastSearchablePage(int docPagesCount, int searchablePagesNumber, string extension)
-    {
-      var excelFormats = new List<string>() { "xls", "xlsx", "ods" };
-      
-      return docPagesCount > searchablePagesNumber && excelFormats.Contains(extension) ?
-        docPagesCount - searchablePagesNumber :
-        0;
-    }
-    
-    public virtual TextFragment GetLastAnchorEntry(Aspose.Pdf.Page page, string anchor)
-    {
-      var absorber = new TextFragmentAbsorber(anchor);
-      page.Accept(absorber);
-      if (absorber.TextFragments.Count == 0)
-        return null;
-
-      // Найти последнее вхождение символа-якоря на странице.
-      // Условное самое первое вхождение будет иметь координаты левого верхнего угла.
-      // https://forum.aspose.com/t/textfragment-at-top-of-page/64774.
-      // Ось X - горизонтальная.
-      // Ось Y - вертикальная.
-      // Начало координат - левый нижний угол.
-      var lastEntry = new TextFragment();
-      var rectConsiderRotation = page.GetPageRect(true);
-      lastEntry.Position.XIndent = 0;
-      lastEntry.Position.YIndent = rectConsiderRotation.Height;
-      foreach (TextFragment textFragment in absorber.TextFragments)
-      {
-        if (textFragment.Position.YIndent < lastEntry.Position.YIndent ||
-            textFragment.Position.YIndent == lastEntry.Position.YIndent &&
-            textFragment.Position.XIndent > lastEntry.Position.XIndent)
-          lastEntry = textFragment;
-      }
-
-      return lastEntry;
-    }
-    
-    public virtual Stream AddStampToDocumentPage(Stream inputStream, int pageNumber, Aspose.Pdf.PdfPageStamp stamp)
-    {
-      try
-      {
-        // Создание нового потока, в который будет записан документ с отметкой (во входной поток записывать нельзя).
-        var outputStream = new MemoryStream();
-        var document = new Aspose.Pdf.Document(inputStream);
-        // Поднимаем версию и переполучаем документ из потока,
-        // чтобы гарантировать читаемость штампа после вставки.
-        using (var documentStream = this.GetUpgradedPdf(document))
-        {
-          document = new Aspose.Pdf.Document(documentStream);
-
-          var documentPage = document.Pages[pageNumber];
-          var rectConsiderRotation = documentPage.GetPageRect(true);
-          if (stamp.Width > rectConsiderRotation.Width || stamp.Width > (rectConsiderRotation.Height - BottomIndent))
-          {
-            inputStream.CopyTo(outputStream);
-          }
-          else
-          {
-            documentPage.AddStamp(stamp);
-            document.Save(outputStream);
-          }
-        }
-        return outputStream;
-      }
-      catch (Exception ex)
-      {
-        Logger.Error("Cannot add stamp to document page", ex);
-        throw new AppliedCodeException("Cannot add stamp to document page");
-      }
-      finally
-      {
-        inputStream.Close();
-      }
     }
   }
 }
