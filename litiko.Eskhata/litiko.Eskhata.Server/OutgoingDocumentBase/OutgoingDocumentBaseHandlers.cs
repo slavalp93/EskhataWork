@@ -12,6 +12,7 @@ namespace litiko.Eskhata
 
     public override void Created(Sungero.Domain.CreatedEventArgs e)
     {
+      base.Created(e);
       _obj.StandardResponse = false;
     }
   }
