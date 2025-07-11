@@ -226,13 +226,13 @@ namespace litiko.CollegiateAgencies.Server
       List<string> absentFIOList = meeting.Absentlitiko
         .Where(x => x?.Employee != null)
         .OrderBy(x => x.Employee.Name)
-        .Select(x => x.Employee.Name)
+        .Select(x => $"{x.Employee.Name} ({x.Reason})")
         .ToList();
       
       //replacebleFields.Add("<AbsentFIOListTJ>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingAbsentNumberedList(meeting, false, true, true, false));
       List<string> absentFIOListTJ = meeting.Absentlitiko
         .Where(x => x?.Employee != null)
-        .Select(x => litiko.Eskhata.PublicFunctions.Person.GetNameTJ(litiko.Eskhata.People.As(x.Employee.Person)))
+        .Select(x => $"{litiko.Eskhata.PublicFunctions.Person.GetNameTJ(litiko.Eskhata.People.As(x.Employee.Person))} ({x.Reason})")
         .OrderBy(name => name)
         .ToList();
       
@@ -246,7 +246,7 @@ namespace litiko.CollegiateAgencies.Server
               ? Sungero.Company.PublicFunctions.Employee.GetShortName(employee, true)
               : string.Empty;
           var jobTitle = x.Employee.JobTitle?.Name ?? string.Empty;
-  
+            
           return $"{shortName} - {jobTitle}";
         })
       .OrderBy(name => name)
