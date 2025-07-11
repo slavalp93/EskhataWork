@@ -62,15 +62,15 @@ namespace litiko.Eskhata.Module.Docflow.Server
           {
             pdfDocumentStream = Sungero.Docflow.IsolatedFunctions.PdfConverter.AddRegistrationStamp(pdfDocumentStream, htmlStamp, 1, rightIndent, bottomIndent);
           }
-          DateTime? outgoingDate = null;
-          var outgoingNo = string.Empty;
+          DateTime? incomingDate = null;
+          var incomingNo = string.Empty;
           var response = OutgoingDocumentBases.As(document)?.InResponseTo;
           if(response != null)
           {
-            outgoingDate = response.RegistrationDate;
-            outgoingNo = response.RegistrationNumber;
+            incomingDate = response.RegistrationDate;
+            incomingNo = response.RegistrationNumber;
           }
-          pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddRegistrationData(pdfDocumentStream, document.RegistrationNumber, document.RegistrationDate, outgoingDate, outgoingNo);
+          pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddRegistrationData(pdfDocumentStream, document.RegistrationNumber, document.RegistrationDate, incomingDate, incomingNo);
           
           #region ⚓^ - утверждающая подпись Подписанта
           var signatureForQR = Sungero.Docflow.PublicFunctions.OfficialDocument.GetSignatureForMark(document, version.Id);
@@ -82,7 +82,7 @@ namespace litiko.Eskhata.Module.Docflow.Server
               string.Format("{0};{1} {2}", signatureForQR.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document)) :
               string.Format("{0} {1};{2} {3}", jobTitle, signatureForQR.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document));
             
-            pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddSignatureQRStamp(pdfDocumentStream, qrText, "⚓^");
+            pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddSignatureQRStamp(pdfDocumentStream, qrText, "⚓^");            
           }
           #endregion
           
@@ -91,12 +91,16 @@ namespace litiko.Eskhata.Module.Docflow.Server
           if (endorsingAuthorSignature != null)
           {
             var signatory = Sungero.Company.Employees.As(endorsingAuthorSignature.Signatory);
-            string jobTitle = Eskhata.JobTitles.As(signatory.JobTitle)?.NameTGlitiko;
+            string jobTitle = string.Empty;
+            if (signatory != null && signatory.JobTitle != null && Eskhata.JobTitles.Is(signatory?.JobTitle))
+            {
+              jobTitle = Eskhata.JobTitles.As(signatory.JobTitle).NameTGlitiko;
+            }
             var qrText = string.IsNullOrEmpty(jobTitle) ?
               string.Format("{0};{1} {2}", endorsingAuthorSignature.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document)) :
               string.Format("{0} {1};{2} {3}", jobTitle, endorsingAuthorSignature.SignatoryFullName, Environment.NewLine, Hyperlinks.Get(document));
             
-            pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddSignatureQRStamp(pdfDocumentStream, qrText, "⚓s");
+            pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddSignatureQRStamp(pdfDocumentStream, qrText, "⚓s");              
           }
           #endregion
           

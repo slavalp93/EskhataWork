@@ -31,7 +31,7 @@ namespace litiko.Eskhata.Shared
       baseConditions[RegulatoryDocuments.PublicConstants.Module.DocumentTypeGuids.RegulatoryDocument.ToString()].Add(Eskhata.Condition.ConditionType.OrganForApprov);
       
       baseConditions[DocflowEskhata.PublicConstants.Module.DocumentTypeGuids.OutgoingLetter.ToString()].Add(Eskhata.Condition.ConditionType.StandardRespons);
-
+      
       return baseConditions;
     }
     
@@ -49,9 +49,8 @@ namespace litiko.Eskhata.Shared
       var isOrganForApprovType = _obj.ConditionType == ConditionType.OrganForApprov;
       _obj.State.Properties.OrganForApprovinglitiko.IsVisible = isOrganForApprovType;
       _obj.State.Properties.OrganForApprovinglitiko.IsRequired = isOrganForApprovType;
-      
+
       var isStandardResponse = _obj.ConditionType == ConditionType.StandardRespons;
-      _obj.State.Properties.StandardResponse.IsVisible = isStandardResponse;
     }
 
     /// <summary>
@@ -66,9 +65,6 @@ namespace litiko.Eskhata.Shared
       
       if (!_obj.State.Properties.OrganForApprovinglitiko.IsVisible)
         _obj.OrganForApprovinglitiko = null;
-      
-      if (!_obj.State.Properties.StandardResponse.IsVisible)
-        _obj.StandardResponse = null;
     }
     
     /// <summary>
@@ -123,9 +119,9 @@ namespace litiko.Eskhata.Shared
       
       if (_obj.ConditionType == Eskhata.Condition.ConditionType.StandardRespons)
       {
-        if (Eskhata.OutgoingDocumentBases.Is(document) && _obj.StandardResponse != null)
+        if (Eskhata.OutgoingDocumentBases.Is(document))
           return Sungero.Docflow.Structures.ConditionBase.ConditionResult.
-            Create(Eskhata.OutgoingDocumentBases.As(document).StandardResponse == _obj.StandardResponse,
+            Create(Eskhata.OutgoingDocumentBases.As(document).StandardResponse == true,
                    string.Empty);
         
         return Sungero.Docflow.Structures.ConditionBase.ConditionResult.

@@ -99,7 +99,7 @@
     },
     {
       "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "7632cb2f-333f-440b-bb62-739898ec4ffb",
+      "NameGuid": "bed2286b-0ade-467a-b500-d4f52da0fa70",
       "Name": "StandardResponse",
       "Code": "StandardRespon",
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",

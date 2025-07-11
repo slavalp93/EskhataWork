@@ -66,7 +66,7 @@
   "IsolatedAssemblyName": "litiko.DocflowEskhata.Isolated",
   "IsolatedFunctions": [
     {
-      "NameGuid": "722c5fcb-1728-4b0e-aed8-40d01fb948bc",
+      "NameGuid": "f099a375-0dd6-4a9b-b53e-379e5ae6566c",
       "Name": "AddRegistrationData",
       "IsolatedAreaId": "34bf9e51-a4f9-4420-8e33-989fe35e2845",
       "Parameters": [
@@ -303,7 +303,7 @@
   "SharedAssemblyName": "litiko.DocflowEskhata.Shared",
   "SharedNamespace": "litiko.DocflowEskhata.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.112",
+  "Version": "0.0.1.111",
   "Widgets": [],
   "Versions": [
     {

@@ -39,22 +39,23 @@ namespace litiko.DocflowEskhata.Isolated.PdfConverter
       }
     }
     
-    private string GenerateRegistrationStampHtml(string registrationNumber, DateTime? registrationDate, string outgoingLetterNo, DateTime? outgoingLetterDate)
+    private string GenerateRegistrationStampHtml(string registrationNumber, DateTime? registrationDate, string incomingLetterNo, DateTime? incomingLetterDate)
     {
       string regDay = registrationDate?.ToString("dd") ?? "";
       string regMonth = registrationDate?.ToString("MM") ?? "";
       string regYear = registrationDate?.ToString("yyyy") ?? "";
 
-      string outDay = outgoingLetterDate?.ToString("dd") ?? "";
-      string outMonth = outgoingLetterDate?.ToString("MM") ?? "";
-      string outYear = outgoingLetterDate?.ToString("yyyy") ?? "";
+      string outDay = incomingLetterDate?.ToString("dd") ?? "";
+      string outMonth = incomingLetterDate?.ToString("MM") ?? "";
+      string outYear = incomingLetterDate?.ToString("yyyy") ?? "";
 
-      bool hasOutgoing = !string.IsNullOrWhiteSpace(outgoingLetterNo) || outgoingLetterDate != null;
+      bool hasIncoming = !string.IsNullOrWhiteSpace(incomingLetterNo) || incomingLetterDate != null;
 
       var sb = new System.Text.StringBuilder();
-      sb.AppendLine("<table style='border-collapse: collapse; font-family: Arial; font-size: 12px'>");
+      sb.AppendLine("<html>");
+      sb.AppendLine("<body style='margin:0;padding:5px;'>");
+      sb.AppendLine("<table style='border: 10px solid transparent;font-family: Arial; font-size: 14px'>");
 
-      // Перша строка
       sb.AppendLine("  <tr>");
       sb.AppendLine("    <td style='font-weight: bold; padding-right: 5px;'>Сод. №</td>");
       sb.AppendLine($"    <td style='padding-right: 10px;'>{registrationNumber}</td>");
@@ -62,24 +63,23 @@ namespace litiko.DocflowEskhata.Isolated.PdfConverter
       sb.AppendLine($"    <td>«{regDay}» {regMonth} {regYear}</td>");
       sb.AppendLine("  </tr>");
 
-      if (hasOutgoing)
+      if (hasIncoming)
       {
-        // Друга строка
         sb.AppendLine("  <tr>");
         sb.AppendLine("    <td style='font-weight: bold; padding-right: 5px;'>Ба №</td>");
-        sb.AppendLine($"    <td style='padding-right: 10px;'>{outgoingLetterNo}</td>");
+        sb.AppendLine($"    <td style='padding-right: 10px;'>{incomingLetterNo}</td>");
         sb.AppendLine("    <td style='font-weight: bold; padding-right: 5px;'>аз</td>");
         sb.AppendLine($"    <td>«{outDay}» {outMonth} {outYear}</td>");
         sb.AppendLine("  </tr>");
       }
-      
-      sb.AppendLine("  <tr><td colspan='4' style='padding-top: 25px; font-size: 1px;'>&nbsp;</td></tr>");
 
       sb.AppendLine("</table>");
+      sb.AppendLine("</body>");
+      sb.AppendLine("</html>");
 
       return sb.ToString();
     }
-
+    
     [Public]
     public Stream AddSignatureQRStamp(Stream inputStream, string qrText, string phrase)
     {

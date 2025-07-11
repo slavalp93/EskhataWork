@@ -25,6 +25,9 @@ namespace litiko.Eskhata.Server
         if (_obj.ConditionType == ConditionType.IsRecommendat)
           return litiko.Eskhata.Conditions.Resources.IsRecommendatConditionName;
         
+        if (_obj.ConditionType == ConditionType.StandardRespons)
+          return litiko.Eskhata.Conditions.Resources.StandardResponseConditionName;
+        
         // "Тип ВНД – {0}?"
         if (_obj.ConditionType == ConditionType.IRDType)
           return litiko.Eskhata.Conditions.Resources.IRDTypeConditionNameFormat(Conditions.Info.Properties.IRDTypelitiko.GetLocalizedValue(_obj.IRDTypelitiko));

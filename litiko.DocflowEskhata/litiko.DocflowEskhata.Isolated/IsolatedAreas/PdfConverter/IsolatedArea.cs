@@ -91,20 +91,28 @@ namespace litiko.DocflowEskhata.Isolated.PdfConverter
       {
         var document = new Aspose.Pdf.Document(inputStream);
         var mark = this.CreateStampFromHtml(htmlMark);
-
+        var pageLimit = 5;
+        var pagesCount = document.Pages.Count > pageLimit ? pageLimit : document.Pages.Count;
         // Поиск символа производится постранично с конца документа.
-        for (var pageNumber = document.Pages.Count; pageNumber >= 0; pageNumber--)
+        for (var pageNumber = 1; pageNumber <= pagesCount; pageNumber++)
         {
           var page = document.Pages[pageNumber];
           var lastAnchorEntry = GetLastAnchorEntry(page, anchorSymbol);
           if (lastAnchorEntry == null)
             continue;
-
+          
+          lastAnchorEntry.Text = "";
+          
           // Установить центры символа-якоря и отметки об ЭП на одной линии по горизонтали.
           mark.XIndent = lastAnchorEntry.Position.XIndent;
           mark.YIndent = lastAnchorEntry.Position.YIndent - (mark.Height / 2) + (lastAnchorEntry.Rectangle.Height / 2);
+          
+          var updatedStream = new MemoryStream();
+          document.Save(updatedStream);
+          updatedStream.Position = 0;
 
-          return AddStampToDocumentPage(inputStream, page.Number, mark);
+          // Передаём в метод установки штампа уже изменённый поток
+          return AddStampToDocumentPage(updatedStream, page.Number, mark);
         }
 
         return inputStream;
@@ -116,12 +124,42 @@ namespace litiko.DocflowEskhata.Isolated.PdfConverter
       }
     }
     
+    public virtual TextFragment GetLastAnchorEntry(Aspose.Pdf.Page page, string anchor)
+    {
+      var absorber = new TextFragmentAbsorber(anchor);
+      page.Accept(absorber);
+      if (absorber.TextFragments.Count == 0)
+        return null;
+
+      // Найти последнее вхождение символа-якоря на странице.
+      // Условное самое первое вхождение будет иметь координаты левого верхнего угла.
+      // https://forum.aspose.com/t/textfragment-at-top-of-page/64774.
+      // Ось X - горизонтальная.
+      // Ось Y - вертикальная.
+      // Начало координат - левый нижний угол.
+      var lastEntry = new TextFragment();
+      var rectConsiderRotation = page.GetPageRect(true);
+      lastEntry.Position.XIndent = 0;
+      lastEntry.Position.YIndent = rectConsiderRotation.Height;
+      foreach (TextFragment textFragment in absorber.TextFragments)
+      {
+        if (textFragment.Position.YIndent < lastEntry.Position.YIndent ||
+            textFragment.Position.YIndent == lastEntry.Position.YIndent &&
+            textFragment.Position.XIndent > lastEntry.Position.XIndent)
+          lastEntry = textFragment;
+      }
+
+      return lastEntry;
+    }
+    
     public virtual Aspose.Pdf.PdfPageStamp CreateStampFromHtml(string html)
     {
       try
       {
         Aspose.Pdf.HtmlLoadOptions objLoadOptions = new Aspose.Pdf.HtmlLoadOptions();
+        
         objLoadOptions.PageInfo.Margin = new Aspose.Pdf.MarginInfo(0, 0, 0, 0);
+        
         Aspose.Pdf.Document stampDoc;
         using (var htmlStamp = new MemoryStream(Encoding.UTF8.GetBytes(html)))
           stampDoc = new Aspose.Pdf.Document(htmlStamp, objLoadOptions);
@@ -143,6 +181,44 @@ namespace litiko.DocflowEskhata.Isolated.PdfConverter
       {
         Logger.Error("Cannot create stamp from html", ex);
         throw new AppliedCodeException("Cannot create stamp from html");
+      }
+    }
+    
+    public virtual Stream AddStampToDocumentPage(Stream inputStream, int pageNumber, Aspose.Pdf.PdfPageStamp stamp)
+    {
+      try
+      {
+        // Создание нового потока, в который будет записан документ с отметкой (во входной поток записывать нельзя).
+        var outputStream = new MemoryStream();
+        var document = new Aspose.Pdf.Document(inputStream);
+        // Поднимаем версию и переполучаем документ из потока,
+        // чтобы гарантировать читаемость штампа после вставки.
+        using (var documentStream = this.GetUpgradedPdf(document))
+        {
+          document = new Aspose.Pdf.Document(documentStream);
+
+          var documentPage = document.Pages[pageNumber];
+          var rectConsiderRotation = documentPage.GetPageRect(true);
+          if (stamp.Width > rectConsiderRotation.Width || stamp.Width > (rectConsiderRotation.Height - BottomIndent))
+          {
+            inputStream.CopyTo(outputStream);
+          }
+          else
+          {
+            documentPage.AddStamp(stamp);
+            document.Save(outputStream);
+          }
+        }
+        return outputStream;
+      }
+      catch (Exception ex)
+      {
+        Logger.Error("Cannot add stamp to document page", ex);
+        throw new AppliedCodeException("Cannot add stamp to document page");
+      }
+      finally
+      {
+        inputStream.Close();
       }
     }
     

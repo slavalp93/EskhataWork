@@ -7,14 +7,5 @@ using litiko.Eskhata.Condition;
 
 namespace litiko.Eskhata
 {
-  partial class ConditionServerHandlers
-  {
-
-    public override void Created(Sungero.Domain.CreatedEventArgs e)
-    {
-      base.Created(e);
-      _obj.StandardResponse = false;
-    }
-  }
 
 }
