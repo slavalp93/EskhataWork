@@ -37,7 +37,7 @@ namespace litiko.CollegiateAgencies.Server
         var allCustomAssignments = litiko.Eskhata.ApprovalSimpleAssignments.GetAll(x => Equals(x.Task, approvalTask) &&
                                                                                 x.Status == litiko.Eskhata.ApprovalSimpleAssignment.Status.Completed &&
                                                                                 x.CustomStageTypelitiko == litiko.Eskhata.ApprovalSimpleAssignment.CustomStageTypelitiko.Voting
-                                                                               );
+                                                                               ).ToList();
         
         IEnumerable<litiko.Eskhata.IApprovalSimpleAssignment> customAssignments;
         if (needAdditionalVoters)        
