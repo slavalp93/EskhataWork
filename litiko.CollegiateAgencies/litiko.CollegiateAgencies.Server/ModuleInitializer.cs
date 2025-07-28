@@ -23,6 +23,7 @@ namespace litiko.CollegiateAgencies.Server
       CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.MeetingMembers, "Участники заседания");
       CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.MeetingInvited, "Приглашенные сотрудники");
       CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.MeetingPresentKOU, "Присутствующие члены КОУ");
+      CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.MeetingPresentDOP, "Присутствующие доп. члены КОУ");
       
       CreateVotingDefaultApprovalRule();
       CreateApprovalVotingUpdateStage();

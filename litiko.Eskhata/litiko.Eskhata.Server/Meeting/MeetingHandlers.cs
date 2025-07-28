@@ -72,14 +72,17 @@ namespace litiko.Eskhata
         aviabledMemberIDs.Add(_root.Secretary.Id);
       if (_root.President != null && !aviabledMemberIDs.Contains(_root.President.Id))
         aviabledMemberIDs.Add(_root.President.Id);
-
-      //aviabledMemberIDs = aviabledMemberIDs.Union(_root.InvitedEmployeeslitiko.Where(x => x.Employee != null).Select(m => m.Employee.Id)).ToList();
+      
       foreach (var element in _root.InvitedEmployeeslitiko.Where(x => x.Employee != null))
       {
         if (!aviabledMemberIDs.Contains(element.Employee.Id))
           aviabledMemberIDs.Add(element.Employee.Id);
       }
-        
+      
+      // 28.07.2025
+      if (_root.MeetingCategorylitiko.President != null && !aviabledMemberIDs.Contains(_root.MeetingCategorylitiko.President.Id))
+        aviabledMemberIDs.Add(_root.MeetingCategorylitiko.President.Id);
+      
       query = query.Where(x => aviabledMemberIDs.Contains(x.Id));      
       return query;
     }

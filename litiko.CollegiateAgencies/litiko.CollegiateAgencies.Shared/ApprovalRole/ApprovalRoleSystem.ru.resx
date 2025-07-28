@@ -76,4 +76,7 @@
   <data name="Enum_Type_MeetingPresentKOU" xml:space="preserve">
     <value>Присутствующие члены КОУ</value>
   </data>
+  <data name="Enum_Type_MeetingPresentDOP" xml:space="preserve">
+    <value>Присутствующие доп. члены КОУ</value>
+  </data>
 </root>

@@ -21,6 +21,43 @@ namespace litiko.Eskhata
   partial class MeetingSharedHandlers
   {
 
+    public override void PresidentChanged(Sungero.Meetings.Shared.MeetingPresidentChangedEventArgs e)
+    {
+      base.PresidentChanged(e);
+      
+      var selectedEmployee = e.NewValue;
+      if (selectedEmployee != null)
+      {
+        var membersToRemove = _obj.Members
+          .Where(x => x.Member != null && Employees.As(x.Member).Equals(selectedEmployee))
+          .ToList();
+        
+        foreach (var member in membersToRemove)
+          _obj.Members.Remove(member);
+        
+        var presentToRemove = _obj.Presentlitiko
+          .Where(x => x.Employee != null && Employees.As(x.Employee).Equals(selectedEmployee))
+          .ToList();
+        
+        using (EntityEvents.Disable(Meetings.Info.Properties.Presentlitiko.Events.Deleted))
+        {
+          foreach (var element in presentToRemove)
+            _obj.Presentlitiko.Remove(element);
+        }
+        
+        var absentToRemove = _obj.Absentlitiko
+          .Where(x => x.Employee != null && Employees.As(x.Employee).Equals(selectedEmployee))
+          .ToList();
+        
+        using (EntityEvents.Disable(Meetings.Info.Properties.Absentlitiko.Events.Deleted))
+        {
+          foreach (var element in absentToRemove)
+            _obj.Absentlitiko.Remove(element);
+        }
+        
+      }      
+    }
+
     public virtual void MeetingCategorylitikoChanged(litiko.Eskhata.Shared.MeetingMeetingCategorylitikoChangedEventArgs e)
     {
       var selectedCategory = e.NewValue;
@@ -28,6 +65,7 @@ namespace litiko.Eskhata
       {
         _obj.Members.Clear();
         _obj.Presentlitiko.Clear();
+        _obj.InvitedEmployeeslitiko.Clear();
         
         if (selectedCategory.Members.Any())
         {
@@ -55,6 +93,19 @@ namespace litiko.Eskhata
           _obj.Secretary = selectedCategory.Secretary;
 
         Functions.Meeting.SetQuorum(_obj, selectedCategory);
+        
+        if (selectedCategory.Name == "Заседание Правления"){
+          var roleAdditionalBoardMembers = Roles.GetAll(x => x.Sid == litiko.CollegiateAgencies.PublicConstants.Module.RoleGuid.AdditionalBoardMembers).FirstOrDefault();
+          if (roleAdditionalBoardMembers != null){
+            var users = Roles.GetAllUsersInGroup(roleAdditionalBoardMembers);
+            foreach (var user in users)
+            {
+              if (!_obj.InvitedEmployeeslitiko.Any(x => Equals(x.Employee, litiko.Eskhata.Employees.As(user)))){
+                _obj.InvitedEmployeeslitiko.AddNew().Employee = litiko.Eskhata.Employees.As(user);                
+              }                            
+            }
+          }
+        }
       }      
     }
   }

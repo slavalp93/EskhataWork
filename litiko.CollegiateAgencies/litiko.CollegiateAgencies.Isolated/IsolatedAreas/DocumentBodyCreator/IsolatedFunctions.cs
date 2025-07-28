@@ -31,6 +31,7 @@ namespace litiko.CollegiateAgencies.Isolated.DocumentBodyCreator
                                             List<string> invitedFIOList,
                                             List<string> invitedFIOListTJ,
                                             List<string> agendaList,
+                                            List<string> agendaListTJ,
                                             List<litiko.CollegiateAgencies.Structures.Module.IMeetingResolutionInfo> meetingResolutions
                                            )
     {
@@ -74,6 +75,13 @@ namespace litiko.CollegiateAgencies.Isolated.DocumentBodyCreator
             AddStringsToNumberedList(builder, agendaList);                                                                
         }        
         #endregion
+        
+        #region AgendaListTJ
+        if (MoveTopaPagraphContainsText(document, "AgendaListTJ", builder))
+        {          
+            AddStringsToNumberedList(builder, agendaListTJ);                                                                
+        }        
+        #endregion        
         
         #region ResolutionList v2       
         if (MoveTopaPagraphContainsText(document, "ResolutionList", builder))

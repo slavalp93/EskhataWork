@@ -46,6 +46,14 @@ namespace litiko.Eskhata.Shared
           foreach (var employee in voters)
             _obj.Voterslitiko.AddNew().Employee = employee;            
         }
+        
+        var appRole2 = litiko.CollegiateAgencies.ApprovalRoles.GetAll().Where(r => Equals(r.Type, litiko.CollegiateAgencies.ApprovalRole.Type.MeetingPresentDOP)).FirstOrDefault();
+        if (appRole2 != null)
+        {
+          var voters = litiko.CollegiateAgencies.PublicFunctions.ApprovalRole.Remote.GetRolePerformers(appRole2, _obj);
+          foreach (var employee in voters)
+            _obj.Voterslitiko.AddNew().Employee = employee;
+        }        
       }
     }  
 

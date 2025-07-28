@@ -57,6 +57,11 @@
           "NameGuid": "592faf08-df19-4369-aa1f-3bae6d7e9c15",
           "Name": "MeetingPresentKOU",
           "Code": "MeetingVoters"
+        },
+        {
+          "NameGuid": "accffd3f-1058-4e04-9cc2-e86e2c8ef3f6",
+          "Name": "MeetingPresentDOP",
+          "Code": "MeetingPresentD"
         }
       ],
       "IsAncestorMetadata": true,

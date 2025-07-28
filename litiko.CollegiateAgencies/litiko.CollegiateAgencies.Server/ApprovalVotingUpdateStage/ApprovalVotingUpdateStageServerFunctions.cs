@@ -27,17 +27,31 @@ namespace litiko.CollegiateAgencies.Server
         this.GetRetryResult(litiko.CollegiateAgencies.ApprovalVotingUpdateStages.Resources.MeetingIsLockedFormat(meeting.Id));
       
       try
-      {        
-        var customAssignments = litiko.Eskhata.ApprovalSimpleAssignments.GetAll(x => Equals(x.Task, approvalTask) && 
+      {
+        // Учитывать голосования по доп. голосующим
+        bool needAdditionalVoters = false;
+        var roleAdditionalBoardMembers = Roles.GetAll(x => x.Sid == litiko.CollegiateAgencies.PublicConstants.Module.RoleGuid.AdditionalBoardMembers).FirstOrDefault();
+        if (meeting.MeetingCategorylitiko?.Name == "Заседание Правления" && roleAdditionalBoardMembers != null)
+          needAdditionalVoters = true;
+        
+        var allCustomAssignments = litiko.Eskhata.ApprovalSimpleAssignments.GetAll(x => Equals(x.Task, approvalTask) &&
                                                                                 x.Status == litiko.Eskhata.ApprovalSimpleAssignment.Status.Completed &&
                                                                                 x.CustomStageTypelitiko == litiko.Eskhata.ApprovalSimpleAssignment.CustomStageTypelitiko.Voting
                                                                                );
+        
+        IEnumerable<litiko.Eskhata.IApprovalSimpleAssignment> customAssignments;
+        if (needAdditionalVoters)        
+          customAssignments = allCustomAssignments.Where(x => !x.Performer.IncludedIn(roleAdditionalBoardMembers));
+        else
+          customAssignments = allCustomAssignments;
+          
         var documentIDs = approvalTask.AddendaGroup.All.Where(d => litiko.CollegiateAgencies.Projectsolutions.Is(d)).Select(d => d.Id).ToList();
         if (customAssignments.Any())
-        {
+        {                    
           foreach (var element in meeting.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null && documentIDs.Contains(x.ProjectSolution.Id)))
           {
-            var projectSolution = element.ProjectSolution;
+            var projectSolution = element.ProjectSolution;            
+            
             var votedYes = customAssignments.Sum(assignment => assignment.Votinglitiko.Where(x => Equals(x.Decision, projectSolution)).Count(x => x.Yes.GetValueOrDefault()));
             var votedNo = customAssignments.Sum(assignment => assignment.Votinglitiko.Where(x => Equals(x.Decision, projectSolution)).Count(x => x.No.GetValueOrDefault()));
             var votedAbstained = customAssignments.Sum(assignment => assignment.Votinglitiko.Where(x => Equals(x.Decision, projectSolution)).Count(x => x.Abstained.GetValueOrDefault()));                    

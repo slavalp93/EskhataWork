@@ -272,6 +272,7 @@ namespace litiko.CollegiateAgencies.Server
       replacebleFields.Add("<TextForMinutesTJ>", !string.IsNullOrEmpty(meetingCategory.TextForTemplateTJ) ? meetingCategory.TextForTemplateTJ : string.Empty);
       replacebleFields.Add("<Quorum>", meeting.Quorumlitiko.HasValue ? meeting.Info.Properties.Quorumlitiko.GetLocalizedValue(meeting.Quorumlitiko).ToLower() : string.Empty);
       List<string> agendaList = new List<string>();
+      List<string> agendaListTJ = new List<string>();
       if (!isExtract)
       {
         replacebleFields.Add("<DocDate>", document.RegistrationDate.HasValue ? document.RegistrationDate.Value.ToString("dd.MM.yyyy") : string.Empty);            
@@ -283,6 +284,7 @@ namespace litiko.CollegiateAgencies.Server
           var projectSolution = element.ProjectSolution;
           
           agendaList.Add($"Рассмотрение вопроса: {projectSolution.Subject}");
+          agendaListTJ.Add($"Баррасии масъала: {projectSolution.Subject}");
           
           var meetingResolutionInfo = new Structures.Module.MeetingResolutionInfo();
           meetingResolutionInfo.ProjectSolutionTittle = string.Format("Рассмотрение вопроса: {1}", element.Number, projectSolution.Subject);
@@ -343,6 +345,7 @@ namespace litiko.CollegiateAgencies.Server
       {                
         var projectSolution = litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument);
         agendaList.Add($"Рассмотрение вопроса: {projectSolution.Subject}");
+        agendaListTJ.Add($"Баррасии масъала: {projectSolution.Subject}");
         
         var regDate = string.Empty;
         var regnumber = string.Empty;
@@ -414,6 +417,7 @@ namespace litiko.CollegiateAgencies.Server
                                                                                                                    invitedFIOList,
                                                                                                                    invitedFIOListTJ,
                                                                                                                    agendaList,
+                                                                                                                   agendaListTJ,
                                                                                                                    meetingResolutions);
       
       // Выключить error-логирование при доступе к зашифрованным бинарным данным/версии.

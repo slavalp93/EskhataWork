@@ -10577,7 +10577,7 @@ namespace FastReport
           <GeneralFormat/>
         </Formats>
       </TextObject>
-      <TextObject Name="Text7" Left="245.05" Top="212.75" Width="463.05" Height="28.35" Text="[MeetingMembers]" Font="Palatino Linotype, 12pt"/>
+      <TextObject Name="Text7" Left="245.05" Top="212.75" Width="463.05" Height="28.35" Text="Члены [Meeting.MeetingCategorylitiko.NameForTemplate]" Font="Palatino Linotype, 12pt"/>
       <TextObject Name="Text8" Top="85.8" Width="718.2" Height="18.9" Text="ОАО «Банк Эсхата» № [Doc.RegistrationNumber]" HorzAlign="Center" Font="Palatino Linotype, 12pt, style=Bold"/>
       <TextObject Name="Text9" Top="263.25" Width="718.2" Height="18.9" Text="ПОВЕСТКА ДНЯ" HorzAlign="Center" Font="Palatino Linotype, 12pt, style=Bold"/>
       <TextObject Name="Text20" Top="9.45" Width="718.2" Height="28.35" HorzAlign="Center" Font="Palatino Linotype, 12pt, style=Bold"/>

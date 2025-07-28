@@ -68,6 +68,15 @@ namespace litiko.CollegiateAgencies.Shared
           .ToList();        
       }
       #endregion      
+
+      #region Присутствующие доп. члены КОУ
+      if (_obj.Type == litiko.CollegiateAgencies.ApprovalRole.Type.MeetingPresentDOP)
+      {
+        query = query.Where(k => k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.Agenda.ToString() ||
+                            k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.Minutes.ToString())
+          .ToList();        
+      }
+      #endregion 
       
       return query;
     }

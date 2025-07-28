@@ -153,25 +153,39 @@ namespace litiko.Eskhata.Client
       }
       
       if (_obj.ProjectSolutionslitiko.Any())
-      {        
+      {
+        // Учитывать голосования по доп. голосующим
+        bool needAdditionalVoters = false;
+        var roleAdditionalBoardMembers = Roles.GetAll(x => x.Sid == litiko.CollegiateAgencies.PublicConstants.Module.RoleGuid.AdditionalBoardMembers).FirstOrDefault();
+        if (_obj.MeetingCategorylitiko?.Name == "Заседание Правления" && roleAdditionalBoardMembers != null)
+          needAdditionalVoters = true;        
+          
         foreach (var element in _obj.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null && x.VotingType == litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Extramural || 
                                                                  x.VotingType == litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Intramural))
         {
-          var projectSolution = element.ProjectSolution;
+          var projectSolution = element.ProjectSolution;   
+
+          var originalVoting = projectSolution.Voting;
+          IEnumerable<litiko.CollegiateAgencies.IProjectsolutionVoting> voting;
           
-          var votedYes = projectSolution.Voting.Count(x => x.Yes.GetValueOrDefault());
+          if (needAdditionalVoters)
+            voting = originalVoting.Where(x => x.Member != null && !x.Member.IncludedIn(roleAdditionalBoardMembers));
+          else
+            voting = originalVoting;
+          
+          var votedYes = voting.Count(x => x.Yes.GetValueOrDefault());
           if (!Equals(element.Yes, votedYes))
             element.Yes = votedYes;
           
-          var votedNo = projectSolution.Voting.Count(x => x.No.GetValueOrDefault());
+          var votedNo = voting.Count(x => x.No.GetValueOrDefault());
           if (!Equals(element.No, votedNo))
             element.No = votedNo;
           
-          var votedAbstained = projectSolution.Voting.Count(x => x.Abstained.GetValueOrDefault());
+          var votedAbstained = voting.Count(x => x.Abstained.GetValueOrDefault());
           if (!Equals(element.Abstained, votedAbstained))
             element.Abstained = votedAbstained;
                     
-          if (!projectSolution.Voting.Any(x => !x.Yes.GetValueOrDefault() && !x.No.GetValueOrDefault() && !x.Abstained.GetValueOrDefault()))
+          if (!voting.Any(x => !x.Yes.GetValueOrDefault() && !x.No.GetValueOrDefault() && !x.Abstained.GetValueOrDefault()))
           {
             var isAccepted = element.Yes > element.No;
             if (!Equals(element.Accepted, isAccepted))
