@@ -272,6 +272,7 @@ namespace litiko.CollegiateAgencies.Server
       replacebleFields.Add("<TextForMinutesTJ>", !string.IsNullOrEmpty(meetingCategory.TextForTemplateTJ) ? meetingCategory.TextForTemplateTJ : string.Empty);
       replacebleFields.Add("<Quorum>", meeting.Quorumlitiko.HasValue ? meeting.Info.Properties.Quorumlitiko.GetLocalizedValue(meeting.Quorumlitiko).ToLower() : string.Empty);
       List<string> agendaList = new List<string>();
+      List<string> agendaListTJ = new List<string>();
       if (!isExtract)
       {
         replacebleFields.Add("<DocDate>", document.RegistrationDate.HasValue ? document.RegistrationDate.Value.ToString("dd.MM.yyyy") : string.Empty);            
@@ -283,6 +284,7 @@ namespace litiko.CollegiateAgencies.Server
           var projectSolution = element.ProjectSolution;
           
           agendaList.Add($"Рассмотрение вопроса: {projectSolution.Subject}");
+          agendaListTJ.Add($"Баррасии масъала: {projectSolution.Subject}");
           
           var meetingResolutionInfo = new Structures.Module.MeetingResolutionInfo();
           meetingResolutionInfo.ProjectSolutionTittle = string.Format("Рассмотрение вопроса: {1}", element.Number, projectSolution.Subject);
@@ -309,7 +311,7 @@ namespace litiko.CollegiateAgencies.Server
           );
 */
           meetingResolutionInfo.Decigions = string.Join(
-            Environment.NewLine,
+            "##DECISION##",
             projectSolution.DecidedMinutes
               .OrderBy(decided => decided.Number)
               .Select(decided => decided.DecisionRU)
@@ -323,7 +325,7 @@ namespace litiko.CollegiateAgencies.Server
             ));          
 */
           meetingResolutionInfo.DecigionsTJ = string.Join(
-            Environment.NewLine, 
+            "##DECISION##", 
             projectSolution.DecidedMinutes
               .OrderBy(decided => decided.Number)
               .Select(decided => decided.DecisionTJ
@@ -343,6 +345,7 @@ namespace litiko.CollegiateAgencies.Server
       {                
         var projectSolution = litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument);
         agendaList.Add($"Рассмотрение вопроса: {projectSolution.Subject}");
+        agendaListTJ.Add($"Баррасии масъала: {projectSolution.Subject}");
         
         var regDate = string.Empty;
         var regnumber = string.Empty;
@@ -361,7 +364,7 @@ namespace litiko.CollegiateAgencies.Server
         var meetingProjectSolutionNumber = projectSolution?.Meeting.ProjectSolutionslitiko.Where(ps => Equals(ps.ProjectSolution, projectSolution))
           .Select(ps => ps.Number)
           .FirstOrDefault();
-        
+        meetingResolutionInfo.Number = meetingProjectSolutionNumber;
         //replacebleFields.Add("<AgendaList>", !string.IsNullOrEmpty(projectSolution.Subject) ? string.Format("... {0}. {1}", meetingProjectSolutionNumber, projectSolution.Subject) : string.Empty);
         
         string speaker = string.Empty;
@@ -374,12 +377,19 @@ namespace litiko.CollegiateAgencies.Server
         meetingResolutionInfo.SpeakerRU = speaker;
         meetingResolutionInfo.SpeakerTJ = projectSolution.Speaker != null ? litiko.Eskhata.PublicFunctions.Person.GetShortNameTJ(litiko.Eskhata.People.As(projectSolution.Speaker.Person)) : string.Empty;        
         
-        meetingResolutionInfo.ProjectSolutionTittle = string.Format("Рассмотрение вопроса: {1}", meetingProjectSolutionNumber, projectSolution.Subject);
+        meetingResolutionInfo.ProjectSolutionTittle = string.Format("Рассмотрение вопроса: {0}", projectSolution.Subject);
         meetingResolutionInfo.ListenedRU = !string.IsNullOrEmpty(projectSolution.ListenedRUMinutes) ? projectSolution.ListenedRUMinutes : string.Empty;
         
-        string originalResult = litiko.CollegiateAgencies.PublicFunctions.Projectsolution.GetProjectSolutionDecidedMinutesRU(projectSolution);
-        meetingResolutionInfo.Decigions = string.Join("\n", originalResult.Split(new[] { '\n' }, StringSplitOptions.None)
-                                                      .Select((line, index) => $"{meetingProjectSolutionNumber}.{line}"));
+        //string originalResult = litiko.CollegiateAgencies.PublicFunctions.Projectsolution.GetProjectSolutionDecidedMinutesRU(projectSolution);
+        //meetingResolutionInfo.Decigions = string.Join("\n", originalResult.Split(new[] { '\n' }, StringSplitOptions.None)
+        //                                              .Select((line, index) => $"{meetingProjectSolutionNumber}.{line}"));
+        
+        meetingResolutionInfo.Decigions = string.Join(
+            "##DECISION##",
+            projectSolution.DecidedMinutes
+              .OrderBy(decided => decided.Number)
+              .Select(decided => decided.DecisionRU)
+          );
         
         var votingrecord = meeting.ProjectSolutionslitiko.Where(x => Equals(x.ProjectSolution, projectSolution)).FirstOrDefault();
         if (votingrecord != null)
@@ -414,6 +424,7 @@ namespace litiko.CollegiateAgencies.Server
                                                                                                                    invitedFIOList,
                                                                                                                    invitedFIOListTJ,
                                                                                                                    agendaList,
+                                                                                                                   agendaListTJ,
                                                                                                                    meetingResolutions);
       
       // Выключить error-логирование при доступе к зашифрованным бинарным данным/версии.

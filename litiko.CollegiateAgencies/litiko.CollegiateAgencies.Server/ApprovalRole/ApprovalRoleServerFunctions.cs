@@ -194,17 +194,7 @@ namespace litiko.CollegiateAgencies.Server
         if (meeting != null)
         {
           // Председатель
-          result.Add(meeting.President);
-            
-          // Присутствующие из членов КОУ
-//          if (meeting.MeetingCategorylitiko != null)
-//          {
-//            foreach (var element in meeting.Presentlitiko.Where(x => x.Employee != null ))
-//            {
-//              if (meeting.MeetingCategorylitiko.Members.Select(x => x.Member).Contains(element.Employee) && !result.Contains(element.Employee))
-//                result.Add(element.Employee);
-//            }            
-//          }          
+          result.Add(meeting.President);                     
           
           // 03.02.2025 Все из поля Присутствовали
           foreach (var element in meeting.Presentlitiko.Where(x => x.Employee != null ))
@@ -212,7 +202,41 @@ namespace litiko.CollegiateAgencies.Server
             if (!result.Contains(element.Employee))
               result.Add(element.Employee);
           }
-          
+        }
+      }
+      #endregion
+      
+      #region Присутствующие доп. члены КОУ
+      if (_obj.Type == litiko.CollegiateAgencies.ApprovalRole.Type.MeetingPresentDOP)
+      {
+        var meeting = litiko.Eskhata.Meetings.Null;
+        
+        if (litiko.Eskhata.Agendas.Is(document))
+        {
+          var agenda = litiko.Eskhata.Agendas.As(document);          
+          if (agenda.Meeting != null)
+            meeting = litiko.Eskhata.Meetings.As(agenda.Meeting);                                    
+        }
+        
+        if (litiko.Eskhata.Minuteses.Is(document))
+        {
+          var minutes = litiko.Eskhata.Minuteses.As(document);
+          if (minutes.Meeting != null)
+            meeting = litiko.Eskhata.Meetings.As(minutes.Meeting);
+        }
+        
+        if (meeting != null && meeting.MeetingCategorylitiko?.Name == "Заседание Правления")
+        {                                        
+          var roleAdditionalBoardMembers = Roles.GetAll(x => x.Sid == litiko.CollegiateAgencies.PublicConstants.Module.RoleGuid.AdditionalBoardMembers).FirstOrDefault();
+          if (roleAdditionalBoardMembers != null){
+            var users = Roles.GetAllUsersInGroup(roleAdditionalBoardMembers);
+            foreach (var user in users)
+            {
+              var empl = Sungero.Company.Employees.As(user);
+              if (meeting.InvitedEmployeeslitiko.Any(x => Equals(x.Employee, empl)) && !result.Contains(empl))
+                result.Add(empl);
+            }
+          }          
         }
       }
       #endregion

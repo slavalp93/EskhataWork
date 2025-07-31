@@ -67,8 +67,8 @@ namespace litiko.Eskhata.Module.Docflow.Server
           var response = OutgoingDocumentBases.As(document)?.InResponseTo;
           if(response != null)
           {
-            incomingDate = response.RegistrationDate;
-            incomingNo = response.RegistrationNumber;
+            incomingDate = response.Dated;
+            incomingNo = response.InNumber;
           }
           pdfDocumentStream = DocflowEskhata.IsolatedFunctions.PdfConverter.AddRegistrationData(pdfDocumentStream, document.RegistrationNumber, document.RegistrationDate, incomingDate, incomingNo);
           

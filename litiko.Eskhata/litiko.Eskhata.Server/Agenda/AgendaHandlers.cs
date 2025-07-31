@@ -30,7 +30,7 @@ namespace litiko.Eskhata
     public override void BeforeSave(Sungero.Domain.BeforeSaveEventArgs e)
     {
       base.BeforeSave(e);
-      
+
       // Связать проекты решений по совещанию с повесткой
       if (_obj.Meeting != null && litiko.Eskhata.Meetings.As(_obj.Meeting).ProjectSolutionslitiko.Where(x => x.ProjectSolution != null).Any())
       {
@@ -40,7 +40,7 @@ namespace litiko.Eskhata
           if (projectSolution.AccessRights.CanRead() && !_obj.Relations.GetRelated(Sungero.Docflow.PublicConstants.Module.AddendumRelationName).Contains(projectSolution))
             _obj.Relations.Add(Sungero.Docflow.PublicConstants.Module.AddendumRelationName, projectSolution);
         }
-      }        
+      }      
     }
   }
 

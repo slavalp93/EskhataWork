@@ -230,7 +230,7 @@
   "IsolatedAssemblyName": "litiko.CollegiateAgencies.Isolated",
   "IsolatedFunctions": [
     {
-      "NameGuid": "7c62fab2-445e-4b4c-a24e-9f70c8654b7a",
+      "NameGuid": "d6d577b8-db46-4c9f-a7ab-fdaeb1e76d1a",
       "Name": "FillMinutesBodyByTemplate",
       "IsolatedAreaId": "ff738b72-b42f-494d-adaf-be32d268cc2d",
       "Parameters": [
@@ -276,6 +276,11 @@
         },
         {
           "Name": "agendaList",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.String>",
+          "ParameterTypeFullName": "System.Collections.Generic.List`1[[System.String]]"
+        },
+        {
+          "Name": "agendaListTJ",
           "ParameterType": "global::System.Collections.Generic.List<global::System.String>",
           "ParameterTypeFullName": "System.Collections.Generic.List`1[[System.String]]"
         },
@@ -529,6 +534,11 @@
       "IsIsolated": true,
       "IsPublic": true,
       "Properties": [
+        {
+          "Name": "Number",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.Int32>"
+        },
         {
           "Name": "ProjectSolutionTittle",
           "IsNullable": true,
@@ -852,7 +862,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.82",
+  "Version": "0.0.1.85",
   "Widgets": [],
   "Versions": [
     {

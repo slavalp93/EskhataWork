@@ -14,6 +14,11 @@ namespace litiko.CollegiateAgencies.Structures.Module
   partial class MeetingResolutionInfo
   {    
     /// <summary>
+    /// Номер вопроса в совещании и протоколе
+    /// </summary>
+    public int? Number { get; set; }    
+    
+    /// <summary>
     /// Проект решения - заголовок
     /// </summary>
     public string ProjectSolutionTittle { get; set; }

@@ -667,6 +667,18 @@
             {
               "Name": "Height",
               "Value": 60
+            },
+            {
+              "Name": "NeedExpand",
+              "Value": false
+            },
+            {
+              "Name": "NeedAutosize",
+              "Value": true
+            },
+            {
+              "Name": "Rows",
+              "Value": 4
             }
           ]
         },
@@ -685,6 +697,14 @@
             {
               "Name": "Height",
               "Value": 60
+            },
+            {
+              "Name": "NeedAutosize",
+              "Value": true
+            },
+            {
+              "Name": "Rows",
+              "Value": 4
             }
           ]
         },
@@ -703,6 +723,14 @@
             {
               "Name": "Height",
               "Value": 60
+            },
+            {
+              "Name": "NeedAutosize",
+              "Value": true
+            },
+            {
+              "Name": "Rows",
+              "Value": 4
             }
           ]
         },
@@ -786,6 +814,14 @@
             {
               "Name": "Height",
               "Value": 60
+            },
+            {
+              "Name": "NeedAutosize",
+              "Value": true
+            },
+            {
+              "Name": "Rows",
+              "Value": 4
             }
           ]
         },
@@ -804,6 +840,14 @@
             {
               "Name": "Height",
               "Value": 60
+            },
+            {
+              "Name": "NeedAutosize",
+              "Value": true
+            },
+            {
+              "Name": "Rows",
+              "Value": 4
             }
           ]
         },
@@ -822,6 +866,14 @@
             {
               "Name": "Height",
               "Value": 60
+            },
+            {
+              "Name": "NeedAutosize",
+              "Value": true
+            },
+            {
+              "Name": "Rows",
+              "Value": 4
             }
           ]
         },
