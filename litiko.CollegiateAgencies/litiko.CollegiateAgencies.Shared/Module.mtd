@@ -535,6 +535,11 @@
       "IsPublic": true,
       "Properties": [
         {
+          "Name": "Number",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.Int32>"
+        },
+        {
           "Name": "ProjectSolutionTittle",
           "IsNullable": true,
           "TypeFullName": "global::System.String"
@@ -857,7 +862,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.84",
+  "Version": "0.0.1.85",
   "Widgets": [],
   "Versions": [
     {

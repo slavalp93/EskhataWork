@@ -311,7 +311,7 @@ namespace litiko.CollegiateAgencies.Server
           );
 */
           meetingResolutionInfo.Decigions = string.Join(
-            Environment.NewLine,
+            "##DECISION##",
             projectSolution.DecidedMinutes
               .OrderBy(decided => decided.Number)
               .Select(decided => decided.DecisionRU)
@@ -325,7 +325,7 @@ namespace litiko.CollegiateAgencies.Server
             ));          
 */
           meetingResolutionInfo.DecigionsTJ = string.Join(
-            Environment.NewLine, 
+            "##DECISION##", 
             projectSolution.DecidedMinutes
               .OrderBy(decided => decided.Number)
               .Select(decided => decided.DecisionTJ
@@ -364,7 +364,7 @@ namespace litiko.CollegiateAgencies.Server
         var meetingProjectSolutionNumber = projectSolution?.Meeting.ProjectSolutionslitiko.Where(ps => Equals(ps.ProjectSolution, projectSolution))
           .Select(ps => ps.Number)
           .FirstOrDefault();
-        
+        meetingResolutionInfo.Number = meetingProjectSolutionNumber;
         //replacebleFields.Add("<AgendaList>", !string.IsNullOrEmpty(projectSolution.Subject) ? string.Format("... {0}. {1}", meetingProjectSolutionNumber, projectSolution.Subject) : string.Empty);
         
         string speaker = string.Empty;
@@ -377,12 +377,19 @@ namespace litiko.CollegiateAgencies.Server
         meetingResolutionInfo.SpeakerRU = speaker;
         meetingResolutionInfo.SpeakerTJ = projectSolution.Speaker != null ? litiko.Eskhata.PublicFunctions.Person.GetShortNameTJ(litiko.Eskhata.People.As(projectSolution.Speaker.Person)) : string.Empty;        
         
-        meetingResolutionInfo.ProjectSolutionTittle = string.Format("Рассмотрение вопроса: {1}", meetingProjectSolutionNumber, projectSolution.Subject);
+        meetingResolutionInfo.ProjectSolutionTittle = string.Format("Рассмотрение вопроса: {0}", projectSolution.Subject);
         meetingResolutionInfo.ListenedRU = !string.IsNullOrEmpty(projectSolution.ListenedRUMinutes) ? projectSolution.ListenedRUMinutes : string.Empty;
         
-        string originalResult = litiko.CollegiateAgencies.PublicFunctions.Projectsolution.GetProjectSolutionDecidedMinutesRU(projectSolution);
-        meetingResolutionInfo.Decigions = string.Join("\n", originalResult.Split(new[] { '\n' }, StringSplitOptions.None)
-                                                      .Select((line, index) => $"{meetingProjectSolutionNumber}.{line}"));
+        //string originalResult = litiko.CollegiateAgencies.PublicFunctions.Projectsolution.GetProjectSolutionDecidedMinutesRU(projectSolution);
+        //meetingResolutionInfo.Decigions = string.Join("\n", originalResult.Split(new[] { '\n' }, StringSplitOptions.None)
+        //                                              .Select((line, index) => $"{meetingProjectSolutionNumber}.{line}"));
+        
+        meetingResolutionInfo.Decigions = string.Join(
+            "##DECISION##",
+            projectSolution.DecidedMinutes
+              .OrderBy(decided => decided.Number)
+              .Select(decided => decided.DecisionRU)
+          );
         
         var votingrecord = meeting.ProjectSolutionslitiko.Where(x => Equals(x.ProjectSolution, projectSolution)).FirstOrDefault();
         if (votingrecord != null)
