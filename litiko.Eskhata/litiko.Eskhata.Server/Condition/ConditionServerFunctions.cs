@@ -38,6 +38,10 @@ namespace litiko.Eskhata.Server
 
         if (_obj.ConditionType == ConditionType.StandardRespons)
           return litiko.Eskhata.Conditions.Resources.StandardResponseConditionName;
+        
+        // "Категория – {0}?"
+        if (_obj.ConditionType == ConditionType.MeetingCategorylitiko)
+          return litiko.Eskhata.Conditions.Resources.MeetingCategoryConditionFormat(_obj.MeetingCategorylitiko);
       }
       return base.GetConditionName();
     }

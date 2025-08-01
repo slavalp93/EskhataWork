@@ -176,7 +176,7 @@
     <value>Voting</value>
   </data>
   <data name="Property_OurSignatory" xml:space="preserve">
-    <value>Responsible for preparation</value>
+    <value>Signed</value>
   </data>
   <data name="Resource_09b8c877bb4f4b329a9832d12a8dae24" xml:space="preserve">
     <value />
@@ -288,5 +288,11 @@
   </data>
   <data name="Property_QuestionGroup" xml:space="preserve">
     <value>Question group</value>
+  </data>
+  <data name="Property_Budget" xml:space="preserve">
+    <value>Budget</value>
+  </data>
+  <data name="Property_BudgetRemaining" xml:space="preserve">
+    <value>Remaining budget</value>
   </data>
 </root>

@@ -151,4 +151,10 @@
   <data name="DescriptionAdditionalBoardMembers" xml:space="preserve">
     <value>Участникам роли выдаются права на просмотр на документы заседаний Правления</value>
   </data>
+  <data name="ResponsibleEmployeeAHD" xml:space="preserve">
+    <value>Responsible employee of the AHD</value>
+  </data>
+  <data name="ResponsibleEmployeeAHDDescription" xml:space="preserve">
+    <value>Used to sign a Project solution</value>
+  </data>
 </root>
