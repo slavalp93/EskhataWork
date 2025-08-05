@@ -58,6 +58,7 @@
         "ValueInputClient"
       ],
       "IsEnabled": false,
+      "IsSortingAllowed": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "d30c8e6b-8ee3-4f78-a51e-a7656dea4d72"
     },
@@ -71,6 +72,7 @@
         "ValueInputClient"
       ],
       "IsEnabled": false,
+      "IsSortingAllowed": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "d669a029-3481-4827-ba55-62ec9517be3d"
     },
@@ -81,6 +83,7 @@
       "CanBeSearch": false,
       "Code": "Abstained",
       "IsEnabled": false,
+      "IsSortingAllowed": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "99df568c-60e0-4b2c-b2d0-caaa4d0b1072"
     },
@@ -90,6 +93,7 @@
       "Name": "Accepted",
       "CanBeSearch": false,
       "Code": "Accepted",
+      "IsSortingAllowed": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
       "PreviousPropertyGuid": "bf68ecc7-abd9-4421-acbf-4ad706d80064"
     },
@@ -119,6 +123,7 @@
       "HandledEvents": [
         "FilteringClient"
       ],
+      "IsSortingAllowed": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
       "PreviousPropertyGuid": "63cf4a97-c5db-47da-a2e1-00873d4bd861"
     }
