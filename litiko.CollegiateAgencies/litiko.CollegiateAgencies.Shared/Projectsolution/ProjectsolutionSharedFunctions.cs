@@ -9,6 +9,45 @@ namespace litiko.CollegiateAgencies.Shared
 {
   partial class ProjectsolutionFunctions
   {
+
+    /// <summary>
+    /// Определить подписанта по умолчанию
+    /// </summary>       
+    public void DefineOurSignatory()
+    {
+      if (_obj.MeetingCategory != null)
+      {
+        if (_obj.MeetingCategory.Name == "Заседание Тендерной комиссии")
+        {
+          // Ответственный сотрудник АХД
+          var role = Roles.GetAll(r => r.Sid == Constants.Module.RoleGuid.ResponsibleEmployeeAHD).FirstOrDefault();
+          if (role != null)
+          {
+            var roleMember = Roles.GetAllUsersInGroup(role).FirstOrDefault();
+            if (roleMember != null && !Equals(_obj.OurSignatory, Sungero.Company.Employees.As(roleMember)))
+              _obj.OurSignatory = Sungero.Company.Employees.As(roleMember);
+          }
+        }
+        else
+        {
+          // Глава подразделения при прямом подчинении Председателю, являющегося куратором/руководителем подразделения Автора
+          var preparedBy = _obj.PreparedBy;
+          if (preparedBy != null)
+          {
+            var department = preparedBy.Department;
+            int hierarchyLevels = 0;
+            while (department.HeadOffice?.HeadOffice != null && hierarchyLevels < 30)
+            {
+              department = department.HeadOffice;
+              hierarchyLevels++;
+            }
+            
+            if (hierarchyLevels < 30 && department?.Manager != null && !Equals(_obj.OurSignatory, department.Manager))
+              _obj.OurSignatory = department.Manager;            
+          }
+        }
+      }      
+    }
     /// <summary>
     /// Обновить карточку документа.
     /// </summary>

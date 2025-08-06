@@ -148,4 +148,10 @@
   <data name="RoleAdditionalBoardMembers" xml:space="preserve">
     <value>Дополнительные члены Правления</value>
   </data>
+  <data name="ResponsibleEmployeeAHD" xml:space="preserve">
+    <value>Ответственный сотрудник АХД</value>
+  </data>
+  <data name="ResponsibleEmployeeAHDDescription" xml:space="preserve">
+    <value>Используется для подписания проекта решения</value>
+  </data>
 </root>

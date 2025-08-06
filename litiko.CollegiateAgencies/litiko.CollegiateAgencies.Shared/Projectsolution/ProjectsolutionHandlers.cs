@@ -73,6 +73,11 @@ namespace litiko.CollegiateAgencies
   partial class ProjectsolutionSharedHandlers
   {
 
+    public virtual void MeetingCategoryChanged(litiko.CollegiateAgencies.Shared.ProjectsolutionMeetingCategoryChangedEventArgs e)
+    {
+      Functions.Projectsolution.DefineOurSignatory(_obj);
+    }
+
     public virtual void MeetingChanged(litiko.CollegiateAgencies.Shared.ProjectsolutionMeetingChangedEventArgs e)
     {
       if (e.NewValue != null && !Equals(e.NewValue, e.OldValue))
@@ -83,20 +88,7 @@ namespace litiko.CollegiateAgencies
     {
       base.PreparedByChanged(e);
       
-      var selectedEmployee = e.NewValue;
-      if (selectedEmployee != null && !Equals(selectedEmployee, e.OldValue))
-      {
-        var department = selectedEmployee.Department;
-        int hierarchyLevels = 0;
-        while (department.HeadOffice?.HeadOffice != null && hierarchyLevels < 30)
-        {
-          department = department.HeadOffice;
-          hierarchyLevels++;
-        }
-        
-        if (hierarchyLevels < 30 && department?.Manager != null && !Equals(_obj.OurSignatory, department.Manager))
-          _obj.OurSignatory = department.Manager;
-      }
+      Functions.Projectsolution.DefineOurSignatory(_obj);
     }
 
   }
