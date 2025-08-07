@@ -19,7 +19,22 @@ namespace litiko.NSI.Server
         InitializationLogger.Debug("Init: Grant rights on NSIBases to all users.");
         NSI.NSIBases.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
         NSI.NSIBases.AccessRights.Save();
-      }      
+                
+        ResponsibilityMatrices.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
+        ResponsibilityMatrices.AccessRights.Save();
+                
+        ContractsVsPaymentDocs.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
+        ContractsVsPaymentDocs.AccessRights.Save();
+                
+        TaxRates.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
+        TaxRates.AccessRights.Save();
+        
+        FrequencyOfPayments.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
+        FrequencyOfPayments.AccessRights.Save();
+        
+        CurrencyRates.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
+        CurrencyRates.AccessRights.Save();        
+      }
     }
   }
 }
