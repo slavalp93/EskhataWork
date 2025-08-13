@@ -121,4 +121,7 @@
   <data name="Property_FullTimeOrTemporary" xml:space="preserve">
     <value>Штатный сотрудник или временный</value>
   </data>
+  <data name="Form_852a4c170131496ba1b256c36cae5bef" xml:space="preserve">
+    <value>Паспортные данные</value>
+  </data>
 </root>
