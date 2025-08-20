@@ -9,6 +9,14 @@ namespace litiko.CollegiateAgencies.Server
 {
   partial class ProjectsolutionFunctions
   {
+
+    /// <summary>
+    /// 
+    /// </summary>       
+    public void Selected()
+    {
+      if(_obj.Subject.
+    }
     /// <summary>
     /// Создать проект решения.
     /// </summary>

@@ -11,27 +11,47 @@ namespace litiko.CollegiateAgencies.Client
   {
     public virtual void Translate(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      var dialog = Dialogs.CreateInputDialog("Введите текст для перевода");
-      var question = dialog.AddMultilineString("Текст", true);
-      dialog.Buttons.AddOkCancel();
-
-      if (dialog.Show() != DialogButtons.Ok || string.IsNullOrWhiteSpace(question.Value))
-        return;
-
+      //      var dialog = Dialogs.CreateInputDialog("Введите текст для перевода");
+      //      var question = dialog.AddMultilineString("Текст", true);
+      //      dialog.Buttons.AddOkCancel();
+//
+      //      if (dialog.Show() != DialogButtons.Ok || string.IsNullOrWhiteSpace(question.Value))
+      //        return;
+//
+      //      try
+      //      {
+      //        // Локальный вызов — достаточно передать только вопрос
+      //        var answer = litiko.DocflowEskhata.PublicFunctions.Module.Remote.AskGemini(question.Value);
+//
+      //        if (string.IsNullOrWhiteSpace(answer))
+      //          Dialogs.ShowMessage("Пустой ответ Gemini.", MessageType.Warning);
+      //        else
+      //          Dialogs.ShowMessage("Результат: " + answer, "Смысловой перевод может быть не точным, перепроверьте переведенный текст");
+      //      }
+      //      catch (Exception ex)
+      //      {
+      //        e.AddError("Не удалось получить ответ от Gemini: " + ex.Message);
+      //      }
+      
       try
       {
-        // Локальный вызов — достаточно передать только вопрос
-        var answer = litiko.DocflowEskhata.PublicFunctions.Module.Remote.AskGemini(question.Value);
-
-        if (string.IsNullOrWhiteSpace(answer))
-          Dialogs.ShowMessage("Пустой ответ Gemini.", MessageType.Warning);
-        else
-          Dialogs.ShowMessage("Результат: " + answer, "Смысловой перевод может быть не точным, перепроверьте переведенный текст");
-      }
+        string sourseText = "";
+        string targetField = "";
+        
+        var ruText = 
+        
+        var formViews = Sungero.CoreEntities.FormViews.GetAllMatches(entity
+                                                                     
+                                                                     // определяем направление перевода
+                                                                     if(!string.IsNullOrEmpty(contex.s
+                                                                     }
       catch (Exception ex)
       {
-        e.AddError("Не удалось получить ответ от Gemini: " + ex.Message);
+        
+        throw;
       }
+      
+
     }
 
     public virtual bool CanTranslate(Sungero.Domain.Client.CanExecuteActionArgs e)
