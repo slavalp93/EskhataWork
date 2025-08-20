@@ -1,23 +1,28 @@
 using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
 using Sungero.CoreEntities;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace litiko.DocflowEskhata.Server
 {
   public class ModuleFunctions
   {
-/// <summary>
+    /// <summary>
     /// Создать и заполнить временную таблицу для конвертов.
     /// </summary>
     /// <param name="reportSessionId">Идентификатор отчета.</param>
     /// <param name="outgoingDocuments">Список Исходящих документов.</param>
     /// <param name="contractualDocuments">Список Договорных документов.</param>
     /// <param name="accountingDocuments">Список Финансовых документов.</param>
-    public static void FillEnvelopeTable(string reportSessionId, 
-                                         List<Sungero.Docflow.IOutgoingDocumentBase> outgoingDocuments, 
-                                         List<Sungero.Docflow.IContractualDocumentBase> contractualDocuments, 
+    public static void FillEnvelopeTable(string reportSessionId,
+                                         List<Sungero.Docflow.IOutgoingDocumentBase> outgoingDocuments,
+                                         List<Sungero.Docflow.IContractualDocumentBase> contractualDocuments,
                                          List<Sungero.Docflow.IAccountingDocumentBase> accountingDocuments)
     {
       var id = 1;
@@ -118,6 +123,51 @@ namespace litiko.DocflowEskhata.Server
         address = address.Replace(zipCodeMatch.Value, string.Empty).Trim();
       
       return Structures.Module.ZipCodeAndAddress.Create(zipCode, address);
+    }
+    
+    [Public, Remote(IsPure = true)]
+    public string AskGemini(string question)
+    {
+      var apiKey = Constants.Module.apiKeyGemini;
+
+      using (var client = new HttpClient())
+      {
+        client.BaseAddress = new Uri("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent");
+        client.DefaultRequestHeaders.Clear();
+        client.DefaultRequestHeaders.Add("X-goog-api-key", apiKey);
+        client.DefaultRequestHeaders.Add("Accept", "application/json");
+
+        var requestJson = new JObject
+        {
+          ["contents"] = new JArray
+          {
+            new JObject
+            {
+              ["parts"] = new JArray
+              {
+                new JObject
+                {
+                  ["text"] = "Переведи с русского на таджикский без лишних слов:\n" + question
+                }
+              }
+            }
+          }
+        };
+
+        var content = new StringContent(requestJson.ToString(), Encoding.UTF8, "application/json");
+        var response = client.PostAsync(client.BaseAddress, content).Result;
+
+        if (!response.IsSuccessStatusCode)
+          throw new Exception("Ошибка при обращении к Gemini API попробуйте через минуту: " + response.StatusCode);
+
+        var resultJson = response.Content.ReadAsStringAsync().Result;
+        var parsed = JObject.Parse(resultJson);
+
+        // Берем текст перевода из content.parts[0].text
+        var translatedText = parsed["candidates"]?[0]?["content"]?["parts"]?[0]?["text"]?.ToString();
+
+        return !string.IsNullOrWhiteSpace(translatedText) ? translatedText.Trim() : "Ответ пустой";
+      }
     }
   }
 }

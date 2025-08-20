@@ -5,6 +5,19 @@ namespace litiko.DocflowEskhata.Constants
 {
   public static class Module
   {
+
+    /// <summary>
+    /// ApiKey ChatGPT
+    /// </summary>
+    [Sungero.Core.Public]
+    public const string apiKeyGPT = litiko.DocflowEskhata.Resources.ApiKeyGPT;
+    
+    [Sungero.Core.Public]
+    public const string apiKeyCopilot = litiko.DocflowEskhata.Resources.ApiKeyCopilot;
+    
+    [Sungero.Core.Public]
+    public const string apiKeyGemini = litiko.DocflowEskhata.Resources.ApiKeyGemini;
+    
     public static class DocumentTypeGuids
     {
       [Sungero.Core.Public]

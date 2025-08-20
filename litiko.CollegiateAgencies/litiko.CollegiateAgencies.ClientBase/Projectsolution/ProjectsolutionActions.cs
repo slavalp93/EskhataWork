@@ -9,23 +9,53 @@ namespace litiko.CollegiateAgencies.Client
 {
   partial class ProjectsolutionActions
   {
+    public virtual void Translate(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var dialog = Dialogs.CreateInputDialog("Введите текст для перевода");
+      var question = dialog.AddMultilineString("Текст", true);
+      dialog.Buttons.AddOkCancel();
+
+      if (dialog.Show() != DialogButtons.Ok || string.IsNullOrWhiteSpace(question.Value))
+        return;
+
+      try
+      {
+        // Локальный вызов — достаточно передать только вопрос
+        var answer = litiko.DocflowEskhata.PublicFunctions.Module.Remote.AskGemini(question.Value);
+
+        if (string.IsNullOrWhiteSpace(answer))
+          Dialogs.ShowMessage("Пустой ответ Gemini.", MessageType.Warning);
+        else
+          Dialogs.ShowMessage("Результат: " + answer, "Смысловой перевод может быть не точным, перепроверьте переведенный текст");
+      }
+      catch (Exception ex)
+      {
+        e.AddError("Не удалось получить ответ от Gemini: " + ex.Message);
+      }
+    }
+
+    public virtual bool CanTranslate(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return true;
+    }
+
     public virtual void CreateResolution(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      var addendum = Functions.Projectsolution.Remote.CreateResolution();      
+      var addendum = Functions.Projectsolution.Remote.CreateResolution();
       addendum.LeadingDocument = _obj;
       addendum.OurSignatory = _obj.Meeting?.President;
-      addendum.Show();      
+      addendum.Show();
     }
 
     public virtual bool CanCreateResolution(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      var roleCreationResolutions = Roles.GetAll(r => r.Sid == Constants.Module.RoleGuid.CreationResolutions).SingleOrDefault();            
+      var roleCreationResolutions = Roles.GetAll(r => r.Sid == Constants.Module.RoleGuid.CreationResolutions).SingleOrDefault();
       return !_obj.State.IsChanged && (Users.Current.IncludedIn(roleCreationResolutions) || Users.Current.IncludedIn(Roles.Administrators));
     }
 
     public virtual void CreateExtractProtocol(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      var addendum = Functions.Projectsolution.Remote.CreateExtractProtocol();      
+      var addendum = Functions.Projectsolution.Remote.CreateExtractProtocol();
       addendum.LeadingDocument = _obj;
       addendum.Show();
     }
@@ -48,7 +78,7 @@ namespace litiko.CollegiateAgencies.Client
       {
         Dialogs.ShowMessage(litiko.CollegiateAgencies.Resources.NoVersionMessage, MessageType.Warning);
         throw new OperationCanceledException();
-      }      
+      }
       
       base.SendForApproval(e);
     }
@@ -105,9 +135,9 @@ namespace litiko.CollegiateAgencies.Client
         if (litiko.Eskhata.Meetings.GetAll().Any(x => x.Id == meetingId))
         {
           _obj.Meeting = meeting;
-          _obj.Save();                 
+          _obj.Save();
         }
-      }      
+      }
       #endregion
       
       #region Включение в существующее совещанее
@@ -128,7 +158,7 @@ namespace litiko.CollegiateAgencies.Client
             Functions.Projectsolution.ProcessIncludingInMeeting(_obj, meeting, false);
             
             _obj.Meeting = meeting;
-            _obj.Save();          
+            _obj.Save();
           }
           else
           {
@@ -137,16 +167,16 @@ namespace litiko.CollegiateAgencies.Client
           }
           
         }
-      }      
+      }
       #endregion
 
     }
 
     public virtual bool CanIncludeInAgenda(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return _obj.InternalApprovalState == InternalApprovalState.Signed && (Equals(Sungero.Company.Employees.As(Users.Current), _obj.MeetingCategory?.Secretary) || 
-        Substitutions.UsersWhoSubstitute(Users.As(_obj.MeetingCategory?.Secretary)).Any(u => Equals(u, Users.Current)) ||
-        Users.Current.IncludedIn(Roles.Administrators));            
+      return _obj.InternalApprovalState == InternalApprovalState.Signed && (Equals(Sungero.Company.Employees.As(Users.Current), _obj.MeetingCategory?.Secretary) ||
+                                                                            Substitutions.UsersWhoSubstitute(Users.As(_obj.MeetingCategory?.Secretary)).Any(u => Equals(u, Users.Current)) ||
+                                                                            Users.Current.IncludedIn(Roles.Administrators));
     }
 
   }

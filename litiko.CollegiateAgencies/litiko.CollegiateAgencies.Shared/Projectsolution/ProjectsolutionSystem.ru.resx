@@ -259,4 +259,10 @@
   <data name="Property_QuestionGroup" xml:space="preserve">
     <value>Группа вопросов</value>
   </data>
+  <data name="Action_Translate" xml:space="preserve">
+    <value>Перевод</value>
+  </data>
+  <data name="Ribbon_Translate_87465ae381134ac6809f41abfef3f299" xml:space="preserve">
+    <value>Перевод</value>
+  </data>
 </root>

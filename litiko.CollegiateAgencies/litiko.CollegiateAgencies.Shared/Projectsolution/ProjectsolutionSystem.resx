@@ -289,4 +289,22 @@
   <data name="Property_QuestionGroup" xml:space="preserve">
     <value>Question group</value>
   </data>
+  <data name="Action_Translate" xml:space="preserve">
+    <value>Translate</value>
+  </data>
+  <data name="Action_TranslateDescription" xml:space="preserve">
+    <value>Переводит введенный вами текст на таджикский язык</value>
+  </data>
+  <data name="Action_TranslateHint" xml:space="preserve">
+    <value>Перевести текст</value>
+  </data>
+  <data name="Action_TranslateConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_TranslateConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Translate_87465ae381134ac6809f41abfef3f299" xml:space="preserve">
+    <value>Translate</value>
+  </data>
 </root>
