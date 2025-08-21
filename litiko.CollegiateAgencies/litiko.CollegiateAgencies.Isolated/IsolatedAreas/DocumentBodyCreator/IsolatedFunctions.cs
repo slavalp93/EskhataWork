@@ -72,7 +72,46 @@ namespace litiko.CollegiateAgencies.Isolated.DocumentBodyCreator
         #region AgendaList
         if (MoveTopaPagraphContainsText(document, "AgendaList", builder))
         {          
-            AddStringsToNumberedList(builder, agendaList);                                                                
+          // Добавляем нумерованный список
+          builder.ListFormat.ApplyNumberDefault();
+          var numberedList = builder.ListFormat.List;          
+          // ОБЩАЯ текстовая позиция и табуляция
+          const double textIndentPt = 36.0; // 1.27 см
+          
+          // Настройка уровня 0 (1., 2.)
+          var level0 = numberedList.ListLevels[0];
+          level0.NumberFormat = "\u0000.";
+          level0.NumberStyle = NumberStyle.Arabic;
+          level0.NumberPosition = 0;
+          level0.TextPosition = textIndentPt;
+          level0.TabPosition = textIndentPt;
+          level0.Alignment = ListLevelAlignment.Left;
+          if (agendaList.Count == 1)
+          {
+            var firstAgenda = agendaList.FirstOrDefault();
+            var parts = firstAgenda.Split(new[] { "##" }, StringSplitOptions.None);
+            if (parts.Length >= 3)
+            {
+              if (int.TryParse(parts[1], out int number))
+              {
+                if (number > 1)
+                  level0.StartAt = number;              
+              }
+              
+              builder.Writeln(parts[2]);
+            }
+            else
+              builder.Writeln(firstAgenda);
+          }
+          else
+          {
+            foreach (var agendaText in agendaList)
+            {
+              builder.Writeln(agendaText);
+            }          
+          }
+          builder.ListFormat.RemoveNumbers();
+            
         }        
         #endregion
         
