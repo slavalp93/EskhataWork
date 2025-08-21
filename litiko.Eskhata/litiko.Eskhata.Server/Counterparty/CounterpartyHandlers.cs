@@ -89,6 +89,7 @@ namespace litiko.Eskhata
       base.Created(e);
       
       _obj.NUNonrezidentlitiko = false;
+      _obj.VATPayerlitiko = false;
     }
   }
 

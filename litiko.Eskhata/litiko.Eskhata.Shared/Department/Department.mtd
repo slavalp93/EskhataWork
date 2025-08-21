@@ -21,6 +21,17 @@
   },
   "Forms": [
     {
+      "$type": "Sungero.Metadata.InplaceFormMetadata, Sungero.Metadata",
+      "NameGuid": "ad83498f-d515-4027-b87c-339dfa82a92f",
+      "Name": "Employees",
+      "Controls": [],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "SettingsResourceKey"
+      ],
+      "Versions": []
+    },
+    {
       "$type": "Sungero.Metadata.StandaloneFormMetadata, Sungero.Metadata",
       "NameGuid": "fcd3a3a2-7db4-47d9-8c35-c835c3bc89e4",
       "Name": "Card",
@@ -39,9 +50,171 @@
           ],
           "IsAncestorMetadata": true,
           "Overridden": [
-            "ColumnDefinitions"
+            "ColumnDefinitions",
+            "Controls"
           ],
           "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "deb0c05a-bde0-49c7-855c-155ea1889d11",
+          "Name": "Namelitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "8c163781-cb21-4a64-bfba-1413d24e910e",
+          "PropertyGuid": "869d1723-c5a9-410c-b7aa-73b1bcd9e812",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "b3da2d18-ba3f-4bb5-ab01-289caad4c6f2",
+          "Name": "Managerlitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "8c163781-cb21-4a64-bfba-1413d24e910e",
+          "PropertyGuid": "039659da-1b07-4277-bdf6-0ff215926ec5",
+          "RowNumber": 4,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "61071c2a-4ccc-4c63-9278-39ed4acac114",
+          "Name": "HeadDepartmentlitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "8c163781-cb21-4a64-bfba-1413d24e910e",
+          "PropertyGuid": "f27925f7-d2b8-43ea-a0b5-5ad1a2c1424b",
+          "RowNumber": 3,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "31d4506b-27e8-4efe-ab6c-78f8f930d731",
+          "Name": "Phonelitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "8c163781-cb21-4a64-bfba-1413d24e910e",
+          "PropertyGuid": "5423f61a-9e61-4c26-8689-2aeef713fa94",
+          "RowNumber": 5,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "7a80c2dd-ff95-4f4a-856f-2367dc18c1b6",
+          "Name": "Statuslitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+          "ParentGuid": "8c163781-cb21-4a64-bfba-1413d24e910e",
+          "PropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1",
+          "RowNumber": 6,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "da31b438-c042-406c-b0ff-e493f133fb74",
+          "Name": "OurCompanylitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "8c163781-cb21-4a64-bfba-1413d24e910e",
+          "PropertyGuid": "64aeb59f-2ae2-4204-b665-3a10603fcb99",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "424a9893-aa1f-44d9-85cd-eab7745011a5",
+          "Name": "ShortNamelitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "8c163781-cb21-4a64-bfba-1413d24e910e",
+          "PropertyGuid": "b22d0728-37cf-4304-8f84-ffe8607c819d",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "ef841bd5-b2b9-4d3c-bb33-a96e06f4a822",
+          "Name": "Commentlitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.TextEditorToTextBinder",
+          "ParentGuid": "8c163781-cb21-4a64-bfba-1413d24e910e",
+          "PropertyGuid": "eb5f06a4-0830-42d0-b00b-adff88508d7d",
+          "RowNumber": 8,
+          "RowSpan": 1,
+          "Settings": [
+            {
+              "Name": "Height",
+              "Value": 40
+            },
+            {
+              "Name": "NeedExpand",
+              "Value": true
+            }
+          ],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "a86c4ebe-1157-4f43-be2b-e2a05662ccd6",
+          "Name": "Codelitiko",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "8c163781-cb21-4a64-bfba-1413d24e910e",
+          "PropertyGuid": "a881f104-cf2f-4576-a7ab-2146760a1e93",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": [],
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "94fee134-25eb-40b3-b846-fe0692aed979",
+          "Name": "TINlitikolitiko",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "8c163781-cb21-4a64-bfba-1413d24e910e",
+          "PropertyGuid": "656bc041-ed86-4bb6-aa6e-45fb574fede8",
+          "RowNumber": 6,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "227825f2-1801-40ca-9685-046b1df73a5c",
+          "Name": "Citylitikolitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "8c163781-cb21-4a64-bfba-1413d24e910e",
+          "PropertyGuid": "63184c72-e15f-43bd-a658-6f7ef7bb8fb1",
+          "RowNumber": 7,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,
@@ -90,6 +263,25 @@
       "Length": 100,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "f52e1279-0001-4bae-94f5-e4a045f181e4"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "656bc041-ed86-4bb6-aa6e-45fb574fede8",
+      "Name": "TINlitiko",
+      "Code": "TINlitiko",
+      "Length": 50,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "7e5d4a5d-9153-4972-8572-f548511ec031"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "63184c72-e15f-43bd-a658-6f7ef7bb8fb1",
+      "Name": "Citylitiko",
+      "Code": "Citylitiko",
+      "EntityGuid": "3a0c21f8-aa88-429c-891f-56c24d56fcef",
+      "FlatListInStandaloneLookup": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "656bc041-ed86-4bb6-aa6e-45fb574fede8"
     }
   ],
   "PublicStructures": [],
