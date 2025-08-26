@@ -221,9 +221,11 @@ namespace litiko.Eskhata.Server
       
       var agenda = Agendas.GetAll().Where(d => Equals(d.Meeting, _obj)).FirstOrDefault();
       if (agenda == null)
-        return null;
+        return null;            
       
-      var votingApprovalRule = Sungero.Docflow.ApprovalRules.GetAll().Where(r => r.Name == litiko.CollegiateAgencies.PublicConstants.Module.VotingApprovalRuleName).FirstOrDefault();
+      //var votingApprovalRule = Sungero.Docflow.ApprovalRules.GetAll().Where(r => r.Name == litiko.CollegiateAgencies.PublicConstants.Module.VotingApprovalRuleName).FirstOrDefault();
+      var availableApprovalRules = Sungero.Docflow.PublicFunctions.OfficialDocument.Remote.GetApprovalRules(agenda);
+      var votingApprovalRule = availableApprovalRules.Where(r => r.Name == litiko.CollegiateAgencies.PublicConstants.Module.VotingApprovalRuleName).FirstOrDefault();
       if (votingApprovalRule == null)
         return null;
       

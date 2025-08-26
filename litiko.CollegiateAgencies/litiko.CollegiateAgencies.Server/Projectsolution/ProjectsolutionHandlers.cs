@@ -177,9 +177,15 @@ namespace litiko.CollegiateAgencies
           if (_obj.MeetingCategory.President != null)
             categoryMembers.Add(_obj.MeetingCategory.President);
           if (_obj.MeetingCategory.Secretary != null)
-            categoryMembers.Add(_obj.MeetingCategory.Secretary);          
+          {
+            categoryMembers.Add(_obj.MeetingCategory.Secretary);
+            
+            var substituters = Sungero.CoreEntities.Substitutions.ActiveUsersWhoSubstitute(_obj.MeetingCategory.Secretary);
+            foreach (var user in substituters)
+              categoryMembers.Add(Sungero.Company.Employees.As(user));
+          }
           foreach (Sungero.Company.IEmployee member in _obj.MeetingCategory.Members.Where(x => x.Member != null).Select(x => x.Member))
-            categoryMembers.Add(member);                              
+            categoryMembers.Add(member);
           
           foreach (var employee in categoryMembers)
           {

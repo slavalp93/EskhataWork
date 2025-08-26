@@ -82,5 +82,6 @@ namespace litiko.CollegiateAgencies.Structures.Module
     /// Голосование - решение принято?
     /// </summary>
     public bool? VoutingAccepted { get; set; }    
-  }	
+  }
+
 }
