@@ -304,6 +304,13 @@
       "StartAt": "1753-01-01T06:00:00"
     }
   ],
+  "Libraries": [
+    {
+      "NameGuid": "b1ee683c-f13a-4715-b834-fc717117555f",
+      "Name": "NewtonsoftJson",
+      "Scope": "Both"
+    }
+  ],
   "PublicConstants": [
     {
       "Name": "ActionItemExecutionTaskOtherGroupGuid",

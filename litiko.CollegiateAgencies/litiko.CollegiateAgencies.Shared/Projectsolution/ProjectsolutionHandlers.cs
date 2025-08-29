@@ -5,8 +5,10 @@ using Sungero.Core;
 using Sungero.CoreEntities;
 using litiko.CollegiateAgencies.Projectsolution;
 
+
 namespace litiko.CollegiateAgencies
 {
+
   partial class ProjectsolutionVotingSharedHandlers
   {
 
@@ -16,7 +18,7 @@ namespace litiko.CollegiateAgencies
       {
         _obj.Yes = false;
         _obj.No = false;
-      }      
+      }
     }
 
     public virtual void VotingNoChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
@@ -25,7 +27,7 @@ namespace litiko.CollegiateAgencies
       {
         _obj.Yes = false;
         _obj.Abstained = false;
-      }      
+      }
     }
 
     public virtual void VotingYesChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
@@ -45,7 +47,7 @@ namespace litiko.CollegiateAgencies
     {
       int minNumber = 1;
       foreach (var decision in _obj.DecidedMinutes)
-        decision.Number = minNumber++;      
+        decision.Number = minNumber++;
     }
 
     public virtual void DecidedMinutesAdded(Sungero.Domain.Shared.CollectionPropertyAddedEventArgs e)
@@ -61,7 +63,7 @@ namespace litiko.CollegiateAgencies
     {
       int minNumber = 1;
       foreach (var decision in _obj.Decided)
-        decision.Number = minNumber++;      
+        decision.Number = minNumber++;
     }
 
     public virtual void DecidedAdded(Sungero.Domain.Shared.CollectionPropertyAddedEventArgs e)

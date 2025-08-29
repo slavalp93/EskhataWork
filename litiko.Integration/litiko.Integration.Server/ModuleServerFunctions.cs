@@ -47,7 +47,8 @@ namespace litiko.Integration.Server
   
         //string application_key = $"{uri.Scheme}://{uri.Host}/" +"Integration/odata/Integration/ProcessResponseFromIS##";
         //string application_key = $"{ipAdress}/Integration/odata/Integration/ProcessResponseFromIS##";
-        string application_key = $"{uri.Host}/Integration/odata/Integration/ProcessResponseFromIS##";
+//        string application_key = $"{uri.Host}/Integration/odata/Integration/ProcessResponseFromIS##";
+string application_key = $"http://192.168.7.50/Integration/odata/Integration/ProcessResponseFromIS##";
         
         string url = method.IntegrationSystem.ServiceUrl;
         var xmlRequestBody = string.Empty;

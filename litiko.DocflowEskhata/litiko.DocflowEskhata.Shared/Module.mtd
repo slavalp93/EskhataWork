@@ -152,6 +152,22 @@
       "Value": "new System.Guid(\"58b9ed35-9c84-46cd-aa79-9b5ef5a82f5d\")"
     },
     {
+      "Name": "apiKeyGPT",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"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\""
+    },
+    {
+      "Name": "apiKeyGPT1",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"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\""
+    },
+    {
       "Name": "Checklist",
       "ParentClasses": [
         "Module",
@@ -288,11 +304,39 @@
   ],
   "PublicFunctions": [
     {
-      "Name": "AskGemini",
+      "Name": "TranslateRuToEn",
       "IsRemote": true,
       "Parameters": [
         {
-          "Name": "question",
+          "Name": "text",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "TranslateRuToTj",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "text",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "TranslateTjToRu",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "text",
           "ParameterType": "global::System.String",
           "ParameterTypeFullName": "System.String"
         }
@@ -320,7 +364,9 @@
     "OutgoingPoACorrespondence",
     "ApiKeyGPT",
     "ApiKeyCopilot",
-    "ApiKeyGemini"
+    "ApiKeyGemini",
+    "GPT",
+    "ChatGPT"
   ],
   "ServerAssemblyName": "litiko.DocflowEskhata.Server",
   "ServerNamespace": "litiko.DocflowEskhata.Server",

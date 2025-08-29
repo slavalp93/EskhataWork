@@ -13,6 +13,7 @@ namespace litiko.DocflowEskhata.Server
 {
   public class ModuleFunctions
   {
+
     /// <summary>
     /// Создать и заполнить временную таблицу для конвертов.
     /// </summary>
@@ -126,48 +127,76 @@ namespace litiko.DocflowEskhata.Server
     }
     
     [Public, Remote(IsPure = true)]
-    public string AskGemini(string question)
+    public static string TranslateRuToTj(string text)
     {
-      var apiKey = Constants.Module.apiKeyGemini;
-
-      using (var client = new HttpClient())
+      return AskChatGPT(text, "ru->tj");
+    }
+    
+    [Public, Remote(IsPure = true)]
+    public static string TranslateTjToRu(string text)
+    {
+      return AskChatGPT(text, "tj->ru");
+    }
+    
+    [Public, Remote(IsPure = true)]
+    public static string TranslateRuToEn(string text)
+    {
+      return AskChatGPT(text, "ru->en");
+    }
+    
+    private static string AskChatGPT(string text, string direction)
+    {
+      var apiKey = litiko.DocflowEskhata.Constants.Module.apiKeyGPT1;
+      
+      if(string.IsNullOrWhiteSpace(text))
+        return string.Empty;
+      
+      var url = "https://api.openai.com/v1/chat/completions";
+      string systemPrompt;
+      switch (direction)
       {
-        client.BaseAddress = new Uri("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent");
+        case "ru->tj":
+          systemPrompt = "You are a professional translator. Translate from Russian to Tajik. Return only the translation, no comments.";
+          break;
+        case "tj->ru":
+          systemPrompt = "You are a professional translator. Translate from Tajik to Russian. Return only the translation, no comments.";
+          break;
+        case "ru->en":
+          systemPrompt = "You are a professional translator. Translate from Russian to English. Return only the translation, no comments.";
+          break;
+        default:
+          systemPrompt = "You are a professional translator. Return only the translation, no comments.";
+          break;
+      }
+      using(var client = new HttpClient())
+      {
         client.DefaultRequestHeaders.Clear();
-        client.DefaultRequestHeaders.Add("X-goog-api-key", apiKey);
-        client.DefaultRequestHeaders.Add("Accept", "application/json");
-
-        var requestJson = new JObject
+        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + apiKey);
+        
+        var payload = new JObject
         {
-          ["contents"] = new JArray
+          ["model"] = "gpt-4o-mini",     // при желании можно заменить на gpt-4o
+          ["temperature"] = 0,       // детерминированнее
+          ["messages"] = new JArray
           {
-            new JObject
-            {
-              ["parts"] = new JArray
-              {
-                new JObject
-                {
-                  ["text"] = "Переведи с русского на таджикский без лишних слов:\n" + question
-                }
-              }
-            }
+            new JObject { ["role"] = "system", ["content"] = systemPrompt },
+            new JObject { ["role"] = "user",   ["content"] = text }
           }
         };
-
-        var content = new StringContent(requestJson.ToString(), Encoding.UTF8, "application/json");
-        var response = client.PostAsync(client.BaseAddress, content).Result;
-
+        
+        var content = new StringContent(payload.ToString(Formatting.None), Encoding.UTF8, "application/json");
+        var response = client.PostAsync(url, content).Result;
+        var responseJson = response.Content.ReadAsStringAsync().Result;
+        
         if (!response.IsSuccessStatusCode)
-          throw new Exception("Ошибка при обращении к Gemini API попробуйте через минуту: " + response.StatusCode);
+          throw new Exception($"OpenAI API error: {response.StatusCode} Повторите попытку через минуту");
 
-        var resultJson = response.Content.ReadAsStringAsync().Result;
-        var parsed = JObject.Parse(resultJson);
-
-        // Берем текст перевода из content.parts[0].text
-        var translatedText = parsed["candidates"]?[0]?["content"]?["parts"]?[0]?["text"]?.ToString();
-
-        return !string.IsNullOrWhiteSpace(translatedText) ? translatedText.Trim() : "Ответ пустой";
+        var parsed = JObject.Parse(responseJson);
+        var translation = parsed["choices"]?[0]?["message"]?["content"]?.ToString();
+        return translation?.Trim() ?? string.Empty;
       }
     }
+    
+    
   }
 }
