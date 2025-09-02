@@ -289,19 +289,19 @@
   <data name="Property_QuestionGroup" xml:space="preserve">
     <value>Question group</value>
   </data>
-  <data name="Action_TranslateRuToTj" xml:space="preserve">
+  <data name="Action_TranslateRuToTjToEn" xml:space="preserve">
     <value>Translate Ru To Tj</value>
   </data>
-  <data name="Action_TranslateRuToTjDescription" xml:space="preserve">
+  <data name="Action_TranslateRuToTjToEnDescription" xml:space="preserve">
     <value>Переводит введенный вами текст на таджикский язык</value>
   </data>
-  <data name="Action_TranslateRuToTjHint" xml:space="preserve">
-    <value>Перевести текст с русского на таджикский</value>
+  <data name="Action_TranslateRuToTjToEnHint" xml:space="preserve">
+    <value>Перевести текст с русского на таджикский и английский</value>
   </data>
-  <data name="Action_TranslateRuToTjConfirmationMessage" xml:space="preserve">
+  <data name="Action_TranslateRuToTjToEnConfirmationMessage" xml:space="preserve">
     <value />
   </data>
-  <data name="Action_TranslateRuToTjConfirmationDescription" xml:space="preserve">
+  <data name="Action_TranslateRuToTjToEnConfirmationDescription" xml:space="preserve">
     <value />
   </data>
   <data name="Ribbon_TranslateDescription_e948421695fc42c181314ae89b85e65b" xml:space="preserve">
@@ -344,21 +344,6 @@
     <value />
   </data>
   <data name="Action_TranslateRuToEnConfirmationDescription" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Action_Action" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Action_ActionDescription" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Action_ActionHint" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Action_ActionConfirmationMessage" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Action_ActionConfirmationDescription" xml:space="preserve">
     <value />
   </data>
 </root>

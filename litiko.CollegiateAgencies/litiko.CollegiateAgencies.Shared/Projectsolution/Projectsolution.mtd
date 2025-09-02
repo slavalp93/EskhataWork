@@ -48,7 +48,7 @@
     },
     {
       "NameGuid": "930daff8-302e-47e5-bb5d-56cc9c7a2115",
-      "Name": "TranslateRuToTj",
+      "Name": "TranslateRuToTjToEn",
       "ActionArea": "CardAndCollection",
       "GenerateHandler": true,
       "LargeIconName": "Action_TranslateRuToTj_large_930daff8302e47e5bb5d56cc9c7a2115.png",
@@ -1495,9 +1495,9 @@
       {
         "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
         "NameGuid": "c791b81d-49a7-4fdd-8d23-e996a24e30fa",
-        "Name": "RuToTj",
+        "Name": "RuToTjToEn",
         "ActionGuid": "930daff8-302e-47e5-bb5d-56cc9c7a2115",
-        "Index": 0,
+        "Index": 1,
         "ParentGuid": "e9484216-95fc-42c1-8131-4ae89b85e65b"
       },
       {
@@ -1505,7 +1505,7 @@
         "NameGuid": "32cc433d-0208-4e66-bb84-665fbc0b16bd",
         "Name": "TjToRu",
         "ActionGuid": "1a328bee-bdd2-4ce0-81e4-476b78068783",
-        "Index": 1,
+        "Index": 2,
         "ParentGuid": "e9484216-95fc-42c1-8131-4ae89b85e65b"
       },
       {
@@ -1513,7 +1513,7 @@
         "NameGuid": "b0a33759-923f-42fd-b1f6-5cc3a28f78df",
         "Name": "RuToEn",
         "ActionGuid": "952286e7-5fd0-4d8e-8100-54060a643e8a",
-        "Index": 2,
+        "Index": 3,
         "ParentGuid": "e9484216-95fc-42c1-8131-4ae89b85e65b"
       }
     ],

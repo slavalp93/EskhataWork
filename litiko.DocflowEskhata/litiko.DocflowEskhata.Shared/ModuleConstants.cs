@@ -4,22 +4,7 @@ using Sungero.Core;
 namespace litiko.DocflowEskhata.Constants
 {
   public static class Module
-  {
-
-    /// <summary>
-    /// ApiKeys
-    /// </summary>
-    [Sungero.Core.Public]
-    public const string apiKeyGPT = "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";
-    
-    [Sungero.Core.Public]
-    public const string apiKeyGPT1 = "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";
-//    [Sungero.Core.Public]
-//    public const string apiKeyCopilot = "11290a6051c4453681c7e6dce460836e.593b5a60b92863c8";
-//    
-//    [Sungero.Core.Public]
-//    public const string apiKeyGemini = "AIzaSyAlAhqjBf_ue_9tIMVrwgeXck2BwfdmfoA";
-    
+  { 
     public static class DocumentTypeGuids
     {
       [Sungero.Core.Public]

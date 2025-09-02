@@ -9,6 +9,7 @@ namespace litiko.CollegiateAgencies.Client
 {
   partial class ProjectsolutionActions
   {
+
     public virtual void TranslateRuToEn(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var sourceListened = _obj.ListenedRU;
@@ -33,7 +34,7 @@ namespace litiko.CollegiateAgencies.Client
             _obj.ListenedEN = translatedListened;
         }
 
-        // Решили (коллекция)
+        // Постановили (Пункт решения)
         foreach (var decided in _obj.Decided)
         {
           if (!string.IsNullOrWhiteSpace(decided.DecisionRU))
@@ -43,12 +44,11 @@ namespace litiko.CollegiateAgencies.Client
               decided.DecisionEN = translatedDecision;
           }
         }
-
         Dialogs.NotifyMessage("Перевод RU->EN выполнен.");
       }
       catch (Exception ex)
       {
-        e.AddError("Ошибка перевода RU->EN: " + ex.Message);
+        e.AddWarning("Ошибка перевода RU->EN: " + ex.Message);
       }
     }
 
@@ -88,7 +88,7 @@ namespace litiko.CollegiateAgencies.Client
         if (!string.IsNullOrWhiteSpace(translatedListened))
           _obj.ListenedRU = translatedListened;
 
-        // Решили (коллекция)
+        // Постановили (Пункт решения)
         foreach (var decided in _obj.Decided)
         {
           if (!string.IsNullOrWhiteSpace(decided.DecisionTJ))
@@ -103,7 +103,7 @@ namespace litiko.CollegiateAgencies.Client
       }
       catch (Exception ex)
       {
-        e.AddError("Ошибка перевода TJ->RU: " + ex.Message + ".");
+        e.AddWarning("Ошибка перевода TJ->RU: " + ex.Message + ".");
       }
     }
 
@@ -113,7 +113,7 @@ namespace litiko.CollegiateAgencies.Client
       return true;
     }
 
-    public virtual void TranslateRuToTj(Sungero.Domain.Client.ExecuteActionArgs e)
+    public virtual void TranslateRuToTjToEn(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var sourseSubject = _obj.Subject;
       var sourseListened = _obj.ListenedRU;
@@ -146,7 +146,7 @@ namespace litiko.CollegiateAgencies.Client
         if (!string.IsNullOrWhiteSpace(translatedListened))
           _obj.ListenedTJ = translatedListened;
 
-        // Решили (коллекция)
+        // Постановили (Пункт решения)
         foreach (var decided in _obj.Decided)
         {
           if (!string.IsNullOrWhiteSpace(decided.DecisionRU))
@@ -156,17 +156,19 @@ namespace litiko.CollegiateAgencies.Client
               decided.DecisionTJ = translatedDecided;
           }
         }
+        
+        TranslateRuToEn(e);
 
         Dialogs.NotifyMessage("Перевод RU->TJ выполнен.");
       }
       catch (Exception ex)
       {
-        e.AddError("Ошибка перевода RU->TJ: " + ex.Message + ".");
+        e.AddWarning("Ошибка перевода RU->TJ: " + ex.Message + ".");
       }
     }
 
 
-    public virtual bool CanTranslateRuToTj(Sungero.Domain.Client.CanExecuteActionArgs e)
+    public virtual bool CanTranslateRuToTjToEn(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
       return true;
     }

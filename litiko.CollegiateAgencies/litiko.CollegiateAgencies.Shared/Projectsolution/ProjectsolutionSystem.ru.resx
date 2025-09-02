@@ -259,8 +259,8 @@
   <data name="Property_QuestionGroup" xml:space="preserve">
     <value>Группа вопросов</value>
   </data>
-  <data name="Action_TranslateRuToTj" xml:space="preserve">
-    <value>Перевод с русского на таджикский</value>
+  <data name="Action_TranslateRuToTjToEn" xml:space="preserve">
+    <value>Перевод с русского на таджикский и английский</value>
   </data>
   <data name="Ribbon_Translate_4732c1763ed443b5996a6e5120e11cc5" xml:space="preserve">
     <value>Перевод</value>
@@ -268,10 +268,10 @@
   <data name="Ribbon_Translate_e948421695fc42c181314ae89b85e65b" xml:space="preserve">
     <value>Перевод</value>
   </data>
-  <data name="Action_TranslateRuToTjHint" xml:space="preserve">
+  <data name="Action_TranslateRuToTjToEnHint" xml:space="preserve">
     <value>Перевести текст</value>
   </data>
-  <data name="Action_TranslateRuToTjDescription" xml:space="preserve">
+  <data name="Action_TranslateRuToTjToEnDescription" xml:space="preserve">
     <value>Переводит русский текст на таджикский язык</value>
   </data>
   <data name="Action_TranslateTjToRu" xml:space="preserve">

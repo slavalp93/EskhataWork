@@ -146,13 +146,19 @@ namespace litiko.DocflowEskhata.Server
     
     private static string AskChatGPT(string text, string direction)
     {
-      var apiKey = litiko.DocflowEskhata.Constants.Module.apiKeyGPT1;
+      var apiKeys = new[]
+      {
+        Resources.ApiKeyGPT1,
+        Resources.ApiKeyGPT2
+      };
       
       if(string.IsNullOrWhiteSpace(text))
         return string.Empty;
       
       var url = "https://api.openai.com/v1/chat/completions";
+      
       string systemPrompt;
+      
       switch (direction)
       {
         case "ru->tj":
@@ -168,35 +174,49 @@ namespace litiko.DocflowEskhata.Server
           systemPrompt = "You are a professional translator. Return only the translation, no comments.";
           break;
       }
-      using(var client = new HttpClient())
+      
+      foreach (var apiKey in apiKeys)
       {
-        client.DefaultRequestHeaders.Clear();
-        client.DefaultRequestHeaders.Add("Authorization", "Bearer " + apiKey);
-        
-        var payload = new JObject
+        using(var client = new HttpClient())
         {
-          ["model"] = "gpt-4o-mini",     // при желании можно заменить на gpt-4o
-          ["temperature"] = 0,       // детерминированнее
-          ["messages"] = new JArray
+          client.DefaultRequestHeaders.Clear();
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + apiKey);
+          
+          var payload = new JObject
           {
-            new JObject { ["role"] = "system", ["content"] = systemPrompt },
-            new JObject { ["role"] = "user",   ["content"] = text }
+            ["model"] = "gpt-4o-mini",
+            ["temperature"] = 0,
+            ["messages"] = new JArray
+            {
+              new JObject { ["role"] = "system", ["content"] = systemPrompt },
+              new JObject { ["role"] = "user",   ["content"] = text }
+            }
+          };
+          
+          var content = new StringContent(payload.ToString(Formatting.None), Encoding.UTF8, "application/json");
+          var response = client.PostAsync(url, content).Result;
+          var responseJson = response.Content.ReadAsStringAsync().Result;
+          
+          if (response.IsSuccessStatusCode)
+          {
+            var parsed = JObject.Parse(responseJson);
+            var translation = parsed["choices"]?[0]?["message"]?["content"]?.ToString();
+            return translation?.Trim() ?? string.Empty;
           }
-        };
-        
-        var content = new StringContent(payload.ToString(Formatting.None), Encoding.UTF8, "application/json");
-        var response = client.PostAsync(url, content).Result;
-        var responseJson = response.Content.ReadAsStringAsync().Result;
-        
-        if (!response.IsSuccessStatusCode)
-          throw new Exception($"OpenAI API error: {response.StatusCode} Повторите попытку через минуту");
-
-        var parsed = JObject.Parse(responseJson);
-        var translation = parsed["choices"]?[0]?["message"]?["content"]?.ToString();
-        return translation?.Trim() ?? string.Empty;
+          else if((int)response.StatusCode == 429)
+          {
+            Logger.Error($"Ключ превысил лимит. Пробуем следующий.");
+            continue;
+          }
+          else
+          {
+            Logger.Error($"{response.StatusCode} || {responseJson}");
+            throw new Exception($"Повторите попытку через минуту.");
+          }
+        }
       }
+      
+      throw new Exception("Превышен лимит запросов, пожалуйста повторите попытку через минуту");
     }
-    
-    
   }
 }
