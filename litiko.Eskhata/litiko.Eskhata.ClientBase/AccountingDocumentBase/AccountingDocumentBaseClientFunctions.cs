@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
 using Sungero.CoreEntities;
-using litiko.NSI.ResponsibilityMatrix;
+using litiko.Eskhata.AccountingDocumentBase;
 
-namespace litiko.NSI.Server
+namespace litiko.Eskhata.Client
 {
-  partial class ResponsibilityMatrixFunctions
+  partial class AccountingDocumentBaseFunctions
   {
+
   }
 }

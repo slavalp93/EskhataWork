@@ -150,7 +150,7 @@
           "Name": "FSZN",
           "ColumnNumber": 2,
           "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
           "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
           "PropertyGuid": "cd732bf4-1729-4168-9eea-c4e834ded4b2",
           "RowNumber": 5,
@@ -264,11 +264,11 @@
       "PreviousPropertyGuid": "8ab2134c-b74a-400e-920d-1a150314f3f4"
     },
     {
-      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
       "NameGuid": "cd732bf4-1729-4168-9eea-c4e834ded4b2",
       "Name": "FSZN",
       "Code": "FSZN",
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "afd0b87b-0493-4f3d-9e98-7f60a495df2b"
     }
   ],
