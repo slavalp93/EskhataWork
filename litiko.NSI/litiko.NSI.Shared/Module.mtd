@@ -115,6 +115,37 @@
   "Overridden": [
     "IsVisible"
   ],
+  "PublicFunctions": [
+    {
+      "Name": "GetContractsVsPaymentDoc",
+      "Parameters": [
+        {
+          "Name": "contract",
+          "ParameterType": "global::litiko.Eskhata.IContract",
+          "ParameterTypeFullName": "litiko.Eskhata.IContract, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "counterparty",
+          "ParameterType": "global::Sungero.Parties.ICounterparty",
+          "ParameterTypeFullName": "Sungero.Parties.ICounterparty, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::litiko.NSI.IContractsVsPaymentDoc",
+      "ReturnTypeFullName": "litiko.NSI.IContractsVsPaymentDoc, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetResponsibilityMatrix",
+      "Parameters": [
+        {
+          "Name": "contract",
+          "ParameterType": "global::litiko.Eskhata.IContract",
+          "ParameterTypeFullName": "litiko.Eskhata.IContract, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::litiko.NSI.IResponsibilityMatrix",
+      "ReturnTypeFullName": "litiko.NSI.IResponsibilityMatrix, Sungero.Domain.Interfaces"
+    }
+  ],
   "PublicStructures": [],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.NSI",
