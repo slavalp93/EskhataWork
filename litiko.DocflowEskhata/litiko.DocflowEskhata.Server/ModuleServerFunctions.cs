@@ -1,23 +1,29 @@
 using System;
+using System.Text;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
 using Sungero.CoreEntities;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace litiko.DocflowEskhata.Server
 {
   public class ModuleFunctions
   {
-/// <summary>
+
+    /// <summary>
     /// Создать и заполнить временную таблицу для конвертов.
     /// </summary>
     /// <param name="reportSessionId">Идентификатор отчета.</param>
     /// <param name="outgoingDocuments">Список Исходящих документов.</param>
     /// <param name="contractualDocuments">Список Договорных документов.</param>
     /// <param name="accountingDocuments">Список Финансовых документов.</param>
-    public static void FillEnvelopeTable(string reportSessionId, 
-                                         List<Sungero.Docflow.IOutgoingDocumentBase> outgoingDocuments, 
-                                         List<Sungero.Docflow.IContractualDocumentBase> contractualDocuments, 
+    public static void FillEnvelopeTable(string reportSessionId,
+                                         List<Sungero.Docflow.IOutgoingDocumentBase> outgoingDocuments,
+                                         List<Sungero.Docflow.IContractualDocumentBase> contractualDocuments,
                                          List<Sungero.Docflow.IAccountingDocumentBase> accountingDocuments)
     {
       var id = 1;
@@ -118,6 +124,99 @@ namespace litiko.DocflowEskhata.Server
         address = address.Replace(zipCodeMatch.Value, string.Empty).Trim();
       
       return Structures.Module.ZipCodeAndAddress.Create(zipCode, address);
+    }
+    
+    [Public, Remote(IsPure = true)]
+    public static string TranslateRuToTj(string text)
+    {
+      return AskChatGPT(text, "ru->tj");
+    }
+    
+    [Public, Remote(IsPure = true)]
+    public static string TranslateTjToRu(string text)
+    {
+      return AskChatGPT(text, "tj->ru");
+    }
+    
+    [Public, Remote(IsPure = true)]
+    public static string TranslateRuToEn(string text)
+    {
+      return AskChatGPT(text, "ru->en");
+    }
+    
+    private static string AskChatGPT(string text, string direction)
+    {
+      var apiKeys = new[]
+      {
+        Resources.ApiKeyGPT1,
+        Resources.ApiKeyGPT2
+      };
+      
+      if(string.IsNullOrWhiteSpace(text))
+        return string.Empty;
+      
+      var url = "https://api.openai.com/v1/chat/completions";
+      
+      string systemPrompt;
+      
+      switch (direction)
+      {
+        case "ru->tj":
+          systemPrompt = "You are a professional translator. Translate from Russian to Tajik. Return only the translation, no comments.";
+          break;
+        case "tj->ru":
+          systemPrompt = "You are a professional translator. Translate from Tajik to Russian. Return only the translation, no comments.";
+          break;
+        case "ru->en":
+          systemPrompt = "You are a professional translator. Translate from Russian to English. Return only the translation, no comments.";
+          break;
+        default:
+          systemPrompt = "You are a professional translator. Return only the translation, no comments.";
+          break;
+      }
+      
+      foreach (var apiKey in apiKeys)
+      {
+        using(var client = new HttpClient())
+        {
+          client.DefaultRequestHeaders.Clear();
+          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + apiKey);
+          
+          var payload = new JObject
+          {
+            ["model"] = "gpt-4o-mini",
+            ["temperature"] = 0,
+            ["messages"] = new JArray
+            {
+              new JObject { ["role"] = "system", ["content"] = systemPrompt },
+              new JObject { ["role"] = "user",   ["content"] = text }
+            }
+          };
+          
+          var content = new StringContent(payload.ToString(Formatting.None), Encoding.UTF8, "application/json");
+          var response = client.PostAsync(url, content).Result;
+          var responseJson = response.Content.ReadAsStringAsync().Result;
+          
+          if (response.IsSuccessStatusCode)
+          {
+            var parsed = JObject.Parse(responseJson);
+            var translation = parsed["choices"]?[0]?["message"]?["content"]?.ToString();
+            return translation?.Trim() ?? string.Empty;
+          }
+          else if((int)response.StatusCode == 429)
+          {
+            Logger.Error($"Ключ превысил лимит. Пробуем следующий.");
+            continue;
+          }
+          else
+          {
+            Logger.Error($"{response.StatusCode} || {responseJson}");
+            throw new Exception($"Повторите попытку через минуту.");
+          }
+        }
+      }
+      
+      throw new Exception("Превышен лимит запросов, пожалуйста повторите попытку через минуту");
     }
   }
 }

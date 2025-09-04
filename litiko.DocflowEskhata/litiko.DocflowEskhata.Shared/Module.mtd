@@ -131,6 +131,11 @@
       "NameGuid": "a797a8de-93bf-47ea-81e1-d1aec50478de",
       "Name": "Drawing",
       "Scope": "Both"
+    },
+    {
+      "NameGuid": "273c030d-48aa-47f1-9e94-c65783324b04",
+      "Name": "NewtonsoftJsson",
+      "Scope": "Both"
     }
   ],
   "Overridden": [
@@ -145,6 +150,22 @@
       ],
       "TypeName": "System.Guid",
       "Value": "new System.Guid(\"58b9ed35-9c84-46cd-aa79-9b5ef5a82f5d\")"
+    },
+    {
+      "Name": "apiKeyGPT",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"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\""
+    },
+    {
+      "Name": "apiKeyGPT1",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"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\""
     },
     {
       "Name": "Checklist",
@@ -281,6 +302,50 @@
       "Value": "new System.Guid(\"4a530f9c-593b-4b7e-a8af-2ef8b6d33029\")"
     }
   ],
+  "PublicFunctions": [
+    {
+      "Name": "TranslateRuToEn",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "text",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "TranslateRuToTj",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "text",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "TranslateTjToRu",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "text",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    }
+  ],
   "PublicStructures": [],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.DocflowEskhata",
@@ -296,7 +361,12 @@
     "IncomingLettersOrganisations",
     "OutgoingCorrespondence",
     "OutgoingCorrespondenceNBT",
-    "OutgoingPoACorrespondence"
+    "OutgoingPoACorrespondence",
+    "ApiKeyGPT",
+    "ApiKeyCopilot",
+    "ApiKeyGemini",
+    "GPT",
+    "ChatGPT"
   ],
   "ServerAssemblyName": "litiko.DocflowEskhata.Server",
   "ServerNamespace": "litiko.DocflowEskhata.Server",

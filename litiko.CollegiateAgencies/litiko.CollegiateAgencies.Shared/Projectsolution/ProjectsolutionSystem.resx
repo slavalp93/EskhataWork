@@ -289,4 +289,61 @@
   <data name="Property_QuestionGroup" xml:space="preserve">
     <value>Question group</value>
   </data>
+  <data name="Action_TranslateRuToTjToEn" xml:space="preserve">
+    <value>Translate Ru To Tj</value>
+  </data>
+  <data name="Action_TranslateRuToTjToEnDescription" xml:space="preserve">
+    <value>Переводит введенный вами текст на таджикский язык</value>
+  </data>
+  <data name="Action_TranslateRuToTjToEnHint" xml:space="preserve">
+    <value>Перевести текст с русского на таджикский и английский</value>
+  </data>
+  <data name="Action_TranslateRuToTjToEnConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_TranslateRuToTjToEnConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_TranslateDescription_e948421695fc42c181314ae89b85e65b" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Ribbon_Translate_4732c1763ed443b5996a6e5120e11cc5" xml:space="preserve">
+    <value>Translate</value>
+  </data>
+  <data name="Ribbon_Translate_e948421695fc42c181314ae89b85e65b" xml:space="preserve">
+    <value>Translate</value>
+  </data>
+  <data name="Ribbon_TranslateHint_e948421695fc42c181314ae89b85e65b" xml:space="preserve">
+    <value>Список возможностей перевода текста</value>
+  </data>
+  <data name="Action_TranslateTjToRu" xml:space="preserve">
+    <value>TranslateTj To Ru</value>
+  </data>
+  <data name="Action_TranslateTjToRuDescription" xml:space="preserve">
+    <value>Данная кнопка переводит введенный вами текст на русский язык</value>
+  </data>
+  <data name="Action_TranslateTjToRuHint" xml:space="preserve">
+    <value>Переводит текст на русский язык</value>
+  </data>
+  <data name="Action_TranslateTjToRuConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_TranslateTjToRuConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_TranslateRuToEn" xml:space="preserve">
+    <value>Translate Ru to En</value>
+  </data>
+  <data name="Action_TranslateRuToEnDescription" xml:space="preserve">
+    <value>Переводит русский текст на английский</value>
+  </data>
+  <data name="Action_TranslateRuToEnHint" xml:space="preserve">
+    <value>Переводит русский текст на английский</value>
+  </data>
+  <data name="Action_TranslateRuToEnConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_TranslateRuToEnConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
 </root>

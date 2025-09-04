@@ -8,7 +8,7 @@
         <property name="View" isnull="true" iskey="true">
           <property name="LinesPerRowMode">None</property>
           <property name="ColumnChooserState" isnull="true" iskey="true">
-            <property name="Location">592,-282</property>
+            <property name="Location">458,-345</property>
             <property name="Size">220,250</property>
           </property>
           <property name="AllowMoveColumnToDropArea">false</property>
@@ -26,40 +26,36 @@
         <property name="GroupCount">0</property>
         <property name="Columns" iskey="true" value="4">
           <property name="Item1" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">1</property>
             <property name="Visible">true</property>
             <property name="Name">Projectsolution_Decided_DecisionRU</property>
             <property name="FieldName">DecisionRU</property>
-            <property name="VisibleIndex">1</property>
-            <property name="Width">386</property>
-            <property name="ActualWidth">38*</property>
+            <property name="VisibleIndex">0</property>
+            <property name="Width">132</property>
+            <property name="ActualWidth">20*</property>
           </property>
           <property name="Item2" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">2</property>
             <property name="Visible">true</property>
             <property name="Name">Projectsolution_Decided_DecisionTJ</property>
             <property name="FieldName">DecisionTJ</property>
-            <property name="VisibleIndex">2</property>
-            <property name="Width">162</property>
-            <property name="ActualWidth">16*</property>
+            <property name="VisibleIndex">1</property>
+            <property name="Width">125</property>
+            <property name="ActualWidth">19*</property>
           </property>
           <property name="Item3" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">3</property>
             <property name="Visible">true</property>
             <property name="Name">Projectsolution_Decided_DecisionEN</property>
             <property name="FieldName">DecisionEN</property>
-            <property name="VisibleIndex">3</property>
-            <property name="Width">173</property>
-            <property name="ActualWidth">17*</property>
+            <property name="VisibleIndex">2</property>
+            <property name="Width">132</property>
+            <property name="ActualWidth">20*</property>
           </property>
           <property name="Item4" isnull="true" iskey="true">
-            <property name="ExtendedVisibleIndex">0</property>
             <property name="Visible">true</property>
             <property name="Name">Projectsolution_Decided_Number</property>
             <property name="FieldName">Number</property>
-            <property name="VisibleIndex">0</property>
-            <property name="Width">122</property>
-            <property name="ActualWidth">12*</property>
+            <property name="VisibleIndex">3</property>
+            <property name="Width">46</property>
+            <property name="ActualWidth">7*</property>
           </property>
         </property>
         <property name="GroupSummarySortInfo" iskey="true" value="0" />

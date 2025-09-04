@@ -4,7 +4,7 @@ using Sungero.Core;
 namespace litiko.DocflowEskhata.Constants
 {
   public static class Module
-  {
+  { 
     public static class DocumentTypeGuids
     {
       [Sungero.Core.Public]

@@ -45,6 +45,30 @@
       "GenerateHandler": true,
       "LargeIconName": "Action_CreateResolution_large_0d4fec61322949cc8ee1b38c15aad4d5.png",
       "SmallIconName": "Action_CreateResolution_small_0d4fec61322949cc8ee1b38c15aad4d5.png"
+    },
+    {
+      "NameGuid": "930daff8-302e-47e5-bb5d-56cc9c7a2115",
+      "Name": "TranslateRuToTjToEn",
+      "ActionArea": "CardAndCollection",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_TranslateRuToTj_large_930daff8302e47e5bb5d56cc9c7a2115.png",
+      "SmallIconName": "Action_TranslateRuToTj_small_930daff8302e47e5bb5d56cc9c7a2115.png"
+    },
+    {
+      "NameGuid": "1a328bee-bdd2-4ce0-81e4-476b78068783",
+      "Name": "TranslateTjToRu",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_TranslateTjToRu_large_1a328beebdd24ce081e4476b78068783.png",
+      "SmallIconName": "Action_TranslateTjToRu_small_1a328beebdd24ce081e4476b78068783.png"
+    },
+    {
+      "NameGuid": "952286e7-5fd0-4d8e-8100-54060a643e8a",
+      "Name": "TranslateRuToEn",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_TranslateRuToEn_large_952286e75fd04d8e810054060a643e8a.png",
+      "SmallIconName": "Action_TranslateRuToEn_small_952286e75fd04d8e810054060a643e8a.png"
     }
   ],
   "BaseGuid": "ce3e34ed-7be2-4426-a951-d5a70f966650",
@@ -1457,9 +1481,52 @@
         "ButtonSize": "Large",
         "Index": 2,
         "ParentGuid": "05d63e9c-36c0-44c3-a7fd-b1a360e13fc0"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonStaticDropDownButtonMetadata, Sungero.Metadata",
+        "NameGuid": "e9484216-95fc-42c1-8131-4ae89b85e65b",
+        "Name": "Translate",
+        "ButtonSize": "Large",
+        "Index": -1,
+        "LargeIconName": "Ribbon_Translate_large_e948421695fc42c181314ae89b85e65b.png",
+        "ParentGuid": "4732c176-3ed4-43b5-996a-6e5120e11cc5",
+        "SmallIconName": "Ribbon_Translate_small_e948421695fc42c181314ae89b85e65b.png"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "c791b81d-49a7-4fdd-8d23-e996a24e30fa",
+        "Name": "RuToTjToEn",
+        "ActionGuid": "930daff8-302e-47e5-bb5d-56cc9c7a2115",
+        "Index": 1,
+        "ParentGuid": "e9484216-95fc-42c1-8131-4ae89b85e65b"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "32cc433d-0208-4e66-bb84-665fbc0b16bd",
+        "Name": "TjToRu",
+        "ActionGuid": "1a328bee-bdd2-4ce0-81e4-476b78068783",
+        "Index": 2,
+        "ParentGuid": "e9484216-95fc-42c1-8131-4ae89b85e65b"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "b0a33759-923f-42fd-b1f6-5cc3a28f78df",
+        "Name": "RuToEn",
+        "ActionGuid": "952286e7-5fd0-4d8e-8100-54060a643e8a",
+        "Index": 3,
+        "ParentGuid": "e9484216-95fc-42c1-8131-4ae89b85e65b"
       }
     ],
-    "Groups": [],
+    "Groups": [
+      {
+        "NameGuid": "4732c176-3ed4-43b5-996a-6e5120e11cc5",
+        "Name": "Translate",
+        "IconName": null,
+        "Index": 21,
+        "ParentGuid": "21a31627-5f58-4416-8c4a-90f538ee2e57",
+        "SmallIconName": null
+      }
+    ],
     "IsAncestorMetadata": true,
     "Pages": [],
     "RibbonKind": "Card"

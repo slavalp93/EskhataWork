@@ -94,4 +94,19 @@
   <data name="OutgoingPoACorrespondence" xml:space="preserve">
     <value>Исходящая корреспонденция по доверенности</value>
   </data>
+  <data name="ApiKeyGPT" xml:space="preserve">
+    <value>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</value>
+  </data>
+  <data name="ApiKeyCopilot" xml:space="preserve">
+    <value>44d4672c5ef64d78991cd956ee55c33d.6e7d7af0a3875492</value>
+  </data>
+  <data name="ApiKeyGemini" xml:space="preserve">
+    <value>AIzaSyAlAhqjBf_ue_9tIMVrwgeXck2BwfdmfoA</value>
+  </data>
+  <data name="GPT" xml:space="preserve">
+    <value>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</value>
+  </data>
+  <data name="ChatGPT" xml:space="preserve">
+    <value>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</value>
+  </data>
 </root>
