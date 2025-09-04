@@ -259,4 +259,7 @@
   <data name="Property_QuestionGroup" xml:space="preserve">
     <value>Группа вопросов</value>
   </data>
+  <data name="Control_cce128fe0119427f8a81781f246dddcc_DisplayValue" xml:space="preserve">
+    <value>Выбрать все "За"</value>
+  </data>
 </root>

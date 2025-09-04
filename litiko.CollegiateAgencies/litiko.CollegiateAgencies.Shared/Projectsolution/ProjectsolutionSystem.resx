@@ -289,4 +289,7 @@
   <data name="Property_QuestionGroup" xml:space="preserve">
     <value>Question group</value>
   </data>
+  <data name="Control_cce128fe0119427f8a81781f246dddcc_DisplayValue" xml:space="preserve">
+    <value>Select all voting</value>
+  </data>
 </root>
