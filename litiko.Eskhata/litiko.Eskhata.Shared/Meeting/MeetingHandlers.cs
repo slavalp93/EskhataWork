@@ -202,6 +202,8 @@ namespace litiko.Eskhata
         _added.VotingType = litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Extramural;
       if (_obj.Votinglitiko == litiko.Eskhata.Meeting.Votinglitiko.NoVoting)
         _added.VotingType = litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.NoVoting;
+      if (_obj.Votinglitiko == litiko.Eskhata.Meeting.Votinglitiko.IntExt)
+        _added.VotingType = litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Intramural;
     }
   }
 
