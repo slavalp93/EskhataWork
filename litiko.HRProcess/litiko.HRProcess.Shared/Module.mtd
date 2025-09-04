@@ -47,7 +47,6 @@
   "InterfaceNamespace": "litiko.HRProcess",
   "IsolatedAssemblyName": "litiko.HRProcess.Isolated",
   "IsolatedNamespace": "litiko.HRProcess.Isolated",
-  "IsVisible": false,
   "Overridden": [
     "IsVisible"
   ],

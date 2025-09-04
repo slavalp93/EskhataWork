@@ -360,6 +360,13 @@
         "Controls",
         "UseAncestorControls"
       ]
+    },
+    {
+      "$type": "Sungero.Metadata.InplaceFormMetadata, Sungero.Metadata",
+      "NameGuid": "852a4c17-0131-496b-a1b2-56c36cae5bef",
+      "Name": "PassportData",
+      "Controls": [],
+      "ParentFormGuid": "cb72ca72-0d09-423d-9611-7a9db4191ed5"
     }
   ],
   "IconResourcesKeys": [],

@@ -30,7 +30,7 @@
             <property name="Name">Hiring_PassportDetailsCollection_Type</property>
             <property name="FieldName">Type</property>
             <property name="VisibleIndex">0</property>
-            <property name="Width">111</property>
+            <property name="Width">161</property>
             <property name="ActualWidth">18*</property>
           </property>
           <property name="Item2" isnull="true" iskey="true">
@@ -38,7 +38,7 @@
             <property name="Name">Hiring_PassportDetailsCollection_Series</property>
             <property name="FieldName">Series</property>
             <property name="VisibleIndex">1</property>
-            <property name="Width">111</property>
+            <property name="Width">161</property>
             <property name="ActualWidth">18*</property>
           </property>
           <property name="Item3" isnull="true" iskey="true">
@@ -46,7 +46,7 @@
             <property name="Name">Hiring_PassportDetailsCollection_Number</property>
             <property name="FieldName">Number</property>
             <property name="VisibleIndex">2</property>
-            <property name="Width">111</property>
+            <property name="Width">161</property>
             <property name="ActualWidth">18*</property>
           </property>
           <property name="Item4" isnull="true" iskey="true">
@@ -54,7 +54,7 @@
             <property name="Name">Hiring_PassportDetailsCollection_DateOfIssue</property>
             <property name="FieldName">DateOfIssue</property>
             <property name="VisibleIndex">3</property>
-            <property name="Width">178</property>
+            <property name="Width">259</property>
             <property name="ActualWidth">29*</property>
           </property>
           <property name="Item5" isnull="true" iskey="true">
@@ -62,7 +62,7 @@
             <property name="Name">Hiring_PassportDetailsCollection_DateOfExpiry</property>
             <property name="FieldName">DateOfExpiry</property>
             <property name="VisibleIndex">4</property>
-            <property name="Width">178</property>
+            <property name="Width">259</property>
             <property name="ActualWidth">29*</property>
           </property>
           <property name="Item6" isnull="true" iskey="true">
@@ -70,7 +70,7 @@
             <property name="Name">Hiring_PassportDetailsCollection_IssuedBy</property>
             <property name="FieldName">IssuedBy</property>
             <property name="VisibleIndex">5</property>
-            <property name="Width">111</property>
+            <property name="Width">161</property>
             <property name="ActualWidth">18*</property>
           </property>
           <property name="Item7" isnull="true" iskey="true">
@@ -78,7 +78,7 @@
             <property name="Name">Hiring_PassportDetailsCollection_TIN</property>
             <property name="FieldName">TIN</property>
             <property name="VisibleIndex">6</property>
-            <property name="Width">111</property>
+            <property name="Width">161</property>
             <property name="ActualWidth">18*</property>
           </property>
         </property>
@@ -115,7 +115,7 @@
             <property name="Name">Hiring_FullTimeOrTemporary_TypeOfSubstituton</property>
             <property name="FieldName">TypeOfSubstituton</property>
             <property name="VisibleIndex">0</property>
-            <property name="Width">418</property>
+            <property name="Width">608</property>
             <property name="ActualWidth">68*</property>
           </property>
           <property name="Item2" isnull="true" iskey="true">
@@ -123,7 +123,7 @@
             <property name="Name">Hiring_FullTimeOrTemporary_EmployeeSelection</property>
             <property name="FieldName">EmployeeSelection</property>
             <property name="VisibleIndex">1</property>
-            <property name="Width">474</property>
+            <property name="Width">688</property>
             <property name="ActualWidth">77*</property>
           </property>
           <property name="Item3" isnull="true" iskey="true">
@@ -131,7 +131,7 @@
             <property name="Name">Hiring_FullTimeOrTemporary_WorkingConditions</property>
             <property name="FieldName">WorkingConditions</property>
             <property name="VisibleIndex">2</property>
-            <property name="Width">394</property>
+            <property name="Width">572</property>
             <property name="ActualWidth">64*</property>
           </property>
         </property>
@@ -168,7 +168,7 @@
             <property name="Name">Hiring_ContractCollection_Number</property>
             <property name="FieldName">Number</property>
             <property name="VisibleIndex">0</property>
-            <property name="Width">252</property>
+            <property name="Width">367</property>
             <property name="ActualWidth">41*</property>
           </property>
           <property name="Item2" isnull="true" iskey="true">
@@ -176,7 +176,7 @@
             <property name="Name">Hiring_ContractCollection_FixedTermContract</property>
             <property name="FieldName">FixedTermContract</property>
             <property name="VisibleIndex">1</property>
-            <property name="Width">504</property>
+            <property name="Width">733</property>
             <property name="ActualWidth">82*</property>
           </property>
           <property name="Item3" isnull="true" iskey="true">
@@ -184,7 +184,7 @@
             <property name="Name">Hiring_ContractCollection_ContractTermFrom</property>
             <property name="FieldName">ContractTermFrom</property>
             <property name="VisibleIndex">2</property>
-            <property name="Width">677</property>
+            <property name="Width">983</property>
             <property name="ActualWidth">110*</property>
           </property>
           <property name="Item4" isnull="true" iskey="true">
@@ -192,7 +192,7 @@
             <property name="Name">Hiring_ContractCollection_ContractTermUntil</property>
             <property name="FieldName">ContractTermUntil</property>
             <property name="VisibleIndex">3</property>
-            <property name="Width">701</property>
+            <property name="Width">1019</property>
             <property name="ActualWidth">114*</property>
           </property>
         </property>
