@@ -64,4 +64,10 @@
   <data name="CoverDescription_MeetingMinutesReportlitiko" xml:space="preserve">
     <value>List of meeting minutes for the selected category and registration date that falls within the specified period.</value>
   </data>
+  <data name="CoverAction_AbsentReasonslocal" xml:space="preserve">
+    <value>Absent reasons</value>
+  </data>
+  <data name="CoverDescription_AbsentReasonslocal" xml:space="preserve">
+    <value>Reasons for absence at collegial meetings</value>
+  </data>
 </root>

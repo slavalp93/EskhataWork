@@ -244,6 +244,13 @@ namespace litiko.Eskhata
   partial class MeetingAbsentlitikoSharedHandlers
   {
 
+    // Временное заполнение поля Reason "под капотом", с целью последующего удаления поля (после переноса в новое полепричин в старых совещаниях). 
+    // Вместо него AbsentReason
+    public virtual void AbsentlitikoAbsentReasonChanged(litiko.Eskhata.Shared.MeetingAbsentlitikoAbsentReasonChangedEventArgs e)
+    {
+      _obj.Reason = e.NewValue?.Name;
+    }
+
     public virtual void AbsentlitikoEmployeeChanged(litiko.Eskhata.Shared.MeetingAbsentlitikoEmployeeChangedEventArgs e)
     {
       var selectedEmployee = e.NewValue;

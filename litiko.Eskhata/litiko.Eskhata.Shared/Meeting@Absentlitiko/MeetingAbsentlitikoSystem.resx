@@ -64,4 +64,7 @@
   <data name="Property_Reason" xml:space="preserve">
     <value>Reason</value>
   </data>
+  <data name="Property_AbsentReason" xml:space="preserve">
+    <value>Absent reason</value>
+  </data>
 </root>

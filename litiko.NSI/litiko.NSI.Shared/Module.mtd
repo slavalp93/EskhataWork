@@ -72,6 +72,10 @@
     {
       "ItemId": "a41cc530-6875-4bde-a348-5ae69965a938",
       "PreviousItemId": "4e4571da-71c5-4f73-82f6-c2b4ec721156"
+    },
+    {
+      "ItemId": "d1374008-9e6e-4f41-82a8-a9852f23ace6",
+      "PreviousItemId": "a41cc530-6875-4bde-a348-5ae69965a938"
     }
   ],
   "HandledEvents": [

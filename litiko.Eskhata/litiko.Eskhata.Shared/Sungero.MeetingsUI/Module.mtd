@@ -20,6 +20,14 @@
         "GroupId": "f835ecc9-a394-4ae3-aa36-40fee5802e1a",
         "PreviousItemGuid": "da8e1569-7f25-4b5c-9fbe-2587c9ae1b19",
         "ReportId": "0896e8c1-b6c1-4159-bfaa-74e636e74091"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "b8a23404-5ae7-465b-913f-f8436287e6cf",
+        "Name": "AbsentReasonslocal",
+        "EntityTypeId": "d1374008-9e6e-4f41-82a8-a9852f23ace6",
+        "GroupId": "6aa2e4d2-89c0-48c6-bb0f-146613c99d44",
+        "PreviousItemGuid": "8e5c53cc-b444-490f-ae47-dcc6a7b81606"
       }
     ],
     "Groups": [],
