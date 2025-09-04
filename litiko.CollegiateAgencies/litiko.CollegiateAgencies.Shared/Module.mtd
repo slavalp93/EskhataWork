@@ -230,7 +230,7 @@
   "IsolatedAssemblyName": "litiko.CollegiateAgencies.Isolated",
   "IsolatedFunctions": [
     {
-      "NameGuid": "d6d577b8-db46-4c9f-a7ab-fdaeb1e76d1a",
+      "NameGuid": "3514dea1-61d7-453b-92ca-1834336a1802",
       "Name": "FillMinutesBodyByTemplate",
       "IsolatedAreaId": "ff738b72-b42f-494d-adaf-be32d268cc2d",
       "Parameters": [
@@ -869,7 +869,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.85",
+  "Version": "0.0.1.86",
   "Widgets": [],
   "Versions": [
     {

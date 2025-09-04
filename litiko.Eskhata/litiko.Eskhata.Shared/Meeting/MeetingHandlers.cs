@@ -13,8 +13,14 @@ namespace litiko.Eskhata
     public virtual void AbsentlitikoDeleted(Sungero.Domain.Shared.CollectionPropertyDeletedEventArgs e)
     {
       var deletedEmployee = _deleted.Employee;
-      if (deletedEmployee != null && !_obj.Presentlitiko.Any(x => Equals(deletedEmployee, x.Employee)))
-        _obj.Presentlitiko.AddNew().Employee = deletedEmployee;
+      if (deletedEmployee != null)
+      {                
+        if (!_obj.Presentlitiko.Any(x => Equals(deletedEmployee, x.Employee)))
+          _obj.Presentlitiko.AddNew().Employee = deletedEmployee;
+        
+        if (Equals(deletedEmployee, _obj.MeetingCategorylitiko?.President) && !Equals(deletedEmployee, _obj.President))
+          _obj.President = deletedEmployee;                  
+      }        
     }
   }
 
@@ -55,7 +61,23 @@ namespace litiko.Eskhata
             _obj.Absentlitiko.Remove(element);
         }
         
-      }      
+        var previousEmployee = e.OldValue;
+        if (previousEmployee != null && !Equals(previousEmployee, selectedEmployee))
+        {
+          if (Equals(previousEmployee, _obj.MeetingCategorylitiko?.President) && !_obj.Absentlitiko.Any(x => Equals(x.Employee, previousEmployee)))
+            _obj.Absentlitiko.AddNew().Employee = previousEmployee;
+          
+          if (_obj.MeetingCategorylitiko.Members.Any(x => Equals(x.Member, previousEmployee)))
+          {
+            if (!_obj.Members.Any(x => Equals(x.Member, previousEmployee)))
+              _obj.Members.AddNew().Member = previousEmployee;
+            
+            if (!_obj.Presentlitiko.Any(x => Equals(x.Employee, previousEmployee)))
+              _obj.Presentlitiko.AddNew().Employee = previousEmployee;
+          }
+        } 
+        
+      }
     }
 
     public virtual void MeetingCategorylitikoChanged(litiko.Eskhata.Shared.MeetingMeetingCategorylitikoChangedEventArgs e)
