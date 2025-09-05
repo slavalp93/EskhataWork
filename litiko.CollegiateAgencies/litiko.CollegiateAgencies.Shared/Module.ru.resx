@@ -150,5 +150,10 @@
   </data>
   <data name="DocumentKindIsEmpty" xml:space="preserve">
     <value>Для создания документа из шаблона необходимо указать вид документа</value>
+  <data name="ResponsibleEmployeeAHD" xml:space="preserve">
+    <value>Ответственный сотрудник АХД</value>
+  </data>
+  <data name="ResponsibleEmployeeAHDDescription" xml:space="preserve">
+    <value>Используется для подписания проекта решения</value>
   </data>
 </root>

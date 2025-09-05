@@ -1,0 +1,439 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "6f5b0bf5-4044-4efe-a948-80141662ec84",
+  "Name": "ContractsVsPaymentDoc",
+  "BaseGuid": "04581d26-0780-4cfd-b3cd-c2cafc5798b0",
+  "CanBeNavigationPropertyType": true,
+  "Code": "ContractsVsPay",
+  "CreationAreaMetadata": {
+    "NameGuid": "f7766750-eee2-4fcd-8003-5c06a90d1f44",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true
+  },
+  "ExtraSearchProperties": [],
+  "FilterPanel": {
+    "NameGuid": "b0125fbd-3b91-4dbb-914a-689276216404",
+    "Name": "FilterPanel",
+    "Controls": [],
+    "IsAncestorMetadata": true
+  },
+  "Forms": [
+    {
+      "$type": "Sungero.Metadata.StandaloneFormMetadata, Sungero.Metadata",
+      "NameGuid": "bca09813-9f8f-4b48-958e-b7a753682d96",
+      "Name": "Card",
+      "Controls": [
+        {
+          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
+          "NameGuid": "34f3349f-76a9-48d0-b3e2-25656f1ca021",
+          "Name": "ControlGroup"
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "c8583e0a-c5af-4ef1-b0cf-d17622343195",
+          "Name": "DocumentKind",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "34f3349f-76a9-48d0-b3e2-25656f1ca021",
+          "PropertyGuid": "d391ab24-674b-4326-ad41-205b6c704e57",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "d9f61abf-db47-44ca-b851-0455574e6693",
+          "Name": "Category",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "34f3349f-76a9-48d0-b3e2-25656f1ca021",
+          "PropertyGuid": "b094b210-e746-4d44-ba73-ecfe2c3d3742",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "688296ee-4257-452e-948a-5c22ee084b69",
+          "Name": "CounterpartyType",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+          "ParentGuid": "34f3349f-76a9-48d0-b3e2-25656f1ca021",
+          "PropertyGuid": "f4fe4ee4-bdd3-49fd-b572-43ef0644ed85",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
+          "NameGuid": "367c7e81-3c7c-4465-abea-0e4b40633aec",
+          "Name": "PaymentBasis",
+          "ColumnDefinitions": [
+            {
+              "Percentage": 33.33
+            },
+            {
+              "Percentage": 33.33
+            },
+            {
+              "Percentage": 33.33
+            }
+          ],
+          "GroupType": "GroupBox"
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "2e141820-3d58-41b8-ba03-8b8e7ccf967a",
+          "Name": "PBIsPaymentContract",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "367c7e81-3c7c-4465-abea-0e4b40633aec",
+          "PropertyGuid": "cffdeba8-56e1-4901-a8a1-40f9885d1743",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "2f8376a4-25f1-4a06-bc14-2ba3c6a1359f",
+          "Name": "PBIsPaymentAct",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "367c7e81-3c7c-4465-abea-0e4b40633aec",
+          "PropertyGuid": "e0e47e35-459a-43d4-b170-fd4c33916220",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "943515d2-33c8-4c97-9ff4-2a5dcf13377e",
+          "Name": "PBIsPaymentInvoice",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "367c7e81-3c7c-4465-abea-0e4b40633aec",
+          "PropertyGuid": "da1e2e19-b389-43cc-923f-74088c2882e4",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "47d9d6f4-341a-4c34-834e-9977801be4f6",
+          "Name": "PBIsPaymentOrder",
+          "ColumnNumber": 2,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "367c7e81-3c7c-4465-abea-0e4b40633aec",
+          "PropertyGuid": "c56276f4-f4f9-450a-8479-5c83b8aca5ce",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "d72c9331-162b-439e-ab6f-b6c2024f7d2f",
+          "Name": "PBIsPaymentTaxInvoice",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "367c7e81-3c7c-4465-abea-0e4b40633aec",
+          "PropertyGuid": "8962be3f-4d5b-4a69-8133-a29a85b3ad50",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
+          "NameGuid": "c5bed2c2-8e62-41bb-b733-fbfecaace97e",
+          "Name": "PaymentClosureBasis",
+          "ColumnDefinitions": [
+            {
+              "Percentage": 33.33
+            },
+            {
+              "Percentage": 33.33
+            },
+            {
+              "Percentage": 33.33
+            }
+          ],
+          "GroupType": "GroupBox"
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "56aadee3-9260-4eb1-a59d-67623a693043",
+          "Name": "PCBIsPaymentContract",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "c5bed2c2-8e62-41bb-b733-fbfecaace97e",
+          "PropertyGuid": "a281120a-dbe5-489b-83c1-fe78fc102faa",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "54471df4-56fc-46e3-a017-4c3c5a39d604",
+          "Name": "PCBIsPaymentAct",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "c5bed2c2-8e62-41bb-b733-fbfecaace97e",
+          "PropertyGuid": "9360ad8e-387d-4a2c-b8ca-8534e7d28b75",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "ed568b48-86c4-46a5-9027-9aaa1c43fb40",
+          "Name": "PCBIsPaymentInvoice",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "c5bed2c2-8e62-41bb-b733-fbfecaace97e",
+          "PropertyGuid": "67a4eeaf-c534-4b1d-886f-e4a2096f8a32",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "be18118c-1159-42e9-af53-a13814f8055d",
+          "Name": "PCBIsPaymentTaxInvoice",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "c5bed2c2-8e62-41bb-b733-fbfecaace97e",
+          "PropertyGuid": "48c3430c-aef6-4942-86ec-fe4eb2a72e19",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "7fbf4188-829a-4c20-b0cd-3fac3a427f29",
+          "Name": "PCBIsPaymentWaybill",
+          "ColumnNumber": 2,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "c5bed2c2-8e62-41bb-b733-fbfecaace97e",
+          "PropertyGuid": "42eb3f73-4fbb-4475-9549-94ed27fcf7d3",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "6a8cac87-c72b-45c8-a059-6494ff0aac0b",
+          "Name": "PCBIsPaymentInsurance",
+          "ColumnNumber": 2,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "c5bed2c2-8e62-41bb-b733-fbfecaace97e",
+          "PropertyGuid": "2a11cab0-6cd9-4f87-84d7-8705216b2bb9",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": []
+        }
+      ]
+    }
+  ],
+  "HandledEvents": [
+    "CreatedServer"
+  ],
+  "IconResourcesKeys": [],
+  "IntegrationServiceName": "NSIContractsVsPaymentDoc",
+  "OperationsClass": "",
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d391ab24-674b-4326-ad41-205b6c704e57",
+      "Name": "DocumentKind",
+      "Code": "DocumentKind",
+      "EntityGuid": "04f3b964-249b-4523-b1fc-8fd835b6d364",
+      "FlatListInStandaloneLookup": true,
+      "HandledEvents": [
+        "LookupServer"
+      ],
+      "IsDisplayValue": true,
+      "IsQuickSearchAllowed": true,
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "b094b210-e746-4d44-ba73-ecfe2c3d3742",
+      "Name": "Category",
+      "Code": "Category",
+      "EntityGuid": "eb34ad64-f23b-4c9f-9d48-74834fbbe33e",
+      "FlatListInStandaloneLookup": true,
+      "HandledEvents": [
+        "LookupServer"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "NeedPassEntityToLookupEvent": true,
+      "PreviousPropertyGuid": "d391ab24-674b-4326-ad41-205b6c704e57"
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "f4fe4ee4-bdd3-49fd-b572-43ef0644ed85",
+      "Name": "CounterpartyType",
+      "Code": "CounterpartyTy",
+      "DirectValues": [
+        {
+          "NameGuid": "4c7c5abd-c515-499b-805e-76eecf2467f0",
+          "Name": "Company",
+          "Code": "Company"
+        },
+        {
+          "NameGuid": "6293dd91-3374-40fd-8137-3fa5bb2556f6",
+          "Name": "Person",
+          "Code": "Person"
+        },
+        {
+          "NameGuid": "c901eab5-3f14-4314-9c77-58e4d7994604",
+          "Name": "Bank",
+          "Code": "Bank"
+        }
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "b094b210-e746-4d44-ba73-ecfe2c3d3742"
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "cffdeba8-56e1-4901-a8a1-40f9885d1743",
+      "Name": "PBIsPaymentContract",
+      "Code": "PBIsPaymentCon",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "f4fe4ee4-bdd3-49fd-b572-43ef0644ed85"
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "da1e2e19-b389-43cc-923f-74088c2882e4",
+      "Name": "PBIsPaymentInvoice",
+      "Code": "PBIsPaymentInv",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "cffdeba8-56e1-4901-a8a1-40f9885d1743",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "8962be3f-4d5b-4a69-8133-a29a85b3ad50",
+      "Name": "PBIsPaymentTaxInvoice",
+      "Code": "PBIsPaymentTax",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "da1e2e19-b389-43cc-923f-74088c2882e4",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "e0e47e35-459a-43d4-b170-fd4c33916220",
+      "Name": "PBIsPaymentAct",
+      "Code": "PBIsPaymentAct",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "8962be3f-4d5b-4a69-8133-a29a85b3ad50",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "c56276f4-f4f9-450a-8479-5c83b8aca5ce",
+      "Name": "PBIsPaymentOrder",
+      "Code": "PBIsPaymentOrd",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "e0e47e35-459a-43d4-b170-fd4c33916220",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "a281120a-dbe5-489b-83c1-fe78fc102faa",
+      "Name": "PCBIsPaymentContract",
+      "Code": "PCBIsPaymentCo",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "c56276f4-f4f9-450a-8479-5c83b8aca5ce",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "67a4eeaf-c534-4b1d-886f-e4a2096f8a32",
+      "Name": "PCBIsPaymentInvoice",
+      "Code": "PCBIsPaymentIn",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "a281120a-dbe5-489b-83c1-fe78fc102faa",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "48c3430c-aef6-4942-86ec-fe4eb2a72e19",
+      "Name": "PCBIsPaymentTaxInvoice",
+      "Code": "PCBIsPaymentTa",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "67a4eeaf-c534-4b1d-886f-e4a2096f8a32",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "9360ad8e-387d-4a2c-b8ca-8534e7d28b75",
+      "Name": "PCBIsPaymentAct",
+      "Code": "PCBIsPaymentAc",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "48c3430c-aef6-4942-86ec-fe4eb2a72e19",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "42eb3f73-4fbb-4475-9549-94ed27fcf7d3",
+      "Name": "PCBIsPaymentWaybill",
+      "Code": "PCBIsPaymentWa",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "9360ad8e-387d-4a2c-b8ca-8534e7d28b75",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "2a11cab0-6cd9-4f87-84d7-8705216b2bb9",
+      "Name": "PCBIsPaymentInsurance",
+      "Code": "PCBIsPaymentI",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "42eb3f73-4fbb-4475-9549-94ed27fcf7d3",
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "c5421150-7472-4619-9d96-85544e99c1b2",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "19e2bb31-3598-4e4e-ac88-93d86d6506f3",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

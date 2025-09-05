@@ -11,6 +11,11 @@ namespace litiko.Eskhata.Server
   partial class ApprovalTaskRouteHandlers
   {
 
+    public override void CompleteAssignment6(Sungero.Docflow.IApprovalAssignment assignment, Sungero.Docflow.Server.ApprovalAssignmentArguments e)
+    {
+      base.CompleteAssignment6(assignment, e);      
+    }
+
     public override void CompleteAssignment30(Sungero.Docflow.IApprovalSimpleAssignment assignment, Sungero.Docflow.Server.ApprovalSimpleAssignmentArguments e)
     {
       base.CompleteAssignment30(assignment, e);

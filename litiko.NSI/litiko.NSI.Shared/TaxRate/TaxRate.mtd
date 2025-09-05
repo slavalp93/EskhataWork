@@ -1,0 +1,302 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "994ce51a-6661-4176-951f-2000120cb252",
+  "Name": "TaxRate",
+  "BaseGuid": "04581d26-0780-4cfd-b3cd-c2cafc5798b0",
+  "CanBeNavigationPropertyType": true,
+  "Code": "TaxRate",
+  "CreationAreaMetadata": {
+    "NameGuid": "f7766750-eee2-4fcd-8003-5c06a90d1f44",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true
+  },
+  "ExtraSearchProperties": [],
+  "FilterPanel": {
+    "NameGuid": "b0125fbd-3b91-4dbb-914a-689276216404",
+    "Name": "FilterPanel",
+    "Controls": [],
+    "IsAncestorMetadata": true
+  },
+  "Forms": [
+    {
+      "$type": "Sungero.Metadata.StandaloneFormMetadata, Sungero.Metadata",
+      "NameGuid": "787366be-e151-44c0-8339-cccff2ee106a",
+      "Name": "Card",
+      "Controls": [
+        {
+          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
+          "NameGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
+          "Name": "ControlGroup",
+          "ColumnDefinitions": [
+            {
+              "Percentage": 33.33
+            },
+            {
+              "Percentage": 33.33
+            },
+            {
+              "Percentage": 33.33
+            }
+          ]
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "4ac3c5cb-0716-4fa8-8296-09a187d2256e",
+          "Name": "Control",
+          "ColumnNumber": 0,
+          "ColumnSpan": 3,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
+          "PropertyGuid": "3c80c591-ef50-4bdf-b0ac-c80993efab54",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "c1e24449-fc6a-4e6a-b431-2717db7353a5",
+          "Name": "DocumentKind",
+          "ColumnNumber": 0,
+          "ColumnSpan": 3,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
+          "PropertyGuid": "8a18a91d-b093-4a48-a667-7cf13c86c02d",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "68b84a60-b700-42b1-a4c6-8de8815a1e0f",
+          "Name": "Category",
+          "ColumnNumber": 0,
+          "ColumnSpan": 3,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
+          "PropertyGuid": "77871e84-a02c-4b16-b210-6e9a544de272",
+          "RowNumber": 2,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "ee99406b-f933-40c4-a816-1d772219f2a8",
+          "Name": "CounterpartyType",
+          "ColumnNumber": 0,
+          "ColumnSpan": 3,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+          "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
+          "PropertyGuid": "a1a3456e-f02f-4adb-8fd9-bdcd89ea2ed6",
+          "RowNumber": 3,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "1365a578-f8a1-4ed2-ac1a-7ba6c820ced7",
+          "Name": "TaxResident",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
+          "PropertyGuid": "8223fb4b-8d3d-4a1a-907f-3f87cf6a10d6",
+          "RowNumber": 4,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "615f8fc3-7a5b-4370-86af-3ead068fb631",
+          "Name": "PensionContribution",
+          "ColumnNumber": 2,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+          "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
+          "PropertyGuid": "8ab2134c-b74a-400e-920d-1a150314f3f4",
+          "RowNumber": 4,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "07e26913-0d95-41f5-89ff-d1e98d47599b",
+          "Name": "IncomeTax",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+          "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
+          "PropertyGuid": "afd0b87b-0493-4f3d-9e98-7f60a495df2b",
+          "RowNumber": 5,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "3de73926-2fd3-46d7-bcc5-8860a22dbeab",
+          "Name": "VAT",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+          "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
+          "PropertyGuid": "8b8c2eab-ce64-4eea-b554-fdee4491b44d",
+          "RowNumber": 4,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "ea940606-9837-4a68-9e9b-0980fffdafe3",
+          "Name": "FSZN",
+          "ColumnNumber": 2,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+          "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
+          "PropertyGuid": "cd732bf4-1729-4168-9eea-c4e834ded4b2",
+          "RowNumber": 5,
+          "RowSpan": 1,
+          "Settings": []
+        }
+      ]
+    }
+  ],
+  "HandledEvents": [
+    "CreatedServer"
+  ],
+  "IconResourcesKeys": [],
+  "IntegrationServiceName": "NSITaxRate",
+  "OperationsClass": "",
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "3c80c591-ef50-4bdf-b0ac-c80993efab54",
+      "Name": "Name",
+      "Code": "Name",
+      "IsDisplayValue": true,
+      "IsQuickSearchAllowed": true,
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "1dcedc29-5140-4770-ac92-eabc212326a1"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "8a18a91d-b093-4a48-a667-7cf13c86c02d",
+      "Name": "DocumentKind",
+      "Code": "DocumentKind",
+      "EntityGuid": "04f3b964-249b-4523-b1fc-8fd835b6d364",
+      "FlatListInStandaloneLookup": true,
+      "HandledEvents": [
+        "LookupServer"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "3c80c591-ef50-4bdf-b0ac-c80993efab54"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "77871e84-a02c-4b16-b210-6e9a544de272",
+      "Name": "Category",
+      "Code": "Category",
+      "EntityGuid": "eb34ad64-f23b-4c9f-9d48-74834fbbe33e",
+      "FlatListInStandaloneLookup": true,
+      "HandledEvents": [
+        "LookupServer"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "NeedPassEntityToLookupEvent": true,
+      "PreviousPropertyGuid": "8a18a91d-b093-4a48-a667-7cf13c86c02d"
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "a1a3456e-f02f-4adb-8fd9-bdcd89ea2ed6",
+      "Name": "CounterpartyType",
+      "Code": "CounterpartyTy",
+      "DirectValues": [
+        {
+          "NameGuid": "bf64fa6c-ca9b-4cf5-b5a3-94b484ca95d1",
+          "Name": "Company",
+          "Code": "Company"
+        },
+        {
+          "NameGuid": "8d42ae83-f271-401d-a38a-e79390f65a06",
+          "Name": "Person",
+          "Code": "Person"
+        },
+        {
+          "NameGuid": "3d9579b8-e5c4-4e81-a574-6aee48fa9c6d",
+          "Name": "Bank",
+          "Code": "Bank"
+        }
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "77871e84-a02c-4b16-b210-6e9a544de272"
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "8223fb4b-8d3d-4a1a-907f-3f87cf6a10d6",
+      "Name": "TaxResident",
+      "Code": "TaxResident",
+      "IsRequired": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "a1a3456e-f02f-4adb-8fd9-bdcd89ea2ed6"
+    },
+    {
+      "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "8b8c2eab-ce64-4eea-b554-fdee4491b44d",
+      "Name": "VAT",
+      "Code": "VAT",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "8223fb4b-8d3d-4a1a-907f-3f87cf6a10d6"
+    },
+    {
+      "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "8ab2134c-b74a-400e-920d-1a150314f3f4",
+      "Name": "PensionContribution",
+      "Code": "PensionContrib",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "8b8c2eab-ce64-4eea-b554-fdee4491b44d"
+    },
+    {
+      "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "afd0b87b-0493-4f3d-9e98-7f60a495df2b",
+      "Name": "IncomeTax",
+      "Code": "IncomeTax",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "8ab2134c-b74a-400e-920d-1a150314f3f4"
+    },
+    {
+      "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "cd732bf4-1729-4168-9eea-c4e834ded4b2",
+      "Name": "FSZN",
+      "Code": "FSZN",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "afd0b87b-0493-4f3d-9e98-7f60a495df2b"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "dcbb2a01-5ce4-468a-960b-f06be803282b",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "99c66256-16c8-455c-a49c-4bb38b9df8e1",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

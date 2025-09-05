@@ -11,14 +11,33 @@ namespace litiko.Eskhata
   {
 
     public virtual IEnumerable<Enumeration> CustomStageTypelitikoFiltering(IEnumerable<Enumeration> query)
-    {
-      if (_obj.StageType != StageType.SimpleAgr || _obj.AllowSendToRework.GetValueOrDefault())
-        query = query.Where(q => !Equals(q, CustomStageTypelitiko.Voting));
-      
-      if (_obj.StageType != StageType.SimpleAgr)
-        query = query.Where(q => !Equals(q, CustomStageTypelitiko.IncludeInMeet) && !Equals(q, CustomStageTypelitiko.ControlIRD));           
-      
-      return query;
+    {     
+      #region Согласование
+      if (_obj.StageType == StageType.Approvers)
+      {        
+        return query.Where(q => Equals(q, CustomStageTypelitiko.BudgetCheck));
+      }      
+      #endregion
+
+      #region Задание
+      if (_obj.StageType == StageType.SimpleAgr)
+      {
+        var allowedValues = new List<Enumeration>
+        {
+          CustomStageTypelitiko.Voting,
+          CustomStageTypelitiko.IncludeInMeet,
+          CustomStageTypelitiko.ControlIRD
+        };
+        
+        if (_obj.AllowSendToRework.GetValueOrDefault())
+          allowedValues.Remove(CustomStageTypelitiko.Voting);
+
+        return query.Where(q => allowedValues.Contains(q));
+      }      
+      #endregion
+
+      // Для всех остальных — недоступны никакие значения
+      return Enumerable.Empty<Enumeration>();
     }
   }
 
