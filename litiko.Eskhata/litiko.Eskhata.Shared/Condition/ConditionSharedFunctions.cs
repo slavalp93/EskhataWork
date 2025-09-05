@@ -32,6 +32,8 @@ namespace litiko.Eskhata.Shared
       
       baseConditions[DocflowEskhata.PublicConstants.Module.DocumentTypeGuids.OutgoingLetter.ToString()].Add(Eskhata.Condition.ConditionType.StandardRespons);
       
+      baseConditions[CollegiateAgencies.PublicConstants.Module.DocumentTypeGuids.ProjectSolution.ToString()].Add(Eskhata.Condition.ConditionType.MeetingCategorylitiko);
+      
       return baseConditions;
     }
     
@@ -51,6 +53,10 @@ namespace litiko.Eskhata.Shared
       _obj.State.Properties.OrganForApprovinglitiko.IsRequired = isOrganForApprovType;
 
       var isStandardResponse = _obj.ConditionType == ConditionType.StandardRespons;
+      
+      var isMeetingCategoryType = _obj.ConditionType == ConditionType.MeetingCategorylitiko;
+      _obj.State.Properties.MeetingCategorylitiko.IsVisible = isMeetingCategoryType;
+      _obj.State.Properties.MeetingCategorylitiko.IsRequired = isMeetingCategoryType;
     }
 
     /// <summary>
@@ -65,6 +71,9 @@ namespace litiko.Eskhata.Shared
       
       if (!_obj.State.Properties.OrganForApprovinglitiko.IsVisible)
         _obj.OrganForApprovinglitiko = null;
+      
+      if (!_obj.State.Properties.MeetingCategorylitiko.IsVisible)
+        _obj.MeetingCategorylitiko = null;
     }
     
     /// <summary>
@@ -74,6 +83,7 @@ namespace litiko.Eskhata.Shared
     /// <param name="task">Задача на согласование.</param>
     public override Sungero.Docflow.Structures.ConditionBase.ConditionResult CheckCondition(Sungero.Docflow.IOfficialDocument document, Sungero.Docflow.IApprovalTask task)
     {
+      #region Согласование с Главным бухгалтером
       if (_obj.ConditionType == Eskhata.Condition.ConditionType.ChiefAccountant)
       {
         if (Eskhata.Orders.Is(document))
@@ -88,17 +98,25 @@ namespace litiko.Eskhata.Shared
         
         return Sungero.Docflow.Structures.ConditionBase.ConditionResult.
           Create(null, litiko.Eskhata.Conditions.Resources.CannotComputeCondition);
-      }
+      }      
+      #endregion
       
+      #region Требования учетной политики Банка
       if (_obj.ConditionType == ConditionType.IsRequirements)
-        return this.CheckIsRequirements(document, task);
+        return this.CheckIsRequirements(document, task);      
+      #endregion
       
+      #region Связано со структурой банка
       if (_obj.ConditionType == ConditionType.IsRelatedStruct)
-        return this.CheckIsRelatedStruct(document, task);
+        return this.CheckIsRelatedStruct(document, task);      
+      #endregion
       
+      #region Рекомендации внутреннего аудита
       if (_obj.ConditionType == ConditionType.IsRecommendat)
-        return this.CheckIsRecommendat(document, task);
+        return this.CheckIsRecommendat(document, task);      
+      #endregion
 
+      #region Тип ВНД
       if (_obj.ConditionType == ConditionType.IRDType)
       {
         var regulatoryDocument = litiko.RegulatoryDocuments.RegulatoryDocuments.As(document);
@@ -106,8 +124,10 @@ namespace litiko.Eskhata.Shared
           return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(regulatoryDocument.Type == _obj.IRDTypelitiko, string.Empty);
         else
           return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(null, litiko.Eskhata.Conditions.Resources.CannotComputeCondition);
-      }
+      }      
+      #endregion      
       
+      #region Орган утверждения
       if (_obj.ConditionType == ConditionType.OrganForApprov)
       {
         var regulatoryDocument = litiko.RegulatoryDocuments.RegulatoryDocuments.As(document);
@@ -115,8 +135,10 @@ namespace litiko.Eskhata.Shared
           return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(regulatoryDocument.OrganForApproving == _obj.OrganForApprovinglitiko, string.Empty);
         else
           return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(null, litiko.Eskhata.Conditions.Resources.CannotComputeCondition);
-      }
+      }      
+      #endregion
       
+      #region Стандартный ответ
       if (_obj.ConditionType == Eskhata.Condition.ConditionType.StandardRespons)
       {
         if (Eskhata.OutgoingDocumentBases.Is(document))
@@ -126,7 +148,21 @@ namespace litiko.Eskhata.Shared
         
         return Sungero.Docflow.Structures.ConditionBase.ConditionResult.
           Create(null, litiko.Eskhata.Conditions.Resources.CannotComputeCondition);
-      }
+      }      
+      #endregion
+      
+      #region Категория заседания
+      if (_obj.ConditionType == Eskhata.Condition.ConditionType.MeetingCategorylitiko)
+      {
+        if (CollegiateAgencies.Projectsolutions.Is(document))
+          return Sungero.Docflow.Structures.ConditionBase.ConditionResult.
+            Create(CollegiateAgencies.Projectsolutions.As(document).MeetingCategory == _obj.MeetingCategorylitiko,
+                   string.Empty);
+        
+        return Sungero.Docflow.Structures.ConditionBase.ConditionResult.
+          Create(null, litiko.Eskhata.Conditions.Resources.CannotComputeCondition);
+      }            
+      #endregion      
       
       return base.CheckCondition(document, task);
     }

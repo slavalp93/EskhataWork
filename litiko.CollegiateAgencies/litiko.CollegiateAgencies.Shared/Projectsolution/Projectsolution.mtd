@@ -649,7 +649,7 @@
           "ColumnSpan": 2,
           "GroupType": "WithTitleNoBorder",
           "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
-          "RowNumber": 14,
+          "RowNumber": 15,
           "RowSpan": 1
         },
         {
@@ -744,7 +744,7 @@
           "HeaderLocation": "Top",
           "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
           "PropertyGuid": "e29167da-a580-4d16-bd95-5c0243d2c511",
-          "RowNumber": 15,
+          "RowNumber": 16,
           "RowSpan": 1,
           "Settings": []
         },
@@ -758,6 +758,32 @@
           "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
           "PropertyGuid": "2dd0ac95-dafd-4591-a2a0-d8eb32a6a63d",
           "RowNumber": 6,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "6fab8ab9-79b4-4940-b3cb-0e8ed7177fee",
+          "Name": "Budget",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+          "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
+          "PropertyGuid": "cb06387c-9b8f-4ca9-9623-de9e813337c8",
+          "RowNumber": 14,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "682049c5-fb67-429a-925b-08f9c7c5ce8f",
+          "Name": "BudgetRemaining",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+          "ParentGuid": "406e14dc-1744-4a7f-85d8-f6eef8abaa3f",
+          "PropertyGuid": "b380276b-f14e-4783-9aaa-87576bd2529b",
+          "RowNumber": 14,
           "RowSpan": 1,
           "Settings": []
         }
@@ -1100,6 +1126,9 @@
       "Code": "MeetingCategor",
       "EntityGuid": "6ae9c018-da75-4e80-88a6-6fc1c710e5f9",
       "FlatListInStandaloneLookup": true,
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "IsRequired": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "ca1d675e-2436-46b3-8485-2711708be9d8"
@@ -1260,6 +1289,22 @@
       "FlatListInStandaloneLookup": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "806f6cff-1540-4ee6-988a-df7a07dd6eed"
+    },
+    {
+      "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "cb06387c-9b8f-4ca9-9623-de9e813337c8",
+      "Name": "Budget",
+      "Code": "Budget",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "2dd0ac95-dafd-4591-a2a0-d8eb32a6a63d"
+    },
+    {
+      "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "b380276b-f14e-4783-9aaa-87576bd2529b",
+      "Name": "BudgetRemaining",
+      "Code": "BudgetRemainin",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "cb06387c-9b8f-4ca9-9623-de9e813337c8"
     }
   ],
   "PublicFunctions": [

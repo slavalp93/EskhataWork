@@ -3,6 +3,16 @@
   "NameGuid": "47ccb9ae-3d4f-41e4-b2f1-47d74051507d",
   "Name": "SimpleDocument",
   "AccessRightsMode": "Both",
+  "Actions": [
+    {
+      "NameGuid": "2044b054-e412-4ef1-b050-af265019b364",
+      "Name": "CreateProjectSolutionlitiko",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_BringToKOUlitiko_large_2044b054e4124ef1b050af265019b364.png",
+      "SmallIconName": "Action_BringToKOUlitiko_small_2044b054e4124ef1b050af265019b364.png"
+    }
+  ],
   "BaseGuid": "09584896-81e2-4c83-8f6c-70eb8321e1d0",
   "CanBeNavigationPropertyType": true,
   "CreationAreaMetadata": {
@@ -57,7 +67,17 @@
     "NameGuid": "d390a058-8f62-410b-b8b3-e095b0da3f84",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "fc10abfc-cc27-44b7-8b94-8c7eb5595db0",
+        "Name": "CreateProjectSolutionlitiko",
+        "ActionGuid": "2044b054-e412-4ef1-b050-af265019b364",
+        "ButtonSize": "Large",
+        "Index": 3,
+        "ParentGuid": "05d63e9c-36c0-44c3-a7fd-b1a360e13fc0"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],

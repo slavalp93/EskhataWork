@@ -170,7 +170,7 @@
     <value>Голосование</value>
   </data>
   <data name="Property_OurSignatory" xml:space="preserve">
-    <value>Ответственный за подготовку</value>
+    <value>Подписал</value>
   </data>
   <data name="Resource_09b8c877bb4f4b329a9832d12a8dae24" xml:space="preserve">
     <value />
@@ -261,5 +261,10 @@
   </data>
   <data name="Control_cce128fe0119427f8a81781f246dddcc_DisplayValue" xml:space="preserve">
     <value>Выбрать все "За"</value>
+  <data name="Property_Budget" xml:space="preserve">
+    <value>Бюджет</value>
+  </data>
+  <data name="Property_BudgetRemaining" xml:space="preserve">
+    <value>Остаток бюджета</value>
   </data>
 </root>

@@ -100,4 +100,7 @@
   <data name="StandardResponseConditionName" xml:space="preserve">
     <value>Standart response?</value>
   </data>
+  <data name="MeetingCategoryCondition" xml:space="preserve">
+    <value>Category – {0}?</value>
+  </data>
 </root>

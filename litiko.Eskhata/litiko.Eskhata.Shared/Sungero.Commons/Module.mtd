@@ -95,6 +95,14 @@
       },
       {
         "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "6c7f764f-92a5-4ccf-a74c-71b87a291765",
+        "Name": "CurrencyRateslitiko",
+        "EntityTypeId": "7948764c-2f80-4639-a157-5c22023fcf2b",
+        "GroupId": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
+        "PreviousItemGuid": "2a06d19f-c151-42dc-b834-c9914b453340"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
         "NameGuid": "6de14f8b-1b4e-45a5-adde-80b57af452f1",
         "Name": "ShowOKOPFlitiko",
         "EntityTypeId": "b0f4d89b-db2f-454c-8941-a306e3b10d45",

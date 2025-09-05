@@ -106,4 +106,10 @@
   <data name="CoverDescription_ShowIDTypelitiko" xml:space="preserve">
     <value>Справочник предназначен для хранения сведений о типах удостоверения личности</value>
   </data>
+  <data name="CoverAction_CurrencyRateslitiko" xml:space="preserve">
+    <value>Курсы валют</value>
+  </data>
+  <data name="CoverDescription_CurrencyRateslitiko" xml:space="preserve">
+    <value>Курсы иностранных валют к сомони Республики Таджикистан.</value>
+  </data>
 </root>

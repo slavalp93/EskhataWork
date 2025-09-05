@@ -58,4 +58,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Action_CreateProjectSolutionlitiko" xml:space="preserve">
+    <value>Вынести вопрос на КОУ</value>
+  </data>
+  <data name="Action_CreateProjectSolutionlitikoHint" xml:space="preserve">
+    <value>Создание нового документа с типом Проект решения.</value>
+  </data>
+  <data name="Action_CreateProjectSolutionlitikoDescription" xml:space="preserve">
+    <value>Создание нового документа с типом Проект решения.</value>
+  </data>
 </root>
