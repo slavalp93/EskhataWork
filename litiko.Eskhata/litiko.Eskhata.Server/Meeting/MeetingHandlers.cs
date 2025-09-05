@@ -79,7 +79,7 @@ namespace litiko.Eskhata
           aviabledMemberIDs.Add(element.Employee.Id);
       }
       
-      // 28.07.2025
+      // 28.07.2025 ...
       var presidentId = _root?.MeetingCategorylitiko?.President?.Id;
       if (presidentId.HasValue && !aviabledMemberIDs.Contains(presidentId.Value))
         aviabledMemberIDs.Add(_root.MeetingCategorylitiko.President.Id);
