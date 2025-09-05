@@ -650,6 +650,7 @@
     "SaveObjectMessage",
     "RoleAdditionalBoardMembers",
     "DescriptionAdditionalBoardMembers",
+    "DocumentKindIsEmpty",
     "ResponsibleEmployeeAHD",
     "ResponsibleEmployeeAHDDescription"
   ],

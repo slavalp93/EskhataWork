@@ -38,7 +38,7 @@ namespace litiko.CollegiateAgencies.Client
 
     public override void SendForApproval(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      if (_obj.LeadingDocument == null)
+      if (_obj.LeadingDocument == null && _obj.MeetingCategory.Name != "Заседание тендерной комиссии")
       {
         e.AddWarning(litiko.CollegiateAgencies.Projectsolutions.Resources.TheExplanatoryNoteFieldIsNotFilledIn);
         return;
@@ -115,7 +115,6 @@ namespace litiko.CollegiateAgencies.Client
       {
         // Запланированные совещания по категории из проекта решения
         var plannedMeetings = litiko.Eskhata.Meetings.GetAll()
-          .Where(x => x.DateTime >= Calendar.Now)
           .Where(x => x.Status == Sungero.Meetings.Meeting.Status.Active)
           .Where(x => Equals(x.MeetingCategorylitiko, _obj.MeetingCategory));
         var meeting = plannedMeetings.ShowSelect(Resources.ScheduledMeetings);

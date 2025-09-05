@@ -9,24 +9,7 @@
   "ClientBaseNamespace": "litiko.Eskhata.Module.RecordManagementUI.ClientBase",
   "Code": "RecMaUI",
   "CompanyCode": "Sungero",
-  "ExplorerTreeOrder": [
-    {
-      "ItemId": "e14e6272-0a0f-41dd-ba9f-462146eefc6a",
-      "PreviousItemId": "bd7ced8f-379e-4cda-9f18-a28193b8d53b"
-    },
-    {
-      "ItemId": "3ca14537-0cab-4f3b-80ab-ac0978a35d83",
-      "PreviousItemId": "e14e6272-0a0f-41dd-ba9f-462146eefc6a"
-    },
-    {
-      "ItemId": "28589c51-3530-4612-a004-c820a50ff1df",
-      "PreviousItemId": "3ca14537-0cab-4f3b-80ab-ac0978a35d83"
-    },
-    {
-      "ItemId": "69a312d7-fdf4-4334-a06a-8ea2f5cd3b81",
-      "PreviousItemId": "28589c51-3530-4612-a004-c820a50ff1df"
-    }
-  ],
+  "ExplorerTreeOrder": [],
   "IconResourcesKeys": [],
   "Importance": "High",
   "IsLicensed": true,

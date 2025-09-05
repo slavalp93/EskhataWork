@@ -148,6 +148,8 @@
   <data name="RoleAdditionalBoardMembers" xml:space="preserve">
     <value>Дополнительные члены Правления</value>
   </data>
+  <data name="DocumentKindIsEmpty" xml:space="preserve">
+    <value>Для создания документа из шаблона необходимо указать вид документа</value>
   <data name="ResponsibleEmployeeAHD" xml:space="preserve">
     <value>Ответственный сотрудник АХД</value>
   </data>
