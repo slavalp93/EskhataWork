@@ -151,7 +151,7 @@ namespace litiko.Eskhata.Server
       foreach (var element in _obj.Absentlitiko.Where(x => x.Employee != null))
       {
         var employee = element.Employee;
-        var reason = element.Reason;
+        var reason = element.AbsentReason?.Name;
         string name = string.Empty;
         if (!inTJ)          
           name = withShortName ? Sungero.Company.PublicFunctions.Employee.GetShortName(Sungero.Company.Employees.As(employee), true) : employee.Name;

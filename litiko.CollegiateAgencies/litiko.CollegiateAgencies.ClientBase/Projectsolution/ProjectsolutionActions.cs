@@ -38,7 +38,7 @@ namespace litiko.CollegiateAgencies.Client
 
     public override void SendForApproval(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      if (_obj.LeadingDocument == null)
+      if (_obj.LeadingDocument == null && _obj.MeetingCategory.Name != "Заседание тендерной комиссии")
       {
         e.AddWarning(litiko.CollegiateAgencies.Projectsolutions.Resources.TheExplanatoryNoteFieldIsNotFilledIn);
         return;

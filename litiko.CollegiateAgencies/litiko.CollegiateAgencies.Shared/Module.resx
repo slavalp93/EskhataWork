@@ -151,4 +151,7 @@
   <data name="DescriptionAdditionalBoardMembers" xml:space="preserve">
     <value>Участникам роли выдаются права на просмотр на документы заседаний Правления</value>
   </data>
+  <data name="DocumentKindIsEmpty" xml:space="preserve">
+    <value>To create a document from a template, you must specify the document type.</value>
+  </data>
 </root>

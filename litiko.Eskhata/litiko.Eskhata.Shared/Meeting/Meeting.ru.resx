@@ -100,4 +100,7 @@
   <data name="VotingTaskIsNotCreated" xml:space="preserve">
     <value>Не удалось создать задачу. Проверьте наличие повестки и правила согласования.</value>
   </data>
+  <data name="VotingNotIntramural" xml:space="preserve">
+    <value>Голосование не очное, функция недоступна</value>
+  </data>
 </root>

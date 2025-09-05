@@ -640,7 +640,8 @@
     "NoVersionMessage",
     "SaveObjectMessage",
     "RoleAdditionalBoardMembers",
-    "DescriptionAdditionalBoardMembers"
+    "DescriptionAdditionalBoardMembers",
+    "DocumentKindIsEmpty"
   ],
   "ServerAssemblyName": "litiko.CollegiateAgencies.Server",
   "ServerNamespace": "litiko.CollegiateAgencies.Server",

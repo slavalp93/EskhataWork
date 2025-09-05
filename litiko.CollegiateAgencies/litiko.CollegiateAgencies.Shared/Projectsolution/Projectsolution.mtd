@@ -924,13 +924,13 @@
           "Name": "MainGroup",
           "ColumnDefinitions": [
             {
-              "Percentage": 14.05
+              "Percentage": 14.16
             },
             {
-              "Percentage": 51.81
+              "Percentage": 52.23
             },
             {
-              "Percentage": 33.33
+              "Percentage": 33.6
             }
           ]
         },

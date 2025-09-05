@@ -50,7 +50,7 @@ namespace litiko.CollegiateAgencies.Client
     {
       if (_obj.Meeting.Votinglitiko.GetValueOrDefault() != litiko.Eskhata.Meeting.Votinglitiko.Intramural)
       {
-        Dialogs.ShowMessage("Голосование не очное, функция недоступна");
+        Dialogs.ShowMessage(litiko.Eskhata.Meetings.Resources.VotingNotIntramural);
         return;
       }
 
