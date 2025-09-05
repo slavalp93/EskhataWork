@@ -64,7 +64,4 @@
   <data name="CommentNeeded" xml:space="preserve">
     <value>Для варианта "Не согласен" необходимо написать комментарий.</value>
   </data>
-  <data name="RequiredToFillBudget" xml:space="preserve">
-    <value>Требуется заполнить поля «Бюджет» и «Остаток бюджета» в карточке Проекта решения.</value>
-  </data>
 </root>

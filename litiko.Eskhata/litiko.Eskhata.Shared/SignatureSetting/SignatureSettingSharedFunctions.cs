@@ -18,7 +18,6 @@ namespace litiko.Eskhata.Shared
       var result = base.GetPossibleSignatureRoles();
       result.Add(CollegiateAgencies.PublicConstants.Module.RoleGuid.Secretaries);
       result.Add(CollegiateAgencies.PublicConstants.Module.RoleGuid.Presidents);
-      result.Add(CollegiateAgencies.PublicConstants.Module.RoleGuid.ResponsibleEmployeeAHD);
       return result;            
     }
   }

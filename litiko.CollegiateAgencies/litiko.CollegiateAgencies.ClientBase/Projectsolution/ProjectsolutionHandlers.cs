@@ -8,7 +8,6 @@ using litiko.CollegiateAgencies.Projectsolution;
 namespace litiko.CollegiateAgencies
 {
 
-
   partial class ProjectsolutionVotingClientHandlers
   {
 

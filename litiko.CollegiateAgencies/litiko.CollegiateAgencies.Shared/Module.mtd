@@ -455,15 +455,6 @@
       "Value": "new System.Guid(\"a145af0a-35bc-40ac-b616-8eb7418cf785\")"
     },
     {
-      "Name": "ResponsibleEmployeeAHD",
-      "ParentClasses": [
-        "Module",
-        "RoleGuid"
-      ],
-      "TypeName": "System.Guid",
-      "Value": "new System.Guid(\"e2251d5e-3141-4c53-aa91-7ac7a8d6f700\")"
-    },
-    {
       "Name": "Secretaries",
       "ParentClasses": [
         "Module",
@@ -651,8 +642,6 @@
     "RoleAdditionalBoardMembers",
     "DescriptionAdditionalBoardMembers",
     "DocumentKindIsEmpty"
-    "ResponsibleEmployeeAHD",
-    "ResponsibleEmployeeAHDDescription"
   ],
   "ServerAssemblyName": "litiko.CollegiateAgencies.Server",
   "ServerNamespace": "litiko.CollegiateAgencies.Server",
@@ -874,7 +863,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.90",
+  "Version": "0.0.1.86",
   "Widgets": [],
   "Versions": [
     {

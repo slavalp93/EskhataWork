@@ -91,7 +91,4 @@
   <data name="Property_AllowResultNotAgreelitiko" xml:space="preserve">
     <value>Allow execution result "Not agree"</value>
   </data>
-  <data name="Enum_CustomStageTypelitiko_BudgetCheck" xml:space="preserve">
-    <value>Tenders. Budget check</value>
-  </data>
 </root>

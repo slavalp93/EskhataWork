@@ -91,7 +91,4 @@
   <data name="Property_AllowResultNotAgreelitiko" xml:space="preserve">
     <value>Разрешить вариант выполнения "Не согласен"</value>
   </data>
-  <data name="Enum_CustomStageTypelitiko_BudgetCheck" xml:space="preserve">
-    <value>Тендера. Проверка бюджета</value>
-  </data>
 </root>
