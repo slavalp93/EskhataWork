@@ -25,10 +25,13 @@ namespace litiko.Eskhata.Shared
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingMembers);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingInvited);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresentKOU);
+        baseRoles.Add(RegulatoryDocuments.ApprovalRole.Type.ProcessManager);        
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresentDOP);
-        baseRoles.Add(RegulatoryDocuments.ApprovalRole.Type.ProcessManager);
-        
+        baseRoles.Add(RegulatoryDocuments.ApprovalRole.Type.ProcessManager);        
         baseRoles.Add(Sungero.Docflow.ApprovalRole.Type.Initiator);
+        baseRoles.Add(ContractsEskhata.ApprovalRole.Type.RespLawyer);
+        baseRoles.Add(ContractsEskhata.ApprovalRole.Type.RespAccountant);
+        baseRoles.Add(ContractsEskhata.ApprovalRole.Type.RespAHD);
       }
       #endregion
       
@@ -39,6 +42,7 @@ namespace litiko.Eskhata.Shared
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingSecretary);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresentKOU);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresentDOP);
+        baseRoles.Add(ContractsEskhata.ApprovalRole.Type.RespAccountant);
       }
       #endregion
       
@@ -49,6 +53,7 @@ namespace litiko.Eskhata.Shared
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingInvited);      
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingSecretary);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresident);
+        baseRoles.Add(ContractsEskhata.ApprovalRole.Type.RespAccountant);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresentKOU);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresentDOP);
       }
@@ -58,6 +63,7 @@ namespace litiko.Eskhata.Shared
       if (_obj.StageType == Sungero.Docflow.ApprovalStage.StageType.Register)
       {
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingSecretary);
+        baseRoles.Add(ContractsEskhata.ApprovalRole.Type.RespLawyer);
       }
       #endregion      
       
@@ -67,6 +73,13 @@ namespace litiko.Eskhata.Shared
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingSecretary);
       }
       #endregion       
+      
+      #region Согласование с руководителем
+      if (_obj.StageType == Sungero.Docflow.ApprovalStage.StageType.Manager)
+      {
+        baseRoles.Add(ContractsEskhata.ApprovalRole.Type.RespLawyer);
+      }
+      #endregion
       
       return baseRoles;
     }
