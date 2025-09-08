@@ -158,6 +158,9 @@ namespace litiko.CollegiateAgencies.Server
       var meetingCategory = meeting.MeetingCategorylitiko;
       if (meetingCategory == null)
         throw AppliedCodeException.Create(Resources.MeetingCategoryIsEmpty);
+
+      if (document.DocumentKind == null)
+        throw AppliedCodeException.Create(Resources.DocumentKindIsEmpty);
       
       #endregion
       
@@ -226,13 +229,13 @@ namespace litiko.CollegiateAgencies.Server
       List<string> absentFIOList = meeting.Absentlitiko
         .Where(x => x?.Employee != null)
         .OrderBy(x => x.Employee.Name)
-        .Select(x => $"{x.Employee.Name} ({x.Reason})")
+        .Select(x => $"{x.Employee.Name} ({x.AbsentReason.Name})")
         .ToList();
       
       //replacebleFields.Add("<AbsentFIOListTJ>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingAbsentNumberedList(meeting, false, true, true, false));
       List<string> absentFIOListTJ = meeting.Absentlitiko
         .Where(x => x?.Employee != null)
-        .Select(x => $"{litiko.Eskhata.PublicFunctions.Person.GetNameTJ(litiko.Eskhata.People.As(x.Employee.Person))} ({x.Reason})")
+        .Select(x => $"{litiko.Eskhata.PublicFunctions.Person.GetNameTJ(litiko.Eskhata.People.As(x.Employee.Person))} ({x.AbsentReason.Name})")
         .OrderBy(name => name)
         .ToList();
       
@@ -275,7 +278,7 @@ namespace litiko.CollegiateAgencies.Server
       List<string> agendaListTJ = new List<string>();
       if (!isExtract)
       {
-        replacebleFields.Add("<DocDate>", document.RegistrationDate.HasValue ? document.RegistrationDate.Value.ToString("dd.MM.yyyy") : string.Empty);            
+        replacebleFields.Add("<DocDate>", litiko.Eskhata.Minuteses.As(document).Meeting.DateTime.HasValue ? litiko.Eskhata.Minuteses.As(document).Meeting.DateTime.Value.ToString("dd.MM.yyyy") : string.Empty);
         replacebleFields.Add("<DocNumber>", !string.IsNullOrEmpty(document.RegistrationNumber) ? document.RegistrationNumber : string.Empty);                  
         //replacebleFields.Add("<AgendaList>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingProjectSolutionsNumberedList(meeting));
         // Все решения по совещанию
@@ -344,15 +347,19 @@ namespace litiko.CollegiateAgencies.Server
       else
       {                
         var projectSolution = litiko.CollegiateAgencies.Projectsolutions.As(document.LeadingDocument);
-        agendaList.Add($"Рассмотрение вопроса: {projectSolution.Subject}");
-        agendaListTJ.Add($"Баррасии масъала: {projectSolution.Subject}");
+        var meetingProjectSolutionNumber = projectSolution?.Meeting.ProjectSolutionslitiko.Where(ps => Equals(ps.ProjectSolution, projectSolution))
+          .Select(ps => ps.Number)
+          .FirstOrDefault();        
+        agendaList.Add($"##{meetingProjectSolutionNumber}##Рассмотрение вопроса: {projectSolution.Subject}");
+        agendaListTJ.Add($"##{meetingProjectSolutionNumber}##Баррасии масъала: {projectSolution.Subject}");
         
         var regDate = string.Empty;
         var regnumber = string.Empty;
         var minutes = litiko.Eskhata.Minuteses.GetAll().Where(x => Equals(x.Meeting, meeting)).FirstOrDefault();
         if (minutes != null)
         {
-          regDate = minutes.RegistrationDate.HasValue ? minutes.RegistrationDate.Value.ToString("dd.MM.yyyy") : string.Empty;
+          //regDate = minutes.RegistrationDate.HasValue ? minutes.RegistrationDate.Value.ToString("dd.MM.yyyy") : string.Empty;
+          regDate = meeting.DateTime.HasValue ? meeting.DateTime.Value.ToString("dd.MM.yyyy") : string.Empty;
           regnumber = !string.IsNullOrEmpty(minutes.RegistrationNumber) ? minutes.RegistrationNumber : string.Empty;
         }
         replacebleFields.Add("<DocDate>", regDate);
@@ -361,9 +368,6 @@ namespace litiko.CollegiateAgencies.Server
         // Решения только по конкретному Проекту решения                  
         var meetingResolutionInfo = new Structures.Module.MeetingResolutionInfo();        
 
-        var meetingProjectSolutionNumber = projectSolution?.Meeting.ProjectSolutionslitiko.Where(ps => Equals(ps.ProjectSolution, projectSolution))
-          .Select(ps => ps.Number)
-          .FirstOrDefault();
         meetingResolutionInfo.Number = meetingProjectSolutionNumber;
         //replacebleFields.Add("<AgendaList>", !string.IsNullOrEmpty(projectSolution.Subject) ? string.Format("... {0}. {1}", meetingProjectSolutionNumber, projectSolution.Subject) : string.Empty);
         

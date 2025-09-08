@@ -58,16 +58,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CoverAction_MeetingMinutesReportlitiko" xml:space="preserve">
-    <value>Отчет по протоколам совещаний</value>
+  <data name="Property_Name" xml:space="preserve">
+    <value>Имя</value>
   </data>
-  <data name="CoverDescription_MeetingMinutesReportlitiko" xml:space="preserve">
-    <value>Список протоколов совещаний по выбранной категории и дате регистрации, которая входит в указанный период.</value>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Причина отсутствия</value>
   </data>
-  <data name="CoverAction_AbsentReasonslocal" xml:space="preserve">
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Причина отсутствия</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
     <value>Причины отсутствия</value>
-  </data>
-  <data name="CoverDescription_AbsentReasonslocal" xml:space="preserve">
-    <value>Причины отсутствия на заседаниях коллегиальных органов. </value>
   </data>
 </root>

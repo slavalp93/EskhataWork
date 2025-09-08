@@ -151,7 +151,7 @@ namespace litiko.Eskhata.Server
       foreach (var element in _obj.Absentlitiko.Where(x => x.Employee != null))
       {
         var employee = element.Employee;
-        var reason = element.Reason;
+        var reason = element.AbsentReason?.Name;
         string name = string.Empty;
         if (!inTJ)          
           name = withShortName ? Sungero.Company.PublicFunctions.Employee.GetShortName(Sungero.Company.Employees.As(employee), true) : employee.Name;
@@ -221,9 +221,11 @@ namespace litiko.Eskhata.Server
       
       var agenda = Agendas.GetAll().Where(d => Equals(d.Meeting, _obj)).FirstOrDefault();
       if (agenda == null)
-        return null;
+        return null;            
       
-      var votingApprovalRule = Sungero.Docflow.ApprovalRules.GetAll().Where(r => r.Name == litiko.CollegiateAgencies.PublicConstants.Module.VotingApprovalRuleName).FirstOrDefault();
+      //var votingApprovalRule = Sungero.Docflow.ApprovalRules.GetAll().Where(r => r.Name == litiko.CollegiateAgencies.PublicConstants.Module.VotingApprovalRuleName).FirstOrDefault();
+      var availableApprovalRules = Sungero.Docflow.PublicFunctions.OfficialDocument.Remote.GetApprovalRules(agenda);
+      var votingApprovalRule = availableApprovalRules.Where(r => r.Name == litiko.CollegiateAgencies.PublicConstants.Module.VotingApprovalRuleName).FirstOrDefault();
       if (votingApprovalRule == null)
         return null;
       

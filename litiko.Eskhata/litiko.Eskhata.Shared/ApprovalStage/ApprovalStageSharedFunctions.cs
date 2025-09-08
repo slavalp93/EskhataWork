@@ -26,6 +26,8 @@ namespace litiko.Eskhata.Shared
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingInvited);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresentKOU);
         baseRoles.Add(RegulatoryDocuments.ApprovalRole.Type.ProcessManager);        
+        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresentDOP);
+        baseRoles.Add(RegulatoryDocuments.ApprovalRole.Type.ProcessManager);        
         baseRoles.Add(Sungero.Docflow.ApprovalRole.Type.Initiator);
         baseRoles.Add(ContractsEskhata.ApprovalRole.Type.RespLawyer);
         baseRoles.Add(ContractsEskhata.ApprovalRole.Type.RespAccountant);
@@ -52,6 +54,8 @@ namespace litiko.Eskhata.Shared
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingSecretary);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresident);
         baseRoles.Add(ContractsEskhata.ApprovalRole.Type.RespAccountant);
+        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresentKOU);
+        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresentDOP);
       }
       #endregion
       

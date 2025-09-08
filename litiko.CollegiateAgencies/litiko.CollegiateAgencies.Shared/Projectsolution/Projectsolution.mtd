@@ -950,10 +950,13 @@
           "Name": "MainGroup",
           "ColumnDefinitions": [
             {
-              "Percentage": 50.0
+              "Percentage": 14.16
             },
             {
-              "Percentage": 50.0
+              "Percentage": 52.23
+            },
+            {
+              "Percentage": 33.6
             }
           ]
         },
@@ -962,12 +965,12 @@
           "NameGuid": "c5a64bd8-9d8c-4558-ba9c-4467ff66ad25",
           "Name": "Voting",
           "ColumnNumber": 0,
-          "ColumnSpan": 2,
+          "ColumnSpan": 3,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.GridControlToChildCollectionBinder",
           "HeaderLocation": "Top",
           "ParentGuid": "c1bf57de-8c52-4fec-9fee-9d04026e30ef",
           "PropertyGuid": "806f6cff-1540-4ee6-988a-df7a07dd6eed",
-          "RowNumber": 1,
+          "RowNumber": 2,
           "RowSpan": 1,
           "Settings": []
         },
@@ -976,12 +979,26 @@
           "NameGuid": "178fd45b-743a-4eda-bc37-1ca47119c06d",
           "Name": "Control",
           "ColumnNumber": 0,
-          "ColumnSpan": 1,
+          "ColumnSpan": 2,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.HyperlinkToSourceBinder",
           "FunctionName": "FillInVoters",
           "HeaderLocation": "None",
           "ParentGuid": "c1bf57de-8c52-4fec-9fee-9d04026e30ef",
           "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.HyperlinkControlMetadata, Sungero.Metadata",
+          "NameGuid": "cce128fe-0119-427f-8a81-781f246dddcc",
+          "Name": "ControlSelectAll",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.HyperlinkToSourceBinder",
+          "FunctionName": "SelectAllVoting",
+          "HeaderLocation": "None",
+          "ParentGuid": "c1bf57de-8c52-4fec-9fee-9d04026e30ef",
+          "RowNumber": 1,
           "RowSpan": 1,
           "Settings": []
         }

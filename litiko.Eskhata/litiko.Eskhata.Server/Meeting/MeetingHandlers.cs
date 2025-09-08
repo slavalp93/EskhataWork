@@ -80,7 +80,8 @@ namespace litiko.Eskhata
       }
       
       // 28.07.2025
-      if (_root.MeetingCategorylitiko.President != null && !aviabledMemberIDs.Contains(_root.MeetingCategorylitiko.President.Id))
+      var presidentId = _root?.MeetingCategorylitiko?.President?.Id;
+      if (presidentId.HasValue && !aviabledMemberIDs.Contains(presidentId.Value))
         aviabledMemberIDs.Add(_root.MeetingCategorylitiko.President.Id);
       
       query = query.Where(x => aviabledMemberIDs.Contains(x.Id));      

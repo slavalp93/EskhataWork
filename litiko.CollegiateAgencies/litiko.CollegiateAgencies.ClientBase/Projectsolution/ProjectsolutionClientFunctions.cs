@@ -41,6 +41,23 @@ namespace litiko.CollegiateAgencies.Client
       
       
     }
+    
+
+    /// <summary>
+    /// Выбрать все "За"
+    /// </summary>  
+    public void SelectAllVoting() 
+    {
+      if (_obj.Meeting.Votinglitiko.GetValueOrDefault() != litiko.Eskhata.Meeting.Votinglitiko.Intramural)
+      {
+        Dialogs.ShowMessage(litiko.Eskhata.Meetings.Resources.VotingNotIntramural);
+        return;
+      }
+
+      foreach (var element in _obj.Voting)
+        element.Yes = true;
+    } 
+    
     /// <summary>
     /// Перенести вопросы и решения из повестки в протокол
     /// </summary>       
@@ -76,6 +93,5 @@ namespace litiko.CollegiateAgencies.Client
         }      
       }      
     }
-
   }
 }
