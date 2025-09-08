@@ -202,4 +202,46 @@
   <data name="Property_FrequencyExpenseslitiko" xml:space="preserve">
     <value>Frequency of allocation to expenses</value>
   </data>
+  <data name="Action_CreateContractStatementDescription" xml:space="preserve">
+    <value>Create a statement to the contractual document.</value>
+  </data>
+  <data name="Action_CreateContractStatement" xml:space="preserve">
+    <value>Create Contract Statement </value>
+  </data>
+  <data name="Action_CreateContractStatementHint" xml:space="preserve">
+    <value>Create Contract Statement</value>
+  </data>
+  <data name="Action_CreateIncomingInvoiceDescription" xml:space="preserve">
+    <value>Create an incoming invoice to the contractual document.</value>
+  </data>
+  <data name="Action_CreateIncomingInvoice" xml:space="preserve">
+    <value>Create Incoming Invoice</value>
+  </data>
+  <data name="Action_CreateIncomingInvoiceHint" xml:space="preserve">
+    <value>Create Incoming Invoice to Document</value>
+  </data>
+  <data name="Action_CreateSupAgreement" xml:space="preserve">
+    <value>Create Supplemental Agreement</value>
+  </data>
+  <data name="Action_CreateSupAgreementHint" xml:space="preserve">
+    <value>Create Supplemental Agreement</value>
+  </data>
+  <data name="Action_CreateSupAgreementDescription" xml:space="preserve">
+    <value>Create a supplemental agreement to the contract.</value>
+  </data>
+  <data name="Action_CreateLegalOpinionlitiko" xml:space="preserve">
+    <value>Create legal opinion</value>
+  </data>
+  <data name="Action_CreateLegalOpinionlitikoDescription" xml:space="preserve">
+    <value>Create a legal opinion to the contract.</value>
+  </data>
+  <data name="Action_CreateLegalOpinionlitikoHint" xml:space="preserve">
+    <value>Create legal opinion</value>
+  </data>
+  <data name="Action_CreateLegalOpinionlitikoConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateLegalOpinionlitikoConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
 </root>

@@ -58,7 +58,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DocumentKindNotFound" xml:space="preserve">
-    <value>No suitable document type found with the name 'Legal Opinion'.</value>
+  <data name="Action_CreateIncomingInvoice" xml:space="preserve">
+    <value>Create Incoming Invoice</value>
+  </data>
+  <data name="Action_CreateIncomingInvoiceHint" xml:space="preserve">
+    <value>Create Incoming Invoice to Document</value>
+  </data>
+  <data name="Action_CreateIncomingInvoiceDescription" xml:space="preserve">
+    <value>Create an incoming invoice to the contractual document.</value>
+  </data>
+  <data name="Action_CreateContractStatement" xml:space="preserve">
+    <value>Create Contract Statement</value>
+  </data>
+  <data name="Action_CreateContractStatementHint" xml:space="preserve">
+    <value>Create Statement to Supplemental Agreement</value>
+  </data>
+  <data name="Action_CreateContractStatementDescription" xml:space="preserve">
+    <value>Create a statement to the supplemental agreement.</value>
   </data>
 </root>

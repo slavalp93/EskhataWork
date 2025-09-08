@@ -26,7 +26,7 @@ namespace litiko.NSI.Server
     [Public]
     public NSI.IContractsVsPaymentDoc GetContractsVsPaymentDoc(litiko.Eskhata.IContract contract, Sungero.Parties.ICounterparty counterparty)
     {
-      Sungero.Core.Enumeration counterpartyType;
+      Sungero.Core.Enumeration? counterpartyType;
       if (Sungero.Parties.Companies.Is(counterparty))
         counterpartyType = NSI.TaxRate.CounterpartyType.Company;
       else if (Sungero.Parties.People.Is(counterparty))
@@ -34,7 +34,7 @@ namespace litiko.NSI.Server
       else if (Sungero.Parties.Banks.Is(counterparty))
         counterpartyType = NSI.TaxRate.CounterpartyType.Bank;
       else
-        throw new InvalidOperationException("Неизвестный тип контрагента");
+        counterpartyType = null;
       
       return NSI.ContractsVsPaymentDocs.GetAll()
         .Where(x => Equals(x.DocumentKind, contract.DocumentKind) && Equals(x.Category, contract.DocumentGroup) && Equals(x.CounterpartyType, counterpartyType))        

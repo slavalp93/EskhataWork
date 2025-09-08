@@ -13,6 +13,14 @@
         "GenerateHandler"
       ],
       "Versions": []
+    },
+    {
+      "NameGuid": "ded7cabe-178d-43f9-9ed6-1922f4ef110e",
+      "Name": "CreateWaybilllitiko",
+      "ActionArea": "CardAndCollection",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_CreateWaybilllitiko_large_ded7cabe178d43f99ed61922f4ef110e.png",
+      "SmallIconName": "Action_CreateWaybilllitiko_small_ded7cabe178d43f99ed61922f4ef110e.png"
     }
   ],
   "BaseGuid": "59079f7f-a326-4947-bbd6-0ae6dfb5f59b",
@@ -998,7 +1006,58 @@
     "NameGuid": "707c35e2-8440-4c48-956c-7819c9dc0e08",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "edacb4f1-46b8-4f0c-b49b-8c068ebbc93a",
+        "Name": "CreateManyAddendum",
+        "ActionGuid": "252eb98b-fadd-4c36-b110-feb9f6a82114",
+        "ButtonSize": "Large",
+        "Index": 6,
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "Index"
+        ],
+        "ParentGuid": "05d63e9c-36c0-44c3-a7fd-b1a360e13fc0",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "33bc3af0-2fc8-4f7a-b47f-2a71ffed0d72",
+        "Name": "CreateCoverLetter",
+        "ActionGuid": "fbd8dcdc-155f-4509-b0d0-0623119ff53e",
+        "ButtonSize": "Large",
+        "Index": 4,
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "Index"
+        ],
+        "ParentGuid": "05d63e9c-36c0-44c3-a7fd-b1a360e13fc0",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "78a40d90-255f-4ea6-a8e1-834be97f9d0a",
+        "Name": "CreateCancellationAgreement",
+        "ActionGuid": "d26be5f7-c51b-4c05-a102-cde46737669b",
+        "ButtonSize": "Large",
+        "Index": 5,
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "Index"
+        ],
+        "ParentGuid": "05d63e9c-36c0-44c3-a7fd-b1a360e13fc0"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "a505e023-2bc7-49a0-9452-1eaaa5c5a3e6",
+        "Name": "CreateWaybilllitikolitiko",
+        "ActionGuid": "ded7cabe-178d-43f9-9ed6-1922f4ef110e",
+        "ButtonSize": "Large",
+        "Index": 3,
+        "ParentGuid": "05d63e9c-36c0-44c3-a7fd-b1a360e13fc0"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],
@@ -1008,7 +1067,31 @@
     "NameGuid": "90aa6228-2fdb-4394-9470-4668761600d1",
     "Name": "RibbonCollection",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "c49a46cc-aaf1-4b45-bdb6-626f5bf08c3d",
+        "Name": "CreateCoverLetter",
+        "ActionGuid": "fbd8dcdc-155f-4509-b0d0-0623119ff53e",
+        "ButtonSize": "Large",
+        "Index": 16,
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "Index"
+        ],
+        "ParentGuid": "40129d01-a200-41e9-ab9d-7349ae62b2c4",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "0dde566b-d765-4845-8ccc-e140a4a3b188",
+        "Name": "CreateWaybilllitikolitiko",
+        "ActionGuid": "ded7cabe-178d-43f9-9ed6-1922f4ef110e",
+        "ButtonSize": "Large",
+        "Index": 14,
+        "ParentGuid": "40129d01-a200-41e9-ab9d-7349ae62b2c4"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": []

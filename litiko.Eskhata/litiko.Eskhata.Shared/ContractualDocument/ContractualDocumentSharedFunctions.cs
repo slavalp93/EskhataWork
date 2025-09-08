@@ -59,7 +59,7 @@ namespace litiko.Eskhata.Shared
         return;
       }      
       
-      Sungero.Core.Enumeration counterpartyType;
+      Sungero.Core.Enumeration? counterpartyType;
       if (Companies.Is(counterparty))
         counterpartyType = NSI.TaxRate.CounterpartyType.Company;
       else if (People.Is(counterparty))
@@ -67,7 +67,7 @@ namespace litiko.Eskhata.Shared
       else if (Banks.Is(counterparty))
         counterpartyType = NSI.TaxRate.CounterpartyType.Bank;
       else
-        throw new InvalidOperationException("Неизвестный тип контрагента");
+        counterpartyType = null;      
       
       var taxRate = NSI.TaxRates.Null;
       if (category != null)
