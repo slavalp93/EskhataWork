@@ -924,13 +924,13 @@
           "Name": "MainGroup",
           "ColumnDefinitions": [
             {
-              "Percentage": 14.16
+              "Percentage": 16.86
             },
             {
-              "Percentage": 52.23
+              "Percentage": 15.91
             },
             {
-              "Percentage": 33.6
+              "Percentage": 64.96
             }
           ]
         },
@@ -944,7 +944,7 @@
           "HeaderLocation": "Top",
           "ParentGuid": "c1bf57de-8c52-4fec-9fee-9d04026e30ef",
           "PropertyGuid": "806f6cff-1540-4ee6-988a-df7a07dd6eed",
-          "RowNumber": 2,
+          "RowNumber": 1,
           "RowSpan": 1,
           "Settings": []
         },
@@ -953,7 +953,7 @@
           "NameGuid": "178fd45b-743a-4eda-bc37-1ca47119c06d",
           "Name": "Control",
           "ColumnNumber": 0,
-          "ColumnSpan": 2,
+          "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.HyperlinkToSourceBinder",
           "FunctionName": "FillInVoters",
           "HeaderLocation": "None",
@@ -966,13 +966,13 @@
           "$type": "Sungero.Metadata.HyperlinkControlMetadata, Sungero.Metadata",
           "NameGuid": "cce128fe-0119-427f-8a81-781f246dddcc",
           "Name": "ControlSelectAll",
-          "ColumnNumber": 0,
+          "ColumnNumber": 1,
           "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.HyperlinkToSourceBinder",
           "FunctionName": "SelectAllVoting",
           "HeaderLocation": "None",
           "ParentGuid": "c1bf57de-8c52-4fec-9fee-9d04026e30ef",
-          "RowNumber": 1,
+          "RowNumber": 0,
           "RowSpan": 1,
           "Settings": []
         }
