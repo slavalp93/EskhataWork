@@ -950,13 +950,13 @@
           "Name": "MainGroup",
           "ColumnDefinitions": [
             {
-              "Percentage": 16.86
+              "Percentage": 17.25
             },
             {
-              "Percentage": 15.91
+              "Percentage": 16.28
             },
             {
-              "Percentage": 64.96
+              "Percentage": 66.47
             }
           ]
         },
@@ -970,7 +970,7 @@
           "HeaderLocation": "Top",
           "ParentGuid": "c1bf57de-8c52-4fec-9fee-9d04026e30ef",
           "PropertyGuid": "806f6cff-1540-4ee6-988a-df7a07dd6eed",
-          "RowNumber": 2,
+          "RowNumber": 1,
           "RowSpan": 1,
           "Settings": []
         },
