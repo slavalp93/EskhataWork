@@ -184,6 +184,28 @@ namespace litiko.Eskhata.Shared
       
       if (!Equals(_obj.PennyAmountlitiko, calculatedAmount))
         _obj.PennyAmountlitiko = calculatedAmount;
-    }    
+    }
+
+    /// <summary>
+    /// Заполнить ссылку на матрицу ответственности.
+    /// </summary>
+    [Public]
+    public void FillResponsibilityMatrix()
+    {            
+      var contract = Contracts.Null;
+      var matrix = NSI.ResponsibilityMatrices.Null;
+      
+      if (Contracts.Is(_obj))
+        contract = Contracts.As(_obj);
+      else if (SupAgreements.Is(_obj) && _obj.LeadingDocument != null)
+        contract = Contracts.As(_obj.LeadingDocument);
+      
+      if (contract != null)
+        matrix = NSI.PublicFunctions.Module.GetResponsibilityMatrix(contract);
+      
+      if (!Equals(_obj.ResponsibilityMatrixlitiko, matrix))
+        _obj.ResponsibilityMatrixlitiko = matrix;
+    }
+    
   }
 }

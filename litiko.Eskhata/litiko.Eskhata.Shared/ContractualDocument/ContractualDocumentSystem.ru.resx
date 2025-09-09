@@ -196,4 +196,7 @@
   <data name="Action_CreateWaybilllitikoDescription" xml:space="preserve">
     <value>Создать накладную к документу.</value>
   </data>
+  <data name="Property_ResponsibilityMatrixlitiko" xml:space="preserve">
+    <value>Матрица ответственности</value>
+  </data>
 </root>

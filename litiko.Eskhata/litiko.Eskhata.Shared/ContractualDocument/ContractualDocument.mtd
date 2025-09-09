@@ -964,9 +964,35 @@
       "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "6ca8db79-203e-4cbd-861a-c7ae62425372"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "8584af22-c1fa-4b9a-91c9-1060ffd9996f",
+      "Name": "ResponsibilityMatrixlitiko",
+      "CanBeSearch": false,
+      "Code": "Responsibility",
+      "EntityGuid": "4636a00a-7ace-4bf0-93f5-8a74240a0ad7",
+      "FlatListInStandaloneLookup": true,
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "3a34d42b-1742-4c87-9091-bdb13385a59c"
     }
   ],
   "PublicFunctions": [
+    {
+      "Name": "FillResponsibilityMatrix",
+      "Parameters": [
+        {
+          "Name": "contractualDocument",
+          "ParameterType": "global::litiko.Eskhata.IContractualDocument",
+          "ParameterTypeFullName": "litiko.Eskhata.IContractualDocument, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
     {
       "Name": "FillTaxRate",
       "Parameters": [
