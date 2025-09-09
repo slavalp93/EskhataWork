@@ -141,7 +141,10 @@ namespace litiko.CollegiateAgencies.Server
       else
         templateDoc = Sungero.Content.ElectronicDocuments.GetAll().Where(d => Sungero.Docflow.DocumentTemplates.Is(d) && d.Name == Constants.Module.ExtractTemplateName).FirstOrDefault();
       */
-     
+
+      if (document.DocumentKind == null)
+        throw AppliedCodeException.Create(Resources.DocumentKindIsEmpty);     
+
       if (templateDoc == null)
         throw AppliedCodeException.Create(Resources.MinutesTemplateNotFoundFormat(document.DocumentKind.Name));            
       

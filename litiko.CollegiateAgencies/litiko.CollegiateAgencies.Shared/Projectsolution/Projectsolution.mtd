@@ -950,13 +950,13 @@
           "Name": "MainGroup",
           "ColumnDefinitions": [
             {
-              "Percentage": 14.16
+              "Percentage": 16.86
             },
             {
-              "Percentage": 52.23
+              "Percentage": 15.91
             },
             {
-              "Percentage": 33.6
+              "Percentage": 64.96
             }
           ]
         },
@@ -992,13 +992,13 @@
           "$type": "Sungero.Metadata.HyperlinkControlMetadata, Sungero.Metadata",
           "NameGuid": "cce128fe-0119-427f-8a81-781f246dddcc",
           "Name": "ControlSelectAll",
-          "ColumnNumber": 0,
+          "ColumnNumber": 1,
           "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.HyperlinkToSourceBinder",
           "FunctionName": "SelectAllVoting",
           "HeaderLocation": "None",
           "ParentGuid": "c1bf57de-8c52-4fec-9fee-9d04026e30ef",
-          "RowNumber": 1,
+          "RowNumber": 0,
           "RowSpan": 1,
           "Settings": []
         }

@@ -55,7 +55,12 @@ namespace litiko.CollegiateAgencies.Client
       }
 
       foreach (var element in _obj.Voting)
+      {
         element.Yes = true;
+        element.No = false;
+        element.Abstained = false;
+        element.State.Properties.Comment.IsRequired = false;
+      }
     } 
     
     /// <summary>
