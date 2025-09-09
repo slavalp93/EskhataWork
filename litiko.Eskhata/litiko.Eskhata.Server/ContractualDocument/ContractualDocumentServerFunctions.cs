@@ -12,6 +12,16 @@ namespace litiko.Eskhata.Server
   {  
     
     /// <summary>
+    /// Создать накладную.
+    /// </summary>
+    /// <returns>Созданный документ.</returns>
+    [Remote]
+    public static Sungero.FinancialArchive.IWaybill CreateWaybill()
+    {            
+      return Sungero.FinancialArchive.Waybills.Create();
+    } 
+
+    /// <summary>
     /// Проверка заполненности свойств контрагента
     /// </summary>
     [Remote(IsPure = true)]
@@ -249,5 +259,6 @@ namespace litiko.Eskhata.Server
       
       return stateView;
     }
+       
   }
 }

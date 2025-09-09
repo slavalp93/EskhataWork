@@ -14,7 +14,7 @@ namespace litiko.Eskhata
     {
       base.CounterpartyChanged(e);
       
-      PublicFunctions.ContractualDocument.FillTaxRate(_obj, DocumentKinds.As(_obj.DocumentKind), Sungero.Contracts.ContractCategories.As(_obj.DocumentGroup), e.NewValue);
+      PublicFunctions.ContractualDocument.FillTaxRate(_obj, DocumentKinds.As(_obj.DocumentKind), Sungero.Contracts.ContractCategories.As(_obj.DocumentGroup), e.NewValue);      
     }
 
     public override void DocumentGroupChanged(Sungero.Docflow.Shared.OfficialDocumentDocumentGroupChangedEventArgs e)
@@ -22,6 +22,7 @@ namespace litiko.Eskhata
       base.DocumentGroupChanged(e);
       
       PublicFunctions.ContractualDocument.FillTaxRate(_obj, DocumentKinds.As(_obj.DocumentKind), Sungero.Contracts.ContractCategories.As(e.NewValue), _obj.Counterparty);
+      PublicFunctions.ContractualDocument.FillResponsibilityMatrix(_obj);
     }
 
     public virtual void IsEqualPaymentlitikoChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
@@ -43,9 +44,9 @@ namespace litiko.Eskhata
     {
       base.DocumentKindChanged(e);
       
-      Functions.Contract.SetIsStandard(_obj);      
-      
-      PublicFunctions.ContractualDocument.FillTaxRate(_obj, DocumentKinds.As(e.NewValue), Sungero.Contracts.ContractCategories.As(_obj.DocumentGroup), _obj.Counterparty);
+      Functions.Contract.SetIsStandard(_obj);            
+      PublicFunctions.ContractualDocument.FillTaxRate(_obj, DocumentKinds.As(e.NewValue), Sungero.Contracts.ContractCategories.As(_obj.DocumentGroup), _obj.Counterparty);      
+      PublicFunctions.ContractualDocument.FillResponsibilityMatrix(_obj);
     }
 
   }

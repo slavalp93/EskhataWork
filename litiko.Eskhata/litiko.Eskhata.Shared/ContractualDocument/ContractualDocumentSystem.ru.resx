@@ -187,4 +187,16 @@
   <data name="Property_PennyAmountlitiko" xml:space="preserve">
     <value>Сумма пенс. взноса</value>
   </data>
+  <data name="Action_CreateWaybilllitiko" xml:space="preserve">
+    <value>Создать накладную</value>
+  </data>
+  <data name="Action_CreateWaybilllitikoHint" xml:space="preserve">
+    <value>Создать накладную</value>
+  </data>
+  <data name="Action_CreateWaybilllitikoDescription" xml:space="preserve">
+    <value>Создать накладную к документу.</value>
+  </data>
+  <data name="Property_ResponsibilityMatrixlitiko" xml:space="preserve">
+    <value>Матрица ответственности</value>
+  </data>
 </root>

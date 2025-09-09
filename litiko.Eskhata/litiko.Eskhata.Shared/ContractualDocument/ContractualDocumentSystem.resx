@@ -196,4 +196,22 @@
   <data name="Property_PennyAmountlitiko" xml:space="preserve">
     <value>Penny amount</value>
   </data>
+  <data name="Action_CreateWaybilllitiko" xml:space="preserve">
+    <value>Create waybill</value>
+  </data>
+  <data name="Action_CreateWaybilllitikoDescription" xml:space="preserve">
+    <value>Create a waybill to the contractual document.</value>
+  </data>
+  <data name="Action_CreateWaybilllitikoHint" xml:space="preserve">
+    <value>Create waybill</value>
+  </data>
+  <data name="Action_CreateWaybilllitikoConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateWaybilllitikoConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_ResponsibilityMatrixlitiko" xml:space="preserve">
+    <value>Responsibility matrix</value>
+  </data>
 </root>

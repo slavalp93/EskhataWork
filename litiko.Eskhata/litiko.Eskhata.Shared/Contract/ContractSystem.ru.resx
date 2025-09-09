@@ -202,4 +202,40 @@
   <data name="Property_FrequencyExpenseslitiko" xml:space="preserve">
     <value>Периодичность отнесения на расходы </value>
   </data>
+  <data name="Action_CreateContractStatementDescription" xml:space="preserve">
+    <value>Создание акта выполненных работ (услуг). </value>
+  </data>
+  <data name="Action_CreateContractStatement" xml:space="preserve">
+    <value>Создать акт вып. работ (услуг)</value>
+  </data>
+  <data name="Action_CreateContractStatementHint" xml:space="preserve">
+    <value>Создать акт выполненных работ (услуг)</value>
+  </data>
+  <data name="Action_CreateIncomingInvoiceDescription" xml:space="preserve">
+    <value>Создание входящего счета</value>
+  </data>
+  <data name="Action_CreateIncomingInvoice" xml:space="preserve">
+    <value>Создать вх. счет</value>
+  </data>
+  <data name="Action_CreateIncomingInvoiceHint" xml:space="preserve">
+    <value>Создание входящего счета</value>
+  </data>
+  <data name="Action_CreateSupAgreement" xml:space="preserve">
+    <value>Создать доп. соглашение (Заказ)</value>
+  </data>
+  <data name="Action_CreateSupAgreementHint" xml:space="preserve">
+    <value>Создать дополнительное соглашение (Заказ)</value>
+  </data>
+  <data name="Action_CreateSupAgreementDescription" xml:space="preserve">
+    <value>Создание дополнительного соглашения к договору (Заказ). </value>
+  </data>
+  <data name="Action_CreateLegalOpinionlitiko" xml:space="preserve">
+    <value>Создать юрид. заключение</value>
+  </data>
+  <data name="Action_CreateLegalOpinionlitikoHint" xml:space="preserve">
+    <value>Создать юридическое заключение</value>
+  </data>
+  <data name="Action_CreateLegalOpinionlitikoDescription" xml:space="preserve">
+    <value>Создание юридичиского заключения к договору. </value>
+  </data>
 </root>

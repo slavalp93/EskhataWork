@@ -13,6 +13,7 @@ namespace litiko.ContractsEskhata.Server
     public override void Initializing(Sungero.Domain.ModuleInitializingEventArgs e)
     {
       CreateApprovalRoles();
+      CreateDocumentKinds();
     }
     
     #region Роли согласования
@@ -50,5 +51,51 @@ namespace litiko.ContractsEskhata.Server
 
     }    
     #endregion
+    
+    #region Виды документов
+    /// <summary>
+    /// Создать виды документов.
+    /// </summary>    
+    public static void CreateDocumentKinds()
+    {
+      
+      #region Settings
+      InitializationLogger.Debug("Init: Create document kinds.");
+      
+      var registrable = Sungero.Docflow.DocumentKind.NumberingType.Registrable;
+      var numerable = Sungero.Docflow.DocumentKind.NumberingType.Numerable;
+      var notNumerable = Sungero.Docflow.DocumentKind.NumberingType.NotNumerable;
+      
+      var actions = new Sungero.Domain.Shared.IActionInfo[] {
+        Sungero.Docflow.OfficialDocuments.Info.Actions.SendForFreeApproval,
+        Sungero.Docflow.OfficialDocuments.Info.Actions.SendForApproval
+      };
+      #endregion         
+      
+      #region Юридическое заключение
+      var aviabledDocumentKinds = Sungero.Docflow.PublicFunctions.DocumentKind.GetAvailableDocumentKinds(typeof(Sungero.Docflow.IAddendum));
+      var docKind = aviabledDocumentKinds
+        .Where(x => x.Status == Sungero.CoreEntities.DatabookEntry.Status.Active && x.Name == "Юридическое заключение")
+        .FirstOrDefault();
+      
+      if (docKind == null)
+      {
+        Sungero.Docflow.PublicInitializationFunctions.Module.
+        CreateDocumentKind("Юридическое заключение",
+                           "Юридическое заключение",
+                           notNumerable,
+                           Sungero.Docflow.DocumentKind.DocumentFlow.Inner,
+                           true,
+                           false,
+                           litiko.CollegiateAgencies.PublicConstants.Module.DocumentTypeGuids.Addendum,
+                           actions,
+                           Constants.Module.DocumentKindGuids.LegalOpinion,
+                           false);      
+      }            
+      #endregion                 
+      
+    }    
+    #endregion
+
   }
 }
