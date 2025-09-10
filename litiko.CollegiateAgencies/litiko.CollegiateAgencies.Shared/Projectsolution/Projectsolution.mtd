@@ -967,7 +967,7 @@
           "ColumnNumber": 0,
           "ColumnSpan": 3,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.GridControlToChildCollectionBinder",
-          "HeaderLocation": "Top",
+          "HeaderLocation": "None",
           "ParentGuid": "c1bf57de-8c52-4fec-9fee-9d04026e30ef",
           "PropertyGuid": "806f6cff-1540-4ee6-988a-df7a07dd6eed",
           "RowNumber": 1,
