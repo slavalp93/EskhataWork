@@ -27,6 +27,18 @@ namespace litiko.Eskhata.Client
         }
       }        
       #endregion      
+      
+      #region Договора. Согласование с бюджетным контролером
+      if (CustomStage.CustomStageTypelitiko == litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.BudgetCheckCont && document != null && ContractualDocuments.Is(document))
+      {
+        var contractualDocument = ContractualDocuments.As(document);
+        if (!contractualDocument.IsWithinBudgetlitiko.HasValue)
+        {
+          e.AddError(litiko.ContractsEskhata.Resources.RequiredToFillIsWithinBudget);
+          return;          
+        }
+      }        
+      #endregion       
     }
 
     public override bool CanWithSuggestions(Sungero.Workflow.Client.CanExecuteResultActionArgs e)
@@ -41,7 +53,7 @@ namespace litiko.Eskhata.Client
       var CustomStage = litiko.Eskhata.ApprovalStages.As(_obj.Stage);
       var document = _obj.DocumentGroup.OfficialDocuments.FirstOrDefault();
         
-      #region Контроль бюджета
+      #region Тендера. Контроль бюджета
       if (CustomStage.CustomStageTypelitiko == litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.BudgetCheck && document != null && CollegiateAgencies.Projectsolutions.Is(document))
       {
         var projectSolution = CollegiateAgencies.Projectsolutions.As(document);
@@ -52,6 +64,48 @@ namespace litiko.Eskhata.Client
         }
       }        
       #endregion
+      
+      #region Договора. Согласование с бюджетным контролером
+      if (CustomStage.CustomStageTypelitiko == litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.BudgetCheckCont && document != null && ContractualDocuments.Is(document))
+      {
+        var contractualDocument = ContractualDocuments.As(document);
+        if (!contractualDocument.IsWithinBudgetlitiko.HasValue)
+        {
+          e.AddError(litiko.ContractsEskhata.Resources.RequiredToFillIsWithinBudget);
+          return;          
+        }
+      }        
+      #endregion      
+      
+      #region Договора. Согласование с бухгалтером
+      if (CustomStage.CustomStageTypelitiko == litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.AccountantAppr && document != null && ContractualDocuments.Is(document))
+      {
+        var contract = Contracts.Null;                       
+        if (Contracts.Is(document))
+          contract = Contracts.As(document);
+        else if (SupAgreements.Is(document))
+          contract = Contracts.As(SupAgreements.As(document).LeadingDocument);
+        
+        if (contract != null)
+        {
+          var notFilledFields = new List<string>();
+          if (string.IsNullOrEmpty(contract.AccDebtCreditlitiko))
+            notFilledFields.Add(contract.Info.Properties.AccDebtCreditlitiko.LocalizedName);
+          
+          if (string.IsNullOrEmpty(contract.AccFutureExpenselitiko))
+            notFilledFields.Add(contract.Info.Properties.AccFutureExpenselitiko.LocalizedName);
+          
+          if (contract.PaymentRegionlitiko == null)
+            notFilledFields.Add(contract.Info.Properties.PaymentRegionlitiko.LocalizedName);
+          
+          if (notFilledFields.Any())
+          {
+            e.AddError(litiko.ContractsEskhata.Resources.RequiredToFillFieldsFormat(string.Join(Environment.NewLine, notFilledFields)));
+            return;            
+          }          
+        }
+      }        
+      #endregion      
     }
 
     public override bool CanApproved(Sungero.Workflow.Client.CanExecuteResultActionArgs e)

@@ -27,6 +27,16 @@ namespace litiko.Eskhata
           && doc != null && litiko.CollegiateAgencies.Projectsolutions.Is(doc) && !litiko.CollegiateAgencies.Projectsolutions.As(doc).IncludedInAgenda.Value)
         e.AddError(litiko.CollegiateAgencies.Resources.DocumentIsNotIncludedInAgenda);      
       #endregion
+      
+      #region Договора. Контроль получения скана.
+      if (stage != null && doc != null && litiko.Eskhata.ApprovalStages.As(stage.Stage).CustomStageTypelitiko == litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.ScanReceivedCon &&
+          ContractualDocuments.Is(doc) && _obj.Result == ApprovalCheckingAssignment.Result.Accept)
+      {
+        var contractualDocument = ContractualDocuments.As(doc);
+        if (!contractualDocument.ScanReceivedlitiko.HasValue)
+          e.AddError(litiko.ContractsEskhata.Resources.RequiredToFillIsScanReceived);
+      }      
+      #endregion      
     }
   }
 
