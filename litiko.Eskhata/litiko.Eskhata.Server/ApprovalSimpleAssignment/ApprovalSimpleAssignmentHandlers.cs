@@ -54,6 +54,32 @@ namespace litiko.Eskhata
       }      
       #endregion
 
+      #region Вынести вопрос на КОУ
+      if (stage != null && doc != null && litiko.Eskhata.ApprovalStages.As(stage.Stage).CustomStageTypelitiko == litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.SubmitIssueKou )
+      {
+        //e.AddError(litiko.ContractsEskhata.Resources.RequiredToFillIsOriginalReceived);
+        // Получаем связанные документы в прочих (OtherGroup)
+        var relatedDocs = doc.Relations.GetRelatedFrom();  
+    
+        var projectSolution = relatedDocs.FirstOrDefault(d => litiko.CollegiateAgencies.Projectsolutions.Is(d));
+        if (projectSolution == null)
+        {
+          e.AddError(litiko.CollegiateAgencies.Resources.BeforeActionItemProjectSolutionRequired);
+          return;
+        }
+        
+        var officialDoc = Sungero.Docflow.OfficialDocuments.As(projectSolution);
+        
+        var createdTasks = Sungero.Docflow.PublicFunctions.Module.Remote.GetApprovalTasks(officialDoc);
+        // Получаем все стартованные задачи согласования по документу
+        
+        if (!createdTasks.Any())
+        {
+            e.AddError(litiko.CollegiateAgencies.Resources.ProjectSolutionApprovalMissing);
+        }
+      }      
+      #endregion      
+      
     }
   }
 

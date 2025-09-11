@@ -157,4 +157,10 @@
   <data name="ResponsibleEmployeeAHDDescription" xml:space="preserve">
     <value>Используется для подписания проекта решения</value>
   </data>
+  <data name="BeforeActionItemProjectSolutionRequired" xml:space="preserve">
+    <value>Перед выполнением задания необходимо создать проект решения и отправить его на согласование</value>
+  </data>
+  <data name="ProjectSolutionApprovalMissing" xml:space="preserve">
+    <value>Проект решения не отправлен на согласование по регламенту</value>
+  </data>
 </root>
