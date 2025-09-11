@@ -74,7 +74,12 @@
   "PublicStructures": [],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.ContractsEskhata",
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "RequiredToFillIsScanReceived",
+    "RequiredToFillIsWithinBudget",
+    "RequiredToFillIsOriginalReceived",
+    "RequiredToFillFields"
+  ],
   "ServerAssemblyName": "litiko.ContractsEskhata.Server",
   "ServerNamespace": "litiko.ContractsEskhata.Server",
   "SharedAssemblyName": "litiko.ContractsEskhata.Shared",

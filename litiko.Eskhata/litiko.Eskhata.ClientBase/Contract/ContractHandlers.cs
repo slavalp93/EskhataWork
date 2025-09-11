@@ -14,7 +14,7 @@ namespace litiko.Eskhata
     {
       base.IsFrameworkContractValueInput(e);
       
-      _obj.State.Properties.TotalAmount.IsRequired = !_obj.IsFrameworkContract.GetValueOrDefault();
+      _obj.State.Properties.TotalAmountlitiko.IsRequired = !_obj.IsFrameworkContract.GetValueOrDefault();
     }
 
     public override void ValidTillValueInput(Sungero.Presentation.DateTimeValueInputEventArgs e)

@@ -43,6 +43,16 @@ namespace litiko.Eskhata
           e.AddError(litiko.RegulatoryDocuments.Resources.NeedFillLegalActAndDateBegin);
       }
       #endregion      
+      
+      #region Договора. Контроль получения скана.
+      if (stage != null && doc != null && litiko.Eskhata.ApprovalStages.As(stage.Stage).CustomStageTypelitiko == litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.ScanReceivedCon &&
+          ContractualDocuments.Is(doc) && _obj.Result == ApprovalSimpleAssignment.Result.Complete)
+      {
+        var contractualDocument = ContractualDocuments.As(doc);
+        if (!contractualDocument.ScanReceivedlitiko.HasValue)
+          e.AddError(litiko.ContractsEskhata.Resources.RequiredToFillIsScanReceived);
+      }      
+      #endregion
 
     }
   }

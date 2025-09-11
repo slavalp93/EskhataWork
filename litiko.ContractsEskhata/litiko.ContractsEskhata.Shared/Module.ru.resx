@@ -58,4 +58,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="RequiredToFillIsScanReceived" xml:space="preserve">
+    <value>Требуется заполнить поле «Скан-образ получен» в карточке документа.</value>
+  </data>
+  <data name="RequiredToFillIsWithinBudget" xml:space="preserve">
+    <value>Требуется заполнить поле «В рамках бюджета» в карточке документа.</value>
+  </data>
+  <data name="RequiredToFillIsOriginalReceived" xml:space="preserve">
+    <value>Требуется заполнить поле «Оригинал получен» в карточке документа.</value>
+  </data>
+  <data name="RequiredToFillFields" xml:space="preserve">
+    <value>Требуется заполнить следующие поля в карточке документа:
+{0}</value>
+  </data>
 </root>

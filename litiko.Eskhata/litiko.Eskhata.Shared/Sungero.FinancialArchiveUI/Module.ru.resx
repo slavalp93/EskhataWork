@@ -58,17 +58,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="RequiredToFillIsScanReceived" xml:space="preserve">
-    <value>You must fill in the “Scan image received” field in the document card.</value>
-  </data>
-  <data name="RequiredToFillIsWithinBudget" xml:space="preserve">
-    <value>It is required to fill in the “Within budget” field in the document card.</value>
-  </data>
-  <data name="RequiredToFillIsOriginalReceived" xml:space="preserve">
-    <value>You must fill in the “Originaal received” field in the document card.</value>
-  </data>
-  <data name="RequiredToFillFields" xml:space="preserve">
-    <value>The following fields in the document card must be filled in:
-{0}</value>
-  </data>
 </root>

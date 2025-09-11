@@ -15,7 +15,14 @@ namespace litiko.Eskhata
       #region Согласование
       if (_obj.StageType == StageType.Approvers)
       {        
-        return query.Where(q => Equals(q, CustomStageTypelitiko.BudgetCheck));
+        var allowedValues = new List<Enumeration>
+        {
+          CustomStageTypelitiko.BudgetCheck,
+          CustomStageTypelitiko.BudgetCheckCont,
+          CustomStageTypelitiko.AccountantAppr
+        };
+        
+        return query.Where(q => allowedValues.Contains(q));
       }      
       #endregion
 
@@ -26,7 +33,8 @@ namespace litiko.Eskhata
         {
           CustomStageTypelitiko.Voting,
           CustomStageTypelitiko.IncludeInMeet,
-          CustomStageTypelitiko.ControlIRD
+          CustomStageTypelitiko.ControlIRD,
+          CustomStageTypelitiko.ScanReceivedCon
         };
         
         if (_obj.AllowSendToRework.GetValueOrDefault())
@@ -36,6 +44,18 @@ namespace litiko.Eskhata
       }      
       #endregion
 
+      #region Контроль возврата
+      if (_obj.StageType == StageType.CheckReturn)
+      {
+        var allowedValues = new List<Enumeration>
+        {
+          CustomStageTypelitiko.OrigReceivedCon
+        };        
+
+        return query.Where(q => allowedValues.Contains(q));
+      }      
+      #endregion
+      
       // Для всех остальных — недоступны никакие значения
       return Enumerable.Empty<Enumeration>();
     }

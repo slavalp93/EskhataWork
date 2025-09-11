@@ -230,6 +230,26 @@
           "NameGuid": "b76f25b4-1e98-469b-88b8-6b155d1cd81f",
           "Name": "BudgetCheck",
           "Code": "BudgetCheck"
+        },
+        {
+          "NameGuid": "bff89bef-6438-4332-97c0-4eb0d364b7be",
+          "Name": "BudgetCheckCont",
+          "Code": "BudgetCheckCont"
+        },
+        {
+          "NameGuid": "535697d1-ef38-45ed-8670-410fb6252047",
+          "Name": "ScanReceivedCon",
+          "Code": "ScanReceivedCon"
+        },
+        {
+          "NameGuid": "7f6bd0b9-d976-41ba-a08c-280673558408",
+          "Name": "OrigReceivedCon",
+          "Code": "OrigReceivedCon"
+        },
+        {
+          "NameGuid": "834d161f-afc6-4a3c-8ba3-bef644d247e7",
+          "Name": "AccountantAppr",
+          "Code": "AccountantAppr"
         }
       ],
       "HandledEvents": [

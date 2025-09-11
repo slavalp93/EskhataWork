@@ -94,4 +94,16 @@
   <data name="Enum_CustomStageTypelitiko_BudgetCheck" xml:space="preserve">
     <value>Tenders. Budget check</value>
   </data>
+  <data name="Enum_CustomStageTypelitiko_BudgetCheckCont" xml:space="preserve">
+    <value>Contracts.  Approving with the budget controller</value>
+  </data>
+  <data name="Enum_CustomStageTypelitiko_ScanReceivedCon" xml:space="preserve">
+    <value>Contracts. Control of receipt of scans.</value>
+  </data>
+  <data name="Enum_CustomStageTypelitiko_OrigReceivedCon" xml:space="preserve">
+    <value>Contracts. Control of receipt of the original.</value>
+  </data>
+  <data name="Enum_CustomStageTypelitiko_AccountantAppr" xml:space="preserve">
+    <value>Contracts. Approving with the accountant.</value>
+  </data>
 </root>
