@@ -347,9 +347,10 @@
     "OutgoingCorrespondenceNBT",
     "OutgoingPoACorrespondence",
     "ApiKeyCopilot",
-    "ApiKeyGemini",
+    "ApiKeyGemini1",
     "ApiKeyGPT1",
-    "ApiKeyGPT2"
+    "ApiKeyGPT2",
+    "ApiKeyGemini2"
   ],
   "ServerAssemblyName": "litiko.DocflowEskhata.Server",
   "ServerNamespace": "litiko.DocflowEskhata.Server",

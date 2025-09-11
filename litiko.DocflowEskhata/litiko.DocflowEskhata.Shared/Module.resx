@@ -97,13 +97,16 @@
   <data name="ApiKeyCopilot" xml:space="preserve">
     <value>44d4672c5ef64d78991cd956ee55c33d.6e7d7af0a3875492</value>
   </data>
-  <data name="ApiKeyGemini" xml:space="preserve">
-    <value>AIzaSyAlAhqjBf_ue_9tIMVrwgeXck2BwfdmfoA</value>
+  <data name="ApiKeyGemini1" xml:space="preserve">
+    <value>AIzaSyB8cN4pojlW00n3PquDG0KBUHKJ5_0VgQQ</value>
   </data>
   <data name="ApiKeyGPT1" xml:space="preserve">
     <value>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</value>
   </data>
   <data name="ApiKeyGPT2" xml:space="preserve">
     <value>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</value>
+  </data>
+  <data name="ApiKeyGemini2" xml:space="preserve">
+    <value>AIzaSyDzMtXOYvFYE-XZa12mgQzkPH9V1EYdHSE</value>
   </data>
 </root>

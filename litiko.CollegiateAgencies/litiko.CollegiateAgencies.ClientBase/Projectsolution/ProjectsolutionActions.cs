@@ -118,21 +118,18 @@ namespace litiko.CollegiateAgencies.Client
       var sourseSubject = _obj.Subject;
       var sourseListened = _obj.ListenedRU;
 
-      if (string.IsNullOrWhiteSpace(sourseSubject))
-      {
-        e.AddWarning("Поле «Заголовок» пустое.");
-        return;
-      }
-      if (string.IsNullOrWhiteSpace(sourseListened))
-      {
-        e.AddWarning("Поле «Слушали» пустое.");
-        return;
-      }
-      if (!_obj.Decided.Any(d => !string.IsNullOrWhiteSpace(d.DecisionRU)))
-      {
-        e.AddWarning("Поле «Решили» пустое.");
-        return;
-      }
+//      if (string.IsNullOrWhiteSpace(sourseSubject))
+//      {
+//        e.AddWarning("Поле «Заголовок» пустое.");
+//      }
+//      if (string.IsNullOrWhiteSpace(sourseListened))
+//      {
+//        e.AddWarning("Поле «Слушали» пустое.");
+//      }
+//      if (!_obj.Decided.Any(d => !string.IsNullOrWhiteSpace(d.DecisionRU)))
+//      {
+//        e.AddWarning("Поле «Решили» пустое.");
+//      }
 
       try
       {

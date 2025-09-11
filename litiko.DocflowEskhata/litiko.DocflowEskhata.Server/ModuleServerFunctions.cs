@@ -129,94 +129,195 @@ namespace litiko.DocflowEskhata.Server
     [Public, Remote(IsPure = true)]
     public static string TranslateRuToTj(string text)
     {
-      return AskChatGPT(text, "ru->tj");
+      return AskGemini(text, "ru->tj");
     }
     
     [Public, Remote(IsPure = true)]
     public static string TranslateTjToRu(string text)
     {
-      return AskChatGPT(text, "tj->ru");
+      return AskGemini(text, "tj->ru");
     }
     
     [Public, Remote(IsPure = true)]
     public static string TranslateRuToEn(string text)
     {
-      return AskChatGPT(text, "ru->en");
+      return AskGemini(text, "ru->en");
     }
     
-    private static string AskChatGPT(string text, string direction)
+    #region ChatGPT
+    //    private static string AskChatGPT(string text, string direction)
+    //    {
+    //      var apiKeys = new[]
+    //      {
+    //        Resources.ApiKeyGPT1,
+    //        Resources.ApiKeyGPT2
+    //      };
+//
+    //      if(string.IsNullOrWhiteSpace(text))
+    //        return string.Empty;
+//
+    //      var url = "https://api.openai.com/v1/chat/completions";
+//
+    //      string systemPrompt;
+//
+    //      switch (direction)
+    //      {
+    //        case "ru->tj":
+    //          systemPrompt = "You are a professional translator. Translate from Russian to Tajik. Return only the translation, no comments.";
+    //          break;
+    //        case "tj->ru":
+    //          systemPrompt = "You are a professional translator. Translate from Tajik to Russian. Return only the translation, no comments.";
+    //          break;
+    //        case "ru->en":
+    //          systemPrompt = "You are a professional translator. Translate from Russian to English. Return only the translation, no comments.";
+    //          break;
+    //        default:
+    //          systemPrompt = "You are a professional translator. Return only the translation, no comments.";
+    //          break;
+    //      }
+//
+    //      foreach (var apiKey in apiKeys)
+    //      {
+    //        using(var client = new HttpClient())
+    //        {
+    //          client.DefaultRequestHeaders.Clear();
+    //          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + apiKey);
+//
+    //          var payload = new JObject
+    //          {
+    //            ["model"] = "gpt-4o-mini",
+    //            ["temperature"] = 0,
+    //            ["messages"] = new JArray
+    //            {
+    //              new JObject { ["role"] = "system", ["content"] = systemPrompt },
+    //              new JObject { ["role"] = "user",   ["content"] = text }
+    //            }
+    //          };
+//
+    //          var content = new StringContent(payload.ToString(Formatting.None), Encoding.UTF8, "application/json");
+    //          var response = client.PostAsync(url, content).Result;
+    //          var responseJson = response.Content.ReadAsStringAsync().Result;
+//
+    //          if (response.IsSuccessStatusCode)
+    //          {
+    //            var parsed = JObject.Parse(responseJson);
+    //            var translation = parsed["choices"]?[0]?["message"]?["content"]?.ToString();
+    //            return translation?.Trim() ?? string.Empty;
+    //          }
+    //          else if((int)response.StatusCode == 429)
+    //          {
+    //            Logger.Error($"Ключ превысил лимит. Пробуем следующий.");
+    //            continue;
+    //          }
+    //          else
+    //          {
+    //            Logger.Error($"{response.StatusCode} || {responseJson}");
+    //            throw new Exception($"Повторите попытку через минуту.");
+    //          }
+    //        }
+    //      }
+//
+    //      throw new Exception("Превышен лимит запросов, пожалуйста повторите попытку через минуту");
+    //    }
+    #endregion
+    
+    private static string AskGemini(string text, string direction)
     {
+      // 1. ЗАМЕНИТЕ ЭТИ КЛЮЧИ НА ВАШИ КЛЮЧИ GEMINI API
       var apiKeys = new[]
       {
-        Resources.ApiKeyGPT1,
-        Resources.ApiKeyGPT2
+        Resources.ApiKeyGemini1, // Замените на реальный ключ
+        Resources.ApiKeyGemini2  // Замените на реальный ключ
       };
       
-      if(string.IsNullOrWhiteSpace(text))
+      if (string.IsNullOrWhiteSpace(text))
         return string.Empty;
       
-      var url = "https://api.openai.com/v1/chat/completions";
-      
-      string systemPrompt;
+      // 2. ФОРМИРУЕМ ИНСТРУКЦИЮ ДЛЯ ПЕРЕВОДА
+      string translationInstruction;
       
       switch (direction)
       {
         case "ru->tj":
-          systemPrompt = "You are a professional translator. Translate from Russian to Tajik. Return only the translation, no comments.";
+          translationInstruction = "Ты — профессиональный переводчик. Переведи следующий текст с русского на таджикский. Верни только перевод, без каких-либо комментариев и пояснений.";
           break;
         case "tj->ru":
-          systemPrompt = "You are a professional translator. Translate from Tajik to Russian. Return only the translation, no comments.";
+          translationInstruction = "Ты — профессиональный переводчик. Переведи следующий текст с таджикского на русский. Верни только перевод, без каких-либо комментариев и пояснений.";
           break;
         case "ru->en":
-          systemPrompt = "You are a professional translator. Translate from Russian to English. Return only the translation, no comments.";
+          translationInstruction = "Ты — профессиональный переводчик. Переведи следующий текст с русского на английский. Верни только перевод, без каких-либо комментариев и пояснений.";
           break;
         default:
-          systemPrompt = "You are a professional translator. Return only the translation, no comments.";
+          // Общая инструкция на случай, если направление не указано
+          translationInstruction = "Ты — профессиональный переводчик. Верни только перевод текста, без комментариев.";
           break;
       }
       
+      // Объединяем инструкцию и сам текст
+      var fullPrompt = $"{translationInstruction}\n\n---\n\n{text}";
+      
       foreach (var apiKey in apiKeys)
       {
-        using(var client = new HttpClient())
+        // 3. ИЗМЕНЕН URL И СПОСОБ ПЕРЕДАЧИ КЛЮЧА
+        var url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={apiKey}";
+        
+        using (var client = new HttpClient())
         {
-          client.DefaultRequestHeaders.Clear();
-          client.DefaultRequestHeaders.Add("Authorization", "Bearer " + apiKey);
-          
+          // 4. ИЗМЕНЕНА СТРУКТУРА ТЕЛА ЗАПРОСА (PAYLOAD)
           var payload = new JObject
           {
-            ["model"] = "gpt-4o-mini",
-            ["temperature"] = 0,
-            ["messages"] = new JArray
+            ["contents"] = new JArray
             {
-              new JObject { ["role"] = "system", ["content"] = systemPrompt },
-              new JObject { ["role"] = "user",   ["content"] = text }
+              new JObject
+              {
+                ["parts"] = new JArray
+                {
+                  new JObject { ["text"] = fullPrompt }
+                }
+              }
+            },
+            // Добавляем конфигурацию для более предсказуемого результата
+            ["generationConfig"] = new JObject
+            {
+              ["temperature"] = 0
             }
           };
           
           var content = new StringContent(payload.ToString(Formatting.None), Encoding.UTF8, "application/json");
           var response = client.PostAsync(url, content).Result;
           var responseJson = response.Content.ReadAsStringAsync().Result;
-          
+                   
           if (response.IsSuccessStatusCode)
           {
-            var parsed = JObject.Parse(responseJson);
-            var translation = parsed["choices"]?[0]?["message"]?["content"]?.ToString();
-            return translation?.Trim() ?? string.Empty;
+            try
+            {
+              var parsed = JObject.Parse(responseJson);
+              // 5. ИЗМЕНЕН ПУТЬ К ТЕКСТУ В ОТВЕТЕ
+              var translation = parsed["candidates"]?[0]?["content"]?["parts"]?[0]?["text"]?.ToString();
+              return translation?.Trim() ?? string.Empty;
+            }
+            catch (Exception ex)
+            {
+              // Логирование ошибки парсинга, если структура ответа неожиданная
+              Logger.Error($"Ошибка парсинга ответа от Gemini: {ex.Message} || Ответ: {responseJson}");
+              continue; // Попробовать следующий ключ
+            }
           }
-          else if((int)response.StatusCode == 429)
+          else if ((int)response.StatusCode == 429) // Too Many Requests
           {
             Logger.Error($"Ключ превысил лимит. Пробуем следующий.");
             continue;
           }
           else
           {
-            Logger.Error($"{response.StatusCode} || {responseJson}");
-            throw new Exception($"Повторите попытку через минуту.");
+            Logger.Error($"Ошибка от Gemini API: {response.StatusCode} || {responseJson}");
+            // Не бросаем исключение сразу, чтобы дать шанс другому ключу
           }
         }
       }
       
-      throw new Exception("Превышен лимит запросов, пожалуйста повторите попытку через минуту");
+      // Если все ключи не сработали
+      throw new Exception("Превышен лимит запросов или все ключи недействительны, пожалуйста повторите попытку через минуту");
     }
   }
 }
