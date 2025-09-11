@@ -79,4 +79,7 @@
   <data name="NoAccessToCreateVersion" xml:space="preserve">
     <value>You do not have sufficient rights to create a version.</value>
   </data>
+  <data name="DocumentHasIncompleteTasks" xml:space="preserve">
+    <value>There are incomplete tasks for the document</value>
+  </data>
 </root>
