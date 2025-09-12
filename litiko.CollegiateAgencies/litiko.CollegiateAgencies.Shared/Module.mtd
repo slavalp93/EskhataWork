@@ -652,7 +652,9 @@
     "DescriptionAdditionalBoardMembers",
     "DocumentKindIsEmpty",
     "ResponsibleEmployeeAHD",
-    "ResponsibleEmployeeAHDDescription"
+    "ResponsibleEmployeeAHDDescription",
+    "BeforeActionItemProjectSolutionRequired",
+    "ProjectSolutionApprovalMissing"
   ],
   "ServerAssemblyName": "litiko.CollegiateAgencies.Server",
   "ServerNamespace": "litiko.CollegiateAgencies.Server",

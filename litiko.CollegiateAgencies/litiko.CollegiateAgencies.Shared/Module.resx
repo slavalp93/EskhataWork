@@ -160,4 +160,10 @@
   <data name="ResponsibleEmployeeAHDDescription" xml:space="preserve">
     <value>Used to sign a Project solution</value>
   </data>
+  <data name="BeforeActionItemProjectSolutionRequired" xml:space="preserve">
+    <value>Before completing the assignment, you must create a project solution and submit it for approval.</value>
+  </data>
+  <data name="ProjectSolutionApprovalMissing" xml:space="preserve">
+    <value>The project solution has not been submitted for approval according to the regulations</value>
+  </data>
 </root>

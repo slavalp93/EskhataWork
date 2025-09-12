@@ -106,4 +106,7 @@
   <data name="Enum_CustomStageTypelitiko_AccountantAppr" xml:space="preserve">
     <value>Договора. Согласование с бухгалтером.</value>
   </data>
+  <data name="Enum_CustomStageTypelitiko_SubmitIssueKou" xml:space="preserve">
+    <value>Вынести вопрос на КОУ</value>
+  </data>
 </root>
