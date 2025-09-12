@@ -264,6 +264,13 @@
       "IsEnabled": false,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "8d20cd4b-4663-4031-8a9b-da8eabaa316b",
+      "Name": "RemovingOldExchangeDocs",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T04:00:00"
     }
   ],
   "PublicConstants": [

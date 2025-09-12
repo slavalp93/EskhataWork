@@ -175,4 +175,10 @@
   <data name="AsyncHandler_Description_f46750933c57401f807dc9c8a4bdfc3d" xml:space="preserve">
     <value>AsyncHandler</value>
   </data>
+  <data name="JobDisplayName_8d20cd4b466340318a9bda8eabaa316b" xml:space="preserve">
+    <value>Интеграция. Удаление старых документов обмена</value>
+  </data>
+  <data name="JobDescription_8d20cd4b466340318a9bda8eabaa316b" xml:space="preserve">
+    <value>Удаление документов обмена (xml которыми обмениваются Directum RX и АБС), дата изменения которых была более 90 дней назад.</value>
+  </data>
 </root>

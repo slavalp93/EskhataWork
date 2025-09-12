@@ -175,4 +175,10 @@
   <data name="AsyncHandler_Description_f46750933c57401f807dc9c8a4bdfc3d" xml:space="preserve">
     <value>UpdateExchangeDoc</value>
   </data>
+  <data name="JobDisplayName_8d20cd4b466340318a9bda8eabaa316b" xml:space="preserve">
+    <value>Integration. Removing old exchange documents</value>
+  </data>
+  <data name="JobDescription_8d20cd4b466340318a9bda8eabaa316b" xml:space="preserve">
+    <value>Deleting exchange documents (xml that are exchanged between Directum RX and ABS), the modification date of which was more than 90 days ago.</value>
+  </data>
 </root>

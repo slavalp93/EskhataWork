@@ -10,6 +10,60 @@ namespace litiko.Integration.Server
   {
 
     /// <summary>
+    /// Интеграция. Удаление старых документов обмена
+    /// </summary>
+    public virtual void RemovingOldExchangeDocs()
+    {      
+      var logPrefix = "Integration. RemovingOldExchangeDocs.";      
+      Logger.DebugFormat("{0} Start.", logPrefix);
+      
+      var createdNinetyDaysAgo = Calendar.Now.AddDays(-90).Date;
+      var exchangeDocIdsToDelete = ExchangeDocuments.GetAll()
+        .Where(x => x.Created.HasValue && x.Created.Value.Date <= createdNinetyDaysAgo)
+        .Select(x => x.Id)
+        .ToList();
+      
+      if (exchangeDocIdsToDelete.Any())
+      {
+        Logger.DebugFormat("{0} Number of documents to delete: {1}.", logPrefix, exchangeDocIdsToDelete.Count);
+        foreach (var exchangeDocId in exchangeDocIdsToDelete)
+        {
+          Transactions.Execute(
+            () =>
+            {
+              try
+              {
+                var exchangeDoc = ExchangeDocuments.Get(exchangeDocId);
+                
+                // Удаляем записи из очереди обмена
+                var exchangeQueue = ExchangeQueues.GetAll()
+                  .Where(x => x.ExchangeDocument.Id == exchangeDocId)
+                  .ToList();
+                
+                foreach (var item in exchangeQueue)
+                  ExchangeQueues.Delete(item);
+                
+                // Удаляем сам документ обмена
+                ExchangeDocuments.Delete(exchangeDoc);
+                
+                Logger.DebugFormat("{0} Document successfully deleted Id:{1}.", logPrefix, exchangeDocId);              
+              }
+              catch (Exception ex)
+              {                                                
+                Logger.Error(string.Format("{0} Failed to delete document. Id:{1}.", logPrefix, exchangeDocId), ex);
+                throw;
+              }              
+            }
+          );
+        }        
+      }
+      else
+        Logger.DebugFormat("{0} No documents available for deletion.", logPrefix);
+      
+      Logger.DebugFormat("{0} Finish.", logPrefix);
+    }
+
+    /// <summary>
     /// 
     /// </summary>
     public virtual void GetOKVED()
