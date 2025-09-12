@@ -9,6 +9,17 @@ namespace litiko.Integration.Client
 {
   partial class ExchangeDocumentActions
   {
+    public virtual void ExchangeQueue(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var exchQueue = Functions.Module.Remote.GetExchangeQueueByDoc(_obj);
+      exchQueue.Show();
+    }
+
+    public virtual bool CanExchangeQueue(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return true;
+    }
+
     public virtual void StartProcessingXML(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       if (Locks.GetLockInfo(_obj).IsLockedByMe)

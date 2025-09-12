@@ -142,4 +142,13 @@
   <data name="Ribbon_Group_314bba1b43e4404a9e80e4976afce26b" xml:space="preserve">
     <value>Обработка XML</value>
   </data>
+  <data name="Action_ExchangeQueue" xml:space="preserve">
+    <value>Очередь обмена</value>
+  </data>
+  <data name="Action_ExchangeQueueHint" xml:space="preserve">
+    <value>Открыть очередь обмена</value>
+  </data>
+  <data name="Action_ExchangeQueueDescription" xml:space="preserve">
+    <value>Открытие очереди обмена по документу</value>
+  </data>
 </root>

@@ -11,6 +11,14 @@
       "GenerateHandler": true,
       "LargeIconName": null,
       "SmallIconName": null
+    },
+    {
+      "NameGuid": "88807131-b24a-4d61-b4f0-4e6f1a63c6ec",
+      "Name": "ExchangeQueue",
+      "ActionArea": "CardAndCollection",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_ExchangeQueue_large_88807131b24a4d61b4f04e6f1a63c6ec.png",
+      "SmallIconName": "Action_ExchangeQueue_small_88807131b24a4d61b4f04e6f1a63c6ec.png"
     }
   ],
   "BaseGuid": "030d8d67-9b94-4f0d-bcc6-691016eb70f3",
@@ -397,6 +405,15 @@
         "Name": "ActionButton",
         "ActionGuid": "d21058a6-5c53-4179-9a48-6a9ee9ca5c15",
         "Index": 0,
+        "ParentGuid": "314bba1b-43e4-404a-9e80-e4976afce26b"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "c626d6b4-7524-4421-84ee-8f3af0b00e17",
+        "Name": "ExchangeQueue",
+        "ActionGuid": "88807131-b24a-4d61-b4f0-4e6f1a63c6ec",
+        "ButtonSize": "Large",
+        "Index": -1,
         "ParentGuid": "314bba1b-43e4-404a-9e80-e4976afce26b"
       }
     ],

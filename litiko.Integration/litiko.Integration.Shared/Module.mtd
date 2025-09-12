@@ -96,6 +96,14 @@
         "Name": "ExchangeDocument",
         "EntityTypeId": "47dff28c-fde9-4a44-b908-da0167e51457",
         "GroupId": "0db013cc-c54e-4d09-8330-4f45268bd3ea"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "839c3a45-ad38-46aa-be08-6398f70fabb4",
+        "Name": "ExchangeQueue",
+        "EntityTypeId": "794b9791-d0ed-47ba-8f0e-bfa4e8184211",
+        "GroupId": "0db013cc-c54e-4d09-8330-4f45268bd3ea",
+        "PreviousItemGuid": "81185b9b-430e-4d39-bc1f-9a1b76db2a3a"
       }
     ],
     "Background": null,

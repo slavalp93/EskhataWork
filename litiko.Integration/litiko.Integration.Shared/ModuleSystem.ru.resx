@@ -146,7 +146,7 @@
     <value>Документы обмена</value>
   </data>
   <data name="CoverDescription_ExchangeDocument" xml:space="preserve">
-    <value>Список исходящих/входящих xml-пакетов обмена.</value>
+    <value>Список документов обмена. ИД документа = session_id протокола интеграции.</value>
   </data>
   <data name="CoverGroup_Settings" xml:space="preserve">
     <value>Настройки</value>
@@ -180,5 +180,11 @@
   </data>
   <data name="JobDescription_8d20cd4b466340318a9bda8eabaa316b" xml:space="preserve">
     <value>Удаление документов обмена (xml которыми обмениваются Directum RX и АБС), дата изменения которых была более 90 дней назад.</value>
+  </data>
+  <data name="CoverAction_ExchangeQueue" xml:space="preserve">
+    <value>Очередь обмена</value>
+  </data>
+  <data name="CoverDescription_ExchangeQueue" xml:space="preserve">
+    <value>Список исходящих/входящих xml-пакетов обмена.</value>
   </data>
 </root>
