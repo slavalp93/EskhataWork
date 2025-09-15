@@ -149,19 +149,10 @@ namespace litiko.DocflowEskhata.Server
     
     private static string AskGemini(string text, string direction)
     {
-      var envPathFile = litiko.DocflowEskhata.Resources.EnvPathFile;
-      
-      using(var env = File.OpenRead(envPathFile))
-      {
-        Env.Load(env);
-      }
       var apiKeys = new[]
       {
-        
-        Env.GetString("ApiKeyGemini1"),
-        Env.GetString("ApiKeyGemini2")
-        //        Resources.ApiKeyGemini1,
-        //        Resources.ApiKeyGemini2
+        Resources.ApiKeyGemini1,
+        Resources.ApiKeyGemini2
       };
       
       if (string.IsNullOrWhiteSpace(text))
