@@ -654,7 +654,9 @@
     "ResponsibleEmployeeAHD",
     "ResponsibleEmployeeAHDDescription",
     "BeforeActionItemProjectSolutionRequired",
-    "ProjectSolutionApprovalMissing"
+    "ProjectSolutionApprovalMissing",
+    "MeetingOpeningGreeting_RU",
+    "MeetingOpeningGreeting_TJ"
   ],
   "ServerAssemblyName": "litiko.CollegiateAgencies.Server",
   "ServerNamespace": "litiko.CollegiateAgencies.Server",

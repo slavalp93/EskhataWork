@@ -163,4 +163,10 @@
   <data name="ProjectSolutionApprovalMissing" xml:space="preserve">
     <value>Проект решения не отправлен на согласование по регламенту</value>
   </data>
+  <data name="MeetingOpeningGreeting_RU" xml:space="preserve">
+    <value>Председательствующий &lt;PresidentFIOlong&gt; поприветствовал всех присутствующих на очередном заседании &lt;CategoryNameForTemplate&gt;, и объявил &lt;Type2&gt; заседание &lt;CategoryNameForTemplate&gt; Банка открытым.</value>
+  </data>
+  <data name="MeetingOpeningGreeting_TJ" xml:space="preserve">
+    <value>Раисикунанда &lt;PresidentFIOTJ&gt; ҳозиринро ба маҷлиси &lt;TypeTJ2&gt;  &lt;CategoryNameForTemplateTJ&gt; хайрамақдам гуфта, маҷлиси &lt;TypeTJ2&gt; зе &lt;CategoryNameForTemplateTJ&gt; Бонкро кушода эълон кард.</value>
+  </data>
 </root>

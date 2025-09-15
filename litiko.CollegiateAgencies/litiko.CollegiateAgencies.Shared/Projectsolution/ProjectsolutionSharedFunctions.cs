@@ -71,10 +71,15 @@ namespace litiko.CollegiateAgencies.Shared
       #endregion
       
       #region Контроль бюджета
-      if (_obj.MeetingCategory.Name != "Заседание Тендерной комиссии")
+      if (_obj.MeetingCategory?.Name != "Заседание Тендерной комиссии")
       {
         _obj.State.Properties.Budget.IsVisible = false;
         _obj.State.Properties.BudgetRemaining.IsVisible = false;
+      }
+      else
+      {
+        _obj.State.Properties.Budget.IsVisible = true;
+        _obj.State.Properties.BudgetRemaining.IsVisible = true;
       }
       #endregion
       
