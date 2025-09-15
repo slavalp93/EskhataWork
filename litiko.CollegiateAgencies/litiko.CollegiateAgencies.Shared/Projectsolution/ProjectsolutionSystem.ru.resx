@@ -259,10 +259,25 @@
   <data name="Property_QuestionGroup" xml:space="preserve">
     <value>Группа вопросов</value>
   </data>
+  <data name="Control_cce128fe0119427f8a81781f246dddcc_DisplayValue" xml:space="preserve">
+    <value>Выбрать все "За"</value>
+  </data>
   <data name="Property_Budget" xml:space="preserve">
     <value>Бюджет</value>
   </data>
   <data name="Property_BudgetRemaining" xml:space="preserve">
     <value>Остаток бюджета</value>
+  </data>
+  <data name="Ribbon_Translate_a1db30f36a024fa299b71c31d4ebf6ff" xml:space="preserve">
+    <value>Перевод</value>
+  </data>
+  <data name="Action_TranslateTjToRu" xml:space="preserve">
+    <value>Перевод с таджикского на русский</value>
+  </data>
+  <data name="Action_TranslateRuToEn" xml:space="preserve">
+    <value>Перевод с русского на английский</value>
+  </data>
+  <data name="Action_TranslateRuToTjToEn" xml:space="preserve">
+    <value>Перевод с русского на таджикский и английский</value>
   </data>
 </root>

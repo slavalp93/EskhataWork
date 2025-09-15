@@ -247,6 +247,11 @@
           "Code": "OrigReceivedCon"
         },
         {
+          "NameGuid": "663c101b-bf9f-49d4-9b76-0061bd008ead",
+          "Name": "SubmitIssueKou",
+          "Code": "SubmitIssueKou"
+        },
+        {
           "NameGuid": "834d161f-afc6-4a3c-8ba3-bef644d247e7",
           "Name": "AccountantAppr",
           "Code": "AccountantAppr"

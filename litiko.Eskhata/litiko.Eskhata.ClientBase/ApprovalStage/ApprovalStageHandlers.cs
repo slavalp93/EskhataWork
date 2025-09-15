@@ -34,7 +34,8 @@ namespace litiko.Eskhata
           CustomStageTypelitiko.Voting,
           CustomStageTypelitiko.IncludeInMeet,
           CustomStageTypelitiko.ControlIRD,
-          CustomStageTypelitiko.ScanReceivedCon
+          CustomStageTypelitiko.ScanReceivedCon,
+          CustomStageTypelitiko.SubmitIssueKou
         };
         
         if (_obj.AllowSendToRework.GetValueOrDefault())

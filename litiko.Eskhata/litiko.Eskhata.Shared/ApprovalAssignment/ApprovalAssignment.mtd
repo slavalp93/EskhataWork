@@ -92,6 +92,19 @@
     "IsAncestorMetadata": true,
     "Versions": []
   },
+  "Forms": [
+    {
+      "$type": "Sungero.Metadata.WorkflowEntityStandaloneFormMetadata, Sungero.Workflow.Shared",
+      "NameGuid": "d47446ab-5c18-4a88-917f-b3774dd433ad",
+      "Name": "Card",
+      "Controls": [],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "SettingsResourceKey"
+      ],
+      "Versions": []
+    }
+  ],
   "HandledEvents": [
     "BeforeCompleteServer",
     "ShowingClient"
@@ -121,7 +134,10 @@
   "ResourcesKeys": [
     "NotAgreeResult",
     "CommentNeeded",
-    "RequiredToFillBudget"
+    "RequiredToFillBudget",
+    "ConfirmBudgetAndBalance",
+    "BudgetControl",
+    "BudgetNotConfirmed"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "b84ccd2d-663d-4810-86e5-7dfc8ea6bdf3",

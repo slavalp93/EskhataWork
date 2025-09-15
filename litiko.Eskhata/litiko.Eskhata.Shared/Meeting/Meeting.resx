@@ -100,4 +100,10 @@
   <data name="VotingTaskIsNotCreated" xml:space="preserve">
     <value>Failed to create task. Check for an agenda and approval rules.</value>
   </data>
+  <data name="VotingNotIntramural" xml:space="preserve">
+    <value>Voting is not intramural, the function is unavailable.</value>
+  </data>
+  <data name="DefaultLocation" xml:space="preserve">
+    <value>Branch of OJSC "Bank Eskhata" in Khujand, 135 Gagarin Street</value>
+  </data>
 </root>

@@ -161,6 +161,9 @@ namespace litiko.CollegiateAgencies.Server
 
         Projectsolutions.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Create);
         Projectsolutions.AccessRights.Save();
+
+        NSI.AbsentReasons.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Read);
+        NSI.AbsentReasons.AccessRights.Save();
         
         //QuestionGroups.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Read);
         //QuestionGroups.AccessRights.Save();
@@ -185,6 +188,9 @@ namespace litiko.CollegiateAgencies.Server
         QuestionGroups.AccessRights.Save();
         
         Reports.AccessRights.Grant(Reports.GetMeetingMinutesReport().Info, secretariesKOU, DefaultReportAccessRightsTypes.Execute);
+        
+        NSI.AbsentReasons.AccessRights.Grant(secretariesKOU, DefaultAccessRightsTypes.FullAccess);
+        NSI.AbsentReasons.AccessRights.Save();
       }      
       
     }    

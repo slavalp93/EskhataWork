@@ -3,21 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
 using Sungero.CoreEntities;
+using System.Text;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using DotNetEnv;
+using System.IO;
+
 
 namespace litiko.DocflowEskhata.Server
 {
   public class ModuleFunctions
   {
-/// <summary>
+    /// <summary>
     /// Создать и заполнить временную таблицу для конвертов.
     /// </summary>
     /// <param name="reportSessionId">Идентификатор отчета.</param>
     /// <param name="outgoingDocuments">Список Исходящих документов.</param>
     /// <param name="contractualDocuments">Список Договорных документов.</param>
     /// <param name="accountingDocuments">Список Финансовых документов.</param>
-    public static void FillEnvelopeTable(string reportSessionId, 
-                                         List<Sungero.Docflow.IOutgoingDocumentBase> outgoingDocuments, 
-                                         List<Sungero.Docflow.IContractualDocumentBase> contractualDocuments, 
+    public static void FillEnvelopeTable(string reportSessionId,
+                                         List<Sungero.Docflow.IOutgoingDocumentBase> outgoingDocuments,
+                                         List<Sungero.Docflow.IContractualDocumentBase> contractualDocuments,
                                          List<Sungero.Docflow.IAccountingDocumentBase> accountingDocuments)
     {
       var id = 1;
@@ -118,6 +126,115 @@ namespace litiko.DocflowEskhata.Server
         address = address.Replace(zipCodeMatch.Value, string.Empty).Trim();
       
       return Structures.Module.ZipCodeAndAddress.Create(zipCode, address);
+    }
+    
+    
+    [Public, Remote(IsPure = true)]
+    public static string TranslateRuToTj(string text)
+    {
+      return AskGemini(text, "ru->tj");
+    }
+    
+    [Public, Remote(IsPure = true)]
+    public static string TranslateTjToRu(string text)
+    {
+      return AskGemini(text, "tj->ru");
+    }
+    
+    [Public, Remote(IsPure = true)]
+    public static string TranslateRuToEn(string text)
+    {
+      return AskGemini(text, "ru->en");
+    }
+    
+    private static string AskGemini(string text, string direction)
+    {
+      var apiKeys = new[]
+      {
+        Resources.ApiKeyGemini1,
+        Resources.ApiKeyGemini2
+      };
+      
+      if (string.IsNullOrWhiteSpace(text))
+        return string.Empty;
+      
+      string translationInstruction;
+      
+      switch (direction)
+      {
+        case "ru->tj":
+          translationInstruction = "Ты — профессиональный переводчик. Переведи следующий текст с русского на таджикский. Верни только перевод, без каких-либо комментариев и пояснений.";
+          break;
+        case "tj->ru":
+          translationInstruction = "Ты — профессиональный переводчик. Переведи следующий текст с таджикского на русский. Верни только перевод, без каких-либо комментариев и пояснений.";
+          break;
+        case "ru->en":
+          translationInstruction = "Ты — профессиональный переводчик. Переведи следующий текст с русского на английский. Верни только перевод, без каких-либо комментариев и пояснений.";
+          break;
+        default:
+          translationInstruction = "Ты — профессиональный переводчик. Верни только перевод текста, без комментариев.";
+          break;
+      }
+      
+      var fullPrompt = $"{translationInstruction}\n\n---\n\n{text}";
+      
+      foreach (var apiKey in apiKeys)
+      {
+        var url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={apiKey}";
+        
+        using (var client = new HttpClient())
+        {
+          var payload = new JObject
+          {
+            ["contents"] = new JArray
+            {
+              new JObject
+              {
+                ["parts"] = new JArray
+                {
+                  new JObject { ["text"] = fullPrompt }
+                }
+              }
+            },
+            ["generationConfig"] = new JObject
+            {
+              ["temperature"] = 0
+            }
+          };
+          
+          var content = new StringContent(payload.ToString(Formatting.None), Encoding.UTF8, "application/json");
+          var response = client.PostAsync(url, content).Result;
+          var responseJson = response.Content.ReadAsStringAsync().Result;
+          
+          if (response.IsSuccessStatusCode)
+          {
+            try
+            {
+              var parsed = JObject.Parse(responseJson);
+              var translation = parsed["candidates"]?[0]?["content"]?["parts"]?[0]?["text"]?.ToString();
+              return translation?.Trim() ?? string.Empty;
+            }
+            catch (Exception ex)
+            {
+              Logger.Error($"Ошибка парсинга ответа от Gemini: {ex.Message} || Ответ: {responseJson}");
+              continue;
+            }
+          }
+          else if ((int)response.StatusCode == 429) // Too Many Requests
+          {
+            Logger.Error($"Ключ превысил лимит. Пробуем следующий.");
+            continue;
+          }
+          else
+          {
+            Logger.Error($"Ошибка от Gemini API: {response.StatusCode} || {responseJson}");
+            // Не бросаем исключение сразу, чтобы дать шанс другому ключу
+          }
+        }
+      }
+      
+      // Если все ключи не сработали
+      throw new Exception("Превышен лимит запросов или все ключи недействительны, пожалуйста повторите попытку через минуту");
     }
   }
 }

@@ -64,4 +64,10 @@
   <data name="CoverDescription_MeetingMinutesReportlitiko" xml:space="preserve">
     <value>Список протоколов совещаний по выбранной категории и дате регистрации, которая входит в указанный период.</value>
   </data>
+  <data name="CoverAction_AbsentReasonslocal" xml:space="preserve">
+    <value>Причины отсутствия</value>
+  </data>
+  <data name="CoverDescription_AbsentReasonslocal" xml:space="preserve">
+    <value>Причины отсутствия на заседаниях коллегиальных органов. </value>
+  </data>
 </root>

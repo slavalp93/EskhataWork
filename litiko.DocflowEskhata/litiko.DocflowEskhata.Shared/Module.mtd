@@ -131,6 +131,16 @@
       "NameGuid": "a797a8de-93bf-47ea-81e1-d1aec50478de",
       "Name": "Drawing",
       "Scope": "Both"
+    },
+    {
+      "NameGuid": "0f469fe9-b6e3-429f-be4b-67219e7db73f",
+      "Name": "NewtonsoftJSON",
+      "Scope": "Both"
+    },
+    {
+      "NameGuid": "d3422580-b228-4130-b888-f76c9abe0a3d",
+      "Name": "DotNetEnv",
+      "Scope": "Both"
     }
   ],
   "Overridden": [
@@ -281,6 +291,50 @@
       "Value": "new System.Guid(\"4a530f9c-593b-4b7e-a8af-2ef8b6d33029\")"
     }
   ],
+  "PublicFunctions": [
+    {
+      "Name": "TranslateRuToEn",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "text",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "TranslateRuToTj",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "text",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
+      "Name": "TranslateTjToRu",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "text",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    }
+  ],
   "PublicStructures": [],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.DocflowEskhata",
@@ -296,14 +350,18 @@
     "IncomingLettersOrganisations",
     "OutgoingCorrespondence",
     "OutgoingCorrespondenceNBT",
-    "OutgoingPoACorrespondence"
+    "OutgoingPoACorrespondence",
+    "ApiKeyGemini1",
+    "ApiKeyGemini2",
+    "EnvFile",
+    "EnvPathFile"
   ],
   "ServerAssemblyName": "litiko.DocflowEskhata.Server",
   "ServerNamespace": "litiko.DocflowEskhata.Server",
   "SharedAssemblyName": "litiko.DocflowEskhata.Shared",
   "SharedNamespace": "litiko.DocflowEskhata.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.119",
+  "Version": "0.0.1.123",
   "Widgets": [],
   "Versions": [
     {

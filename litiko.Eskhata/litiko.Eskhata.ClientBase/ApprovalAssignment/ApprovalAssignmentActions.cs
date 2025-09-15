@@ -62,6 +62,19 @@ namespace litiko.Eskhata.Client
           e.AddError(litiko.Eskhata.ApprovalAssignments.Resources.RequiredToFillBudget);
           return;          
         }
+        // Vals 20250915
+        var dialogMessage = litiko.Eskhata.ApprovalAssignments.Resources.ConfirmBudgetAndBalance;
+        var dialogDescription = litiko.Eskhata.ApprovalAssignments.Resources.BudgetControl;
+        var dialog = Dialogs.CreateTaskDialog(dialogMessage, dialogDescription, MessageType.Question);
+        dialog.Buttons.AddYesNo();
+        dialog.Buttons.Default = DialogButtons.Yes;
+        var result = dialog.Show();
+        
+        if (result == DialogButtons.No)
+        {
+          e.AddError(litiko.Eskhata.ApprovalAssignments.Resources.BudgetNotConfirmed);
+          return;          
+        }        
       }        
       #endregion
       

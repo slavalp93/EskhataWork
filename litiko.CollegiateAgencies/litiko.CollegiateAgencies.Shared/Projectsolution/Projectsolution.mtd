@@ -45,6 +45,30 @@
       "GenerateHandler": true,
       "LargeIconName": "Action_CreateResolution_large_0d4fec61322949cc8ee1b38c15aad4d5.png",
       "SmallIconName": "Action_CreateResolution_small_0d4fec61322949cc8ee1b38c15aad4d5.png"
+    },
+    {
+      "NameGuid": "0d05e349-12d1-4b61-8d6f-768e4b91ab9c",
+      "Name": "TranslateRuToTjToEn",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_TranslateRuToTjToEn_large_0d05e34912d14b618d6f768e4b91ab9c.png",
+      "SmallIconName": "Action_TranslateRuToTjToEn_small_0d05e34912d14b618d6f768e4b91ab9c.png"
+    },
+    {
+      "NameGuid": "3df835b5-7188-499a-9b6c-9429f32a7334",
+      "Name": "TranslateRuToEn",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_TranslateRuToEn_large_3df835b57188499a9b6c9429f32a7334.png",
+      "SmallIconName": "Action_TranslateRuToEn_small_3df835b57188499a9b6c9429f32a7334.png"
+    },
+    {
+      "NameGuid": "db199eff-7c77-4411-a2e2-055321a30f17",
+      "Name": "TranslateTjToRu",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_TranslateTjToRu_large_db199eff7c774411a2e2055321a30f17.png",
+      "SmallIconName": "Action_TranslateTjToRu_small_db199eff7c774411a2e2055321a30f17.png"
     }
   ],
   "BaseGuid": "ce3e34ed-7be2-4426-a951-d5a70f966650",
@@ -950,10 +974,13 @@
           "Name": "MainGroup",
           "ColumnDefinitions": [
             {
-              "Percentage": 50.0
+              "Percentage": 17.25
             },
             {
-              "Percentage": 50.0
+              "Percentage": 16.28
+            },
+            {
+              "Percentage": 66.47
             }
           ]
         },
@@ -962,9 +989,9 @@
           "NameGuid": "c5a64bd8-9d8c-4558-ba9c-4467ff66ad25",
           "Name": "Voting",
           "ColumnNumber": 0,
-          "ColumnSpan": 2,
+          "ColumnSpan": 3,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.GridControlToChildCollectionBinder",
-          "HeaderLocation": "Top",
+          "HeaderLocation": "None",
           "ParentGuid": "c1bf57de-8c52-4fec-9fee-9d04026e30ef",
           "PropertyGuid": "806f6cff-1540-4ee6-988a-df7a07dd6eed",
           "RowNumber": 1,
@@ -976,9 +1003,23 @@
           "NameGuid": "178fd45b-743a-4eda-bc37-1ca47119c06d",
           "Name": "Control",
           "ColumnNumber": 0,
-          "ColumnSpan": 1,
+          "ColumnSpan": 2,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.HyperlinkToSourceBinder",
           "FunctionName": "FillInVoters",
+          "HeaderLocation": "None",
+          "ParentGuid": "c1bf57de-8c52-4fec-9fee-9d04026e30ef",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.HyperlinkControlMetadata, Sungero.Metadata",
+          "NameGuid": "cce128fe-0119-427f-8a81-781f246dddcc",
+          "Name": "ControlSelectAll",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.HyperlinkToSourceBinder",
+          "FunctionName": "SelectAllVoting",
           "HeaderLocation": "None",
           "ParentGuid": "c1bf57de-8c52-4fec-9fee-9d04026e30ef",
           "RowNumber": 0,
@@ -1502,6 +1543,40 @@
         "ButtonSize": "Large",
         "Index": 2,
         "ParentGuid": "05d63e9c-36c0-44c3-a7fd-b1a360e13fc0"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonStaticDropDownButtonMetadata, Sungero.Metadata",
+        "NameGuid": "a1db30f3-6a02-4fa2-99b7-1c31d4ebf6ff",
+        "Name": "Translate",
+        "ButtonSize": "Large",
+        "Index": 9,
+        "LargeIconName": "Ribbon_Translate_large_a1db30f36a024fa299b71c31d4ebf6ff.png",
+        "ParentGuid": "4f04b1b4-b6b2-424f-a95a-9a6927cfbdb4",
+        "SmallIconName": "Ribbon_Translate_small_a1db30f36a024fa299b71c31d4ebf6ff.png"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "b0f15555-4897-412d-82f3-03f3855ceb6b",
+        "Name": "TranslateRuToTjToEn",
+        "ActionGuid": "0d05e349-12d1-4b61-8d6f-768e4b91ab9c",
+        "Index": 0,
+        "ParentGuid": "a1db30f3-6a02-4fa2-99b7-1c31d4ebf6ff"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "3bb66268-b55c-414b-8c0d-c2b07ac1d480",
+        "Name": "TranslateRuToEn",
+        "ActionGuid": "3df835b5-7188-499a-9b6c-9429f32a7334",
+        "Index": 1,
+        "ParentGuid": "a1db30f3-6a02-4fa2-99b7-1c31d4ebf6ff"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "6637ae1b-1911-4f0c-8dac-d2de376bb04d",
+        "Name": "TranslateTjToRu",
+        "ActionGuid": "db199eff-7c77-4411-a2e2-055321a30f17",
+        "Index": 2,
+        "ParentGuid": "a1db30f3-6a02-4fa2-99b7-1c31d4ebf6ff"
       }
     ],
     "Groups": [],
