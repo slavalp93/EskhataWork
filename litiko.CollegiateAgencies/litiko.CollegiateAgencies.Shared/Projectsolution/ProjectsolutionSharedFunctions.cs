@@ -70,6 +70,14 @@ namespace litiko.CollegiateAgencies.Shared
       _obj.State.Properties.Voting.IsEnabled = isEnabled && votingTableAviabled;
       #endregion
       
+      #region Контроль бюджета
+      if (_obj.MeetingCategory.Name != "Заседание Тендерной комиссии")
+      {
+        _obj.State.Properties.Budget.IsVisible = false;
+        _obj.State.Properties.BudgetRemaining.IsVisible = false;
+      }
+      #endregion
+      
       #region Вкладка протокол
       bool isСommitteeMember = _obj.Meeting != null && _obj.Meeting.MeetingCategorylitiko != null && (
         _obj.Meeting.MeetingCategorylitiko.Members.Any(x => Equals(Sungero.Company.Employees.As(Users.Current), x.Member)) ||

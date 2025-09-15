@@ -67,4 +67,13 @@
   <data name="RequiredToFillBudget" xml:space="preserve">
     <value>Требуется заполнить поля «Бюджет» и «Остаток бюджета» в карточке Проекта решения.</value>
   </data>
+  <data name="ConfirmBudgetAndBalance" xml:space="preserve">
+    <value>Подтверждаете значение Бюджет и Остаток бюджета?</value>
+  </data>
+  <data name="BudgetControl" xml:space="preserve">
+    <value>Контроль бюжета</value>
+  </data>
+  <data name="BudgetNotConfirmed" xml:space="preserve">
+    <value>Бюджет не подтвержден</value>
+  </data>
 </root>
