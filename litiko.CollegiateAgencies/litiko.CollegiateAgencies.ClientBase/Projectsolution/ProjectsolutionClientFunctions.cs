@@ -48,7 +48,8 @@ namespace litiko.CollegiateAgencies.Client
     /// </summary>  
     public void SelectAllVoting() 
     {
-      if (_obj.Meeting.Votinglitiko.GetValueOrDefault() != litiko.Eskhata.Meeting.Votinglitiko.Intramural)
+      if (_obj.Meeting.Votinglitiko.GetValueOrDefault() != litiko.Eskhata.Meeting.Votinglitiko.Intramural
+          && _obj.Meeting.Votinglitiko.GetValueOrDefault() != litiko.Eskhata.Meeting.Votinglitiko.IntExt)
       {
         Dialogs.ShowMessage(litiko.Eskhata.Meetings.Resources.VotingNotIntramural);
         return;
