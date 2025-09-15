@@ -151,4 +151,19 @@
   <data name="Ribbon_Group_314bba1b43e4404a9e80e4976afce26b" xml:space="preserve">
     <value>Processing XML</value>
   </data>
+  <data name="Action_ExchangeQueue" xml:space="preserve">
+    <value>Exchange queue</value>
+  </data>
+  <data name="Action_ExchangeQueueDescription" xml:space="preserve">
+    <value>Opens exchange queue by exchage document</value>
+  </data>
+  <data name="Action_ExchangeQueueHint" xml:space="preserve">
+    <value>Open exchange queue</value>
+  </data>
+  <data name="Action_ExchangeQueueConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ExchangeQueueConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
 </root>

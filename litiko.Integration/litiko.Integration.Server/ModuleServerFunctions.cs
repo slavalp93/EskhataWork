@@ -2815,6 +2815,16 @@ namespace litiko.Integration.Server
         {
             return false;
         }
+    }
+
+    /// <summary>
+    /// Получить записи очереди обмена по документу
+    /// </summary>
+    [Remote]
+    public IQueryable<IExchangeQueue> GetExchangeQueueByDoc(IExchangeDocument document)
+    {
+      return ExchangeQueues.GetAll()
+        .Where(x => Equals(x.ExchangeDocument, document));
     }    
     
     #endregion
