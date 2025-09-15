@@ -28,6 +28,12 @@ namespace litiko.Eskhata
   partial class MeetingServerHandlers
   {
 
+    public override void Created(Sungero.Domain.CreatedEventArgs e)
+    {
+      base.Created(e);
+      _obj.Location = litiko.Eskhata.Meetings.Resources.DefaultLocation;
+    }
+
     public override void Saving(Sungero.Domain.SavingEventArgs e)
     {
 

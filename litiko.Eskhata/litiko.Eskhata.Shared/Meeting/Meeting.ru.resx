@@ -103,4 +103,7 @@
   <data name="VotingNotIntramural" xml:space="preserve">
     <value>Голосование не очное, функция недоступна</value>
   </data>
+  <data name="DefaultLocation" xml:space="preserve">
+    <value>ГО ОАО «Банк Эсхата» в г. Худжанд ул. Гагарина 135</value>
+  </data>
 </root>
