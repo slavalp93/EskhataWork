@@ -199,86 +199,7 @@ namespace litiko.Integration.Server
                 versionFullXML = exchDoc.LastVersion;  
               }                            
             }            
-          }
-          
-          /*          
-          if (exchDoc.RequestToRXPacketCount > 1)
-          {
-            Logger.DebugFormat("{0} Creating full xml version. Packets count: {1}. {2}", logPrefix, exchDoc.RequestToRXPacketCount, logPostfix);
-            List<XElement> dataElements = new List<XElement>();
-            XElement headElement = null;
-            XElement requestElement = null;          
-            List<Sungero.Content.IElectronicDocumentVersions> versionsToDelete = new List<Sungero.Content.IElectronicDocumentVersions>();
-            
-            var versionsWithPackage = exchDoc.Versions.Where(v => v.Note.StartsWith(Integration.Resources.VersionRequestToRX_) && v.AssociatedApplication.Extension == "xml" && v.Body.Size > 0);
-            foreach (var versionWithPackage in versionsWithPackage)
-            {
-              XDocument doc = XDocument.Load(versionWithPackage.Body.Read());
-              var elements = doc.Descendants("Data").Elements("element");
-              dataElements.AddRange(elements);
-                
-              if (headElement == null && requestElement == null)
-              {
-                headElement = doc.Root.Element("head");
-                requestElement = doc.Root.Element("request");
-              }
-              versionsToDelete.Add(versionWithPackage);
-            }          
-    
-            // Создание новой версии XML
-            if (dataElements.Any())
-            {
-              using (MemoryStream ms = new MemoryStream())
-              {            
-                XmlWriterSettings xws = new XmlWriterSettings();
-                xws.OmitXmlDeclaration = false;
-                xws.Indent = true;
-                
-                using (XmlWriter xw = XmlWriter.Create(ms, xws))
-                {
-                  // Копирование структуры request без <Data>
-                  XElement newRequestElement = new XElement(requestElement);
-                  newRequestElement.Element("Data").Remove();
-          
-                  // Создание нового элемента <Data> с объединенными элементами
-                  XElement newDataElement = new XElement("Data", dataElements);
-          
-                  // Добавление нового <Data> к запросу
-                  newRequestElement.Add(newDataElement);
-                  
-                  // Создание нового XML документа
-                  XDocument newDoc = new XDocument(
-                    new XDeclaration("1.0", "UTF-8", null),  
-                    new XElement("root", headElement, newRequestElement)
-                  );
-                  newDoc.WriteTo(xw);
-                }
-                
-                exchDoc.CreateVersionFrom(ms, "xml");
-                exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;              
-                Logger.DebugFormat("{0} Full xml version created. {1}", logPrefix, logPostfix);
-                versionFullXML = exchDoc.LastVersion;  
-              }
-              
-              // Удаление версий с пакетами
-              foreach (var version in versionsToDelete)          
-                exchDoc.DeleteVersion(version);              
-            }
-          }
-          else
-          {
-            var VersionWithPackage = exchDoc.Versions.Where(v => v.Note.StartsWith(Integration.Resources.VersionRequestToRX_) && v.AssociatedApplication.Extension == "xml" && v.Body.Size > 0).FirstOrDefault();
-            if (VersionWithPackage == null)
-            {            
-              Logger.DebugFormat("{0} Version with note starts with {1} not found. {2}", logPrefix, Integration.Resources.VersionRequestToRX_, logPostfix);
-            }
-            else
-            {
-              VersionWithPackage.Note = Integration.Resources.VersionRequestToRXFull;            
-              versionFullXML = VersionWithPackage;
-            }            
-          }
-          */
+          }          
           
           if (exchDoc.State.IsChanged)
             exchDoc.Save();        
@@ -344,7 +265,21 @@ namespace litiko.Integration.Server
             case "R_DR_GET_MARITALSTATUSES":
               errorList = Functions.Module.R_DR_GET_MARITALSTATUSES(dataElements);
               break;
-              
+            case "R_DR_GET_CURRENCY_RATES":
+              errorList = Functions.Module.R_DR_GET_CURRENCY_RATES(dataElements);
+              break;
+            case "R_DR_GET_PAYMENT_REGIONS":
+              errorList = Functions.Module.R_DR_GET_PAYMENT_REGIONS(dataElements);
+              break;
+            case "R_DR_GET_TAX_REGIONS":
+              errorList = Functions.Module.R_DR_GET_TAX_REGIONS(dataElements);
+              break;
+            case "R_DR_GET_CONTRACT_VID":
+              errorList = Functions.Module.R_DR_GET_CONTRACT_VID(dataElements);
+              break;
+            case "R_DR_GET_CONTRACT_TYPE":
+              errorList = Functions.Module.R_DR_GET_CONTRACT_TYPE(dataElements);
+              break;
           }
           
           if (errorList.Any())

@@ -109,16 +109,24 @@ namespace litiko.Eskhata.Shared
     /// </summary>
     /// <param name="amount">Общая сумма.</param>
     /// <param name="currencyRate">Курс валюты.</param>
-    public void FillTotalAmount(double? amount, litiko.NSI.ICurrencyRate currencyRate)
-    {            
-      if (amount == null || currencyRate == null)
+    /// <param name="currency">Валюта.</param>
+    public void FillTotalAmount(double? amount, litiko.NSI.ICurrencyRate currencyRate, Sungero.Commons.ICurrency currency)
+    {                  
+      if (amount == null)
       {
         _obj.TotalAmount = null;
         return;
       }
       
-      int UnitOfMeasurement = currencyRate.Currency?.UnitOfMeasurementlitiko ?? 1;
-      var calculatedAmount = Math.Round(amount.Value * (double)currencyRate.Rate / UnitOfMeasurement, 2);
+      double? calculatedAmount;
+      var defaultCurrency = Sungero.Commons.PublicFunctions.Currency.Remote.GetDefaultCurrency();
+      if (Equals(defaultCurrency, currency))
+        calculatedAmount = amount;
+      else
+      {
+        int UnitOfMeasurement = currencyRate?.Currency?.UnitOfMeasurementlitiko ?? 1;
+        calculatedAmount = Math.Round(amount.Value * (double)currencyRate?.Rate / UnitOfMeasurement, 2);      
+      }            
       
       if (!Equals(_obj.TotalAmount, calculatedAmount))
         _obj.TotalAmount = calculatedAmount;

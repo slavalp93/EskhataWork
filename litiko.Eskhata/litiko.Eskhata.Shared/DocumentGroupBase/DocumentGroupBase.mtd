@@ -1,12 +1,11 @@
 {
   "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
-  "NameGuid": "04f3b964-249b-4523-b1fc-8fd835b6d364",
-  "Name": "DocumentKind",
-  "AccessRightsMode": "Both",
-  "BaseGuid": "14a59623-89a2-4ea8-b6e9-2ad4365f358c",
+  "NameGuid": "bcd78809-1194-4fe3-9039-024c65a26e71",
+  "Name": "DocumentGroupBase",
+  "BaseGuid": "f5061291-4ac6-428f-b091-d53acdbe9ae5",
   "CanBeNavigationPropertyType": true,
   "CreationAreaMetadata": {
-    "NameGuid": "5d4501da-7520-435d-b1c3-00d562a779cb",
+    "NameGuid": "adf26ea8-6301-4941-80c8-fe25c2dc2b13",
     "Name": "CreationArea",
     "Buttons": [],
     "IsAncestorMetadata": true,
@@ -21,14 +20,15 @@
     "Versions": []
   },
   "IconResourcesKeys": [],
-  "LayeredFromGuid": "14a59623-89a2-4ea8-b6e9-2ad4365f358c",
+  "IsAbstract": true,
+  "LayeredFromGuid": "f5061291-4ac6-428f-b091-d53acdbe9ae5",
   "OperationsClass": "",
   "Properties": [
     {
       "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "beb749b5-b07e-46a1-9a4a-adb7452e08d1",
-      "Name": "AvailableActions",
-      "EntityGuid": "645c38f1-b73f-42f5-b6e8-fb9b21a8d715",
+      "NameGuid": "4289ae81-adbb-4195-af93-cb8df6add31a",
+      "Name": "DocumentKinds",
+      "EntityGuid": "c6521def-cb45-4df6-b451-d650b962c06d",
       "IsAncestorMetadata": true,
       "Overridden": [
         "EntityGuid"
@@ -37,25 +37,17 @@
     },
     {
       "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "845e32e4-c732-4b12-aa8f-7e9e3f5990b8",
-      "Name": "NameTj",
-      "Code": "NameTj",
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-      "PreviousPropertyGuid": "7eca1266-9b95-447b-9886-77d1f63d8228"
-    },
-    {
-      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "f2b23f58-84ee-41df-98a7-68be77522b47",
+      "NameGuid": "95cfb516-fae3-4c43-8693-8acb791d0e52",
       "Name": "ExternalIdlitiko",
       "Code": "ExternalIdliti",
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-      "PreviousPropertyGuid": "845e32e4-c732-4b12-aa8f-7e9e3f5990b8"
+      "PreviousPropertyGuid": "85595a43-27de-48c5-9fda-20d31ba6d6ea"
     }
   ],
   "PublicStructures": [],
   "ResourcesKeys": [],
   "RibbonCardMetadata": {
-    "NameGuid": "d2174de4-2e37-4df9-8b02-c645e9cc7698",
+    "NameGuid": "540f7b2e-8b75-4cab-b5cc-12a3815dda24",
     "Name": "RibbonCard",
     "Categories": [],
     "Elements": [],
@@ -65,7 +57,7 @@
     "RibbonKind": "Card"
   },
   "RibbonCollectionMetadata": {
-    "NameGuid": "24d34a8f-c96a-4278-8ed0-35f36dd4eae2",
+    "NameGuid": "ff270bac-5f61-4f5c-9b39-894ccfce11c8",
     "Name": "RibbonCollection",
     "Categories": [],
     "Elements": [],
