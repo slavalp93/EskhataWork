@@ -37,7 +37,13 @@ namespace litiko.Integration.Server
         CreateIntegrationMethod("R_DR_GET_COMPANYKINDS", integrationSystem);
         CreateIntegrationMethod("R_DR_GET_TYPESOFIDCARDS", integrationSystem);
         CreateIntegrationMethod("R_DR_GET_ECOLOG", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_MARITALSTATUSES", integrationSystem);      
+        CreateIntegrationMethod("R_DR_GET_MARITALSTATUSES", integrationSystem);       
+        CreateIntegrationMethod("R_DR_GET_CURRENCY_RATES", integrationSystem);
+        CreateIntegrationMethod("R_DR_GET_PAYMENT_REGIONS", integrationSystem);
+        CreateIntegrationMethod("R_DR_GET_TAX_REGIONS", integrationSystem);
+        CreateIntegrationMethod("R_DR_GET_CONTRACT_VID", integrationSystem);
+        CreateIntegrationMethod("R_DR_GET_CONTRACT_TYPE", integrationSystem);
+        CreateIntegrationMethod("R_DR_GET_PERSON", integrationSystem);
       }
       
       GrantRightsOnEntities();

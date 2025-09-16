@@ -279,6 +279,41 @@
       "GenerateHandler": true,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T04:00:00"
+    },
+    {
+      "NameGuid": "8c9d8242-2f6b-4bd7-8c35-eedd57534ee5",
+      "Name": "GetCurrencyRates",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "256f17d5-08a2-4b3e-97b2-3e86ee444d1f",
+      "Name": "GetPaymentRegions",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "d8af206d-d0aa-4323-b816-ae4f9ff97d30",
+      "Name": "GetRegionOfRental",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "b477ca34-8877-4cb3-a2f7-9a561e78851e",
+      "Name": "GetContractVid",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "ca66ee71-5885-4185-b3ce-67a5353c9a74",
+      "Name": "GetContractType",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
     }
   ],
   "PublicConstants": [
@@ -428,7 +463,8 @@
     "ResponseNotReceived",
     "DataUpdatedSuccessfully",
     "IntegrationMethodNotFound",
-    "VersionRequestToRX_"
+    "VersionRequestToRX_",
+    "RequestXMLTemplateForCurrencyRates"
   ],
   "ServerAssemblyName": "litiko.Integration.Server",
   "ServerNamespace": "litiko.Integration.Server",

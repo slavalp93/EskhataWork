@@ -10,6 +10,46 @@ namespace litiko.Integration.Server
   {
 
     /// <summary>
+    /// Интеграция. Типы договоров.
+    /// </summary>
+    public virtual void GetContractType()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_CONTRACT_TYPE");
+    }
+
+    /// <summary>
+    /// Интеграция. Виды договоров.
+    /// </summary>
+    public virtual void GetContractVid()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_CONTRACT_VID");
+    }
+
+    /// <summary>
+    /// Интеграция. Регионы объектов аренды.
+    /// </summary>
+    public virtual void GetRegionOfRental()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_TAX_REGIONS");
+    }
+
+    /// <summary>
+    /// Интеграция. Регионы оплаты
+    /// </summary>
+    public virtual void GetPaymentRegions()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_PAYMENT_REGIONS");
+    }
+
+    /// <summary>
+    /// Интеграция. Курсы валют
+    /// </summary>
+    public virtual void GetCurrencyRates()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_CURRENCY_RATES");
+    }
+
+    /// <summary>
     /// Интеграция. Удаление старых документов обмена
     /// </summary>
     public virtual void RemovingOldExchangeDocs()
