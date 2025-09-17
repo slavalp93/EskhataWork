@@ -42,6 +42,11 @@ namespace litiko.Eskhata.Server
         // "Категория – {0}?"
         if (_obj.ConditionType == ConditionType.MeetingCategorylitiko)
           return litiko.Eskhata.Conditions.Resources.MeetingCategoryConditionFormat(_obj.MeetingCategorylitiko);
+        
+        // Документ зарегистрирован         // Vals 20250916
+        if (_obj.ConditionType == ConditionType.IsDocumentRegis)
+          return litiko.Eskhata.Conditions.Resources.IsDocumentRegistered;
+        
       }
       return base.GetConditionName();
     }
