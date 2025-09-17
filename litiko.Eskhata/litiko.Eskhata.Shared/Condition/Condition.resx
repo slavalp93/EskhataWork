@@ -103,4 +103,7 @@
   <data name="MeetingCategoryCondition" xml:space="preserve">
     <value>Category – {0}?</value>
   </data>
+  <data name="IsDocumentRegistered" xml:space="preserve">
+    <value>Is document registered?</value>
+  </data>
 </root>

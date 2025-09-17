@@ -30,6 +30,12 @@ namespace litiko.Eskhata.Shared
       baseConditions[RegulatoryDocuments.PublicConstants.Module.DocumentTypeGuids.RegulatoryDocument.ToString()].Add(Eskhata.Condition.ConditionType.IRDType);
       baseConditions[RegulatoryDocuments.PublicConstants.Module.DocumentTypeGuids.RegulatoryDocument.ToString()].Add(Eskhata.Condition.ConditionType.OrganForApprov);
       
+      // Vals 20250916
+      foreach (var kvp in baseConditions)
+      {
+          kvp.Value.Add(Eskhata.Condition.ConditionType.IsDocumentRegis);
+      }
+      
       baseConditions[DocflowEskhata.PublicConstants.Module.DocumentTypeGuids.OutgoingLetter.ToString()].Add(Eskhata.Condition.ConditionType.StandardRespons);
       
       baseConditions[CollegiateAgencies.PublicConstants.Module.DocumentTypeGuids.ProjectSolution.ToString()].Add(Eskhata.Condition.ConditionType.MeetingCategorylitiko);
@@ -163,6 +169,16 @@ namespace litiko.Eskhata.Shared
           Create(null, litiko.Eskhata.Conditions.Resources.CannotComputeCondition);
       }            
       #endregion      
+      
+      #region Документ зарегистрирован
+      // Vals 20250916
+      if (_obj.ConditionType == Eskhata.Condition.ConditionType.IsDocumentRegis)
+      {
+        return Sungero.Docflow.Structures.ConditionBase.ConditionResult.
+          Create(document.RegistrationState == Sungero.Docflow.OfficialDocument.RegistrationState.Registered,
+                 string.Empty);
+      }            
+      #endregion        
       
       return base.CheckCondition(document, task);
     }
