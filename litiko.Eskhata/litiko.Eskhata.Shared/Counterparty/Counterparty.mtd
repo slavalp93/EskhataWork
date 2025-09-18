@@ -10,6 +10,14 @@
       "GenerateHandler": true,
       "LargeIconName": "Action_SendToVerificationlitiko_large_988cee70a1fe411cb972a84981e1ec2e.png",
       "SmallIconName": "Action_SendToVerificationlitiko_small_988cee70a1fe411cb972a84981e1ec2e.png"
+    },
+    {
+      "NameGuid": "eccb2b8d-e791-4d8c-8ab3-64e5f274912b",
+      "Name": "FillFromABSlitiko",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_FillFromABSlitiko_large_eccb2b8de7914d8c8ab364e5f274912b.png",
+      "SmallIconName": "Action_FillFromABSlitiko_small_eccb2b8de7914d8c8ab364e5f274912b.png"
     }
   ],
   "BaseGuid": "294767f1-009f-4fbd-80fc-f98c49ddc560",
@@ -243,6 +251,15 @@
         "ButtonSize": "Large",
         "Index": 0,
         "ParentGuid": "f329dc86-efcb-484a-bdfd-999e6f96e971"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "8aaa60bc-82a8-4227-9bfb-c4de3d069f45",
+        "Name": "FillFromABSlitiko",
+        "ActionGuid": "eccb2b8d-e791-4d8c-8ab3-64e5f274912b",
+        "ButtonSize": "Large",
+        "Index": -1,
+        "ParentGuid": "aa25262b-e782-4a70-829e-0856dd1e2b57"
       }
     ],
     "Groups": [],

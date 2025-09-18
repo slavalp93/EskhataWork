@@ -190,11 +190,11 @@
   <data name="Property_Countrylitiko" xml:space="preserve">
     <value>Юрисдикция</value>
   </data>
-  <data name="Action_FillFromABSlitikoHint" xml:space="preserve">
-    <value>Автоматическое заполнение реквизитов банка из АБС по БИК</value>
-  </data>
   <data name="Action_FillFromABSlitiko" xml:space="preserve">
     <value>Заполнить из АБС по БИК</value>
+  </data>
+  <data name="Action_FillFromABSlitikoHint" xml:space="preserve">
+    <value>Автоматическое заполнение реквизитов банка из АБС по БИК</value>
   </data>
   <data name="Action_FillFromABSlitikoDescription" xml:space="preserve">
     <value>Автоматическое заполнение реквизитов банка из АБС по БИК</value>

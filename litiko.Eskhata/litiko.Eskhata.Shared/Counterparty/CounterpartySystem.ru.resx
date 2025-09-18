@@ -109,4 +109,13 @@
   <data name="Action_SendToVerificationlitikoDescription" xml:space="preserve">
     <value>Создание задачи по регламенту «Проверка контрагента»</value>
   </data>
+  <data name="Action_FillFromABSlitiko" xml:space="preserve">
+    <value>Заполнить из АБС</value>
+  </data>
+  <data name="Action_FillFromABSlitikoHint" xml:space="preserve">
+    <value>Автоматическое заполнение реквизитов контрагента из АБС</value>
+  </data>
+  <data name="Action_FillFromABSlitikoDescription" xml:space="preserve">
+    <value>Автоматическое заполнение реквизитов контрагента из АБС</value>
+  </data>
 </root>
