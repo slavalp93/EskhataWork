@@ -4,13 +4,13 @@
   "Name": "Bank",
   "Actions": [
     {
-      "NameGuid": "2b442916-c675-43a6-845e-cef83a1101a5",
+      "NameGuid": "eccb2b8d-e791-4d8c-8ab3-64e5f274912b",
       "Name": "FillFromABSlitiko",
-      "ActionArea": "Card",
       "GenerateHandler": true,
-      "IsVisibleInDesktopClient": false,
-      "LargeIconName": "Action_FillFromABSlitiko_large_2b442916c67543a6845ecef83a1101a5.png",
-      "SmallIconName": "Action_FillFromABSlitiko_small_2b442916c67543a6845ecef83a1101a5.png"
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ]
     }
   ],
   "BaseGuid": "80c4e311-e95f-449b-984d-1fd540b8f0af",
@@ -672,17 +672,7 @@
     "NameGuid": "ac6a4b3c-2888-4c71-9e93-007360c8b117",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [
-      {
-        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
-        "NameGuid": "63ae4233-e47b-4ac6-b666-d9e8c5b0ed42",
-        "Name": "FillFromABSlitikolitiko",
-        "ActionGuid": "2b442916-c675-43a6-845e-cef83a1101a5",
-        "ButtonSize": "Large",
-        "Index": 0,
-        "ParentGuid": "aa25262b-e782-4a70-829e-0856dd1e2b57"
-      }
-    ],
+    "Elements": [],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],

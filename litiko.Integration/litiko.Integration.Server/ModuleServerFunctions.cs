@@ -2811,12 +2811,12 @@ namespace litiko.Integration.Server
             if (string.IsNullOrEmpty(isId) || string.IsNullOrEmpty(isName))
               throw AppliedCodeException.Create(string.Format("Not all required fields are filled in. ID:{0}, Name:{1}", isId, isName));
             
-            var entity = litiko.Eskhata.DocumentGroupBases.GetAll().Where(x => x.ExternalIdlitiko == isId).FirstOrDefault();
+            var entity = Sungero.Contracts.ContractCategories.GetAll().Where(x => x.ExternalIdlitiko == isId).FirstOrDefault();
             if (entity != null)
               Logger.DebugFormat("Contract type with ExternalId:{0} was found. Id:{1}, Name:{2}", isId, entity.Id, entity.Name);
             else
             {              
-              entity = litiko.Eskhata.DocumentGroupBases.Create();
+              entity = Sungero.Contracts.ContractCategories.Create();
               entity.ExternalIdlitiko = isId;
               // Префикс в имя добавляется для того, чтобы отличать созданные автоматически записи от созданных вручную
               entity.Name = $"{namePrefix}{isName}";              
@@ -3233,8 +3233,8 @@ namespace litiko.Integration.Server
     {
       return ExchangeQueues.GetAll()
         .Where(x => Equals(x.ExchangeDocument, document));
-    }    
-    
+    }   
+       
     #endregion
   }
 }
