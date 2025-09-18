@@ -2736,6 +2736,7 @@ namespace litiko.Integration.Server
               entity.Name = $"{namePrefix}{isName}";
               entity.ShortName = $"{shortNamePrefix} {isName}";  
               
+              entity.AvailableActions.Clear();
               foreach (var action in actions)
                 entity.AvailableActions.AddNew().Action = action;              
               
