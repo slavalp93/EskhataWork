@@ -71,7 +71,7 @@
     <value>Do you confirm the Budget and Budget Balance values?</value>
   </data>
   <data name="BudgetControl" xml:space="preserve">
-    <value>Budget Control</value>
+    <value>Please verify the values in the document card</value>
   </data>
   <data name="BudgetNotConfirmed" xml:space="preserve">
     <value>Budget not confirmed</value>

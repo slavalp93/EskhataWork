@@ -106,4 +106,7 @@
   <data name="Property_MeetingCategorylitiko" xml:space="preserve">
     <value>Meeting category</value>
   </data>
+  <data name="Enum_ConditionType_IsDocumentRegis" xml:space="preserve">
+    <value>Document registered</value>
+  </data>
 </root>
