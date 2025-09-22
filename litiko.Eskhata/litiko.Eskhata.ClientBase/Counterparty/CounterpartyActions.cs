@@ -76,7 +76,7 @@ namespace litiko.Eskhata.Client
         else if (bank != null)
           errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_BANK(exchDocId, _obj);
         else if (person != null)
-          //errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_PERSON(exchDocId, _obj);
+          errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_PERSON(exchDocId, _obj);
         
         if (errorList.Any())
           e.AddInformation(errorList.LastOrDefault());
@@ -112,6 +112,12 @@ namespace litiko.Eskhata.Client
         var approvalTask = Sungero.Docflow.PublicFunctions.Module.Remote.CreateApprovalTask(lastDocument);
         if (!approvalTask.OtherGroup.All.Contains(_obj))
           approvalTask.OtherGroup.All.Add(_obj);
+        
+        foreach (var doc in documents.Where(d => !Equals(d, lastDocument)))
+        {
+          if (!approvalTask.OtherGroup.All.Contains(doc))
+            approvalTask.OtherGroup.All.Add(doc);          
+        }
         
         approvalTask.Show();
         e.CloseFormAfterAction = true;

@@ -16,6 +16,7 @@ namespace litiko.Eskhata
       
       _obj.IsVATlitiko = false;
       _obj.IsIndividualPaymentlitiko = false;
+      _obj.Currency = Sungero.Commons.PublicFunctions.Currency.Remote.GetDefaultCurrency();
     }
   }
 

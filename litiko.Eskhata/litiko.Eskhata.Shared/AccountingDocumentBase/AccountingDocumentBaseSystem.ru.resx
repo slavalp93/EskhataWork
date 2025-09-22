@@ -91,4 +91,10 @@
   <data name="Property_PennyAmountlitiko" xml:space="preserve">
     <value>Сумма пенс. взноса</value>
   </data>
+  <data name="Property_TotalAmount" xml:space="preserve">
+    <value>Сумма в нац. валюте</value>
+  </data>
+  <data name="Property_TotalAmountlitiko" xml:space="preserve">
+    <value>Общая сумма</value>
+  </data>
 </root>
