@@ -29,7 +29,7 @@ namespace litiko.Integration.Structures.Module
   partial class ProcessingPersonResult
   {        
     /// <summary>
-    /// Должность.
+    /// Персона.
     /// </summary>
     public Eskhata.IPerson person { get; set; }
     

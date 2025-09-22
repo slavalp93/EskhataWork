@@ -117,7 +117,7 @@
 	&lt;request-type&gt;R_DR_GET_DATA&lt;/request-type&gt;
 	&lt;dictionary&gt;{2}&lt;/dictionary&gt;
 	&lt;lastId&gt;{3}&lt;/lastId&gt;
-	&lt;INN&gt;{4}&lt;/INN&gt;
+	&lt;inn&gt;{4}&lt;/inn&gt;
 &lt;/request&gt;
 &lt;/root&gt;</value>
   </data>

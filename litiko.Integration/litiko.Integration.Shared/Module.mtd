@@ -398,6 +398,25 @@
       "ReturnTypeFullName": "System.Collections.Generic.List"
     },
     {
+      "Name": "R_DR_GET_PERSON",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "exchDocID",
+          "ParameterType": "global::System.Int64",
+          "ParameterTypeFullName": "System.Int64"
+        },
+        {
+          "Name": "counterparty",
+          "ParameterType": "global::litiko.Eskhata.ICounterparty",
+          "ParameterTypeFullName": "litiko.Eskhata.ICounterparty, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
       "Name": "SendRequestToIS",
       "IsRemote": true,
       "Parameters": [

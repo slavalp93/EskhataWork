@@ -76,7 +76,7 @@ namespace litiko.Eskhata.Client
         else if (bank != null)
           errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_BANK(exchDocId, _obj);
         else if (person != null)
-          //errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_PERSON(exchDocId, _obj);
+          errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_PERSON(exchDocId, _obj);
         
         if (errorList.Any())
           e.AddInformation(errorList.LastOrDefault());

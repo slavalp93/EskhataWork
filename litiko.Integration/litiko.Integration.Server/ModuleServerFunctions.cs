@@ -51,7 +51,7 @@ namespace litiko.Integration.Server
         string url = method.IntegrationSystem.ServiceUrl;
         var xmlRequestBody = string.Empty;
   
-        if (method.Name == "R_DR_GET_COMPANY")
+        if (method.Name == "R_DR_GET_COMPANY" || method.Name == "R_DR_GET_PERSON")
           xmlRequestBody = Integration.Resources.RequestXMLTemplateForCompanyFormat(exchDoc.Id, application_key, method.Name, lastId, exchDoc.Counterparty.TIN);
         else if (method.Name == "R_DR_GET_BANK")
           xmlRequestBody = Integration.Resources.RequestXMLTemplateForBankFormat(exchDoc.Id, application_key, method.Name, lastId, Eskhata.Banks.As(exchDoc.Counterparty).BIC);
@@ -919,7 +919,7 @@ namespace litiko.Integration.Server
               }
               
               var fioInfo = Structures.Module.FIOInfo.Create(isLastNameRu, isFirstNameRu, isMiddleNameRU, isLastNameTG, isFirstNameTG, isMiddleNameTG);
-              var personResult = ProcessingPerson(isPerson, fioInfo);
+              var personResult = ProcessingPerson(isPerson, fioInfo, null);
               var person = personResult.person;
               if(!Equals(employee.Person, person))
               {
@@ -2101,7 +2101,7 @@ namespace litiko.Integration.Server
                 contact.JobTitle = isRange;                  
               }
               
-              var personResult = ProcessingPerson(isPerson, null);
+              var personResult = ProcessingPerson(isPerson, null, null);
               var person = personResult.person;
               if(!Equals(contact.Person, person))
               {
@@ -2373,7 +2373,7 @@ namespace litiko.Integration.Server
                 contact.JobTitle = isRange;                  
               }
               
-              var personResult = ProcessingPerson(isPerson, null);
+              var personResult = ProcessingPerson(isPerson, null, null);
               var person = personResult.person;
               if(!Equals(contact.Person, person))
               {
@@ -2710,7 +2710,9 @@ namespace litiko.Integration.Server
         {
           var isId = element.Element("ID")?.Value;
           var isName = element.Element("Name")?.Value;          
-          var isCode = element.Element("Code")?.Value;          
+          var isCode = new string((element.Element("Code")?.Value ?? "")
+                        .Take(10)
+                        .ToArray());
           
           try
           {                        
@@ -2858,6 +2860,51 @@ namespace litiko.Integration.Server
       return errorList;
     }    
     
+    /// <summary>
+    /// Обработка Персоны.
+    /// </summary>
+    /// <param name="exchDocID">ИД документа обмена</param>
+    /// <param name="counterparty">Персона</param>
+    /// <returns>Список ошибок (List<string>)</returns>
+    [Public, Remote]
+    public List<string> R_DR_GET_PERSON(long exchDocID, Eskhata.ICounterparty counterparty)
+    {          
+      Logger.Debug("R_DR_GET_PERSON - Start");
+      var errorList = new List<string>();            
+      
+      var exchDoc = ExchangeDocuments.Get(exchDocID);
+      var versionFullXML = exchDoc.Versions.Where(v => v.Note == Integration.Resources.VersionRequestToRXFull && v.AssociatedApplication.Extension == "xml" && v.Body.Size > 0).FirstOrDefault();
+      if (versionFullXML == null)
+      {
+        errorList.Add("Version with full XML data not found.");
+        return errorList;
+      }
+        
+      XDocument xmlDoc = XDocument.Load(versionFullXML.Body.Read());
+      var dataElements = xmlDoc.Descendants("Data").Elements("FASE");                    
+      if (!dataElements.Any())
+      {
+        errorList.Add("Empty Data node.");
+        return errorList;
+      }                  
+      
+      try
+      {
+        var person = litiko.Eskhata.People.As(counterparty);
+        var isPerson = dataElements.FirstOrDefault();
+        var personResult = ProcessingPerson(isPerson, null, person);
+      }
+      catch (Exception ex)
+      {
+        var errorMessage = string.Format("Error when processing Person with Id:{0}. Description: {1}. StackTrace: {2}", counterparty.Id, ex.Message, ex.StackTrace);
+        Logger.Error(errorMessage);
+        errorList.Add(errorMessage);
+      }      
+      
+      Logger.Debug("R_DR_GET_PERSON - Finish"); 
+      return errorList;
+    }      
+    
     #endregion
     
     #region Вспомогательные функции
@@ -2921,7 +2968,7 @@ namespace litiko.Integration.Server
     /// </summary>
     /// <param name="dataElements">Информация о персоне в виде XElement.</param>
     /// <returns>Структура с персоной и признаком изменения<string>)</returns>
-    public Structures.Module.ProcessingPersonResult ProcessingPerson(System.Xml.Linq.XElement personData, Structures.Module.FIOInfo fioInfo)
+    public Structures.Module.ProcessingPersonResult ProcessingPerson(System.Xml.Linq.XElement personData, Structures.Module.FIOInfo fioInfo, litiko.Eskhata.IPerson person)
     {              
       var isID = personData.Element("ID")?.Value;
       var isName = personData.Element("NAME")?.Value;
@@ -2941,6 +2988,11 @@ namespace litiko.Integration.Server
       var isPhone = personData.Element("Phone")?.Value;
       var isEmail = personData.Element("Email")?.Value;
       var isWebSite = personData.Element("WebSite")?.Value;
+      
+      var isVATApplicable = personData.Element("VATApplicable")?.Value;
+      var isIIN = personData.Element("IIN")?.Value;
+      var isCorrAcc = personData.Element("CorrAcc")?.Value;
+      var isInternalAcc = personData.Element("InternalAcc")?.Value;
           
       string isLastNameRu = string.Empty, isFirstNameRu = string.Empty, isMiddleNameRU = string.Empty;
       string isLastNameTG = string.Empty, isFirstNameTG = string.Empty, isMiddleNameTG = string.Empty;
@@ -2977,15 +3029,21 @@ namespace litiko.Integration.Server
       if (string.IsNullOrEmpty(isID) || string.IsNullOrEmpty(isName) || string.IsNullOrEmpty(isSex))
         throw AppliedCodeException.Create(string.Format("Not all required fields are filled in Person. ID:{0}, NAME:{1}, SEX:{2}", isID, isName, isSex));
       
-      var person = Eskhata.People.GetAll().Where(x => x.ExternalId == isID).FirstOrDefault();
+      bool needSave = true;
       if (person == null)
       {
-        person = Eskhata.People.Create();
-        person.ExternalId = isID;        
-        Logger.DebugFormat("Create new Person with ExternalId:{0}. Id:{1}", isID, person.Id);                  
+        person = Eskhata.People.GetAll().Where(x => x.ExternalId == isID).FirstOrDefault();
+        if (person == null)
+        {
+          person = Eskhata.People.Create();
+          person.ExternalId = isID;        
+          Logger.DebugFormat("Create new Person with ExternalId:{0}. Id:{1}", isID, person.Id);                  
+        }
+        else
+          Logger.DebugFormat("Person with ExternalId:{0} was found. Id:{1}, Name:{2}", isID, person.Id, person.Name);      
       }
       else
-        Logger.DebugFormat("Person with ExternalId:{0} was found. Id:{1}, Name:{2}", isID, person.Id, person.Name);
+        needSave = false;
       
       if (!string.IsNullOrEmpty(isLastNameRu) && person.LastName != isLastNameRu)
       {
@@ -3167,15 +3225,55 @@ namespace litiko.Integration.Server
       {
         Logger.DebugFormat("Change Homepage: current:{0}, new:{1}", person.Homepage, isWebSite);
         person.Homepage = isWebSite;                
+      }
+      
+      if(!string.IsNullOrEmpty(isVATApplicable))
+      {
+        bool VATPayer = isVATApplicable == "1" ? true : false;
+        if(person.VATPayerlitiko != VATPayer)
+        {
+          Logger.DebugFormat("Change VATPayerlitiko: current:{0}, new:{1}", person.VATPayerlitiko.GetValueOrDefault(), VATPayer);
+          person.VATPayerlitiko = VATPayer; 
+        }               
+      }
+            
+      if (!string.IsNullOrEmpty(isIIN))
+      {
+        int untIIN;
+        if (int.TryParse(isIIN, out untIIN) && person.SINlitiko != untIIN)
+        {
+          Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.SINlitiko, untIIN);
+          person.SINlitiko = untIIN;        
+        }
+        else
+          Logger.ErrorFormat("Can`t convert to int value of IIN:{0}", isIIN);            
       }      
+
+      if(!string.IsNullOrEmpty(isCorrAcc) && person.Account != isCorrAcc)
+      {
+        Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.Account, isCorrAcc);
+        person.Account = isCorrAcc;                
+      } 
+
+      if(!string.IsNullOrEmpty(isInternalAcc) && person.AccountEskhatalitiko != isInternalAcc)
+      {
+        Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.AccountEskhatalitiko, isInternalAcc);
+        person.AccountEskhatalitiko = isInternalAcc;                
+      } 
       
       /* !!! IdentityDocuments !!! */
       
       var result = Structures.Module.ProcessingPersonResult.Create(person, false);
       if (person.State.IsChanged || person.State.IsInserted)
       {
-        person.Save();
-        Logger.DebugFormat("Person successfully saved. ExternalId:{0}, Id:{1}", isID, person.Id);
+        if (needSave)
+        {
+          person.Save();
+          Logger.DebugFormat("Person successfully saved. ExternalId:{0}, Id:{1}", isID, person.Id);        
+        }
+        else
+          Logger.DebugFormat("Person successfully changed, but not saved. The user can save the changes independently. ExternalId:{0}, Id:{1}", isID, person.Id);
+        
         result.isCreatedOrUpdated = true;
       }
       else
