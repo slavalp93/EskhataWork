@@ -356,8 +356,6 @@
     "OutgoingCorrespondence",
     "OutgoingCorrespondenceNBT",
     "OutgoingPoACorrespondence",
-    "ApiKeyGemini1",
-    "ApiKeyGemini2",
     "EnvFile",
     "EnvPathFile"
   ],
