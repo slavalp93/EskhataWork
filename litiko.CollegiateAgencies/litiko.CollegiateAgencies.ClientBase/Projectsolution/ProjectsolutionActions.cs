@@ -14,18 +14,18 @@ namespace litiko.CollegiateAgencies.Client
       var sourseSubject = _obj.SubjectTJ;
       var sourseListened = _obj.ListenedTJ;
 
-      if (string.IsNullOrWhiteSpace(sourseSubject))
-      {
-        e.AddWarning("Поле «Заголовок (TJ)» пустое.");
-      }
-      if (string.IsNullOrWhiteSpace(sourseListened))
-      {
-        e.AddWarning("Поле «Слушали (TJ)» пустое.");
-      }
-      if (!_obj.Decided.Any(d => !string.IsNullOrWhiteSpace(d.DecisionTJ)))
-      {
-        e.AddWarning("Поле «Решили (TJ)» пустое.");
-      }
+//      if (string.IsNullOrWhiteSpace(sourseSubject))
+//      {
+//        e.AddWarning("Поле «Заголовок (TJ)» пустое.");
+//      }
+//      if (string.IsNullOrWhiteSpace(sourseListened))
+//      {
+//        e.AddWarning("Поле «Слушали (TJ)» пустое.");
+//      }
+//      if (!_obj.Decided.Any(d => !string.IsNullOrWhiteSpace(d.DecisionTJ)))
+//      {
+//        e.AddWarning("Поле «Решили (TJ)» пустое.");
+//      }
 
       try
       {
@@ -67,15 +67,15 @@ namespace litiko.CollegiateAgencies.Client
     {
       var sourceListened = _obj.ListenedRU;
 
-      if (string.IsNullOrWhiteSpace(sourceListened))
-      {
-        e.AddWarning("Поле «Слушали (RU)» не заполнено.");
-      }
+//      if (string.IsNullOrWhiteSpace(sourceListened))
+//      {
+//        e.AddWarning("Поле «Слушали (RU)» не заполнено.");
+//      }
 
-      if (!_obj.Decided.Any(d => !string.IsNullOrWhiteSpace(d.DecisionRU)))
-      {
-        e.AddWarning("Поле «Решили (RU)» не заполнено.");
-      }
+//      if (!_obj.Decided.Any(d => !string.IsNullOrWhiteSpace(d.DecisionRU)))
+//      {
+//        e.AddWarning("Поле «Решили (RU)» не заполнено.");
+//      }
 
       try
       {

@@ -149,10 +149,20 @@ namespace litiko.DocflowEskhata.Server
     
     private static string AskGemini(string text, string direction)
     {
+
+      string envDirectoryPath = "C:\\RxData\\git_repository\\Eskhata_Work";
+      
+      string envFilePath = Path.Combine(envDirectoryPath, ".env");
+      
+      Env.Load(envFilePath);
+      
+      var apiKey1 = Env.GetString("apiKey1");
+      var apiKey2 = Env.GetString("apiKey2");
+      
       var apiKeys = new[]
       {
-        Resources.ApiKeyGemini1,
-        Resources.ApiKeyGemini2
+        apiKey1,
+        apiKey2
       };
       
       if (string.IsNullOrWhiteSpace(text))

@@ -141,6 +141,11 @@
       "NameGuid": "d3422580-b228-4130-b888-f76c9abe0a3d",
       "Name": "DotNetEnv",
       "Scope": "Both"
+    },
+    {
+      "NameGuid": "9192663b-8fa9-470d-9622-8d067e4d89d9",
+      "Name": "Spra",
+      "Scope": "Both"
     }
   ],
   "Overridden": [
