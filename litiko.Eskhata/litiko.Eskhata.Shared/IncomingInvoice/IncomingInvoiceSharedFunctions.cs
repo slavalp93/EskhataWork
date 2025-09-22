@@ -9,6 +9,15 @@ namespace litiko.Eskhata.Shared
 {
   partial class IncomingInvoiceFunctions
   {
-
+    /// <summary>
+    /// Установить обязательность свойств в зависимости от заполненных данных.
+    /// </summary>
+    public override void SetRequiredProperties()
+    {
+      base.SetRequiredProperties();
+      
+      _obj.State.Properties.TotalAmount.IsRequired = false;
+      _obj.State.Properties.TotalAmountlitiko.IsRequired = true;
+    }
   }
 }

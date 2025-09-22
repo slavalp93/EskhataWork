@@ -68,15 +68,20 @@ namespace litiko.Eskhata.Shared
         counterpartyType = NSI.TaxRate.CounterpartyType.Bank;
       else
         counterpartyType = null;      
-      
+            
       var taxRate = NSI.TaxRates.Null;
       if (category != null)
         taxRate = NSI.TaxRates.GetAll()
-          .Where(x => Equals(x.DocumentKind, DocumentKind) && Equals(x.CounterpartyType, counterpartyType) && Equals(x.Category, category))
+          .Where(x => Equals(x.DocumentKind, DocumentKind))
+          .Where(x => Equals(x.CounterpartyType, counterpartyType))
+          .Where(x => Equals(x.TaxResident, litiko.Eskhata.Counterparties.As(counterparty).NUNonrezidentlitiko))
+          .Where(x => Equals(x.Category, category))
           .FirstOrDefault();
       else
         taxRate = NSI.TaxRates.GetAll()
-          .Where(x => Equals(x.DocumentKind, DocumentKind) && Equals(x.CounterpartyType, counterpartyType)) //&& x.Category == null
+          .Where(x => Equals(x.DocumentKind, DocumentKind))
+          .Where(x => Equals(x.CounterpartyType, counterpartyType))
+          .Where(x => Equals(x.TaxResident, litiko.Eskhata.Counterparties.As(counterparty).NUNonrezidentlitiko))
           .FirstOrDefault();
       
       if (!Equals(_obj.TaxRatelitiko, taxRate))
@@ -124,6 +129,12 @@ namespace litiko.Eskhata.Shared
         calculatedAmount = amount;
       else
       {
+        if (currencyRate == null)
+        {
+          _obj.TotalAmount = null;
+          return;
+        }
+        
         int UnitOfMeasurement = currencyRate?.Currency?.UnitOfMeasurementlitiko ?? 1;
         calculatedAmount = Math.Round(amount.Value * (double)currencyRate?.Rate / UnitOfMeasurement, 2);      
       }            

@@ -168,6 +168,9 @@
       "Code": "CurrencyRatel1",
       "EntityGuid": "7948764c-2f80-4639-a157-5c22023fcf2b",
       "FlatListInStandaloneLookup": true,
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "IsShowedInList": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "75119999-60dc-4dc3-9923-e47c7d923372"
@@ -254,6 +257,17 @@
       "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "2638461c-2a5f-4d8d-abba-b5304fb35088"
+    },
+    {
+      "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "59a875bd-2135-4c36-8f83-a4352a158b30",
+      "Name": "TotalAmountlitiko",
+      "Code": "TotalAmountli1",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "a90d6b7d-2000-4e6d-b3c0-8475ccd92e63"
     }
   ],
   "PublicStructures": [],

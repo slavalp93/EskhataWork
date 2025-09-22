@@ -23,7 +23,11 @@ namespace litiko.ContractsEskhata.Shared
       #region Ответственный бухгалтер
       if (_obj.Type == litiko.ContractsEskhata.ApprovalRole.Type.RespAccountant)
       {
-        query = query.Where(k => k.DocumentType.DocumentTypeGuid == Sungero.Contracts.PublicConstants.Module.ContractGuid.ToString()).ToList();
+        query = query.Where(k => k.DocumentType.DocumentTypeGuid == Sungero.Contracts.PublicConstants.Module.ContractGuid.ToString() ||
+                                 k.DocumentType.DocumentTypeGuid == Sungero.Contracts.PublicConstants.Module.SupAgreementGuid.ToString() ||
+                                 k.DocumentType.DocumentTypeGuid == Constants.Module.DocumentTypeGuids.IncomingInvoice.ToString() ||
+                                 k.DocumentType.DocumentTypeGuid == Constants.Module.DocumentTypeGuids.ContractStatement.ToString()
+                           ).ToList();
       }
       #endregion
 

@@ -146,7 +146,7 @@
     <value>Amount in words</value>
   </data>
   <data name="Property_Currency" xml:space="preserve">
-    <value>Contract currency</value>
+    <value>Currency</value>
   </data>
   <data name="Property_ScanReceivedlitiko" xml:space="preserve">
     <value>Scan received</value>
@@ -213,5 +213,8 @@
   </data>
   <data name="Property_ResponsibilityMatrixlitiko" xml:space="preserve">
     <value>Responsibility matrix</value>
+  </data>
+  <data name="Property_CurrencyContractlitiko" xml:space="preserve">
+    <value>Contract currency</value>
   </data>
 </root>

@@ -288,7 +288,7 @@
           "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
           "ParentGuid": "73e9df7c-895e-4811-b3d5-76c6f95b87aa",
-          "PropertyGuid": "ca562f2d-d3c7-448f-a648-b858e8d2fb2a",
+          "PropertyGuid": "9543f412-9d7a-407c-af27-9736d6356cbb",
           "RowNumber": 1,
           "RowSpan": 1,
           "Settings": [],
@@ -652,19 +652,6 @@
   "OperationsClass": "",
   "Properties": [
     {
-      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "ca562f2d-d3c7-448f-a648-b858e8d2fb2a",
-      "Name": "Currency",
-      "HandledEvents": [
-        "ChangedShared"
-      ],
-      "IsAncestorMetadata": true,
-      "Overridden": [
-        "HandledEvents"
-      ],
-      "Versions": []
-    },
-    {
       "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
       "NameGuid": "96c9e3f6-9201-4e6c-92e0-acf7a1624081",
       "Name": "TotalAmount",
@@ -977,6 +964,19 @@
       "IsShowedInList": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "3a34d42b-1742-4c87-9091-bdb13385a59c"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "9543f412-9d7a-407c-af27-9736d6356cbb",
+      "Name": "CurrencyContractlitiko",
+      "Code": "CurrencyContr",
+      "EntityGuid": "ffc2629f-dc30-4106-a3ce-c402ae7d32b9",
+      "FlatListInStandaloneLookup": true,
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "8584af22-c1fa-4b9a-91c9-1060ffd9996f"
     }
   ],
   "PublicFunctions": [

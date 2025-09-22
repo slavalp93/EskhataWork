@@ -89,7 +89,7 @@
     <value>Bank</value>
   </data>
   <data name="Property_TaxResident" xml:space="preserve">
-    <value>Tax resident</value>
+    <value>Tax non-resident</value>
   </data>
   <data name="Property_VAT" xml:space="preserve">
     <value>VAT, %</value>

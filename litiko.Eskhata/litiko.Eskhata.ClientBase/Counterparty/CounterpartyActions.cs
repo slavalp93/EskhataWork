@@ -113,6 +113,12 @@ namespace litiko.Eskhata.Client
         if (!approvalTask.OtherGroup.All.Contains(_obj))
           approvalTask.OtherGroup.All.Add(_obj);
         
+        foreach (var doc in documents.Where(d => !Equals(d, lastDocument)))
+        {
+          if (!approvalTask.OtherGroup.All.Contains(doc))
+            approvalTask.OtherGroup.All.Add(doc);          
+        }
+        
         approvalTask.Show();
         e.CloseFormAfterAction = true;
       }

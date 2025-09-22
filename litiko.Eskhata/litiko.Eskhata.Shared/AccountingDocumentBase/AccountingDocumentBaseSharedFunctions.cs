@@ -9,6 +9,18 @@ namespace litiko.Eskhata.Shared
 {
   partial class AccountingDocumentBaseFunctions
   {
+
+    /// <summary>
+    /// Установить обязательность свойств в зависимости от заполненных данных.
+    /// </summary>
+    public override void SetRequiredProperties()
+    {
+      base.SetRequiredProperties();
+      
+      _obj.State.Properties.TotalAmount.IsRequired = false;
+      _obj.State.Properties.TotalAmountlitiko.IsRequired = true;
+    } 
+    
     /// <summary>
     /// Заполнить курс валюты.
     /// </summary>
@@ -108,6 +120,40 @@ namespace litiko.Eskhata.Shared
       
       if (!Equals(_obj.PennyAmountlitiko, calculatedAmount))
         _obj.PennyAmountlitiko = calculatedAmount;
-    }     
+    }
+    
+    /// <summary>
+    /// Заполнить сумму в нац. валюте.
+    /// </summary>
+    /// <param name="amount">Общая сумма.</param>
+    /// <param name="currencyRate">Курс валюты.</param>
+    /// <param name="currency">Валюта.</param>
+    public void FillTotalAmount(double? amount, litiko.NSI.ICurrencyRate currencyRate, Sungero.Commons.ICurrency currency)
+    {                  
+      if (amount == null)
+      {
+        _obj.TotalAmount = null;
+        return;
+      }
+      
+      double? calculatedAmount;
+      var defaultCurrency = Sungero.Commons.PublicFunctions.Currency.Remote.GetDefaultCurrency();
+      if (Equals(defaultCurrency, currency))
+        calculatedAmount = amount;
+      else
+      {
+        if (currencyRate == null)
+        {
+          _obj.TotalAmount = null;
+          return;
+        }
+        
+        int UnitOfMeasurement = currencyRate?.Currency?.UnitOfMeasurementlitiko ?? 1;
+        calculatedAmount = Math.Round(amount.Value * (double)currencyRate?.Rate / UnitOfMeasurement, 2);      
+      }            
+      
+      if (!Equals(_obj.TotalAmount, calculatedAmount))
+        _obj.TotalAmount = calculatedAmount;
+    }    
   }
 }
