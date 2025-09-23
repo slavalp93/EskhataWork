@@ -116,10 +116,9 @@ namespace litiko.Eskhata
         
         if (!Equals(contract.ResponsibleEmployee, _obj.ResponsibleEmployee))
           _obj.ResponsibleEmployee = contract.ResponsibleEmployee;
-        
-        // !!! Проверить !!!
-        if (!Equals(contract.Currency, _obj.Currency))
-          _obj.Currency = contract.Currency;
+                
+        if (!Equals(contract.CurrencyContractlitiko, _obj.CurrencyContractlitiko))
+          _obj.CurrencyContractlitiko = contract.CurrencyContractlitiko;
         
         if (!Equals(contract.TaxRatelitiko, _obj.TaxRatelitiko))
           _obj.TaxRatelitiko = contract.TaxRatelitiko;
