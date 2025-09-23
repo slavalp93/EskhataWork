@@ -445,9 +445,9 @@
       "IsRemote": true,
       "Parameters": [
         {
-          "Name": "exchDoc",
-          "ParameterType": "global::litiko.Integration.IExchangeDocument",
-          "ParameterTypeFullName": "litiko.Integration.IExchangeDocument, Sungero.Domain.Interfaces"
+          "Name": "exchDocId",
+          "ParameterType": "global::System.Int64",
+          "ParameterTypeFullName": "System.Int64"
         },
         {
           "Name": "intervalMilliseconds",

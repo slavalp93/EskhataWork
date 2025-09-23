@@ -67,7 +67,7 @@ namespace litiko.Eskhata.Client
         return;
       }      
 
-      bool successed = Integration.PublicFunctions.Module.Remote.WaitForGettingDataFromIS(exchDoc, 1000, 10);
+      bool successed = Integration.PublicFunctions.Module.Remote.WaitForGettingDataFromIS(exchDocId, 1000, 10);
       if (successed)
       {                
         var errorList = new List<string>();
@@ -78,10 +78,22 @@ namespace litiko.Eskhata.Client
         else if (person != null)
           errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_PERSON(exchDocId, _obj);
         
+        exchDoc = litiko.Integration.ExchangeDocuments.Get(exchDocId);
         if (errorList.Any())
-          e.AddInformation(errorList.LastOrDefault());
+        {
+          var lastError = errorList.LastOrDefault();          
+          exchDoc.RequestToRXInfo = lastError.Length >= 1000 ? lastError.Substring(0, 999) : lastError;
+          exchDoc.StatusProcessingRx = Integration.ExchangeDocument.StatusProcessingRx.Error;          
+          
+          e.AddInformation(lastError);
+        }
         else
-          e.AddInformation(litiko.Integration.Resources.DataUpdatedSuccessfully);        
+        {
+          exchDoc.StatusProcessingRx = Integration.ExchangeDocument.StatusProcessingRx.Success;          
+          
+          e.AddInformation(litiko.Integration.Resources.DataUpdatedSuccessfully);
+        }
+        exchDoc.Save();
       }
       else
         e.AddInformation(litiko.Integration.Resources.ResponseNotReceived);      
