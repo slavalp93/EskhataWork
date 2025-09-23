@@ -277,55 +277,81 @@ namespace litiko.Integration.Server
                 
         var statusRequestToRX = exchDoc.StatusRequestToRX;
         var requestToRXInfo = exchDoc.RequestToRXInfo;
-          
-        try
-        {                    
-          var exchQueue = ExchangeQueues.Create();
-          exchQueue.ExchangeDocument = exchDoc;
-          exchQueue.Xml = xmlData;
-          exchQueue.Name = Integration.Resources.VersionRequestToRXFormat(lastId);
-          exchQueue.Save();
-          increaseNumberOfPackages = true;
-          
-          // обновить статусы в exchDoc
-          if (lastId > 0)
-            statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;
-          else
-            statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
-          
-          if (requestToRXInfo != "Saved")
-            requestToRXInfo = "Saved";                    
-        }
-        catch (Exception ex)
-        {
-          errorMessage = ex.Message;          
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.{2}", logPrefix, errorMessage, logPostfix);
-          statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
-          requestToRXInfo = ex.Message;                      
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, ex.Message));
-        }
         
-        // Обновляем exchDoc асинхронным обработчиком
-        var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
-        asyncHandler.DocId = exchDoc.Id;
-        asyncHandler.StatusRequestToRX = statusRequestToRX.ToString();
-        asyncHandler.RequestToRXInfo = requestToRXInfo;
-        asyncHandler.IncreaseNumberOfPackages = increaseNumberOfPackages;
-        asyncHandler.ExecuteAsync();
-        
-        if (string.IsNullOrEmpty(errorMessage))
+        bool isCounterparty = exchDoc.IntegrationMethod.Name == "R_DR_GET_COMPANY" || exchDoc.IntegrationMethod.Name == "R_DR_GET_BANK" || exchDoc.IntegrationMethod.Name == "R_DR_GET_PERSON";
+        if (isCounterparty)
         {
-          if (lastId > 0)
-            // вызвать получение остальной части пакета
-            SendRequestToIS(exchDoc.IntegrationMethod, exchDoc, lastId);
-          else
+          try
           {
-            Thread.Sleep(5000); // Пауза на 5 сек.
+            exchDoc.CreateVersionFrom(xmlStream, "xml");
+            exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;              
+            Logger.DebugFormat("{0} Full xml version created. {1}", logPrefix, logPostfix);
             
-            // запустить обработчик пакета
-            var asyncHandlerImportData = Integration.AsyncHandlers.ImportData.Create();
-            asyncHandlerImportData.ExchangeDocId = exchDoc.Id;
-            asyncHandlerImportData.ExecuteAsync();
+            exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
+            exchDoc.RequestToRXInfo = "Saved";
+            exchDoc.RequestToRXPacketCount = 1;
+            exchDoc.Save();
+          }
+          catch (Exception ex)
+          {
+            errorMessage = ex.Message;          
+            Logger.ErrorFormat("{0} ErrorMessage: {1}.{2}", logPrefix, errorMessage, logPostfix);
+            statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
+            requestToRXInfo = ex.Message;                      
+            return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, ex.Message));
+          }          
+        }
+        else
+        {
+          try
+          {                    
+            var exchQueue = ExchangeQueues.Create();
+            exchQueue.ExchangeDocument = exchDoc;
+            exchQueue.Xml = xmlData;
+            exchQueue.Name = Integration.Resources.VersionRequestToRXFormat(lastId);
+            exchQueue.Save();
+            increaseNumberOfPackages = true;
+            
+            // обновить статусы в exchDoc
+            if (lastId > 0)
+              statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;
+            else
+              statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
+            
+            if (requestToRXInfo != "Saved")
+              requestToRXInfo = "Saved";                    
+          }
+          catch (Exception ex)
+          {
+            errorMessage = ex.Message;          
+            Logger.ErrorFormat("{0} ErrorMessage: {1}.{2}", logPrefix, errorMessage, logPostfix);
+            statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
+            requestToRXInfo = ex.Message;                      
+            return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, ex.Message));
+          }
+          
+          // Обновляем exchDoc асинхронным обработчиком
+          var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
+          asyncHandler.DocId = exchDoc.Id;
+          asyncHandler.StatusRequestToRX = statusRequestToRX.ToString();
+          asyncHandler.RequestToRXInfo = requestToRXInfo;
+          asyncHandler.IncreaseNumberOfPackages = increaseNumberOfPackages;
+          asyncHandler.ExecuteAsync();
+          
+          if (string.IsNullOrEmpty(errorMessage))
+          {
+            if (lastId > 0)
+              // вызвать получение остальной части пакета
+              SendRequestToIS(exchDoc.IntegrationMethod, exchDoc, lastId);
+            else
+            {
+              Thread.Sleep(5000); // Пауза на 5 сек.
+              
+              // запустить обработчик пакета
+              var asyncHandlerImportData = Integration.AsyncHandlers.ImportData.Create();
+              asyncHandlerImportData.ExchangeDocId = exchDoc.Id;
+              asyncHandlerImportData.ExecuteAsync();
+            }        
           }        
         }                
         

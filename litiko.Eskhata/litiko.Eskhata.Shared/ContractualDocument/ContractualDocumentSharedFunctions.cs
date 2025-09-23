@@ -53,7 +53,7 @@ namespace litiko.Eskhata.Shared
     [Public]
     public void FillTaxRate(IDocumentKind DocumentKind, Sungero.Contracts.IContractCategory category, Sungero.Parties.ICounterparty counterparty)
     {      
-      if (DocumentKind == null)
+      if (DocumentKind == null || counterparty == null)
       {
         _obj.TaxRatelitiko = null;
         return;
@@ -69,20 +69,23 @@ namespace litiko.Eskhata.Shared
       else
         counterpartyType = null;      
             
-      var taxRate = NSI.TaxRates.Null;
+      var taxRate = NSI.TaxRates.Null;            
+      bool? isNonResident = litiko.Eskhata.Counterparties.As(counterparty)?.NUNonrezidentlitiko;
+      
+      // Базовый запрос
+      var query = NSI.TaxRates.GetAll()
+        .Where(x => Equals(x.DocumentKind, DocumentKind))
+        .Where(x => Equals(x.CounterpartyType, counterpartyType));
+      
+      // Фильтруем по признаку нерезидент (только если он не null)
+      if (isNonResident.HasValue)
+        query = query.Where(x => Equals(x.TaxResident, isNonResident));
+      
+      // Фильтруем по категории
       if (category != null)
-        taxRate = NSI.TaxRates.GetAll()
-          .Where(x => Equals(x.DocumentKind, DocumentKind))
-          .Where(x => Equals(x.CounterpartyType, counterpartyType))
-          .Where(x => Equals(x.TaxResident, litiko.Eskhata.Counterparties.As(counterparty).NUNonrezidentlitiko))
-          .Where(x => Equals(x.Category, category))
-          .FirstOrDefault();
-      else
-        taxRate = NSI.TaxRates.GetAll()
-          .Where(x => Equals(x.DocumentKind, DocumentKind))
-          .Where(x => Equals(x.CounterpartyType, counterpartyType))
-          .Where(x => Equals(x.TaxResident, litiko.Eskhata.Counterparties.As(counterparty).NUNonrezidentlitiko))
-          .FirstOrDefault();
+        query = query.Where(x => Equals(x.Category, category));
+      
+      taxRate = query.FirstOrDefault();      
       
       if (!Equals(_obj.TaxRatelitiko, taxRate))
         _obj.TaxRatelitiko = taxRate;
