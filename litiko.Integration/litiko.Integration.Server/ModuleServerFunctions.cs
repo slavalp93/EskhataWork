@@ -162,7 +162,8 @@ namespace litiko.Integration.Server
         Logger.Error(errorMessage);
       }
       
-      if (exchDoc.StatusRequestToIS != statusRequestToIS || exchDoc.RequestToISInfo != requestToISInfo)
+      bool isCounterparty = exchDoc.IntegrationMethod.Name == "R_DR_GET_COMPANY" || exchDoc.IntegrationMethod.Name == "R_DR_GET_BANK" || exchDoc.IntegrationMethod.Name == "R_DR_GET_PERSON";
+      if (!isCounterparty && exchDoc.StatusRequestToIS != statusRequestToIS || exchDoc.RequestToISInfo != requestToISInfo)
       {
         // Обновляем exchDoc асинхронным обработчиком
         var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
@@ -277,59 +278,37 @@ namespace litiko.Integration.Server
                 
         var statusRequestToRX = exchDoc.StatusRequestToRX;
         var requestToRXInfo = exchDoc.RequestToRXInfo;
-        
-        bool isCounterparty = exchDoc.IntegrationMethod.Name == "R_DR_GET_COMPANY" || exchDoc.IntegrationMethod.Name == "R_DR_GET_BANK" || exchDoc.IntegrationMethod.Name == "R_DR_GET_PERSON";
-        if (isCounterparty)
-        {
-          try
-          {
-            exchDoc.CreateVersionFrom(xmlStream, "xml");
-            exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;              
-            Logger.DebugFormat("{0} Full xml version created. {1}", logPrefix, logPostfix);
+                
+        try
+        {                    
+          var exchQueue = ExchangeQueues.Create();
+          exchQueue.ExchangeDocument = exchDoc;
+          exchQueue.Xml = xmlData;
+          exchQueue.Name = Integration.Resources.VersionRequestToRXFormat(lastId);
+          exchQueue.Save();
+          increaseNumberOfPackages = true;
             
-            exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
-            exchDoc.RequestToRXInfo = "Saved";
-            exchDoc.RequestToRXPacketCount = 1;
-            exchDoc.Save();
-          }
-          catch (Exception ex)
-          {
-            errorMessage = ex.Message;          
-            Logger.ErrorFormat("{0} ErrorMessage: {1}.{2}", logPrefix, errorMessage, logPostfix);
-            statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
-            requestToRXInfo = ex.Message;                      
-            return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, ex.Message));
-          }          
+          // обновить статусы в exchDoc
+          if (lastId > 0)
+            statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;
+          else
+            statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
+            
+          if (requestToRXInfo != "Saved")
+            requestToRXInfo = "Saved";                    
         }
-        else
+        catch (Exception ex)
         {
-          try
-          {                    
-            var exchQueue = ExchangeQueues.Create();
-            exchQueue.ExchangeDocument = exchDoc;
-            exchQueue.Xml = xmlData;
-            exchQueue.Name = Integration.Resources.VersionRequestToRXFormat(lastId);
-            exchQueue.Save();
-            increaseNumberOfPackages = true;
-            
-            // обновить статусы в exchDoc
-            if (lastId > 0)
-              statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;
-            else
-              statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
-            
-            if (requestToRXInfo != "Saved")
-              requestToRXInfo = "Saved";                    
-          }
-          catch (Exception ex)
-          {
-            errorMessage = ex.Message;          
-            Logger.ErrorFormat("{0} ErrorMessage: {1}.{2}", logPrefix, errorMessage, logPostfix);
-            statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
-            requestToRXInfo = ex.Message;                      
-            return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, ex.Message));
-          }
-          
+          errorMessage = ex.Message;          
+          Logger.ErrorFormat("{0} ErrorMessage: {1}.{2}", logPrefix, errorMessage, logPostfix);
+          statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
+          requestToRXInfo = errorMessage;                      
+          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
+        }
+        
+        bool isCounterparty = exchDoc.IntegrationMethod.Name == "R_DR_GET_COMPANY" || exchDoc.IntegrationMethod.Name == "R_DR_GET_BANK" || exchDoc.IntegrationMethod.Name == "R_DR_GET_PERSON";        
+        if (!isCounterparty)
+        {
           // Обновляем exchDoc асинхронным обработчиком
           var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
           asyncHandler.DocId = exchDoc.Id;
@@ -352,8 +331,8 @@ namespace litiko.Integration.Server
               asyncHandlerImportData.ExchangeDocId = exchDoc.Id;
               asyncHandlerImportData.ExecuteAsync();
             }        
-          }        
-        }                
+          }                        
+        }
         
         Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);
         return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 1, "Saved"));
@@ -361,20 +340,24 @@ namespace litiko.Integration.Server
     }
 
     [Public, Remote(IsPure = true)]
-    public static bool WaitForGettingDataFromIS(long exchDocId, int intervalMilliseconds, int maxAttempts)
+    public static long WaitForGettingDataFromIS(long exchDocId, int intervalMilliseconds, int maxAttempts)
     {
       for (int attempt = 0; attempt < maxAttempts; attempt++)
       {                        
-        var exchDoc = litiko.Integration.ExchangeDocuments.Get(exchDocId);
-        if (Equals(exchDoc.StatusRequestToRX, litiko.Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull))
+        var exchQueue = ExchangeQueues.GetAll()
+          .Where(x => x.ExchangeDocument.Id == exchDocId)
+          .Where(x => x.Name == Integration.Resources.VersionRequestToRXFormat(0).ToString())
+          .FirstOrDefault();
+        
+        if (exchQueue != null)
         {
-          return true;
-        }                        
+          return exchQueue.Id;
+        }          
             
         Thread.Sleep(intervalMilliseconds); // Ожидание
       }
         
-      return false; // Условие не выполнено за maxAttempts попыток
+      return 0; // Условие не выполнено за maxAttempts попыток
     }
 
     /// <summary>
@@ -1877,11 +1860,11 @@ namespace litiko.Integration.Server
       var element = dataElements.FirstOrDefault();
       
       var isId = element.Element("ID")?.Value;
-      var isName = element.Element("NAME")?.Value;
+      var isName = element.Element("NAME")?.Value.Trim();      
       var isINN = element.Element("INN")?.Value;
           
-      var isLongName = element.Element("LONG_NAME")?.Value;
-      var isIName = element.Element("I_NAME")?.Value;
+      var isLongName = element.Element("LONG_NAME")?.Value.Trim();
+      var isIName = element.Element("I_NAME")?.Value.Trim();
       var isRezident = element.Element("REZIDENT")?.Value;          
       var isNuRezident = element.Element("NU_REZIDENT")?.Value;          
       var isKPP = element.Element("KPP")?.Value;
@@ -2141,7 +2124,7 @@ namespace litiko.Integration.Server
                 contact.Save();
                 Logger.DebugFormat("Contact successfully saved. ExternalId:{0}, Id:{1}", isContactID, contact.Id);
               }
-              
+
             }
           }
                        
@@ -2157,7 +2140,7 @@ namespace litiko.Integration.Server
           Logger.DebugFormat("There are no changes in Company. ExternalId:{0}, Id:{1}", isId, company.Id);
         }
             
-        }
+      }
       catch (Exception ex)
       {
         var errorMessage = string.Format("Error when processing Company with ExternalId:{0}. Description: {1}. StackTrace: {2}", isId, ex.Message, ex.StackTrace);

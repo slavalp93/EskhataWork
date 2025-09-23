@@ -461,8 +461,8 @@
         }
       ],
       "Placement": "Shared",
-      "ReturnType": "global::System.Boolean",
-      "ReturnTypeFullName": "System.Boolean"
+      "ReturnType": "global::System.Int64",
+      "ReturnTypeFullName": "System.Int64"
     }
   ],
   "PublicStructures": [],

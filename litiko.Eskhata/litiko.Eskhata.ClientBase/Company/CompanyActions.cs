@@ -13,7 +13,7 @@ namespace litiko.Eskhata.Client
   {
     public override void FillFromABSlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      base.FillFromABSlitiko(e);
+      base.FillFromABSlitiko(e);            
       
       #region Подсветка измененных контролов        
       if (_obj.State.Properties.Name.IsChanged)

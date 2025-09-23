@@ -60,16 +60,38 @@ namespace litiko.Eskhata.Client
       exchDoc.Save();
       var exchDocId = exchDoc.Id;      
       
-      var errorMessage =  Integration.PublicFunctions.Module.Remote.SendRequestToIS(integrationMethod, exchDoc, 0);      
+      //var errorMessage = string.Empty;
+      var errorMessage =  Integration.PublicFunctions.Module.Remote.SendRequestToIS(integrationMethod, exchDoc, 0);
       if (!string.IsNullOrEmpty(errorMessage))
       {
+        exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
+        exchDoc.RequestToISInfo = errorMessage.Length >= 1000 ? errorMessage.Substring(0, 999) : errorMessage;
+        exchDoc.Save();
         e.AddError(errorMessage);
         return;
-      }      
-
-      bool successed = Integration.PublicFunctions.Module.Remote.WaitForGettingDataFromIS(exchDocId, 1000, 10);
-      if (successed)
+      }
+      else
+      {
+        exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Sent;        
+        exchDoc.Save();
+      }
+            
+      long exchangeQueueId = Integration.PublicFunctions.Module.Remote.WaitForGettingDataFromIS(exchDocId, 1000, 10);
+      if (exchangeQueueId > 0)
       {                
+        #region Создать версию из xml
+        var exchQueue = litiko.Integration.ExchangeQueues.Get(exchangeQueueId);
+        using (var xmlStream = new System.IO.MemoryStream(exchQueue.Xml))
+        {
+          exchDoc.CreateVersionFrom(xmlStream, "xml");
+          exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;                                    
+          exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
+          exchDoc.RequestToRXInfo = "Saved";
+          exchDoc.RequestToRXPacketCount = 1;
+          exchDoc.Save();
+        }        
+        #endregion
+        
         var errorList = new List<string>();
         if (company != null)
           errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_COMPANY(exchDocId, _obj);
@@ -77,23 +99,23 @@ namespace litiko.Eskhata.Client
           errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_BANK(exchDocId, _obj);
         else if (person != null)
           errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_PERSON(exchDocId, _obj);
-        
-        exchDoc = litiko.Integration.ExchangeDocuments.Get(exchDocId);
+                
         if (errorList.Any())
         {
           var lastError = errorList.LastOrDefault();          
           exchDoc.RequestToRXInfo = lastError.Length >= 1000 ? lastError.Substring(0, 999) : lastError;
           exchDoc.StatusProcessingRx = Integration.ExchangeDocument.StatusProcessingRx.Error;          
+          exchDoc.Save();
           
           e.AddInformation(lastError);
         }
         else
         {
           exchDoc.StatusProcessingRx = Integration.ExchangeDocument.StatusProcessingRx.Success;          
+          exchDoc.Save();
           
           e.AddInformation(litiko.Integration.Resources.DataUpdatedSuccessfully);
-        }
-        exchDoc.Save();
+        }        
       }
       else
         e.AddInformation(litiko.Integration.Resources.ResponseNotReceived);      

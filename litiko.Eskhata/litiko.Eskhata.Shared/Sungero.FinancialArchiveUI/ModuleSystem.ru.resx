@@ -103,4 +103,10 @@
   <data name="FilterPanel_ManualPeriodlitiko_4d65379a6cfe4a48aa71b5eca1bc54e6" xml:space="preserve">
     <value>Произвольный период:</value>
   </data>
+  <data name="CoverDescription_FinancialDocumentslitiko" xml:space="preserve">
+    <value>Список всех финансовых документов: актов, накладных, счетов-фактур и универсальных передаточных документов</value>
+  </data>
+  <data name="CoverAction_FinancialDocumentslitiko" xml:space="preserve">
+    <value>Финансовые документы</value>
+  </data>
 </root>
