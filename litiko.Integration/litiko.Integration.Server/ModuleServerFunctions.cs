@@ -23,19 +23,20 @@ namespace litiko.Integration.Server
     /// <summary>
     /// Отправка запроса во внешнюю информационную систему.
     /// </summary>
-    /// <param name="method">Метод интеграции</param>
     /// <param name="exchDoc">Документ обмена</param>
     /// <param name="lastId">0 - новый запрос, >0 - запрос очередной части предыдущего запроса</param></param>
+    /// <param name="entity">Сущность, если запрос по конкретному объекту</param></param>
     /// <returns>Строка с ошибкой или пустая строка</returns>
     [Public, Remote]
-    public string SendRequestToIS(IIntegrationMethod method, IExchangeDocument exchDoc, long lastId)
+    public string SendRequestToIS(IExchangeDocument exchDoc, long lastId, Sungero.Domain.Shared.IEntity entity)
     {
       var logPostfix = string.Format("ExchangeDocId = '{0}'", exchDoc.Id);
       var logPrefix = "Integration. SendRequestToIS.";      
       Logger.DebugFormat("{0} Start. {1}", logPrefix, logPostfix);
       
-      var errorMessage = string.Empty;
+      var method = exchDoc.IntegrationMethod;
       
+      var errorMessage = string.Empty;
       var statusRequestToIS = exchDoc.StatusRequestToIS;
       var requestToISInfo = exchDoc.RequestToISInfo;
       
@@ -52,9 +53,17 @@ namespace litiko.Integration.Server
         var xmlRequestBody = string.Empty;
   
         if (method.Name == "R_DR_GET_COMPANY" || method.Name == "R_DR_GET_PERSON")
-          xmlRequestBody = Integration.Resources.RequestXMLTemplateForCompanyFormat(exchDoc.Id, application_key, method.Name, lastId, exchDoc.Counterparty.TIN);
+        {
+          var counterparty = Sungero.Parties.Counterparties.As(entity);
+          if (counterparty != null)
+            xmlRequestBody = Integration.Resources.RequestXMLTemplateForCompanyFormat(exchDoc.Id, application_key, method.Name, lastId, counterparty.TIN);
+        }        
         else if (method.Name == "R_DR_GET_BANK")
-          xmlRequestBody = Integration.Resources.RequestXMLTemplateForBankFormat(exchDoc.Id, application_key, method.Name, lastId, Eskhata.Banks.As(exchDoc.Counterparty).BIC);
+        {
+          var bank = litiko.Eskhata.Banks.As(entity);
+          if (bank != null)
+            xmlRequestBody = Integration.Resources.RequestXMLTemplateForBankFormat(exchDoc.Id, application_key, method.Name, lastId, bank.BIC);
+        }        
         else if (method.Name == "R_DR_GET_CURRENCY_RATES")
         {
           // Получить дату последней успешной интеграции          
@@ -321,7 +330,7 @@ namespace litiko.Integration.Server
           {
             if (lastId > 0)
               // вызвать получение остальной части пакета
-              SendRequestToIS(exchDoc.IntegrationMethod, exchDoc, lastId);
+              SendRequestToIS(exchDoc, lastId, null);
             else
             {
               Thread.Sleep(5000); // Пауза на 5 сек.
@@ -386,7 +395,7 @@ namespace litiko.Integration.Server
       exchDoc.IntegrationMethod = integrationMethod;      
       exchDoc.Save();
       
-      var errorMessage = Functions.Module.SendRequestToIS(integrationMethod, exchDoc, lastId);            
+      var errorMessage = Functions.Module.SendRequestToIS(exchDoc, lastId, null);            
       if (!string.IsNullOrEmpty(errorMessage))
         throw AppliedCodeException.Create(errorMessage);        
     }
@@ -1839,7 +1848,7 @@ namespace litiko.Integration.Server
     public List<string> R_DR_GET_COMPANY(long exchDocID, Eskhata.ICounterparty counterparty)
     {          
       Logger.Debug("R_DR_GET_COMPANY - Start");
-      var errorList = new List<string>();            
+      var errorList = new List<string>();                  
       
       var exchDoc = ExchangeDocuments.Get(exchDocID);
       var versionFullXML = exchDoc.Versions.Where(v => v.Note == Integration.Resources.VersionRequestToRXFull && v.AssociatedApplication.Extension == "xml" && v.Body.Size > 0).FirstOrDefault();
@@ -2147,7 +2156,7 @@ namespace litiko.Integration.Server
         Logger.Error(errorMessage);
         errorList.Add(errorMessage);
       }      
-      
+
       Logger.Debug("R_DR_GET_COMPANY - Finish"); 
       return errorList;
     }  

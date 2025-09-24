@@ -55,13 +55,12 @@ namespace litiko.Eskhata.Client
       #endregion
       
       var exchDoc = Integration.PublicFunctions.Module.Remote.CreateExchangeDocument();
-      exchDoc.IntegrationMethod = integrationMethod;
-      exchDoc.Counterparty = _obj;
+      exchDoc.IntegrationMethod = integrationMethod;      
       exchDoc.Save();
       var exchDocId = exchDoc.Id;      
       
       //var errorMessage = string.Empty;
-      var errorMessage =  Integration.PublicFunctions.Module.Remote.SendRequestToIS(integrationMethod, exchDoc, 0);
+      var errorMessage =  Integration.PublicFunctions.Module.Remote.SendRequestToIS(exchDoc, 0, _obj);
       if (!string.IsNullOrEmpty(errorMessage))
       {
         exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
@@ -79,6 +78,7 @@ namespace litiko.Eskhata.Client
       long exchangeQueueId = Integration.PublicFunctions.Module.Remote.WaitForGettingDataFromIS(exchDocId, 1000, 10);
       if (exchangeQueueId > 0)
       {                
+        
         #region Создать версию из xml
         var exchQueue = litiko.Integration.ExchangeQueues.Get(exchangeQueueId);
         using (var xmlStream = new System.IO.MemoryStream(exchQueue.Xml))
@@ -92,7 +92,7 @@ namespace litiko.Eskhata.Client
         }        
         #endregion
         
-        var errorList = new List<string>();
+        var errorList = new List<string>();        
         if (company != null)
           errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_COMPANY(exchDocId, _obj);
         else if (bank != null)

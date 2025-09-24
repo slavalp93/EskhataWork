@@ -421,11 +421,6 @@
       "IsRemote": true,
       "Parameters": [
         {
-          "Name": "method",
-          "ParameterType": "global::litiko.Integration.IIntegrationMethod",
-          "ParameterTypeFullName": "litiko.Integration.IIntegrationMethod, Sungero.Domain.Interfaces"
-        },
-        {
           "Name": "exchDoc",
           "ParameterType": "global::litiko.Integration.IExchangeDocument",
           "ParameterTypeFullName": "litiko.Integration.IExchangeDocument, Sungero.Domain.Interfaces"
@@ -434,6 +429,11 @@
           "Name": "lastId",
           "ParameterType": "global::System.Int64",
           "ParameterTypeFullName": "System.Int64"
+        },
+        {
+          "Name": "entity",
+          "ParameterType": "global::Sungero.Domain.Shared.IEntity",
+          "ParameterTypeFullName": "Sungero.Domain.Shared.IEntity, Sungero.Domain.Shared"
         }
       ],
       "Placement": "Shared",
