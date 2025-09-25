@@ -44,6 +44,26 @@
       "Id": "10731f77-ea04-4ba8-b1c2-e680f9fa88ad",
       "MaxVersion": "",
       "MinVersion": "4.8.0.9"
+    },
+    {
+      "Id": "3c8b7d3a-187d-4445-8a8c-1d00ece44556",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
+    },
+    {
+      "Id": "f9d15b1c-2784-4c84-8348-1e162d70b988",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
+    },
+    {
+      "Id": "59797aba-7718-45df-8ac1-5bb7a36c7a66",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
+    },
+    {
+      "Id": "e99ae7e2-edb7-4904-a19a-4577f07609a4",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
     }
   ],
   "DesktopViews": [],
@@ -266,6 +286,42 @@
     {
       "ItemId": "51fb5b21-874f-4773-85af-ee44b68db663",
       "PreviousItemId": "6c183f76-59d5-49d3-9987-ee7122fea716"
+    },
+    {
+      "ItemId": "6d25b161-27a7-424c-9eaa-75da3295b2af",
+      "PreviousItemId": "51fb5b21-874f-4773-85af-ee44b68db663"
+    },
+    {
+      "ItemId": "ce1ccade-ceab-4d44-986a-fa4f1294ce02",
+      "PreviousItemId": "6d25b161-27a7-424c-9eaa-75da3295b2af"
+    },
+    {
+      "ItemId": "14ceb05a-f6d2-41b0-bb99-2b776fe827b2",
+      "PreviousItemId": "ce1ccade-ceab-4d44-986a-fa4f1294ce02"
+    },
+    {
+      "ItemId": "ec4c98b5-8e58-478a-9067-cf2419f99fb4",
+      "PreviousItemId": "14ceb05a-f6d2-41b0-bb99-2b776fe827b2"
+    },
+    {
+      "ItemId": "1a068bdf-cfb9-4f09-9b79-bcb45d636b11",
+      "PreviousItemId": "ec4c98b5-8e58-478a-9067-cf2419f99fb4"
+    },
+    {
+      "ItemId": "da0e81e8-07a5-499f-94e3-44cf4bd19315",
+      "PreviousItemId": "1a068bdf-cfb9-4f09-9b79-bcb45d636b11"
+    },
+    {
+      "ItemId": "942aea94-95c8-4025-9774-9359c3ecfd13",
+      "PreviousItemId": "da0e81e8-07a5-499f-94e3-44cf4bd19315"
+    },
+    {
+      "ItemId": "4065a5df-f8c6-44c3-8457-50e87aa14f52",
+      "PreviousItemId": "942aea94-95c8-4025-9774-9359c3ecfd13"
+    },
+    {
+      "ItemId": "bcd78809-1194-4fe3-9039-024c65a26e71",
+      "PreviousItemId": "4065a5df-f8c6-44c3-8457-50e87aa14f52"
     }
   ],
   "IconResourcesKeys": [],
@@ -328,7 +384,7 @@
   "SharedAssemblyName": "litiko.Eskhata.Shared",
   "SharedNamespace": "litiko.Eskhata.Shared",
   "SpecialFolders": [],
-  "Version": "4.8.138.121",
+  "Version": "4.8.138.134",
   "Widgets": [],
   "Versions": [
     {

@@ -100,4 +100,10 @@
   <data name="VotingTaskIsNotCreated" xml:space="preserve">
     <value>Не удалось создать задачу. Проверьте наличие повестки и правила согласования.</value>
   </data>
+  <data name="VotingNotIntramural" xml:space="preserve">
+    <value>Голосование не очное, функция недоступна</value>
+  </data>
+  <data name="DefaultLocation" xml:space="preserve">
+    <value>ГО ОАО «Банк Эсхата» в г. Худжанд ул. Гагарина 135</value>
+  </data>
 </root>

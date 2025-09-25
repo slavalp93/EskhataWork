@@ -216,10 +216,19 @@ namespace litiko.CollegiateAgencies
       object paramValue;
       if (((Sungero.Domain.Shared.IExtendedEntity)_obj).Params.TryGetValue(litiko.RegulatoryDocuments.PublicConstants.Module.CreatedFromIRD_ID, out paramValue))
       {
-        var IdIRD = (long)paramValue;
-        var regulatoryDocument = litiko.RegulatoryDocuments.RegulatoryDocuments.Get(IdIRD);
-        if (!_obj.Relations.GetRelated(Sungero.Docflow.PublicConstants.Module.SimpleRelationName).Contains(regulatoryDocument))
-          _obj.Relations.Add(Sungero.Docflow.PublicConstants.Module.SimpleRelationName, regulatoryDocument);
+        var docId = (long)paramValue;
+        var document = Sungero.Docflow.OfficialDocuments.Get(docId);
+        if (document != null && litiko.RegulatoryDocuments.RegulatoryDocuments.Is(document))
+        {
+          if (!_obj.Relations.GetRelated(Sungero.Docflow.PublicConstants.Module.SimpleRelationName).Contains(document))
+            _obj.Relations.Add(Sungero.Docflow.PublicConstants.Module.SimpleRelationName, document);          
+        }
+        
+        if (document != null && Sungero.Docflow.SimpleDocuments.Is(document))
+        {
+          if (!_obj.Relations.GetRelated(Sungero.Docflow.PublicConstants.Module.AddendumRelationName).Contains(document))
+            _obj.Relations.Add(Sungero.Docflow.PublicConstants.Module.AddendumRelationName, document);          
+        }        
       }
     }
 

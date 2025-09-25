@@ -1,0 +1,81 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "7b849979-6f7c-49db-83e8-22ac096cf123",
+  "Name": "ApprovalRole",
+  "BaseGuid": "3445f357-1435-4444-9f24-a56a752fc471",
+  "CanBeNavigationPropertyType": true,
+  "CreationAreaMetadata": {
+    "NameGuid": "f7766750-eee2-4fcd-8003-5c06a90d1f44",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "ExtraSearchProperties": [],
+  "FilterPanel": {
+    "NameGuid": "b0125fbd-3b91-4dbb-914a-689276216404",
+    "Name": "FilterPanel",
+    "Controls": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "IconResourcesKeys": [],
+  "IntegrationServiceName": "ContractsEskhataApprovalRole",
+  "OperationsClass": "",
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "644bffad-c8fe-4ef4-90fc-15bc9176a728",
+      "Name": "Type",
+      "DirectValues": [
+        {
+          "NameGuid": "ac14a68e-af45-4938-a313-21796c6fc349",
+          "Name": "RespLawyer",
+          "Code": "RespLawyer"
+        },
+        {
+          "NameGuid": "b4b9d1a8-d834-4ccd-b01c-b04661438691",
+          "Name": "RespAccountant",
+          "Code": "RespAccountant"
+        },
+        {
+          "NameGuid": "0a00a5d2-91a9-42b6-b470-9862ea0c0421",
+          "Name": "RespAHD",
+          "Code": "RespAHD"
+        }
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "Values"
+      ],
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "96f6e469-b5a0-4709-9f22-6813a1321135",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "2e730cc3-9c55-4333-8076-9a591eb40387",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

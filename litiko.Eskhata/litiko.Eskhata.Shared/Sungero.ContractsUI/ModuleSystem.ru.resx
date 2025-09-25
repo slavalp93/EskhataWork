@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CoverAction_ResponsibilityMatrixlitiko" xml:space="preserve">
+    <value>Матрица ответственности</value>
+  </data>
+  <data name="CoverDescription_ResponsibilityMatrixlitiko" xml:space="preserve">
+    <value>Справочник специалистов, ответственных за согласование договорных документов в зависимости от вида договора.</value>
+  </data>
+  <data name="CoverAction_ContractsVsPaymentDoclitiko" xml:space="preserve">
+    <value>Соответствие видов договоров и документов на оплату</value>
+  </data>
+  <data name="CoverDescription_ContractsVsPaymentDoclitiko" xml:space="preserve">
+    <value>Виды платежных документов в зависимости от вида и типа договора</value>
+  </data>
+  <data name="CoverAction_TaxRatelitiko" xml:space="preserve">
+    <value>Ставки налогов</value>
+  </data>
+  <data name="CoverAction_FrequencyOfPaymentlitiko" xml:space="preserve">
+    <value>Периодичности оплаты</value>
+  </data>
+  <data name="CoverAction_PaymentRegionlitiko" xml:space="preserve">
+    <value>Регионы оплаты</value>
+  </data>
+  <data name="CoverAction_RegionsOfRentallitiko" xml:space="preserve">
+    <value>Регионы объектов аренды</value>
+  </data>
+  <data name="CoverDescription_FrequencyOfPaymentlitiko" xml:space="preserve">
+    <value>Периодичности оплаты по договорам</value>
+  </data>
+  <data name="CoverDescription_PaymentRegionlitiko" xml:space="preserve">
+    <value>Справочник регионов оплаты налогов.</value>
+  </data>
+  <data name="CoverDescription_RegionsOfRentallitiko" xml:space="preserve">
+    <value>Справочник регионов объектов аренды.</value>
+  </data>
+</root>

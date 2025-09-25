@@ -211,13 +211,13 @@
   <data name="Property_Countrylitiko" xml:space="preserve">
     <value>Юрисдикция</value>
   </data>
-  <data name="Action_FillFromABSlitiko" xml:space="preserve">
-    <value>Заполнить из АБС по ИНН</value>
-  </data>
   <data name="Action_FillFromABSlitikoHint" xml:space="preserve">
     <value>Автоматическое заполнение реквизитов контрагента из АБС по ИНН</value>
   </data>
   <data name="Action_FillFromABSlitikoDescription" xml:space="preserve">
     <value>Автоматическое заполнение реквизитов контрагента из АБС по ИНН</value>
+  </data>
+  <data name="Action_FillFromABSlitiko" xml:space="preserve">
+    <value>Заполнить из АБС по ИНН</value>
   </data>
 </root>

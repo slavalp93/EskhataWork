@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="sf_bd72576e_9c0a_4722_bb5d_b078c73bf1fe" xml:space="preserve">
+    <value>Financial documents</value>
+  </data>
+  <data name="FilterPanel_DocumentKindslitiko_b7f3603033a8472b9419646e6dac87a3" xml:space="preserve">
+    <value>Document kinds</value>
+  </data>
+  <data name="FilterPanel_Actslitiko_cca730509ebf4cde86fdb8c40637a38a" xml:space="preserve">
+    <value>Acts</value>
+  </data>
+  <data name="FilterPanel_Invoiceslitiko_a60fd0715c524f63b0f3f3773f3ff2ac" xml:space="preserve">
+    <value>Invoices</value>
+  </data>
+  <data name="FilterPanel_TaxInvoiceslitiko_2360563c4742465d8d928b325b62dd96" xml:space="preserve">
+    <value>Tax invoices</value>
+  </data>
+  <data name="FilterPanel_Waybillslitiko_175f331ebe044fd9a89a7d90bbe9c665" xml:space="preserve">
+    <value>Waybills</value>
+  </data>
+  <data name="FilterPanel_Departmentlitiko_e8c48215228646d99b3ac292aab2a8c2" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="FilterPanel_Counterpartylitiko_3400769207d7443497add515749d6f31" xml:space="preserve">
+    <value>Counterparty</value>
+  </data>
+  <data name="FilterPanel_GeneralGrouplitiko_abfb8f4809284c02a22af4ea53eb8e67" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="FilterPanel_Periodlitiko_0d10831b107a4d9592806a9aa1801f57" xml:space="preserve">
+    <value>Period</value>
+  </data>
+  <data name="FilterPanel_CurrentMonthlitiko_89f904a9294c4c778ae5616d25417f9a" xml:space="preserve">
+    <value>Current month</value>
+  </data>
+  <data name="FilterPanel_PreviousMonthlitiko_95381946fd8b4cdfadc1570abb9906fe" xml:space="preserve">
+    <value>Previous month</value>
+  </data>
+  <data name="FilterPanel_CurrentQuarterlitiko_92c7c62c181b4583afaefa9cccc0c126" xml:space="preserve">
+    <value>Current quarter</value>
+  </data>
+  <data name="FilterPanel_PreviousQuarterlitiko_233e075be61c45c5b74da25507b7c7a4" xml:space="preserve">
+    <value>Previous quarter</value>
+  </data>
+  <data name="FilterPanel_ManualPeriodlitiko_4d65379a6cfe4a48aa71b5eca1bc54e6" xml:space="preserve">
+    <value>User-defined period:</value>
+  </data>
+  <data name="CoverAction_FinancialDocumentslitiko" xml:space="preserve">
+    <value>Financial Documents</value>
+  </data>
+  <data name="CoverDescription_FinancialDocumentslitiko" xml:space="preserve">
+    <value>Contains the list of all financial documents: contract statements, waybills, tax invoices, and universal transfer documents</value>
+  </data>
+</root>

@@ -72,6 +72,38 @@
     {
       "ItemId": "a41cc530-6875-4bde-a348-5ae69965a938",
       "PreviousItemId": "4e4571da-71c5-4f73-82f6-c2b4ec721156"
+    },
+    {
+      "ItemId": "4636a00a-7ace-4bf0-93f5-8a74240a0ad7",
+      "PreviousItemId": "a41cc530-6875-4bde-a348-5ae69965a938"
+    },
+    {
+      "ItemId": "6f5b0bf5-4044-4efe-a948-80141662ec84",
+      "PreviousItemId": "4636a00a-7ace-4bf0-93f5-8a74240a0ad7"
+    },
+    {
+      "ItemId": "994ce51a-6661-4176-951f-2000120cb252",
+      "PreviousItemId": "6f5b0bf5-4044-4efe-a948-80141662ec84"
+    },
+    {
+      "ItemId": "e5095b15-da6f-41c2-a451-81aac76232ae",
+      "PreviousItemId": "994ce51a-6661-4176-951f-2000120cb252"
+    },
+    {
+      "ItemId": "8586403e-a068-4c8a-b153-c6a168578e24",
+      "PreviousItemId": "e5095b15-da6f-41c2-a451-81aac76232ae"
+    },
+    {
+      "ItemId": "c540a83c-c37a-4053-a817-1f52f801fa06",
+      "PreviousItemId": "8586403e-a068-4c8a-b153-c6a168578e24"
+    },
+    {
+      "ItemId": "7948764c-2f80-4639-a157-5c22023fcf2b",
+      "PreviousItemId": "c540a83c-c37a-4053-a817-1f52f801fa06"
+    },
+    {
+      "ItemId": "d1374008-9e6e-4f41-82a8-a9852f23ace6",
+      "PreviousItemId": "7948764c-2f80-4639-a157-5c22023fcf2b"
     }
   ],
   "HandledEvents": [
@@ -87,6 +119,37 @@
   "Overridden": [
     "IsVisible"
   ],
+  "PublicFunctions": [
+    {
+      "Name": "GetContractsVsPaymentDoc",
+      "Parameters": [
+        {
+          "Name": "contract",
+          "ParameterType": "global::litiko.Eskhata.IContract",
+          "ParameterTypeFullName": "litiko.Eskhata.IContract, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "counterparty",
+          "ParameterType": "global::Sungero.Parties.ICounterparty",
+          "ParameterTypeFullName": "Sungero.Parties.ICounterparty, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::litiko.NSI.IContractsVsPaymentDoc",
+      "ReturnTypeFullName": "litiko.NSI.IContractsVsPaymentDoc, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "GetResponsibilityMatrix",
+      "Parameters": [
+        {
+          "Name": "contract",
+          "ParameterType": "global::litiko.Eskhata.IContract",
+          "ParameterTypeFullName": "litiko.Eskhata.IContract, Sungero.Domain.Interfaces"
+        }
+      ],
+      "ReturnType": "global::litiko.NSI.IResponsibilityMatrix",
+      "ReturnTypeFullName": "litiko.NSI.IResponsibilityMatrix, Sungero.Domain.Interfaces"
+    }
+  ],
   "PublicStructures": [],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.NSI",
@@ -96,7 +159,7 @@
   "SharedAssemblyName": "litiko.NSI.Shared",
   "SharedNamespace": "litiko.NSI.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.121",
+  "Version": "0.0.1.134",
   "Widgets": [],
   "Versions": [
     {

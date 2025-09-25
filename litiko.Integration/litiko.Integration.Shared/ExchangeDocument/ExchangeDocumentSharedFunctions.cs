@@ -9,6 +9,14 @@ namespace litiko.Integration.Shared
 {
   partial class ExchangeDocumentFunctions
   {
+
+    /// <summary>
+    /// 
+    /// </summary>       
+    public void Function()
+    {
+      
+    }
     /// <summary>
     /// Заполнить имя документа.
     /// </summary>    

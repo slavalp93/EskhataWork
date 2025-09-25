@@ -100,4 +100,10 @@
   <data name="StandardResponseConditionName" xml:space="preserve">
     <value>Стандартный ответ?</value>
   </data>
+  <data name="MeetingCategoryCondition" xml:space="preserve">
+    <value>Категория – {0}?</value>
+  </data>
+  <data name="IsDocumentRegistered" xml:space="preserve">
+    <value>Документ зарегистрирован?</value>
+  </data>
 </root>

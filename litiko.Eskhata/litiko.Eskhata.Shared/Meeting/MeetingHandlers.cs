@@ -13,10 +13,14 @@ namespace litiko.Eskhata
     public virtual void AbsentlitikoDeleted(Sungero.Domain.Shared.CollectionPropertyDeletedEventArgs e)
     {
       var deletedEmployee = _deleted.Employee;
+      
       if (deletedEmployee != null)
       {                
-        if (!_obj.Presentlitiko.Any(x => Equals(deletedEmployee, x.Employee)))
+        if (!_obj.Presentlitiko.Any(x => Equals(deletedEmployee, x.Employee)) && 
+            _obj.MeetingCategorylitiko.Members.Any(x => Equals(deletedEmployee, x.Member)))
+        {
           _obj.Presentlitiko.AddNew().Employee = deletedEmployee;
+        }
         
         if (Equals(deletedEmployee, _obj.MeetingCategorylitiko?.President) && !Equals(deletedEmployee, _obj.President))
           _obj.President = deletedEmployee;                  
@@ -202,6 +206,8 @@ namespace litiko.Eskhata
         _added.VotingType = litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Extramural;
       if (_obj.Votinglitiko == litiko.Eskhata.Meeting.Votinglitiko.NoVoting)
         _added.VotingType = litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.NoVoting;
+      if (_obj.Votinglitiko == litiko.Eskhata.Meeting.Votinglitiko.IntExt)
+        _added.VotingType = litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Intramural;
     }
   }
 

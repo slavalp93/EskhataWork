@@ -148,4 +148,25 @@
   <data name="RoleAdditionalBoardMembers" xml:space="preserve">
     <value>Дополнительные члены Правления</value>
   </data>
+  <data name="DocumentKindIsEmpty" xml:space="preserve">
+    <value>Для создания документа из шаблона необходимо указать вид документа</value>
+  </data>
+  <data name="ResponsibleEmployeeAHD" xml:space="preserve">
+    <value>Ответственный сотрудник АХД</value>
+  </data>
+  <data name="ResponsibleEmployeeAHDDescription" xml:space="preserve">
+    <value>Используется для подписания проекта решения</value>
+  </data>
+  <data name="BeforeActionItemProjectSolutionRequired" xml:space="preserve">
+    <value>Перед выполнением задания необходимо создать проект решения и отправить его на согласование</value>
+  </data>
+  <data name="ProjectSolutionApprovalMissing" xml:space="preserve">
+    <value>Проект решения не отправлен на согласование по регламенту</value>
+  </data>
+  <data name="MeetingOpeningGreeting_RU" xml:space="preserve">
+    <value>Председательствующий &lt;PresidentFIOlong&gt; поприветствовал всех присутствующих на очередном заседании &lt;CategoryNameForTemplate&gt;, и объявил &lt;Type2&gt; заседание &lt;CategoryNameForTemplate&gt; Банка открытым.</value>
+  </data>
+  <data name="MeetingOpeningGreeting_TJ" xml:space="preserve">
+    <value>Раисикунанда &lt;PresidentFIOTJ&gt; ҳозиринро ба маҷлиси &lt;TypeTJ2&gt;  &lt;CategoryNameForTemplateTJ&gt; хайрамақдам гуфта, маҷлиси &lt;TypeTJ2&gt; зе &lt;CategoryNameForTemplateTJ&gt; Бонкро кушода эълон кард.</value>
+  </data>
 </root>

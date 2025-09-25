@@ -84,6 +84,19 @@
           "RowNumber": 2,
           "RowSpan": 1,
           "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "bcb2ccb6-0e6a-4e69-ab9b-81b5c122416b",
+          "Name": "MeetingCategorylitikolitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "f904772f-63c7-4cbf-bbf2-f4b3ff15249d",
+          "PropertyGuid": "da942838-5d48-4ea2-b416-88fa8bf71609",
+          "RowNumber": 3,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,
@@ -136,6 +149,16 @@
           "NameGuid": "e5cccdc7-7be1-4da7-aaf6-775a474c6ffa",
           "Name": "StandardRespons",
           "Code": "StandardRespons"
+        },
+        {
+          "NameGuid": "c6727510-e7a5-4042-9e63-985933715c19",
+          "Name": "MeetingCategorylitiko",
+          "Code": "MeetingCategor"
+        },
+        {
+          "NameGuid": "6049c60d-a560-4d2f-b3f5-38d43831d3f5",
+          "Name": "IsDocumentRegis",
+          "Code": "IsDocumentRegis"
         }
       ],
       "IsAncestorMetadata": true,
@@ -233,6 +256,16 @@
       "FlatListInStandaloneLookup": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "59903d5e-16cc-4d2a-92ce-2cb518e85707"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "da942838-5d48-4ea2-b416-88fa8bf71609",
+      "Name": "MeetingCategorylitiko",
+      "Code": "MeetingCategor",
+      "EntityGuid": "6ae9c018-da75-4e80-88a6-6fc1c710e5f9",
+      "FlatListInStandaloneLookup": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "59f80882-ff09-467d-829f-5c3e9ff9d2cb"
     }
   ],
   "PublicStructures": [],
@@ -250,7 +283,9 @@
     "IRDTypeConditionName",
     "CannotComputeCondition",
     "OrganForApprovConditionName",
-    "StandardResponseConditionName"
+    "StandardResponseConditionName",
+    "MeetingCategoryCondition",
+    "IsDocumentRegistered"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "997055c7-5c5b-49af-9ebd-5a00efff04ca",

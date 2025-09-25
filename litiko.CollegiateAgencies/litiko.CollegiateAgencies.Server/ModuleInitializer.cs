@@ -11,7 +11,7 @@ namespace litiko.CollegiateAgencies.Server
   {
 
     public override void Initializing(Sungero.Domain.ModuleInitializingEventArgs e)
-    {
+    {    
       CreateDocumentTypes();
       CreateDocumentKinds();
       CreateRoles();
@@ -161,6 +161,9 @@ namespace litiko.CollegiateAgencies.Server
 
         Projectsolutions.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Create);
         Projectsolutions.AccessRights.Save();
+
+        NSI.AbsentReasons.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Read);
+        NSI.AbsentReasons.AccessRights.Save();
         
         //QuestionGroups.AccessRights.Grant(roleAllUsers, DefaultAccessRightsTypes.Read);
         //QuestionGroups.AccessRights.Save();
@@ -185,6 +188,9 @@ namespace litiko.CollegiateAgencies.Server
         QuestionGroups.AccessRights.Save();
         
         Reports.AccessRights.Grant(Reports.GetMeetingMinutesReport().Info, secretariesKOU, DefaultReportAccessRightsTypes.Execute);
+        
+        NSI.AbsentReasons.AccessRights.Grant(secretariesKOU, DefaultAccessRightsTypes.FullAccess);
+        NSI.AbsentReasons.AccessRights.Save();
       }      
       
     }    
@@ -224,7 +230,7 @@ namespace litiko.CollegiateAgencies.Server
       Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(Resources.RoleCreationResolutions, Resources.DescriptionRoleCreationResolutions, Constants.Module.RoleGuid.CreationResolutions);
       CreateSingleUserRole(Resources.RoleTranslator, Resources.RoleTranslator, Constants.Module.RoleGuid.Translator);
       Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(Resources.RoleAdditionalBoardMembers, Resources.DescriptionAdditionalBoardMembers, Constants.Module.RoleGuid.AdditionalBoardMembers);
-      
+      CreateSingleUserRole(Resources.ResponsibleEmployeeAHD, Resources.ResponsibleEmployeeAHDDescription, Constants.Module.RoleGuid.ResponsibleEmployeeAHD);            
     }
     
     /// <summary>

@@ -141,7 +141,10 @@ namespace litiko.CollegiateAgencies.Server
       else
         templateDoc = Sungero.Content.ElectronicDocuments.GetAll().Where(d => Sungero.Docflow.DocumentTemplates.Is(d) && d.Name == Constants.Module.ExtractTemplateName).FirstOrDefault();
       */
-     
+
+      if (document.DocumentKind == null)
+        throw AppliedCodeException.Create(Resources.DocumentKindIsEmpty);     
+
       if (templateDoc == null)
         throw AppliedCodeException.Create(Resources.MinutesTemplateNotFoundFormat(document.DocumentKind.Name));            
       
@@ -158,6 +161,9 @@ namespace litiko.CollegiateAgencies.Server
       var meetingCategory = meeting.MeetingCategorylitiko;
       if (meetingCategory == null)
         throw AppliedCodeException.Create(Resources.MeetingCategoryIsEmpty);
+
+      if (document.DocumentKind == null)
+        throw AppliedCodeException.Create(Resources.DocumentKindIsEmpty);
       
       #endregion
       
@@ -226,13 +232,13 @@ namespace litiko.CollegiateAgencies.Server
       List<string> absentFIOList = meeting.Absentlitiko
         .Where(x => x?.Employee != null)
         .OrderBy(x => x.Employee.Name)
-        .Select(x => $"{x.Employee.Name} ({x.Reason})")
+        .Select(x => $"{x.Employee.Name} ({x.AbsentReason?.Name})")
         .ToList();
       
       //replacebleFields.Add("<AbsentFIOListTJ>", litiko.Eskhata.PublicFunctions.Meeting.GetMeetingAbsentNumberedList(meeting, false, true, true, false));
       List<string> absentFIOListTJ = meeting.Absentlitiko
         .Where(x => x?.Employee != null)
-        .Select(x => $"{litiko.Eskhata.PublicFunctions.Person.GetNameTJ(litiko.Eskhata.People.As(x.Employee.Person))} ({x.Reason})")
+        .Select(x => $"{litiko.Eskhata.PublicFunctions.Person.GetNameTJ(litiko.Eskhata.People.As(x.Employee.Person))} ({x.AbsentReason?.Name})")
         .OrderBy(name => name)
         .ToList();
       
@@ -412,6 +418,40 @@ namespace litiko.CollegiateAgencies.Server
         meetingResolutions.Add(meetingResolutionInfo);
       }
 
+      // Vals 20250915
+      if (meeting.MeetingMethodlitiko?.Name == "Электронное голосование")
+      {
+        replacebleFields.Add("<MeetingOpeningGreeting_RU>", "");
+        replacebleFields.Add("<MeetingOpeningGreeting_TJ>", "");
+      }
+      else
+      {
+        var replacePresidentFIOlong = replacebleFields.ContainsKey("<PresidentFIOlong>") ? replacebleFields["<PresidentFIOlong>"] : "";
+        var replaceCategoryNameForTemplate = replacebleFields.ContainsKey("<CategoryNameForTemplate>") ? replacebleFields["<CategoryNameForTemplate>"] : "";
+        var replaceType2 = replacebleFields.ContainsKey("<Type2>") ? replacebleFields["<Type2>"] : "";
+        
+        string meetingOpeningGreeting_RU = litiko.CollegiateAgencies.Resources.MeetingOpeningGreeting_RU;
+        meetingOpeningGreeting_RU = meetingOpeningGreeting_RU
+          .Replace("<PresidentFIOlong>", replacePresidentFIOlong)
+          .Replace("<CategoryNameForTemplate>", replaceCategoryNameForTemplate)
+          .Replace("<Type2>", replaceType2);
+        
+        replacebleFields.Add("<MeetingOpeningGreeting_RU>", meetingOpeningGreeting_RU); 
+        
+        var replacePresidentFIOlong_TJ = replacebleFields.ContainsKey("<PresidentFIOTJ>") ? replacebleFields["<PresidentFIOTJ>"] : "";
+        var replaceCategoryNameForTemplate_TJ = replacebleFields.ContainsKey("<CategoryNameForTemplateTJ>") ? replacebleFields["<CategoryNameForTemplateTJ>"] : "";
+        var replaceType2_TJ = replacebleFields.ContainsKey("<TypeTJ2>") ? replacebleFields["<TypeTJ2>"] : "";
+
+        string meetingOpeningGreeting_TJ = litiko.CollegiateAgencies.Resources.MeetingOpeningGreeting_TJ;
+        meetingOpeningGreeting_TJ = meetingOpeningGreeting_TJ
+          .Replace("<PresidentFIOTJ>", replacePresidentFIOlong_TJ)
+          .Replace("<CategoryNameForTemplateTJ>", replaceCategoryNameForTemplate_TJ)
+          .Replace("<TypeTJ2>", replaceType2_TJ);
+        
+        replacebleFields.Add("<MeetingOpeningGreeting_TJ>", meetingOpeningGreeting_TJ);
+      }
+         
+      
       #endregion
       
       #region Формирование тела по шаблону

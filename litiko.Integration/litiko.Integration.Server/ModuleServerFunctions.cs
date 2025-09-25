@@ -23,25 +23,25 @@ namespace litiko.Integration.Server
     /// <summary>
     /// Отправка запроса во внешнюю информационную систему.
     /// </summary>
-    /// <param name="method">Метод интеграции</param>
     /// <param name="exchDoc">Документ обмена</param>
     /// <param name="lastId">0 - новый запрос, >0 - запрос очередной части предыдущего запроса</param></param>
+    /// <param name="entity">Сущность, если запрос по конкретному объекту</param></param>
     /// <returns>Строка с ошибкой или пустая строка</returns>
     [Public, Remote]
-    public string SendRequestToIS(IIntegrationMethod method, IExchangeDocument exchDoc, long lastId)
+    public string SendRequestToIS(IExchangeDocument exchDoc, long lastId, Sungero.Domain.Shared.IEntity entity)
     {
       var logPostfix = string.Format("ExchangeDocId = '{0}'", exchDoc.Id);
       var logPrefix = "Integration. SendRequestToIS.";      
       Logger.DebugFormat("{0} Start. {1}", logPrefix, logPostfix);
       
-      var errorMessage = string.Empty;
+      var method = exchDoc.IntegrationMethod;
       
+      var errorMessage = string.Empty;
       var statusRequestToIS = exchDoc.StatusRequestToIS;
       var requestToISInfo = exchDoc.RequestToISInfo;
       
       try
-      {      
-        //string application_key = "10.10.202.171/Integration/odata/Integration/ProcessResponseFromIS##";                  
+      {                              
         Uri uri = new Uri(Hyperlinks.Get(exchDoc));      
         string ipAdress = Dns.GetHostAddresses(uri.Host).FirstOrDefault().ToString();
   
@@ -52,24 +52,39 @@ namespace litiko.Integration.Server
         string url = method.IntegrationSystem.ServiceUrl;
         var xmlRequestBody = string.Empty;
   
-        if (method.Name == "R_DR_GET_COMPANY")
-          xmlRequestBody = Integration.Resources.RequestXMLTemplateForCompanyFormat(exchDoc.Id, application_key, method.Name, lastId, exchDoc.Counterparty.TIN);
+        if (method.Name == "R_DR_GET_COMPANY" || method.Name == "R_DR_GET_PERSON")
+        {
+          var counterparty = Sungero.Parties.Counterparties.As(entity);
+          if (counterparty != null)
+            xmlRequestBody = Integration.Resources.RequestXMLTemplateForCompanyFormat(exchDoc.Id, application_key, method.Name, lastId, counterparty.TIN);
+        }        
         else if (method.Name == "R_DR_GET_BANK")
-          xmlRequestBody = Integration.Resources.RequestXMLTemplateForBankFormat(exchDoc.Id, application_key, method.Name, lastId, Eskhata.Banks.As(exchDoc.Counterparty).BIC);
+        {
+          var bank = litiko.Eskhata.Banks.As(entity);
+          if (bank != null)
+            xmlRequestBody = Integration.Resources.RequestXMLTemplateForBankFormat(exchDoc.Id, application_key, method.Name, lastId, bank.BIC);
+        }        
+        else if (method.Name == "R_DR_GET_CURRENCY_RATES")
+        {
+          // Получить дату последней успешной интеграции          
+          var lastExchangeDoc = ExchangeDocuments.GetAll()
+            .Where(x => Equals(x.IntegrationMethod, method))
+            .Where(x => x.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull)
+            .OrderByDescending(x => x.Created)
+            .FirstOrDefault();          
+          DateTime lastExchangeDate;
+          if (lastExchangeDoc != null && lastExchangeDoc.Created.HasValue)
+            lastExchangeDate = lastExchangeDoc.Created.Value.Date;
+          else
+            lastExchangeDate = Calendar.Today.AddDays(-10).Date;
+          
+          xmlRequestBody = Integration.Resources.RequestXMLTemplateForCurrencyRatesFormat(exchDoc.Id, application_key, method.Name, lastId, lastExchangeDate.ToString("dd.MM.yyyy"));
+        }
         else
           xmlRequestBody = Integration.Resources.RequestXMLTemplateFormat(exchDoc.Id, application_key, method.Name, lastId);      
 
         if (method.SaveRequestToIS.Value)
-        {
-          /*
-          using (var xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(xmlRequestBody)))
-          {            
-            exchDoc.CreateVersionFrom(xmlStream, "xml");
-            exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToISFormat(lastId);
-            // exchDoc.Save();            
-          }
-          */
-            
+        {           
           var exchQueue = ExchangeQueues.Create();
           exchQueue.ExchangeDocument = exchDoc;
           exchQueue.Xml = Encoding.UTF8.GetBytes(xmlRequestBody);
@@ -108,32 +123,18 @@ namespace litiko.Integration.Server
             {
               Logger.DebugFormat("Response successful. State message: {0}", stateMsg);
               statusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Sent;
-              //if (exchDoc.StatusRequestToIS != Integration.ExchangeDocument.StatusRequestToIS.Sent)
-              //  exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Sent;
             }
             else
             {
               Logger.DebugFormat("Response failed. State message: {0}", stateMsg);
               statusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
-              //if (exchDoc.StatusRequestToIS != Integration.ExchangeDocument.StatusRequestToIS.Error)
-              //  exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
             }
             
-            //if (exchDoc.RequestToISInfo != stateMsg)
-            //  exchDoc.RequestToISInfo = stateMsg;
             requestToISInfo = stateMsg;
             
             // Сохранение ответа
             if (method.SaveResponseFromIS.Value)
-            {
-              /*
-              using (var xmlStream = new MemoryStream(Encoding.UTF8.GetBytes(responseBody)))
-              {
-                exchDoc.CreateVersionFrom(xmlStream, "xml");
-                exchDoc.LastVersion.Note = Integration.Resources.VersionResponseFromISFormat(lastId);              
-              }
-              */
-              
+            { 
               var exchQueue = ExchangeQueues.Create();
               exchQueue.ExchangeDocument = exchDoc;
               exchQueue.Xml = Encoding.UTF8.GetBytes(responseBody);
@@ -144,12 +145,6 @@ namespace litiko.Integration.Server
           else
           {             
             errorMessage = string.Format("Response is not valid XML: {0}", responseBody);
-            /*
-            if (exchDoc.RequestToISInfo != errorMessage)
-              exchDoc.RequestToISInfo = errorMessage;
-            if (exchDoc.StatusRequestToIS != Integration.ExchangeDocument.StatusRequestToIS.Error)
-              exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
-            */
           }          
         }
       }
@@ -176,7 +171,8 @@ namespace litiko.Integration.Server
         Logger.Error(errorMessage);
       }
       
-      if (exchDoc.StatusRequestToIS != statusRequestToIS || exchDoc.RequestToISInfo != requestToISInfo)
+      bool isCounterparty = exchDoc.IntegrationMethod.Name == "R_DR_GET_COMPANY" || exchDoc.IntegrationMethod.Name == "R_DR_GET_BANK" || exchDoc.IntegrationMethod.Name == "R_DR_GET_PERSON";
+      if (!isCounterparty && exchDoc.StatusRequestToIS != statusRequestToIS || exchDoc.RequestToISInfo != requestToISInfo)
       {
         // Обновляем exchDoc асинхронным обработчиком
         var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
@@ -187,20 +183,6 @@ namespace litiko.Integration.Server
         asyncHandler.ExecuteAsync();
       }
       
-      /*
-      if (exchDoc.State.IsChanged)
-      {
-        try
-        {
-          exchDoc.Save();
-        }
-        catch (Exception ex)
-        {
-          errorMessage = string.Format("{0} Error saving. Message: {2} {1}", logPrefix, logPostfix, ex.Message);
-          Logger.Error(errorMessage);          
-        }
-      }
-      */
       Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);
       
       return errorMessage;
@@ -305,30 +287,22 @@ namespace litiko.Integration.Server
                 
         var statusRequestToRX = exchDoc.StatusRequestToRX;
         var requestToRXInfo = exchDoc.RequestToRXInfo;
-          
+                
         try
-        {
-          
-          // сохранить xml в новую версию
-          //exchDoc.CreateVersionFrom(xmlStream, "xml");
-          //exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFormat(lastId);
-          
+        {                    
           var exchQueue = ExchangeQueues.Create();
           exchQueue.ExchangeDocument = exchDoc;
           exchQueue.Xml = xmlData;
           exchQueue.Name = Integration.Resources.VersionRequestToRXFormat(lastId);
           exchQueue.Save();
           increaseNumberOfPackages = true;
-          
+            
           // обновить статусы в exchDoc
           if (lastId > 0)
             statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;
           else
             statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
-          
-          //exchDoc.RequestToRXPacketCount++;
-          //if (exchDoc.RequestToRXInfo != "Saved")
-          //  exchDoc.RequestToRXInfo = "Saved";
+            
           if (requestToRXInfo != "Saved")
             requestToRXInfo = "Saved";                    
         }
@@ -337,33 +311,37 @@ namespace litiko.Integration.Server
           errorMessage = ex.Message;          
           Logger.ErrorFormat("{0} ErrorMessage: {1}.{2}", logPrefix, errorMessage, logPostfix);
           statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
-          requestToRXInfo = ex.Message;                      
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, ex.Message));
+          requestToRXInfo = errorMessage;                      
+          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
         }
         
-        // Обновляем exchDoc асинхронным обработчиком
-        var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
-        asyncHandler.DocId = exchDoc.Id;
-        asyncHandler.StatusRequestToRX = statusRequestToRX.ToString();
-        asyncHandler.RequestToRXInfo = requestToRXInfo;
-        asyncHandler.IncreaseNumberOfPackages = increaseNumberOfPackages;
-        asyncHandler.ExecuteAsync();
-        
-        if (string.IsNullOrEmpty(errorMessage))
+        bool isCounterparty = exchDoc.IntegrationMethod.Name == "R_DR_GET_COMPANY" || exchDoc.IntegrationMethod.Name == "R_DR_GET_BANK" || exchDoc.IntegrationMethod.Name == "R_DR_GET_PERSON";        
+        if (!isCounterparty)
         {
-          if (lastId > 0)
-            // вызвать получение остальной части пакета
-            SendRequestToIS(exchDoc.IntegrationMethod, exchDoc, lastId);
-          else
+          // Обновляем exchDoc асинхронным обработчиком
+          var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
+          asyncHandler.DocId = exchDoc.Id;
+          asyncHandler.StatusRequestToRX = statusRequestToRX.ToString();
+          asyncHandler.RequestToRXInfo = requestToRXInfo;
+          asyncHandler.IncreaseNumberOfPackages = increaseNumberOfPackages;
+          asyncHandler.ExecuteAsync();
+          
+          if (string.IsNullOrEmpty(errorMessage))
           {
-            Thread.Sleep(5000); // Пауза на 5 сек.
-            
-            // запустить обработчик пакета
-            var asyncHandlerImportData = Integration.AsyncHandlers.ImportData.Create();
-            asyncHandlerImportData.ExchangeDocId = exchDoc.Id;
-            asyncHandlerImportData.ExecuteAsync();
-          }        
-        }                
+            if (lastId > 0)
+              // вызвать получение остальной части пакета
+              SendRequestToIS(exchDoc, lastId, null);
+            else
+            {
+              Thread.Sleep(5000); // Пауза на 5 сек.
+              
+              // запустить обработчик пакета
+              var asyncHandlerImportData = Integration.AsyncHandlers.ImportData.Create();
+              asyncHandlerImportData.ExchangeDocId = exchDoc.Id;
+              asyncHandlerImportData.ExecuteAsync();
+            }        
+          }                        
+        }
         
         Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);
         return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 1, "Saved"));
@@ -371,19 +349,24 @@ namespace litiko.Integration.Server
     }
 
     [Public, Remote(IsPure = true)]
-    public static bool WaitForGettingDataFromIS(Integration.IExchangeDocument exchDoc, int intervalMilliseconds, int maxAttempts)
+    public static long WaitForGettingDataFromIS(long exchDocId, int intervalMilliseconds, int maxAttempts)
     {
       for (int attempt = 0; attempt < maxAttempts; attempt++)
       {                        
-        if (Equals(exchDoc.StatusRequestToRX, litiko.Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull))
+        var exchQueue = ExchangeQueues.GetAll()
+          .Where(x => x.ExchangeDocument.Id == exchDocId)
+          .Where(x => x.Name == Integration.Resources.VersionRequestToRXFormat(0).ToString())
+          .FirstOrDefault();
+        
+        if (exchQueue != null)
         {
-          return true;
-        }                        
+          return exchQueue.Id;
+        }          
             
         Thread.Sleep(intervalMilliseconds); // Ожидание
       }
         
-      return false; // Условие не выполнено за maxAttempts попыток
+      return 0; // Условие не выполнено за maxAttempts попыток
     }
 
     /// <summary>
@@ -412,7 +395,7 @@ namespace litiko.Integration.Server
       exchDoc.IntegrationMethod = integrationMethod;      
       exchDoc.Save();
       
-      var errorMessage = Functions.Module.SendRequestToIS(integrationMethod, exchDoc, lastId);            
+      var errorMessage = Functions.Module.SendRequestToIS(exchDoc, lastId, null);            
       if (!string.IsNullOrEmpty(errorMessage))
         throw AppliedCodeException.Create(errorMessage);        
     }
@@ -955,7 +938,7 @@ namespace litiko.Integration.Server
               }
               
               var fioInfo = Structures.Module.FIOInfo.Create(isLastNameRu, isFirstNameRu, isMiddleNameRU, isLastNameTG, isFirstNameTG, isMiddleNameTG);
-              var personResult = ProcessingPerson(isPerson, fioInfo);
+              var personResult = ProcessingPerson(isPerson, fioInfo, null);
               var person = personResult.person;
               if(!Equals(employee.Person, person))
               {
@@ -1865,7 +1848,7 @@ namespace litiko.Integration.Server
     public List<string> R_DR_GET_COMPANY(long exchDocID, Eskhata.ICounterparty counterparty)
     {          
       Logger.Debug("R_DR_GET_COMPANY - Start");
-      var errorList = new List<string>();            
+      var errorList = new List<string>();                  
       
       var exchDoc = ExchangeDocuments.Get(exchDocID);
       var versionFullXML = exchDoc.Versions.Where(v => v.Note == Integration.Resources.VersionRequestToRXFull && v.AssociatedApplication.Extension == "xml" && v.Body.Size > 0).FirstOrDefault();
@@ -1886,11 +1869,11 @@ namespace litiko.Integration.Server
       var element = dataElements.FirstOrDefault();
       
       var isId = element.Element("ID")?.Value;
-      var isName = element.Element("NAME")?.Value;
+      var isName = element.Element("NAME")?.Value.Trim();      
       var isINN = element.Element("INN")?.Value;
           
-      var isLongName = element.Element("LONG_NAME")?.Value;
-      var isIName = element.Element("I_NAME")?.Value;
+      var isLongName = element.Element("LONG_NAME")?.Value.Trim();
+      var isIName = element.Element("I_NAME")?.Value.Trim();
       var isRezident = element.Element("REZIDENT")?.Value;          
       var isNuRezident = element.Element("NU_REZIDENT")?.Value;          
       var isKPP = element.Element("KPP")?.Value;
@@ -2137,7 +2120,7 @@ namespace litiko.Integration.Server
                 contact.JobTitle = isRange;                  
               }
               
-              var personResult = ProcessingPerson(isPerson, null);
+              var personResult = ProcessingPerson(isPerson, null, null);
               var person = personResult.person;
               if(!Equals(contact.Person, person))
               {
@@ -2150,7 +2133,7 @@ namespace litiko.Integration.Server
                 contact.Save();
                 Logger.DebugFormat("Contact successfully saved. ExternalId:{0}, Id:{1}", isContactID, contact.Id);
               }
-              
+
             }
           }
                        
@@ -2166,14 +2149,14 @@ namespace litiko.Integration.Server
           Logger.DebugFormat("There are no changes in Company. ExternalId:{0}, Id:{1}", isId, company.Id);
         }
             
-        }
+      }
       catch (Exception ex)
       {
         var errorMessage = string.Format("Error when processing Company with ExternalId:{0}. Description: {1}. StackTrace: {2}", isId, ex.Message, ex.StackTrace);
         Logger.Error(errorMessage);
         errorList.Add(errorMessage);
       }      
-      
+
       Logger.Debug("R_DR_GET_COMPANY - Finish"); 
       return errorList;
     }  
@@ -2409,7 +2392,7 @@ namespace litiko.Integration.Server
                 contact.JobTitle = isRange;                  
               }
               
-              var personResult = ProcessingPerson(isPerson, null);
+              var personResult = ProcessingPerson(isPerson, null, null);
               var person = personResult.person;
               if(!Equals(contact.Person, person))
               {
@@ -2447,6 +2430,497 @@ namespace litiko.Integration.Server
       }      
       
       Logger.Debug("R_DR_GET_BANK - Finish"); 
+      return errorList;
+    }
+    
+    /// <summary>
+    /// Обработка курсов валют.
+    /// </summary>
+    /// <param name="dataElements">Информация по курсам валют в виде XElement.</param>
+    /// <returns>Список ошибок (List<string>)</returns>     
+    public List<string> R_DR_GET_CURRENCY_RATES(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> dataElements)
+    {          
+      Logger.Debug("R_DR_GET_CURRENCY_RATES - Start");
+      var errorList = new List<string>();
+      int countAll = dataElements.Count();
+      int countChanged = 0;
+      int countNotChanged = 0;
+      int countErrors = 0;
+      
+      foreach (var element in dataElements)
+      {       
+        Transactions.Execute(() =>
+        {
+          // TODO Проверить, приходит ли в пакете ID курса валюты (по ТЗ этого поля нет)
+          //var isId = element.Element("ID")?.Value;
+          
+          var isCurrencyAlphaCode = element.Element("CurrencyAlphaCode")?.Value;
+          var isRateDate = element.Element("RateDate")?.Value;          
+          var isRate = element.Element("Rate")?.Value;        
+          
+          try
+          {                        
+            if (string.IsNullOrEmpty(isCurrencyAlphaCode) || string.IsNullOrEmpty(isRateDate) || string.IsNullOrEmpty(isRate))
+              throw AppliedCodeException.Create(string.Format("Not all required fields are filled in. CurrencyAlphaCode:{0}, RateDate:{1}, Rate:{2}", isCurrencyAlphaCode, isRateDate, isRate));  
+            
+            DateTime rateDate;
+            if (!Calendar.TryParseDate(isRateDate, out rateDate))
+              throw AppliedCodeException.Create(string.Format("Failed to convert value to date:{0}", isRateDate));
+            
+            double rate;
+            if (!Double.TryParse(isRate, out rate))
+              throw AppliedCodeException.Create(string.Format("Failed to convert value to double:{0}", isRate));
+            
+            var currency = litiko.Eskhata.Currencies.GetAll()
+              .Where(x => x.Status == Sungero.CoreEntities.DatabookEntry.Status.Active && x.AlphaCode == isCurrencyAlphaCode)
+              .FirstOrDefault();
+            
+            if (currency != null)
+            {
+              var entity = litiko.NSI.CurrencyRates.GetAll()
+                .Where(x => Equals(x.Currency, currency))
+                .Where(x => Equals(x.Date, rateDate))
+                .FirstOrDefault();
+              
+              if (entity != null)
+                Logger.DebugFormat("Currency rate {0} on date {1} already exists", isCurrencyAlphaCode, isRateDate);
+              else
+              {              
+                entity = NSI.CurrencyRates.Create();
+                //entity.ExternalId = isId;
+                entity.Currency = currency;
+                entity.Date = rateDate;
+                Logger.DebugFormat("Create new Currency rate {0} on date {1}", isCurrencyAlphaCode, isRateDate);
+              }
+
+              if (entity.Rate != rate)
+              {
+                Logger.DebugFormat("Change rate: current:{0}, new:{1}", entity.Rate, rate);
+                entity.Rate = rate;
+              }
+              
+              if (entity.State.IsInserted || entity.State.IsChanged)
+              {
+                entity.Save();                                          
+                Logger.DebugFormat("Currency rate successfully saved. Id:{0}", entity.Id);
+                countChanged++;
+              }
+              else
+              {
+                Logger.DebugFormat("There are no changes in Currency rate. Id:{1}", entity.Id);
+                countNotChanged++;
+              }              
+            }
+            else
+              Logger.DebugFormat("Currency with AlphaCode:{0} not found.", isCurrencyAlphaCode);
+                                    
+          }
+          catch (Exception ex)
+          {
+            var errorMessage = string.Format("Error when processing Currency rate. Description: {0}. StackTrace: {1}", ex.Message, ex.StackTrace);
+            Logger.Error(errorMessage);
+            errorList.Add(errorMessage);
+            countErrors++;
+          }
+        });
+      }
+      Logger.DebugFormat("R_DR_GET_CURRENCY_RATES - Total: CountAll:{0} CountChanged:{1} CountNotChanged:{2} CountErrors:{3}", countAll, countChanged, countNotChanged, countErrors);
+      
+      Logger.Debug("R_DR_GET_CURRENCY_RATES - Finish"); 
+      return errorList;
+    }
+    
+    /// <summary>
+    /// Обработка справочника Регионы оплаты.
+    /// </summary>
+    /// <param name="dataElements">Информация по регионам оплаты в виде XElement.</param>
+    /// <returns>Список ошибок (List<string>)</returns>     
+    public List<string> R_DR_GET_PAYMENT_REGIONS(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> dataElements)
+    {          
+      Logger.Debug("R_DR_GET_PAYMENT_REGIONS - Start");
+      var errorList = new List<string>();
+      int countAll = dataElements.Count();
+      int countChanged = 0;
+      int countNotChanged = 0;
+      int countErrors = 0;
+      
+      foreach (var element in dataElements)
+      {       
+        Transactions.Execute(() =>
+        {
+          var isId = element.Element("ID")?.Value;
+          var isName = element.Element("Name")?.Value;          
+          var isCode = element.Element("Code")?.Value;        
+          var isLabel = element.Element("Label")?.Value;                  
+          
+          try
+          {                        
+            if (string.IsNullOrEmpty(isId) || string.IsNullOrEmpty(isName) || string.IsNullOrEmpty(isCode) || string.IsNullOrEmpty(isLabel))
+              throw AppliedCodeException.Create(string.Format("Not all required fields are filled in. ID:{0}, Name:{1}, Code:{2}, Label:{3}", isId, isName, isCode, isLabel));
+            
+            var entity = NSI.PaymentRegions.GetAll().Where(x => x.ExternalId == isId).FirstOrDefault();
+            if (entity != null)
+              Logger.DebugFormat("Payment region with ExternalId:{0} was found. Id:{1}, Name:{2}", isId, entity.Id, entity.Name);
+            else
+            {              
+              entity = NSI.PaymentRegions.Create();
+              entity.ExternalId = isId;
+              Logger.DebugFormat("Create new Payment region with ExternalId:{0}. Id:{1}", isId, entity.Id);
+            }             
+            
+            if (entity.Name != isName)
+            {
+              Logger.DebugFormat("Change Name: current:{0}, new:{1}", entity.Name, isName);
+              entity.Name = isName;              
+            }
+            
+            if (entity.Code != isCode)
+            {
+              Logger.DebugFormat("Change Code: current:{0}, new:{1}", entity.Code, isCode);
+              entity.Code = isCode;              
+            }                                                            
+
+            if (entity.Marker != isLabel)
+            {
+              Logger.DebugFormat("Change Label: current:{0}, new:{1}", entity.Marker, isLabel);
+              entity.Marker = isLabel;              
+            } 
+            
+            if (entity.State.IsInserted || entity.State.IsChanged)
+            {
+              entity.Save();                                          
+              Logger.DebugFormat("Payment region successfully saved. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              countChanged++;
+            }
+            else
+            {
+              Logger.DebugFormat("There are no changes in Payment region. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              countNotChanged++;
+            }
+          }
+          catch (Exception ex)
+          {
+            var errorMessage = string.Format("Error when processing Payment region with ExternalId:{0}. Description: {1}. StackTrace: {2}", isId, ex.Message, ex.StackTrace);
+            Logger.Error(errorMessage);
+            errorList.Add(errorMessage);
+            countErrors++;
+          }
+        });
+      }
+      Logger.DebugFormat("R_DR_GET_PAYMENT_REGIONS - Total: CountAll:{0} CountChanged:{1} CountNotChanged:{2} CountErrors:{3}", countAll, countChanged, countNotChanged, countErrors);
+      
+      Logger.Debug("R_DR_GET_PAYMENT_REGIONS - Finish"); 
+      return errorList;
+    }
+    
+    /// <summary>
+    /// Обработка справочника Регионы объектов аренды.
+    /// </summary>
+    /// <param name="dataElements">Информация по регионам объектов аренды в виде XElement.</param>
+    /// <returns>Список ошибок (List<string>)</returns>     
+    public List<string> R_DR_GET_TAX_REGIONS(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> dataElements)
+    {          
+      Logger.Debug("R_DR_GET_TAX_REGIONS - Start");
+      var errorList = new List<string>();
+      int countAll = dataElements.Count();
+      int countChanged = 0;
+      int countNotChanged = 0;
+      int countErrors = 0;
+      
+      foreach (var element in dataElements)
+      {       
+        Transactions.Execute(() =>
+        {
+          var isId = element.Element("ID")?.Value;
+          var isName = element.Element("Name")?.Value;          
+          var isCode = element.Element("Code")?.Value;          
+          
+          try
+          {                        
+            if (string.IsNullOrEmpty(isId) || string.IsNullOrEmpty(isName) || string.IsNullOrEmpty(isCode))
+              throw AppliedCodeException.Create(string.Format("Not all required fields are filled in. ID:{0}, Name:{1}, Code:{2}", isId, isName, isCode));
+            
+            var entity = NSI.RegionOfRentals.GetAll().Where(x => x.ExternalId == isId).FirstOrDefault();
+            if (entity != null)
+              Logger.DebugFormat("Region of rental with ExternalId:{0} was found. Id:{1}, Name:{2}", isId, entity.Id, entity.Name);
+            else
+            {              
+              entity = NSI.RegionOfRentals.Create();
+              entity.ExternalId = isId;
+              Logger.DebugFormat("Create new Region of rental with ExternalId:{0}. Id:{1}", isId, entity.Id);
+            }             
+            
+            if (entity.Name != isName)
+            {
+              Logger.DebugFormat("Change Name: current:{0}, new:{1}", entity.Name, isName);
+              entity.Name = isName;              
+            }
+            
+            if (entity.Code != isCode)
+            {
+              Logger.DebugFormat("Change Code: current:{0}, new:{1}", entity.Code, isCode);
+              entity.Code = isCode;              
+            }                                                            
+            
+            if (entity.State.IsInserted || entity.State.IsChanged)
+            {
+              entity.Save();                                          
+              Logger.DebugFormat("Region of rental successfully saved. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              countChanged++;
+            }
+            else
+            {
+              Logger.DebugFormat("There are no changes in Region of rental. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              countNotChanged++;
+            }
+          }
+          catch (Exception ex)
+          {
+            var errorMessage = string.Format("Error when processing Region of rental with ExternalId:{0}. Description: {1}. StackTrace: {2}", isId, ex.Message, ex.StackTrace);
+            Logger.Error(errorMessage);
+            errorList.Add(errorMessage);
+            countErrors++;
+          }
+        });
+      }
+      Logger.DebugFormat("R_DR_GET_TAX_REGIONS - Total: CountAll:{0} CountChanged:{1} CountNotChanged:{2} CountErrors:{3}", countAll, countChanged, countNotChanged, countErrors);
+      
+      Logger.Debug("R_DR_GET_TAX_REGIONS - Finish"); 
+      return errorList;
+    }    
+    
+    /// <summary>
+    /// Обработка справочника Виды договоров (Виды документов).
+    /// </summary>
+    /// <param name="dataElements">Информация по видам договоров в виде XElement.</param>
+    /// <returns>Список ошибок (List<string>)</returns>     
+    public List<string> R_DR_GET_CONTRACT_VID(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> dataElements)
+    {          
+      Logger.Debug("R_DR_GET_CONTRACT_VID - Start");
+      var errorList = new List<string>();
+      int countAll = dataElements.Count();
+      int countChanged = 0;
+      int countNotChanged = 0;
+      int countErrors = 0;
+            
+      var documentType = Sungero.Docflow.DocumentTypes.GetAll(t => t.DocumentTypeGuid == Sungero.Contracts.PublicConstants.Module.ContractGuid).FirstOrDefault();
+      var registrable = Sungero.Docflow.DocumentKind.NumberingType.Registrable;
+      
+      var actionInfos = new Sungero.Domain.Shared.IActionInfo[] {
+        Sungero.Docflow.OfficialDocuments.Info.Actions.SendForFreeApproval,
+        Sungero.Docflow.OfficialDocuments.Info.Actions.SendForApproval
+      };
+      var actions = new List<Sungero.Docflow.IDocumentSendAction>();
+      foreach (var actionInfo in actionInfos)
+      {
+        var internalAction = actionInfo as Sungero.Domain.Shared.IInternalActionInfo;
+        var action = Sungero.Docflow.DocumentSendActions.GetAllCached(a => a.ActionGuid == internalAction.NameGuid.ToString()).FirstOrDefault();
+        if (action != null)
+          actions.Add(action);
+      }      
+      
+      var contractsDocumentFlow = Sungero.Docflow.DocumentKind.DocumentFlow.Contracts;
+      string namePrefix = "New_";
+      string shortNamePrefix = "Договор";
+      
+      foreach (var element in dataElements)
+      {       
+        Transactions.Execute(() =>
+        {
+          var isId = element.Element("ID")?.Value;
+          var isName = element.Element("Name")?.Value;          
+          var isCode = new string((element.Element("Code")?.Value ?? "")
+                        .Take(10)
+                        .ToArray());
+          
+          try
+          {                        
+            if (string.IsNullOrEmpty(isId) || string.IsNullOrEmpty(isName) || string.IsNullOrEmpty(isCode))
+              throw AppliedCodeException.Create(string.Format("Not all required fields are filled in. ID:{0}, Name:{1}, Code:{2}", isId, isName, isCode));
+            
+            var entity = litiko.Eskhata.DocumentKinds.GetAll().Where(x => x.ExternalIdlitiko == isId).FirstOrDefault();
+            if (entity != null)
+              Logger.DebugFormat("Document kind with ExternalId:{0} was found. Id:{1}, Name:{2}", isId, entity.Id, entity.Name);
+            else
+            {              
+              entity = litiko.Eskhata.DocumentKinds.Create();
+              entity.ExternalIdlitiko = isId;
+              entity.NumberingType = registrable;
+              entity.AutoNumbering = false;
+              entity.DocumentFlow = contractsDocumentFlow;
+              entity.GenerateDocumentName = true;
+              entity.ProjectsAccounting = false;
+              entity.GrantRightsToProject = false;
+              entity.DocumentType = documentType;
+              entity.IsDefault = false;
+              // Префикс в имя добавляется для того, чтобы отличать созданные автоматически записи от созданных вручную
+              entity.Name = $"{namePrefix}{isName}";
+              entity.ShortName = $"{shortNamePrefix} {isName}";  
+              
+              entity.AvailableActions.Clear();
+              foreach (var action in actions)
+                entity.AvailableActions.AddNew().Action = action;              
+              
+              Logger.DebugFormat("Create new Document kind with ExternalId:{0}. Id:{1}. Name:{2}", isId, entity.Id, isName);
+            }             
+            
+            /* 
+            if (entity.Name != isName)
+            {
+              Logger.DebugFormat("Change Name: current:{0}, new:{1}", entity.Name, isName);
+              entity.Name = isName;              
+            }
+            */
+            
+            if (entity.Code != isCode)
+            {
+              Logger.DebugFormat("Change Code: current:{0}, new:{1}", entity.Code, isCode);
+              entity.Code = isCode;              
+            }                                                            
+            
+            if (entity.State.IsInserted || entity.State.IsChanged)
+            {
+              entity.Save();                                          
+              Logger.DebugFormat("Document kind successfully saved. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              countChanged++;
+            }
+            else
+            {
+              Logger.DebugFormat("There are no changes in Document kind. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              countNotChanged++;
+            }
+          }
+          catch (Exception ex)
+          {
+            var errorMessage = string.Format("Error when processing Document kind with ExternalId:{0}. Description: {1}. StackTrace: {2}", isId, ex.Message, ex.StackTrace);
+            Logger.Error(errorMessage);
+            errorList.Add(errorMessage);
+            countErrors++;
+          }
+        });
+      }
+      Logger.DebugFormat("R_DR_GET_CONTRACT_VID - Total: CountAll:{0} CountChanged:{1} CountNotChanged:{2} CountErrors:{3}", countAll, countChanged, countNotChanged, countErrors);
+      
+      Logger.Debug("R_DR_GET_CONTRACT_VID - Finish"); 
+      return errorList;
+    }  
+
+    /// <summary>
+    /// Обработка справочника Типы договоров (Категории договоров).
+    /// </summary>
+    /// <param name="dataElements">Информация по типам договоров в виде XElement.</param>
+    /// <returns>Список ошибок (List<string>)</returns>     
+    public List<string> R_DR_GET_CONTRACT_TYPE(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> dataElements)
+    {          
+      Logger.Debug("R_DR_GET_CONTRACT_TYPE - Start");
+      var errorList = new List<string>();
+      int countAll = dataElements.Count();
+      int countChanged = 0;
+      int countNotChanged = 0;
+      int countErrors = 0;      
+      string namePrefix = "New_";
+      
+      foreach (var element in dataElements)
+      {       
+        Transactions.Execute(() =>
+        {
+          var isId = element.Element("ID")?.Value;
+          var isName = element.Element("Name")?.Value;                   
+          
+          try
+          {                        
+            if (string.IsNullOrEmpty(isId) || string.IsNullOrEmpty(isName))
+              throw AppliedCodeException.Create(string.Format("Not all required fields are filled in. ID:{0}, Name:{1}", isId, isName));
+            
+            var entity = Sungero.Contracts.ContractCategories.GetAll().Where(x => x.ExternalIdlitiko == isId).FirstOrDefault();
+            if (entity != null)
+              Logger.DebugFormat("Contract type with ExternalId:{0} was found. Id:{1}, Name:{2}", isId, entity.Id, entity.Name);
+            else
+            {              
+              entity = Sungero.Contracts.ContractCategories.Create();
+              entity.ExternalIdlitiko = isId;
+              // Префикс в имя добавляется для того, чтобы отличать созданные автоматически записи от созданных вручную
+              entity.Name = $"{namePrefix}{isName}";              
+              Logger.DebugFormat("Create new Contract type with ExternalId:{0}. Id:{1}", isId, entity.Id);
+            }             
+            
+            /*
+            if (entity.Name != isName)
+            {
+              Logger.DebugFormat("Change Name: current:{0}, new:{1}", entity.Name, isName);
+              entity.Name = isName;              
+            }
+            */                                                                      
+            
+            if (entity.State.IsInserted || entity.State.IsChanged)
+            {
+              entity.Save();                                          
+              Logger.DebugFormat("Contract type successfully saved. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              countChanged++;
+            }
+            else
+            {
+              Logger.DebugFormat("There are no changes in Contract type. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              countNotChanged++;
+            }
+          }
+          catch (Exception ex)
+          {
+            var errorMessage = string.Format("Error when processing Contract type with ExternalId:{0}. Description: {1}. StackTrace: {2}", isId, ex.Message, ex.StackTrace);
+            Logger.Error(errorMessage);
+            errorList.Add(errorMessage);
+            countErrors++;
+          }
+        });
+      }
+      Logger.DebugFormat("R_DR_GET_CONTRACT_TYPE - Total: CountAll:{0} CountChanged:{1} CountNotChanged:{2} CountErrors:{3}", countAll, countChanged, countNotChanged, countErrors);
+      
+      Logger.Debug("R_DR_GET_CONTRACT_TYPE - Finish"); 
+      return errorList;
+    }    
+    
+    /// <summary>
+    /// Обработка Персоны.
+    /// </summary>
+    /// <param name="exchDocID">ИД документа обмена</param>
+    /// <param name="counterparty">Персона</param>
+    /// <returns>Список ошибок (List<string>)</returns>
+    [Public, Remote]
+    public List<string> R_DR_GET_PERSON(long exchDocID, Eskhata.ICounterparty counterparty)
+    {          
+      Logger.Debug("R_DR_GET_PERSON - Start");
+      var errorList = new List<string>();            
+      
+      var exchDoc = ExchangeDocuments.Get(exchDocID);
+      var versionFullXML = exchDoc.Versions.Where(v => v.Note == Integration.Resources.VersionRequestToRXFull && v.AssociatedApplication.Extension == "xml" && v.Body.Size > 0).FirstOrDefault();
+      if (versionFullXML == null)
+      {
+        errorList.Add("Version with full XML data not found.");
+        return errorList;
+      }
+        
+      XDocument xmlDoc = XDocument.Load(versionFullXML.Body.Read());
+      var dataElements = xmlDoc.Descendants("Data").Elements("FASE");                    
+      if (!dataElements.Any())
+      {
+        errorList.Add("Empty Data node.");
+        return errorList;
+      }                  
+      
+      try
+      {
+        var person = litiko.Eskhata.People.As(counterparty);
+        var isPerson = dataElements.FirstOrDefault();
+        var personResult = ProcessingPerson(isPerson, null, person);
+      }
+      catch (Exception ex)
+      {
+        var errorMessage = string.Format("Error when processing Person with Id:{0}. Description: {1}. StackTrace: {2}", counterparty.Id, ex.Message, ex.StackTrace);
+        Logger.Error(errorMessage);
+        errorList.Add(errorMessage);
+      }      
+      
+      Logger.Debug("R_DR_GET_PERSON - Finish"); 
       return errorList;
     }      
     
@@ -2513,7 +2987,7 @@ namespace litiko.Integration.Server
     /// </summary>
     /// <param name="dataElements">Информация о персоне в виде XElement.</param>
     /// <returns>Структура с персоной и признаком изменения<string>)</returns>
-    public Structures.Module.ProcessingPersonResult ProcessingPerson(System.Xml.Linq.XElement personData, Structures.Module.FIOInfo fioInfo)
+    public Structures.Module.ProcessingPersonResult ProcessingPerson(System.Xml.Linq.XElement personData, Structures.Module.FIOInfo fioInfo, litiko.Eskhata.IPerson person)
     {              
       var isID = personData.Element("ID")?.Value;
       var isName = personData.Element("NAME")?.Value;
@@ -2533,6 +3007,11 @@ namespace litiko.Integration.Server
       var isPhone = personData.Element("Phone")?.Value;
       var isEmail = personData.Element("Email")?.Value;
       var isWebSite = personData.Element("WebSite")?.Value;
+      
+      var isVATApplicable = personData.Element("VATApplicable")?.Value;
+      var isIIN = personData.Element("IIN")?.Value;
+      var isCorrAcc = personData.Element("CorrAcc")?.Value;
+      var isInternalAcc = personData.Element("InternalAcc")?.Value;
           
       string isLastNameRu = string.Empty, isFirstNameRu = string.Empty, isMiddleNameRU = string.Empty;
       string isLastNameTG = string.Empty, isFirstNameTG = string.Empty, isMiddleNameTG = string.Empty;
@@ -2569,15 +3048,21 @@ namespace litiko.Integration.Server
       if (string.IsNullOrEmpty(isID) || string.IsNullOrEmpty(isName) || string.IsNullOrEmpty(isSex))
         throw AppliedCodeException.Create(string.Format("Not all required fields are filled in Person. ID:{0}, NAME:{1}, SEX:{2}", isID, isName, isSex));
       
-      var person = Eskhata.People.GetAll().Where(x => x.ExternalId == isID).FirstOrDefault();
+      bool needSave = true;
       if (person == null)
       {
-        person = Eskhata.People.Create();
-        person.ExternalId = isID;        
-        Logger.DebugFormat("Create new Person with ExternalId:{0}. Id:{1}", isID, person.Id);                  
+        person = Eskhata.People.GetAll().Where(x => x.ExternalId == isID).FirstOrDefault();
+        if (person == null)
+        {
+          person = Eskhata.People.Create();
+          person.ExternalId = isID;        
+          Logger.DebugFormat("Create new Person with ExternalId:{0}. Id:{1}", isID, person.Id);                  
+        }
+        else
+          Logger.DebugFormat("Person with ExternalId:{0} was found. Id:{1}, Name:{2}", isID, person.Id, person.Name);      
       }
       else
-        Logger.DebugFormat("Person with ExternalId:{0} was found. Id:{1}, Name:{2}", isID, person.Id, person.Name);
+        needSave = false;
       
       if (!string.IsNullOrEmpty(isLastNameRu) && person.LastName != isLastNameRu)
       {
@@ -2759,15 +3244,55 @@ namespace litiko.Integration.Server
       {
         Logger.DebugFormat("Change Homepage: current:{0}, new:{1}", person.Homepage, isWebSite);
         person.Homepage = isWebSite;                
+      }
+      
+      if(!string.IsNullOrEmpty(isVATApplicable))
+      {
+        bool VATPayer = isVATApplicable == "1" ? true : false;
+        if(person.VATPayerlitiko != VATPayer)
+        {
+          Logger.DebugFormat("Change VATPayerlitiko: current:{0}, new:{1}", person.VATPayerlitiko.GetValueOrDefault(), VATPayer);
+          person.VATPayerlitiko = VATPayer; 
+        }               
+      }
+            
+      if (!string.IsNullOrEmpty(isIIN))
+      {
+        int untIIN;
+        if (int.TryParse(isIIN, out untIIN) && person.SINlitiko != untIIN)
+        {
+          Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.SINlitiko, untIIN);
+          person.SINlitiko = untIIN;        
+        }
+        else
+          Logger.ErrorFormat("Can`t convert to int value of IIN:{0}", isIIN);            
       }      
+
+      if(!string.IsNullOrEmpty(isCorrAcc) && person.Account != isCorrAcc)
+      {
+        Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.Account, isCorrAcc);
+        person.Account = isCorrAcc;                
+      } 
+
+      if(!string.IsNullOrEmpty(isInternalAcc) && person.AccountEskhatalitiko != isInternalAcc)
+      {
+        Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.AccountEskhatalitiko, isInternalAcc);
+        person.AccountEskhatalitiko = isInternalAcc;                
+      } 
       
       /* !!! IdentityDocuments !!! */
       
       var result = Structures.Module.ProcessingPersonResult.Create(person, false);
       if (person.State.IsChanged || person.State.IsInserted)
       {
-        person.Save();
-        Logger.DebugFormat("Person successfully saved. ExternalId:{0}, Id:{1}", isID, person.Id);
+        if (needSave)
+        {
+          person.Save();
+          Logger.DebugFormat("Person successfully saved. ExternalId:{0}, Id:{1}", isID, person.Id);        
+        }
+        else
+          Logger.DebugFormat("Person successfully changed, but not saved. The user can save the changes independently. ExternalId:{0}, Id:{1}", isID, person.Id);
+        
         result.isCreatedOrUpdated = true;
       }
       else
@@ -2815,8 +3340,18 @@ namespace litiko.Integration.Server
         {
             return false;
         }
-    }    
-    
+    }
+
+    /// <summary>
+    /// Получить записи очереди обмена по документу
+    /// </summary>
+    [Remote]
+    public IQueryable<IExchangeQueue> GetExchangeQueueByDoc(IExchangeDocument document)
+    {
+      return ExchangeQueues.GetAll()
+        .Where(x => Equals(x.ExchangeDocument, document));
+    }   
+       
     #endregion
   }
 }

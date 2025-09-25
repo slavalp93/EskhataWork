@@ -61,4 +61,7 @@
   <data name="Property_NameTj" xml:space="preserve">
     <value>Название (tj)</value>
   </data>
+  <data name="Property_ExternalIdlitiko" xml:space="preserve">
+    <value>ИД во внешней системе</value>
+  </data>
 </root>

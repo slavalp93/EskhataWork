@@ -146,7 +146,7 @@
     <value>ExchangeDocument</value>
   </data>
   <data name="CoverDescription_ExchangeDocument" xml:space="preserve">
-    <value>List of outgoing/incoming xml exchange packages.</value>
+    <value>List of exchange documents. Document ID = session_id of the integration protocol.</value>
   </data>
   <data name="CoverGroup_Settings" xml:space="preserve">
     <value>Settings</value>
@@ -174,5 +174,47 @@
   </data>
   <data name="AsyncHandler_Description_f46750933c57401f807dc9c8a4bdfc3d" xml:space="preserve">
     <value>UpdateExchangeDoc</value>
+  </data>
+  <data name="JobDisplayName_8d20cd4b466340318a9bda8eabaa316b" xml:space="preserve">
+    <value>Integration. Removing old exchange documents</value>
+  </data>
+  <data name="JobDescription_8d20cd4b466340318a9bda8eabaa316b" xml:space="preserve">
+    <value>Deleting exchange documents (xml that are exchanged between Directum RX and ABS), the modification date of which was more than 90 days ago.</value>
+  </data>
+  <data name="CoverAction_ExchangeQueue" xml:space="preserve">
+    <value>ExchangeQueue</value>
+  </data>
+  <data name="CoverDescription_ExchangeQueue" xml:space="preserve">
+    <value>List of outgoing/incoming xml exchange packages.</value>
+  </data>
+  <data name="JobDisplayName_8c9d82422f6b4bd78c35eedd57534ee5" xml:space="preserve">
+    <value>Integration. Currency rates.</value>
+  </data>
+  <data name="JobDescription_8c9d82422f6b4bd78c35eedd57534ee5" xml:space="preserve">
+    <value>Integration. Currency rates.</value>
+  </data>
+  <data name="JobDisplayName_256f17d508a24b3e97b23e86ee444d1f" xml:space="preserve">
+    <value>Integration. Payment regions.</value>
+  </data>
+  <data name="JobDescription_256f17d508a24b3e97b23e86ee444d1f" xml:space="preserve">
+    <value>Integration. Payment regions.</value>
+  </data>
+  <data name="JobDisplayName_d8af206dd0aa4323b816ae4f9ff97d30" xml:space="preserve">
+    <value>Integration. Regions of rental.</value>
+  </data>
+  <data name="JobDescription_d8af206dd0aa4323b816ae4f9ff97d30" xml:space="preserve">
+    <value>Integration. Regions of rental.</value>
+  </data>
+  <data name="JobDisplayName_b477ca3488774cb3a2f79a561e78851e" xml:space="preserve">
+    <value>Integration. Contract kinds.</value>
+  </data>
+  <data name="JobDescription_b477ca3488774cb3a2f79a561e78851e" xml:space="preserve">
+    <value>Integration. Contract kinds.</value>
+  </data>
+  <data name="JobDisplayName_ca66ee7158854185b3ce67a5353c9a74" xml:space="preserve">
+    <value>Integration. Contract types.</value>
+  </data>
+  <data name="JobDescription_ca66ee7158854185b3ce67a5353c9a74" xml:space="preserve">
+    <value>Integration. Contract types.</value>
   </data>
 </root>

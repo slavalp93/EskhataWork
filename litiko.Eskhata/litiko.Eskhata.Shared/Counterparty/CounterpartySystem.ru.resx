@@ -70,4 +70,52 @@
   <data name="Property_OKVEDlitiko" xml:space="preserve">
     <value>ОКВЭД</value>
   </data>
+  <data name="Property_VATPayerlitiko" xml:space="preserve">
+    <value>Плательщик НДС</value>
+  </data>
+  <data name="Property_Reliabilitylitiko" xml:space="preserve">
+    <value>Благонадежность</value>
+  </data>
+  <data name="Enum_Reliabilitylitiko_Reliable" xml:space="preserve">
+    <value>Надежный</value>
+  </data>
+  <data name="Enum_Reliabilitylitiko_NotReliable" xml:space="preserve">
+    <value>Не надежный</value>
+  </data>
+  <data name="Property_DateOfInspectionlitiko" xml:space="preserve">
+    <value>Дата проверки</value>
+  </data>
+  <data name="Property_EINlitiko" xml:space="preserve">
+    <value>ЕИН</value>
+  </data>
+  <data name="Property_SINlitiko" xml:space="preserve">
+    <value>СИН</value>
+  </data>
+  <data name="Property_AccountEskhatalitiko" xml:space="preserve">
+    <value>Счет в Банке Эсхата</value>
+  </data>
+  <data name="Property_Streetlitiko" xml:space="preserve">
+    <value>Улица</value>
+  </data>
+  <data name="Property_HouseNumberlitiko" xml:space="preserve">
+    <value>Номер дома</value>
+  </data>
+  <data name="Action_SendToVerificationlitiko" xml:space="preserve">
+    <value>На проверку</value>
+  </data>
+  <data name="Action_SendToVerificationlitikoHint" xml:space="preserve">
+    <value>Создание задачи по регламенту «Проверка контрагента»</value>
+  </data>
+  <data name="Action_SendToVerificationlitikoDescription" xml:space="preserve">
+    <value>Создание задачи по регламенту «Проверка контрагента»</value>
+  </data>
+  <data name="Action_FillFromABSlitiko" xml:space="preserve">
+    <value>Заполнить из АБС</value>
+  </data>
+  <data name="Action_FillFromABSlitikoHint" xml:space="preserve">
+    <value>Автоматическое заполнение реквизитов контрагента из АБС</value>
+  </data>
+  <data name="Action_FillFromABSlitikoDescription" xml:space="preserve">
+    <value>Автоматическое заполнение реквизитов контрагента из АБС</value>
+  </data>
 </root>

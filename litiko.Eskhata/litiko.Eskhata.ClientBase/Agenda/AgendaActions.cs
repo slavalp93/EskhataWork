@@ -29,8 +29,9 @@ namespace litiko.Eskhata.Client
     {
       if (_obj.State.IsInserted)
       {
-        Dialogs.ShowMessage(litiko.CollegiateAgencies.Resources.SaveObjectMessage, MessageType.Warning);
-        throw new OperationCanceledException();
+        //Dialogs.ShowMessage(litiko.CollegiateAgencies.Resources.SaveObjectMessage, MessageType.Warning);
+        //throw new OperationCanceledException();                  
+        _obj.Save();
       }      
       
       try

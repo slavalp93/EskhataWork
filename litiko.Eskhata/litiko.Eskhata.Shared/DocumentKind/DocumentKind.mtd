@@ -42,6 +42,14 @@
       "Code": "NameTj",
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "7eca1266-9b95-447b-9886-77d1f63d8228"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "f2b23f58-84ee-41df-98a7-68be77522b47",
+      "Name": "ExternalIdlitiko",
+      "Code": "ExternalIdliti",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "845e32e4-c732-4b12-aa8f-7e9e3f5990b8"
     }
   ],
   "PublicStructures": [],

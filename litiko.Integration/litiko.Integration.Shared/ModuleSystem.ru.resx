@@ -146,7 +146,7 @@
     <value>Документы обмена</value>
   </data>
   <data name="CoverDescription_ExchangeDocument" xml:space="preserve">
-    <value>Список исходящих/входящих xml-пакетов обмена.</value>
+    <value>Список документов обмена. ИД документа = session_id протокола интеграции.</value>
   </data>
   <data name="CoverGroup_Settings" xml:space="preserve">
     <value>Настройки</value>
@@ -174,5 +174,47 @@
   </data>
   <data name="AsyncHandler_Description_f46750933c57401f807dc9c8a4bdfc3d" xml:space="preserve">
     <value>AsyncHandler</value>
+  </data>
+  <data name="JobDisplayName_8d20cd4b466340318a9bda8eabaa316b" xml:space="preserve">
+    <value>Интеграция. Удаление старых документов обмена</value>
+  </data>
+  <data name="JobDescription_8d20cd4b466340318a9bda8eabaa316b" xml:space="preserve">
+    <value>Удаление документов обмена (xml которыми обмениваются Directum RX и АБС), дата изменения которых была более 90 дней назад.</value>
+  </data>
+  <data name="CoverAction_ExchangeQueue" xml:space="preserve">
+    <value>Очередь обмена</value>
+  </data>
+  <data name="CoverDescription_ExchangeQueue" xml:space="preserve">
+    <value>Список исходящих/входящих xml-пакетов обмена.</value>
+  </data>
+  <data name="JobDisplayName_8c9d82422f6b4bd78c35eedd57534ee5" xml:space="preserve">
+    <value>Интеграция. Курсы валют.</value>
+  </data>
+  <data name="JobDescription_8c9d82422f6b4bd78c35eedd57534ee5" xml:space="preserve">
+    <value>Интеграция. Курсы валют.</value>
+  </data>
+  <data name="JobDisplayName_256f17d508a24b3e97b23e86ee444d1f" xml:space="preserve">
+    <value>Интеграция. Регионы оплаты.</value>
+  </data>
+  <data name="JobDescription_256f17d508a24b3e97b23e86ee444d1f" xml:space="preserve">
+    <value>Интеграция. Регионы оплаты.</value>
+  </data>
+  <data name="JobDisplayName_d8af206dd0aa4323b816ae4f9ff97d30" xml:space="preserve">
+    <value>Интеграция. Регионы объектов аренды.</value>
+  </data>
+  <data name="JobDescription_d8af206dd0aa4323b816ae4f9ff97d30" xml:space="preserve">
+    <value>Интеграция. Регионы объектов аренды.</value>
+  </data>
+  <data name="JobDisplayName_b477ca3488774cb3a2f79a561e78851e" xml:space="preserve">
+    <value>Интеграция. Виды договоров.</value>
+  </data>
+  <data name="JobDescription_b477ca3488774cb3a2f79a561e78851e" xml:space="preserve">
+    <value>Интеграция. Виды договоров.</value>
+  </data>
+  <data name="JobDisplayName_ca66ee7158854185b3ce67a5353c9a74" xml:space="preserve">
+    <value>Интеграция. Типы договоров.</value>
+  </data>
+  <data name="JobDescription_ca66ee7158854185b3ce67a5353c9a74" xml:space="preserve">
+    <value>Интеграция. Типы договоров.</value>
   </data>
 </root>

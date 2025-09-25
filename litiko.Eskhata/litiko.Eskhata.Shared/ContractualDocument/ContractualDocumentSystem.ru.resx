@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_IsWithinBudgetlitiko" xml:space="preserve">
+    <value>В рамках бюджета</value>
+  </data>
+  <data name="Property_CurrencyOperationlitiko" xml:space="preserve">
+    <value>Валюта операции</value>
+  </data>
+  <data name="Property_CurrencyRatelitiko" xml:space="preserve">
+    <value>Курс валюты</value>
+  </data>
+  <data name="Control_57371953b26b4bbaa41a206167b12046_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_57371953b26b4bbaa41a206167b12046" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_TotalAmountlitiko" xml:space="preserve">
+    <value>Общая сумма</value>
+  </data>
+  <data name="Resource_986164646eaf4cbb9f67ca0a09417c10" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_4b0f9f5a515f48e889b3b891ba9b943b" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_73e9df7c895e4811b3d576c6f95b87aa" xml:space="preserve">
+    <value>Условия</value>
+  </data>
+  <data name="Form_c9f39bf6867e4cd2824b73d39476a34f" xml:space="preserve">
+    <value>Платежная часть</value>
+  </data>
+  <data name="Resource_2ba45a3701c04b3e908a465e75956a24" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_2ba45a3701c04b3e908a465e75956a24_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_c248aafe8e354a2486a2364ce117ba5d" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_c248aafe8e354a2486a2364ce117ba5d_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_f47228b360b84bd3a8a58c7469cc8619" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_f47228b360b84bd3a8a58c7469cc8619_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_6a993f552422481595e476b5a73cb9ae" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_6a993f552422481595e476b5a73cb9ae_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_89c5c5d1362044b082a83f12ccaf3a47" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_89c5c5d1362044b082a83f12ccaf3a47_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_560833ba36b94d9cb995526605b7a18c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_560833ba36b94d9cb995526605b7a18c_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_fffc387555a7467c922d11409a8ffc93" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_fffc387555a7467c922d11409a8ffc93_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_ebca0b017fba4bb8be2c2aab0cbd5311" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_ebca0b017fba4bb8be2c2aab0cbd5311_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_407c65241df4449eb1d65df162b9d019" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_407c65241df4449eb1d65df162b9d019_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_AmountInWordslitiko" xml:space="preserve">
+    <value>Сумма прописью</value>
+  </data>
+  <data name="Property_Currency" xml:space="preserve">
+    <value>Валюта</value>
+  </data>
+  <data name="Property_ScanReceivedlitiko" xml:space="preserve">
+    <value>Скан-образ получен </value>
+  </data>
+  <data name="Property_OriginalReceivedlitiko" xml:space="preserve">
+    <value>Оригинал получен</value>
+  </data>
+  <data name="Property_TotalAmount" xml:space="preserve">
+    <value>Сумма в нац. валюте</value>
+  </data>
+  <data name="Property_IsVATlitiko" xml:space="preserve">
+    <value>Облагается НДС</value>
+  </data>
+  <data name="Property_VatRatelitiko" xml:space="preserve">
+    <value>Ставка НДС</value>
+  </data>
+  <data name="Property_TaxRatelitiko" xml:space="preserve">
+    <value>Ставки налогов</value>
+  </data>
+  <data name="Property_IncomeTaxRatelitiko" xml:space="preserve">
+    <value>Налог на доходы</value>
+  </data>
+  <data name="Property_IncomeTaxAmountlitiko" xml:space="preserve">
+    <value>Сумма налога на доходы</value>
+  </data>
+  <data name="Property_IsIndividualPaymentlitiko" xml:space="preserve">
+    <value>Оплата труда физ лиц</value>
+  </data>
+  <data name="Property_FSZNRatelitiko" xml:space="preserve">
+    <value>ФСЗН</value>
+  </data>
+  <data name="Property_FSZNAmountlitiko" xml:space="preserve">
+    <value>Сумма ФСЗН</value>
+  </data>
+  <data name="Property_PennyRatelitiko" xml:space="preserve">
+    <value>Пенс. взнос</value>
+  </data>
+  <data name="Property_PennyAmountlitiko" xml:space="preserve">
+    <value>Сумма пенс. взноса</value>
+  </data>
+  <data name="Action_CreateWaybilllitiko" xml:space="preserve">
+    <value>Создать накладную</value>
+  </data>
+  <data name="Action_CreateWaybilllitikoHint" xml:space="preserve">
+    <value>Создать накладную</value>
+  </data>
+  <data name="Action_CreateWaybilllitikoDescription" xml:space="preserve">
+    <value>Создать накладную к документу.</value>
+  </data>
+  <data name="Property_ResponsibilityMatrixlitiko" xml:space="preserve">
+    <value>Матрица ответственности</value>
+  </data>
+  <data name="Property_CurrencyContractlitiko" xml:space="preserve">
+    <value>Валюта договора</value>
+  </data>
+</root>

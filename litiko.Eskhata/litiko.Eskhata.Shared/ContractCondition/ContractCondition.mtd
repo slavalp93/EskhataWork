@@ -1,0 +1,225 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "da0e81e8-07a5-499f-94e3-44cf4bd19315",
+  "Name": "ContractCondition",
+  "BaseGuid": "0523387b-a689-41e5-bed3-95892df6922c",
+  "CanBeNavigationPropertyType": true,
+  "CreationAreaMetadata": {
+    "NameGuid": "f7766750-eee2-4fcd-8003-5c06a90d1f44",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "ExtraSearchProperties": [],
+  "FilterPanel": {
+    "NameGuid": "b0125fbd-3b91-4dbb-914a-689276216404",
+    "Name": "FilterPanel",
+    "Controls": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "Forms": [
+    {
+      "$type": "Sungero.Metadata.StandaloneFormMetadata, Sungero.Metadata",
+      "NameGuid": "52a9f7ad-ca10-47b2-b1c5-d942ccfb49bf",
+      "Name": "Card",
+      "Controls": [
+        {
+          "$type": "Sungero.Metadata.ControlGroupMetadata, Sungero.Metadata",
+          "NameGuid": "f904772f-63c7-4cbf-bbf2-f4b3ff15249d",
+          "Name": "AdditionalConditions",
+          "IsAncestorMetadata": true,
+          "Overridden": [
+            "Controls"
+          ],
+          "SharedNestedGroupsAlignment": true,
+          "Versions": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "b5b9b78f-245a-4f0d-a435-a0167c54c069",
+          "Name": "PaymentBasedOnlitikolitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+          "ParentGuid": "f904772f-63c7-4cbf-bbf2-f4b3ff15249d",
+          "PropertyGuid": "3bde83bb-28e9-49a8-be8a-5352416cd694",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "9f04d870-93ad-47af-a9e9-3551f45174b9",
+          "Name": "Controllitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiSelectFromListEditorToCollectionBinder",
+          "ParentGuid": "f904772f-63c7-4cbf-bbf2-f4b3ff15249d",
+          "PropertyGuid": "96309bbf-6232-4eab-8f39-437c1d343252",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": [
+            {
+              "Name": "NavigationPropertyGuid",
+              "Value": "ddddc57b-b72d-4507-a844-180190a49dcc"
+            }
+          ]
+        }
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "SettingsResourceKey"
+      ],
+      "Versions": []
+    }
+  ],
+  "IconResourcesKeys": [],
+  "LayeredFromGuid": "0523387b-a689-41e5-bed3-95892df6922c",
+  "OperationsClass": "",
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "679c57e1-2e21-440b-91d1-101b6371e13b",
+      "Name": "Currencies",
+      "EntityGuid": "c0050b5b-84d7-4303-9a07-d1fcd357fdd9",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "EntityGuid"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "1285cb01-22f6-4373-8371-b61b71b20072",
+      "Name": "ConditionType",
+      "DirectValues": [
+        {
+          "NameGuid": "86b19ba1-3afc-4b8d-b834-c8b4dd41c39c",
+          "Name": "PaymentBasedOn",
+          "Code": "PaymentBasedOn"
+        },
+        {
+          "NameGuid": "6ef8bbdc-213d-456f-bbb0-f3cc3de53ca7",
+          "Name": "DocumentGroup",
+          "Code": "DocumentGroup"
+        }
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "Values"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "e078276a-8b45-4ebc-a3cc-ebfdc3d8fd18",
+      "Name": "DocumentKinds",
+      "EntityGuid": "cc7b87ec-59c8-4123-9de8-77a2c124b71f",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "EntityGuid"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "5fff25cb-7584-43ca-83f0-2b3ed37f4bff",
+      "Name": "ConditionDocumentKinds",
+      "EntityGuid": "f0993feb-ef02-4ff9-adfb-077a1a05299d",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "EntityGuid"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "9aba844d-23da-4450-aaad-d3973b306044",
+      "Name": "DeliveryMethods",
+      "EntityGuid": "3a0d4a5b-9c95-4f93-a822-11242cae2510",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "EntityGuid"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "3bde83bb-28e9-49a8-be8a-5352416cd694",
+      "Name": "PaymentBasedOnlitiko",
+      "Code": "PaymentBasedOn",
+      "DirectValues": [
+        {
+          "NameGuid": "2effb85f-b3ac-4fe7-97dd-fb4dfca4ac92",
+          "Name": "Contract",
+          "Code": "Contract"
+        },
+        {
+          "NameGuid": "0d69a077-b67f-44fb-9c1f-80ae64dd2b54",
+          "Name": "Invoice",
+          "Code": "Invoice"
+        },
+        {
+          "NameGuid": "a6a7bbc1-80a2-4afb-99b9-b4c1bd45e7c6",
+          "Name": "TaxInvoice",
+          "Code": "TaxInvoice"
+        },
+        {
+          "NameGuid": "dd053734-a542-4509-a8d8-26c8e00dbafb",
+          "Name": "Act",
+          "Code": "Act"
+        },
+        {
+          "NameGuid": "fb1a40f3-ef3d-4637-bbbe-ce34fc9a5c04",
+          "Name": "Order",
+          "Code": "Order"
+        }
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "608b0ff7-f187-48fe-80f7-232c4f0605f7"
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "96309bbf-6232-4eab-8f39-437c1d343252",
+      "Name": "DocumentGroupslitiko",
+      "Code": "ContractCondit",
+      "EntityGuid": "5f538b72-016d-4183-8ec8-ab9ef3d11c34",
+      "IsShowedInList": false,
+      "PreviousPropertyGuid": "3bde83bb-28e9-49a8-be8a-5352416cd694"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [
+    "ContractIsMoreThan",
+    "ContractsVsPaymentDocIsNotFound",
+    "PaymentBasedOn",
+    "DocumentGroup"
+  ],
+  "RibbonCardMetadata": {
+    "NameGuid": "e803ff34-d61a-4d36-941f-7728c5124827",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "8f7d77d0-f866-4fa7-ab06-fe07f8a6cc47",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

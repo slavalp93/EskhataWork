@@ -5,6 +5,27 @@
   "AccessRightsMode": "Instance",
   "Actions": [
     {
+      "$type": "Sungero.Workflow.Shared.ExecutionResultActionMetadata, Sungero.Workflow.Shared",
+      "NameGuid": "18c8bdd2-3fbe-43ef-9ad4-a34713e1f2f9",
+      "Name": "Approved",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Workflow.Shared.ExecutionResultActionMetadata, Sungero.Workflow.Shared",
+      "NameGuid": "abe9db55-0cf3-46f4-9ac4-57fde6d8aea4",
+      "Name": "WithSuggestions",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ]
+    },
+    {
       "NameGuid": "f2f6f39d-66e3-487b-881f-62259e65f514",
       "Name": "NotAgreelitiko",
       "ActionArea": "Card",
@@ -71,6 +92,19 @@
     "IsAncestorMetadata": true,
     "Versions": []
   },
+  "Forms": [
+    {
+      "$type": "Sungero.Metadata.WorkflowEntityStandaloneFormMetadata, Sungero.Workflow.Shared",
+      "NameGuid": "d47446ab-5c18-4a88-917f-b3774dd433ad",
+      "Name": "Card",
+      "Controls": [],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "SettingsResourceKey"
+      ],
+      "Versions": []
+    }
+  ],
   "HandledEvents": [
     "BeforeCompleteServer",
     "ShowingClient"
@@ -99,7 +133,11 @@
   "PublicStructures": [],
   "ResourcesKeys": [
     "NotAgreeResult",
-    "CommentNeeded"
+    "CommentNeeded",
+    "RequiredToFillBudget",
+    "ConfirmBudgetAndBalance",
+    "BudgetControl",
+    "BudgetNotConfirmed"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "b84ccd2d-663d-4810-86e5-7dfc8ea6bdf3",

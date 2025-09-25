@@ -1,0 +1,65 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "3cec7836-d32c-4f6f-8587-3daf47b5194f",
+  "Name": "ResponsibilityMatrixContractCategories",
+  "AccessRightsMode": "NoRight",
+  "BaseGuid": "a3d38bf5-0414-41f6-bb33-a4621d2e5a60",
+  "CanBeNavigationPropertyType": true,
+  "Code": "Categories",
+  "ExtraSearchProperties": [],
+  "IsChildEntity": true,
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "e8c60abd-eca0-46cb-9dfe-d2a2a3934ed6",
+      "Name": "ResponsibilityMatrix",
+      "CanBeSearch": false,
+      "Code": "Responsibility",
+      "EntityGuid": "4636a00a-7ace-4bf0-93f5-8a74240a0ad7",
+      "IsReferenceToRootEntity": true,
+      "IsShowedInList": false
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "0da6a0e4-ed71-43f8-b195-ff62efa84ac3",
+      "Name": "Category",
+      "CanBeSearch": false,
+      "Code": "Category",
+      "EntityGuid": "eb34ad64-f23b-4c9f-9d48-74834fbbe33e",
+      "FlatListInStandaloneLookup": true,
+      "HandledEvents": [
+        "LookupServer"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "NeedPassEntityToLookupEvent": true,
+      "OnlyRootEntityUsedInChildLookupEvent": true,
+      "PreviousPropertyGuid": "e8c60abd-eca0-46cb-9dfe-d2a2a3934ed6"
+    }
+  ],
+  "PublicStructures": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "f0ef77f0-c2c5-4184-a21c-d1f735179ea7",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "f7ae1f6a-fc5e-4f8e-b0b8-1e7641e097c1",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

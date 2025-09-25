@@ -17,6 +17,9 @@ namespace litiko.Eskhata.Client
       {
         try
         {       
+          if (_obj.State.IsInserted)
+            _obj.Save();
+          
           litiko.CollegiateAgencies.PublicFunctions.Module.Remote.CreateMinutesBody(_obj, true);
           e.AddInformation(litiko.Eskhata.Resources.VersionCreatedSuccessfully);
         }

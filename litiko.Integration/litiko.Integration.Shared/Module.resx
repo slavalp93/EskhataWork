@@ -117,7 +117,7 @@
 	&lt;request-type&gt;R_DR_GET_DATA&lt;/request-type&gt;
 	&lt;dictionary&gt;{2}&lt;/dictionary&gt;
 	&lt;lastId&gt;{3}&lt;/lastId&gt;
-	&lt;INN&gt;{4}&lt;/INN&gt;
+	&lt;inn&gt;{4}&lt;/inn&gt;
 &lt;/request&gt;
 &lt;/root&gt;</value>
   </data>
@@ -148,5 +148,21 @@
   </data>
   <data name="VersionRequestToRX_" xml:space="preserve">
     <value>RequestToRX_</value>
+  </data>
+  <data name="RequestXMLTemplateForCurrencyRates" xml:space="preserve">
+    <value>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;root&gt;
+&lt;head&gt;
+	&lt;session_id&gt;{0}&lt;/session_id&gt;
+	&lt;application_key&gt;{1}&lt;/application_key&gt;
+&lt;/head&gt;
+&lt;request&gt;
+	&lt;protocol-version&gt;1.00&lt;/protocol-version&gt;
+	&lt;request-type&gt;R_DR_GET_DATA&lt;/request-type&gt;
+	&lt;dictionary&gt;{2}&lt;/dictionary&gt;
+	&lt;lastId&gt;{3}&lt;/lastId&gt;
+	&lt;lastExchangeDate&gt;{4}&lt;/lastExchangeDate&gt;
+&lt;/request&gt;
+&lt;/root&gt;</value>
   </data>
 </root>

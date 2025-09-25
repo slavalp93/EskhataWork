@@ -7,6 +7,8 @@ using litiko.Eskhata.Meeting;
 
 namespace litiko.Eskhata
 {
+
+
   partial class MeetingProjectSolutionslitikoClientHandlers
   {
 
@@ -83,7 +85,7 @@ namespace litiko.Eskhata
         if (selectedType == litiko.Eskhata.Meeting.Votinglitiko.NoVoting)
           typeForTable = litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.NoVoting;
         if (selectedType == litiko.Eskhata.Meeting.Votinglitiko.IntExt)
-          typeForTable = null;
+          typeForTable = litiko.Eskhata.MeetingProjectSolutionslitiko.VotingType.Intramural;
       }
       
       foreach (var element in _obj.ProjectSolutionslitiko)

@@ -27,6 +27,42 @@ namespace litiko.Eskhata
           && doc != null && litiko.CollegiateAgencies.Projectsolutions.Is(doc) && !litiko.CollegiateAgencies.Projectsolutions.As(doc).IncludedInAgenda.Value)
         e.AddError(litiko.CollegiateAgencies.Resources.DocumentIsNotIncludedInAgenda);      
       #endregion
+      
+      #region Договора. Контроль получения скана.
+      if (stage != null && doc != null && litiko.Eskhata.ApprovalStages.As(stage.Stage).CustomStageTypelitiko == litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.ScanReceivedCon &&
+          ContractualDocuments.Is(doc) && _obj.Result == ApprovalCheckingAssignment.Result.Accept)
+      {
+        var contractualDocument = ContractualDocuments.As(doc);
+        if (!contractualDocument.ScanReceivedlitiko.HasValue)
+          e.AddError(litiko.ContractsEskhata.Resources.RequiredToFillIsScanReceived);
+      }      
+      #endregion      
+      
+      #region Вынести вопрос на КОУ
+      if (stage != null && doc != null && litiko.Eskhata.ApprovalStages.As(stage.Stage).CustomStageTypelitiko == litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.SubmitIssueKou )
+      {
+        //e.AddError(litiko.ContractsEskhata.Resources.RequiredToFillIsOriginalReceived);
+        // Получаем связанные документы в прочих (OtherGroup)
+        var relatedDocs = doc.Relations.GetRelatedFrom();  
+    
+        var projectSolution = relatedDocs.FirstOrDefault(d => litiko.CollegiateAgencies.Projectsolutions.Is(d));
+        if (projectSolution == null)
+        {
+          e.AddError(litiko.CollegiateAgencies.Resources.BeforeActionItemProjectSolutionRequired);
+          return;
+        }
+        
+        var officialDoc = Sungero.Docflow.OfficialDocuments.As(projectSolution);
+        
+        var createdTasks = Sungero.Docflow.PublicFunctions.Module.Remote.GetApprovalTasks(officialDoc);
+        // Получаем все стартованные задачи согласования по документу
+        
+        if (!createdTasks.Any())
+        {
+            e.AddError(litiko.CollegiateAgencies.Resources.ProjectSolutionApprovalMissing);
+        }
+      }      
+      #endregion        
     }
   }
 

@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_DocumentKind" xml:space="preserve">
+    <value>Вид договора</value>
+  </data>
+  <data name="Property_DocumentGroup" xml:space="preserve">
+    <value>Тип договора</value>
+  </data>
+  <data name="Property_IsFrameworkContract" xml:space="preserve">
+    <value>Генеральный</value>
+  </data>
+  <data name="Property_DeliveryAddresslitiko" xml:space="preserve">
+    <value>Адрес</value>
+  </data>
+  <data name="ControlGroup_73e9df7c895e4811b3d576c6f95b87aa" xml:space="preserve">
+    <value>Условия</value>
+  </data>
+  <data name="Resource_4b0f9f5a515f48e889b3b891ba9b943b" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_986164646eaf4cbb9f67ca0a09417c10" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_535a4857d47f4d0ab28bfbbde9e3f535" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_57371953b26b4bbaa41a206167b12046" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_57371953b26b4bbaa41a206167b12046_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_62d6b4fbb9ce4f1f9ff3b7e3f8c2cfd7" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_61dfdc7711884789829dc4badfd8655c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_TotalAmount" xml:space="preserve">
+    <value>Сумма в нац. валюте</value>
+  </data>
+  <data name="Resource_a88937eaeb20405f867764521bf7423b" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_DeliveryDatelitiko" xml:space="preserve">
+    <value>Срок</value>
+  </data>
+  <data name="ControlGroup_23aff4662c6c40d894313de7b7d8d091" xml:space="preserve">
+    <value>Поставка / оказание услуг</value>
+  </data>
+  <data name="Property_RBOlitiko" xml:space="preserve">
+    <value>РБО</value>
+  </data>
+  <data name="Property_ReasonForChangelitiko" xml:space="preserve">
+    <value>Основание изменений</value>
+  </data>
+  <data name="Property_PaymentMethodlitiko" xml:space="preserve">
+    <value>Способ оплаты</value>
+  </data>
+  <data name="Enum_PaymentMethodlitiko_Prepayment" xml:space="preserve">
+    <value>Предоплата</value>
+  </data>
+  <data name="Enum_PaymentMethodlitiko_Postpay" xml:space="preserve">
+    <value>Постоплата</value>
+  </data>
+  <data name="ControlGroup_9783066c8edb4db0ad308b6b82ac8b14" xml:space="preserve">
+    <value>Оплата</value>
+  </data>
+  <data name="Property_FrequencyOfPaymentlitiko" xml:space="preserve">
+    <value>Периодичность оплаты</value>
+  </data>
+  <data name="Property_IsPartialPaymentlitiko" xml:space="preserve">
+    <value>Оплата частями</value>
+  </data>
+  <data name="Property_IsEqualPaymentlitiko" xml:space="preserve">
+    <value>Равномерная оплата</value>
+  </data>
+  <data name="Property_AmountForPeriodlitiko" xml:space="preserve">
+    <value>Сумма за период</value>
+  </data>
+  <data name="Property_AccDebtCreditlitiko" xml:space="preserve">
+    <value>Счет расчетов с дебиторами и кредиторами</value>
+  </data>
+  <data name="Property_AccFutureExpenselitiko" xml:space="preserve">
+    <value>Счет расходов будущ. периодов</value>
+  </data>
+  <data name="Resource_d6bc6a03df7042d68e3b717a68e13917" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_d6bc6a03df7042d68e3b717a68e13917_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_e867763432d14e2e9902262a8f6ad74b" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_e867763432d14e2e9902262a8f6ad74b_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_72aaa15a881a4353bcf95d2d100e7cea" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_7ce48c28571241daaa31efee49cfe56c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_0021721a297a4f07b4ca3221784162ab" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_760a3b11a36c4c22bdf47df012b233c0" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_760a3b11a36c4c22bdf47df012b233c0_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_a0865e18cb7547e39f944c3cc6c97dbd" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_f9922d9e7281484e8cc09220df2dd7e7" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_240b69ef4e354db9ba55a8d8695d743a" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_e92aa7c66ab849a5867cea4b942e05f4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_980956f769154c999d8f69338ebfcd08" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_7b637f4d98774accacb2756ee812abe6" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_cf0a1d3cc6d04341a1dfcab595861b4e" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_8ed7ecdd11e74864850e4d3127acb93c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_PaymentRegionlitiko" xml:space="preserve">
+    <value>Регион оплаты</value>
+  </data>
+  <data name="Property_RegionOfRentallitiko" xml:space="preserve">
+    <value>Регион объекта аренды</value>
+  </data>
+  <data name="Property_FrequencyExpenseslitiko" xml:space="preserve">
+    <value>Периодичность отнесения на расходы </value>
+  </data>
+  <data name="Action_CreateContractStatementDescription" xml:space="preserve">
+    <value>Создание акта выполненных работ (услуг). </value>
+  </data>
+  <data name="Action_CreateContractStatement" xml:space="preserve">
+    <value>Создать акт вып. работ (услуг)</value>
+  </data>
+  <data name="Action_CreateContractStatementHint" xml:space="preserve">
+    <value>Создать акт выполненных работ (услуг)</value>
+  </data>
+  <data name="Action_CreateIncomingInvoiceDescription" xml:space="preserve">
+    <value>Создание входящего счета</value>
+  </data>
+  <data name="Action_CreateIncomingInvoice" xml:space="preserve">
+    <value>Создать вх. счет</value>
+  </data>
+  <data name="Action_CreateIncomingInvoiceHint" xml:space="preserve">
+    <value>Создание входящего счета</value>
+  </data>
+  <data name="Action_CreateSupAgreement" xml:space="preserve">
+    <value>Создать доп. соглашение (Заказ)</value>
+  </data>
+  <data name="Action_CreateSupAgreementHint" xml:space="preserve">
+    <value>Создать дополнительное соглашение (Заказ)</value>
+  </data>
+  <data name="Action_CreateSupAgreementDescription" xml:space="preserve">
+    <value>Создание дополнительного соглашения к договору (Заказ). </value>
+  </data>
+  <data name="Action_CreateLegalOpinionlitiko" xml:space="preserve">
+    <value>Создать юрид. заключение</value>
+  </data>
+  <data name="Action_CreateLegalOpinionlitikoHint" xml:space="preserve">
+    <value>Создать юридическое заключение</value>
+  </data>
+  <data name="Action_CreateLegalOpinionlitikoDescription" xml:space="preserve">
+    <value>Создание юридичиского заключения к договору. </value>
+  </data>
+</root>

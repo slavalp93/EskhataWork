@@ -41,9 +41,21 @@
       "Name": "Reason",
       "CanBeSearch": false,
       "Code": "Reason",
+      "IsShowedInList": false,
       "IsSortingAllowed": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "55582daa-9118-4c9a-b680-2abb316bb6a0"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "dda9a333-47bb-4b82-86e1-d09260fa8cb2",
+      "Name": "AbsentReason",
+      "CanBeSearch": false,
+      "Code": "AbsentReason",
+      "EntityGuid": "d1374008-9e6e-4f41-82a8-a9852f23ace6",
+      "FlatListInStandaloneLookup": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "08beb413-169c-4bc9-893a-8e5d3cb9aa62"
     }
   ],
   "PublicStructures": [],

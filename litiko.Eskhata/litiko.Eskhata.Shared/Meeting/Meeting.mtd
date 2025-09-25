@@ -534,7 +534,8 @@
   ],
   "HandledEvents": [
     "RefreshClient",
-    "SavingServer"
+    "SavingServer",
+    "CreatedServer"
   ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "dbc0dd63-4d23-4f41-92ae-cab59bb70c8c",
@@ -986,7 +987,9 @@
     "ActionItemsSentSeccessfully",
     "ActionItemCreateFromDialogNotification",
     "StartActionItemExecutionTasksErrorSolution",
-    "VotingTaskIsNotCreated"
+    "VotingTaskIsNotCreated",
+    "VotingNotIntramural",
+    "DefaultLocation"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "b7b59d97-b6e4-46de-ba8f-0f82b8e09c3b",

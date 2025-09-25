@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Property_IsWithinBudgetlitiko" xml:space="preserve">
+    <value>Within budget</value>
+  </data>
+  <data name="ControlGroup_5b3fbd7f9dd84501a35b30433b661719" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_af3d3d413d0542a99cd8dbdbcdb5e4c3" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_57371953b26b4bbaa41a206167b12046_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_57371953b26b4bbaa41a206167b12046" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_TotalAmountlitiko" xml:space="preserve">
+    <value>Total amount</value>
+  </data>
+  <data name="Resource_986164646eaf4cbb9f67ca0a09417c10" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_4b0f9f5a515f48e889b3b891ba9b943b" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_73e9df7c895e4811b3d576c6f95b87aa" xml:space="preserve">
+    <value>Terms</value>
+  </data>
+  <data name="Form_c9f39bf6867e4cd2824b73d39476a34f" xml:space="preserve">
+    <value>Payment part</value>
+  </data>
+  <data name="Resource_2ba45a3701c04b3e908a465e75956a24" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_2ba45a3701c04b3e908a465e75956a24_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_c248aafe8e354a2486a2364ce117ba5d" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_c248aafe8e354a2486a2364ce117ba5d_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_f47228b360b84bd3a8a58c7469cc8619" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_f47228b360b84bd3a8a58c7469cc8619_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_6a993f552422481595e476b5a73cb9ae" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_6a993f552422481595e476b5a73cb9ae_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_89c5c5d1362044b082a83f12ccaf3a47" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_89c5c5d1362044b082a83f12ccaf3a47_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_560833ba36b94d9cb995526605b7a18c" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_560833ba36b94d9cb995526605b7a18c_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_fffc387555a7467c922d11409a8ffc93" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_fffc387555a7467c922d11409a8ffc93_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_ebca0b017fba4bb8be2c2aab0cbd5311" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_ebca0b017fba4bb8be2c2aab0cbd5311_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_407c65241df4449eb1d65df162b9d019" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_407c65241df4449eb1d65df162b9d019_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_AmountInWordslitiko" xml:space="preserve">
+    <value>Amount in words</value>
+  </data>
+  <data name="Property_Currency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="Property_ScanReceivedlitiko" xml:space="preserve">
+    <value>Scan received</value>
+  </data>
+  <data name="Property_OriginalReceivedlitiko" xml:space="preserve">
+    <value>Original received</value>
+  </data>
+  <data name="Property_TotalAmount" xml:space="preserve">
+    <value>Amount in nat currency</value>
+  </data>
+  <data name="ControlGroup_04796885692c4fadb1973d38b3ed4ba1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_CurrencyOperationlitiko" xml:space="preserve">
+    <value>Currency for operation</value>
+  </data>
+  <data name="Property_CurrencyRatelitiko" xml:space="preserve">
+    <value>Currency rate</value>
+  </data>
+  <data name="Property_IsVATlitiko" xml:space="preserve">
+    <value>Subject to VAT</value>
+  </data>
+  <data name="Property_VatRatelitiko" xml:space="preserve">
+    <value>VAT rate</value>
+  </data>
+  <data name="Property_TaxRatelitiko" xml:space="preserve">
+    <value>Tax rate</value>
+  </data>
+  <data name="Property_IncomeTaxRatelitiko" xml:space="preserve">
+    <value>Income tax</value>
+  </data>
+  <data name="Property_IncomeTaxAmountlitiko" xml:space="preserve">
+    <value>Income tax amount</value>
+  </data>
+  <data name="Property_IsIndividualPaymentlitiko" xml:space="preserve">
+    <value>Is individual payment</value>
+  </data>
+  <data name="Property_FSZNRatelitiko" xml:space="preserve">
+    <value>FSZN rate</value>
+  </data>
+  <data name="Property_FSZNAmountlitiko" xml:space="preserve">
+    <value>FSZN amount</value>
+  </data>
+  <data name="Property_PennyRatelitiko" xml:space="preserve">
+    <value>Penny contribution</value>
+  </data>
+  <data name="Property_PennyAmountlitiko" xml:space="preserve">
+    <value>Penny amount</value>
+  </data>
+  <data name="Action_CreateWaybilllitiko" xml:space="preserve">
+    <value>Create waybill</value>
+  </data>
+  <data name="Action_CreateWaybilllitikoDescription" xml:space="preserve">
+    <value>Create a waybill to the contractual document.</value>
+  </data>
+  <data name="Action_CreateWaybilllitikoHint" xml:space="preserve">
+    <value>Create waybill</value>
+  </data>
+  <data name="Action_CreateWaybilllitikoConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateWaybilllitikoConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_ResponsibilityMatrixlitiko" xml:space="preserve">
+    <value>Responsibility matrix</value>
+  </data>
+  <data name="Property_CurrencyContractlitiko" xml:space="preserve">
+    <value>Contract currency</value>
+  </data>
+</root>

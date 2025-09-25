@@ -70,4 +70,64 @@
   <data name="Property_OKVEDlitiko" xml:space="preserve">
     <value>OKVED</value>
   </data>
+  <data name="Property_VATPayerlitiko" xml:space="preserve">
+    <value>VAT payer</value>
+  </data>
+  <data name="Property_Reliabilitylitiko" xml:space="preserve">
+    <value>Trustworthiness</value>
+  </data>
+  <data name="Enum_Reliabilitylitiko_Reliable" xml:space="preserve">
+    <value>Reliable</value>
+  </data>
+  <data name="Enum_Reliabilitylitiko_NotReliable" xml:space="preserve">
+    <value>Not reliable</value>
+  </data>
+  <data name="Property_DateOfInspectionlitiko" xml:space="preserve">
+    <value>Date of inspection</value>
+  </data>
+  <data name="Property_EINlitiko" xml:space="preserve">
+    <value>EIN</value>
+  </data>
+  <data name="Property_SINlitiko" xml:space="preserve">
+    <value>SIN</value>
+  </data>
+  <data name="Property_AccountEskhatalitiko" xml:space="preserve">
+    <value>Bank Eskhata Account</value>
+  </data>
+  <data name="Property_Streetlitiko" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="Property_HouseNumberlitiko" xml:space="preserve">
+    <value>House number</value>
+  </data>
+  <data name="Action_SendToVerificationlitiko" xml:space="preserve">
+    <value>To verification</value>
+  </data>
+  <data name="Action_SendToVerificationlitikoDescription" xml:space="preserve">
+    <value>Creating a task according to the "Counterparty verification" regulation</value>
+  </data>
+  <data name="Action_SendToVerificationlitikoHint" xml:space="preserve">
+    <value>Creating a task according to the "Counterparty verification" regulation</value>
+  </data>
+  <data name="Action_SendToVerificationlitikoConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_SendToVerificationlitikoConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_FillFromABSlitiko" xml:space="preserve">
+    <value>Fill from ABS</value>
+  </data>
+  <data name="Action_FillFromABSlitikoDescription" xml:space="preserve">
+    <value>Automatic filling of the counterparty details from the ABS</value>
+  </data>
+  <data name="Action_FillFromABSlitikoHint" xml:space="preserve">
+    <value>Automatic filling of the counterparty details from the ABS</value>
+  </data>
+  <data name="Action_FillFromABSlitikoConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_FillFromABSlitikoConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
 </root>

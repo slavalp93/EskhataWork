@@ -38,7 +38,10 @@ namespace litiko.Eskhata.Client
     public override void CreateFromTemplate(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       try
-      {       
+      {
+        if (_obj.State.IsInserted)
+          _obj.Save();
+          
         litiko.CollegiateAgencies.PublicFunctions.Module.Remote.CreateMinutesBody(_obj, false);
         e.AddInformation(litiko.Eskhata.Resources.VersionCreatedSuccessfully);
       }

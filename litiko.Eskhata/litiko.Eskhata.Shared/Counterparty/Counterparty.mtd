@@ -2,6 +2,24 @@
   "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
   "NameGuid": "7466ead6-2162-47df-9ff2-7dc848d040cf",
   "Name": "Counterparty",
+  "Actions": [
+    {
+      "NameGuid": "988cee70-a1fe-411c-b972-a84981e1ec2e",
+      "Name": "SendToVerificationlitiko",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_SendToVerificationlitiko_large_988cee70a1fe411cb972a84981e1ec2e.png",
+      "SmallIconName": "Action_SendToVerificationlitiko_small_988cee70a1fe411cb972a84981e1ec2e.png"
+    },
+    {
+      "NameGuid": "eccb2b8d-e791-4d8c-8ab3-64e5f274912b",
+      "Name": "FillFromABSlitiko",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_FillFromABSlitiko_large_eccb2b8de7914d8c8ab364e5f274912b.png",
+      "SmallIconName": "Action_FillFromABSlitiko_small_eccb2b8de7914d8c8ab364e5f274912b.png"
+    }
+  ],
   "BaseGuid": "294767f1-009f-4fbd-80fc-f98c49ddc560",
   "CanBeNavigationPropertyType": true,
   "CreationAreaMetadata": {
@@ -136,15 +154,114 @@
       "EntityGuid": "eb73e7c2-4a03-4c71-bb5d-accbab247b14",
       "IsShowedInList": false,
       "PreviousPropertyGuid": "9c8c1bda-16cb-49df-aa4e-02e12c326afe"
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "cef89963-753f-4811-8e49-2b87d1e08bc6",
+      "Name": "VATPayerlitiko",
+      "Code": "VATPayerlitiko",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "2c2de8eb-61e4-47c4-9b82-c22eb80c3132"
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "49890f77-3125-4813-8433-810c3d6950f8",
+      "Name": "Reliabilitylitiko",
+      "Code": "Reliabilitylit",
+      "DirectValues": [
+        {
+          "NameGuid": "2a66192f-af64-4a1e-b579-8953ff24d4a2",
+          "Name": "Reliable",
+          "Code": "Reliable"
+        },
+        {
+          "NameGuid": "e728c77a-56d2-4880-aa57-70214300ece4",
+          "Name": "NotReliable",
+          "Code": "NotReliable"
+        }
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "cef89963-753f-4811-8e49-2b87d1e08bc6"
+    },
+    {
+      "$type": "Sungero.Metadata.DateTimePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "ce221cf3-796e-45b6-893b-b1134eeba9cb",
+      "Name": "DateOfInspectionlitiko",
+      "Code": "DateOfInspecti",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
+      "PreviousPropertyGuid": "49890f77-3125-4813-8433-810c3d6950f8"
+    },
+    {
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "018cca87-6ebb-4f55-bdd8-f96c2f2c356b",
+      "Name": "EINlitiko",
+      "Code": "EINlitiko",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "ce221cf3-796e-45b6-893b-b1134eeba9cb"
+    },
+    {
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "ddc32bb7-d474-48c2-b654-a0c096fd44a9",
+      "Name": "SINlitiko",
+      "Code": "SINlitiko",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "018cca87-6ebb-4f55-bdd8-f96c2f2c356b"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d6ac6148-eac7-4115-85cd-9e4cbe48accd",
+      "Name": "AccountEskhatalitiko",
+      "Code": "AccountEskhata",
+      "Length": 34,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "ddc32bb7-d474-48c2-b654-a0c096fd44a9"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "71f6ff04-8ae9-4cb2-b10e-1af1080921d7",
+      "Name": "Streetlitiko",
+      "Code": "Streetlitiko",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "d6ac6148-eac7-4115-85cd-9e4cbe48accd"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "a0c39e3c-f24a-4db7-b611-2ad920a6404a",
+      "Name": "HouseNumberlitiko",
+      "Code": "HouseNumberlit",
+      "Length": 50,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "71f6ff04-8ae9-4cb2-b10e-1af1080921d7"
     }
   ],
   "PublicStructures": [],
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "InformationAboutCounterpartyIsRequired"
+  ],
   "RibbonCardMetadata": {
     "NameGuid": "f301c37e-0718-450e-b2eb-f3ad159dbd08",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "97f2da79-4911-4358-af8f-aa20a2153b16",
+        "Name": "ActionButtonlitiko",
+        "ActionGuid": "988cee70-a1fe-411c-b972-a84981e1ec2e",
+        "ButtonSize": "Large",
+        "Index": 0,
+        "ParentGuid": "f329dc86-efcb-484a-bdfd-999e6f96e971"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "8aaa60bc-82a8-4227-9bfb-c4de3d069f45",
+        "Name": "FillFromABSlitiko",
+        "ActionGuid": "eccb2b8d-e791-4d8c-8ab3-64e5f274912b",
+        "ButtonSize": "Large",
+        "Index": -1,
+        "ParentGuid": "aa25262b-e782-4a70-829e-0856dd1e2b57"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],

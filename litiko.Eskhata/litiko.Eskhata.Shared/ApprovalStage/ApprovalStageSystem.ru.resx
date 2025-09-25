@@ -91,4 +91,22 @@
   <data name="Property_AllowResultNotAgreelitiko" xml:space="preserve">
     <value>Разрешить вариант выполнения "Не согласен"</value>
   </data>
+  <data name="Enum_CustomStageTypelitiko_BudgetCheck" xml:space="preserve">
+    <value>Тендера. Проверка бюджета</value>
+  </data>
+  <data name="Enum_CustomStageTypelitiko_BudgetCheckCont" xml:space="preserve">
+    <value>Договора. Согласование с бюджетным контролером</value>
+  </data>
+  <data name="Enum_CustomStageTypelitiko_ScanReceivedCon" xml:space="preserve">
+    <value>Договора. Контроль получения скана.</value>
+  </data>
+  <data name="Enum_CustomStageTypelitiko_OrigReceivedCon" xml:space="preserve">
+    <value>Договора. Контроль получения оригинала.</value>
+  </data>
+  <data name="Enum_CustomStageTypelitiko_AccountantAppr" xml:space="preserve">
+    <value>Договора. Согласование с бухгалтером.</value>
+  </data>
+  <data name="Enum_CustomStageTypelitiko_SubmitIssueKou" xml:space="preserve">
+    <value>Вынести вопрос на КОУ</value>
+  </data>
 </root>
