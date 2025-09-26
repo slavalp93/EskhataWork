@@ -172,7 +172,7 @@ namespace litiko.Integration.Server
       }
       
       bool isCounterparty = exchDoc.IntegrationMethod.Name == "R_DR_GET_COMPANY" || exchDoc.IntegrationMethod.Name == "R_DR_GET_BANK" || exchDoc.IntegrationMethod.Name == "R_DR_GET_PERSON";
-      if (!isCounterparty && exchDoc.StatusRequestToIS != statusRequestToIS || exchDoc.RequestToISInfo != requestToISInfo)
+      if (!isCounterparty && (exchDoc.StatusRequestToIS != statusRequestToIS || exchDoc.RequestToISInfo != requestToISInfo))
       {
         // Обновляем exchDoc асинхронным обработчиком
         var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
