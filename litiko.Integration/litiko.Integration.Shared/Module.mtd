@@ -328,6 +328,20 @@
   ],
   "PublicFunctions": [
     {
+      "Name": "BuildContractXml",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "contractualDocument",
+          "ParameterType": "global::litiko.Eskhata.IContractualDocument",
+          "ParameterTypeFullName": "litiko.Eskhata.IContractualDocument, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
       "Name": "CreateExchangeDocument",
       "IsRemote": true,
       "Placement": "Shared",
