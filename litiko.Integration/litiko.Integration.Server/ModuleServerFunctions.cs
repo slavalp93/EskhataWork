@@ -3353,5 +3353,497 @@ namespace litiko.Integration.Server
     }   
        
     #endregion
+    
+    #region Экспорт договоров для интеграции
+    
+    /// <summary>
+    /// Преобразует nullable булевое значение в строковое представление: "true", "false" или "null".
+    /// Используется для корректного формирования XML-элементов, где нужно указать значение флага.
+    /// </summary>
+    /// <param name="value">nullable булевое значение</param>
+    /// <returns>строка "true", "false" или "null"</returns>    
+    private string ToYesNoNull(bool? value)
+    {
+      if (!value.HasValue)
+          return "null";
+      return value.Value ? "true" : "false";
+    }
+
+    /// <summary>
+    /// Формирует XML-структуру <Person> для контрагента-физического лица.
+    /// </summary>    
+    private XElement BuildPersonXml(Sungero.Parties.ICounterparty counterparty)
+    {
+        var person = litiko.Eskhata.People.As(counterparty);
+        if (person == null)
+            return new XElement("Person");
+    
+        // ==========================
+        // Инициализация переменных
+        // ==========================
+        var id              = person.Id;
+        var externalId      = person.ExternalId ?? "";
+        var lastName        = person.LastName ?? "";
+        var firstName       = person.FirstName ?? "";
+        var middleName      = person.MiddleName ?? "";
+        var rezident        = ToYesNoNull(!person.Nonresident);
+        var nuRezident      = ToYesNoNull(!person.NUNonrezidentlitiko);
+        var iName           = person.Inamelitiko ?? "";
+        var datePers        = person.DateOfBirth?.ToString("dd.MM.yyyy") ?? "";
+        var sex             = person.Sex?.ToString() ?? "";
+        var marigeSt        = person.FamilyStatuslitiko?.ToString() ?? "";
+        var inn             = person.TIN ?? "";
+        var iin             = person.SINlitiko?.ToString() ?? "";
+        var country         = person.Region?.ToString() ?? "";
+        var docBirthPlace   = person.DateOfBirth?.ToString() ?? "";
+        var postAddress     = person.PostalAddress ?? "";
+        var email           = person.Email ?? "";
+        var phone           = person.Phones ?? "";
+        var city            = person.City?.ToString() ?? "";
+        var street          = person.Streetlitiko ?? "";
+        var buildingNumber  = person.HouseNumberlitiko ?? "";
+        var website         = person.Homepage ?? "";
+        var taxNonResident  = ToYesNoNull(person.NUNonrezidentlitiko);
+        var vatPayer        = ToYesNoNull(person.VATPayerlitiko);
+        var reliability     = "true"; // TODO
+        var corrAcc         = person.Account ?? "";
+        var internalAcc     = person.AccountEskhatalitiko ?? "";
+    
+        var idDocId         = person.IdentityAuthorityCode ?? "";
+        var idDocType       = person.IdentityKind?.ToString() ?? "";
+        var idDocName       = ""; // TODO
+        var idDocBegin      = person.IdentityDateOfIssue?.ToString() ?? "";
+        var idDocEnd        = person.IdentityExpirationDate?.ToString() ?? "";
+        var idDocNum        = person.IdentityNumber ?? "";
+        var idDocSer        = person.IdentitySeries ?? "";
+        var idDocWho        = person.IdentityAuthority ?? "";
+    
+        // ==========================
+        // Коллекции (OKONH, OKVED)
+        // ==========================
+        var codeOkonh = person.OKONHlitiko?.Any() == true
+            ? new XElement("CODE_OKONH",
+                person.OKONHlitiko.Select(c => new XElement("element", c?.ToString() ?? "")))
+            : null;
+    
+        var codeOkved = person.OKVEDlitiko?.Any() == true
+            ? new XElement("CODE_OKVED",
+                person.OKVEDlitiko.Select(c => new XElement("element", c?.ToString() ?? "")))
+            : null;
+    
+        // ==========================
+        // Формирование XML
+        // ==========================
+        return new XElement("Person",
+            new XElement("ID", id),
+            new XElement("ExternalID", externalId),
+            new XElement("LastName", lastName),
+            new XElement("FirstName", firstName),
+            new XElement("MiddleName", middleName),
+            new XElement("REZIDENT", rezident),
+            new XElement("NU_REZIDENT", nuRezident),
+            new XElement("I_NAME", iName),
+            new XElement("DATE_PERS", datePers),
+            new XElement("SEX", sex),
+            new XElement("MARIGE_ST", marigeSt),
+            new XElement("INN", inn),
+            codeOkonh,
+            codeOkved,
+            new XElement("IIN", iin),
+            new XElement("COUNTRY", country),
+            new XElement("DOC_BIRTH_PLACE", docBirthPlace),
+            new XElement("PostAdress", postAddress),
+            new XElement("Email", email),
+            new XElement("Phone", phone),
+            new XElement("City", city),
+            new XElement("Street", street),
+            new XElement("BuildingNumber", buildingNumber),
+            new XElement("WebSite", website),
+            new XElement("TaxNonResident", taxNonResident),
+            new XElement("VATPayer", vatPayer),
+            new XElement("Reliability", reliability),
+            new XElement("CorrAcc", corrAcc),
+            new XElement("InternalAcc", internalAcc),
+            new XElement("IdentityDocument",
+                new XElement("ID", idDocId),
+                new XElement("TYPE", idDocType),
+                new XElement("NAME", idDocName),
+                new XElement("DATE_BEGIN", idDocBegin),
+                new XElement("DATE_END", idDocEnd),
+                new XElement("NUM", idDocNum),
+                new XElement("SER", idDocSer),
+                new XElement("WHO", idDocWho)
+            )
+        );
+    }
+
+    /// <summary>
+    /// Формирует XML-структуру <Company> для контрагента-юридического лица.
+
+    /// </summary>    
+    private XElement BuildCompanyXml(Sungero.Parties.ICounterparty counterparty)
+    {
+        var company = litiko.Eskhata.Companies.As(counterparty);
+        if (company == null)
+            return new XElement("Company");
+    
+        // ==========================
+        // Инициализация переменных
+        // ==========================
+        var id              = company.Id.ToString();
+        var externalId      = company.ExternalId ?? "";
+        var name            = company.Name ?? "";
+        var longName        = company.LegalName ?? "";
+        var iName           = company.Inamelitiko ?? "";
+        var rezident        = ToYesNoNull(!company.Nonresident);
+        var nuRezident      = ToYesNoNull(!company.NUNonrezidentlitiko);
+        var inn             = company.TIN ?? "";
+        var kpp             = company.TRRC ?? "";
+        var kodOkpo         = company.NCEO ?? "";
+        var forma           = ""; // TODO
+        var ownership       = company.OKOPFlitiko?.ExternalId; 
+        var iin             = company.SINlitiko?.ToString() ?? "";
+        var registNum       = company.RegNumlitiko ?? "";
+        var numbers         = company.Numberslitiko?.ToString() ?? "";
+        var business        = company.Businesslitiko?.ToString() ?? "";
+        var psRef           = company.EnterpriseTypelitiko?.ToString() ?? "";
+        var country         = company.Region?.ToString() ?? "";
+        var postAddress     = company.PostalAddress ?? "";
+        var legalAddress    = company.LegalAddress ?? "";
+        var phone           = company.Phones ?? "";
+        var city            = company.City?.ToString() ?? "";
+        var street          = company.Streetlitiko ?? "";
+        var buildingNumber  = company.HouseNumberlitiko ?? "";
+        var email           = company.Email ?? "";
+        var website         = company.Homepage ?? "";
+        var taxNonResident  = ToYesNoNull(company.NUNonrezidentlitiko);
+        var vatPayer        = ToYesNoNull(company.VATPayerlitiko);
+        var reliability     = company.Reliabilitylitiko?.ToString() ?? "";
+        var corrAcc         = company.Account ?? "";
+        var internalAcc     = company.AccountEskhatalitiko ?? "";
+    
+        // ==========================
+        // Коллекции
+        // ==========================
+        var codeOkonh = company.OKONHlitiko?.Any() == true
+            ? new XElement("CODE_OKONH",
+                company.OKONHlitiko.Select(c => new XElement("element", c?.ToString() ?? "")))
+            : null;
+    
+        var codeOkved = company.OKVEDlitiko?.Any() == true
+            ? new XElement("CODE_OKVED",
+                company.OKVEDlitiko.Select(c => new XElement("element", c?.ToString() ?? "")))
+            : null;
+    
+        // ==========================
+        // Формирование XML
+        // ==========================
+        return new XElement("Company",
+            new XElement("ID", id),
+            new XElement("ExternalD", externalId),
+            new XElement("Name", name),
+            new XElement("LONG_NAME", longName),
+            new XElement("I_NAME", iName),
+            new XElement("REZIDENT", rezident),
+            new XElement("NU_REZIDENT", nuRezident),
+            new XElement("INN", inn),
+            new XElement("KPP", kpp),
+            new XElement("KOD_OKPO", kodOkpo),
+            new XElement("FORMA", forma),
+            new XElement("OWNERSHIP", ownership),
+            codeOkonh,
+            codeOkved,
+            new XElement("IIN", iin),
+            new XElement("REGIST_NUM", registNum),
+            new XElement("NUMBERS", numbers),
+            new XElement("BUSINESS", business),
+            new XElement("PS_REF", psRef),
+            new XElement("COUNTRY", country),
+            new XElement("PostAdress", postAddress),
+            new XElement("LegalAdress", legalAddress),
+            new XElement("Phone", phone),
+            new XElement("City", city),
+            new XElement("Street", street),
+            new XElement("BuildingNumber", buildingNumber),
+            new XElement("Email", email),
+            new XElement("WebSite", website),
+            new XElement("TaxNonResident", taxNonResident),
+            new XElement("VATPayer", vatPayer),
+            new XElement("Reliability", reliability),
+            new XElement("CorrAcc", corrAcc),
+            new XElement("InternalAcc", internalAcc)
+        );
+    }
+    
+    /// <summary>
+    /// Формирует XML-структуру <Data> для документа типа "Дополнительное соглашение" (SupAgreement).
+    /// Включает сведения о документе, без информации о контрагенте (Company/Person).
+    /// </summary>
+    /// <param name="contractualDocument">Документ SupAgreement</param>
+    /// <returns>Элемент XElement с полной информацией о документе</returns>
+    private XElement BuildContractXmlForSupAgreement(litiko.Eskhata.ISupAgreement contractualDocument)
+    {
+        if (contractualDocument == null)
+            return new XElement("Data");
+    
+        const string dateFormat = "dd.MM.yyyy";
+    
+        // ==========================
+        // Document values
+        // ==========================
+        var documentId        = contractualDocument.Id.ToString();
+        var externalId        = contractualDocument.ExternalId ?? "";
+        var contractId        = contractualDocument.LeadingDocument.Id.ToString() ?? ""; 
+        var contractExtId     = contractualDocument.LeadingDocument.ExternalId ?? "";   
+        var documentKind      = litiko.Eskhata.DocumentKinds.As(contractualDocument.DocumentKind)?.ExternalIdlitiko ?? "";
+        var subject           = contractualDocument.Subject ?? "";
+        var name              = contractualDocument.Name ?? "";
+        var registrationNumber= contractualDocument.RegistrationNumber?.ToString() ?? "";
+        var registrationDate  = contractualDocument.RegistrationDate?.ToString(dateFormat) ?? "";
+        var validFrom         = contractualDocument.ValidFrom?.ToString(dateFormat) ?? "";
+        var validTill         = contractualDocument.ValidTill?.ToString(dateFormat) ?? "";
+        var totalAmount       = contractualDocument.TotalAmount?.ToString() ?? "";
+        var currency          = contractualDocument.CurrencyContractlitiko?.ToString() ?? "";
+        var operationCurrency = contractualDocument.CurrencyOperationlitiko?.ToString() ?? "";
+        var currencyRate      = contractualDocument.CurrencyRatelitiko?.Rate.ToString() ?? ""; 
+        var vatApplicable     = ToYesNoNull(contractualDocument.IsVATlitiko);
+        var vatRate           = contractualDocument.VatRate?.ToString() ?? "";
+        var vatAmount         = contractualDocument.VatAmount?.ToString() ?? "";
+        var incomeTaxRate     = contractualDocument.IncomeTaxRatelitiko?.ToString() ?? "";
+        var incomeTaxAmount   = contractualDocument.IncomeTaxAmountlitiko?.ToString() ?? ""; 
+        var laborPayment      = ToYesNoNull(contractualDocument.IsIndividualPaymentlitiko); 
+        var note              = contractualDocument.Note?.ToString() ?? "";
+        var isWithinBudget    = ToYesNoNull(contractualDocument.IsWithinBudgetlitiko);
+    
+        // ==========================
+        // Формирование XML
+        // ==========================
+        var documentElement = new XElement("Document",
+            new XElement("ID", documentId),
+            new XElement("ExternalD", externalId),
+            new XElement("Contract",
+                new XElement("ID", contractId),
+                new XElement("ExternalD", contractExtId)
+            ),
+            new XElement("DocumentKind", documentKind),
+            new XElement("Subject", subject),
+            new XElement("Name", name),
+            new XElement("IsWithinBudget", isWithinBudget),
+            new XElement("RegistrationNumber", registrationNumber),
+            new XElement("RegistrationDate", registrationDate),
+            new XElement("ValidFrom", validFrom),
+            new XElement("ValidTill", validTill),
+            new XElement("TotalAmount", totalAmount),
+            new XElement("Currency", currency),
+            new XElement("OperationCurrency", operationCurrency),
+            new XElement("CurrencyRate", currencyRate),
+            new XElement("VATApplicable", vatApplicable),
+            new XElement("VATRate", vatRate),
+            new XElement("VATAmount", vatAmount),
+            new XElement("IncomeTaxRate", incomeTaxRate),
+            new XElement("IncomeTaxAmount", incomeTaxAmount),
+            new XElement("LaborPayment", laborPayment),
+            new XElement("Note", note)
+        );
+    
+        return new XElement("Data", documentElement);
+    }
+    
+    /// <summary>
+    /// Формирует XML-структуру <Data> для документа типа "Договор".
+    /// Включает в себя сведения о документе, компании и/или физическом лице.
+    /// </summary>
+    private XElement BuildContractXmlForContract(litiko.Eskhata.IContract contractualDocument)
+    {
+        const string dateFormat = "dd.MM.yyyy";
+        
+        // ==========================
+        // Document values
+        // ==========================
+        var rbo              = contractualDocument.RBOlitiko ?? "";
+        var accDebtCredit    = contractualDocument.AccDebtCreditlitiko ?? "";
+        var accFutureExpense = contractualDocument.AccFutureExpenselitiko ?? "";
+        var paymentRegion    = contractualDocument.PaymentRegionlitiko?.ToString() ?? "";
+        var paymentTaxRegion = contractualDocument.RegionOfRentallitiko?.ToString() ?? "";
+        var paymentMethod    = contractualDocument.PaymentMethodlitiko?.ToString() ?? "";
+        var paymentFrequency = contractualDocument.FrequencyOfPaymentlitiko?.ToString() ?? "";
+    
+        var matrix = NSI.PublicFunctions.Module.GetResponsibilityMatrix(contractualDocument);
+        var responsibleEmployee =
+            litiko.Eskhata.Employees.As(matrix?.ResponsibleAccountant)            
+            ?? Roles.As(matrix?.ResponsibleAccountant)?
+                   .RecipientLinks
+                   .Select(l => litiko.Eskhata.Employees.As(l.Member))
+                   .FirstOrDefault(e => e != null);
+    
+        var responsibleAccountantFIO = responsibleEmployee?.Name ?? string.Empty;
+        var responsibleDepartment    = responsibleEmployee?.Department?.Name ?? string.Empty;
+    
+        // PaymentBasis
+        var matrix2 = NSI.PublicFunctions.Module.GetContractsVsPaymentDoc(contractualDocument, contractualDocument.Counterparty);
+    
+        var isPaymentContract   = ToYesNoNull(matrix2?.PBIsPaymentContract);
+        var isPaymentInvoice    = ToYesNoNull(matrix2?.PBIsPaymentInvoice);
+        var isPaymentTaxInvoice = ToYesNoNull(matrix2?.PBIsPaymentTaxInvoice);
+        var isPaymentAct        = ToYesNoNull(matrix2?.PBIsPaymentAct);
+        var isPaymentOrder      = ToYesNoNull(matrix2?.PBIsPaymentOrder);
+    
+        var isClosureContract   = ToYesNoNull(matrix2?.PCBIsPaymentContract);
+        var isClosureInvoice    = ToYesNoNull(matrix2?.PCBIsPaymentInvoice);
+        var isClosureTaxInvoice = ToYesNoNull(matrix2?.PCBIsPaymentTaxInvoice);
+        var isClosureAct        = ToYesNoNull(matrix2?.PCBIsPaymentAct);
+        var isClosureWaybill    = ToYesNoNull(matrix2?.PCBIsPaymentWaybill);
+
+        // BatchProcessing:
+        var matrix3 = NSI.PublicFunctions.Module.GetResponsibilityMatrix(contractualDocument);
+        var batchProcessing = ToYesNoNull(matrix3?.BatchProcessing);
+        
+        // ==========================
+        // Document XElement
+        // ==========================
+        var documentId          = contractualDocument.Id.ToString();
+        var externalId          = contractualDocument.ExternalId ?? "";
+        var documentKind        = litiko.Eskhata.DocumentKinds.As(contractualDocument.DocumentKind)?.ExternalIdlitiko ?? "";
+        var documentGroup = litiko.Eskhata.DocumentGroupBases.As(contractualDocument.DocumentGroup)?.ExternalIdlitiko ?? "";
+        var subject             = contractualDocument.Subject ?? "";
+        var name                = contractualDocument.Name ?? "";
+        var counterpartySign    = contractualDocument.CounterpartySignatory?.Name ?? ""; // ФИО
+        var department          = litiko.Eskhata.Departments.As(contractualDocument.Department)?.ExternalId ?? "";  
+        var responsibleEmployeeStr = contractualDocument.ResponsibleEmployee?.ToString() ?? "";
+        var author              = contractualDocument.Author?.ToString() ?? "";
+        var validFrom           = contractualDocument.ValidFrom?.ToString(dateFormat) ?? ""; 
+        var validTill           = contractualDocument.ValidTill?.ToString(dateFormat) ?? "";
+        var changeReason        = contractualDocument.ReasonForChangelitiko;
+        var accountDebtCredit   = accDebtCredit;
+        var accountFutureExp    = accFutureExpense;
+        var totalAmountLitiko   = contractualDocument.TotalAmountlitiko?.ToString() ?? "";
+        var currencyContract    = contractualDocument.CurrencyContractlitiko?.ToString() ?? "";
+        var currencyOperation   = contractualDocument.CurrencyOperationlitiko?.ToString() ?? "";
+        var vatApplicable       = ToYesNoNull(contractualDocument.IsVATlitiko);
+        var vatRate             = contractualDocument.VatRate?.ToString() ?? "";
+        var vatAmount           = contractualDocument.VatAmount?.ToString() ?? "";
+        var incomeTaxRate       = contractualDocument.IncomeTaxRatelitiko?.ToString() ?? "";
+        var amountForPeriod     = contractualDocument.TotalAmount?.ToString() ?? "";
+        var note                = contractualDocument.Note?.ToString() ?? "";
+        var registrationNumber  = contractualDocument.RegistrationNumber?.ToString() ?? "";
+        var registrationDate    = contractualDocument.RegistrationDate?.ToString(dateFormat) ?? "";
+    
+        var documentElement = new XElement("Document",
+            new XElement("ID", documentId),
+            new XElement("ExternalD", externalId),
+            new XElement("DocumentKind", documentKind),
+            new XElement("DocumentGroup", documentGroup),
+            new XElement("Subject", subject),
+            new XElement("Name", name),
+            new XElement("CounterpartySignatory", counterpartySign),
+            new XElement("Department", department),
+            new XElement("ResponsibleEmployee", responsibleEmployeeStr),
+            new XElement("Author", author),
+            new XElement("ResponsibleAccountant", responsibleAccountantFIO), 
+            new XElement("ResponsibleDepartment", responsibleDepartment), 
+            new XElement("RBO", rbo),
+            new XElement("ValidFrom", validFrom),
+            new XElement("ValidTill", validTill),
+            new XElement("СhangeReason", changeReason), 
+            new XElement("AccountDebtCredt", accountDebtCredit),
+            new XElement("AccountFutureExpense", accountFutureExp),
+            new XElement("TotalAmount", totalAmountLitiko),
+            new XElement("Currency", currencyContract),
+            new XElement("OperationCurrency", currencyOperation),
+            new XElement("VATApplicable", vatApplicable),
+            new XElement("VATRate", vatRate),
+            new XElement("VATAmount", vatAmount),
+            new XElement("IncomeTaxRate", incomeTaxRate),
+            new XElement("PaymentRegion", paymentRegion),
+            new XElement("PaymentTaxRegion", paymentTaxRegion),
+            new XElement("BatchProcessing", batchProcessing), 
+            new XElement("PaymentMethod", paymentMethod),
+            new XElement("PaymentFrequency", paymentFrequency),
+            new XElement("PaymentBasis",
+                new XElement("IsPaymentContract",   isPaymentContract),
+                new XElement("IsPaymentInvoice",    isPaymentInvoice),
+                new XElement("IsPaymentTaxInvoice", isPaymentTaxInvoice),
+                new XElement("IsPaymentAct",        isPaymentAct),
+                new XElement("IsPaymentOrder",      isPaymentOrder)
+            ),
+            new XElement("PaymentClosureBasis",
+                new XElement("IsPaymentContract",   isClosureContract),
+                new XElement("IsPaymentInvoice",    isClosureInvoice),
+                new XElement("IsPaymentTaxInvoice", isClosureTaxInvoice),
+                new XElement("IsPaymentAct",        isClosureAct),
+                new XElement("IsPaymentWaybill",    isClosureWaybill)
+            ),
+            new XElement("AmountForPeriod", amountForPeriod),
+            new XElement("Note", note),
+            new XElement("RegistrationNumber", registrationNumber),
+            new XElement("RegistrationDate", registrationDate)
+        );
+    
+        // Company
+        var companyElement = BuildCompanyXml(contractualDocument.Counterparty);
+    
+        // Person
+        var personElement = BuildPersonXml(contractualDocument.Counterparty);
+
+        // dataElement
+        var counterpartyElement = new XElement("Counterparty", companyElement, personElement);
+        var dataElement         = new XElement("Data", documentElement, counterpartyElement);
+    
+        return dataElement;
+    }
+
+    /// <summary>
+    /// Формирование XML для выгрузки Договора для ТЗ п.3.5.7 и п.3.5.8
+    /// </summary>
+    [Remote, Public]
+    //public string BuildContractXml(Sungero.Contracts.IContractualDocument contractualDocument)
+    public string BuildContractXml(litiko.Eskhata.IContractualDocument contractualDocument)
+    {
+        if (contractualDocument == null)
+            return string.Empty;
+    
+        XElement dataElement;
+    
+        // Определяем тип документа
+        bool isContract = litiko.Eskhata.Contracts.Is(contractualDocument);
+        bool isSupAgreement = litiko.Eskhata.SupAgreements.Is(contractualDocument);
+    
+        if (isContract)
+        {
+            // Вызываем функцию построения XML для обычного контракта
+            dataElement = BuildContractXmlForContract(litiko.Eskhata.Contracts.As(contractualDocument));
+        }
+        else if (isSupAgreement)
+        {
+            // Вызываем функцию построения XML для дополнительного соглашения
+            dataElement = BuildContractXmlForSupAgreement(litiko.Eskhata.SupAgreements.As(contractualDocument));
+        }
+        else
+        {
+            // Неизвестный тип документа, возвращаем пустой XML 
+            dataElement = new XElement("Data");
+        } 
+
+        var xdoc = new XDocument(
+            new XDeclaration("1.0", "UTF-8", null),
+            new XElement("root",
+                new XElement("head",
+                    new XElement("session_id", "123456"),
+                    new XElement("application_key", "sed.eskhata.com/Integration/odata/Integration/ProcessResponseFromIS##")
+                ),
+                new XElement("request",
+                    new XElement("protocol-version", "1.00"),
+                    new XElement("request-type", "R_DR_GET_DATA"),
+                    new XElement("dictionary", "R_DR_SET_CONTRACT"),
+                    new XElement("lastId", "0"),
+                    dataElement
+                )
+            )
+        );
+    
+        return xdoc.ToString();
+    }
+    #endregion
+   
   }
 }
