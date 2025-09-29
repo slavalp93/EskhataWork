@@ -24,26 +24,26 @@ namespace litiko.Integration.Server
       var integrationSystem = IntegrationSystems.GetAll(r => r.Name == "ABS").FirstOrDefault();
       if (integrationSystem != null)
       {
-        CreateIntegrationMethod("R_DR_GET_DEPART", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_EMPLOYEES", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_BUSINESSUNITS", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_COMPANY", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_BANK", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_COUNTRIES", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_OKOPF", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_OKFS", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_OKONH", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_OKVED", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_COMPANYKINDS", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_TYPESOFIDCARDS", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_ECOLOG", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_MARITALSTATUSES", integrationSystem);       
-        CreateIntegrationMethod("R_DR_GET_CURRENCY_RATES", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_PAYMENT_REGIONS", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_TAX_REGIONS", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_CONTRACT_VID", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_CONTRACT_TYPE", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_PERSON", integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_DEPART, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_EMPLOYEES, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_BUSINESSUNITS, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_COMPANY, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_BANK, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_PERSON, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_COUNTRIES, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_OKOPF, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_OKFS, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_OKONH, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_OKVED, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_COMPANYKINDS, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_TYPESOFIDCARDS, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_ECOLOG, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_MARITALSTATUSES, integrationSystem);       
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_CURRENCY_RATES, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_PAYMENT_REGIONS, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_TAX_REGIONS, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_CONTRACT_VID, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_CONTRACT_TYPE, integrationSystem);        
       }
       
       GrantRightsOnEntities();

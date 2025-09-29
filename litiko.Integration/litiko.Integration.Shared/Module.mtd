@@ -172,6 +172,10 @@
     {
       "ItemId": "794b9791-d0ed-47ba-8f0e-bfa4e8184211",
       "PreviousItemId": "96d31d03-06b2-4266-8058-815ecc7bad28"
+    },
+    {
+      "ItemId": "88367dcc-767e-40ab-8b41-48c9348ee051",
+      "PreviousItemId": "794b9791-d0ed-47ba-8f0e-bfa4e8184211"
     }
   ],
   "HandledEvents": [
@@ -317,6 +321,204 @@
     }
   ],
   "PublicConstants": [
+    {
+      "Name": "R_DR_GET_BANK",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_BANK\""
+    },
+    {
+      "Name": "R_DR_GET_BUSINESSUNITS",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_BUSINESSUNITS\""
+    },
+    {
+      "Name": "R_DR_GET_COMPANY",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_COMPANY\""
+    },
+    {
+      "Name": "R_DR_GET_COMPANYKINDS",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_COMPANYKINDS\""
+    },
+    {
+      "Name": "R_DR_GET_CONTRACT_TYPE",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_CONTRACT_TYPE\""
+    },
+    {
+      "Name": "R_DR_GET_CONTRACT_VID",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_CONTRACT_VID\""
+    },
+    {
+      "Name": "R_DR_GET_COUNTRIES",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_COUNTRIES\""
+    },
+    {
+      "Name": "R_DR_GET_CURRENCY_RATES",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_CURRENCY_RATES\""
+    },
+    {
+      "Name": "R_DR_GET_DEPART",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_DEPART\""
+    },
+    {
+      "Name": "R_DR_GET_ECOLOG",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_ECOLOG\""
+    },
+    {
+      "Name": "R_DR_GET_EMPLOYEES",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_EMPLOYEES\""
+    },
+    {
+      "Name": "R_DR_GET_MARITALSTATUSES",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_MARITALSTATUSES\""
+    },
+    {
+      "Name": "R_DR_GET_OKFS",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_OKFS\""
+    },
+    {
+      "Name": "R_DR_GET_OKONH",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_OKONH\""
+    },
+    {
+      "Name": "R_DR_GET_OKOPF",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_OKOPF\""
+    },
+    {
+      "Name": "R_DR_GET_OKVED",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_OKVED\""
+    },
+    {
+      "Name": "R_DR_GET_PAYMENT_REGIONS",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_PAYMENT_REGIONS\""
+    },
+    {
+      "Name": "R_DR_GET_PERSON",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_PERSON\""
+    },
+    {
+      "Name": "R_DR_GET_TAX_REGIONS",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_TAX_REGIONS\""
+    },
+    {
+      "Name": "R_DR_GET_TYPESOFIDCARDS",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_TYPESOFIDCARDS\""
+    },
+    {
+      "Name": "R_DR_SET_CONTRACT",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_SET_CONTRACT\""
+    },
+    {
+      "Name": "R_DR_SET_PAYMENT_DOCUMENT",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_SET_PAYMENT_DOCUMENT\""
+    },
     {
       "Name": "SynchronizationResponsibleRoleGuid",
       "ParentClasses": [

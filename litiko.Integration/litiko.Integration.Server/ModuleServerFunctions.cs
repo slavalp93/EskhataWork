@@ -52,19 +52,19 @@ namespace litiko.Integration.Server
         string url = method.IntegrationSystem.ServiceUrl;
         var xmlRequestBody = string.Empty;
   
-        if (method.Name == "R_DR_GET_COMPANY" || method.Name == "R_DR_GET_PERSON")
+        if (method.Name == Constants.Module.IntegrationMethods.R_DR_GET_COMPANY || method.Name == Constants.Module.IntegrationMethods.R_DR_GET_PERSON)
         {
           var counterparty = Sungero.Parties.Counterparties.As(entity);
           if (counterparty != null)
             xmlRequestBody = Integration.Resources.RequestXMLTemplateForCompanyFormat(exchDoc.Id, application_key, method.Name, lastId, counterparty.TIN);
         }        
-        else if (method.Name == "R_DR_GET_BANK")
+        else if (method.Name == Constants.Module.IntegrationMethods.R_DR_GET_BANK)
         {
           var bank = litiko.Eskhata.Banks.As(entity);
           if (bank != null)
             xmlRequestBody = Integration.Resources.RequestXMLTemplateForBankFormat(exchDoc.Id, application_key, method.Name, lastId, bank.BIC);
         }        
-        else if (method.Name == "R_DR_GET_CURRENCY_RATES")
+        else if (method.Name == Constants.Module.IntegrationMethods.R_DR_GET_CURRENCY_RATES)
         {
           // Получить дату последней успешной интеграции          
           var lastExchangeDoc = ExchangeDocuments.GetAll()
@@ -171,7 +171,10 @@ namespace litiko.Integration.Server
         Logger.Error(errorMessage);
       }
       
-      bool isCounterparty = exchDoc.IntegrationMethod.Name == "R_DR_GET_COMPANY" || exchDoc.IntegrationMethod.Name == "R_DR_GET_BANK" || exchDoc.IntegrationMethod.Name == "R_DR_GET_PERSON";
+      bool isCounterparty = exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_COMPANY || 
+        exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_BANK || 
+        exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_PERSON;
+      
       if (!isCounterparty && (exchDoc.StatusRequestToIS != statusRequestToIS || exchDoc.RequestToISInfo != requestToISInfo))
       {
         // Обновляем exchDoc асинхронным обработчиком
@@ -315,7 +318,10 @@ namespace litiko.Integration.Server
           return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
         }
         
-        bool isCounterparty = exchDoc.IntegrationMethod.Name == "R_DR_GET_COMPANY" || exchDoc.IntegrationMethod.Name == "R_DR_GET_BANK" || exchDoc.IntegrationMethod.Name == "R_DR_GET_PERSON";        
+        bool isCounterparty = exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_COMPANY || 
+          exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_BANK || 
+          exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_PERSON;
+        
         if (!isCounterparty)
         {
           // Обновляем exchDoc асинхронным обработчиком
