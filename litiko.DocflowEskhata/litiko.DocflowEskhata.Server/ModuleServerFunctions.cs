@@ -149,21 +149,37 @@ namespace litiko.DocflowEskhata.Server
     
     private static string AskGemini(string text, string direction)
     {
+      string apiKey = string.Empty;
+      
+      var key = Constants.Module.ApiKey2;
 
-      string envDirectoryPath = "C:\\RxData\\git_repository\\Eskhata_Work";
-      
-      string envFilePath = Path.Combine(envDirectoryPath, ".env");
-      
-      Env.Load(envFilePath);
-      
-      var apiKey1 = Env.GetString("apiKey1");
-      var apiKey2 = Env.GetString("apiKey2");
-      
-      var apiKeys = new[]
+      try
       {
-        apiKey1,
-        apiKey2
-      };
+        //var createCommand = string.Format(Queries.Module.CreateApiKeyTable, key); // расскоментировать при первом выполнении метода, потом закоментировать обратно
+        
+        var selectCommand =  string.Format(Queries.Module.SelectApiKeyGemini, key);
+        
+        //var executionCreateResult = Sungero.Docflow.PublicFunctions.Module.ExecuteScalarSQLCommand(createCommand);
+        
+        //Sungero.Docflow.PublicFunctions.Module.ExecuteScalarSQLCommand(createCommand); // расскоментировать при первом выполнении метода, потом закоментировать обратно
+        
+        var executionSelectResult = Sungero.Docflow.PublicFunctions.Module.ExecuteScalarSQLCommand(selectCommand);
+        
+        if (!(executionSelectResult is DBNull) && executionSelectResult != null)
+        {
+          apiKey = executionSelectResult.ToString();
+          Logger.Debug("ApiKey successfully retrieved from the database.");
+        }
+        else
+        {
+          Logger.Debug("ApiKey was not found in the database. The initial key from constants will be used if available.");
+        }
+      }
+      catch (Exception ex)
+      {
+        Logger.Error("An error occurred while accessing the database for ApiKey.", ex);
+        return string.Empty;
+      }
       
       if (string.IsNullOrWhiteSpace(text))
         return string.Empty;
@@ -188,9 +204,9 @@ namespace litiko.DocflowEskhata.Server
       
       var fullPrompt = $"{translationInstruction}\n\n---\n\n{text}";
       
-      foreach (var apiKey in apiKeys)
+      foreach (var api in apiKey)
       {
-        var url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={apiKey}";
+        var url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key={api}";
         
         using (var client = new HttpClient())
         {
@@ -227,24 +243,20 @@ namespace litiko.DocflowEskhata.Server
             catch (Exception ex)
             {
               Logger.Error($"Ошибка парсинга ответа от Gemini: {ex.Message} || Ответ: {responseJson}");
-              continue;
             }
           }
-          else if ((int)response.StatusCode == 429) // Too Many Requests
+          else if((int)response.StatusCode == 429) // Too Many Requests
           {
-            Logger.Error($"Ключ превысил лимит. Пробуем следующий.");
-            continue;
+            Logger.Error($"Ключ превысил лимит");
           }
+          
           else
           {
             Logger.Error($"Ошибка от Gemini API: {response.StatusCode} || {responseJson}");
-            // Не бросаем исключение сразу, чтобы дать шанс другому ключу
           }
         }
       }
-      
-      // Если все ключи не сработали
-      throw new Exception("Превышен лимит запросов или все ключи недействительны, пожалуйста повторите попытку через минуту");
+      return string.Empty;
     }
   }
 }

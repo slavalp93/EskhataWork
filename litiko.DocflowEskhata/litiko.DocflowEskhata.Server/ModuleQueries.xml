@@ -1,3 +1,29 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <queries>
+  <query key="SelectApiKeyGemini">
+    <postgres><![CDATA[SELECT Value FROM Sungero_Docflow_ApiKeys WHERE (Key = '{0}')]]></postgres>
+  </query>
+  <query key="CreateApiKeyTable">
+    <postgres><![CDATA[DO $$
+BEGIN
+  CREATE TABLE IF NOT EXISTS Sungero_Docflow_ApiKeys
+  (
+    Key citext NOT NULL,
+    Value citext,
+    PRIMARY KEY (Key)
+  );
+
+  IF NOT EXISTS(SELECT 1 FROM Sungero_Docflow_ApiKeys WHERE Key = 'ApiKey')
+  THEN
+    INSERT INTO Sungero_Docflow_ApiKeys(Key, Value) VALUES ('ApiKey', 'AIzaSyCQSaUNUwNNbdntgYdEpFdOG6mrOP8-0_4');
+  END IF;
+END$$
+]]></postgres>
+  </query>
+  <query key="InserIntoSungeroDocflowApiKeysValue">
+    <postgres><![CDATA[do $$
+begin
+  if not exists(select 1 from Sungero_Docflow_ApiKeys where Key = '{0}')
+ end$$;]]></postgres>
+  </query>
 </queries>
