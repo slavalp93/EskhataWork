@@ -145,62 +145,78 @@ namespace litiko.Integration.Server
           if (exchQueues.Count() > 0)
           {
             Logger.DebugFormat("{0} Creating full xml version. Packets count: {1}. {2}", logPrefix, exchDoc.RequestToRXPacketCount, logPostfix);
-            List<XElement> dataElements = new List<XElement>();
-            XElement headElement = null;
-            XElement requestElement = null;
             
-            foreach (var exchQueue in exchQueues)
+            // Если есть только одна часть с индексом пакета 0, берем ее, иначе - собираем из частей
+            if (exchQueues.Count() == 1 && exchQueues.FirstOrDefault()?.Name == Integration.Resources.VersionRequestToRXFormat(0).ToString())
             {
-              using (var xmlStream = new MemoryStream(exchQueue.Xml))
+              var exchQueue = exchQueues.FirstOrDefault();
+              using (var ms = new MemoryStream(exchQueue.Xml))
               {
-                XDocument doc = XDocument.Load(xmlStream);
-                var elements = doc.Descendants("Data").Elements("element");
-                if (!elements.Any())
-                  elements = doc.Descendants("Data").Elements();
-                dataElements.AddRange(elements);
-                if (headElement == null && requestElement == null)
-                {
-                  headElement = doc.Root.Element("head");
-                  requestElement = doc.Root.Element("request");
-                }                
-              }
-            }
-
-            // Создание новой версии XML
-            if (dataElements.Any())
-            {
-              using (MemoryStream ms = new MemoryStream())
-              {            
-                XmlWriterSettings xws = new XmlWriterSettings();
-                xws.OmitXmlDeclaration = false;
-                xws.Indent = true;
-                
-                using (XmlWriter xw = XmlWriter.Create(ms, xws))
-                {
-                  // Копирование структуры request без <Data>
-                  XElement newRequestElement = new XElement(requestElement);
-                  newRequestElement.Element("Data").Remove();
-          
-                  // Создание нового элемента <Data> с объединенными элементами
-                  XElement newDataElement = new XElement("Data", dataElements);
-          
-                  // Добавление нового <Data> к запросу
-                  newRequestElement.Add(newDataElement);
-                  
-                  // Создание нового XML документа
-                  XDocument newDoc = new XDocument(
-                    new XDeclaration("1.0", "UTF-8", null),  
-                    new XElement("root", headElement, newRequestElement)
-                  );
-                  newDoc.WriteTo(xw);
-                }
-                
                 exchDoc.CreateVersionFrom(ms, "xml");
                 exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;              
                 Logger.DebugFormat("{0} Full xml version created. {1}", logPrefix, logPostfix);
-                versionFullXML = exchDoc.LastVersion;  
-              }                            
-            }            
+                versionFullXML = exchDoc.LastVersion;                
+              }              
+            }
+            else
+            {
+              List<XElement> dataElements = new List<XElement>();
+              XElement headElement = null;
+              XElement requestElement = null;
+              
+              foreach (var exchQueue in exchQueues)
+              {
+                using (var xmlStream = new MemoryStream(exchQueue.Xml))
+                {
+                  XDocument doc = XDocument.Load(xmlStream);
+                  var elements = doc.Descendants("Data").Elements("element");
+                  if (!elements.Any())
+                    elements = doc.Descendants("Data").Elements();
+                  dataElements.AddRange(elements);
+                  if (headElement == null && requestElement == null)
+                  {
+                    headElement = doc.Root.Element("head");
+                    requestElement = doc.Root.Element("request");
+                  }                
+                }
+              }
+  
+              // Создание новой версии XML
+              if (dataElements.Any())
+              {
+                using (MemoryStream ms = new MemoryStream())
+                {            
+                  XmlWriterSettings xws = new XmlWriterSettings();
+                  xws.OmitXmlDeclaration = false;
+                  xws.Indent = true;
+                  
+                  using (XmlWriter xw = XmlWriter.Create(ms, xws))
+                  {
+                    // Копирование структуры request без <Data>
+                    XElement newRequestElement = new XElement(requestElement);
+                    newRequestElement.Element("Data").Remove();
+            
+                    // Создание нового элемента <Data> с объединенными элементами
+                    XElement newDataElement = new XElement("Data", dataElements);
+            
+                    // Добавление нового <Data> к запросу
+                    newRequestElement.Add(newDataElement);
+                    
+                    // Создание нового XML документа
+                    XDocument newDoc = new XDocument(
+                      new XDeclaration("1.0", "UTF-8", null),  
+                      new XElement("root", headElement, newRequestElement)
+                    );
+                    newDoc.WriteTo(xw);
+                  }
+                  
+                  exchDoc.CreateVersionFrom(ms, "xml");
+                  exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;              
+                  Logger.DebugFormat("{0} Full xml version created. {1}", logPrefix, logPostfix);
+                  versionFullXML = exchDoc.LastVersion;  
+                }                            
+              }            
+            }                        
           }          
           
           if (exchDoc.State.IsChanged)
@@ -218,6 +234,13 @@ namespace litiko.Integration.Server
           XDocument xmlDoc = XDocument.Load(versionFullXML.Body.Read());          
           var dictionary = xmlDoc.Root.Element("request").Element("dictionary").Value;
           
+          // Проверка статуса обработки в ИС (<stateId> и <stateMsg>)                    
+          string state = xmlDoc.Root.Element("request")?.Element("stateId")?.Value;
+          string stateMsg = xmlDoc.Root.Element("request")?.Element("stateMsg")?.Value;
+          bool statusIS = state != "0";
+          if (!statusIS)
+            throw AppliedCodeException.Create($"State message from IS:{stateMsg}");         
+          
           IEnumerable<XElement> dataElements;
           if (dictionary == Constants.Module.IntegrationMethods.R_DR_SET_CONTRACT || dictionary == Constants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT)
             dataElements = xmlDoc.Descendants("Data").Elements();
@@ -225,9 +248,7 @@ namespace litiko.Integration.Server
             dataElements = xmlDoc.Descendants("Data").Elements("element");
           
           if (!dataElements.Any())
-          {
-            throw AppliedCodeException.Create("Empty Data node.");
-          }          
+            throw AppliedCodeException.Create("Empty Data node.");          
           
           switch (dictionary)
           {
