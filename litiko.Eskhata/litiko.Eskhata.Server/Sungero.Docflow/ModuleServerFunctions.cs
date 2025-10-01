@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
 using Sungero.CoreEntities;
+using Sungero.Domain.Shared;
+using Sungero.Metadata;
 
 namespace litiko.Eskhata.Module.Docflow.Server
 {
@@ -152,5 +154,24 @@ namespace litiko.Eskhata.Module.Docflow.Server
     {
       return base.SaveDocumentAfterConvertToPdf(document, isSignatureMark);
     }
+
+    /// <summary>
+    /// Получить созданные задачи на согласование по регламенту для документа.
+    /// </summary>
+    /// <param name="document">Документ.</param>
+    /// <returns>Список созданных задач по документу.</returns>
+    [Public, Remote]    
+    public IQueryable<Sungero.Docflow.IApprovalTask> GetApprovalTasksWithCompleted(Sungero.Docflow.IOfficialDocument document)
+    {
+      var docGuid = document.GetEntityMetadata().GetOriginal().NameGuid;
+      var approvalTaskDocumentGroupGuid = Sungero.Docflow.Constants.Module.TaskMainGroup.ApprovalTask;
+      return ApprovalTasks.GetAll()
+        .Where(t => t.Status == Sungero.Workflow.Task.Status.InProcess ||
+               t.Status == Sungero.Workflow.Task.Status.Suspended ||
+                t.Status == Sungero.Workflow.Task.Status.Completed)
+        .Where(t => t.AttachmentDetails
+               .Any(att => att.AttachmentId == document.Id && att.EntityTypeGuid == docGuid &&
+                    att.GroupId == approvalTaskDocumentGroupGuid));
+    }       
   }
 }
