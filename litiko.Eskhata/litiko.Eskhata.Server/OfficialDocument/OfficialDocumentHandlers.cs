@@ -7,6 +7,17 @@ using litiko.Eskhata.OfficialDocument;
 
 namespace litiko.Eskhata
 {
+  partial class OfficialDocumentCreatingFromServerHandler
+  {
+
+    public override void CreatingFrom(Sungero.Domain.CreatingFromEventArgs e)
+    {
+      base.CreatingFrom(e);
+      
+      e.Without(_info.Properties.IntegrationStatuslitiko);
+    }
+  }
+
   partial class OfficialDocumentServerHandlers
   {
 

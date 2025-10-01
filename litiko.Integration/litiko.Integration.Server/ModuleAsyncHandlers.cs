@@ -155,6 +155,8 @@ namespace litiko.Integration.Server
               {
                 XDocument doc = XDocument.Load(xmlStream);
                 var elements = doc.Descendants("Data").Elements("element");
+                if (!elements.Any())
+                  elements = doc.Descendants("Data").Elements();
                 dataElements.AddRange(elements);
                 if (headElement == null && requestElement == null)
                 {
@@ -213,73 +215,88 @@ namespace litiko.Integration.Server
         }
         else
         {
-          XDocument xmlDoc = XDocument.Load(versionFullXML.Body.Read());
-          var dataElements = xmlDoc.Descendants("Data").Elements("element");                    
+          XDocument xmlDoc = XDocument.Load(versionFullXML.Body.Read());          
+          var dictionary = xmlDoc.Root.Element("request").Element("dictionary").Value;
+          
+          IEnumerable<XElement> dataElements;
+          if (dictionary == Constants.Module.IntegrationMethods.R_DR_SET_CONTRACT || dictionary == Constants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT)
+            dataElements = xmlDoc.Descendants("Data").Elements();
+          else
+            dataElements = xmlDoc.Descendants("Data").Elements("element");
+          
           if (!dataElements.Any())
           {
             throw AppliedCodeException.Create("Empty Data node.");
-          }
+          }          
           
-          var dictionary = xmlDoc.Root.Element("request").Element("dictionary").Value;
           switch (dictionary)
           {
-            case "R_DR_GET_DEPART":
+            case Constants.Module.IntegrationMethods.R_DR_GET_DEPART:
               errorList = Functions.Module.R_DR_GET_DEPART(dataElements);
               break;
-            case "R_DR_GET_EMPLOYEES":
+            case Constants.Module.IntegrationMethods.R_DR_GET_EMPLOYEES:
               errorList = Functions.Module.R_DR_GET_EMPLOYEES(dataElements);
               break;
-            case "R_DR_GET_BUSINESSUNITS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_BUSINESSUNITS:
               errorList = Functions.Module.R_DR_GET_BUSINESSUNITS(dataElements);
               break;
-            case "R_DR_GET_COMPANY":
+            case Constants.Module.IntegrationMethods.R_DR_GET_COMPANY:
               // Обработка выполняется на клиенте;
               break;
-            case "R_DR_GET_BANK":
+            case Constants.Module.IntegrationMethods.R_DR_GET_BANK:
               // Обработка выполняется на клиенте;
               break;
-            case "R_DR_GET_COUNTRIES":
+            case Constants.Module.IntegrationMethods.R_DR_GET_PERSON:
+              // Обработка выполняется на клиенте;
+              break;              
+            case Constants.Module.IntegrationMethods.R_DR_GET_COUNTRIES:
               errorList = Functions.Module.R_DR_GET_COUNTRIES(dataElements);
               break;
-            case "R_DR_GET_OKOPF":
+            case Constants.Module.IntegrationMethods.R_DR_GET_OKOPF:
               errorList = Functions.Module.R_DR_GET_OKOPF(dataElements);
               break;
-            case "R_DR_GET_OKFS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_OKFS:
               errorList = Functions.Module.R_DR_GET_OKFS(dataElements);
               break;
-            case "R_DR_GET_OKONH":
+            case Constants.Module.IntegrationMethods.R_DR_GET_OKONH:
               errorList = Functions.Module.R_DR_GET_OKONH(dataElements);
               break;
-            case "R_DR_GET_OKVED":
+            case Constants.Module.IntegrationMethods.R_DR_GET_OKVED:
               errorList = Functions.Module.R_DR_GET_OKVED(dataElements);
               break;
-            case "R_DR_GET_COMPANYKINDS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_COMPANYKINDS:
               errorList = Functions.Module.R_DR_GET_COMPANYKINDS(dataElements);
               break;
-            case "R_DR_GET_TYPESOFIDCARDS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_TYPESOFIDCARDS:
               errorList = Functions.Module.R_DR_GET_TYPESOFIDCARDS(dataElements);
               break;
-            case "R_DR_GET_ECOLOG":
+            case Constants.Module.IntegrationMethods.R_DR_GET_ECOLOG:
               errorList = Functions.Module.R_DR_GET_ECOLOG(dataElements);
               break;
-            case "R_DR_GET_MARITALSTATUSES":
+            case Constants.Module.IntegrationMethods.R_DR_GET_MARITALSTATUSES:
               errorList = Functions.Module.R_DR_GET_MARITALSTATUSES(dataElements);
               break;
-            case "R_DR_GET_CURRENCY_RATES":
+            case Constants.Module.IntegrationMethods.R_DR_GET_CURRENCY_RATES:
               errorList = Functions.Module.R_DR_GET_CURRENCY_RATES(dataElements);
               break;
-            case "R_DR_GET_PAYMENT_REGIONS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_PAYMENT_REGIONS:
               errorList = Functions.Module.R_DR_GET_PAYMENT_REGIONS(dataElements);
               break;
-            case "R_DR_GET_TAX_REGIONS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_TAX_REGIONS:
               errorList = Functions.Module.R_DR_GET_TAX_REGIONS(dataElements);
               break;
-            case "R_DR_GET_CONTRACT_VID":
+            case Constants.Module.IntegrationMethods.R_DR_GET_CONTRACT_VID:
               errorList = Functions.Module.R_DR_GET_CONTRACT_VID(dataElements);
               break;
-            case "R_DR_GET_CONTRACT_TYPE":
+            case Constants.Module.IntegrationMethods.R_DR_GET_CONTRACT_TYPE:
               errorList = Functions.Module.R_DR_GET_CONTRACT_TYPE(dataElements);
               break;
+            case Constants.Module.IntegrationMethods.R_DR_SET_CONTRACT:
+              errorList = Functions.Module.R_DR_SET_CONTRACT(dataElements);
+              break;
+            case Constants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT:
+              errorList = Functions.Module.R_DR_SET_CONTRACT(dataElements);
+              break;              
           }
           
           if (errorList.Any())

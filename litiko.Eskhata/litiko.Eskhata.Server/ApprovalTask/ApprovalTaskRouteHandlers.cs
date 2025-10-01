@@ -11,6 +11,15 @@ namespace litiko.Eskhata.Server
   partial class ApprovalTaskRouteHandlers
   {
 
+    public override void StartBlock52(Sungero.Workflow.Server.Route.MonitoringStartBlockEventArguments e)
+    {
+      base.StartBlock52(e);
+      
+      // TODO Вынести в настройку частоту мониторинга, например, в карточку метода интеграции
+      if (_obj.ExchangeDocIdlitiko != null)
+        e.Block.Period = TimeSpan.FromMinutes(5);
+    }
+
     public override void CompleteAssignment6(Sungero.Docflow.IApprovalAssignment assignment, Sungero.Docflow.Server.ApprovalAssignmentArguments e)
     {
       base.CompleteAssignment6(assignment, e);      

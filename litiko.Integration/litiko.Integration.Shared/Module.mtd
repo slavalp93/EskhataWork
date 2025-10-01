@@ -530,16 +530,34 @@
   ],
   "PublicFunctions": [
     {
-      "Name": "BuildContractXml",
-      "IsRemote": true,
+      "Name": "BuildDocumentXml",
       "Parameters": [
         {
-          "Name": "contractualDocument",
-          "ParameterType": "global::litiko.Eskhata.IContractualDocument",
-          "ParameterTypeFullName": "litiko.Eskhata.IContractualDocument, Sungero.Domain.Interfaces"
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "session_id",
+          "ParameterType": "global::System.Int64",
+          "ParameterTypeFullName": "System.Int64"
+        },
+        {
+          "Name": "application_key",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "dictionary",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "lastId",
+          "ParameterType": "global::System.Int64",
+          "ParameterTypeFullName": "System.Int64"
         }
       ],
-      "Placement": "Shared",
       "ReturnType": "global::System.String",
       "ReturnTypeFullName": "System.String"
     },

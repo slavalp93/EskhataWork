@@ -1,7 +1,7 @@
 {
   "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
   "NameGuid": "88367dcc-767e-40ab-8b41-48c9348ee051",
-  "Name": "SendDocumentToIS",
+  "Name": "SendDocumentStage",
   "BaseGuid": "6831f842-3ea6-412e-9637-c6315a4e6686",
   "CanBeNavigationPropertyType": true,
   "CreationAreaMetadata": {
@@ -17,11 +17,30 @@
     "Controls": [],
     "IsAncestorMetadata": true
   },
+  "Forms": [
+    {
+      "$type": "Sungero.Metadata.StandaloneFormMetadata, Sungero.Metadata",
+      "NameGuid": "4fda00ea-e89a-4969-bee1-487d5edb89cc",
+      "Name": "Card",
+      "Controls": [],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "SettingsResourceKey"
+      ]
+    }
+  ],
   "IconResourcesKeys": [],
-  "IntegrationServiceName": "IntegrationSendDocumentToIS",
+  "IntegrationServiceName": "IntegrationSendDocumentStage",
   "OperationsClass": "",
   "PublicStructures": [],
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "DocumentNotFound",
+    "UnsupportedDocumentType",
+    "IntegrationMethodNotFound",
+    "ExchangeDocumentNotFound",
+    "ExchangeDocumentIsLocked",
+    "DocumentIsLocked"
+  ],
   "RibbonCardMetadata": {
     "NameGuid": "eb8e3edf-6cf2-4f67-93db-925497728389",
     "Name": "RibbonCard",

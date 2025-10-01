@@ -103,6 +103,16 @@ namespace litiko.Integration.Constants
       /// <summary> Дополнительное соглашение, Счет, Акт </summary>
       [Sungero.Core.Public]
       public const string R_DR_SET_PAYMENT_DOCUMENT = "R_DR_SET_PAYMENT_DOCUMENT";      
-    }    
+    }
+
+    /// <summary>
+    /// Наименования типов сценариев
+    /// </summary>    
+    public static class ApprovalFunctionStages
+    {
+      /// <summary> Интеграция. Экспорт документа в АБС </summary>      
+      public const string SendDocumentToIS = "Интеграция. Экспорт документа в АБС";
+      
+    }
   }
 }

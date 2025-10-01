@@ -130,9 +130,6 @@
   <data name="Enum_StatusProcessingRx_Error" xml:space="preserve">
     <value>Error</value>
   </data>
-  <data name="Property_Counterparty" xml:space="preserve">
-    <value>Counterparty</value>
-  </data>
   <data name="Action_StartProcessingXML" xml:space="preserve">
     <value>Start processing XML</value>
   </data>

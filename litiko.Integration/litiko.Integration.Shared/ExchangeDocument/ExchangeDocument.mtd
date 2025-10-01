@@ -377,19 +377,6 @@
       ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
       "PreviousPropertyGuid": "144f2a2a-b059-417a-84e3-69fb48d8bf55"
-    },
-    {
-      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "a5a1e922-05c1-413a-945a-dcdd0ee524fc",
-      "Name": "Counterparty",
-      "CanBeSearch": false,
-      "Code": "Counterparty",
-      "EntityGuid": "7466ead6-2162-47df-9ff2-7dc848d040cf",
-      "FlatListInStandaloneLookup": true,
-      "IsShowedInList": false,
-      "IsVisibility": false,
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
-      "PreviousPropertyGuid": "842b276b-8356-4cb6-90d8-cb49b3ff663d"
     }
   ],
   "PublicStructures": [],

@@ -151,7 +151,8 @@
   "HandledEvents": [
     "RefreshClient",
     "BeforeSaveServer",
-    "ShowingSignDialogClient"
+    "ShowingSignDialogClient",
+    "CreatingFromServer"
   ],
   "IconResourcesKeys": [],
   "IsAbstract": true,
@@ -200,6 +201,26 @@
       "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
       "PreviousPropertyGuid": "afeb04ab-abe9-4388-a17e-344e90743c09"
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d03dfc81-0789-4fa3-a365-a1bbd74a04fc",
+      "Name": "IntegrationStatuslitiko",
+      "Code": "IntegrationSta",
+      "DirectValues": [
+        {
+          "NameGuid": "7b39a492-e457-499e-b68d-3bd32abefb8a",
+          "Name": "Send",
+          "Code": "Send"
+        },
+        {
+          "NameGuid": "ced241c7-6796-484d-b73f-4e7f31f7ff8c",
+          "Name": "Success",
+          "Code": "Success"
+        }
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "bd63208e-e9fc-4ef0-8b57-26a8dc6365f5"
     }
   ],
   "PublicFunctions": [

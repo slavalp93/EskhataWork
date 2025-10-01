@@ -58,4 +58,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DocumentNotFound" xml:space="preserve">
+    <value>Документ не найден.</value>
+  </data>
+  <data name="UnsupportedDocumentType" xml:space="preserve">
+    <value>Неподдерживаемый тип документа</value>
+  </data>
+  <data name="IntegrationMethodNotFound" xml:space="preserve">
+    <value>Протокол интеграции {0} не найден.</value>
+  </data>
+  <data name="ExchangeDocumentNotFound" xml:space="preserve">
+    <value>Документ обмена не найден.</value>
+  </data>
+  <data name="ExchangeDocumentIsLocked" xml:space="preserve">
+    <value>Документ обмена {0} заблокирован.</value>
+  </data>
+  <data name="DocumentIsLocked" xml:space="preserve">
+    <value>Документ {0} заблокирован.</value>
+  </data>
 </root>

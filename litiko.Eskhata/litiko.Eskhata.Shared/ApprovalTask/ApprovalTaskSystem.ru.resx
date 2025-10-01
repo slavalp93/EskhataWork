@@ -145,4 +145,7 @@
   <data name="ControlGroup_7225e25461ef433299de51c1a8550078" xml:space="preserve">
     <value>Голосующие</value>
   </data>
+  <data name="Property_ExchangeDocIdlitiko" xml:space="preserve">
+    <value>ИД документа обмена</value>
+  </data>
 </root>
