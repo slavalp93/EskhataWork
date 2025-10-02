@@ -8,7 +8,6 @@ using System.IO;
 
 using Sungero.Core;
 using Sungero.CoreEntities;
-using Sungero.Docflow.Contracts; // Для работы с договорами
 using Sungero.Parties;           // Для работы с контрагентами
 using Sungero.Company;           // Для работы с сотрудниками
 

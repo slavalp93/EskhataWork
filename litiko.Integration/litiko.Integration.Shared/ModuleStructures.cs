@@ -11,7 +11,7 @@ namespace litiko.Integration.Structures.Module
   /// Результат обработки должности
   /// </summary>
   partial class ProcessingJobTittleResult
-  {        
+  {
     /// <summary>
     /// Должность.
     /// </summary>
@@ -20,14 +20,14 @@ namespace litiko.Integration.Structures.Module
     /// <summary>
     /// Признак, было ли изменение или создание.
     /// </summary>
-    public bool isCreatedOrUpdated { get; set; }    
+    public bool isCreatedOrUpdated { get; set; }
   }
   
   /// <summary>
   /// Результат обработки персоны
   /// </summary>
   partial class ProcessingPersonResult
-  {        
+  {
     /// <summary>
     /// Персона.
     /// </summary>
@@ -36,14 +36,14 @@ namespace litiko.Integration.Structures.Module
     /// <summary>
     /// Признак, было ли изменение или создание.
     /// </summary>
-    public bool isCreatedOrUpdated { get; set; }    
+    public bool isCreatedOrUpdated { get; set; }
   }
   
   /// <summary>
   /// Информация о ФИО
   /// </summary>
   partial class FIOInfo
-  {        
+  {
     /// <summary>
     /// Фамилия.
     /// </summary>
@@ -52,12 +52,12 @@ namespace litiko.Integration.Structures.Module
     /// <summary>
     /// Имя.
     /// </summary>
-    public string FirstNameRU { get; set; }    
+    public string FirstNameRU { get; set; }
     
     /// <summary>
     /// Отчество.
     /// </summary>
-    public string MiddleNameRU { get; set; }      
+    public string MiddleNameRU { get; set; }
     
     /// <summary>
     /// Фамилия тадж.
@@ -67,7 +67,7 @@ namespace litiko.Integration.Structures.Module
     /// <summary>
     /// Имя тадж.
     /// </summary>
-    public string FirstNameTG { get; set; }    
+    public string FirstNameTG { get; set; }
     
     /// <summary>
     /// Отчество тадж.
@@ -75,5 +75,24 @@ namespace litiko.Integration.Structures.Module
     public string MiddleNameTG { get; set; }
     
   }
-
+  
+  partial class PaymentBasisInfo
+  {
+    public bool IsPaymentContracts { get; set; }
+    public bool IsPaymentInvoice { get; set; } 
+    public bool IsPaymentTaxInvoice { get; set; }
+    public bool IsPaymentAct { get; set; }
+    public bool IsPaymentOrder { get; set; }
+    
+  }
+  
+  partial class PaymentClosureBasis
+  {
+    public bool IsPaymentContract { get; set; }
+    public bool IsPaymentInvoice { get; set; } 
+    public bool IsPaymentTaxInvoice { get; set; }
+    public bool IsPaymentAct { get; set; }
+    public bool IsPaymentOrder { get; set; }
+    public bool IsPaymentWaybill { get; set; }
+  }
 }
