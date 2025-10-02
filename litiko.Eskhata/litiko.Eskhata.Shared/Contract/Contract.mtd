@@ -430,7 +430,7 @@
           "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
           "ParentGuid": "73e9df7c-895e-4811-b3d5-76c6f95b87aa",
-          "PropertyGuid": "ca562f2d-d3c7-448f-a648-b858e8d2fb2a",
+          "PropertyGuid": "9543f412-9d7a-407c-af27-9736d6356cbb",
           "RowNumber": 1,
           "RowSpan": 1,
           "Settings": [],

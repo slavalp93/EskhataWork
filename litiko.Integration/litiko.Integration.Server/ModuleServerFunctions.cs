@@ -23,19 +23,20 @@ namespace litiko.Integration.Server
     /// <summary>
     /// Отправка запроса во внешнюю информационную систему.
     /// </summary>
-    /// <param name="method">Метод интеграции</param>
     /// <param name="exchDoc">Документ обмена</param>
     /// <param name="lastId">0 - новый запрос, >0 - запрос очередной части предыдущего запроса</param></param>
+    /// <param name="entity">Сущность, если запрос по конкретному объекту</param></param>
     /// <returns>Строка с ошибкой или пустая строка</returns>
     [Public, Remote]
-    public string SendRequestToIS(IIntegrationMethod method, IExchangeDocument exchDoc, long lastId)
+    public string SendRequestToIS(IExchangeDocument exchDoc, long lastId, Sungero.Domain.Shared.IEntity entity)
     {
       var logPostfix = string.Format("ExchangeDocId = '{0}'", exchDoc.Id);
       var logPrefix = "Integration. SendRequestToIS.";      
       Logger.DebugFormat("{0} Start. {1}", logPrefix, logPostfix);
       
-      var errorMessage = string.Empty;
+      var method = exchDoc.IntegrationMethod;
       
+      var errorMessage = string.Empty;
       var statusRequestToIS = exchDoc.StatusRequestToIS;
       var requestToISInfo = exchDoc.RequestToISInfo;
       
@@ -53,11 +54,19 @@ namespace litiko.Integration.Server
         string url = method.IntegrationSystem.ServiceUrl;
         var xmlRequestBody = string.Empty;
   
-        if (method.Name == "R_DR_GET_COMPANY")
-          xmlRequestBody = Integration.Resources.RequestXMLTemplateForCompanyFormat(exchDoc.Id, application_key, method.Name, lastId, exchDoc.Counterparty.TIN);
-        else if (method.Name == "R_DR_GET_BANK")
-          xmlRequestBody = Integration.Resources.RequestXMLTemplateForBankFormat(exchDoc.Id, application_key, method.Name, lastId, Eskhata.Banks.As(exchDoc.Counterparty).BIC);
-        else if (method.Name == "R_DR_GET_CURRENCY_RATES")
+        if (method.Name == Constants.Module.IntegrationMethods.R_DR_GET_COMPANY || method.Name == Constants.Module.IntegrationMethods.R_DR_GET_PERSON)
+        {
+          var counterparty = Sungero.Parties.Counterparties.As(entity);
+          if (counterparty != null)
+            xmlRequestBody = Integration.Resources.RequestXMLTemplateForCompanyFormat(exchDoc.Id, application_key, method.Name, lastId, counterparty.TIN);
+        }        
+        else if (method.Name == Constants.Module.IntegrationMethods.R_DR_GET_BANK)
+        {
+          var bank = litiko.Eskhata.Banks.As(entity);
+          if (bank != null)
+            xmlRequestBody = Integration.Resources.RequestXMLTemplateForBankFormat(exchDoc.Id, application_key, method.Name, lastId, bank.BIC);
+        }        
+        else if (method.Name == Constants.Module.IntegrationMethods.R_DR_GET_CURRENCY_RATES)
         {
           // Получить дату последней успешной интеграции          
           var lastExchangeDoc = ExchangeDocuments.GetAll()
@@ -164,7 +173,11 @@ namespace litiko.Integration.Server
         Logger.Error(errorMessage);
       }
       
-      if (exchDoc.StatusRequestToIS != statusRequestToIS || exchDoc.RequestToISInfo != requestToISInfo)
+      bool isCounterparty = exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_COMPANY || 
+        exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_BANK || 
+        exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_PERSON;
+      
+      if (!isCounterparty && (exchDoc.StatusRequestToIS != statusRequestToIS || exchDoc.RequestToISInfo != requestToISInfo))
       {
         // Обновляем exchDoc асинхронным обработчиком
         var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
@@ -279,7 +292,7 @@ namespace litiko.Integration.Server
                 
         var statusRequestToRX = exchDoc.StatusRequestToRX;
         var requestToRXInfo = exchDoc.RequestToRXInfo;
-          
+                
         try
         {                    
           var exchQueue = ExchangeQueues.Create();
@@ -288,13 +301,13 @@ namespace litiko.Integration.Server
           exchQueue.Name = Integration.Resources.VersionRequestToRXFormat(lastId);
           exchQueue.Save();
           increaseNumberOfPackages = true;
-          
+            
           // обновить статусы в exchDoc
           if (lastId > 0)
             statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;
           else
             statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
-          
+            
           if (requestToRXInfo != "Saved")
             requestToRXInfo = "Saved";                    
         }
@@ -303,33 +316,40 @@ namespace litiko.Integration.Server
           errorMessage = ex.Message;          
           Logger.ErrorFormat("{0} ErrorMessage: {1}.{2}", logPrefix, errorMessage, logPostfix);
           statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
-          requestToRXInfo = ex.Message;                      
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, ex.Message));
+          requestToRXInfo = errorMessage;                      
+          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
         }
         
-        // Обновляем exchDoc асинхронным обработчиком
-        var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
-        asyncHandler.DocId = exchDoc.Id;
-        asyncHandler.StatusRequestToRX = statusRequestToRX.ToString();
-        asyncHandler.RequestToRXInfo = requestToRXInfo;
-        asyncHandler.IncreaseNumberOfPackages = increaseNumberOfPackages;
-        asyncHandler.ExecuteAsync();
+        bool isCounterparty = exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_COMPANY || 
+          exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_BANK || 
+          exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_PERSON;
         
-        if (string.IsNullOrEmpty(errorMessage))
+        if (!isCounterparty)
         {
-          if (lastId > 0)
-            // вызвать получение остальной части пакета
-            SendRequestToIS(exchDoc.IntegrationMethod, exchDoc, lastId);
-          else
+          // Обновляем exchDoc асинхронным обработчиком
+          var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
+          asyncHandler.DocId = exchDoc.Id;
+          asyncHandler.StatusRequestToRX = statusRequestToRX.ToString();
+          asyncHandler.RequestToRXInfo = requestToRXInfo;
+          asyncHandler.IncreaseNumberOfPackages = increaseNumberOfPackages;
+          asyncHandler.ExecuteAsync();
+          
+          if (string.IsNullOrEmpty(errorMessage))
           {
-            Thread.Sleep(5000); // Пауза на 5 сек.
-            
-            // запустить обработчик пакета
-            var asyncHandlerImportData = Integration.AsyncHandlers.ImportData.Create();
-            asyncHandlerImportData.ExchangeDocId = exchDoc.Id;
-            asyncHandlerImportData.ExecuteAsync();
-          }        
-        }                
+            if (lastId > 0)
+              // вызвать получение остальной части пакета
+              SendRequestToIS(exchDoc, lastId, null);
+            else
+            {
+              Thread.Sleep(5000); // Пауза на 5 сек.
+              
+              // запустить обработчик пакета
+              var asyncHandlerImportData = Integration.AsyncHandlers.ImportData.Create();
+              asyncHandlerImportData.ExchangeDocId = exchDoc.Id;
+              asyncHandlerImportData.ExecuteAsync();
+            }        
+          }                        
+        }
         
         Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);
         return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 1, "Saved"));
@@ -337,19 +357,24 @@ namespace litiko.Integration.Server
     }
 
     [Public, Remote(IsPure = true)]
-    public static bool WaitForGettingDataFromIS(Integration.IExchangeDocument exchDoc, int intervalMilliseconds, int maxAttempts)
+    public static long WaitForGettingDataFromIS(long exchDocId, int intervalMilliseconds, int maxAttempts)
     {
       for (int attempt = 0; attempt < maxAttempts; attempt++)
       {                        
-        if (Equals(exchDoc.StatusRequestToRX, litiko.Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull))
+        var exchQueue = ExchangeQueues.GetAll()
+          .Where(x => x.ExchangeDocument.Id == exchDocId)
+          .Where(x => x.Name == Integration.Resources.VersionRequestToRXFormat(0).ToString())
+          .FirstOrDefault();
+        
+        if (exchQueue != null)
         {
-          return true;
-        }                        
+          return exchQueue.Id;
+        }          
             
         Thread.Sleep(intervalMilliseconds); // Ожидание
       }
         
-      return false; // Условие не выполнено за maxAttempts попыток
+      return 0; // Условие не выполнено за maxAttempts попыток
     }
 
     /// <summary>
@@ -378,7 +403,7 @@ namespace litiko.Integration.Server
       exchDoc.IntegrationMethod = integrationMethod;      
       exchDoc.Save();
       
-      var errorMessage = Functions.Module.SendRequestToIS(integrationMethod, exchDoc, lastId);            
+      var errorMessage = Functions.Module.SendRequestToIS(exchDoc, lastId, null);            
       if (!string.IsNullOrEmpty(errorMessage))
         throw AppliedCodeException.Create(errorMessage);        
     }
@@ -921,7 +946,7 @@ namespace litiko.Integration.Server
               }
               
               var fioInfo = Structures.Module.FIOInfo.Create(isLastNameRu, isFirstNameRu, isMiddleNameRU, isLastNameTG, isFirstNameTG, isMiddleNameTG);
-              var personResult = ProcessingPerson(isPerson, fioInfo);
+              var personResult = ProcessingPerson(isPerson, fioInfo, null);
               var person = personResult.person;
               if(!Equals(employee.Person, person))
               {
@@ -1831,7 +1856,7 @@ namespace litiko.Integration.Server
     public List<string> R_DR_GET_COMPANY(long exchDocID, Eskhata.ICounterparty counterparty)
     {          
       Logger.Debug("R_DR_GET_COMPANY - Start");
-      var errorList = new List<string>();            
+      var errorList = new List<string>();                  
       
       var exchDoc = ExchangeDocuments.Get(exchDocID);
       var versionFullXML = exchDoc.Versions.Where(v => v.Note == Integration.Resources.VersionRequestToRXFull && v.AssociatedApplication.Extension == "xml" && v.Body.Size > 0).FirstOrDefault();
@@ -1852,11 +1877,11 @@ namespace litiko.Integration.Server
       var element = dataElements.FirstOrDefault();
       
       var isId = element.Element("ID")?.Value;
-      var isName = element.Element("NAME")?.Value;
+      var isName = element.Element("NAME")?.Value.Trim();      
       var isINN = element.Element("INN")?.Value;
           
-      var isLongName = element.Element("LONG_NAME")?.Value;
-      var isIName = element.Element("I_NAME")?.Value;
+      var isLongName = element.Element("LONG_NAME")?.Value.Trim();
+      var isIName = element.Element("I_NAME")?.Value.Trim();
       var isRezident = element.Element("REZIDENT")?.Value;          
       var isNuRezident = element.Element("NU_REZIDENT")?.Value;          
       var isKPP = element.Element("KPP")?.Value;
@@ -2103,7 +2128,7 @@ namespace litiko.Integration.Server
                 contact.JobTitle = isRange;                  
               }
               
-              var personResult = ProcessingPerson(isPerson, null);
+              var personResult = ProcessingPerson(isPerson, null, null);
               var person = personResult.person;
               if(!Equals(contact.Person, person))
               {
@@ -2116,7 +2141,7 @@ namespace litiko.Integration.Server
                 contact.Save();
                 Logger.DebugFormat("Contact successfully saved. ExternalId:{0}, Id:{1}", isContactID, contact.Id);
               }
-              
+
             }
           }
                        
@@ -2132,14 +2157,14 @@ namespace litiko.Integration.Server
           Logger.DebugFormat("There are no changes in Company. ExternalId:{0}, Id:{1}", isId, company.Id);
         }
             
-        }
+      }
       catch (Exception ex)
       {
         var errorMessage = string.Format("Error when processing Company with ExternalId:{0}. Description: {1}. StackTrace: {2}", isId, ex.Message, ex.StackTrace);
         Logger.Error(errorMessage);
         errorList.Add(errorMessage);
       }      
-      
+
       Logger.Debug("R_DR_GET_COMPANY - Finish"); 
       return errorList;
     }  
@@ -2375,7 +2400,7 @@ namespace litiko.Integration.Server
                 contact.JobTitle = isRange;                  
               }
               
-              var personResult = ProcessingPerson(isPerson, null);
+              var personResult = ProcessingPerson(isPerson, null, null);
               var person = personResult.person;
               if(!Equals(contact.Person, person))
               {
@@ -2712,7 +2737,9 @@ namespace litiko.Integration.Server
         {
           var isId = element.Element("ID")?.Value;
           var isName = element.Element("Name")?.Value;          
-          var isCode = element.Element("Code")?.Value;          
+          var isCode = new string((element.Element("Code")?.Value ?? "")
+                        .Take(10)
+                        .ToArray());
           
           try
           {                        
@@ -2860,6 +2887,51 @@ namespace litiko.Integration.Server
       return errorList;
     }    
     
+    /// <summary>
+    /// Обработка Персоны.
+    /// </summary>
+    /// <param name="exchDocID">ИД документа обмена</param>
+    /// <param name="counterparty">Персона</param>
+    /// <returns>Список ошибок (List<string>)</returns>
+    [Public, Remote]
+    public List<string> R_DR_GET_PERSON(long exchDocID, Eskhata.ICounterparty counterparty)
+    {          
+      Logger.Debug("R_DR_GET_PERSON - Start");
+      var errorList = new List<string>();            
+      
+      var exchDoc = ExchangeDocuments.Get(exchDocID);
+      var versionFullXML = exchDoc.Versions.Where(v => v.Note == Integration.Resources.VersionRequestToRXFull && v.AssociatedApplication.Extension == "xml" && v.Body.Size > 0).FirstOrDefault();
+      if (versionFullXML == null)
+      {
+        errorList.Add("Version with full XML data not found.");
+        return errorList;
+      }
+        
+      XDocument xmlDoc = XDocument.Load(versionFullXML.Body.Read());
+      var dataElements = xmlDoc.Descendants("Data").Elements("FASE");                    
+      if (!dataElements.Any())
+      {
+        errorList.Add("Empty Data node.");
+        return errorList;
+      }                  
+      
+      try
+      {
+        var person = litiko.Eskhata.People.As(counterparty);
+        var isPerson = dataElements.FirstOrDefault();
+        var personResult = ProcessingPerson(isPerson, null, person);
+      }
+      catch (Exception ex)
+      {
+        var errorMessage = string.Format("Error when processing Person with Id:{0}. Description: {1}. StackTrace: {2}", counterparty.Id, ex.Message, ex.StackTrace);
+        Logger.Error(errorMessage);
+        errorList.Add(errorMessage);
+      }      
+      
+      Logger.Debug("R_DR_GET_PERSON - Finish"); 
+      return errorList;
+    }      
+    
     #endregion
     
     #region Вспомогательные функции
@@ -2923,7 +2995,7 @@ namespace litiko.Integration.Server
     /// </summary>
     /// <param name="dataElements">Информация о персоне в виде XElement.</param>
     /// <returns>Структура с персоной и признаком изменения<string>)</returns>
-    public Structures.Module.ProcessingPersonResult ProcessingPerson(System.Xml.Linq.XElement personData, Structures.Module.FIOInfo fioInfo)
+    public Structures.Module.ProcessingPersonResult ProcessingPerson(System.Xml.Linq.XElement personData, Structures.Module.FIOInfo fioInfo, litiko.Eskhata.IPerson person)
     {              
       var isID = personData.Element("ID")?.Value;
       var isName = personData.Element("NAME")?.Value;
@@ -2943,6 +3015,11 @@ namespace litiko.Integration.Server
       var isPhone = personData.Element("Phone")?.Value;
       var isEmail = personData.Element("Email")?.Value;
       var isWebSite = personData.Element("WebSite")?.Value;
+      
+      var isVATApplicable = personData.Element("VATApplicable")?.Value;
+      var isIIN = personData.Element("IIN")?.Value;
+      var isCorrAcc = personData.Element("CorrAcc")?.Value;
+      var isInternalAcc = personData.Element("InternalAcc")?.Value;
           
       string isLastNameRu = string.Empty, isFirstNameRu = string.Empty, isMiddleNameRU = string.Empty;
       string isLastNameTG = string.Empty, isFirstNameTG = string.Empty, isMiddleNameTG = string.Empty;
@@ -2979,15 +3056,21 @@ namespace litiko.Integration.Server
       if (string.IsNullOrEmpty(isID) || string.IsNullOrEmpty(isName) || string.IsNullOrEmpty(isSex))
         throw AppliedCodeException.Create(string.Format("Not all required fields are filled in Person. ID:{0}, NAME:{1}, SEX:{2}", isID, isName, isSex));
       
-      var person = Eskhata.People.GetAll().Where(x => x.ExternalId == isID).FirstOrDefault();
+      bool needSave = true;
       if (person == null)
       {
-        person = Eskhata.People.Create();
-        person.ExternalId = isID;        
-        Logger.DebugFormat("Create new Person with ExternalId:{0}. Id:{1}", isID, person.Id);                  
+        person = Eskhata.People.GetAll().Where(x => x.ExternalId == isID).FirstOrDefault();
+        if (person == null)
+        {
+          person = Eskhata.People.Create();
+          person.ExternalId = isID;        
+          Logger.DebugFormat("Create new Person with ExternalId:{0}. Id:{1}", isID, person.Id);                  
+        }
+        else
+          Logger.DebugFormat("Person with ExternalId:{0} was found. Id:{1}, Name:{2}", isID, person.Id, person.Name);      
       }
       else
-        Logger.DebugFormat("Person with ExternalId:{0} was found. Id:{1}, Name:{2}", isID, person.Id, person.Name);
+        needSave = false;
       
       if (!string.IsNullOrEmpty(isLastNameRu) && person.LastName != isLastNameRu)
       {
@@ -3169,15 +3252,55 @@ namespace litiko.Integration.Server
       {
         Logger.DebugFormat("Change Homepage: current:{0}, new:{1}", person.Homepage, isWebSite);
         person.Homepage = isWebSite;                
+      }
+      
+      if(!string.IsNullOrEmpty(isVATApplicable))
+      {
+        bool VATPayer = isVATApplicable == "1" ? true : false;
+        if(person.VATPayerlitiko != VATPayer)
+        {
+          Logger.DebugFormat("Change VATPayerlitiko: current:{0}, new:{1}", person.VATPayerlitiko.GetValueOrDefault(), VATPayer);
+          person.VATPayerlitiko = VATPayer; 
+        }               
+      }
+            
+      if (!string.IsNullOrEmpty(isIIN))
+      {
+        int untIIN;
+        if (int.TryParse(isIIN, out untIIN) && person.SINlitiko != untIIN)
+        {
+          Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.SINlitiko, untIIN);
+          person.SINlitiko = untIIN;        
+        }
+        else
+          Logger.ErrorFormat("Can`t convert to int value of IIN:{0}", isIIN);            
       }      
+
+      if(!string.IsNullOrEmpty(isCorrAcc) && person.Account != isCorrAcc)
+      {
+        Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.Account, isCorrAcc);
+        person.Account = isCorrAcc;                
+      } 
+
+      if(!string.IsNullOrEmpty(isInternalAcc) && person.AccountEskhatalitiko != isInternalAcc)
+      {
+        Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.AccountEskhatalitiko, isInternalAcc);
+        person.AccountEskhatalitiko = isInternalAcc;                
+      } 
       
       /* !!! IdentityDocuments !!! */
       
       var result = Structures.Module.ProcessingPersonResult.Create(person, false);
       if (person.State.IsChanged || person.State.IsInserted)
       {
-        person.Save();
-        Logger.DebugFormat("Person successfully saved. ExternalId:{0}, Id:{1}", isID, person.Id);
+        if (needSave)
+        {
+          person.Save();
+          Logger.DebugFormat("Person successfully saved. ExternalId:{0}, Id:{1}", isID, person.Id);        
+        }
+        else
+          Logger.DebugFormat("Person successfully changed, but not saved. The user can save the changes independently. ExternalId:{0}, Id:{1}", isID, person.Id);
+        
         result.isCreatedOrUpdated = true;
       }
       else
@@ -3238,5 +3361,497 @@ namespace litiko.Integration.Server
     }   
        
     #endregion
+    
+    #region Экспорт договоров для интеграции
+    
+    /// <summary>
+    /// Преобразует nullable булевое значение в строковое представление: "true", "false" или "null".
+    /// Используется для корректного формирования XML-элементов, где нужно указать значение флага.
+    /// </summary>
+    /// <param name="value">nullable булевое значение</param>
+    /// <returns>строка "true", "false" или "null"</returns>    
+    private string ToYesNoNull(bool? value)
+    {
+      if (!value.HasValue)
+          return "null";
+      return value.Value ? "true" : "false";
+    }
+
+    /// <summary>
+    /// Формирует XML-структуру <Person> для контрагента-физического лица.
+    /// </summary>    
+    private XElement BuildPersonXml(Sungero.Parties.ICounterparty counterparty)
+    {
+        var person = litiko.Eskhata.People.As(counterparty);
+        if (person == null)
+            return new XElement("Person");
+    
+        // ==========================
+        // Инициализация переменных
+        // ==========================
+        var id              = person.Id;
+        var externalId      = person.ExternalId ?? "";
+        var lastName        = person.LastName ?? "";
+        var firstName       = person.FirstName ?? "";
+        var middleName      = person.MiddleName ?? "";
+        var rezident        = ToYesNoNull(!person.Nonresident);
+        var nuRezident      = ToYesNoNull(!person.NUNonrezidentlitiko);
+        var iName           = person.Inamelitiko ?? "";
+        var datePers        = person.DateOfBirth?.ToString("dd.MM.yyyy") ?? "";
+        var sex             = person.Sex?.ToString() ?? "";
+        var marigeSt        = person.FamilyStatuslitiko?.ToString() ?? "";
+        var inn             = person.TIN ?? "";
+        var iin             = person.SINlitiko?.ToString() ?? "";
+        var country         = person.Region?.ToString() ?? "";
+        var docBirthPlace   = person.DateOfBirth?.ToString() ?? "";
+        var postAddress     = person.PostalAddress ?? "";
+        var email           = person.Email ?? "";
+        var phone           = person.Phones ?? "";
+        var city            = person.City?.ToString() ?? "";
+        var street          = person.Streetlitiko ?? "";
+        var buildingNumber  = person.HouseNumberlitiko ?? "";
+        var website         = person.Homepage ?? "";
+        var taxNonResident  = ToYesNoNull(person.NUNonrezidentlitiko);
+        var vatPayer        = ToYesNoNull(person.VATPayerlitiko);
+        var reliability     = "true"; // TODO
+        var corrAcc         = person.Account ?? "";
+        var internalAcc     = person.AccountEskhatalitiko ?? "";
+    
+        var idDocId         = person.IdentityAuthorityCode ?? "";
+        var idDocType       = person.IdentityKind?.ToString() ?? "";
+        var idDocName       = ""; // TODO
+        var idDocBegin      = person.IdentityDateOfIssue?.ToString() ?? "";
+        var idDocEnd        = person.IdentityExpirationDate?.ToString() ?? "";
+        var idDocNum        = person.IdentityNumber ?? "";
+        var idDocSer        = person.IdentitySeries ?? "";
+        var idDocWho        = person.IdentityAuthority ?? "";
+    
+        // ==========================
+        // Коллекции (OKONH, OKVED)
+        // ==========================
+        var codeOkonh = person.OKONHlitiko?.Any() == true
+            ? new XElement("CODE_OKONH",
+                person.OKONHlitiko.Select(c => new XElement("element", c?.ToString() ?? "")))
+            : null;
+    
+        var codeOkved = person.OKVEDlitiko?.Any() == true
+            ? new XElement("CODE_OKVED",
+                person.OKVEDlitiko.Select(c => new XElement("element", c?.ToString() ?? "")))
+            : null;
+    
+        // ==========================
+        // Формирование XML
+        // ==========================
+        return new XElement("Person",
+            new XElement("ID", id),
+            new XElement("ExternalID", externalId),
+            new XElement("LastName", lastName),
+            new XElement("FirstName", firstName),
+            new XElement("MiddleName", middleName),
+            new XElement("REZIDENT", rezident),
+            new XElement("NU_REZIDENT", nuRezident),
+            new XElement("I_NAME", iName),
+            new XElement("DATE_PERS", datePers),
+            new XElement("SEX", sex),
+            new XElement("MARIGE_ST", marigeSt),
+            new XElement("INN", inn),
+            codeOkonh,
+            codeOkved,
+            new XElement("IIN", iin),
+            new XElement("COUNTRY", country),
+            new XElement("DOC_BIRTH_PLACE", docBirthPlace),
+            new XElement("PostAdress", postAddress),
+            new XElement("Email", email),
+            new XElement("Phone", phone),
+            new XElement("City", city),
+            new XElement("Street", street),
+            new XElement("BuildingNumber", buildingNumber),
+            new XElement("WebSite", website),
+            new XElement("TaxNonResident", taxNonResident),
+            new XElement("VATPayer", vatPayer),
+            new XElement("Reliability", reliability),
+            new XElement("CorrAcc", corrAcc),
+            new XElement("InternalAcc", internalAcc),
+            new XElement("IdentityDocument",
+                new XElement("ID", idDocId),
+                new XElement("TYPE", idDocType),
+                new XElement("NAME", idDocName),
+                new XElement("DATE_BEGIN", idDocBegin),
+                new XElement("DATE_END", idDocEnd),
+                new XElement("NUM", idDocNum),
+                new XElement("SER", idDocSer),
+                new XElement("WHO", idDocWho)
+            )
+        );
+    }
+
+    /// <summary>
+    /// Формирует XML-структуру <Company> для контрагента-юридического лица.
+
+    /// </summary>    
+    private XElement BuildCompanyXml(Sungero.Parties.ICounterparty counterparty)
+    {
+        var company = litiko.Eskhata.Companies.As(counterparty);
+        if (company == null)
+            return new XElement("Company");
+    
+        // ==========================
+        // Инициализация переменных
+        // ==========================
+        var id              = company.Id.ToString();
+        var externalId      = company.ExternalId ?? "";
+        var name            = company.Name ?? "";
+        var longName        = company.LegalName ?? "";
+        var iName           = company.Inamelitiko ?? "";
+        var rezident        = ToYesNoNull(!company.Nonresident);
+        var nuRezident      = ToYesNoNull(!company.NUNonrezidentlitiko);
+        var inn             = company.TIN ?? "";
+        var kpp             = company.TRRC ?? "";
+        var kodOkpo         = company.NCEO ?? "";
+        var forma           = ""; // TODO
+        var ownership       = company.OKOPFlitiko?.ExternalId; 
+        var iin             = company.SINlitiko?.ToString() ?? "";
+        var registNum       = company.RegNumlitiko ?? "";
+        var numbers         = company.Numberslitiko?.ToString() ?? "";
+        var business        = company.Businesslitiko?.ToString() ?? "";
+        var psRef           = company.EnterpriseTypelitiko?.ToString() ?? "";
+        var country         = company.Region?.ToString() ?? "";
+        var postAddress     = company.PostalAddress ?? "";
+        var legalAddress    = company.LegalAddress ?? "";
+        var phone           = company.Phones ?? "";
+        var city            = company.City?.ToString() ?? "";
+        var street          = company.Streetlitiko ?? "";
+        var buildingNumber  = company.HouseNumberlitiko ?? "";
+        var email           = company.Email ?? "";
+        var website         = company.Homepage ?? "";
+        var taxNonResident  = ToYesNoNull(company.NUNonrezidentlitiko);
+        var vatPayer        = ToYesNoNull(company.VATPayerlitiko);
+        var reliability     = company.Reliabilitylitiko?.ToString() ?? "";
+        var corrAcc         = company.Account ?? "";
+        var internalAcc     = company.AccountEskhatalitiko ?? "";
+    
+        // ==========================
+        // Коллекции
+        // ==========================
+        var codeOkonh = company.OKONHlitiko?.Any() == true
+            ? new XElement("CODE_OKONH",
+                company.OKONHlitiko.Select(c => new XElement("element", c?.ToString() ?? "")))
+            : null;
+    
+        var codeOkved = company.OKVEDlitiko?.Any() == true
+            ? new XElement("CODE_OKVED",
+                company.OKVEDlitiko.Select(c => new XElement("element", c?.ToString() ?? "")))
+            : null;
+    
+        // ==========================
+        // Формирование XML
+        // ==========================
+        return new XElement("Company",
+            new XElement("ID", id),
+            new XElement("ExternalD", externalId),
+            new XElement("Name", name),
+            new XElement("LONG_NAME", longName),
+            new XElement("I_NAME", iName),
+            new XElement("REZIDENT", rezident),
+            new XElement("NU_REZIDENT", nuRezident),
+            new XElement("INN", inn),
+            new XElement("KPP", kpp),
+            new XElement("KOD_OKPO", kodOkpo),
+            new XElement("FORMA", forma),
+            new XElement("OWNERSHIP", ownership),
+            codeOkonh,
+            codeOkved,
+            new XElement("IIN", iin),
+            new XElement("REGIST_NUM", registNum),
+            new XElement("NUMBERS", numbers),
+            new XElement("BUSINESS", business),
+            new XElement("PS_REF", psRef),
+            new XElement("COUNTRY", country),
+            new XElement("PostAdress", postAddress),
+            new XElement("LegalAdress", legalAddress),
+            new XElement("Phone", phone),
+            new XElement("City", city),
+            new XElement("Street", street),
+            new XElement("BuildingNumber", buildingNumber),
+            new XElement("Email", email),
+            new XElement("WebSite", website),
+            new XElement("TaxNonResident", taxNonResident),
+            new XElement("VATPayer", vatPayer),
+            new XElement("Reliability", reliability),
+            new XElement("CorrAcc", corrAcc),
+            new XElement("InternalAcc", internalAcc)
+        );
+    }
+    
+    /// <summary>
+    /// Формирует XML-структуру <Data> для документа типа "Дополнительное соглашение" (SupAgreement).
+    /// Включает сведения о документе, без информации о контрагенте (Company/Person).
+    /// </summary>
+    /// <param name="contractualDocument">Документ SupAgreement</param>
+    /// <returns>Элемент XElement с полной информацией о документе</returns>
+    private XElement BuildContractXmlForSupAgreement(litiko.Eskhata.ISupAgreement contractualDocument)
+    {
+        if (contractualDocument == null)
+            return new XElement("Data");
+    
+        const string dateFormat = "dd.MM.yyyy";
+    
+        // ==========================
+        // Document values
+        // ==========================
+        var documentId        = contractualDocument.Id.ToString();
+        var externalId        = contractualDocument.ExternalId ?? "";
+        var contractId        = contractualDocument.LeadingDocument.Id.ToString() ?? ""; 
+        var contractExtId     = contractualDocument.LeadingDocument.ExternalId ?? "";   
+        var documentKind      = litiko.Eskhata.DocumentKinds.As(contractualDocument.DocumentKind)?.ExternalIdlitiko ?? "";
+        var subject           = contractualDocument.Subject ?? "";
+        var name              = contractualDocument.Name ?? "";
+        var registrationNumber= contractualDocument.RegistrationNumber?.ToString() ?? "";
+        var registrationDate  = contractualDocument.RegistrationDate?.ToString(dateFormat) ?? "";
+        var validFrom         = contractualDocument.ValidFrom?.ToString(dateFormat) ?? "";
+        var validTill         = contractualDocument.ValidTill?.ToString(dateFormat) ?? "";
+        var totalAmount       = contractualDocument.TotalAmount?.ToString() ?? "";
+        var currency          = contractualDocument.CurrencyContractlitiko?.ToString() ?? "";
+        var operationCurrency = contractualDocument.CurrencyOperationlitiko?.ToString() ?? "";
+        var currencyRate      = contractualDocument.CurrencyRatelitiko?.Rate.ToString() ?? ""; 
+        var vatApplicable     = ToYesNoNull(contractualDocument.IsVATlitiko);
+        var vatRate           = contractualDocument.VatRate?.ToString() ?? "";
+        var vatAmount         = contractualDocument.VatAmount?.ToString() ?? "";
+        var incomeTaxRate     = contractualDocument.IncomeTaxRatelitiko?.ToString() ?? "";
+        var incomeTaxAmount   = contractualDocument.IncomeTaxAmountlitiko?.ToString() ?? ""; 
+        var laborPayment      = ToYesNoNull(contractualDocument.IsIndividualPaymentlitiko); 
+        var note              = contractualDocument.Note?.ToString() ?? "";
+        var isWithinBudget    = ToYesNoNull(contractualDocument.IsWithinBudgetlitiko);
+    
+        // ==========================
+        // Формирование XML
+        // ==========================
+        var documentElement = new XElement("Document",
+            new XElement("ID", documentId),
+            new XElement("ExternalD", externalId),
+            new XElement("Contract",
+                new XElement("ID", contractId),
+                new XElement("ExternalD", contractExtId)
+            ),
+            new XElement("DocumentKind", documentKind),
+            new XElement("Subject", subject),
+            new XElement("Name", name),
+            new XElement("IsWithinBudget", isWithinBudget),
+            new XElement("RegistrationNumber", registrationNumber),
+            new XElement("RegistrationDate", registrationDate),
+            new XElement("ValidFrom", validFrom),
+            new XElement("ValidTill", validTill),
+            new XElement("TotalAmount", totalAmount),
+            new XElement("Currency", currency),
+            new XElement("OperationCurrency", operationCurrency),
+            new XElement("CurrencyRate", currencyRate),
+            new XElement("VATApplicable", vatApplicable),
+            new XElement("VATRate", vatRate),
+            new XElement("VATAmount", vatAmount),
+            new XElement("IncomeTaxRate", incomeTaxRate),
+            new XElement("IncomeTaxAmount", incomeTaxAmount),
+            new XElement("LaborPayment", laborPayment),
+            new XElement("Note", note)
+        );
+    
+        return new XElement("Data", documentElement);
+    }
+    
+    /// <summary>
+    /// Формирует XML-структуру <Data> для документа типа "Договор".
+    /// Включает в себя сведения о документе, компании и/или физическом лице.
+    /// </summary>
+    private XElement BuildContractXmlForContract(litiko.Eskhata.IContract contractualDocument)
+    {
+        const string dateFormat = "dd.MM.yyyy";
+        
+        // ==========================
+        // Document values
+        // ==========================
+        var rbo              = contractualDocument.RBOlitiko ?? "";
+        var accDebtCredit    = contractualDocument.AccDebtCreditlitiko ?? "";
+        var accFutureExpense = contractualDocument.AccFutureExpenselitiko ?? "";
+        var paymentRegion    = contractualDocument.PaymentRegionlitiko?.ToString() ?? "";
+        var paymentTaxRegion = contractualDocument.RegionOfRentallitiko?.ToString() ?? "";
+        var paymentMethod    = contractualDocument.PaymentMethodlitiko?.ToString() ?? "";
+        var paymentFrequency = contractualDocument.FrequencyOfPaymentlitiko?.ToString() ?? "";
+    
+        var matrix = NSI.PublicFunctions.Module.GetResponsibilityMatrix(contractualDocument);
+        var responsibleEmployee =
+            litiko.Eskhata.Employees.As(matrix?.ResponsibleAccountant)            
+            ?? Roles.As(matrix?.ResponsibleAccountant)?
+                   .RecipientLinks
+                   .Select(l => litiko.Eskhata.Employees.As(l.Member))
+                   .FirstOrDefault(e => e != null);
+    
+        var responsibleAccountantFIO = responsibleEmployee?.Name ?? string.Empty;
+        var responsibleDepartment    = responsibleEmployee?.Department?.Name ?? string.Empty;
+    
+        // PaymentBasis
+        var matrix2 = NSI.PublicFunctions.Module.GetContractsVsPaymentDoc(contractualDocument, contractualDocument.Counterparty);
+    
+        var isPaymentContract   = ToYesNoNull(matrix2?.PBIsPaymentContract);
+        var isPaymentInvoice    = ToYesNoNull(matrix2?.PBIsPaymentInvoice);
+        var isPaymentTaxInvoice = ToYesNoNull(matrix2?.PBIsPaymentTaxInvoice);
+        var isPaymentAct        = ToYesNoNull(matrix2?.PBIsPaymentAct);
+        var isPaymentOrder      = ToYesNoNull(matrix2?.PBIsPaymentOrder);
+    
+        var isClosureContract   = ToYesNoNull(matrix2?.PCBIsPaymentContract);
+        var isClosureInvoice    = ToYesNoNull(matrix2?.PCBIsPaymentInvoice);
+        var isClosureTaxInvoice = ToYesNoNull(matrix2?.PCBIsPaymentTaxInvoice);
+        var isClosureAct        = ToYesNoNull(matrix2?.PCBIsPaymentAct);
+        var isClosureWaybill    = ToYesNoNull(matrix2?.PCBIsPaymentWaybill);
+
+        // BatchProcessing:
+        var matrix3 = NSI.PublicFunctions.Module.GetResponsibilityMatrix(contractualDocument);
+        var batchProcessing = ToYesNoNull(matrix3?.BatchProcessing);
+        
+        // ==========================
+        // Document XElement
+        // ==========================
+        var documentId          = contractualDocument.Id.ToString();
+        var externalId          = contractualDocument.ExternalId ?? "";
+        var documentKind        = litiko.Eskhata.DocumentKinds.As(contractualDocument.DocumentKind)?.ExternalIdlitiko ?? "";
+        var documentGroup = litiko.Eskhata.DocumentGroupBases.As(contractualDocument.DocumentGroup)?.ExternalIdlitiko ?? "";
+        var subject             = contractualDocument.Subject ?? "";
+        var name                = contractualDocument.Name ?? "";
+        var counterpartySign    = contractualDocument.CounterpartySignatory?.Name ?? ""; // ФИО
+        var department          = litiko.Eskhata.Departments.As(contractualDocument.Department)?.ExternalId ?? "";  
+        var responsibleEmployeeStr = contractualDocument.ResponsibleEmployee?.ToString() ?? "";
+        var author              = contractualDocument.Author?.ToString() ?? "";
+        var validFrom           = contractualDocument.ValidFrom?.ToString(dateFormat) ?? ""; 
+        var validTill           = contractualDocument.ValidTill?.ToString(dateFormat) ?? "";
+        var changeReason        = contractualDocument.ReasonForChangelitiko;
+        var accountDebtCredit   = accDebtCredit;
+        var accountFutureExp    = accFutureExpense;
+        var totalAmountLitiko   = contractualDocument.TotalAmountlitiko?.ToString() ?? "";
+        var currencyContract    = contractualDocument.CurrencyContractlitiko?.ToString() ?? "";
+        var currencyOperation   = contractualDocument.CurrencyOperationlitiko?.ToString() ?? "";
+        var vatApplicable       = ToYesNoNull(contractualDocument.IsVATlitiko);
+        var vatRate             = contractualDocument.VatRate?.ToString() ?? "";
+        var vatAmount           = contractualDocument.VatAmount?.ToString() ?? "";
+        var incomeTaxRate       = contractualDocument.IncomeTaxRatelitiko?.ToString() ?? "";
+        var amountForPeriod     = contractualDocument.TotalAmount?.ToString() ?? "";
+        var note                = contractualDocument.Note?.ToString() ?? "";
+        var registrationNumber  = contractualDocument.RegistrationNumber?.ToString() ?? "";
+        var registrationDate    = contractualDocument.RegistrationDate?.ToString(dateFormat) ?? "";
+    
+        var documentElement = new XElement("Document",
+            new XElement("ID", documentId),
+            new XElement("ExternalD", externalId),
+            new XElement("DocumentKind", documentKind),
+            new XElement("DocumentGroup", documentGroup),
+            new XElement("Subject", subject),
+            new XElement("Name", name),
+            new XElement("CounterpartySignatory", counterpartySign),
+            new XElement("Department", department),
+            new XElement("ResponsibleEmployee", responsibleEmployeeStr),
+            new XElement("Author", author),
+            new XElement("ResponsibleAccountant", responsibleAccountantFIO), 
+            new XElement("ResponsibleDepartment", responsibleDepartment), 
+            new XElement("RBO", rbo),
+            new XElement("ValidFrom", validFrom),
+            new XElement("ValidTill", validTill),
+            new XElement("СhangeReason", changeReason), 
+            new XElement("AccountDebtCredt", accountDebtCredit),
+            new XElement("AccountFutureExpense", accountFutureExp),
+            new XElement("TotalAmount", totalAmountLitiko),
+            new XElement("Currency", currencyContract),
+            new XElement("OperationCurrency", currencyOperation),
+            new XElement("VATApplicable", vatApplicable),
+            new XElement("VATRate", vatRate),
+            new XElement("VATAmount", vatAmount),
+            new XElement("IncomeTaxRate", incomeTaxRate),
+            new XElement("PaymentRegion", paymentRegion),
+            new XElement("PaymentTaxRegion", paymentTaxRegion),
+            new XElement("BatchProcessing", batchProcessing), 
+            new XElement("PaymentMethod", paymentMethod),
+            new XElement("PaymentFrequency", paymentFrequency),
+            new XElement("PaymentBasis",
+                new XElement("IsPaymentContract",   isPaymentContract),
+                new XElement("IsPaymentInvoice",    isPaymentInvoice),
+                new XElement("IsPaymentTaxInvoice", isPaymentTaxInvoice),
+                new XElement("IsPaymentAct",        isPaymentAct),
+                new XElement("IsPaymentOrder",      isPaymentOrder)
+            ),
+            new XElement("PaymentClosureBasis",
+                new XElement("IsPaymentContract",   isClosureContract),
+                new XElement("IsPaymentInvoice",    isClosureInvoice),
+                new XElement("IsPaymentTaxInvoice", isClosureTaxInvoice),
+                new XElement("IsPaymentAct",        isClosureAct),
+                new XElement("IsPaymentWaybill",    isClosureWaybill)
+            ),
+            new XElement("AmountForPeriod", amountForPeriod),
+            new XElement("Note", note),
+            new XElement("RegistrationNumber", registrationNumber),
+            new XElement("RegistrationDate", registrationDate)
+        );
+    
+        // Company
+        var companyElement = BuildCompanyXml(contractualDocument.Counterparty);
+    
+        // Person
+        var personElement = BuildPersonXml(contractualDocument.Counterparty);
+
+        // dataElement
+        var counterpartyElement = new XElement("Counterparty", companyElement, personElement);
+        var dataElement         = new XElement("Data", documentElement, counterpartyElement);
+    
+        return dataElement;
+    }
+
+    /// <summary>
+    /// Формирование XML для выгрузки Договора для ТЗ п.3.5.7 и п.3.5.8
+    /// </summary>
+    [Remote, Public]
+    //public string BuildContractXml(Sungero.Contracts.IContractualDocument contractualDocument)
+    public string BuildContractXml(litiko.Eskhata.IContractualDocument contractualDocument)
+    {
+        if (contractualDocument == null)
+            return string.Empty;
+    
+        XElement dataElement;
+    
+        // Определяем тип документа
+        bool isContract = litiko.Eskhata.Contracts.Is(contractualDocument);
+        bool isSupAgreement = litiko.Eskhata.SupAgreements.Is(contractualDocument);
+    
+        if (isContract)
+        {
+            // Вызываем функцию построения XML для обычного контракта
+            dataElement = BuildContractXmlForContract(litiko.Eskhata.Contracts.As(contractualDocument));
+        }
+        else if (isSupAgreement)
+        {
+            // Вызываем функцию построения XML для дополнительного соглашения
+            dataElement = BuildContractXmlForSupAgreement(litiko.Eskhata.SupAgreements.As(contractualDocument));
+        }
+        else
+        {
+            // Неизвестный тип документа, возвращаем пустой XML 
+            dataElement = new XElement("Data");
+        } 
+
+        var xdoc = new XDocument(
+            new XDeclaration("1.0", "UTF-8", null),
+            new XElement("root",
+                new XElement("head",
+                    new XElement("session_id", "123456"),
+                    new XElement("application_key", "sed.eskhata.com/Integration/odata/Integration/ProcessResponseFromIS##")
+                ),
+                new XElement("request",
+                    new XElement("protocol-version", "1.00"),
+                    new XElement("request-type", "R_DR_GET_DATA"),
+                    new XElement("dictionary", "R_DR_SET_CONTRACT"),
+                    new XElement("lastId", "0"),
+                    dataElement
+                )
+            )
+        );
+    
+        return xdoc.ToString();
+    }
+    #endregion
+   
   }
 }

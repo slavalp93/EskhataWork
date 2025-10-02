@@ -55,33 +55,67 @@ namespace litiko.Eskhata.Client
       #endregion
       
       var exchDoc = Integration.PublicFunctions.Module.Remote.CreateExchangeDocument();
-      exchDoc.IntegrationMethod = integrationMethod;
-      exchDoc.Counterparty = _obj;
+      exchDoc.IntegrationMethod = integrationMethod;      
       exchDoc.Save();
       var exchDocId = exchDoc.Id;      
       
-      var errorMessage =  Integration.PublicFunctions.Module.Remote.SendRequestToIS(integrationMethod, exchDoc, 0);      
+      //var errorMessage = string.Empty;
+      var errorMessage =  Integration.PublicFunctions.Module.Remote.SendRequestToIS(exchDoc, 0, _obj);
       if (!string.IsNullOrEmpty(errorMessage))
       {
+        exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
+        exchDoc.RequestToISInfo = errorMessage.Length >= 1000 ? errorMessage.Substring(0, 999) : errorMessage;
+        exchDoc.Save();
         e.AddError(errorMessage);
         return;
-      }      
-
-      bool successed = Integration.PublicFunctions.Module.Remote.WaitForGettingDataFromIS(exchDoc, 1000, 10);
-      if (successed)
+      }
+      else
+      {
+        exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Sent;        
+        exchDoc.Save();
+      }
+            
+      long exchangeQueueId = Integration.PublicFunctions.Module.Remote.WaitForGettingDataFromIS(exchDocId, 1000, 10);
+      if (exchangeQueueId > 0)
       {                
-        var errorList = new List<string>();
+        
+        #region Создать версию из xml
+        var exchQueue = litiko.Integration.ExchangeQueues.Get(exchangeQueueId);
+        using (var xmlStream = new System.IO.MemoryStream(exchQueue.Xml))
+        {
+          exchDoc.CreateVersionFrom(xmlStream, "xml");
+          exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;                                    
+          exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
+          exchDoc.RequestToRXInfo = "Saved";
+          exchDoc.RequestToRXPacketCount = 1;
+          exchDoc.Save();
+        }        
+        #endregion
+        
+        var errorList = new List<string>();        
         if (company != null)
           errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_COMPANY(exchDocId, _obj);
         else if (bank != null)
           errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_BANK(exchDocId, _obj);
         else if (person != null)
-          //errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_PERSON(exchDocId, _obj);
-        
+          errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_PERSON(exchDocId, _obj);
+                
         if (errorList.Any())
-          e.AddInformation(errorList.LastOrDefault());
+        {
+          var lastError = errorList.LastOrDefault();          
+          exchDoc.RequestToRXInfo = lastError.Length >= 1000 ? lastError.Substring(0, 999) : lastError;
+          exchDoc.StatusProcessingRx = Integration.ExchangeDocument.StatusProcessingRx.Error;          
+          exchDoc.Save();
+          
+          e.AddInformation(lastError);
+        }
         else
-          e.AddInformation(litiko.Integration.Resources.DataUpdatedSuccessfully);        
+        {
+          exchDoc.StatusProcessingRx = Integration.ExchangeDocument.StatusProcessingRx.Success;          
+          exchDoc.Save();
+          
+          e.AddInformation(litiko.Integration.Resources.DataUpdatedSuccessfully);
+        }        
       }
       else
         e.AddInformation(litiko.Integration.Resources.ResponseNotReceived);      
@@ -112,6 +146,12 @@ namespace litiko.Eskhata.Client
         var approvalTask = Sungero.Docflow.PublicFunctions.Module.Remote.CreateApprovalTask(lastDocument);
         if (!approvalTask.OtherGroup.All.Contains(_obj))
           approvalTask.OtherGroup.All.Add(_obj);
+        
+        foreach (var doc in documents.Where(d => !Equals(d, lastDocument)))
+        {
+          if (!approvalTask.OtherGroup.All.Contains(doc))
+            approvalTask.OtherGroup.All.Add(doc);          
+        }
         
         approvalTask.Show();
         e.CloseFormAfterAction = true;

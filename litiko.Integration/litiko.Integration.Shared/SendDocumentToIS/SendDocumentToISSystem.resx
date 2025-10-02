@@ -58,7 +58,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Property_TotalAmount" xml:space="preserve">
-    <value>Amount in nat currency</value>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Sending document to information system</value>
+  </data>
+  <data name="AccusativeDisplayName" xml:space="preserve">
+    <value>Send document to information system</value>
+  </data>
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Sendings documents to information system</value>
   </data>
 </root>

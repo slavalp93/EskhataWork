@@ -10,6 +10,24 @@ namespace litiko.Eskhata
   partial class AccountingDocumentBaseSharedHandlers
   {
 
+    public virtual void CurrencyRatelitikoChanged(litiko.Eskhata.Shared.AccountingDocumentBaseCurrencyRatelitikoChangedEventArgs e)
+    {
+      Functions.AccountingDocumentBase.FillTotalAmount(_obj, _obj.TotalAmountlitiko, e.NewValue, _obj.Currency);
+    }
+
+    public virtual void TotalAmountlitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
+    {
+      // Подставить валюту по умолчанию.
+      if (_obj.Currency == null)
+      {
+        var defaultCurrency = Sungero.Commons.PublicFunctions.Currency.Remote.GetDefaultCurrency();
+        if (defaultCurrency != null)
+          _obj.Currency = defaultCurrency;
+      }
+      
+      Functions.AccountingDocumentBase.FillTotalAmount(_obj, e.NewValue, _obj.CurrencyRatelitiko, _obj.Currency);
+    }
+
     public virtual void PennyRatelitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
     {
       Functions.AccountingDocumentBase.FillPennyAmount(_obj, _obj.TotalAmount, e.NewValue);
@@ -62,6 +80,7 @@ namespace litiko.Eskhata
       base.CurrencyChanged(e);
       
       Functions.AccountingDocumentBase.FillCurrencyRate(_obj, e.NewValue, _obj.RegistrationDate);
+      Functions.AccountingDocumentBase.FillTotalAmount(_obj, _obj.TotalAmountlitiko, _obj.CurrencyRatelitiko, e.NewValue);
     }
 
     public override void LeadingDocumentChanged(Sungero.Docflow.Shared.OfficialDocumentLeadingDocumentChangedEventArgs e)
@@ -69,8 +88,14 @@ namespace litiko.Eskhata
       base.LeadingDocumentChanged(e);
       
       var contract = Contracts.As(e.NewValue);
+      var supAgreement = SupAgreements.As(e.NewValue);
+      
+      if (contract == null && supAgreement != null && supAgreement.LeadingDocument != null)
+        contract = Contracts.As(supAgreement.LeadingDocument);
+      
       _obj.Counterparty = contract?.Counterparty;
       _obj.CurrencyOperationlitiko = contract?.CurrencyOperationlitiko;
+      _obj.Currency = contract?.CurrencyContractlitiko;
       
       _obj.TaxRatelitiko = contract?.TaxRatelitiko;
       

@@ -184,4 +184,13 @@
   <data name="Property_FamilyStatuslitiko" xml:space="preserve">
     <value>Family status</value>
   </data>
+  <data name="Action_FillFromABSlitiko" xml:space="preserve">
+    <value>Fill from ABS by TIN</value>
+  </data>
+  <data name="Action_FillFromABSlitikoHint" xml:space="preserve">
+    <value>Automatic filling of the counterparty details from the ABS according to the TIN</value>
+  </data>
+  <data name="Action_FillFromABSlitikoDescription" xml:space="preserve">
+    <value>Automatic filling of the counterparty details from the ABS according to the TIN</value>
+  </data>
 </root>

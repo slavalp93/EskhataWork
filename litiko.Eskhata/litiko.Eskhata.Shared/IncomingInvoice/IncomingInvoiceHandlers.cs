@@ -14,8 +14,14 @@ namespace litiko.Eskhata
     {
       base.ContractChanged(e);
       
-      var contract = Contracts.As(e.NewValue);      
+      var contract = Contracts.As(e.NewValue);
+      var supAgreement = SupAgreements.As(e.NewValue);
+      
+      if (contract == null && supAgreement != null && supAgreement.LeadingDocument != null)
+        contract = Contracts.As(supAgreement.LeadingDocument);
+      
       _obj.CurrencyOperationlitiko = contract?.CurrencyOperationlitiko;
+      _obj.Currency = contract?.CurrencyContractlitiko;
       
       _obj.TaxRatelitiko = contract?.TaxRatelitiko;
       

@@ -89,7 +89,7 @@
     <value>Банк</value>
   </data>
   <data name="Property_TaxResident" xml:space="preserve">
-    <value>Налоговый резидент</value>
+    <value>Налоговый нерезидент</value>
   </data>
   <data name="Property_VAT" xml:space="preserve">
     <value>НДС, %</value>

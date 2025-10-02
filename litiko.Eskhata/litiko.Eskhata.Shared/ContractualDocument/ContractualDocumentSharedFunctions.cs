@@ -53,7 +53,7 @@ namespace litiko.Eskhata.Shared
     [Public]
     public void FillTaxRate(IDocumentKind DocumentKind, Sungero.Contracts.IContractCategory category, Sungero.Parties.ICounterparty counterparty)
     {      
-      if (DocumentKind == null)
+      if (DocumentKind == null || counterparty == null)
       {
         _obj.TaxRatelitiko = null;
         return;
@@ -68,16 +68,24 @@ namespace litiko.Eskhata.Shared
         counterpartyType = NSI.TaxRate.CounterpartyType.Bank;
       else
         counterpartyType = null;      
+            
+      var taxRate = NSI.TaxRates.Null;            
+      bool? isNonResident = litiko.Eskhata.Counterparties.As(counterparty)?.NUNonrezidentlitiko;
       
-      var taxRate = NSI.TaxRates.Null;
+      // Базовый запрос
+      var query = NSI.TaxRates.GetAll()
+        .Where(x => Equals(x.DocumentKind, DocumentKind))
+        .Where(x => Equals(x.CounterpartyType, counterpartyType));
+      
+      // Фильтруем по признаку нерезидент (только если он не null)
+      if (isNonResident.HasValue)
+        query = query.Where(x => Equals(x.TaxResident, isNonResident));
+      
+      // Фильтруем по категории
       if (category != null)
-        taxRate = NSI.TaxRates.GetAll()
-          .Where(x => Equals(x.DocumentKind, DocumentKind) && Equals(x.CounterpartyType, counterpartyType) && Equals(x.Category, category))
-          .FirstOrDefault();
-      else
-        taxRate = NSI.TaxRates.GetAll()
-          .Where(x => Equals(x.DocumentKind, DocumentKind) && Equals(x.CounterpartyType, counterpartyType)) //&& x.Category == null
-          .FirstOrDefault();
+        query = query.Where(x => Equals(x.Category, category));
+      
+      taxRate = query.FirstOrDefault();      
       
       if (!Equals(_obj.TaxRatelitiko, taxRate))
         _obj.TaxRatelitiko = taxRate;
@@ -124,6 +132,12 @@ namespace litiko.Eskhata.Shared
         calculatedAmount = amount;
       else
       {
+        if (currencyRate == null)
+        {
+          _obj.TotalAmount = null;
+          return;
+        }
+        
         int UnitOfMeasurement = currencyRate?.Currency?.UnitOfMeasurementlitiko ?? 1;
         calculatedAmount = Math.Round(amount.Value * (double)currencyRate?.Rate / UnitOfMeasurement, 2);      
       }            

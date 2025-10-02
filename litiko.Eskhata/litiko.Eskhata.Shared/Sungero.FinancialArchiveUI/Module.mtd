@@ -9,6 +9,66 @@
   "ClientBaseNamespace": "litiko.Eskhata.Module.FinancialArchiveUI.ClientBase",
   "Code": "FinArUI",
   "CompanyCode": "Sungero",
+  "Cover": {
+    "NameGuid": "b567c089-d959-4833-bfbd-4d7751a2ad34",
+    "Actions": [
+      {
+        "$type": "Sungero.Metadata.CoverComputableFolderActionMetadata, Sungero.Metadata",
+        "NameGuid": "1f59b222-f6e1-4081-80eb-c95719a6bfc0",
+        "Name": "AllContractualDocuments",
+        "ComputableFolderId": "727ee230-9497-48cd-bceb-096fe7fc9a63",
+        "GroupId": "71b4e7f7-9afd-44f6-b908-212f50f84379",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "PreviousItemGuid"
+        ],
+        "PreviousItemGuid": "2741c489-a80c-4c46-8151-a4ba86415d12",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "2741c489-a80c-4c46-8151-a4ba86415d12",
+        "Name": "AllFinancialDocuments",
+        "EntityTypeId": "96c4f4f3-dc74-497a-b347-e8faf4afe320",
+        "GroupId": "71b4e7f7-9afd-44f6-b908-212f50f84379",
+        "IsAncestorMetadata": true,
+        "IsVisible": false,
+        "Overridden": [
+          "PreviousItemGuid",
+          "IsVisible"
+        ],
+        "PreviousItemGuid": "9f675885-badc-4128-8779-73190514c0a7",
+        "Versions": []
+      },
+      {
+        "$type": "Sungero.Metadata.CoverComputableFolderActionMetadata, Sungero.Metadata",
+        "NameGuid": "61019878-a1cf-45d8-8c3c-e0efbb3d7f00",
+        "Name": "PowerOfAttorneyList",
+        "ComputableFolderId": "1a28189b-8312-4c0e-bf40-cd8f33166887",
+        "GroupId": "71b4e7f7-9afd-44f6-b908-212f50f84379",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "PreviousItemGuid"
+        ],
+        "PreviousItemGuid": "1f59b222-f6e1-4081-80eb-c95719a6bfc0"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverComputableFolderActionMetadata, Sungero.Metadata",
+        "NameGuid": "9f675885-badc-4128-8779-73190514c0a7",
+        "Name": "FinancialDocumentslitiko",
+        "ComputableFolderId": "bd72576e-9c0a-4722-bb5d-b078c73bf1fe",
+        "GroupId": "71b4e7f7-9afd-44f6-b908-212f50f84379",
+        "PreviousItemGuid": "62db0c25-6b7e-417f-a2cf-9514ad838ae4"
+      }
+    ],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Overridden": [
+      "Actions"
+    ],
+    "Tabs": [],
+    "Versions": []
+  },
   "ExplorerTreeOrder": [
     {
       "ItemId": "bd72576e-9c0a-4722-bb5d-b078c73bf1fe",

@@ -1550,6 +1550,7 @@
         "Name": "Translate",
         "ButtonSize": "Large",
         "Index": 9,
+        "IsVisible": false,
         "LargeIconName": "Ribbon_Translate_large_a1db30f36a024fa299b71c31d4ebf6ff.png",
         "ParentGuid": "4f04b1b4-b6b2-424f-a95a-9a6927cfbdb4",
         "SmallIconName": "Ribbon_Translate_small_a1db30f36a024fa299b71c31d4ebf6ff.png"

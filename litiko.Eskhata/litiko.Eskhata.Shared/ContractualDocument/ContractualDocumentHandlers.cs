@@ -10,6 +10,12 @@ namespace litiko.Eskhata
   partial class ContractualDocumentSharedHandlers
   {
 
+    public virtual void CurrencyContractlitikoChanged(litiko.Eskhata.Shared.ContractualDocumentCurrencyContractlitikoChangedEventArgs e)
+    {
+      Functions.ContractualDocument.FillCurrencyRate(_obj, e.NewValue, _obj.ValidFrom);
+      Functions.ContractualDocument.FillTotalAmount(_obj, _obj.TotalAmountlitiko, _obj.CurrencyRatelitiko, e.NewValue);      
+    }
+
     public virtual void PennyRatelitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
     {
       Functions.ContractualDocument.FillPennyAmount(_obj, _obj.TotalAmount, e.NewValue, _obj.IsIndividualPaymentlitiko);
@@ -38,35 +44,27 @@ namespace litiko.Eskhata
 
     public virtual void CurrencyRatelitikoChanged(litiko.Eskhata.Shared.ContractualDocumentCurrencyRatelitikoChangedEventArgs e)
     {
-      Functions.ContractualDocument.FillTotalAmount(_obj, _obj.TotalAmountlitiko, e.NewValue, _obj.Currency);
+      Functions.ContractualDocument.FillTotalAmount(_obj, _obj.TotalAmountlitiko, e.NewValue, _obj.CurrencyContractlitiko);
     }
 
     public virtual void TotalAmountlitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
     {
       // Подставить валюту по умолчанию.
-      if (_obj.Currency == null)
+      if (_obj.CurrencyContractlitiko == null)
       {
         var defaultCurrency = Sungero.Commons.PublicFunctions.Currency.Remote.GetDefaultCurrency();
         if (defaultCurrency != null)
-          _obj.Currency = defaultCurrency;
+          _obj.CurrencyContractlitiko = defaultCurrency;
       }
       
-      Functions.ContractualDocument.FillTotalAmount(_obj, e.NewValue, _obj.CurrencyRatelitiko, _obj.Currency);
+      Functions.ContractualDocument.FillTotalAmount(_obj, e.NewValue, _obj.CurrencyRatelitiko, _obj.CurrencyContractlitiko);
     }
 
     public override void ValidFromChanged(Sungero.Domain.Shared.DateTimePropertyChangedEventArgs e)
     {
       base.ValidFromChanged(e);
       
-      Functions.ContractualDocument.FillCurrencyRate(_obj, _obj.Currency, e.NewValue);
-    }
-
-    public override void CurrencyChanged(Sungero.Docflow.Shared.ContractualDocumentBaseCurrencyChangedEventArgs e)
-    {
-      base.CurrencyChanged(e);
-      
-      Functions.ContractualDocument.FillCurrencyRate(_obj, e.NewValue, _obj.ValidFrom);
-      Functions.ContractualDocument.FillTotalAmount(_obj, _obj.TotalAmount, _obj.CurrencyRatelitiko, e.NewValue);
+      Functions.ContractualDocument.FillCurrencyRate(_obj, _obj.CurrencyContractlitiko, e.NewValue);
     }
 
     public override void TotalAmountChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
@@ -118,9 +116,9 @@ namespace litiko.Eskhata
         
         if (!Equals(contract.ResponsibleEmployee, _obj.ResponsibleEmployee))
           _obj.ResponsibleEmployee = contract.ResponsibleEmployee;
-        
-        if (!Equals(contract.Currency, _obj.Currency))
-          _obj.Currency = contract.Currency;
+                
+        if (!Equals(contract.CurrencyContractlitiko, _obj.CurrencyContractlitiko))
+          _obj.CurrencyContractlitiko = contract.CurrencyContractlitiko;
         
         if (!Equals(contract.TaxRatelitiko, _obj.TaxRatelitiko))
           _obj.TaxRatelitiko = contract.TaxRatelitiko;
