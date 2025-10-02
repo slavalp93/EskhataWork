@@ -9,6 +9,17 @@ namespace litiko.Eskhata.Client
 {
   partial class ContractualDocumentActions
   {
+    public override void ExportToABSlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      base.ExportToABSlitiko(e);
+    }
+
+    public override bool CanExportToABSlitiko(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      // Доступно роли «Администраторы» и «Ответственные за синхронизацию с учетными системами»
+      return Users.Current.IncludedIn(Roles.Administrators) || Users.Current.IncludedIn(Integration.PublicConstants.Module.SynchronizationResponsibleRoleGuid);
+    }
+
     public virtual void CreateWaybilllitiko(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var waybill = litiko.Eskhata.Functions.ContractualDocument.Remote.CreateWaybill();      

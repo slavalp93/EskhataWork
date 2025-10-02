@@ -91,4 +91,13 @@
   <data name="Enum_IntegrationStatuslitiko_Success" xml:space="preserve">
     <value>Успешно</value>
   </data>
+  <data name="Action_ExportToABSlitiko" xml:space="preserve">
+    <value>Экспорт в АБС</value>
+  </data>
+  <data name="Action_ExportToABSlitikoHint" xml:space="preserve">
+    <value>Передать информацию о документе в систему АБС</value>
+  </data>
+  <data name="Action_ExportToABSlitikoDescription" xml:space="preserve">
+    <value>Запуск процесса интеграции по документу с системой АБС</value>
+  </data>
 </root>

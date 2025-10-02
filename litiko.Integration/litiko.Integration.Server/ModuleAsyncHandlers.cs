@@ -313,10 +313,10 @@ namespace litiko.Integration.Server
               errorList = Functions.Module.R_DR_GET_CONTRACT_TYPE(dataElements);
               break;
             case Constants.Module.IntegrationMethods.R_DR_SET_CONTRACT:
-              errorList = Functions.Module.R_DR_SET_CONTRACT(dataElements);
+              errorList = Functions.Module.R_DR_SET_CONTRACT(dataElements, null, null);
               break;
             case Constants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT:
-              errorList = Functions.Module.R_DR_SET_CONTRACT(dataElements);
+              errorList = Functions.Module.R_DR_SET_CONTRACT(dataElements, null, null);
               break;              
           }
           

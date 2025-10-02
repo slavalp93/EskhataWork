@@ -176,15 +176,11 @@ namespace litiko.Integration.Server
         requestToISInfo = errorMessage;
         statusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
         Logger.Error(errorMessage);
-      }
+      }      
       
-      bool isCounterparty = exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_COMPANY || 
-        exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_BANK || 
-        exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_PERSON;
-      
-      if (!isCounterparty && (exchDoc.StatusRequestToIS != statusRequestToIS || exchDoc.RequestToISInfo != requestToISInfo))
-      {
-        // Обновляем exchDoc асинхронным обработчиком
+      // Обновляем exchDoc асинхронным обработчиком для не Online-запросов
+      if (!exchDoc.IsOnline.GetValueOrDefault() && (exchDoc.StatusRequestToIS != statusRequestToIS || exchDoc.RequestToISInfo != requestToISInfo))
+      {        
         var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
         asyncHandler.DocId = exchDoc.Id;
         asyncHandler.RequestToISInfo = requestToISInfo;
@@ -323,15 +319,11 @@ namespace litiko.Integration.Server
           statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
           requestToRXInfo = errorMessage;                      
           return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
-        }
+        }        
         
-        bool isCounterparty = exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_COMPANY || 
-          exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_BANK || 
-          exchDoc.IntegrationMethod.Name == Constants.Module.IntegrationMethods.R_DR_GET_PERSON;
-        
-        if (!isCounterparty)
+        if (!exchDoc.IsOnline.GetValueOrDefault())
         {
-          // Обновляем exchDoc асинхронным обработчиком
+          // Обновляем exchDoc асинхронным обработчиком для не Online-запросов
           var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
           asyncHandler.DocId = exchDoc.Id;
           asyncHandler.StatusRequestToRX = statusRequestToRX.ToString();
@@ -405,7 +397,8 @@ namespace litiko.Integration.Server
       }
       */      
       var exchDoc = Integration.ExchangeDocuments.Create();
-      exchDoc.IntegrationMethod = integrationMethod;      
+      exchDoc.IntegrationMethod = integrationMethod;
+      exchDoc.IsOnline = false;
       exchDoc.Save();
       
       var errorMessage = Functions.Module.SendRequestToIS(exchDoc, lastId, null);            
@@ -1857,7 +1850,7 @@ namespace litiko.Integration.Server
     /// <param name="exchDocID">ИД документа обмена</param>
     /// <param name="counterparty">Организация</param>
     /// <returns>Список ошибок (List<string>)</returns>
-    [Public, Remote]
+    [Remote]
     public List<string> R_DR_GET_COMPANY(long exchDocID, Eskhata.ICounterparty counterparty)
     {          
       Logger.Debug("R_DR_GET_COMPANY - Start");
@@ -2180,7 +2173,7 @@ namespace litiko.Integration.Server
     /// <param name="exchDocID">ИД документа обмена</param>
     /// <param name="counterparty">Банк</param>
     /// <returns>Список ошибок (List<string>)</returns>
-    [Public, Remote]
+    [Remote]
     public List<string> R_DR_GET_BANK(long exchDocID, Eskhata.ICounterparty counterparty)
     {          
       Logger.Debug("R_DR_GET_BANK - Start");
@@ -2481,7 +2474,7 @@ namespace litiko.Integration.Server
               throw AppliedCodeException.Create(string.Format("Failed to convert value to date:{0}", isRateDate));
             
             double rate;
-            if (!Double.TryParse(isRate, out rate))
+            if (!Double.TryParse(isRate, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out rate))
               throw AppliedCodeException.Create(string.Format("Failed to convert value to double:{0}", isRate));
             
             var currency = litiko.Eskhata.Currencies.GetAll()
@@ -2898,7 +2891,7 @@ namespace litiko.Integration.Server
     /// <param name="exchDocID">ИД документа обмена</param>
     /// <param name="counterparty">Персона</param>
     /// <returns>Список ошибок (List<string>)</returns>
-    [Public, Remote]
+    [Remote]
     public List<string> R_DR_GET_PERSON(long exchDocID, Eskhata.ICounterparty counterparty)
     {          
       Logger.Debug("R_DR_GET_PERSON - Start");
@@ -2937,12 +2930,20 @@ namespace litiko.Integration.Server
       return errorList;
     }
     
+    [Remote]
+    public List<string> R_DR_SET_CONTRACT_Online(IExchangeDocument exchDoc, litiko.Eskhata.IOfficialDocument document)
+    {
+      return R_DR_SET_CONTRACT(null, exchDoc, document);
+    }
+    
     /// <summary>
     /// Обработка договорного документа.
     /// </summary>
     /// <param name="dataElements">Информация о договорном документе в виде XElement.</param>
-    /// <returns>Список ошибок (List<string>)</returns>     
-    public List<string> R_DR_SET_CONTRACT(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> dataElements)
+    /// <param name="exchDoc">Документ обмена (при online интеграции).</param>
+    /// <param name="document">Документ (при online интеграции).</param>
+    /// <returns>Список ошибок (List<string>)</returns>
+    public List<string> R_DR_SET_CONTRACT(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> dataElements,IExchangeDocument exchDoc, litiko.Eskhata.IOfficialDocument document)
     {          
       Logger.Debug("R_DR_SET_CONTRACT - Start");
       
@@ -2951,6 +2952,21 @@ namespace litiko.Integration.Server
       {          
         try
         {                        
+          if (dataElements == null)
+          {
+            XDocument xmlDoc = XDocument.Load(exchDoc.LastVersion.Body.Read());                                 
+            
+            string state = xmlDoc.Root.Element("request")?.Element("stateId")?.Value;
+            string stateMsg = xmlDoc.Root.Element("request")?.Element("stateMsg")?.Value;
+            bool statusIS = state != "0";
+            if (!statusIS)
+              throw AppliedCodeException.Create($"State message from IS:{stateMsg}");         
+            
+            dataElements = xmlDoc.Descendants("Data").Elements();            
+            if (!dataElements.Any())
+              throw AppliedCodeException.Create("Empty Data node.");
+          }
+          
           var documentElement = dataElements.FirstOrDefault(x => x.Name == "Document");
           if (documentElement == null)
             throw AppliedCodeException.Create($"Document node is absent");
@@ -2968,9 +2984,19 @@ namespace litiko.Integration.Server
           if (!System.Int64.TryParse(isId, out docId))
             throw AppliedCodeException.Create($"Invalid value in <Document><ID> node:{isId}");
           
-          var document = litiko.Eskhata.OfficialDocuments.Get(docId);
-          if (!Locks.TryLock(document))
-            throw AppliedCodeException.Create(SendDocumentStages.Resources.DocumentIsLockedFormat(document.Id));
+          bool isForcedLocked = false;
+          if (document == null)
+          {
+            document = litiko.Eskhata.OfficialDocuments.Get(docId);
+            isForcedLocked = Locks.TryLock(document);
+            if (!isForcedLocked)
+              throw AppliedCodeException.Create(SendDocumentStages.Resources.DocumentIsLockedFormat(document.Id));
+          }          
+          else
+          {
+            if (document.Id != docId)
+              throw AppliedCodeException.Create($"The document ID:{isId} does not match");
+          }                                  
           
           try          
           {
@@ -2982,7 +3008,9 @@ namespace litiko.Integration.Server
             
             if (document.State.IsChanged)
             {
-              document.Save();            
+              if (isForcedLocked)
+                document.Save();
+              
               Logger.Debug($"Document:{docId} updated successfully");
             }            
             else
@@ -2990,7 +3018,8 @@ namespace litiko.Integration.Server
           }
           finally
           {
-            Locks.Unlock(document);
+            if (isForcedLocked)
+              Locks.Unlock(document);
           }                                          
           
           XElement counterpartyDataElement = null;
@@ -3007,13 +3036,22 @@ namespace litiko.Integration.Server
           long conterpartyId;
           if (!System.Int64.TryParse(isConterpartyId, out conterpartyId))
             throw AppliedCodeException.Create($"Invalid value in <Counterparty><ID> node:{isConterpartyId}");
-          
-          var counterparty = litiko.Eskhata.Counterparties.Get(conterpartyId);
+                    
+          var counterparty = litiko.Eskhata.Counterparties.Get(conterpartyId);          
           if (counterparty.ExternalId != isConterpartyExternalId)
           {
-            counterparty.ExternalId = isExternalD;
-            counterparty.Save();
-            Logger.Debug($"Counterparty:{isConterpartyExternalId} updated successfully");          
+            isForcedLocked = Locks.TryLock(counterparty);
+            try
+            {
+              counterparty.ExternalId = isExternalD;
+              counterparty.Save();
+              Logger.Debug($"Counterparty:{isConterpartyExternalId} updated successfully");                      
+            }
+            finally
+            {
+              if (isForcedLocked)
+                Locks.Unlock(counterparty);
+            }            
           }
           else
             Logger.Debug($"There are no changes in counterparty:{isConterpartyExternalId}");
@@ -3023,7 +3061,7 @@ namespace litiko.Integration.Server
         {
           var errorMessage = string.Format("Error when processing Document. Description: {0}. StackTrace: {1}", ex.Message, ex.StackTrace);
           Logger.Error(errorMessage);
-          errorList.Add(errorMessage);
+          errorList.Add(ex.Message);
         }        
       });      
       

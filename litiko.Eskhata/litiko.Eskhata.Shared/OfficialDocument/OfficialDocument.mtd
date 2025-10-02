@@ -13,6 +13,14 @@
         "GenerateHandler"
       ],
       "Versions": []
+    },
+    {
+      "NameGuid": "ee2e8155-3df0-4352-9ab4-406c5d5cab0d",
+      "Name": "ExportToABSlitiko",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_ExportToABSlitiko_large_ee2e81553df043529ab4406c5d5cab0d.png",
+      "SmallIconName": "Action_ExportToABSlitiko_small_ee2e81553df043529ab4406c5d5cab0d.png"
     }
   ],
   "BaseGuid": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
@@ -252,7 +260,17 @@
     "NameGuid": "9928919e-7ba5-49c4-8b4a-f42b6653377e",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "e8579d30-0585-4026-8c3c-d47070ac7411",
+        "Name": "ExportToABSlitikolitiko",
+        "ActionGuid": "ee2e8155-3df0-4352-9ab4-406c5d5cab0d",
+        "ButtonSize": "Large",
+        "Index": 41,
+        "ParentGuid": "f329dc86-efcb-484a-bdfd-999e6f96e971"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],

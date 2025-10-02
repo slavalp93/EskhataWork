@@ -11,7 +11,7 @@ namespace litiko.Eskhata.Client
   {
     public virtual void FillFromABSlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      #region Предпроверки      
+      
       // "Ответственные за синхронизацию с учетными системами"
       // "Ответственные за контрагентов"
       // "Администраторы"
@@ -22,6 +22,16 @@ namespace litiko.Eskhata.Client
         return;
       }
       
+      string errorMessage = litiko.Integration.PublicFunctions.Module.IntegrationClientAction(_obj);
+      if (!string.IsNullOrEmpty(errorMessage))
+      {
+        e.AddError(errorMessage);
+        return;
+      }
+      else
+        e.AddInformation(litiko.Integration.Resources.DataUpdatedSuccessfully);      
+      
+      /*
       var company = Companies.As(_obj);
       var bank = Banks.As(_obj);
       var person = People.As(_obj);
@@ -55,7 +65,8 @@ namespace litiko.Eskhata.Client
       #endregion
       
       var exchDoc = Integration.PublicFunctions.Module.Remote.CreateExchangeDocument();
-      exchDoc.IntegrationMethod = integrationMethod;      
+      exchDoc.IntegrationMethod = integrationMethod;
+      exchDoc.IsOnline = true;
       exchDoc.Save();
       var exchDocId = exchDoc.Id;      
       
@@ -119,6 +130,7 @@ namespace litiko.Eskhata.Client
       }
       else
         e.AddInformation(litiko.Integration.Resources.ResponseNotReceived);      
+      */
     }
 
     public virtual bool CanFillFromABSlitiko(Sungero.Domain.Client.CanExecuteActionArgs e)

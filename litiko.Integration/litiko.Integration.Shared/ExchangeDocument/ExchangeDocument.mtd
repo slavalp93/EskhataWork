@@ -205,6 +205,19 @@
           "RowNumber": 6,
           "RowSpan": 1,
           "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "e93b2ad3-6ebd-41eb-a0fd-ee193c631de4",
+          "Name": "IsOnline",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "dac5a094-b07f-407e-a80d-71198fff1704",
+          "PropertyGuid": "baaadd47-7981-46e1-b26b-81009bed43e1",
+          "RowNumber": 6,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,
@@ -377,6 +390,14 @@
       ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
       "PreviousPropertyGuid": "144f2a2a-b059-417a-84e3-69fb48d8bf55"
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "baaadd47-7981-46e1-b26b-81009bed43e1",
+      "Name": "IsOnline",
+      "Code": "IsOnline",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "842b276b-8356-4cb6-90d8-cb49b3ff663d"
     }
   ],
   "PublicStructures": [],

@@ -583,6 +583,19 @@
       "ReturnTypeFullName": "Sungero.Content.IElectronicDocumentVersions, Sungero.Content.Shared"
     },
     {
+      "Name": "IntegrationClientAction",
+      "Parameters": [
+        {
+          "Name": "entity",
+          "ParameterType": "global::Sungero.Domain.Shared.IEntity",
+          "ParameterTypeFullName": "Sungero.Domain.Shared.IEntity, Sungero.Domain.Shared"
+        }
+      ],
+      "Placement": "Client",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
       "Name": "ProcessResponseFromIS",
       "Parameters": [
         {
@@ -592,63 +605,6 @@
       ],
       "ReturnType": "System.Byte[]",
       "WebApiRequestType": "Post"
-    },
-    {
-      "Name": "R_DR_GET_BANK",
-      "IsRemote": true,
-      "Parameters": [
-        {
-          "Name": "exchDocID",
-          "ParameterType": "global::System.Int64",
-          "ParameterTypeFullName": "System.Int64"
-        },
-        {
-          "Name": "counterparty",
-          "ParameterType": "global::litiko.Eskhata.ICounterparty",
-          "ParameterTypeFullName": "litiko.Eskhata.ICounterparty, Sungero.Domain.Interfaces"
-        }
-      ],
-      "Placement": "Shared",
-      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
-      "ReturnTypeFullName": "System.Collections.Generic.List"
-    },
-    {
-      "Name": "R_DR_GET_COMPANY",
-      "IsRemote": true,
-      "Parameters": [
-        {
-          "Name": "exchDocID",
-          "ParameterType": "global::System.Int64",
-          "ParameterTypeFullName": "System.Int64"
-        },
-        {
-          "Name": "counterparty",
-          "ParameterType": "global::litiko.Eskhata.ICounterparty",
-          "ParameterTypeFullName": "litiko.Eskhata.ICounterparty, Sungero.Domain.Interfaces"
-        }
-      ],
-      "Placement": "Shared",
-      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
-      "ReturnTypeFullName": "System.Collections.Generic.List"
-    },
-    {
-      "Name": "R_DR_GET_PERSON",
-      "IsRemote": true,
-      "Parameters": [
-        {
-          "Name": "exchDocID",
-          "ParameterType": "global::System.Int64",
-          "ParameterTypeFullName": "System.Int64"
-        },
-        {
-          "Name": "counterparty",
-          "ParameterType": "global::litiko.Eskhata.ICounterparty",
-          "ParameterTypeFullName": "litiko.Eskhata.ICounterparty, Sungero.Domain.Interfaces"
-        }
-      ],
-      "Placement": "Shared",
-      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
-      "ReturnTypeFullName": "System.Collections.Generic.List"
     },
     {
       "Name": "SendRequestToIS",
@@ -742,7 +698,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.136",
+  "Version": "0.0.1.137",
   "Widgets": [],
   "Versions": [
     {

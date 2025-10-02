@@ -163,4 +163,7 @@
   <data name="Action_ExchangeQueueConfirmationDescription" xml:space="preserve">
     <value />
   </data>
+  <data name="Property_IsOnline" xml:space="preserve">
+    <value>Online</value>
+  </data>
 </root>

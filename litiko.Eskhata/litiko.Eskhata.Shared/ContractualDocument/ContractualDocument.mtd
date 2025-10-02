@@ -5,6 +5,15 @@
   "AccessRightsMode": "Both",
   "Actions": [
     {
+      "NameGuid": "ee2e8155-3df0-4352-9ab4-406c5d5cab0d",
+      "Name": "ExportToABSlitiko",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ]
+    },
+    {
       "NameGuid": "d021d43d-7949-4bdf-b0a0-4db25547f388",
       "Name": "SendForApproval",
       "GenerateHandler": true,
