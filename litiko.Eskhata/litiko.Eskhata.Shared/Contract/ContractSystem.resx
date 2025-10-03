@@ -244,4 +244,22 @@
   <data name="Action_CreateLegalOpinionlitikoConfirmationDescription" xml:space="preserve">
     <value />
   </data>
+  <data name="Property_RequestContractlitiko" xml:space="preserve">
+    <value>ShinaContract</value>
+  </data>
+  <data name="Action_Requestlitiko" xml:space="preserve">
+    <value>Requestlitiko</value>
+  </data>
+  <data name="Action_RequestlitikoDescription" xml:space="preserve">
+    <value>Requestlitiko</value>
+  </data>
+  <data name="Action_RequestlitikoHint" xml:space="preserve">
+    <value>Requestlitiko</value>
+  </data>
+  <data name="Action_RequestlitikoConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_RequestlitikoConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
 </root>

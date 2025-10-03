@@ -12,6 +12,10 @@ using System.Xml.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Net;
+using litiko.Integration.Structures.Module;
+using Sungero.Contracts;
+using Sungero.Docflow.Server;
+using Sungero.FinancialArchive.OutgoingTaxInvoice;
 
 namespace litiko.Integration.Server
 {
@@ -410,16 +414,14 @@ namespace litiko.Integration.Server
     
     #endregion
 
-    public
-      
-      #region Создание/обновление сущьностей по XML-данным от внешней информационной системы.
-      
-      /// <summary>
-      /// Обработка подразделений.
-      /// </summary>
-      /// <param name="dataElements">Информация по подразделиям в виде XElement.</param>
-      /// <returns>Список ошибок (List<string>)</returns>
-      public List<string> R_DR_GET_DEPART(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> dataElements)
+    #region Создание/обновление сущьностей по XML-данным от внешней информационной системы.
+    
+    /// <summary>
+    /// Обработка подразделений.
+    /// </summary>
+    /// <param name="dataElements">Информация по подразделиям в виде XElement.</param>
+    /// <returns>Список ошибок (List<string>)</returns>
+    public List<string> R_DR_GET_DEPART(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> dataElements)
     {
       Logger.Debug("R_DR_GET_DEPART - Start");
       var errorList = new List<string>();
@@ -865,7 +867,7 @@ namespace litiko.Integration.Server
                                var isMiddleNameRU = element.Element("MiddleNameRU")?.Value;
                                var isMiddleNameTG = element.Element("MiddleNameTG")?.Value;
                                
-                               var isPersonalNumber = element.Element("PersonalNumber")?.Value; // FIXME PersonnelNumber
+                               var isPersonnelNumber = element.Element("isPersonnelNumber")?.Value;
                                var isPhone = element.Element("Phone")?.Value;
                                var isJobTittle = element.Element("JobTitle");
                                var isPerson = element.Element("FASE");
@@ -3855,119 +3857,259 @@ namespace litiko.Integration.Server
     }
     #endregion
     
-    #region Импорт Договоров
-    //    public static void ImportContractFromXml(string xmlContent)
-    //    {
-    //      if(string.IsNullOrWhiteSpace(xmlContent))
-    //      {
-    //        Logger.Error("ImportContractFromXML: Input XML is empty.");
-    //        return;
-    //      }
-    //      try
-    //      {
-    //        var xdoc = XDocument.Parse(xmlContent);
-    //        var dataElement = xdoc.Root?.Element("request")?.Element("Data");
-//
-    //        if(dataElement ==null)
-    //          throw new InvalidOperationException("XML node /root/request/Data not found");
-//
-    //        var isSupAgreement = dataElement.Element("Document")?.Element("Contract") != null;
-//
-    //        if (isSupAgreement)
-    //        {
-    //          ProcessSupAgreementData(dataElement);
-    //        }
-    //        else
-    //        {
-    //          ProcessContractData(dataElement);
-    //        }
-    //      }
-    //      catch (Exception ex)
-    //      {
-    //        Logger.Error("Failed to import contract from XML.", ex);
-    //        throw;
-    //      }
-    //    }
-//
-    //    /// <summary>
-    //    /// Обрабатывает данные основного договора
-    //    /// </summary>
-    //    /// <param name="dataElement"></param>
-    //    private static void ProcessContractData(XElement dataElement)
-    //    {
-//
-//
-    //    }
+      
+     
+          public List<string> R_DR_SET_CONTRACTS(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> dataElements)
+          {
+            Logger.Debug("R_DR_SET_CONTRACTS - Start");
+            var errorList = new List<string>();
+            var countAll = dataElements.Count();
+            var countChanged = 0;
+            var countNotChanged = 0;
+            var countErrors = 0;
 
+
+            foreach (var element in dataElements)
+            {
+              Transactions.Execute(() =>
+              {
+                // <Document
+                var isExternalId = element.Element("ExternalD")?.Value;
+                var isDocumentKind = element.Element("DocumentKind")?.Value;
+                var isDocumentGroup = element.Element("DocumentGroup")?.Value;
+                var isSubject = element.Element("Subject")?.Value;
+                var isName = element.Element("Name")?.Value;
+                var isCounterpartySignatory = element.Element("CounterpartySignatory")?.Value;
+                var isDepartment = element.Element("Department")?.Value;
+                var isAuthor = element.Element("Author")?.Value;
+                var isResponsibleAccountant = element.Element("ResponsibleAccountant")?.Value;
+                var isResponsibleDepartment = element.Element("ResponsibleDepartment")?.Value;
+                var isRBO = element.Element("ResponsibleEmployee")?.Value;
+                var isValidFrom = element.Element("ValidFrom")?.Value;
+                var isValidTill = element.Element("ValidTill")?.Value;
+                var isСhangeReason = element.Element("СhangeReason")?.Value;
+                var isAccountDebtCredt = element.Element("AccountDebtCredt")?.Value;
+                var isAccountFutureExpense = element.Element("AccountFutureExpense")?.Value;
+                var isInternalAcc = element.Element("InternalAcc")?.Value;
+                var isTotalAmount = element.Element("TotalAmount")?.Value;
+                var isCurrency = element.Element("Currency")?.Value;
+                var isOperationCurrency = element.Element("OperationCurrency")?.Value;
+                var isVATApplicable = element.Element("VATApplicable")?.Value;
+                var isVATRate = element.Element("VATRate")?.Value;
+                var isVATAmount = element.Element("VATAmount")?.Value;
+                var isIncomeTaxRate = element.Element("IncomeTaxRate")?.Value;
+                var isPaymentRegion = element.Element("PaymentRegion")?.Value;
+                var isPaymentTaxRegion = element.Element("PaymentTaxRegion")?.Value;
+                var isBatchProcessing = element.Element("BatchProcessing")?.Value;
+                var isPaymentMethod = element.Element("PaymentMethod")?.Value;
+                var isPaymentFrequency = element.Element("PaymentFrequency")?.Value;
+
+                var isPaymentBasis = element.Element("PaymentBasis").Elements("IsPaymentContract").Elements("IsPaymentInvoice").Elements("IsPaymentTaxInvoice").Elements("IsPaymentAct").Elements("IsPaymentOrder");
+                var isPaymentClosureBasis = element.Element("PaymentClosureBasis").Elements("IsPaymentContract").Elements("IsPaymentInvoice").Elements("IsPaymentTaxInvoice").Elements("IsPaymentAct").Elements("IsPaymentOrder").Elements("IsPaymentWaybill");
+
+                var isPartialPayment = element.Element("PartialPayment")?.Value;
+                var isIsEqualPayment = element.Element("IsEqualPayment")?.Value;
+                var isAmountForPeriod = element.Element("AmountForPeriod")?.Value;
+                var isNote = element.Element("Note")?.Value;
+                var isRegistrationNumber = element.Element("RegistrationNumber")?.Value;
+                var isRegistrationDate = element.Element("RegistrationDate")?.Value;
+                // </Document>
+                
+
+                // <Counterparty>
+              });
+            }
+
+            return errorList;
+          }
+      
+          
+          
+           
+          //    public static void ImportContractFromXml(string xmlContent)
+          //    {
+          //      if(string.IsNullOrWhiteSpace(xmlContent))
+          //      {
+          //        Logger.Error("ImportContractFromXML: Input XML is empty.");
+          //        return;
+          //      }
+          //      try
+          //      {
+          //        var xdoc = XDocument.Parse(xmlContent);
+          //        var dataElement = xdoc.Root?.Element("request")?.Element("Data");
+//
+          //        if(dataElement ==null)
+          //          throw new InvalidOperationException("XML node /root/request/Data not found");
+//
+          //        var isSupAgreement = dataElement.Element("Document")?.Element("Contract") != null;
+//
+          //        if (isSupAgreement)
+          //        {
+          //          ProcessSupAgreementData(dataElement);
+          //        }
+          //        else
+          //        {
+          //          ProcessContractData(dataElement);
+          //        }
+          //      }
+          //      catch (Exception ex)
+          //      {
+          //        Logger.Error("Failed to import contract from XML.", ex);
+          //        throw;
+          //      }
+          //    }
+//
+          //    /// <summary>
+          //    /// Обрабатывает данные основного договора
+          //    /// </summary>
+          //    /// <param name="dataElement"></param>
+          //    private static void ProcessContractData(XElement dataElement)
+          //    {
+//
+//
+          //    }
+
+          
+      /*[Public, Remote] // IsPure = true, если действие не меняет _obj, а только выполняет логику
+    public string GetAndProcessExchangeDoc()
+    {
+      var errorMessage = string.Empty;
+      
+      string url = "http://10.10.2.53:9850";
+      
+      var xmlRequestBody =
+        $@"<?xml version=""1.0"" encoding=""utf-8""?>
+            <root>
+            <head>
+	            <session_id>2</session_id>
+	            <application_key>172.20.70.75:80/Integration/odata/Integration/ProcessResponseFromIS##</application_key>
+            </head>
+            <request>
+	            <protocol-version>1.00</protocol-version>
+	            <request-type>R_DR_GET_DATA</request-type>
+	            <dictionary>R_DR_SET_CONTRACTS</dictionary>
+	            <lastId>1</lastId>
+            </request>
+            </root>";
+      
+      try
+      {
+        using (HttpClient httpClient = new HttpClient())
+        {
+          httpClient.DefaultRequestHeaders.Accept.Clear();
+          httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
+
+          StringContent content = new StringContent(xmlRequestBody, Encoding.UTF8, "application/xml");
+          
+          HttpResponseMessage response = httpClient.PostAsync(url, content).Result;
+
+          response.EnsureSuccessStatusCode();
+
+          string responseBody = response.Content.ReadAsStringAsync().Result;
+
+          /*if (IsValidXml(responseBody))
+          {
+            XElement xmlResponse = XElement.Parse(responseBody);
+
+            string state = xmlResponse.Element("response")?.Element("state")?.Value;
+            string stateMsg = xmlResponse.Element("response")?.Element("state_msg")?.Value;
+
+            if (state == "1")
+            {
+              Logger.DebugFormat("Response successful. State message {0}", stateMsg);
+            }
+          }#1#
+        }
+        
+      }
+      catch (HttpRequestException e)
+      {
+        // Обработка исключений сети и HTTP
+        errorMessage = string.Format("Request error: {0}", e.Message);
+      }
+      catch (XmlException e)
+      {
+        // Обработка ошибок XML парсинга
+        errorMessage = string.Format("XML error: {0}", e.Message);
+      }
+      catch (Exception e)
+      {
+        // Обработка других ошибок
+        errorMessage = string.Format("Unexpected error: {0}", e.Message);
+      }
+      return errorMessage;
+    }
+  }*/
+      
+      
+      
+    /*#region Импорт Договоров
+    
+    /*
     public List<string> R_DR_SET_CONTRACTS(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> dataElements)
+    #1#
+    public List<string> R_DR_SET_CONTRACTS(DocumentInfo docData)
     {
       Logger.Debug("R_DR_SET_CONTRACTS - Start");
       var errorList = new List<string>();
-      var countAll = dataElements.Count();
-      var countChanged = 0;
-      var countNotChanged = 0;
-      var countErrors = 0;
-      
-      
-      foreach (var element in dataElements)
+      //int countAll = dataElements.Count();
+      int countCreated = 0;
+      int countErrors = 0;
+
+      try
       {
+        string result = string.Empty;
+
         Transactions.Execute(() =>
-                             {
-                               // <Document
-                               var isExternalId = element.Element("ExternalD")?.Value;
-                               var isDocumentKind = element.Element("DocumentKind")?.Value;
-                               var isDocumentGroup = element.Element("DocumentGroup")?.Value;
-                               var isSubject = element.Element("Subject")?.Value;
-                               var isName = element.Element("Name")?.Value;
-                               var isCounterpartySignatory = element.Element("CounterpartySignatory")?.Value;
-                               var isDepartment = element.Element("Department")?.Value;
-                               var isAuthor = element.Element("Author")?.Value;
-                               var isResponsibleAccountant = element.Element("ResponsibleAccountant")?.Value;
-                               var isResponsibleDepartment = element.Element("ResponsibleDepartment")?.Value;
-                               var isRBO = element.Element("ResponsibleEmployee")?.Value;
-                               var isValidFrom = element.Element("ValidFrom")?.Value;
-                               var isValidTill = element.Element("ValidTill")?.Value;
-                               var isСhangeReason = element.Element("СhangeReason")?.Value;
-                               var isAccountDebtCredt = element.Element("AccountDebtCredt")?.Value;
-                               var isAccountFutureExpense = element.Element("AccountFutureExpense")?.Value;
-                               var isInternalAcc = element.Element("InternalAcc")?.Value;
-                               var isTotalAmount = element.Element("TotalAmount")?.Value;
-                               var isCurrency = element.Element("Currency")?.Value;
-                               var isOperationCurrency = element.Element("OperationCurrency")?.Value;
-                               var isVATApplicable = element.Element("VATApplicable")?.Value;
-                               var isVATRate = element.Element("VATRate")?.Value;
-                               var isVATAmount = element.Element("VATAmount")?.Value;
-                               var isIncomeTaxRate = element.Element("IncomeTaxRate")?.Value;
-                               var isPaymentRegion = element.Element("PaymentRegion")?.Value;
-                               var isPaymentTaxRegion = element.Element("PaymentTaxRegion")?.Value;
-                               var isBatchProcessing = element.Element("BatchProcessing")?.Value;
-                               var isPaymentMethod = element.Element("PaymentMethod")?.Value;
-                               var isPaymentFrequency = element.Element("PaymentFrequency")?.Value;
-                               
-                               var isPaymentBasis = element.Element("PaymentBasis")?.Value;
-                               
-                               
-                               var isPaymentClosureBasis = element.Element("PaymentClosureBasis")?.Value;
-                               
-                               var isPartialPayment = element.Element("PartialPayment")?.Value;
-                               var isIsEqualPayment = element.Element("IsEqualPayment")?.Value;
-                               var isAmountForPeriod = element.Element("AmountForPeriod")?.Value;
-                               var isNote = element.Element("Note")?.Value;
-                               var isRegistrationNumber = element.Element("RegistrationNumber")?.Value;
-                               var isRegistrationDate = element.Element("RegistrationDate")?.Value;
-                               // </Document>
-                               
-                               // <Counterparty>
-                               var
-                                 
-                                 
-                                 
-                             }
-        }
+          {
+            if (docData == null)
+              throw AppliedCodeException.Create("Counterparty is missing in xml");
+
+            if (string.IsNullOrEmpty(docData.ExternalD))
+              throw AppliedCodeException.Create("ExternalD is missing");
+
+                //var counterparty = FindCounterpartyFromXml(docData.CounterpartyInfo.Person.ExternalID).DisplayValue();
+
+            var contract = Sungero.Contracts.Contracts.GetAll(c => c.ExternalId == docData.ExternalD).FirstOrDefault();
+            if (contract != null)
+            {
+              Logger.DebugFormat("Contract with {0} ExternalId already have in DB. {Skip {1}", docData.ExternalD, contract.Id);
+              return;
+            }
+
+            contract = Sungero.Contracts.Contracts.Create();
+            
+            contract.ExternalId = docData.ExternalD;
+            contract.DocumentKind = docData.DocumentKind;
+            contract.DocumentGroup = docData.DocumentGroup;
+            contract.Subject = docElement.Element("Subject")?.Value;
+            
+            contract.Name = docElement.Element("Name")?.Value;
+            contract.DocumentKind = docElement.Element("DocumentKind");
+
+          });
+      }
+      catch (Exception e)
+      {
+        Console.WriteLine(e);
+        throw;
+      }
     }
-    
-    
-    #endregion
-    
+
+    private Sungero.Parties.ICounterparty FindCounterpartyFromXml(XElement personElement)
+    {
+      var inn = personElement.Element("INN").Value;
+      if (string.IsNullOrEmpty(inn))
+        throw AppliedCodeException.Create("У контрагента не указан ИНН.");
+
+      var counterparty = Sungero.Parties.Counterparties
+        .GetAll(c => c.TIN == inn && c.Status == Sungero.CoreEntities.DatabookEntry.Status.Active).FirstOrDefault();
+
+      return counterparty;
+    }
+    #endregion*/
+      
   }
+  
+  
 }

@@ -20,6 +20,14 @@
       "GenerateHandler": true,
       "LargeIconName": "Action_CreateLegalOpinionlitiko_large_3ce1db8c57964b0bb5e72a76050237be.png",
       "SmallIconName": "Action_CreateLegalOpinionlitiko_small_3ce1db8c57964b0bb5e72a76050237be.png"
+    },
+    {
+      "NameGuid": "89c5eb19-a804-47de-888b-f50ea43980f9",
+      "Name": "Requestlitiko",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": null,
+      "SmallIconName": null
     }
   ],
   "BaseGuid": "f37c7e63-b134-4446-9b5b-f8811f6c9666",
@@ -668,7 +676,8 @@
     }
   ],
   "HandledEvents": [
-    "CreatedServer"
+    "CreatedServer",
+    "ShowingClient"
   ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "f37c7e63-b134-4446-9b5b-f8811f6c9666",
@@ -911,6 +920,14 @@
       "FlatListInStandaloneLookup": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "8470fc48-267e-4164-aa3f-40ef8e422251"
+    },
+    {
+      "$type": "Sungero.Metadata.TextPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "379530f7-d06c-4fcb-9d03-154e82acc757",
+      "Name": "RequestContractlitiko",
+      "Code": "RequestContrac",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToTextBinder",
+      "PreviousPropertyGuid": "d3fd9bb1-067d-490d-95bb-ead1f9f3a8d7"
     }
   ],
   "PublicFunctions": [
@@ -1006,6 +1023,14 @@
         "ButtonSize": "Large",
         "Index": 3,
         "ParentGuid": "05d63e9c-36c0-44c3-a7fd-b1a360e13fc0"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "93df141f-6daf-4dc0-bb96-3fe62354b6d3",
+        "Name": "Requestlitikolitiko",
+        "ActionGuid": "89c5eb19-a804-47de-888b-f50ea43980f9",
+        "Index": 51,
+        "ParentGuid": "f3b0ddcd-9d1e-4ca3-8780-695ae25a9e8b"
       }
     ],
     "Groups": [],

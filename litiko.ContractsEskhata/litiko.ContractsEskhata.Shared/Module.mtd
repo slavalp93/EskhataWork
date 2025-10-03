@@ -56,7 +56,6 @@
   "InterfaceNamespace": "litiko.ContractsEskhata",
   "IsolatedAssemblyName": "litiko.ContractsEskhata.Isolated",
   "IsolatedNamespace": "litiko.ContractsEskhata.Isolated",
-  "IsVisible": false,
   "Overridden": [
     "IsVisible"
   ],
