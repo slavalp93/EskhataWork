@@ -124,4 +124,13 @@
   <data name="Property_PCBIsPaymentInsurance" xml:space="preserve">
     <value>Страховой полис</value>
   </data>
+  <data name="Action_ShowDuplicates" xml:space="preserve">
+    <value>Показать дубли</value>
+  </data>
+  <data name="Action_ShowDuplicatesHint" xml:space="preserve">
+    <value>Показать дубли</value>
+  </data>
+  <data name="Action_ShowDuplicatesDescription" xml:space="preserve">
+    <value>Показать дубли</value>
+  </data>
 </root>

@@ -2,6 +2,16 @@
   "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
   "NameGuid": "6f5b0bf5-4044-4efe-a948-80141662ec84",
   "Name": "ContractsVsPaymentDoc",
+  "Actions": [
+    {
+      "NameGuid": "32cb2dbf-ada8-4696-9219-284690eb4f2c",
+      "Name": "ShowDuplicates",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_ShowDuplicates_large_32cb2dbfada846969219284690eb4f2c.png",
+      "SmallIconName": "Action_ShowDuplicates_small_32cb2dbfada846969219284690eb4f2c.png"
+    }
+  ],
   "BaseGuid": "04581d26-0780-4cfd-b3cd-c2cafc5798b0",
   "CanBeNavigationPropertyType": true,
   "Code": "ContractsVsPay",
@@ -249,7 +259,8 @@
     }
   ],
   "HandledEvents": [
-    "CreatedServer"
+    "CreatedServer",
+    "BeforeSaveServer"
   ],
   "IconResourcesKeys": [],
   "IntegrationServiceName": "NSIContractsVsPaymentDoc",
@@ -415,7 +426,17 @@
     "NameGuid": "c5421150-7472-4619-9d96-85544e99c1b2",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "05ce3f75-737d-444f-b1bd-c8ba621746ab",
+        "Name": "ActionButton",
+        "ActionGuid": "32cb2dbf-ada8-4696-9219-284690eb4f2c",
+        "ButtonSize": "Large",
+        "Index": 31,
+        "ParentGuid": "f5671141-d97a-40aa-962c-24aa87a848f1"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],

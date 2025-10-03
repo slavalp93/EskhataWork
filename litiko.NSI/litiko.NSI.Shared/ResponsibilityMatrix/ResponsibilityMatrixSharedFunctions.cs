@@ -9,6 +9,5 @@ namespace litiko.NSI.Shared
 {
   partial class ResponsibilityMatrixFunctions
   {
-
   }
 }

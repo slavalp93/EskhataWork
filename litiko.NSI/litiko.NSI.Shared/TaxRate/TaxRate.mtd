@@ -2,6 +2,16 @@
   "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
   "NameGuid": "994ce51a-6661-4176-951f-2000120cb252",
   "Name": "TaxRate",
+  "Actions": [
+    {
+      "NameGuid": "dea57647-f128-40eb-91d8-6dd969cae906",
+      "Name": "ShowDuplicates",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_ShowDuplicates_large_dea57647f12840eb91d86dd969cae906.png",
+      "SmallIconName": "Action_ShowDuplicates_small_dea57647f12840eb91d86dd969cae906.png"
+    }
+  ],
   "BaseGuid": "04581d26-0780-4cfd-b3cd-c2cafc5798b0",
   "CanBeNavigationPropertyType": true,
   "Code": "TaxRate",
@@ -161,7 +171,8 @@
     }
   ],
   "HandledEvents": [
-    "CreatedServer"
+    "CreatedServer",
+    "BeforeSaveServer"
   ],
   "IconResourcesKeys": [],
   "IntegrationServiceName": "NSITaxRate",
@@ -278,7 +289,17 @@
     "NameGuid": "dcbb2a01-5ce4-468a-960b-f06be803282b",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "62320aef-2f66-4963-be5a-3329efcf791b",
+        "Name": "ActionButton",
+        "ActionGuid": "dea57647-f128-40eb-91d8-6dd969cae906",
+        "ButtonSize": "Large",
+        "Index": 31,
+        "ParentGuid": "f5671141-d97a-40aa-962c-24aa87a848f1"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],
