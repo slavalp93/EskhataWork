@@ -10,16 +10,6 @@ namespace litiko.Eskhata
   partial class ContractClientHandlers
   {
 
-    public override void Showing(Sungero.Presentation.FormShowingEventArgs e)
-    {
-      base.Showing(e);
-      
-      var showResponse = Integration.PublicFunctions.Module.Remote.GetAndProcessExchangeDoc();
-      
-      _obj.RequestContractlitiko = showResponse;
-      
-    }
-
     public override void IsFrameworkContractValueInput(Sungero.Presentation.BooleanValueInputEventArgs e)
     {
       base.IsFrameworkContractValueInput(e);

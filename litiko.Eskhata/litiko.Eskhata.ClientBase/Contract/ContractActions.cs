@@ -9,17 +9,6 @@ namespace litiko.Eskhata.Client
 {
   partial class ContractActions
   {
-    public virtual void Requestlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
-    {
-      var request = Integration.PublicFunctions.Module.Remote.GetAndProcessExchangeDoc();
-      
-      request.show();
-    }
-
-    public virtual bool CanRequestlitiko(Sungero.Domain.Client.CanExecuteActionArgs e)
-    {
-      return true;
-    }
 
     public virtual void CreateLegalOpinionlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
     {
