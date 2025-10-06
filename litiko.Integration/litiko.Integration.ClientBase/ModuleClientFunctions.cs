@@ -111,9 +111,7 @@ namespace litiko.Integration.Client
         {
           exchDoc.StatusProcessingRx = Integration.ExchangeDocument.StatusProcessingRx.Success;          
           exchDoc.Save();
-        }
-        
-        // TODO Подсветить обновленные свойства на карточке
+        }        
       }
       else
         return litiko.Integration.Resources.ResponseNotReceived;

@@ -10,11 +10,19 @@ namespace litiko.Integration.Server
   {
 
     /// <summary>
+    /// Интеграция. Виды документов, удостоверяющих личность
+    /// </summary>
+    public virtual void GetIdentityDocumentKinds()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_TYPESOFIDCARDS);
+    }
+
+    /// <summary>
     /// Интеграция. Типы договоров.
     /// </summary>
     public virtual void GetContractType()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_CONTRACT_TYPE");
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_CONTRACT_TYPE);
     }
 
     /// <summary>
@@ -22,7 +30,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetContractVid()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_CONTRACT_VID");
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_CONTRACT_VID);
     }
 
     /// <summary>
@@ -30,7 +38,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetRegionOfRental()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_TAX_REGIONS");
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_TAX_REGIONS);
     }
 
     /// <summary>
@@ -38,7 +46,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetPaymentRegions()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_PAYMENT_REGIONS");
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_PAYMENT_REGIONS);
     }
 
     /// <summary>
@@ -46,7 +54,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetCurrencyRates()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_CURRENCY_RATES");
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_CURRENCY_RATES);
     }
 
     /// <summary>
@@ -108,7 +116,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetOKVED()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_OKVED");        
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_OKVED);        
     }
 
     /// <summary>
@@ -116,7 +124,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetOKOPF()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_OKOPF");       
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_OKOPF);       
     }
 
     /// <summary>
@@ -124,7 +132,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetOKONH()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_OKONH");         
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_OKONH);         
     }
 
     /// <summary>
@@ -132,7 +140,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetOKFS()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_OKFS");         
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_OKFS);         
     }
 
     /// <summary>
@@ -140,7 +148,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetMaterialStatuses()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_MARITALSTATUSES");       
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_MARITALSTATUSES);       
     }
 
     /// <summary>
@@ -148,7 +156,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetEcolog()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_ECOLOG");       
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_ECOLOG);       
     }
 
     /// <summary>
@@ -156,7 +164,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetCountries()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_COUNTRIES");      
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_COUNTRIES);      
     }
 
     /// <summary>
@@ -164,7 +172,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetCompanyKinds()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_COMPANYKINDS");
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_COMPANYKINDS);
     }
 
     /// <summary>
@@ -172,7 +180,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetEmployees()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_EMPLOYEES");            
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_EMPLOYEES);            
     }
 
     /// <summary>
@@ -180,7 +188,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetBusinessUnits()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_BUSINESSUNITS");                  
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_BUSINESSUNITS);                  
     }
 
     /// <summary>
@@ -188,7 +196,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetDepartments()
     {                
-      litiko.Integration.Functions.Module.BackgroundProcessStart("R_DR_GET_DEPART");
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_DEPART);
     }
 
   }

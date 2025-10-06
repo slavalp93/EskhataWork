@@ -15,7 +15,7 @@ namespace litiko.Eskhata.Client
     {
       base.FillFromABSlitiko(e);            
       
-      #region Подсветка измененных контролов        
+      #region Подсветка измененных контролов  
       if (_obj.State.Properties.Name.IsChanged)
         _obj.State.Properties.Name.HighlightColor = Colors.Common.Green;
       if (_obj.State.Properties.LegalName.IsChanged)
@@ -51,7 +51,7 @@ namespace litiko.Eskhata.Client
       if (_obj.State.Properties.Phones.IsChanged)
         _obj.State.Properties.Phones.HighlightColor = Colors.Common.Green;  
       if (_obj.State.Properties.Email.IsChanged)
-        _obj.State.Properties.Email.HighlightColor = Colors.Common.Green;          
+        _obj.State.Properties.Email.HighlightColor = Colors.Common.Green;                  
       #endregion
     }
 

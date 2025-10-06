@@ -318,6 +318,15 @@
       "GenerateHandler": true,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "94ffe050-c727-4a32-b51e-23edc5d37cc5",
+      "Name": "GetIdentityDocumentKinds",
+      "DaysOfWeekSchedule": "Monday",
+      "GenerateHandler": true,
+      "Monthly": "Weekly",
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T05:00:00"
     }
   ],
   "PublicConstants": [
@@ -698,7 +707,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.137",
+  "Version": "0.0.1.141",
   "Widgets": [],
   "Versions": [
     {

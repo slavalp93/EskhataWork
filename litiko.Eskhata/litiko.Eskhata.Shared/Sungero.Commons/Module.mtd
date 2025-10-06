@@ -79,7 +79,7 @@
         "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
         "NameGuid": "2a06d19f-c151-42dc-b834-c9914b453340",
         "Name": "ShowIDTypelitiko",
-        "EntityTypeId": "a41cc530-6875-4bde-a348-5ae69965a938",
+        "EntityTypeId": "9cfefa75-b807-46e3-b09c-d8b232b21f4f",
         "GroupId": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
         "IsVisibleInDesktopClient": false,
         "PreviousItemGuid": "bdfea838-c8fa-429f-9865-9aa7aa3ed883"

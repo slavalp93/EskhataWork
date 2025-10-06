@@ -217,4 +217,10 @@
   <data name="JobDescription_ca66ee7158854185b3ce67a5353c9a74" xml:space="preserve">
     <value>Интеграция. Типы договоров.</value>
   </data>
+  <data name="JobDisplayName_94ffe050c7274a32b51e23edc5d37cc5" xml:space="preserve">
+    <value>Интеграция. Виды документов, удостоверяющих личность</value>
+  </data>
+  <data name="JobDescription_94ffe050c7274a32b51e23edc5d37cc5" xml:space="preserve">
+    <value>Интеграция. Виды документов, удостоверяющих личность</value>
+  </data>
 </root>

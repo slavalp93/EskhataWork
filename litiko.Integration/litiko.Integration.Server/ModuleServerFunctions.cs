@@ -1626,29 +1626,35 @@ namespace litiko.Integration.Server
       int countChanged = 0;
       int countNotChanged = 0;
       int countErrors = 0;
-      
+      /**/
       foreach (var element in dataElements)
-      {       
+      {        
         Transactions.Execute(() =>
         {
           var isId = element.Element("ID")?.Value;
           var isName = element.Element("NAME")?.Value;
           
-          var isCode = element.Element("CODE")?.Value;        
+          var codeValue = element.Element("CODE")?.Value;
+          var isCode = string.IsNullOrWhiteSpace(codeValue) ? "???" : (codeValue.Length >= 3 ? codeValue.Substring(0, 3) : codeValue);
           
           try
           {                        
             if (string.IsNullOrEmpty(isId) || string.IsNullOrEmpty(isName))
               throw AppliedCodeException.Create(string.Format("Not all required fields are filled in. ID:{0}, NAME:{1}", isId, isName));  
             
-            var entity = NSI.IDTypes.GetAll().Where(x => x.ExternalId == isId).FirstOrDefault();
+            var entity = Sungero.Parties.IdentityDocumentKinds.GetAll().Where(x => x.SID == isId).FirstOrDefault();
             if (entity != null)
-              Logger.DebugFormat("IDType with ExternalId:{0} was found. Id:{1}, Name:{2}", isId, entity.Id, entity.Name);
+              Logger.DebugFormat("IdentityDocumentKind with SID:{0} was found. Id:{1}, Name:{2}", isId, entity.Id, entity.Name);
             else
             {              
-              entity = NSI.IDTypes.Create();
-              entity.ExternalId = isId;
-              Logger.DebugFormat("Create new IDType with ExternalId:{0}. Id:{1}", isId, entity.Id);
+              entity = Sungero.Parties.IdentityDocumentKinds.Create();
+              entity.SID = isId;
+              entity.SpecifyIdentitySeries = true;
+              entity.SpecifyIdentityAuthorityCode = false;
+              entity.SpecifyIdentityExpirationDate = false;
+              entity.SpecifyBirthPlace = false;
+              entity.Note = codeValue.Length >= 3 ? codeValue : string.Empty;
+              Logger.DebugFormat("Create new IdentityDocumentKind with SID:{0}. Id:{1}", isId, entity.Id);
             }             
             
             if (entity.Name != isName)
@@ -1666,24 +1672,25 @@ namespace litiko.Integration.Server
             if (entity.State.IsInserted || entity.State.IsChanged)
             {
               entity.Save();                                          
-              Logger.DebugFormat("IDType successfully saved. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              Logger.DebugFormat("IdentityDocumentKind successfully saved. SID:{0}, Id:{1}", isId, entity.Id);
               countChanged++;
             }
             else
             {
-              Logger.DebugFormat("There are no changes in IDType. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              Logger.DebugFormat("There are no changes in IdentityDocumentKind. SID:{0}, Id:{1}", isId, entity.Id);
               countNotChanged++;
             }
           }
           catch (Exception ex)
           {
-            var errorMessage = string.Format("Error when processing IDType with ExternalId:{0}. Description: {1}. StackTrace: {2}", isId, ex.Message, ex.StackTrace);
+            var errorMessage = string.Format("Error when processing IdentityDocumentKind with ExternalId:{0}. Description: {1}. StackTrace: {2}", isId, ex.Message, ex.StackTrace);
             Logger.Error(errorMessage);
             errorList.Add(errorMessage);
             countErrors++;
           }
         });
       }
+      /**/
       Logger.DebugFormat("R_DR_GET_TYPESOFIDCARDS - Total: CountAll:{0} CountChanged:{1} CountNotChanged:{2} CountErrors:{3}", countAll, countChanged, countNotChanged, countErrors);
       
       Logger.Debug("R_DR_GET_TYPESOFIDCARDS - Finish"); 
@@ -1911,25 +1918,25 @@ namespace litiko.Integration.Server
         if (company.ExternalId != isId)
         {
           Logger.DebugFormat("Change ExternalId: current:{0}, new:{1}", company.ExternalId, isId);
-          company.ExternalId = isId;              
+          company.ExternalId = isId;                        
         }
 
         if (company.Name != isName)
         {
           Logger.DebugFormat("Change Name: current:{0}, new:{1}", company.Name, isName);
-          company.Name = isName;                    
+          company.Name = isName;                              
         }
 
         if(!string.IsNullOrEmpty(isLongName) && company.LegalName != isLongName)
         {
           Logger.DebugFormat("Change LegalName: current:{0}, new:{1}", company.LegalName, isLongName);
-          company.LegalName = isLongName;        
+          company.LegalName = isLongName;                  
         }
             
         if(!string.IsNullOrEmpty(isIName) && company.Inamelitiko != isIName)
         {
           Logger.DebugFormat("Change Inamelitiko: current:{0}, new:{1}", company.Inamelitiko, isIName);
-          company.Inamelitiko = isIName;       
+          company.Inamelitiko = isIName;             
         }   
 
         if(!string.IsNullOrEmpty(isNuRezident))
@@ -1938,7 +1945,7 @@ namespace litiko.Integration.Server
           if(company.NUNonrezidentlitiko != !isNuRezidentBool)
           {
             Logger.DebugFormat("Change NUNonrezidentlitiko: current:{0}, new:{1}", company.NUNonrezidentlitiko, !isNuRezidentBool);
-            company.NUNonrezidentlitiko = !isNuRezidentBool;          
+            company.NUNonrezidentlitiko = !isNuRezidentBool;                      
           }               
         }            
             
@@ -1948,20 +1955,20 @@ namespace litiko.Integration.Server
           if(company.Nonresident != !isRezidentBool)
           {
             Logger.DebugFormat("Change Nonresident: current:{0}, new:{1}", company.Nonresident, !isRezidentBool);
-            company.Nonresident = !isRezidentBool; 
+            company.Nonresident = !isRezidentBool;             
           }               
         }            
             
         if(!string.IsNullOrEmpty(isKPP) && company.TRRC != isKPP)
         {
           Logger.DebugFormat("Change TRRC: current:{0}, new:{1}", company.TRRC, isKPP);
-          company.TRRC = isKPP;                
+          company.TRRC = isKPP;                          
         }
             
         if(!string.IsNullOrEmpty(isOKPO) && company.NCEO != isOKPO)
         {
           Logger.DebugFormat("Change NCEO: current:{0}, new:{1}", company.NCEO, isOKPO);
-          company.NCEO = isOKPO;                
+          company.NCEO = isOKPO;                          
         }            
             
         if(!string.IsNullOrEmpty(isOKOPF))
@@ -1970,7 +1977,7 @@ namespace litiko.Integration.Server
           if(okopf != null && !Equals(company.OKOPFlitiko, okopf))
           {
             Logger.DebugFormat("Change OKOPFlitiko: current:{0}, new:{1}", company.OKOPFlitiko?.Name, okopf.Name);
-            company.OKOPFlitiko = okopf;                    
+            company.OKOPFlitiko = okopf;                                
           }            
         }             
 
@@ -1980,7 +1987,7 @@ namespace litiko.Integration.Server
           if(okfs != null && !Equals(company.OKFSlitiko, okfs))
           {
             Logger.DebugFormat("Change OKFSlitiko: current:{0}, new:{1}", company.OKOPFlitiko?.Name, okfs.Name);
-            company.OKFSlitiko = okfs;                    
+            company.OKFSlitiko = okfs;                                
           }            
         }
                         
@@ -2029,19 +2036,19 @@ namespace litiko.Integration.Server
         if(!string.IsNullOrEmpty(isRegistnum) && company.RegNumlitiko != isRegistnum)
         {
           Logger.DebugFormat("Change RegNumlitiko: current:{0}, new:{1}", company.RegNumlitiko, isRegistnum);
-          company.RegNumlitiko = isRegistnum;                
+          company.RegNumlitiko = isRegistnum;                          
         }
             
         if(!string.IsNullOrEmpty(isNumbers) && company.Numberslitiko != int.Parse(isNumbers))
         {
           Logger.DebugFormat("Change Numberslitiko: current:{0}, new:{1}", company.Numberslitiko, isNumbers);
-          company.Numberslitiko = int.Parse(isNumbers);                
+          company.Numberslitiko = int.Parse(isNumbers);                          
         }
             
         if(!string.IsNullOrEmpty(isBusiness) && company.Businesslitiko != isBusiness)
         {
           Logger.DebugFormat("Change Businesslitiko: current:{0}, new:{1}", company.Businesslitiko, isBusiness);
-          company.Businesslitiko = isBusiness;                
+          company.Businesslitiko = isBusiness;                          
         }
             
         if(!string.IsNullOrEmpty(isPS_REF))
@@ -2050,7 +2057,7 @@ namespace litiko.Integration.Server
           if(enterpriseType != null && !Equals(company.EnterpriseTypelitiko, enterpriseType))
           {
             Logger.DebugFormat("Change EnterpriseTypelitiko: current:{0}, new:{1}", company.EnterpriseTypelitiko?.Name, enterpriseType.Name);
-            company.EnterpriseTypelitiko = enterpriseType;                    
+            company.EnterpriseTypelitiko = enterpriseType;                                
           }            
         }
             
@@ -2060,38 +2067,38 @@ namespace litiko.Integration.Server
           if(country != null && !Equals(company.Countrylitiko, country))
           {
             Logger.DebugFormat("Change Countrylitiko: current:{0}, new:{1}", company.Countrylitiko?.Name, country.Name);
-            company.Countrylitiko = country;                    
+            company.Countrylitiko = country;                                
           }            
         }
 
         if(!string.IsNullOrEmpty(isPostAdress) && company.PostalAddress != isPostAdress)
         {
           Logger.DebugFormat("Change PostalAddress: current:{0}, new:{1}", company.PostalAddress, isPostAdress);
-          company.PostalAddress = isPostAdress;                
+          company.PostalAddress = isPostAdress;                          
         }
 
         if(!string.IsNullOrEmpty(isLegalAdress) && company.LegalAddress != isLegalAdress)
         {
           Logger.DebugFormat("Change LegalAddress: current:{0}, new:{1}", company.LegalAddress, isLegalAdress);
-          company.LegalAddress = isLegalAdress;                
+          company.LegalAddress = isLegalAdress;                          
         }
 
         if(!string.IsNullOrEmpty(isPhone) && company.Phones != isPhone)
         {
           Logger.DebugFormat("Change Phones: current:{0}, new:{1}", company.Phones, isPhone);
-          company.Phones = isPhone;                
+          company.Phones = isPhone;                          
         }
 
         if(!string.IsNullOrEmpty(isEmail) && company.Email != isEmail)
         {
           Logger.DebugFormat("Change Email: current:{0}, new:{1}", company.Email, isEmail);
-          company.Email = isEmail;                
+          company.Email = isEmail;                          
         }
 
         if(!string.IsNullOrEmpty(isWebSite) && company.Homepage != isWebSite)
         {
           Logger.DebugFormat("Change Homepage: current:{0}, new:{1}", company.Homepage, isWebSite);
-          company.Homepage = isWebSite;                
+          company.Homepage = isWebSite;                          
         }
 
         if(isContacts.Any())
@@ -2231,31 +2238,31 @@ namespace litiko.Integration.Server
         if (bank.ExternalId != isId)
         {
           Logger.DebugFormat("Change ExternalId: current:{0}, new:{1}", bank.ExternalId, isId);
-          bank.ExternalId = isId;              
+          bank.ExternalId = isId;                        
         }
 
         if (bank.Name != isName)
         {
           Logger.DebugFormat("Change Name: current:{0}, new:{1}", bank.Name, isName);
-          bank.Name = isName;                    
+          bank.Name = isName;                              
         }
 
         if(!string.IsNullOrEmpty(isLongName) && bank.LegalName != isLongName)
         {
           Logger.DebugFormat("Change LegalName: current:{0}, new:{1}", bank.LegalName, isLongName);
-          bank.LegalName = isLongName;        
+          bank.LegalName = isLongName;                  
         }
             
         if(!string.IsNullOrEmpty(isIName) && bank.Inamelitiko != isIName)
         {
           Logger.DebugFormat("Change Inamelitiko: current:{0}, new:{1}", bank.Inamelitiko, isIName);
-          bank.Inamelitiko = isIName;       
+          bank.Inamelitiko = isIName;                 
         }   
 
         if (!string.IsNullOrEmpty(isSWIFT) && bank.SWIFT != isSWIFT)
         {
           Logger.DebugFormat("Change Inamelitiko: current:{0}, new:{1}", bank.SWIFT, isSWIFT);
-          bank.SWIFT = isSWIFT;           
+          bank.SWIFT = isSWIFT;                     
         }
         
         if(!string.IsNullOrEmpty(isNuRezident))
@@ -2264,7 +2271,7 @@ namespace litiko.Integration.Server
           if(bank.NUNonrezidentlitiko != !isNuRezidentBool)
           {
             Logger.DebugFormat("Change NUNonrezidentlitiko: current:{0}, new:{1}", bank.NUNonrezidentlitiko, !isNuRezidentBool);
-            bank.NUNonrezidentlitiko = !isNuRezidentBool;          
+            bank.NUNonrezidentlitiko = !isNuRezidentBool;                      
           }               
         }            
             
@@ -2274,26 +2281,26 @@ namespace litiko.Integration.Server
           if(bank.Nonresident != !isRezidentBool)
           {
             Logger.DebugFormat("Change Nonresident: current:{0}, new:{1}", bank.Nonresident, !isRezidentBool);
-            bank.Nonresident = !isRezidentBool; 
+            bank.Nonresident = !isRezidentBool;             
           }               
         }            
             
         if(!string.IsNullOrEmpty(isINN) && bank.TIN != isINN)
         {
           Logger.DebugFormat("Change TIN: current:{0}, new:{1}", bank.TIN, isINN);
-          bank.TIN = isINN;                
+          bank.TIN = isINN;                         
         }
 
         if(!string.IsNullOrEmpty(isKPP) && bank.TRRC != isKPP)
         {
           Logger.DebugFormat("Change TRRC: current:{0}, new:{1}", bank.TRRC, isKPP);
-          bank.TRRC = isKPP;                
+          bank.TRRC = isKPP;                          
         }
             
         if(!string.IsNullOrEmpty(isCorrAcc) && bank.CorrespondentAccount != isCorrAcc)
         {
           Logger.DebugFormat("Change CorrespondentAccount: current:{0}, new:{1}", bank.CorrespondentAccount, isCorrAcc);
-          bank.CorrespondentAccount = isCorrAcc;                
+          bank.CorrespondentAccount = isCorrAcc;         
         }        
 
         if(!string.IsNullOrEmpty(isIsSettlements))
@@ -2302,7 +2309,7 @@ namespace litiko.Integration.Server
           if(bank.SettlParticipantlitiko != isIsSettlementsBool)
           {
             Logger.DebugFormat("Change SettlParticipantlitiko: current:{0}, new:{1}", bank.SettlParticipantlitiko, isIsSettlementsBool);
-            bank.SettlParticipantlitiko = isIsSettlementsBool; 
+            bank.SettlParticipantlitiko = isIsSettlementsBool;             
           }            
         }
 
@@ -2312,7 +2319,7 @@ namespace litiko.Integration.Server
           if(bank.LoroCorrespondentlitiko != isIsLoroCorrespondentBool)
           {
             Logger.DebugFormat("Change LoroCorrespondentlitiko: current:{0}, new:{1}", bank.LoroCorrespondentlitiko, isIsLoroCorrespondentBool);
-            bank.LoroCorrespondentlitiko = isIsLoroCorrespondentBool; 
+            bank.LoroCorrespondentlitiko = isIsLoroCorrespondentBool;             
           }            
         }        
 
@@ -2322,7 +2329,7 @@ namespace litiko.Integration.Server
           if(bank.NostroCorrespondentlitiko != isIsNostroCorrespondentBool)
           {
             Logger.DebugFormat("Change NostroCorrespondentlitiko: current:{0}, new:{1}", bank.NostroCorrespondentlitiko, isIsNostroCorrespondentBool);
-            bank.NostroCorrespondentlitiko = isIsNostroCorrespondentBool; 
+            bank.NostroCorrespondentlitiko = isIsNostroCorrespondentBool;             
           }            
         }
         
@@ -2332,38 +2339,38 @@ namespace litiko.Integration.Server
           if(country != null && !Equals(bank.Countrylitiko, country))
           {
             Logger.DebugFormat("Change Countrylitiko: current:{0}, new:{1}", bank.Countrylitiko?.Name, country.Name);
-            bank.Countrylitiko = country;                    
+            bank.Countrylitiko = country;
           }            
         }
 
         if(!string.IsNullOrEmpty(isPostAdress) && bank.PostalAddress != isPostAdress)
         {
           Logger.DebugFormat("Change PostalAddress: current:{0}, new:{1}", bank.PostalAddress, isPostAdress);
-          bank.PostalAddress = isPostAdress;                
+          bank.PostalAddress = isPostAdress;                         
         }
 
         if(!string.IsNullOrEmpty(isLegalAdress) && bank.LegalAddress != isLegalAdress)
         {
           Logger.DebugFormat("Change LegalAddress: current:{0}, new:{1}", bank.LegalAddress, isLegalAdress);
-          bank.LegalAddress = isLegalAdress;                
+          bank.LegalAddress = isLegalAdress;                          
         }
 
         if(!string.IsNullOrEmpty(isPhone) && bank.Phones != isPhone)
         {
           Logger.DebugFormat("Change Phones: current:{0}, new:{1}", bank.Phones, isPhone);
-          bank.Phones = isPhone;                
+          bank.Phones = isPhone;                          
         }
 
         if(!string.IsNullOrEmpty(isEmail) && bank.Email != isEmail)
         {
           Logger.DebugFormat("Change Email: current:{0}, new:{1}", bank.Email, isEmail);
-          bank.Email = isEmail;                
+          bank.Email = isEmail;                          
         }
 
         if(!string.IsNullOrEmpty(isWebSite) && bank.Homepage != isWebSite)
         {
           Logger.DebugFormat("Change Homepage: current:{0}, new:{1}", bank.Homepage, isWebSite);
-          bank.Homepage = isWebSite;                
+          bank.Homepage = isWebSite;                          
         }
 
         if(isContacts.Any())
@@ -3134,6 +3141,8 @@ namespace litiko.Integration.Server
     /// <returns>Структура с персоной и признаком изменения<string>)</returns>
     public Structures.Module.ProcessingPersonResult ProcessingPerson(System.Xml.Linq.XElement personData, Structures.Module.FIOInfo fioInfo, litiko.Eskhata.IPerson person)
     {              
+      const string dateFormat = "dd.MM.yyyy";
+      
       var isID = personData.Element("ID")?.Value;
       var isName = personData.Element("NAME")?.Value;
       var isSex = personData.Element("SEX")?.Value;      
@@ -3157,6 +3166,8 @@ namespace litiko.Integration.Server
       var isIIN = personData.Element("IIN")?.Value;
       var isCorrAcc = personData.Element("CorrAcc")?.Value;
       var isInternalAcc = personData.Element("InternalAcc")?.Value;
+      
+      var isIdentityDocument = personData.Element("IdentityDocuments")?.Element("element");
           
       string isLastNameRu = string.Empty, isFirstNameRu = string.Empty, isMiddleNameRU = string.Empty;
       string isLastNameTG = string.Empty, isFirstNameTG = string.Empty, isMiddleNameTG = string.Empty;
@@ -3212,43 +3223,43 @@ namespace litiko.Integration.Server
       if (!string.IsNullOrEmpty(isLastNameRu) && person.LastName != isLastNameRu)
       {
         Logger.DebugFormat("Change LastName: current:{0}, new:{1}", person.LastName, isLastNameRu);
-        person.LastName = isLastNameRu;  
+        person.LastName = isLastNameRu;        
       }
       
       if (!string.IsNullOrEmpty(isFirstNameRu) && person.FirstName != isFirstNameRu)
       {
         Logger.DebugFormat("Change FirstName: current:{0}, new:{1}", person.FirstName, isFirstNameRu);
-        person.FirstName = isFirstNameRu;  
+        person.FirstName = isFirstNameRu;         
       } 
 
       if (!string.IsNullOrEmpty(isMiddleNameRU) && person.MiddleName != isMiddleNameRU)
       {
         Logger.DebugFormat("Change MiddleName: current:{0}, new:{1}", person.MiddleName, isMiddleNameRU);
-        person.MiddleName = isMiddleNameRU;  
+        person.MiddleName = isMiddleNameRU;          
       }       
 
       if (!string.IsNullOrEmpty(isLastNameTG) && person.LastNameTGlitiko != isLastNameTG)
       {
         Logger.DebugFormat("Change LastNameTGlitiko: current:{0}, new:{1}", person.LastNameTGlitiko, isLastNameTG);
-        person.LastNameTGlitiko = isLastNameTG;  
+        person.LastNameTGlitiko = isLastNameTG;        
       }
 
       if (!string.IsNullOrEmpty(isFirstNameTG) && person.FirstNameTGlitiko != isFirstNameTG)
       {
         Logger.DebugFormat("Change FirstNameTGlitiko: current:{0}, new:{1}", person.FirstNameTGlitiko, isFirstNameTG);
-        person.FirstNameTGlitiko = isFirstNameTG;  
+        person.FirstNameTGlitiko = isFirstNameTG;          
       } 
 
       if (!string.IsNullOrEmpty(isMiddleNameTG) && person.MiddleNameTGlitiko != isMiddleNameTG)
       {
         Logger.DebugFormat("Change MiddleNameTGlitiko: current:{0}, new:{1}", person.MiddleNameTGlitiko, isMiddleNameTG);
-        person.MiddleNameTGlitiko = isMiddleNameTG;  
+        person.MiddleNameTGlitiko = isMiddleNameTG;          
       }      
       
       if(isSex == "М" && !Equals(person.Sex, Eskhata.Person.Sex.Male))
       {
         Logger.DebugFormat("Change Sex: current:{0}, new:{1}", person.Info.Properties.Sex.GetLocalizedValue(person.Sex), person.Info.Properties.Sex.GetLocalizedValue(Eskhata.Person.Sex.Male));
-        person.Sex = Eskhata.Person.Sex.Male;          
+        person.Sex = Eskhata.Person.Sex.Male;                  
       }
       else if (isSex == "Ж" && !Equals(person.Sex, Eskhata.Person.Sex.Female))
       {
@@ -3259,7 +3270,7 @@ namespace litiko.Integration.Server
       if(!string.IsNullOrEmpty(isIName) && person.Inamelitiko != isIName)
       {
         Logger.DebugFormat("Change Inamelitiko: current:{0}, new:{1}", person.Inamelitiko, isIName);
-        person.Inamelitiko = isIName;                
+        person.Inamelitiko = isIName;                        
       }   
 
       if(!string.IsNullOrEmpty(isNuRezident))
@@ -3268,7 +3279,7 @@ namespace litiko.Integration.Server
         if(person.NUNonrezidentlitiko != !isNuRezidentBool)
         {
           Logger.DebugFormat("Change NUNonrezidentlitiko: current:{0}, new:{1}", person.NUNonrezidentlitiko, !isNuRezidentBool);
-          person.NUNonrezidentlitiko = !isNuRezidentBool; 
+          person.NUNonrezidentlitiko = !isNuRezidentBool;           
         }               
       }            
             
@@ -3278,7 +3289,7 @@ namespace litiko.Integration.Server
         if(person.Nonresident != !isRezidentBool)
         {
           Logger.DebugFormat("Change Nonresident: current:{0}, new:{1}", person.Nonresident, !isRezidentBool);
-          person.Nonresident = !isRezidentBool; 
+          person.Nonresident = !isRezidentBool;           
         }               
       }
             
@@ -3289,7 +3300,7 @@ namespace litiko.Integration.Server
         {
           var curDate = person.DateOfBirth.HasValue ? person.DateOfBirth.Value.ToString("dd.MM.yyyy") : string.Empty;
           Logger.DebugFormat("Change DateOfBirth: current:{0}, new:{1}", curDate, dateOfBirth.ToString("dd.MM.yyyy"));
-          person.DateOfBirth = dateOfBirth;
+          person.DateOfBirth = dateOfBirth;         
         }
       }
       
@@ -3299,14 +3310,14 @@ namespace litiko.Integration.Server
         if (familyStatus != null && !Equals(person.FamilyStatuslitiko, familyStatus))
         {
           Logger.DebugFormat("Change FamilyStatuslitiko: current:{0}, new:{1}", person.FamilyStatuslitiko?.Name, familyStatus?.Name);
-          person.FamilyStatuslitiko = familyStatus;        
+          person.FamilyStatuslitiko = familyStatus;                  
         }
       }
       
       if(!string.IsNullOrEmpty(isINN) && person.TIN != isINN)
       {
         Logger.DebugFormat("Change TIN: current:{0}, new:{1}", person.TIN, isINN);
-        person.TIN = isINN;                
+        person.TIN = isINN;                        
       }      
         
       if(isCodeOKONHelements.Any())
@@ -3357,38 +3368,38 @@ namespace litiko.Integration.Server
         if (country != null && !Equals(person.Citizenship, country))
         {
           Logger.DebugFormat("Change Citizenship: current:{0}, new:{1}", person.Citizenship?.Name, country?.Name);
-          person.Citizenship = country;          
+          person.Citizenship = country;                    
         }
       }
       
       if(!string.IsNullOrEmpty(isPostAdress) && person.PostalAddress != isPostAdress)
       {
         Logger.DebugFormat("Change PostalAddress: current:{0}, new:{1}", person.PostalAddress, isPostAdress);
-        person.PostalAddress = isPostAdress;                
+        person.PostalAddress = isPostAdress;                        
       }
 
       if(!string.IsNullOrEmpty(isLegalAdress) && person.LegalAddress != isLegalAdress)
       {
         Logger.DebugFormat("Change LegalAddress: current:{0}, new:{1}", person.LegalAddress, isLegalAdress);
-        person.LegalAddress = isLegalAdress;                
+        person.LegalAddress = isLegalAdress;                        
       }
 
       if(!string.IsNullOrEmpty(isPhone) && person.Phones != isPhone)
       {
         Logger.DebugFormat("Change Phones: current:{0}, new:{1}", person.Phones, isPhone);
-        person.Phones = isPhone;                
+        person.Phones = isPhone;                       
       }
 
       if(!string.IsNullOrEmpty(isEmail) && person.Email != isEmail)
       {
         Logger.DebugFormat("Change Email: current:{0}, new:{1}", person.Email, isEmail);
-        person.Email = isEmail;                
+        person.Email = isEmail;                       
       }
 
       if(!string.IsNullOrEmpty(isWebSite) && person.Homepage != isWebSite)
       {
         Logger.DebugFormat("Change Homepage: current:{0}, new:{1}", person.Homepage, isWebSite);
-        person.Homepage = isWebSite;                
+        person.Homepage = isWebSite;                        
       }
       
       if(!string.IsNullOrEmpty(isVATApplicable))
@@ -3397,7 +3408,7 @@ namespace litiko.Integration.Server
         if(person.VATPayerlitiko != VATPayer)
         {
           Logger.DebugFormat("Change VATPayerlitiko: current:{0}, new:{1}", person.VATPayerlitiko.GetValueOrDefault(), VATPayer);
-          person.VATPayerlitiko = VATPayer; 
+          person.VATPayerlitiko = VATPayer;           
         }               
       }
             
@@ -3407,7 +3418,7 @@ namespace litiko.Integration.Server
         if (int.TryParse(isIIN, out untIIN) && person.SINlitiko != untIIN)
         {
           Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.SINlitiko, untIIN);
-          person.SINlitiko = untIIN;        
+          person.SINlitiko = untIIN;                  
         }
         else
           Logger.ErrorFormat("Can`t convert to int value of IIN:{0}", isIIN);            
@@ -3416,16 +3427,73 @@ namespace litiko.Integration.Server
       if(!string.IsNullOrEmpty(isCorrAcc) && person.Account != isCorrAcc)
       {
         Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.Account, isCorrAcc);
-        person.Account = isCorrAcc;                
+        person.Account = isCorrAcc;                        
       } 
 
       if(!string.IsNullOrEmpty(isInternalAcc) && person.AccountEskhatalitiko != isInternalAcc)
       {
         Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.AccountEskhatalitiko, isInternalAcc);
-        person.AccountEskhatalitiko = isInternalAcc;                
+        person.AccountEskhatalitiko = isInternalAcc;                        
       } 
       
       /* !!! IdentityDocuments !!! */
+      if (isIdentityDocument != null)
+      {
+        var id = isIdentityDocument.Element("ID")?.Value;        
+        if (!string.IsNullOrEmpty(id))
+        {          
+          var identityDocument = Sungero.Parties.IdentityDocumentKinds.GetAll().Where(x => x.SID == id).FirstOrDefault();
+          if (identityDocument != null)
+          {
+            Logger.DebugFormat("IdentityDocument with SID:{0} was found. Id:{1}, Name:{2}", id, identityDocument.Id, identityDocument.Name);
+            var isDateBegin = isIdentityDocument.Element("DATE_BEGIN")?.Value;
+            var isDateEnd = isIdentityDocument.Element("DATE_END")?.Value;
+            var isNum = isIdentityDocument.Element("NUM")?.Value;
+            var isSer = isIdentityDocument.Element("SER")?.Value;
+            var isWho = isIdentityDocument.Element("WHO")?.Value;
+            
+            if (!Equals(person.IdentityKind, identityDocument))
+            {
+              Logger.DebugFormat("Change IdentityKind: current:{0}, new:{1}", person.IdentityKind?.Name, identityDocument?.Name);
+              person.IdentityKind = identityDocument;                           
+            }
+            
+            DateTime dateBegin;
+            if (!string.IsNullOrEmpty(isDateBegin) && Calendar.TryParseDate(isDateBegin, out dateBegin) && !Equals(person.IdentityDateOfIssue, dateBegin))
+            {
+              Logger.DebugFormat("Change IdentityDateOfIssue: current:{0}, new:{1}", person.IdentityDateOfIssue?.ToString(dateFormat), dateBegin.ToString(dateFormat));
+              person.IdentityDateOfIssue = dateBegin;              
+            }
+            
+            DateTime dateEnd;
+            if (!string.IsNullOrEmpty(isDateEnd) && Calendar.TryParseDate(isDateEnd, out dateEnd) && !Equals(person.IdentityExpirationDate, dateEnd))
+            {
+              Logger.DebugFormat("Change IdentityExpirationDate: current:{0}, new:{1}", person.IdentityExpirationDate?.ToString(dateFormat), dateEnd.ToString(dateFormat));
+              person.IdentityExpirationDate = dateEnd;              
+            }
+
+            if (!string.IsNullOrEmpty(isNum) && person.IdentityNumber != isNum)
+            {
+              Logger.DebugFormat("Change IdentityNumber: current:{0}, new:{1}", person.IdentityNumber, isNum);
+              person.IdentityNumber = isNum;             
+            }
+            
+            if (!string.IsNullOrEmpty(isSer) && person.IdentitySeries != isSer)
+            {
+              Logger.DebugFormat("Change IdentitySeries: current:{0}, new:{1}", person.IdentitySeries, isSer);
+              person.IdentitySeries = isSer;              
+            }            
+            
+            if (!string.IsNullOrEmpty(isWho) && person.IdentityAuthority != isWho)
+            {
+              Logger.DebugFormat("Change IdentityAuthority: current:{0}, new:{1}", person.IdentityAuthority, isWho);
+              person.IdentityAuthority = isWho;              
+            }             
+          }
+          else
+            Logger.ErrorFormat("IdentityDocument with SID:{0} not found.", id);
+        }        
+      }
       
       var result = Structures.Module.ProcessingPersonResult.Create(person, false);
       if (person.State.IsChanged || person.State.IsInserted)
@@ -3556,9 +3624,8 @@ namespace litiko.Integration.Server
         var corrAcc         = person.Account ?? "";
         var internalAcc     = person.AccountEskhatalitiko ?? "";
     
-        var idDocId         = person.IdentityKind.Id.ToString() ?? ""; // TODO person.IdentityKind.ExternalId
-        var idDocType       = person.IdentityKind.Id.ToString() ?? ""; // TODO person.IdentityKind.ExternalId
-        var idDocName       = person.IdentityKind.Name; 
+        var idDocId         = person.IdentityKind?.SID ?? "";        
+        var idDocName       = person.IdentityKind?.Name; 
         var idDocBegin      = person.IdentityDateOfIssue?.ToString(dateFormat) ?? "";
         var idDocEnd        = person.IdentityExpirationDate?.ToString(dateFormat) ?? "";
         var idDocNum        = person.IdentityNumber ?? "";
@@ -3611,15 +3678,17 @@ namespace litiko.Integration.Server
             new XElement("Reliability", reliability),
             new XElement("CorrAcc", corrAcc),
             new XElement("InternalAcc", internalAcc),
-            new XElement("IdentityDocument",
-                new XElement("ID", idDocId),
-                new XElement("TYPE", idDocType),
-                new XElement("NAME", idDocName),
-                new XElement("DATE_BEGIN", idDocBegin),
-                new XElement("DATE_END", idDocEnd),
-                new XElement("NUM", idDocNum),
-                new XElement("SER", idDocSer),
-                new XElement("WHO", idDocWho)
+            new XElement("IdentityDocuments",
+                new XElement("element",
+                    new XElement("ID", idDocId),
+                    new XElement("TYPE", idDocId),
+                    new XElement("NAME", idDocName),
+                    new XElement("DATE_BEGIN", idDocBegin),
+                    new XElement("DATE_END", idDocEnd),
+                    new XElement("NUM", idDocNum),
+                    new XElement("SER", idDocSer),
+                    new XElement("WHO", idDocWho)
+                )
             )
         );
     }
