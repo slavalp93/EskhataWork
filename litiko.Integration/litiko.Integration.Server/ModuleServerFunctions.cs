@@ -3941,6 +3941,7 @@ namespace litiko.Integration.Server
         var registrationDate    = contractualDocument.RegistrationDate?.ToString(dateFormat) ?? "";
         var isPartialPayment    = ToYesNoNull(contractualDocument.IsPartialPaymentlitiko);
         var isEqualPayment      = ToYesNoNull(contractualDocument.IsEqualPaymentlitiko);
+        var laborPayment        = ToYesNoNull(contractualDocument.IsIndividualPaymentlitiko); 
         
         var documentElement = new XElement("Document",
             new XElement("ID", documentId),
@@ -3989,6 +3990,7 @@ namespace litiko.Integration.Server
             ),
             new XElement("IsPartialPayment", isPartialPayment),
             new XElement("IsEqualPayment", isEqualPayment),
+            new XElement("LaborPayment", laborPayment),
             new XElement("AmountForPeriod", amountForPeriod),
             new XElement("Note", note),
             new XElement("RegistrationNumber", registrationNumber),
@@ -4051,6 +4053,7 @@ namespace litiko.Integration.Server
                     new XElement("session_id", session_id.ToString()),
                     new XElement("application_key", application_key)
                 ),
+                         
                 new XElement("request",
                     new XElement("protocol-version", "1.00"),
                     new XElement("request-type", "R_DR_GET_DATA"),
