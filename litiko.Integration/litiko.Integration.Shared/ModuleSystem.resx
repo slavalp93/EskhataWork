@@ -223,4 +223,10 @@
   <data name="JobDescription_94ffe050c7274a32b51e23edc5d37cc5" xml:space="preserve">
     <value>Integration. Identity Document Kinds</value>
   </data>
+  <data name="JobDisplayName_d5a413e4895a48369d38d7fdafaed77c" xml:space="preserve">
+    <value>Integration. Export updates for active contracts</value>
+  </data>
+  <data name="JobDescription_d5a413e4895a48369d38d7fdafaed77c" xml:space="preserve">
+    <value>Active contracts with the “Requires updating in ABS” flag are selected and the R_DR_SET_CONTRACT integration protocol is called for each suitable document.</value>
+  </data>
 </root>

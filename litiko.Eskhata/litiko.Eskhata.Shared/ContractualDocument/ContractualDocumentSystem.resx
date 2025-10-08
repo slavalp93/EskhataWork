@@ -217,4 +217,7 @@
   <data name="Property_CurrencyContractlitiko" xml:space="preserve">
     <value>Contract currency</value>
   </data>
+  <data name="Property_UpdateRquiredlitiko" xml:space="preserve">
+    <value>Update required in ABS</value>
+  </data>
 </root>

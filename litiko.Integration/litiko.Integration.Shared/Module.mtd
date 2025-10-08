@@ -327,6 +327,13 @@
       "Monthly": "Weekly",
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T05:00:00"
+    },
+    {
+      "NameGuid": "d5a413e4-895a-4836-9d38-d7fdafaed77c",
+      "Name": "ExportUpdatesForActiveContracts",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T19:00:00"
     }
   ],
   "PublicConstants": [

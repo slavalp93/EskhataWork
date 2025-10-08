@@ -10,6 +10,73 @@ namespace litiko.Integration.Server
   {
 
     /// <summary>
+    /// Интеграция. Экспорт обновлений по действующим договорам
+    /// </summary>
+    public virtual void ExportUpdatesForActiveContracts()      
+    {
+      var logPrefix = "Integration. ExportUpdatesForActiveContracts.";      
+      Logger.DebugFormat("{0} Start.", logPrefix);
+      
+      var documents = litiko.Eskhata.Contracts.GetAll()
+        .Where(d => Equals(d.LifeCycleState, litiko.Eskhata.Contract.LifeCycleState.Active))
+        .Where(d => d.UpdateRquiredlitiko.GetValueOrDefault());
+      
+      if (documents.Any())
+      {
+        var integrationMethod = IntegrationMethods.GetAll().Where(x => x.Name == Constants.Module.IntegrationMethods.R_DR_SET_CONTRACT).FirstOrDefault();
+        if (integrationMethod == null)
+          throw new AppliedCodeException(SendDocumentStages.Resources.IntegrationMethodNotFoundFormat(Constants.Module.IntegrationMethods.R_DR_SET_CONTRACT));
+      
+        Logger.DebugFormat("{0} Found {1} documents.", logPrefix, documents.Count());
+        foreach (var document in documents)
+        {
+          Transactions.Execute(
+            () =>
+            {
+              if (!Locks.TryLock(document))              
+                Logger.ErrorFormat("{0} Document with Id:{1} is locked.", logPrefix, document.Id);
+              else
+              {
+                try
+                {
+                  var exchDoc = Integration.ExchangeDocuments.Create();
+                  exchDoc.IntegrationMethod = integrationMethod;
+                  exchDoc.IsOnline = false;
+                  exchDoc.Save();                  
+                  
+                  var errorMessage = Functions.Module.SendRequestToIS(exchDoc, 0, document);
+                  if (!string.IsNullOrEmpty(errorMessage))
+                    Logger.ErrorFormat("{0} Document with Id:{1} not sent. Error: {2}", logPrefix, document.Id, errorMessage);                  
+                  else
+                  {                    
+                    document.IntegrationStatuslitiko = litiko.Eskhata.OfficialDocument.IntegrationStatuslitiko.Send;
+                    document.UpdateRquiredlitiko = false;
+                    document.Save();
+                    
+                    Logger.DebugFormat("{0} Document successfully sent. Id:{1}.", logPrefix, document.Id);
+                  }                                    
+                }
+                catch (Exception ex)
+                {
+                  Logger.ErrorFormat("{0} Error when processing document with Id:{1}. Error: {2}", logPrefix, document.Id, ex.Message);
+                  //throw ex;
+                }
+                finally
+                {                  
+                  Locks.Unlock(document);
+                }                
+              }
+            }
+          );
+        }        
+      }
+      else
+        Logger.DebugFormat("{0} Documents not found.", logPrefix);
+      
+      Logger.DebugFormat("{0} Finish.", logPrefix);      
+    }
+
+    /// <summary>
     /// Интеграция. Виды документов, удостоверяющих личность
     /// </summary>
     public virtual void GetIdentityDocumentKinds()
