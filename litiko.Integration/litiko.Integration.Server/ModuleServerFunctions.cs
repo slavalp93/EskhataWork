@@ -3822,7 +3822,7 @@ namespace litiko.Integration.Server
         var operationCurrency = contractualDocument.CurrencyOperationlitiko?.AlphaCode ?? "";
         var currencyRate      = contractualDocument.CurrencyRatelitiko?.Rate.ToString() ?? ""; 
         var vatApplicable     = ToYesNoNull(contractualDocument.IsVATlitiko);
-        var vatRate           = contractualDocument.VatRate?.ToString() ?? "";
+        var vatRate           = contractualDocument.VatRatelitiko?.ToString() ?? "";
         var vatAmount         = contractualDocument.VatAmount?.ToString() ?? "";
         var incomeTaxRate     = contractualDocument.IncomeTaxRatelitiko?.ToString() ?? "";
         var incomeTaxAmount   = contractualDocument.IncomeTaxAmountlitiko?.ToString() ?? ""; 
@@ -3932,7 +3932,7 @@ namespace litiko.Integration.Server
         var currencyContract    = contractualDocument.CurrencyContractlitiko?.AlphaCode ?? "";
         var currencyOperation   = contractualDocument.CurrencyOperationlitiko?.AlphaCode ?? "";
         var vatApplicable       = ToYesNoNull(contractualDocument.IsVATlitiko);
-        var vatRate             = contractualDocument.VatRate?.ToString() ?? "";
+        var vatRate             = contractualDocument.VatRatelitiko?.ToString() ?? "";
         var vatAmount           = contractualDocument.VatAmount?.ToString() ?? "";
         var incomeTaxRate       = contractualDocument.IncomeTaxRatelitiko?.ToString() ?? "";
         var amountForPeriod     = contractualDocument.AmountForPeriodlitiko?.ToString() ?? "";
