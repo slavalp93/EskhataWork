@@ -1,8 +1,15 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
 using Sungero.CoreEntities;
+using System.Text;
+using System.Xml.Linq;
+using System.Xml;
+using System.Text.RegularExpressions;
+
+using System.Xml.Serialization;
 using litiko.Eskhata.Contract;
 
 namespace litiko.Eskhata.Server
@@ -10,12 +17,143 @@ namespace litiko.Eskhata.Server
   partial class ContractFunctions
   {
     /// <summary>
+    /// Импорт договоров из файла экспортированных из АБС
+    /// </summary>
+    [Remote, Public]
+    public List<string> ImportContractsFromXml()
+    {
+      var errorList = new List<string>();
+      
+      string filePath = "C:\\RxData\\git_repository\\Contracts.xml";
+
+      if(!File.Exists(filePath))
+      {
+        Logger.Error("XML file is not exist");
+        return errorList;
+      }
+      
+      try
+      {
+       // var documentKind = litiko.Eskhata.Contract
+       //var person = litiko.Eskhata.Contracts.As()
+        XDocument xmlDoc = XDocument.Load(filePath);
+        
+        XElement dataElement = xmlDoc.Descendants("Data").FirstOrDefault();
+        
+        if(dataElement == null)
+        {
+          Logger.Error("<DATA> tag is not found.");
+          return errorList;
+        }
+        
+        foreach (var docElement in dataElement.Elements("Document"))
+        {
+          var contract = litiko.Eskhata.Contracts.Create();
+
+          contract.ExternalId = docElement.Element("ExternalD")?.Value;
+          
+          var documentKind = docElement.Element("DocumentKind")?.Value;
+          var docKind = Sungero.Docflow.DocumentKinds.GetAll().FirstOrDefault(k=>k.Code == documentKind);
+          if(docKind != null)
+            contract.DocumentKind = docKind;
+          else
+            Logger.Error("DocumentKind not found");
+          
+          var documentGroup = docElement.Element("DocumentGroup").Value;
+          if(documentGroup != null)
+            contract.DocumentGroup = documentGroup;
+          else
+            Logger.Error("Document group not found");
+          
+          contract.Subject = docElement.Element("Subject").Value;
+          contract.Name = docElement.Element("Name").Value;
+          
+          /*var counterpartySignatory = (Sungero.Parties.IContact)(docElement.Element("CounterpartySignatory"));
+          contract.CounterpartySignatory = counterpartySignatory;*/
+         
+          /*contract.Department = (Sungero.Company.IDepartment)docElement.Element("Department");
+          contract.ResponsibleEmployee = (Sungero.Company.IEmployee)docElement.Element("ResponsibleEmployee");
+          contract.Author = (IUser)docElement.Element("Author");/*
+          contract.ResponsibleAccountantlitiko = docElement.Element("ResponsibleAccountant").Value; 
+          contract.ResponsibleDepartmentlitiko = docElement.Element("ResponsibleDepartment").Value; 
+          contract.RBOlitiko = docElement.Element("RBO").Value;
+          contract.ValidFrom = docElement.Element("ValidFrom").Value;
+          contract.ValidTill = docElement.Element("ValidTill").Value;
+          contract.ReasonForChangelitiko = docElement.Element("СhangeReason").Value;
+          contract.AccDebtCreditlitiko = docElement.Element("AccountDebtCredt").Value;
+          contract.AccFutureExpenselitiko = docElement.Element("AccountFutureExpense").Value;
+          contract.InternalAcclitikoternalAcc = docElement.Element("InternalAcc").Value; // create
+          contract.TotalAmountlitiko = docElement.Element("TotalAmount").Value;
+          contract.Currency = docElement.Element("Currency").Value;
+          contract.CurrencyOperationlitiko = docElement.Element("OperationCurrency").Value;
+          contract.IsVATlitiko = docElement.Element("VATApplicable").Value;
+          contract.VatRatelitiko = docElement.Element("VATRate").Value;
+          contract.VatAmount = docElement.Element("VATAmount").Value;
+          contract.IncomeTaxRatelitiko = docElement.Element("IncomeTaxRate").Value;
+          contract.PaymentRegionlitiko = docElement.Element("PaymentRegion").Value;
+          contract.PaymentTaxRegionlitiko = docElement.Element("PaymentTaxRegion").Value;
+          contract.BatchProcessinglitiko = docElement.Element("BatchProcessing").Value;
+          contract.PaymentMethodlitiko = docElement.Element("PaymentMethod").Value;
+          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+          */
+          
+         /* var paymentBasisElement = docElement.Element("PaymentBasis");
+          if(paymentBasisElement != null)
+          {
+            var item = contract.PaymentBasislitiko.AddNew();
+            
+            item.IsPaymentContract   = (bool)paymentBasisElement.Element("IsPaymentContract");
+            item.IsPaymentInvoice    = (bool)paymentBasisElement.Element("IsPaymentInvoice");
+            item.IsPaymentTaxInvoice = (bool)paymentBasisElement.Element("IsPaymentTaxInvoice");
+            item.IsPaymentAct        = (bool)paymentBasisElement.Element("IsPaymentAct");
+            item.IsPaymentOrder      = (bool)paymentBasisElement.Element("IsPaymentOrder");
+          }
+
+          var paymentClosureBasis = docElement.Element("PaymentClosureBasis");
+          if (paymentClosureBasis != null)
+          {
+            var item = contract.PaymentClosureBasislitiko.AddNew();
+            
+            item.IsPaymentContract   = (bool)paymentClosureBasis.Element("IsPaymentContract");
+            item.IsPaymentInvoice    = (bool)paymentClosureBasis.Element("IsPaymentInvoice");
+            item.IsPaymentTaxInvoice = (bool)paymentClosureBasis.Element("IsPaymentTaxInvoice");
+            item.IsPaymentAct        = (bool)paymentClosureBasis.Element("IsPaymentAct");
+            item.IsPaymentOrder      = (bool)paymentClosureBasis.Element("IsPaymentOrder");
+            item.IsPaymentWaybill    = (bool)paymentClosureBasis.Element("IsPaymentWaybill");
+          }
+          /*
+          contract.IsPartialPaymentlitiko = docElement.Element("IsPartialPayment");
+          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+          */
+          
+          
+         contract.Save();
+          
+        }
+      }
+      catch (Exception ex)
+      {
+        Console.WriteLine("{0}", ex);
+     
+      }
+
+      return errorList;
+    }
+    
+    /// <summary>
     /// Создать юрид. заключение.
     /// </summary>
     /// <returns>Юридическое заключение.</returns>
     [Remote, Public]
     public static Sungero.Docflow.IAddendum CreateLegalOpinion()
-    {            
+    {
       var aviabledDocumentKinds = Sungero.Docflow.PublicFunctions.DocumentKind.GetAvailableDocumentKinds(typeof(Sungero.Docflow.IAddendum));
       var docKind = aviabledDocumentKinds
         .Where(x => x.Status == Sungero.CoreEntities.DatabookEntry.Status.Active && x.Name == "Юридическое заключение")
@@ -27,7 +165,7 @@ namespace litiko.Eskhata.Server
       var newDoc = Sungero.Docflow.Addendums.Create();
       newDoc.DocumentKind = docKind;
       return newDoc;
-    }    
+    }
     
     /// <summary>
     /// Построить сводку по документу.
@@ -50,7 +188,7 @@ namespace litiko.Eskhata.Server
       documentBlock.AddLabel(documentName);
       
       // Типовой/Не типовой, Рамочный.
-      var isStandardLabel = _obj.IsStandard.Value ? Sungero.Contracts.ContractBases.Resources.isStandartContract : Sungero.Contracts.ContractBases.Resources.isNotStandartContract;      
+      var isStandardLabel = _obj.IsStandard.Value ? Sungero.Contracts.ContractBases.Resources.isStandartContract : Sungero.Contracts.ContractBases.Resources.isNotStandartContract;
       var isframeworkContractLabel = _obj.IsFrameworkContract.Value ? _obj.Info.Properties.IsFrameworkContract.LocalizedName : string.Empty;
       
       if (string.IsNullOrEmpty(isframeworkContractLabel))
@@ -130,6 +268,6 @@ namespace litiko.Eskhata.Server
       documentBlock.AddLabel(note);
       
       return documentSummary;
-    }    
+    }
   }
 }

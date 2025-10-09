@@ -9,6 +9,17 @@ namespace litiko.Eskhata.Client
 {
   partial class ContractActions
   {
+    public virtual void StartContractsBatchImportlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var import = Functions.Contract.Remote.ImportContractsFromXml(_obj);
+      
+    }
+
+    public virtual bool CanStartContractsBatchImportlitiko(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return true;
+    }
+
 
     public virtual void CreateLegalOpinionlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
     {

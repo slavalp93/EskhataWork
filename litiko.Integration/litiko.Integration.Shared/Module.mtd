@@ -307,6 +307,13 @@
       "GenerateHandler": true,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "b709ba1e-a11d-4b0d-a7e5-fd2eb3a71283",
+      "Name": "SetContracts",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
     }
   ],
   "PublicConstants": [
@@ -498,6 +505,15 @@
       ],
       "TypeName": "System.String",
       "Value": "\"R_DR_SET_CONTRACT\""
+    },
+    {
+      "Name": "R_DR_SET_CONTRACTS",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_SET_CONTRACTS\""
     },
     {
       "Name": "R_DR_SET_PAYMENT_DOCUMENT",

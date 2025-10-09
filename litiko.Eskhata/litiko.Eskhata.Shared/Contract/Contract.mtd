@@ -20,6 +20,14 @@
       "GenerateHandler": true,
       "LargeIconName": "Action_CreateLegalOpinionlitiko_large_3ce1db8c57964b0bb5e72a76050237be.png",
       "SmallIconName": "Action_CreateLegalOpinionlitiko_small_3ce1db8c57964b0bb5e72a76050237be.png"
+    },
+    {
+      "NameGuid": "a6ba3524-79c6-47e7-b169-f0f83e63418f",
+      "Name": "StartContractsBatchImportlitiko",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": null,
+      "SmallIconName": null
     }
   ],
   "BaseGuid": "f37c7e63-b134-4446-9b5b-f8811f6c9666",
@@ -668,7 +676,8 @@
     }
   ],
   "HandledEvents": [
-    "CreatedServer"
+    "CreatedServer",
+    "ShowingClient"
   ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "f37c7e63-b134-4446-9b5b-f8811f6c9666",
@@ -919,6 +928,64 @@
       "Code": "RequestContrac",
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToTextBinder",
       "PreviousPropertyGuid": "d3fd9bb1-067d-490d-95bb-ead1f9f3a8d7"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "acdabf68-534c-4257-8c24-44c6881f5a99",
+      "Name": "InternalAcclitiko",
+      "Code": "InternalAcclit",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "379530f7-d06c-4fcb-9d03-154e82acc757"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "162fc70a-1256-4010-92dd-82c7f7dabbae",
+      "Name": "ResponsibleAccountantlitiko",
+      "Code": "ResponsibleAcc",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "acdabf68-534c-4257-8c24-44c6881f5a99"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "2e0b5ae3-2f2f-44b4-82be-3e0fff223340",
+      "Name": "ResponsibleDepartmentlitiko",
+      "Code": "ResponsibleDep",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "162fc70a-1256-4010-92dd-82c7f7dabbae"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "a7921fbe-15e4-4523-8ff6-49948965c3e8",
+      "Name": "PaymentTaxRegionlitiko",
+      "Code": "PaymentTaxRegi",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "2e0b5ae3-2f2f-44b4-82be-3e0fff223340"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "74c4034c-04ed-4e2f-9f68-35836181c0a6",
+      "Name": "BatchProcessinglitiko",
+      "Code": "BatchProcessin",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "a7921fbe-15e4-4523-8ff6-49948965c3e8"
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "7a98953a-9949-4d61-aae0-238b4a8bebf1",
+      "Name": "PaymentBasislitiko",
+      "Code": "ContractPaymen",
+      "EntityGuid": "81ef2bbb-e0ab-4a34-ba61-b9351c343069",
+      "IsShowedInList": false,
+      "PreviousPropertyGuid": "74c4034c-04ed-4e2f-9f68-35836181c0a6"
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "c2a0612a-f611-4950-ba4d-e907ffabf5d4",
+      "Name": "PaymentClosureBasislitiko",
+      "Code": "PaymentClosure",
+      "EntityGuid": "4d6ab7f4-25db-42d3-9b68-8c7aecc159eb",
+      "IsShowedInList": false,
+      "PreviousPropertyGuid": "7a98953a-9949-4d61-aae0-238b4a8bebf1"
     }
   ],
   "PublicFunctions": [
@@ -928,6 +995,20 @@
       "Placement": "Shared",
       "ReturnType": "global::Sungero.Docflow.IAddendum",
       "ReturnTypeFullName": "Sungero.Docflow.IAddendum, Sungero.Domain.Interfaces"
+    },
+    {
+      "Name": "ImportContractsFromXml",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "contract",
+          "ParameterType": "global::litiko.Eskhata.IContract",
+          "ParameterTypeFullName": "litiko.Eskhata.IContract, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
     }
   ],
   "PublicStructures": [],
@@ -1014,6 +1095,14 @@
         "ButtonSize": "Large",
         "Index": 3,
         "ParentGuid": "05d63e9c-36c0-44c3-a7fd-b1a360e13fc0"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "cf4adea1-d2a8-4115-a760-77ee05e1c96d",
+        "Name": "ActionButtonlitiko",
+        "ActionGuid": "a6ba3524-79c6-47e7-b169-f0f83e63418f",
+        "Index": 51,
+        "ParentGuid": "f3b0ddcd-9d1e-4ca3-8780-695ae25a9e8b"
       }
     ],
     "Groups": [],

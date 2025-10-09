@@ -58,7 +58,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AsyncHandler_Description_9c867ca8bd7c4050bffd5019247a9e8d" xml:space="preserve">
-    <value>AsyncHandler</value>
+  <data name="Property_IsPaymentContract" xml:space="preserve">
+    <value>Договор</value>
+  </data>
+  <data name="Property_IsPaymentInvoice" xml:space="preserve">
+    <value>Счет</value>
+  </data>
+  <data name="Property_IsPaymentTaxInvoice" xml:space="preserve">
+    <value>Счет-фактура</value>
+  </data>
+  <data name="Property_IsPaymentAct" xml:space="preserve">
+    <value>Акт выполненных работ</value>
+  </data>
+  <data name="Property_IsPaymentOrder" xml:space="preserve">
+    <value>Заказ</value>
+  </data>
+  <data name="Property_IsPaymentWaybill" xml:space="preserve">
+    <value>Расходная накладная</value>
   </data>
 </root>

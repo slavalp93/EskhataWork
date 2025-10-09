@@ -247,4 +247,40 @@
   <data name="Property_RequestContractlitiko" xml:space="preserve">
     <value>ShinaContract</value>
   </data>
+  <data name="Action_StartContractsBatchImportlitiko" xml:space="preserve">
+    <value>Выгрузить договора</value>
+  </data>
+  <data name="Action_StartContractsBatchImportlitikoDescription" xml:space="preserve">
+    <value>фыва</value>
+  </data>
+  <data name="Action_StartContractsBatchImportlitikoHint" xml:space="preserve">
+    <value>фыва</value>
+  </data>
+  <data name="Action_StartContractsBatchImportlitikoConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_StartContractsBatchImportlitikoConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_InternalAcclitiko" xml:space="preserve">
+    <value>Счет в Банке Эсхата</value>
+  </data>
+  <data name="Property_ResponsibleAccountantlitiko" xml:space="preserve">
+    <value>Ответственный бухгалтер</value>
+  </data>
+  <data name="Property_ResponsibleDepartmentlitiko" xml:space="preserve">
+    <value>Ответственное подразделение</value>
+  </data>
+  <data name="Property_PaymentTaxRegionlitiko" xml:space="preserve">
+    <value>Регион объекта аренды</value>
+  </data>
+  <data name="Property_BatchProcessinglitiko" xml:space="preserve">
+    <value>Групповая обработка</value>
+  </data>
+  <data name="Property_PaymentBasislitiko" xml:space="preserve">
+    <value>Оплата на основании</value>
+  </data>
+  <data name="Property_PaymentClosureBasislitiko" xml:space="preserve">
+    <value>Закрытие платежа на основании</value>
+  </data>
 </root>
