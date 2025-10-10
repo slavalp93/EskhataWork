@@ -16,136 +16,431 @@ namespace litiko.Eskhata.Server
 {
   partial class ContractFunctions
   {
-    /// <summary>
-    /// Импорт договоров из файла экспортированных из АБС
-    /// </summary>
-    [Remote, Public]
+    //    /// <summary>
+    //    /// Импорт договоров из файла экспортированных из АБС
+    //    /// </summary>
+    //    [Remote, Public]
+    //    public List<string> ImportContractsFromXml()
+    //    {
+    //      var errorList = new List<string>();
+//
+    //      string filePath = "C:\\RxData\\git_repository\\Contracts.xml";
+//
+    //      if(!File.Exists(filePath))
+    //      {
+    //        Logger.Error("XML file is not exist");
+    //        return errorList;
+    //      }
+//
+    //      try
+    //      {
+    //       // var documentKind = litiko.Eskhata.Contract
+    //       //var person = litiko.Eskhata.Contracts.As()
+    //        XDocument xmlDoc = XDocument.Load(filePath);
+//
+    //        XElement dataElement = xmlDoc.Descendants("Data").FirstOrDefault();
+//
+    //        if(dataElement == null)
+    //        {
+    //          Logger.Error("<DATA> tag is not found.");
+    //          return errorList;
+    //        }
+//
+    //        foreach (var docElement in dataElement.Elements("Document"))
+    //        {
+    //          var contract = litiko.Eskhata.Contracts.Create();
+//
+    //          contract.ExternalId = docElement.Element("ExternalD")?.Value;
+//
+    //          var documentKind = docElement.Element("DocumentKind")?.Value;
+    //          var docKind = Sungero.Docflow.DocumentKinds.GetAll().FirstOrDefault(k=>k.Code == documentKind);
+    //          if(docKind != null)
+    //            contract.DocumentKind = docKind;
+    //          else
+    //            Logger.Error("DocumentKind not found");
+//
+    //          var documentGroup = docElement.Element("DocumentGroup").Value;
+    //          if(documentGroup != null)
+    //            contract.DocumentGroup = documentGroup;
+    //          else
+    //            Logger.Error("Document group not found");
+//
+    //          contract.Subject = docElement.Element("Subject").Value;
+    //          contract.Name = docElement.Element("Name").Value;
+//
+    //          /*var counterpartySignatory = (Sungero.Parties.IContact)(docElement.Element("CounterpartySignatory"));
+    //          contract.CounterpartySignatory = counterpartySignatory;*/
+//
+    //          /*contract.Department = (Sungero.Company.IDepartment)docElement.Element("Department");
+    //          contract.ResponsibleEmployee = (Sungero.Company.IEmployee)docElement.Element("ResponsibleEmployee");
+    //          contract.Author = (IUser)docElement.Element("Author");/*
+    //          contract.ResponsibleAccountantlitiko = docElement.Element("ResponsibleAccountant").Value;
+    //          contract.ResponsibleDepartmentlitiko = docElement.Element("ResponsibleDepartment").Value;
+    //          contract.RBOlitiko = docElement.Element("RBO").Value;
+    //          contract.ValidFrom = docElement.Element("ValidFrom").Value;
+    //          contract.ValidTill = docElement.Element("ValidTill").Value;
+    //          contract.ReasonForChangelitiko = docElement.Element("СhangeReason").Value;
+    //          contract.AccDebtCreditlitiko = docElement.Element("AccountDebtCredt").Value;
+    //          contract.AccFutureExpenselitiko = docElement.Element("AccountFutureExpense").Value;
+    //          contract.InternalAcclitikoternalAcc = docElement.Element("InternalAcc").Value; // create
+    //          contract.TotalAmountlitiko = docElement.Element("TotalAmount").Value;
+    //          contract.Currency = docElement.Element("Currency").Value;
+    //          contract.CurrencyOperationlitiko = docElement.Element("OperationCurrency").Value;
+    //          contract.IsVATlitiko = docElement.Element("VATApplicable").Value;
+    //          contract.VatRatelitiko = docElement.Element("VATRate").Value;
+    //          contract.VatAmount = docElement.Element("VATAmount").Value;
+    //          contract.IncomeTaxRatelitiko = docElement.Element("IncomeTaxRate").Value;
+    //          contract.PaymentRegionlitiko = docElement.Element("PaymentRegion").Value;
+    //          contract.PaymentTaxRegionlitiko = docElement.Element("PaymentTaxRegion").Value;
+    //          contract.BatchProcessinglitiko = docElement.Element("BatchProcessing").Value;
+    //          contract.PaymentMethodlitiko = docElement.Element("PaymentMethod").Value;
+    //          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+    //          */
+//
+    //         /* var paymentBasisElement = docElement.Element("PaymentBasis");
+    //          if(paymentBasisElement != null)
+    //          {
+    //            var item = contract.PaymentBasislitiko.AddNew();
+//
+    //            item.IsPaymentContract   = (bool)paymentBasisElement.Element("IsPaymentContract");
+    //            item.IsPaymentInvoice    = (bool)paymentBasisElement.Element("IsPaymentInvoice");
+    //            item.IsPaymentTaxInvoice = (bool)paymentBasisElement.Element("IsPaymentTaxInvoice");
+    //            item.IsPaymentAct        = (bool)paymentBasisElement.Element("IsPaymentAct");
+    //            item.IsPaymentOrder      = (bool)paymentBasisElement.Element("IsPaymentOrder");
+    //          }
+//
+    //          var paymentClosureBasis = docElement.Element("PaymentClosureBasis");
+    //          if (paymentClosureBasis != null)
+    //          {
+    //            var item = contract.PaymentClosureBasislitiko.AddNew();
+//
+    //            item.IsPaymentContract   = (bool)paymentClosureBasis.Element("IsPaymentContract");
+    //            item.IsPaymentInvoice    = (bool)paymentClosureBasis.Element("IsPaymentInvoice");
+    //            item.IsPaymentTaxInvoice = (bool)paymentClosureBasis.Element("IsPaymentTaxInvoice");
+    //            item.IsPaymentAct        = (bool)paymentClosureBasis.Element("IsPaymentAct");
+    //            item.IsPaymentOrder      = (bool)paymentClosureBasis.Element("IsPaymentOrder");
+    //            item.IsPaymentWaybill    = (bool)paymentClosureBasis.Element("IsPaymentWaybill");
+    //          }
+    //          /*
+    //          contract.IsPartialPaymentlitiko = docElement.Element("IsPartialPayment");
+    //          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+    //          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+    //          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+    //          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+    //          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+    //          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+    //          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+    //          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
+    //          */
+//
+//
+    //         contract.Save();
+//
+    //        }
+    //      }
+    //      catch (Exception ex)
+    //      {
+    //        Console.WriteLine("{0}", ex);
+//
+    //      }
+//
+    //      return errorList;
+    //    }
+
+
+    // Серверный метод (на DDS в .NET 6)
+    
+    /* [Remote, Public]
     public List<string> ImportContractsFromXml()
     {
       var errorList = new List<string>();
-      
+
       string filePath = "C:\\RxData\\git_repository\\Contracts.xml";
 
-      if(!File.Exists(filePath))
+      if (!System.IO.File.Exists(filePath))
       {
-        Logger.Error("XML file is not exist");
+        Logger.Error("XML файл не найден: " + filePath);
         return errorList;
       }
+
+      var xmlDoc = new System.Xml.XmlDocument();
+      xmlDoc.Load(filePath); // загружаем файл, а не текст!
+
+      var dataNodes = xmlDoc.GetElementsByTagName("Data");
+
+      foreach (System.Xml.XmlNode dataNode in dataNodes)
+      {
+        try
+        {
+          var documentNode = dataNode.SelectSingleNode("Document");
+          var counterpartyNode = dataNode.SelectSingleNode("Counterparty/Person");
+
+          // --- Контрагент ---
+          var counterpartyInn = GetNodeValue(counterpartyNode, "INN");
+          var counterpartyExternalId = GetNodeValue(counterpartyNode, "ExternalID");
+          var lastName = GetNodeValue(counterpartyNode, "LastName");
+          var firstName = GetNodeValue(counterpartyNode, "FirstName");
+          var middleName = GetNodeValue(counterpartyNode, "MiddleName");
+          var fullName = $"{lastName} {firstName} {middleName}".Trim();
+
+          
+
+          // --- Договор ---
+          var externalId = GetNodeValue(documentNode, "ExternalID");
+          var name = GetNodeValue(documentNode, "Name");
+          var subject = GetNodeValue(documentNode, "Subject");
+          var docKindId = GetNodeValue(documentNode, "DocumentKind");
+          var departmentId = GetNodeValue(documentNode, "Department");
+          var validFromStr = GetNodeValue(documentNode, "ValidFrom");
+          var validTillStr = GetNodeValue(documentNode, "ValidTill");
+          var regDateStr = GetNodeValue(documentNode, "RegistrationDate");
+          var regNumber = GetNodeValue(documentNode, "RegistrationNumber");
+          var totalAmountStr = GetNodeValue(documentNode, "TotalAmount");
+          var currencyCode = GetNodeValue(documentNode, "Currency");
+          var vatApplicableStr = GetNodeValue(documentNode, "VATApplicable");
+          var note = GetNodeValue(documentNode, "Note");
+
+          
+          
+          // Проверка на дубликат
+          var existing = Sungero.Contracts.ContractBases.GetAll()
+            .FirstOrDefault(d => d.Note == externalId);
+          if (existing != null)
+            continue;
+
+          var contract = Sungero.Contracts.ContractualDocuments.Create();
+          contract.Name = name;
+          contract.Subject = subject;
+          contract.Note = externalId;
+
+          // Вид документа
+          int docKindInt;
+          if (int.TryParse(docKindId, out docKindInt))
+            contract.DocumentKind = Sungero.Docflow.DocumentKinds.GetAll().FirstOrDefault(k => k.Id == docKindInt);
+
+          // Подразделение
+          int deptInt;
+          if (int.TryParse(departmentId, out deptInt))
+            contract.Department = Sungero.Company.Departments.GetAll().FirstOrDefault(d => d.Id == deptInt);
+
+          // Даты
+          contract.ValidFrom = ParseDate(validFromStr);
+          contract.ValidTill = ParseDate(validTillStr);
+          contract.RegistrationDate = ParseDate(regDateStr);
+          contract.RegistrationNumber = regNumber;
+
+          
+          var counterparty = null as Sungero.Parties.ICounterparty;
+
+          if (!string.IsNullOrWhiteSpace(counterpartyInn))
+          {
+            try
+            {
+              counterparty = Sungero.Parties.Counterparties.GetAll()
+                .FirstOrDefault(c => c.TIN == counterpartyInn.Trim());
+            }
+            catch (Exception ex)
+            {
+              Logger.Error($"Ошибка при поиске контрагента по ИНН '{counterpartyInn}': {ex.Message}");
+            }
+          }
+
+          // Если контрагент не найден — создаём
+          if (counterparty == null)
+          {
+            try
+            {
+              counterparty = Sungero.Parties.Counterparties.Create();
+              counterparty.Name = firstName;
+              
+              if (!string.IsNullOrWhiteSpace(counterpartyInn))
+                counterparty.TIN = counterpartyInn.Trim();
+
+              counterparty.Save();
+            }
+            catch (Exception ex)
+            {
+              Logger.Error($"Ошибка при создании контрагента '{fullName}': {ex.Message}");
+            }
+          contract.Counterparty = counterparty;
+            
+          }
+          
+          
+          
+          // Валюта
+          var currency = Sungero.Financials.Currencies.GetAll().FirstOrDefault(c => c.AlphaCode == currencyCode);
+          if (currency != null)
+            contract.Currency = currency;*/
+
+    // Сумма
+    //contract.TotalAmount = ParseDecimal(totalAmountStr);
+
+    // НДС
+    /*bool vatApplicable;
+          if (bool.TryParse(vatApplicableStr, out vatApplicable))
+            contract.vat = vatApplicable;
+
+          contract.LifeCycleState = Sungero.Docflow.OfficialDocument.LifeCycleState.Draft;
+
+          contract.Save();
+        }
+        catch (Exception ex)
+        {
+          Logger.Debug($"Ошибка при импорте договора: {ex.Message}");
+        }
+      }
+      return errorList;
+      
+    }*/
+
+    //string xmlPathFile = "C:\\RxData\\git_repository\\Contracts.xml"
+
+    [Remote,Public]
+    public List<string> ImportContractsFromXml(string xmlPathFile)
+    {
+      Logger.Debug("ImportContractsFromXml - Start");
+      var errorList = new List<string>();
+      int countAll = 0;
+      int countChanged = 0;
+      int countNotChanged = 0;
+      int countErrors = 0;
       
       try
       {
-       // var documentKind = litiko.Eskhata.Contract
-       //var person = litiko.Eskhata.Contracts.As()
-        XDocument xmlDoc = XDocument.Load(filePath);
-        
-        XElement dataElement = xmlDoc.Descendants("Data").FirstOrDefault();
-        
-        if(dataElement == null)
-        {
-          Logger.Error("<DATA> tag is not found.");
-          return errorList;
-        }
-        
-        foreach (var docElement in dataElement.Elements("Document"))
-        {
-          var contract = litiko.Eskhata.Contracts.Create();
+        var xdoc = XDocument.Load(xmlPathFile);
+        var documentElements = xdoc.Descendants("Document").ToList();
+        var counterpartyElements = xdoc.Descendants("Counterparty").ToList();
 
-          contract.ExternalId = docElement.Element("ExternalD")?.Value;
-          
-          var documentKind = docElement.Element("DocumentKind")?.Value;
-          var docKind = Sungero.Docflow.DocumentKinds.GetAll().FirstOrDefault(k=>k.Code == documentKind);
-          if(docKind != null)
-            contract.DocumentKind = docKind;
-          else
-            Logger.Error("DocumentKind not found");
-          
-          var documentGroup = docElement.Element("DocumentGroup").Value;
-          if(documentGroup != null)
-            contract.DocumentGroup = documentGroup;
-          else
-            Logger.Error("Document group not found");
-          
-          contract.Subject = docElement.Element("Subject").Value;
-          contract.Name = docElement.Element("Name").Value;
-          
-          /*var counterpartySignatory = (Sungero.Parties.IContact)(docElement.Element("CounterpartySignatory"));
-          contract.CounterpartySignatory = counterpartySignatory;*/
-         
-          /*contract.Department = (Sungero.Company.IDepartment)docElement.Element("Department");
-          contract.ResponsibleEmployee = (Sungero.Company.IEmployee)docElement.Element("ResponsibleEmployee");
-          contract.Author = (IUser)docElement.Element("Author");/*
-          contract.ResponsibleAccountantlitiko = docElement.Element("ResponsibleAccountant").Value; 
-          contract.ResponsibleDepartmentlitiko = docElement.Element("ResponsibleDepartment").Value; 
-          contract.RBOlitiko = docElement.Element("RBO").Value;
-          contract.ValidFrom = docElement.Element("ValidFrom").Value;
-          contract.ValidTill = docElement.Element("ValidTill").Value;
-          contract.ReasonForChangelitiko = docElement.Element("СhangeReason").Value;
-          contract.AccDebtCreditlitiko = docElement.Element("AccountDebtCredt").Value;
-          contract.AccFutureExpenselitiko = docElement.Element("AccountFutureExpense").Value;
-          contract.InternalAcclitikoternalAcc = docElement.Element("InternalAcc").Value; // create
-          contract.TotalAmountlitiko = docElement.Element("TotalAmount").Value;
-          contract.Currency = docElement.Element("Currency").Value;
-          contract.CurrencyOperationlitiko = docElement.Element("OperationCurrency").Value;
-          contract.IsVATlitiko = docElement.Element("VATApplicable").Value;
-          contract.VatRatelitiko = docElement.Element("VATRate").Value;
-          contract.VatAmount = docElement.Element("VATAmount").Value;
-          contract.IncomeTaxRatelitiko = docElement.Element("IncomeTaxRate").Value;
-          contract.PaymentRegionlitiko = docElement.Element("PaymentRegion").Value;
-          contract.PaymentTaxRegionlitiko = docElement.Element("PaymentTaxRegion").Value;
-          contract.BatchProcessinglitiko = docElement.Element("BatchProcessing").Value;
-          contract.PaymentMethodlitiko = docElement.Element("PaymentMethod").Value;
-          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
-          */
-          
-         /* var paymentBasisElement = docElement.Element("PaymentBasis");
-          if(paymentBasisElement != null)
-          {
-            var item = contract.PaymentBasislitiko.AddNew();
-            
-            item.IsPaymentContract   = (bool)paymentBasisElement.Element("IsPaymentContract");
-            item.IsPaymentInvoice    = (bool)paymentBasisElement.Element("IsPaymentInvoice");
-            item.IsPaymentTaxInvoice = (bool)paymentBasisElement.Element("IsPaymentTaxInvoice");
-            item.IsPaymentAct        = (bool)paymentBasisElement.Element("IsPaymentAct");
-            item.IsPaymentOrder      = (bool)paymentBasisElement.Element("IsPaymentOrder");
-          }
+        countAll = documentElements.Count;
 
-          var paymentClosureBasis = docElement.Element("PaymentClosureBasis");
-          if (paymentClosureBasis != null)
-          {
-            var item = contract.PaymentClosureBasislitiko.AddNew();
-            
-            item.IsPaymentContract   = (bool)paymentClosureBasis.Element("IsPaymentContract");
-            item.IsPaymentInvoice    = (bool)paymentClosureBasis.Element("IsPaymentInvoice");
-            item.IsPaymentTaxInvoice = (bool)paymentClosureBasis.Element("IsPaymentTaxInvoice");
-            item.IsPaymentAct        = (bool)paymentClosureBasis.Element("IsPaymentAct");
-            item.IsPaymentOrder      = (bool)paymentClosureBasis.Element("IsPaymentOrder");
-            item.IsPaymentWaybill    = (bool)paymentClosureBasis.Element("IsPaymentWaybill");
-          }
-          /*
-          contract.IsPartialPaymentlitiko = docElement.Element("IsPartialPayment");
-          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
-          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
-          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
-          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
-          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
-          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
-          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
-          contract.FrequencyOfPaymentlitiko = docElement.Element("PaymentFrequency").Value;
-          */
-          
-          
-         contract.Save();
-          
+        for (int i = 0; i < documentElements.Count; i++)
+        {
+          var documentElement = documentElements[i];
+          var counterpartyElement = counterpartyElements.Count > i ? counterpartyElements[i] : null;
+
+          Transactions.Execute(() =>
+                               {
+                                 try
+                                 {
+                                   var externalID = documentElement.Element("ExternalID")?.Value;
+
+                                   if (string.IsNullOrWhiteSpace(externalID))
+                                     throw AppliedCodeException.Create("ExternalID does not exits in document");
+
+                                   var contract = Sungero.Contracts.ContractBases.GetAll().Where(d => d.ExternalId == externalID)
+                                     .FirstOrDefault();
+
+                                   if (contract == null)
+                                   {
+                                     contract = Sungero.Contracts.ContractBases.Create();
+                                     contract.ExternalId = externalID;
+                                     Logger.DebugFormat("Create new Contract with ExternalID: {0}", externalID);
+                                   }
+                                   else
+                                     Logger.DebugFormat("Contract with this {0} externalID is found on system", externalID);
+
+                                   contract.Name = documentElement.Element("Name")?.Value;
+                                   contract.Subject = documentElement.Element("Subject")?.Value;
+
+
+                                   if (DateTime.TryParse(documentElement.Element("ValidFrom")?.Value, out var validFrom))
+                                     contract.ValidFrom = validFrom;
+                                   if (DateTime.TryParse(documentElement.Element("ValidTill")?.Value, out var validTill))
+                                     contract.ValidTill = validTill;
+
+                                   if (double.TryParse(documentElement.Element("TotalAmount")?.Value, out var totalAmountLitiko))
+                                     contract.TotalAmountlitiko = totalAmountLitiko;
+
+                                   var currencyCode = documentElement.Element("Currency")?.Value;
+                                   var currency = Sungero.Commons.Currencies.GetAll().FirstOrDefault(c => c.AlphaCode == currencyCode);
+                                   if (currency != null)
+                                     contract.Currency = currency;
+
+
+                                   if (counterpartyElement != null)
+                                   {
+                                     var personElement = counterpartyElement.Element("Person");
+                                     if (personElement != null)
+                                     {
+                                       var counterPartyExternalID = personElement.Element("ExternalID")?.Value;
+                                       var firstName = personElement.Element("FirstName")?.Value;
+                                       var lastName = personElement.Element("LastName")?.Value;
+
+                                       var counterparty = Sungero.Parties.Companies.GetAll()
+                                         .Where(c => c.ExternalId == counterPartyExternalID).FirstOrDefault();
+
+                                       if (counterparty != null)
+                                       {
+                                         counterparty = Sungero.Parties.Companies.Create();
+                                         counterparty.ExternalId = counterPartyExternalID;
+                                         counterparty.Name = $"{firstName} {lastName}".Trim();
+                                         counterparty.Save();
+                                         Logger.DebugFormat("Created the new counterparty {0}", counterparty.Name);
+                                       }
+
+                                       contract.Counterparty = counterparty;
+                                     }
+                                   }
+                                   contract.Save();
+                                   Logger.DebugFormat("Contract successfully saved. ExternalID {0}", externalID);
+                                   countChanged++;
+                                 }
+                                 catch (Exception ex)
+                                 {
+                                   var error = $"Error pri obrabotke documenta #{i + 1}: {ex.Message}";
+                                   Logger.Error(error);
+                                   errorList.Add(error);
+                                   countErrors++;
+                                 }
+                               });
         }
       }
-      catch (Exception ex)
+      catch (Exception e)
       {
-        Console.WriteLine("{0}", ex);
-     
+        var error = $"General error in load xml: {e.Message}";
+        Logger.Error(error);
+        errorList.Add(error);
       }
-
+      Logger.DebugFormat("ImportContractsFromXML - End. CountAll {0}, Updated {1}, NotUpdated {2}, Errors {3}", countAll, countChanged, countNotChanged, countErrors);
+      Logger.Debug("ImportContractsFromXML - Finish");
       return errorList;
     }
+
+    
+    
+    // Вспомогательный метод: безопасное чтение узла
+    private string GetNodeValue(System.Xml.XmlNode parent, string nodeName)
+    {
+      return parent?.SelectSingleNode(nodeName)?.InnerText?.Trim();
+    }
+
+    // Вспомогательный метод: дата
+    private DateTime? ParseDate(string value)
+    {
+      DateTime result;
+      if (DateTime.TryParseExact(value, "dd.MM.yyyy", System.Globalization.CultureInfo.InvariantCulture,
+                                 System.Globalization.DateTimeStyles.None, out result))
+        return result;
+
+      return null;
+    }
+
+    // Вспомогательный метод: сумма
+    private double? ParseDecimal(string value)
+    {
+      double result;
+      if (double.TryParse(value, System.Globalization.NumberStyles.Any,
+                          System.Globalization.CultureInfo.InvariantCulture, out result))
+        return result;
+
+      return null;
+    }
+    
+    
+    
+    
+    
     
     /// <summary>
     /// Создать юрид. заключение.
