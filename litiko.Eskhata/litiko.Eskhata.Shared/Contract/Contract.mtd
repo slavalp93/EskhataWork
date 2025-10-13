@@ -1006,6 +1006,11 @@
           "ParameterTypeFullName": "litiko.Eskhata.IContract, Sungero.Domain.Interfaces"
         },
         {
+          "Name": "_obj",
+          "ParameterType": "global::litiko.Eskhata.IContract",
+          "ParameterTypeFullName": "litiko.Eskhata.IContract, Sungero.Domain.Interfaces"
+        },
+        {
           "Name": "xmlPathFile",
           "ParameterType": "global::System.String",
           "ParameterTypeFullName": "System.String"

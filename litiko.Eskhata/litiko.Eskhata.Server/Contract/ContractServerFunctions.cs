@@ -296,148 +296,187 @@ namespace litiko.Eskhata.Server
 
     //string xmlPathFile = "C:\\RxData\\git_repository\\Contracts.xml"
 
-    [Remote,Public]
-    public List<string> ImportContractsFromXml(string xmlPathFile)
+    [Remote, Public]
+    public List<string> ImportContractsFromXml(IContract _obj, string xmlPathFile)
     {
       Logger.Debug("ImportContractsFromXml - Start");
+
       var errorList = new List<string>();
       int countAll = 0;
       int countChanged = 0;
       int countNotChanged = 0;
       int countErrors = 0;
-      
+      bool isNew = false;
+
       try
       {
         var xdoc = XDocument.Load(xmlPathFile);
-        var documentElements = xdoc.Descendants("Document").ToList();
-        var counterpartyElements = xdoc.Descendants("Counterparty").ToList();
+        var documentElements = xdoc.Descendants("Data").Elements("Document");
+        var counterpartyElements = xdoc.Descendants("Counterparty").Elements("Person");
 
-        countAll = documentElements.Count;
-
-        for (int i = 0; i < documentElements.Count; i++)
+        foreach (var documentElement in documentElements)
         {
-          var documentElement = documentElements[i];
-          var counterpartyElement = counterpartyElements.Count > i ? counterpartyElements[i] : null;
+          try
+          {
+            var isCounterpartySignatory = documentElement.Element("CounterpartySignatory")?.Value;
+            var counterpartySignatory = Sungero.Parties.Counterparties.GetAll()
+            .Where(x => x.CounterpartySignatory == isCounterpartySignatory).FirstOrDefault();
+            
 
-          Transactions.Execute(() =>
-                               {
-                                 try
-                                 {
-                                   var externalID = documentElement.Element("ExternalID")?.Value;
+            // Найдем соответствующего контрагента, если есть
+            var counterpartyElement = counterpartyElements
+              .FirstOrDefault(c => c.Element("DocumentID")?.Value == documentElement.Element("ExternalD")?.Value);
 
-                                   if (string.IsNullOrWhiteSpace(externalID))
-                                     throw AppliedCodeException.Create("ExternalID does not exits in document");
+            string externalID = documentElement.Element("ExternalD")?.Value.Trim();
+            if (string.IsNullOrWhiteSpace(externalID))
+              throw AppliedCodeException.Create("ExternalD отсутствует в документе.");
 
-                                   var contract = Sungero.Contracts.ContractBases.GetAll().Where(d => d.ExternalId == externalID)
-                                     .FirstOrDefault();
+            // Поиск или создание договора
+            var contract = Contracts.GetAll()
+              .FirstOrDefault(d => d.ExternalId == externalID);
 
-                                   if (contract == null)
-                                   {
-                                     contract = Sungero.Contracts.ContractBases.Create();
-                                     contract.ExternalId = externalID;
-                                     Logger.DebugFormat("Create new Contract with ExternalID: {0}", externalID);
-                                   }
-                                   else
-                                     Logger.DebugFormat("Contract with this {0} externalID is found on system", externalID);
+            
+            if (contract == null)
+            {
+              contract = Contracts.Create();
+              contract.ExternalId = externalID;
+              isNew = true;
+              Logger.DebugFormat("Создаём новый договор ExternalD={0}", externalID);
+            }
+            else
+            {
+              Logger.DebugFormat("Найден существующий договор ExternalD={0}", externalID);
+            }
 
-                                   contract.Name = documentElement.Element("Name")?.Value;
-                                   contract.Subject = documentElement.Element("Subject")?.Value;
+            // Простые текстовые поля
+            contract.Name = documentElement.Element("Name")?.Value;
+            contract.Subject = documentElement.Element("Subject")?.Value;
+            contract.CounterpartySignatory = documentElement.Element("CounterpartySignatory")?.Value;
+            contract.RegistrationNumber = documentElement.Element("RegistrationNumber")?.Value;
+            contract.Note = documentElement.Element("Note")?.Value;
 
+            var validFromStr = documentElement.Element("ValidFrom")?.Value?.Trim();
+            if (!string.IsNullOrWhiteSpace(validFromStr))
+            {
+              try
+              {
+                // Парсим строку формата dd.MM.yyyy
+                DateTime df = DateTime.ParseExact(validFromStr, "dd.MM.yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                contract.ValidFrom = Calendar.FromUserTime(df);
+              }
+              catch
+              {
+                Logger.DebugFormat("Не удалось распарсить ValidFrom: '{0}'", validFromStr);
+              }
+            }
 
-                                   if (DateTime.TryParse(documentElement.Element("ValidFrom")?.Value, out var validFrom))
-                                     contract.ValidFrom = validFrom;
-                                   if (DateTime.TryParse(documentElement.Element("ValidTill")?.Value, out var validTill))
-                                     contract.ValidTill = validTill;
+            var validTillStr = documentElement.Element("ValidTill")?.Value?.Trim();
+            if (!string.IsNullOrWhiteSpace(validTillStr))
+            {
+              try
+              {
+                DateTime dt = DateTime.ParseExact(validTillStr, "dd.MM.yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                contract.ValidTill = Calendar.FromUserTime(dt);
+              }
+              catch
+              {
+                Logger.DebugFormat("Не удалось распарсить ValidTill: '{0}'", validTillStr);
+              }
+            }
+            // Валюта
+            string currencyCode = documentElement.Element("Currency")?.Value.Trim();
+            if (!string.IsNullOrWhiteSpace(currencyCode))
+            {
+              var currency = Sungero.Commons.Currencies.GetAll().FirstOrDefault(c => c.AlphaCode == currencyCode);
+              if (currency != null)
+                contract.Currency = currency;
+            }
 
-                                   if (double.TryParse(documentElement.Element("TotalAmount")?.Value, out var totalAmountLitiko))
-                                     contract.TotalAmountlitiko = totalAmountLitiko;
+            // Контрагент
+            if (counterpartyElement != null)
+            {
+              var personElement = counterpartyElement.Element("Person");
+              if (personElement != null)
+              {
+                string cpExternalId = personElement.Element("ExternalID")?.Value.Trim();
+                string firstName = personElement.Element("FirstName")?.Value.Trim();
+                string lastName = personElement.Element("LastName")?.Value.Trim();
 
-                                   var currencyCode = documentElement.Element("Currency")?.Value;
-                                   var currency = Sungero.Commons.Currencies.GetAll().FirstOrDefault(c => c.AlphaCode == currencyCode);
-                                   if (currency != null)
-                                     contract.Currency = currency;
+                Sungero.Parties.ICounterparty counterparty = null;
+                if (!string.IsNullOrWhiteSpace(cpExternalId))
+                {
+                  counterparty = Sungero.Parties.Counterparties.GetAll()
+                    .FirstOrDefault(c => c.ExternalId == cpExternalId);
+                }
 
+                if (counterparty == null)
+                {
+                  var created = Sungero.Parties.Companies.Create();
+                  created.ExternalId = cpExternalId;
+                  created.Name = (lastName + " " + firstName).Trim();
+                  created.Save();
+                  counterparty = created;
+                  Logger.DebugFormat("Создан контрагент: {0}", created.Name);
+                }
 
-                                   if (counterpartyElement != null)
-                                   {
-                                     var personElement = counterpartyElement.Element("Person");
-                                     if (personElement != null)
-                                     {
-                                       var counterPartyExternalID = personElement.Element("ExternalID")?.Value;
-                                       var firstName = personElement.Element("FirstName")?.Value;
-                                       var lastName = personElement.Element("LastName")?.Value;
+                contract.Counterparty = counterparty;
+              }
+            }
 
-                                       var counterparty = Sungero.Parties.Companies.GetAll()
-                                         .Where(c => c.ExternalId == counterPartyExternalID).FirstOrDefault();
+            // Сохраняем договор
+            contract.Save();
 
-                                       if (counterparty != null)
-                                       {
-                                         counterparty = Sungero.Parties.Companies.Create();
-                                         counterparty.ExternalId = counterPartyExternalID;
-                                         counterparty.Name = $"{firstName} {lastName}".Trim();
-                                         counterparty.Save();
-                                         Logger.DebugFormat("Created the new counterparty {0}", counterparty.Name);
-                                       }
-
-                                       contract.Counterparty = counterparty;
-                                     }
-                                   }
-                                   contract.Save();
-                                   Logger.DebugFormat("Contract successfully saved. ExternalID {0}", externalID);
-                                   countChanged++;
-                                 }
-                                 catch (Exception ex)
-                                 {
-                                   var error = $"Error pri obrabotke documenta #{i + 1}: {ex.Message}";
-                                   Logger.Error(error);
-                                   errorList.Add(error);
-                                   countErrors++;
-                                 }
-                               });
+            if (isNew) countChanged++; else countNotChanged++;
+            
+          }
+          catch (Exception ex)
+          {
+            var error = $"Ошибка при обработке документа ExternalD={documentElement.Element("ExternalD")?.Value}: {ex.Message}";
+            Logger.Error(error);
+            errorList.Add(error);
+            countErrors++;
+          }
         }
+
       }
+      
       catch (Exception e)
       {
-        var error = $"General error in load xml: {e.Message}";
+        var error = "General error in load xml: " + e.Message;
         Logger.Error(error);
         errorList.Add(error);
       }
-      Logger.DebugFormat("ImportContractsFromXML - End. CountAll {0}, Updated {1}, NotUpdated {2}, Errors {3}", countAll, countChanged, countNotChanged, countErrors);
+
+      Logger.DebugFormat("ImportContractsFromXML - End. CountAll {0}, Updated {1}, NotUpdated {2}, Errors {3}",
+                         countAll, countChanged, countNotChanged, countErrors);
       Logger.Debug("ImportContractsFromXML - Finish");
+
       return errorList;
     }
-
     
-    
-    // Вспомогательный метод: безопасное чтение узла
-    private string GetNodeValue(System.Xml.XmlNode parent, string nodeName)
-    {
-      return parent?.SelectSingleNode(nodeName)?.InnerText?.Trim();
-    }
 
-    // Вспомогательный метод: дата
-    private DateTime? ParseDate(string value)
-    {
-      DateTime result;
-      if (DateTime.TryParseExact(value, "dd.MM.yyyy", System.Globalization.CultureInfo.InvariantCulture,
-                                 System.Globalization.DateTimeStyles.None, out result))
-        return result;
+    /*
+public Sungero.CoreEntities.Shared.WorkingTimeCalendarState ParseDateSafe(string dateStr)
+{
+    if (string.IsNullOrWhiteSpace(dateStr))
+        return null;
 
-      return null;
-    }
+    DateTime dt;
+    if (DateTime.TryParseExact(dateStr, "dd.MM.yyyy", System.Globalization.CultureInfo.InvariantCulture,
+            System.Globalization.DateTimeStyles.None, out dt))
+        return dt;
 
-    // Вспомогательный метод: сумма
-    private double? ParseDecimal(string value)
-    {
-      double result;
-      if (double.TryParse(value, System.Globalization.NumberStyles.Any,
-                          System.Globalization.CultureInfo.InvariantCulture, out result))
-        return result;
+    if (DateTime.TryParse(dateStr, out dt))
+        return dt;
 
-      return null;
-    }
-    
-    
+    Logger.Debug("Не удалось распарсить дату: '" + dateStr + "'");
+    return null;
+}
+     */
+
+  
+
+
     
     
     

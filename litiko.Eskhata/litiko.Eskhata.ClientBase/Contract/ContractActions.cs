@@ -11,12 +11,29 @@ namespace litiko.Eskhata.Client
   {
     public virtual void StartContractsBatchImportlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      var import = Functions.Contract.Remote.ImportContractsFromXml(_obj);
-      if(import.Any())
-        Dialogs.ShowMessage("импорт выполнен с ошибками");
+      // Запрашиваем у пользователя путь к XML-файлу
+      var fileDialog = Dialogs.CreateInputDialog("Импорт договоров из XML");
+      var xmlPath = fileDialog.AddString("Путь к XML-файлу", true);
+      
+      fileDialog.Buttons.AddOkCancel();
+      var result = fileDialog.Show();
+
+      if (result != DialogButtons.Ok)
+        return;
+
+      // Вызываем удалённый метод, передавая текущий объект и путь
+      var errors = Functions.Contract.Remote.ImportContractsFromXml(_obj, _obj, xmlPath.Value);
+
+      if (errors.Any())
+      {
+        Dialogs.ShowMessage("Импорт выполнен с ошибками:\n" + string.Join("\n", errors));
+      }
       else
+      {
         Dialogs.ShowMessage("Импорт выполнен успешно");
+      }
     }
+
 
     public virtual bool CanStartContractsBatchImportlitiko(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
@@ -34,7 +51,7 @@ namespace litiko.Eskhata.Client
       }
       
       addendum.LeadingDocument = _obj;
-      addendum.Show();      
+      addendum.Show();
     }
 
     public virtual bool CanCreateLegalOpinionlitiko(Sungero.Domain.Client.CanExecuteActionArgs e)
