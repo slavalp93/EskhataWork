@@ -283,4 +283,7 @@
   <data name="Property_PaymentClosureBasislitiko" xml:space="preserve">
     <value>Закрытие платежа на основании</value>
   </data>
+  <data name="Property_CounterpartySignatorylitiko" xml:space="preserve">
+    <value>Counterparty sign</value>
+  </data>
 </root>

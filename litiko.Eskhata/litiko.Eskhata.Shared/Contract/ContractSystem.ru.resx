@@ -238,4 +238,7 @@
   <data name="Action_CreateLegalOpinionlitikoDescription" xml:space="preserve">
     <value>Создание юридичиского заключения к договору. </value>
   </data>
+  <data name="Property_CounterpartySignatorylitiko" xml:space="preserve">
+    <value>Подписал</value>
+  </data>
 </root>

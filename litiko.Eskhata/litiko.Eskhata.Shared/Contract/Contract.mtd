@@ -986,6 +986,14 @@
       "EntityGuid": "4d6ab7f4-25db-42d3-9b68-8c7aecc159eb",
       "IsShowedInList": false,
       "PreviousPropertyGuid": "7a98953a-9949-4d61-aae0-238b4a8bebf1"
+    },
+    {
+      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "143e1298-d5b4-4db2-ad2c-9c1c24a097a4",
+      "Name": "CounterpartySignatorylitiko",
+      "Code": "CounterpartySi",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "c2a0612a-f611-4950-ba4d-e907ffabf5d4"
     }
   ],
   "PublicFunctions": [
@@ -1006,7 +1014,7 @@
           "ParameterTypeFullName": "litiko.Eskhata.IContract, Sungero.Domain.Interfaces"
         },
         {
-          "Name": "_obj",
+          "Name": "contractParam",
           "ParameterType": "global::litiko.Eskhata.IContract",
           "ParameterTypeFullName": "litiko.Eskhata.IContract, Sungero.Domain.Interfaces"
         },
