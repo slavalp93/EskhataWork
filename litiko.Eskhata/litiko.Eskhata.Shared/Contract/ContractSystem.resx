@@ -286,4 +286,7 @@
   <data name="Property_CounterpartySignatorylitiko" xml:space="preserve">
     <value>Counterparty sign</value>
   </data>
+  <data name="Property_VATApplicablelitiko" xml:space="preserve">
+    <value>Облагается НДС</value>
+  </data>
 </root>

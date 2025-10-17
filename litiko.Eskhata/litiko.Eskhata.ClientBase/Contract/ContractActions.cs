@@ -11,18 +11,8 @@ namespace litiko.Eskhata.Client
   {
     public virtual void StartContractsBatchImportlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      // Запрашиваем у пользователя путь к XML-файлу
-      var fileDialog = Dialogs.CreateInputDialog("Импорт договоров из XML");
-      var xmlPath = fileDialog.AddString("Путь к XML-файлу", true);
-      
-      fileDialog.Buttons.AddOkCancel();
-      var result = fileDialog.Show();
 
-      if (result != DialogButtons.Ok)
-        return;
-
-      // Вызываем удалённый метод, передавая текущий объект и путь
-      var errors = Functions.Contract.Remote.ImportContractsFromXml(_obj, _obj, xmlPath.Value);
+      var errors = Functions.Contract.Remote.ImportContractsFromXml(_obj);
 
       if (errors.Any())
       {

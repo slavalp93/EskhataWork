@@ -685,6 +685,47 @@
   "OperationsClass": "",
   "Properties": [
     {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "6c316926-04e7-453d-9d0e-57b89e8f477b",
+      "Name": "PurchaseOrderNumber",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "38f94413-bf41-4f87-b5a7-cf9f1485d61f"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "38f94413-bf41-4f87-b5a7-cf9f1485d61f",
+      "Name": "VatRate",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "d01721b5-5731-4638-a4ef-f7c33181310e"
+    },
+    {
+      "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "08598cbc-3d38-4dac-a193-c0fac61637d1",
+      "Name": "VatAmount",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "7bead9d6-4768-4538-8925-4d223a99ca78"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "90dcb094-0fea-422c-b6f8-5f28d51f0782",
+      "Name": "Contact",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "6c316926-04e7-453d-9d0e-57b89e8f477b",
+      "Versions": []
+    },
+    {
       "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
       "NameGuid": "50e10772-7165-4916-b8c5-b9ed30c3c151",
       "Name": "DocumentGroup",
@@ -994,6 +1035,14 @@
       "Code": "CounterpartySi",
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "c2a0612a-f611-4950-ba4d-e907ffabf5d4"
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "65847b0c-8c79-4ef9-88be-65667de70474",
+      "Name": "VATApplicablelitiko",
+      "Code": "VATApplicablel",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "143e1298-d5b4-4db2-ad2c-9c1c24a097a4"
     }
   ],
   "PublicFunctions": [
@@ -1012,16 +1061,6 @@
           "Name": "contract",
           "ParameterType": "global::litiko.Eskhata.IContract",
           "ParameterTypeFullName": "litiko.Eskhata.IContract, Sungero.Domain.Interfaces"
-        },
-        {
-          "Name": "contractParam",
-          "ParameterType": "global::litiko.Eskhata.IContract",
-          "ParameterTypeFullName": "litiko.Eskhata.IContract, Sungero.Domain.Interfaces"
-        },
-        {
-          "Name": "xmlPathFile",
-          "ParameterType": "global::System.String",
-          "ParameterTypeFullName": "System.String"
         }
       ],
       "Placement": "Shared",
