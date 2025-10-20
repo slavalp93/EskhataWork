@@ -27,7 +27,12 @@ namespace litiko.Eskhata
       base.ValidTillValueInput(e);
       
       if (Equals(_obj.LifeCycleState, LifeCycleState.Active) && !Equals(e.NewValue, e.OldValue))
+      {
         _obj.State.Properties.ReasonForChangelitiko.IsRequired = true;
+        
+        if (Equals(_obj.IntegrationStatuslitiko, IntegrationStatuslitiko.Success) && !string.IsNullOrEmpty(_obj.ExternalId))
+          _obj.UpdateRquiredlitiko = true;
+      }      
     }
 
   }

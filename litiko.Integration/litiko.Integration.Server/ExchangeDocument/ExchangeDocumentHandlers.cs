@@ -14,6 +14,7 @@ namespace litiko.Integration
     {
       _obj.StatusRequestToIS = ExchangeDocument.StatusRequestToIS.Created;
       _obj.RequestToRXPacketCount = 0;
+      _obj.IsOnline = false;
     }
   }
 

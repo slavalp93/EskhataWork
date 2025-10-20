@@ -13,6 +13,14 @@
         "GenerateHandler"
       ],
       "Versions": []
+    },
+    {
+      "NameGuid": "ee2e8155-3df0-4352-9ab4-406c5d5cab0d",
+      "Name": "ExportToABSlitiko",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_ExportToABSlitiko_large_ee2e81553df043529ab4406c5d5cab0d.png",
+      "SmallIconName": "Action_ExportToABSlitiko_small_ee2e81553df043529ab4406c5d5cab0d.png"
     }
   ],
   "BaseGuid": "58cca102-1e97-4f07-b6ac-fd866a8b7cb1",
@@ -151,7 +159,8 @@
   "HandledEvents": [
     "RefreshClient",
     "BeforeSaveServer",
-    "ShowingSignDialogClient"
+    "ShowingSignDialogClient",
+    "CreatingFromServer"
   ],
   "IconResourcesKeys": [],
   "IsAbstract": true,
@@ -200,6 +209,26 @@
       "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
       "PreviousPropertyGuid": "afeb04ab-abe9-4388-a17e-344e90743c09"
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d03dfc81-0789-4fa3-a365-a1bbd74a04fc",
+      "Name": "IntegrationStatuslitiko",
+      "Code": "IntegrationSta",
+      "DirectValues": [
+        {
+          "NameGuid": "7b39a492-e457-499e-b68d-3bd32abefb8a",
+          "Name": "Send",
+          "Code": "Send"
+        },
+        {
+          "NameGuid": "ced241c7-6796-484d-b73f-4e7f31f7ff8c",
+          "Name": "Success",
+          "Code": "Success"
+        }
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "bd63208e-e9fc-4ef0-8b57-26a8dc6365f5"
     }
   ],
   "PublicFunctions": [
@@ -231,7 +260,17 @@
     "NameGuid": "9928919e-7ba5-49c4-8b4a-f42b6653377e",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "e8579d30-0585-4026-8c3c-d47070ac7411",
+        "Name": "ExportToABSlitikolitiko",
+        "ActionGuid": "ee2e8155-3df0-4352-9ab4-406c5d5cab0d",
+        "ButtonSize": "Large",
+        "Index": 41,
+        "ParentGuid": "f329dc86-efcb-484a-bdfd-999e6f96e971"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],

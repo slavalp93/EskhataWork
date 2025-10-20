@@ -10,10 +10,114 @@ namespace litiko.Integration.Client
   {
 
     /// <summary>
-    /// 
-    /// </summary>
-    public virtual void Function1()      
+    /// Запуск интеграции с АБС по кнопке с карточки объекта
+    /// </summary>    
+    /// <param name="entity">Сущность, из которой запущен процесс</param></param>
+    /// <returns>Строка с ошибкой или пустая строка</returns>
+    [Public]
+    public string IntegrationClientAction(Sungero.Domain.Shared.IEntity entity)
     {
+      string errorMessage = string.Empty;
+      
+      #region Предпроверки
+      var company = litiko.Eskhata.Companies.As(entity);
+      var bank = litiko.Eskhata.Banks.As(entity);
+      var person = litiko.Eskhata.People.As(entity);
+      var contract = litiko.Eskhata.Contracts.As(entity);
+      var supAgreement = litiko.Eskhata.SupAgreements.As(entity);
+      
+      if ((company != null || bank != null) && string.IsNullOrEmpty(litiko.Eskhata.Counterparties.As(entity).TIN))
+        return litiko.Eskhata.Companies.Resources.ErrorNeedFillTin;
+            
+      if (bank != null && string.IsNullOrEmpty(bank.BIC))      
+        return litiko.Eskhata.Banks.Resources.ErrorNeedFillBIC;
+            
+      // TODO вынести в функцию - получить метод интеграции по типу объекта
+      var integrationMethodName = string.Empty;
+      if (company != null)
+        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_GET_COMPANY;
+      else if (bank != null)
+        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_GET_BANK;
+      else if (person != null)
+        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_GET_PERSON;
+      else if (contract != null)
+        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_SET_CONTRACT;
+      else if (supAgreement != null)
+        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT;
+              
+      var integrationMethod = Integration.IntegrationMethods.GetAll().Where(x => x.Name == integrationMethodName).FirstOrDefault();
+      if (integrationMethod == null)        
+        return litiko.Integration.Resources.IntegrationMethodNotFoundFormat(integrationMethodName);
+      #endregion
+            
+      var exchDoc = Integration.PublicFunctions.Module.Remote.CreateExchangeDocument();
+      exchDoc.IntegrationMethod = integrationMethod;
+      exchDoc.IsOnline = true;
+      exchDoc.Save();
+      
+      errorMessage =  Integration.PublicFunctions.Module.Remote.SendRequestToIS(exchDoc, 0, entity);
+      if (!string.IsNullOrEmpty(errorMessage))
+      {
+        exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
+        exchDoc.RequestToISInfo = errorMessage.Length >= 1000 ? errorMessage.Substring(0, 999) : errorMessage;
+        exchDoc.Save();        
+        return errorMessage;
+      }
+      else
+      {
+        exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Sent;        
+        exchDoc.Save();
+      }
+            
+      long exchangeQueueId = Integration.PublicFunctions.Module.Remote.WaitForGettingDataFromIS(exchDoc.Id, 1000, 10);
+      if (exchangeQueueId > 0)
+      {                
+        
+        #region Создать версию из xml
+        var exchQueue = litiko.Integration.ExchangeQueues.Get(exchangeQueueId);
+        using (var xmlStream = new System.IO.MemoryStream(exchQueue.Xml))
+        {
+          exchDoc.CreateVersionFrom(xmlStream, "xml");
+          exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;                                    
+          exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
+          exchDoc.RequestToRXInfo = "Saved";
+          exchDoc.RequestToRXPacketCount = 1;
+          exchDoc.Save();
+        }        
+        #endregion
+        
+        var errorList = new List<string>();        
+        if (company != null)
+          errorList = litiko.Integration.Functions.Module.Remote.R_DR_GET_COMPANY(exchDoc.Id, company);
+        else if (bank != null)
+          errorList = litiko.Integration.Functions.Module.Remote.R_DR_GET_BANK(exchDoc.Id, bank);
+        else if (person != null)
+          errorList = litiko.Integration.Functions.Module.Remote.R_DR_GET_PERSON(exchDoc.Id, person);
+        else if (contract != null)
+          errorList = litiko.Integration.Functions.Module.Remote.R_DR_SET_CONTRACT_Online(exchDoc, contract);
+        else if (supAgreement != null)
+          errorList = litiko.Integration.Functions.Module.Remote.R_DR_SET_CONTRACT_Online(exchDoc, supAgreement);
+                
+        if (errorList.Any())
+        {
+          var lastError = errorList.LastOrDefault();          
+          exchDoc.RequestToRXInfo = lastError.Length >= 1000 ? lastError.Substring(0, 999) : lastError;
+          exchDoc.StatusProcessingRx = Integration.ExchangeDocument.StatusProcessingRx.Error;          
+          exchDoc.Save();
+          
+          return lastError;
+        }
+        else
+        {
+          exchDoc.StatusProcessingRx = Integration.ExchangeDocument.StatusProcessingRx.Success;          
+          exchDoc.Save();
+        }        
+      }
+      else
+        return litiko.Integration.Resources.ResponseNotReceived;
+      
+      return errorMessage;
+      
     }
 
   }

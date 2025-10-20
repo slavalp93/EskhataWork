@@ -2,6 +2,16 @@
   "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
   "NameGuid": "4636a00a-7ace-4bf0-93f5-8a74240a0ad7",
   "Name": "ResponsibilityMatrix",
+  "Actions": [
+    {
+      "NameGuid": "57d4e697-90fc-4a10-94f4-52add145e428",
+      "Name": "ShowDuplicates",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_ShowDuplicates_large_57d4e69790fc4a1094f452add145e428.png",
+      "SmallIconName": "Action_ShowDuplicates_small_57d4e69790fc4a1094f452add145e428.png"
+    }
+  ],
   "BaseGuid": "04581d26-0780-4cfd-b3cd-c2cafc5798b0",
   "CanBeNavigationPropertyType": true,
   "Code": "Responsibility",
@@ -137,7 +147,8 @@
     }
   ],
   "HandledEvents": [
-    "CreatedServer"
+    "CreatedServer",
+    "BeforeSaveServer"
   ],
   "IconResourcesKeys": [],
   "IntegrationServiceName": "NSIResponsibilityMatrix",
@@ -228,7 +239,17 @@
     "NameGuid": "146df6ca-44f6-44e3-a6e3-0aece007b1e5",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "c58f650e-2a85-4426-a1b7-e61a254d7124",
+        "Name": "ActionButton",
+        "ActionGuid": "57d4e697-90fc-4a10-94f4-52add145e428",
+        "ButtonSize": "Large",
+        "Index": 31,
+        "ParentGuid": "f5671141-d97a-40aa-962c-24aa87a848f1"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],

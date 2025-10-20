@@ -103,4 +103,13 @@
   <data name="Property_FSZN" xml:space="preserve">
     <value>ФСЗН, %</value>
   </data>
+  <data name="Action_ShowDuplicates" xml:space="preserve">
+    <value>Показать дубли</value>
+  </data>
+  <data name="Action_ShowDuplicatesHint" xml:space="preserve">
+    <value>Показать дубли</value>
+  </data>
+  <data name="Action_ShowDuplicatesDescription" xml:space="preserve">
+    <value>Показать дубли</value>
+  </data>
 </root>

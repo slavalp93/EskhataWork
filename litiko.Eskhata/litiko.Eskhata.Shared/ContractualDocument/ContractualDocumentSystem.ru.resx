@@ -202,4 +202,7 @@
   <data name="Property_CurrencyContractlitiko" xml:space="preserve">
     <value>Валюта договора</value>
   </data>
+  <data name="Property_UpdateRquiredlitiko" xml:space="preserve">
+    <value>Требуется обновить в АБС</value>
+  </data>
 </root>

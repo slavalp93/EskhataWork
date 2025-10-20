@@ -515,6 +515,17 @@
       "IsEnabled": false,
       "IsShowedInList": false,
       "PreviousPropertyGuid": "cf4b7cca-a1d3-42ba-a620-ae8577333b8e"
+    },
+    {
+      "$type": "Sungero.Metadata.LongIntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d23b5bdd-20b6-4ffb-81c0-3462c5f4803f",
+      "Name": "ExchangeDocIdlitiko",
+      "CanBeSearch": false,
+      "Code": "ExchangeDocIdl",
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "4a7e638a-f5a5-4560-b9ba-cf07f1793724"
     }
   ],
   "PublicFunctions": [

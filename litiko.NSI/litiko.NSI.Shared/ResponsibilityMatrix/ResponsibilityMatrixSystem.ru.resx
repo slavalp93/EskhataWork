@@ -88,4 +88,13 @@
   <data name="Property_BatchProcessing" xml:space="preserve">
     <value>Групповая обработка</value>
   </data>
+  <data name="Action_ShowDuplicates" xml:space="preserve">
+    <value>Показать дубли</value>
+  </data>
+  <data name="Action_ShowDuplicatesHint" xml:space="preserve">
+    <value>Показать дубли</value>
+  </data>
+  <data name="Action_ShowDuplicatesDescription" xml:space="preserve">
+    <value>Показать дубли</value>
+  </data>
 </root>

@@ -153,13 +153,15 @@
   "PublicStructures": [],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.NSI",
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "DuplicatesFound"
+  ],
   "ServerAssemblyName": "litiko.NSI.Server",
   "ServerNamespace": "litiko.NSI.Server",
   "SharedAssemblyName": "litiko.NSI.Shared",
   "SharedNamespace": "litiko.NSI.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.134",
+  "Version": "0.0.1.141",
   "Widgets": [],
   "Versions": [
     {

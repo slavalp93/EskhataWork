@@ -145,61 +145,79 @@ namespace litiko.Integration.Server
           if (exchQueues.Count() > 0)
           {
             Logger.DebugFormat("{0} Creating full xml version. Packets count: {1}. {2}", logPrefix, exchDoc.RequestToRXPacketCount, logPostfix);
-            List<XElement> dataElements = new List<XElement>();
-            XElement headElement = null;
-            XElement requestElement = null;
             
-            foreach (var exchQueue in exchQueues)
+            // Если есть только одна часть с индексом пакета 0, берем ее, иначе - собираем из частей
+            if (exchQueues.Count() == 1 && exchQueues.FirstOrDefault()?.Name == Integration.Resources.VersionRequestToRXFormat(0).ToString())
             {
-              using (var xmlStream = new MemoryStream(exchQueue.Xml))
+              var exchQueue = exchQueues.FirstOrDefault();
+              using (var ms = new MemoryStream(exchQueue.Xml))
               {
-                XDocument doc = XDocument.Load(xmlStream);
-                var elements = doc.Descendants("Data").Elements("element");
-                dataElements.AddRange(elements);
-                if (headElement == null && requestElement == null)
-                {
-                  headElement = doc.Root.Element("head");
-                  requestElement = doc.Root.Element("request");
-                }
-              }
-            }
-
-            // Создание новой версии XML
-            if (dataElements.Any())
-            {
-              using (MemoryStream ms = new MemoryStream())
-              {
-                XmlWriterSettings xws = new XmlWriterSettings();
-                xws.OmitXmlDeclaration = false;
-                xws.Indent = true;
-                
-                using (XmlWriter xw = XmlWriter.Create(ms, xws))
-                {
-                  // Копирование структуры request без <Data>
-                  XElement newRequestElement = new XElement(requestElement);
-                  newRequestElement.Element("Data").Remove();
-                  
-                  // Создание нового элемента <Data> с объединенными элементами
-                  XElement newDataElement = new XElement("Data", dataElements);
-                  
-                  // Добавление нового <Data> к запросу
-                  newRequestElement.Add(newDataElement);
-                  
-                  // Создание нового XML документа
-                  XDocument newDoc = new XDocument(
-                    new XDeclaration("1.0", "UTF-8", null),
-                    new XElement("root", headElement, newRequestElement)
-                   );
-                  newDoc.WriteTo(xw);
-                }
-                
                 exchDoc.CreateVersionFrom(ms, "xml");
                 exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;
                 Logger.DebugFormat("{0} Full xml version created. {1}", logPrefix, logPostfix);
-                versionFullXML = exchDoc.LastVersion;
-              }
+                versionFullXML = exchDoc.LastVersion;                
+              }              
             }
-          }
+            else
+            {
+              List<XElement> dataElements = new List<XElement>();
+              XElement headElement = null;
+              XElement requestElement = null;
+              
+              foreach (var exchQueue in exchQueues)
+              {
+                using (var xmlStream = new MemoryStream(exchQueue.Xml))
+                {
+                  XDocument doc = XDocument.Load(xmlStream);
+                  var elements = doc.Descendants("Data").Elements("element");
+                  if (!elements.Any())
+                    elements = doc.Descendants("Data").Elements();
+                  dataElements.AddRange(elements);
+                  if (headElement == null && requestElement == null)
+                  {
+                    headElement = doc.Root.Element("head");
+                    requestElement = doc.Root.Element("request");
+                  }                
+                }
+              }
+  
+              // Создание новой версии XML
+              if (dataElements.Any())
+              {
+                using (MemoryStream ms = new MemoryStream())
+                {            
+                  XmlWriterSettings xws = new XmlWriterSettings();
+                  xws.OmitXmlDeclaration = false;
+                  xws.Indent = true;
+                  
+                  using (XmlWriter xw = XmlWriter.Create(ms, xws))
+                  {
+                    // Копирование структуры request без <Data>
+                    XElement newRequestElement = new XElement(requestElement);
+                    newRequestElement.Element("Data").Remove();
+            
+                    // Создание нового элемента <Data> с объединенными элементами
+                    XElement newDataElement = new XElement("Data", dataElements);
+            
+                    // Добавление нового <Data> к запросу
+                    newRequestElement.Add(newDataElement);
+                    
+                    // Создание нового XML документа
+                    XDocument newDoc = new XDocument(
+                      new XDeclaration("1.0", "UTF-8", null),  
+                      new XElement("root", headElement, newRequestElement)
+                    );
+                    newDoc.WriteTo(xw);
+                  }
+                  
+                  exchDoc.CreateVersionFrom(ms, "xml");
+                  exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;              
+                  Logger.DebugFormat("{0} Full xml version created. {1}", logPrefix, logPostfix);
+                  versionFullXML = exchDoc.LastVersion;  
+                }                            
+              }            
+            }                        
+          }          
           
           if (exchDoc.State.IsChanged)
             exchDoc.Save();
@@ -213,73 +231,93 @@ namespace litiko.Integration.Server
         }
         else
         {
-          XDocument xmlDoc = XDocument.Load(versionFullXML.Body.Read());
-          var dataElements = xmlDoc.Descendants("Data").Elements("element");
-          if (!dataElements.Any())
-          {
-            throw AppliedCodeException.Create("Empty Data node.");
-          }
-          
+          XDocument xmlDoc = XDocument.Load(versionFullXML.Body.Read());          
           var dictionary = xmlDoc.Root.Element("request").Element("dictionary").Value;
+          
+          // Проверка статуса обработки в ИС (<stateId> и <stateMsg>)                    
+          string state = xmlDoc.Root.Element("request")?.Element("stateId")?.Value;
+          string stateMsg = xmlDoc.Root.Element("request")?.Element("stateMsg")?.Value;
+          bool statusIS = state != "0";
+          if (!statusIS)
+            throw AppliedCodeException.Create($"State message from IS:{stateMsg}");         
+          
+          IEnumerable<XElement> dataElements;
+          if (dictionary == Constants.Module.IntegrationMethods.R_DR_SET_CONTRACT || dictionary == Constants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT)
+            dataElements = xmlDoc.Descendants("Data").Elements();
+          else
+            dataElements = xmlDoc.Descendants("Data").Elements("element");
+          
+          if (!dataElements.Any())
+            throw AppliedCodeException.Create("Empty Data node.");          
+          
           switch (dictionary)
           {
-            case "R_DR_GET_DEPART":
+            case Constants.Module.IntegrationMethods.R_DR_GET_DEPART:
               errorList = Functions.Module.R_DR_GET_DEPART(dataElements);
               break;
-            case "R_DR_GET_EMPLOYEES":
+            case Constants.Module.IntegrationMethods.R_DR_GET_EMPLOYEES:
               errorList = Functions.Module.R_DR_GET_EMPLOYEES(dataElements);
               break;
-            case "R_DR_GET_BUSINESSUNITS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_BUSINESSUNITS:
               errorList = Functions.Module.R_DR_GET_BUSINESSUNITS(dataElements);
               break;
-            case "R_DR_GET_COMPANY":
+            case Constants.Module.IntegrationMethods.R_DR_GET_COMPANY:
               // Обработка выполняется на клиенте;
               break;
-            case "R_DR_GET_BANK":
+            case Constants.Module.IntegrationMethods.R_DR_GET_BANK:
               // Обработка выполняется на клиенте;
               break;
-            case "R_DR_GET_COUNTRIES":
+            case Constants.Module.IntegrationMethods.R_DR_GET_PERSON:
+              // Обработка выполняется на клиенте;
+              break;              
+            case Constants.Module.IntegrationMethods.R_DR_GET_COUNTRIES:
               errorList = Functions.Module.R_DR_GET_COUNTRIES(dataElements);
               break;
-            case "R_DR_GET_OKOPF":
+            case Constants.Module.IntegrationMethods.R_DR_GET_OKOPF:
               errorList = Functions.Module.R_DR_GET_OKOPF(dataElements);
               break;
-            case "R_DR_GET_OKFS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_OKFS:
               errorList = Functions.Module.R_DR_GET_OKFS(dataElements);
               break;
-            case "R_DR_GET_OKONH":
+            case Constants.Module.IntegrationMethods.R_DR_GET_OKONH:
               errorList = Functions.Module.R_DR_GET_OKONH(dataElements);
               break;
-            case "R_DR_GET_OKVED":
+            case Constants.Module.IntegrationMethods.R_DR_GET_OKVED:
               errorList = Functions.Module.R_DR_GET_OKVED(dataElements);
               break;
-            case "R_DR_GET_COMPANYKINDS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_COMPANYKINDS:
               errorList = Functions.Module.R_DR_GET_COMPANYKINDS(dataElements);
               break;
-            case "R_DR_GET_TYPESOFIDCARDS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_TYPESOFIDCARDS:
               errorList = Functions.Module.R_DR_GET_TYPESOFIDCARDS(dataElements);
               break;
-            case "R_DR_GET_ECOLOG":
+            case Constants.Module.IntegrationMethods.R_DR_GET_ECOLOG:
               errorList = Functions.Module.R_DR_GET_ECOLOG(dataElements);
               break;
-            case "R_DR_GET_MARITALSTATUSES":
+            case Constants.Module.IntegrationMethods.R_DR_GET_MARITALSTATUSES:
               errorList = Functions.Module.R_DR_GET_MARITALSTATUSES(dataElements);
               break;
-            case "R_DR_GET_CURRENCY_RATES":
+            case Constants.Module.IntegrationMethods.R_DR_GET_CURRENCY_RATES:
               errorList = Functions.Module.R_DR_GET_CURRENCY_RATES(dataElements);
               break;
-            case "R_DR_GET_PAYMENT_REGIONS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_PAYMENT_REGIONS:
               errorList = Functions.Module.R_DR_GET_PAYMENT_REGIONS(dataElements);
               break;
-            case "R_DR_GET_TAX_REGIONS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_TAX_REGIONS:
               errorList = Functions.Module.R_DR_GET_TAX_REGIONS(dataElements);
               break;
-            case "R_DR_GET_CONTRACT_VID":
+            case Constants.Module.IntegrationMethods.R_DR_GET_CONTRACT_VID:
               errorList = Functions.Module.R_DR_GET_CONTRACT_VID(dataElements);
               break;
-            case "R_DR_GET_CONTRACT_TYPE":
+            case Constants.Module.IntegrationMethods.R_DR_GET_CONTRACT_TYPE:
               errorList = Functions.Module.R_DR_GET_CONTRACT_TYPE(dataElements);
               break;
+            case Constants.Module.IntegrationMethods.R_DR_SET_CONTRACT:
+              errorList = Functions.Module.R_DR_SET_CONTRACT(dataElements, null, null);
+              break;
+            case Constants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT:
+              errorList = Functions.Module.R_DR_SET_CONTRACT(dataElements, null, null);
+              break;              
           }
           
           if (errorList.Any())

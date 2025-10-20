@@ -11,6 +11,26 @@ namespace litiko.Eskhata.Client
 
   partial class OfficialDocumentActions
   {
+    public virtual void ExportToABSlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      string errorMessage = litiko.Integration.PublicFunctions.Module.IntegrationClientAction(_obj);
+      if (!string.IsNullOrEmpty(errorMessage))
+      {
+        e.AddError(errorMessage);
+        return;
+      }
+      else
+      {
+        e.AddInformation(litiko.Integration.Resources.DataUpdatedSuccessfully);        
+      }      
+    }
+
+    public virtual bool CanExportToABSlitiko(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      // Доступность определяется в наследниках
+      return false;
+    }
+
     public override void ShowAcquaintanceReport(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       //base.ShowAcquaintanceReport(e);

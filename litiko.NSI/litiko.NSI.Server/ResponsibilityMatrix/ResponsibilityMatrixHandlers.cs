@@ -10,6 +10,17 @@ namespace litiko.NSI
   partial class ResponsibilityMatrixServerHandlers
   {
 
+    public override void BeforeSave(Sungero.Domain.BeforeSaveEventArgs e)
+    {
+      // Проверка дубикатов.
+      if (_obj.Status == Sungero.CoreEntities.DatabookEntry.Status.Active)
+      {
+        var hasDuplicates = Functions.ResponsibilityMatrix.GetDuplicates(_obj).Any();
+        if (hasDuplicates)
+          e.AddError(NSI.Resources.DuplicatesFound, _obj.Info.Actions.ShowDuplicates);            
+      }
+    }
+
     public override void Created(Sungero.Domain.CreatedEventArgs e)
     {
       _obj.ConclusionDKR = false;

@@ -593,6 +593,20 @@
       ],
       "ReturnType": "global::litiko.Eskhata.Module.Docflow.Structures.Module.IConversionToPdfResult",
       "ReturnTypeFullName": "litiko.Eskhata.Module.Docflow.Structures.Module.IConversionToPdfResult"
+    },
+    {
+      "Name": "GetApprovalTasksWithCompleted",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Linq.IQueryable<global::Sungero.Docflow.IApprovalTask>",
+      "ReturnTypeFullName": "System.Linq.IQueryable"
     }
   ],
   "PublicStructures": [

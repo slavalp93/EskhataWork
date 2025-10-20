@@ -64,6 +64,21 @@
       "Id": "e99ae7e2-edb7-4904-a19a-4577f07609a4",
       "MaxVersion": "",
       "MinVersion": "4.8.138.0"
+    },
+    {
+      "Id": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
+    },
+    {
+      "Id": "593dcc11-15ee-49f2-b4ef-bf4cf7867055",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
+    },
+    {
+      "Id": "4e25caec-c722-4740-bcfd-c4f803840ac6",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
     }
   ],
   "DesktopViews": [],
@@ -384,7 +399,7 @@
   "SharedAssemblyName": "litiko.Eskhata.Shared",
   "SharedNamespace": "litiko.Eskhata.Shared",
   "SpecialFolders": [],
-  "Version": "4.8.138.134",
+  "Version": "4.8.138.141",
   "Widgets": [],
   "Versions": [
     {

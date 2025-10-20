@@ -17,9 +17,7 @@ namespace litiko.Integration.Server
 
     public override void Initializing(Sungero.Domain.ModuleInitializingEventArgs e)
     {      
-      CreateIntegrationSystem("ABS");
-      
-      // Some Comment Test
+      CreateIntegrationSystem("ABS");      
       
       var integrationSystem = IntegrationSystems.GetAll(r => r.Name == "ABS").FirstOrDefault();
       if (integrationSystem != null)
@@ -43,10 +41,13 @@ namespace litiko.Integration.Server
         CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_PAYMENT_REGIONS, integrationSystem);
         CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_TAX_REGIONS, integrationSystem);
         CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_CONTRACT_VID, integrationSystem);
-        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_CONTRACT_TYPE, integrationSystem); 
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_CONTRACT_TYPE, integrationSystem);        
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_SET_CONTRACT, integrationSystem);        
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT, integrationSystem);        
       }
       
       GrantRightsOnEntities();
+      CreateApprovalFunctionStages();
     }
     
     /// <summary>
@@ -119,9 +120,26 @@ namespace litiko.Integration.Server
         IntegrationSystems.AccessRights.Save();
         IntegrationMethods.AccessRights.Grant(roleCounterpartiesResponsible, DefaultAccessRightsTypes.Read);
         IntegrationMethods.AccessRights.Save();
-        ExchangeQueues.AccessRights.Grant(roleCounterpartiesResponsible, DefaultAccessRightsTypes.Create);
+        ExchangeQueues.AccessRights.Grant(roleCounterpartiesResponsible, DefaultAccessRightsTypes.FullAccess);
         ExchangeQueues.AccessRights.Save();
       }      
     }
+    
+    /// <summary>
+    /// Создать записи новых типов сценариев.
+    /// </summary>    
+    public static void CreateApprovalFunctionStages()
+    {                              
+      if (!litiko.Integration.SendDocumentStages.GetAll(x => x.Name == litiko.Integration.Constants.Module.ApprovalFunctionStages.SendDocumentToIS).Any())
+      {
+        InitializationLogger.DebugFormat("Init: Create stage Sending document to information system.");
+        var stage = litiko.Integration.SendDocumentStages.Create();
+        stage.Name = litiko.Integration.Constants.Module.ApprovalFunctionStages.SendDocumentToIS;
+        stage.TimeoutInHours = 4;
+        stage.Save();      
+      }      
+      
+    }    
+
   }
 }

@@ -217,7 +217,16 @@
   <data name="JobDescription_ca66ee7158854185b3ce67a5353c9a74" xml:space="preserve">
     <value>Интеграция. Типы договоров.</value>
   </data>
-  <data name="JobDisplayName_b709ba1ea11d4b0da7e5fd2eb3a71283" xml:space="preserve">
-    <value>Получить все существующие договора</value>
+  <data name="JobDisplayName_94ffe050c7274a32b51e23edc5d37cc5" xml:space="preserve">
+    <value>Интеграция. Виды документов, удостоверяющих личность</value>
+  </data>
+  <data name="JobDescription_94ffe050c7274a32b51e23edc5d37cc5" xml:space="preserve">
+    <value>Интеграция. Виды документов, удостоверяющих личность</value>
+  </data>
+  <data name="JobDisplayName_d5a413e4895a48369d38d7fdafaed77c" xml:space="preserve">
+    <value>Интеграция. Экспорт обновлений по действующим договорам</value>
+  </data>
+  <data name="JobDescription_d5a413e4895a48369d38d7fdafaed77c" xml:space="preserve">
+    <value>Отбираются действующие договора с признаком «Требуется обновить в АБС» и вызывается протокол интграции R_DR_SET_CONTRACT для каждого подходящего документа.</value>
   </data>
 </root>

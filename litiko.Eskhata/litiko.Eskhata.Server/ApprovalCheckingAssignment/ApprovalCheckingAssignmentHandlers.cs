@@ -54,7 +54,7 @@ namespace litiko.Eskhata
         
         var officialDoc = Sungero.Docflow.OfficialDocuments.As(projectSolution);
         
-        var createdTasks = Sungero.Docflow.PublicFunctions.Module.Remote.GetApprovalTasks(officialDoc);
+        var createdTasks = litiko.Eskhata.Module.Docflow.PublicFunctions.Module.Remote.GetApprovalTasksWithCompleted(officialDoc);
         // Получаем все стартованные задачи согласования по документу
         
         if (!createdTasks.Any())

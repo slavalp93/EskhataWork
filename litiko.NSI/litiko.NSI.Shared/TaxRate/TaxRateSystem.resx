@@ -103,4 +103,19 @@
   <data name="Property_FSZN" xml:space="preserve">
     <value>FSZN, %</value>
   </data>
+  <data name="Action_ShowDuplicates" xml:space="preserve">
+    <value>ShowDuplicates</value>
+  </data>
+  <data name="Action_ShowDuplicatesDescription" xml:space="preserve">
+    <value>ShowDuplicates</value>
+  </data>
+  <data name="Action_ShowDuplicatesHint" xml:space="preserve">
+    <value>ShowDuplicates</value>
+  </data>
+  <data name="Action_ShowDuplicatesConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowDuplicatesConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
 </root>

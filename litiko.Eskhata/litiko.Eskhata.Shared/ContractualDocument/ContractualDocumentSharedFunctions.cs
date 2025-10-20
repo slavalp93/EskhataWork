@@ -19,6 +19,11 @@ namespace litiko.Eskhata.Shared
       
       _obj.State.Properties.VatAmount.IsEnabled = false;
       
+      var canUpdate = _obj.AccessRights.CanUpdate();
+      _obj.State.Properties.CaseFile.IsEnabled = canUpdate;
+      _obj.State.Properties.PlacedToCaseFileDate.IsEnabled = canUpdate;
+      _obj.State.Properties.StoredIn.IsEnabled = canUpdate;
+      
       // TODO убрать из обновления формы
       _obj.State.Controls.CounterpartryInfolitiko.Refresh();
     }

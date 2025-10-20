@@ -5,6 +5,15 @@
   "AccessRightsMode": "Both",
   "Actions": [
     {
+      "NameGuid": "ee2e8155-3df0-4352-9ab4-406c5d5cab0d",
+      "Name": "ExportToABSlitiko",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ]
+    },
+    {
       "NameGuid": "d021d43d-7949-4bdf-b0a0-4db25547f388",
       "Name": "SendForApproval",
       "GenerateHandler": true,
@@ -977,6 +986,15 @@
       ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "8584af22-c1fa-4b9a-91c9-1060ffd9996f"
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "33bbf737-89bb-4924-ab13-6b159b2b4402",
+      "Name": "UpdateRquiredlitiko",
+      "Code": "UpdateRquiredl",
+      "IsEnabled": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "9543f412-9d7a-407c-af27-9736d6356cbb"
     }
   ],
   "PublicFunctions": [
