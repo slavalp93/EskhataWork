@@ -103,227 +103,152 @@ namespace litiko.Eskhata.Server
           var isRegistrationNumber = documentElement.Element("RegistrationNumber")?.Value;
           var isRegistrationDate = documentElement.Element("RegistrationDate")?.Value;
 
-          try
-          {
-            var contract = Eskhata.Contracts.GetAll().FirstOrDefault(x => x.ExternalId == isExternalD);
-            if (contract != null)
-              Logger.DebugFormat("contract with ExternalD:{0} was found. Id:{1}, Name:{2}", isExternalD, contract.Id,
-                                 contract.Name);
-            else
+            try
             {
-              contract = Eskhata.Contracts.Create();
-              contract.ExternalId = isExternalD;
-              contract.DeliveryAddresslitiko = "";
-              contract.DeliveryDatelitiko = null;
-              contract.RBOlitiko = isRBO;
-              contract.ReasonForChangelitiko = isChangeReason;
-
-              if (!string.IsNullOrWhiteSpace(isPaymentMethod))
+              var contract = Eskhata.Contracts.GetAll().FirstOrDefault(x => x.ExternalId == isExternalD);
+              
+              if (contract == null)
+                Logger.DebugFormat("contract with ExternalD:{0} was found. Id:{1}, Name:{2}", isExternalD, contract.Id, contract.Name);
+              else
               {
-                Sungero.Core.Enumeration? paymentEnum = null;
-
-                switch (isPaymentMethod)
-                {
-                  case "Предоплата":
-                    paymentEnum = litiko.Eskhata.Contract.PaymentMethodlitiko.Prepayment;
-                    break;
-
-                  case "Постоплата":
-                    paymentEnum = litiko.Eskhata.Contract.PaymentMethodlitiko.Postpay;
-                    break;
-                  default:
-                    Logger.DebugFormat("Unknow Payment Method: {0}", isPaymentMethod);
-                    break;
-                }
-
-                if (paymentEnum != null)
-                  contract.PaymentMethodlitiko = paymentEnum;
-              }
-
-              if (!string.IsNullOrWhiteSpace(isPaymentFrequency))
-              {
-                var frequency = litiko.NSI.FrequencyOfPayments.GetAll()
-                  .FirstOrDefault(f => f.Name.Equals(isPaymentFrequency, StringComparison.OrdinalIgnoreCase));
-
-                if (frequency != null)
-                  contract.FrequencyOfPaymentlitiko = frequency;
-                else
-                  Logger.DebugFormat("Payment frequency with name {0} was not found", isPaymentFrequency);
-              }
-
-              contract.IsPartialPaymentlitiko = bool.Parse(isPartialPayment);
-              contract.IsEqualPaymentlitiko = bool.Parse(isEqualPayment);
-              contract.AmountForPeriodlitiko = double.Parse(isAmountForPeriod);
-              contract.AccDebtCreditlitiko = isAccountDebtCredt;
-              contract.AccFutureExpenselitiko = isAccountFutureExpense;
-
-              if (!string.IsNullOrWhiteSpace(isPaymentRegion))
-              {
-                var paymentRegion = litiko.NSI.PaymentRegions.GetAll()
-                  .FirstOrDefault(r => r.ExternalId == isPaymentRegion);
-
-                if (paymentRegion != null)
-                {
-                  contract.PaymentRegionlitiko = paymentRegion;
-                  Logger.DebugFormat("Payment region with ExternalId {0} found {1}", isPaymentRegion, paymentRegion.Name);
-                }
+                contract = Eskhata.Contracts.Create();
+                contract.ExternalId = isExternalD;
+                
+                ////////////////////////////////////////////////////DocumentKind//////////////////////////////////////////////////////////////
+                var documentType = Sungero.Contracts.ContractCategories.GetAll().Where(t => t.ExternalIdlitiko == isDocumentKind).FirstOrDefault();
+                
+                var documentKind = litiko.Eskhata.DocumentKinds.GetAll()
+                  .FirstOrDefault(k => k.ExternalIdlitiko == isDocumentKind);
+                if (documentKind != null)
+                  Logger.DebugFormat("Document kind with ExternalId:{0} was found. Id{1}, Name:{2}", isDocumentKind, documentKind.Id, documentKind.Name);
                 else
                 {
-                  Logger.DebugFormat("Payment region with ExternalId {0} not found", isPaymentRegion);
-                  /*paymentRegion = litiko.NSI.PaymentRegions.Create();
-                  paymentRegion.ExternalId = isPaymentRegion;
-                  paymentRegion.Name = $"{}";*/
+                  documentKind = litiko.Eskhata.DocumentKinds.Create();
+                  documentKind.ExternalIdlitiko = isDocumentKind;
+                  documentKind.Name = litiko.Eskhata.DocumentKinds.GetAll()
+                    .Where(k => k.ExternalIdlitiko == isDocumentKind)
+                    .Select(n=>n.Name)
+                    .FirstOrDefault() ?? "Imported data";
+                  Logger.DebugFormat("Create new Document kind with ExternalId:{0}. ID{1}", isDocumentKind, documentKind.Id);
+                  documentKind.DocumentType = isDocumentGroup;
+                 
+                  documentKind.Save();
                 }
-              }
-              else
-              {
-                Logger.Debug("PaymentRegion element is missing or empty in XML.");
-              }
-              
-              
-              
-              
-              
-              var totalAmount = 0.0;
-              if (!string.IsNullOrWhiteSpace(isTotalAmount))
-              {
-                if (double.TryParse(isTotalAmount.Replace(',', '.'),
-                                    System.Globalization.NumberStyles.Any,
-                                    System.Globalization.CultureInfo.InvariantCulture,
-                                    out totalAmount))
+                
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+                var documentGroup = litiko.Eskhata.DocumentGroupBases.GetAll()
+                  .FirstOrDefault(d => d.ExternalIdlitiko == isDocumentGroup);
+                  
+                if (documentGroup == null)
                 {
-                  contract.TotalAmountlitiko = totalAmount;
-                  Logger.DebugFormat("Assigned TotalAmount = {0}", totalAmount);
+                  documentGroup = litiko.Eskhata.DocumentGroupBases.Create();
+                  
+                  documentGroup.ExternalIdlitiko = isDocumentGroup;
+                  
+                  documentGroup.Name = litiko.Eskhata.DocumentGroupBases.GetAll()
+                    .Where(d => d.ExternalIdlitiko == isDocumentGroup)
+                    .Select(n=>n.Name)
+                    .FirstOrDefault() ?? "Imported data";
+                  
+                  documentGroup.Save();
                 }
-                else
+
+                contract.DocumentKind = documentKind;
+                if (documentGroup != null)
+                  contract.DocumentGroup = documentGroup;
+                    //contract.DocumentGroup = documentGroup;
+                contract.Subject = isSubject;
+                contract.Name = isName;
+                contract.CounterpartySignatorylitiko = int.Parse(isCounterpartySignatory);
+                
+                
+                if (!string.IsNullOrWhiteSpace(isDepartment)) // Department
                 {
-                  Logger.DebugFormat("Invalid TotalAmount format: {0}", isTotalAmount);
+                  var department = litiko.Eskhata.Departments.GetAll()
+                    .FirstOrDefault(d => d.ExternalCodelitiko == isDepartment);
+
+                  if (department == null)
+                  {
+                    department = litiko.Eskhata.Departments.Create();
+                    contract.Department = department;
+                  }
+                  else
+                    Logger.DebugFormat("Department with ExternalCode:{0} not found", isDepartment);
                 }
-              }
-              else
-              {
-                Logger.Debug("TotalAmount is null or whitespace.");
-              }
-              
-              Logger.DebugFormat("Create new Contract with ExternalD:{0}. ID{1}", isExternalD, contract.Id);
-              contract.Save();
-            }
 
-            ////////////////////////////////////////////////////DocumentKind//////////////////////////////////////////////////////////////
-            var documentKind = litiko.Eskhata.DocumentKinds.GetAll()
-              .FirstOrDefault(k => k.ExternalIdlitiko == isDocumentKind);
-            if (documentKind != null)
-              Logger.DebugFormat("Document kind with ExternalId:{0} was found. Id{1}, Name:{2}", isDocumentKind,
-                                 documentKind.Id, documentKind.Name);
-            else
-            {
-              documentKind = litiko.Eskhata.DocumentKinds.Create();
-              documentKind.ExternalIdlitiko = isDocumentKind;
-              documentKind.Name = "Imported data";
-              Logger.DebugFormat("Create new Document kind with ExternalId:{0}. ID{1}", isDocumentKind,
-                                 documentKind.Id);
-              documentKind.Save();
-            }
+                if (!string.IsNullOrWhiteSpace(isResponsibleEmployee)) // ResponsibleEmployee
+                {
+                  var employee = litiko.Eskhata.Employees.GetAll()
+                    .FirstOrDefault(e => e.ExternalId == isResponsibleEmployee);
 
-            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            var documentGroup = litiko.Eskhata.DocumentGroupBases.GetAll()
-              .FirstOrDefault(d => d.ExternalIdlitiko == isDocumentGroup);
-            if (documentGroup == null)
-            {
-              documentGroup = litiko.Eskhata.DocumentGroupBases.Create();
-              documentGroup.ExternalIdlitiko = isDocumentGroup;
-            }
+                  if (employee == null)
+                  {
+                    employee = litiko.Eskhata.Employees.Create();
+                    contract.ResponsibleEmployee = employee;
+                  }
+                  else
+                    Logger.DebugFormat("Employee with ExternalId:{0} not found", isResponsibleEmployee);
+                }
 
-            contract.Subject = isSubject;
-            contract.Name = isName;
-            contract.CounterpartySignatorylitiko = int.Parse(isCounterpartySignatory);
+                var authorId = 0;
+                if (!string.IsNullOrWhiteSpace(isAuthor) && int.TryParse(isAuthor, out authorId))
+                {
+                  var author = Sungero.CoreEntities.Users.GetAll().FirstOrDefault(x => x.Id == authorId);
 
-            if (!string.IsNullOrWhiteSpace(isDepartment)) // Department
-            {
-              var department = litiko.Eskhata.Departments.GetAll()
-                .FirstOrDefault(d => d.ExternalCodelitiko == isDepartment);
+                  if (author != null)
+                    contract.Author = author;
+                }
 
-              if (department == null)
-              {
-                department = litiko.Eskhata.Departments.Create();
-                contract.Department = department;
-              }
-              else
-                Logger.DebugFormat("Department with ExternalCode:{0} not found", isDepartment);
-            }
+                contract.ResponsibleAccountantlitiko = isResponsibleAccountant;
+                contract.ResponsibleDepartmentlitiko = isResponsibleDepartment;
+                contract.RBOlitiko = isRBO;
 
-            if (!string.IsNullOrWhiteSpace(isResponsibleEmployee)) // ResponsibleEmployee
-            {
-              var employee = litiko.Eskhata.Employees.GetAll()
-                .FirstOrDefault(e => e.ExternalId == isResponsibleEmployee);
+                var datePatternFrom = "dd.MM.yyyy";
+                var dateStyleFrom = System.Globalization.DateTimeStyles.None;
+                DateTime validFrom;
+                if (!string.IsNullOrWhiteSpace(isValidFrom) &&
+                    DateTime.TryParseExact(isValidFrom, datePatternFrom, null, dateStyleFrom, out validFrom))
+                  contract.ValidFrom = validFrom;
 
-              if (employee == null)
-              {
-                employee = litiko.Eskhata.Employees.Create();
-                contract.ResponsibleEmployee = employee;
-              }
-              else
-                Logger.DebugFormat("Employee with ExternalId:{0} not found", isResponsibleEmployee);
-            }
+                var datePatternTill = "dd.MM.yyyy";
+                var dateStyleTill = System.Globalization.DateTimeStyles.None;
+                DateTime validTill;
+                if (!string.IsNullOrWhiteSpace(isValidFrom) &&
+                    DateTime.TryParseExact(isValidFrom, datePatternTill, null, dateStyleTill, out validTill))
+                  contract.ValidFrom = validTill;
 
-            var authorId = 0;
-            if (!string.IsNullOrWhiteSpace(isAuthor) && int.TryParse(isAuthor, out authorId))
-            {
-              var author = Sungero.CoreEntities.Users.GetAll().FirstOrDefault(x => x.Id == authorId);
+                contract.ReasonForChangelitiko = isChangeReason;
+                contract.AccDebtCreditlitiko = isAccountDebtCredt;
+                contract.AccFutureExpenselitiko = isAccountFutureExpense;
+                contract.InternalAcclitiko = isInternalAcc;
+                contract.TotalAmountlitiko = ParseDoubleSafe(isTotalAmount);
 
-              if (author != null)
-                contract.Author = author;
-            }
+                if (!string.IsNullOrWhiteSpace(isCurrency))
+                {
+                  var currency = Sungero.Commons.Currencies.GetAll()
+                    .FirstOrDefault(c => c.AlphaCode == isCurrency || c.NumericCode == isCurrency);
 
-            contract.ResponsibleAccountantlitiko = isResponsibleAccountant;
-            contract.ResponsibleDepartmentlitiko = isResponsibleDepartment;
-            contract.RBOlitiko = isRBO;
+                  if (currency != null)
+                    contract.Currency = currency;
+                  else
+                    Logger.Debug($"Currency is not found by code '{isCurrency}'");
+                }
 
-            var datePatternFrom = "dd.MM.yyyy";
-            var dateStyleFrom = System.Globalization.DateTimeStyles.None;
-            DateTime validFrom;
-            if (!string.IsNullOrWhiteSpace(isValidFrom) &&
-                DateTime.TryParseExact(isValidFrom, datePatternFrom, null, dateStyleFrom, out validFrom))
-              contract.ValidFrom = validFrom;
+                if (!string.IsNullOrWhiteSpace(isCurrencyOperation))
+                {
+                  var currencyOp = litiko.Eskhata.Currencies.GetAll()
+                    .FirstOrDefault(c => c.AlphaCode == isCurrencyOperation || c.NumericCode == isCurrencyOperation);
 
-            var datePatternTill = "dd.MM.yyyy";
-            var dateStyleTill = System.Globalization.DateTimeStyles.None;
-            DateTime validTill;
-            if (!string.IsNullOrWhiteSpace(isValidFrom) &&
-                DateTime.TryParseExact(isValidFrom, datePatternTill, null, dateStyleTill, out validTill))
-              contract.ValidFrom = validTill;
+                  if (currencyOp != null)
+                    contract.CurrencyOperationlitiko = currencyOp;
+                  else
+                    Logger.Debug($"Currency Operation is not found by code '{isCurrencyOperation}'");
+                }
 
-            //contract.ReasonForChangelitiko = isChaneReason;
-            contract.AccDebtCreditlitiko = isAccountDebtCredt;
-            contract.AccFutureExpenselitiko = isAccountFutureExpense;
-            contract.InternalAcclitiko = isInternalAcc;
-            contract.TotalAmountlitiko = double.Parse(isTotalAmount);
+                contract.VATApplicablelitiko = ParseBoolSafe(isVATApplicable);
 
-            if (!string.IsNullOrWhiteSpace(isCurrency))
-            {
-              var currency = Sungero.Commons.Currencies.GetAll()
-                .FirstOrDefault(c => c.AlphaCode == isCurrency || c.NumericCode == isCurrency);
-
-              if (currency != null)
-                contract.Currency = currency;
-              else
-                Logger.Debug($"Currency is not found by code '{isCurrency}'");
-            }
-
-            if (!string.IsNullOrWhiteSpace(isCurrencyOperation))
-            {
-              var currencyOp = litiko.Eskhata.Currencies.GetAll()
-                .FirstOrDefault(c => c.AlphaCode == isCurrencyOperation || c.NumericCode == isCurrencyOperation);
-
-              if (currencyOp != null)
-                contract.CurrencyOperationlitiko = currencyOp;
-              else
-                Logger.Debug($"Currency Operation is not found by code '{isCurrencyOperation}'");
-            }
-
-            contract.VATApplicablelitiko = bool.Parse(isVATApplicable);
-
-            /*if (!string.IsNullOrWhiteSpace(isVATRate))
+                /*if (!string.IsNullOrWhiteSpace(isVATRate))
             {
               var vatRate = Sungero.Commons.VatRates.GetAll()
                 .FirstOrDefault(r => r.Rate == double.Parse(isVATRate));
@@ -332,31 +257,105 @@ namespace litiko.Eskhata.Server
                 contract.VatRatelitiko
             }*/
 
-            contract.VatRatelitiko = double.Parse(isVATRate);
-            contract.VatAmount = double.Parse(isVATAmount);
-            contract.IncomeTaxRatelitiko = double.Parse(isIncomeTaxRate);
+                contract.VatRatelitiko = ParseDoubleSafe(isVATRate);
+                contract.VatAmount = ParseDoubleSafe(isVATAmount);
+                contract.IncomeTaxRatelitiko = ParseDoubleSafe(isIncomeTaxRate);
 
-            if (!string.IsNullOrWhiteSpace(isPaymentRegion))
-            {
-              var paymentRegion = litiko.NSI.PaymentRegions.GetAll()
-                .FirstOrDefault(r => r.ExternalId == isPaymentRegion || r.Code == isPaymentRegion);
+                if (!string.IsNullOrWhiteSpace(isPaymentRegion))
+                {
+                  var paymentRegion = litiko.NSI.PaymentRegions.GetAll()
+                    .FirstOrDefault(r => r.ExternalId == isPaymentRegion || r.Code == isPaymentRegion);
 
-              if (paymentRegion != null)
-                contract.PaymentRegionlitiko = paymentRegion;
-              else
-                Logger.Debug($"Payment Region is not found by code '{isPaymentRegion}'");
+                  if (paymentRegion != null)
+                    contract.PaymentRegionlitiko = paymentRegion;
+                  else
+                    Logger.Debug($"Payment Region is not found by code '{isPaymentRegion}'");
+                }
+                
+
+                if (!string.IsNullOrWhiteSpace(isPaymentMethod))
+                {
+                  Sungero.Core.Enumeration? paymentEnum = null;
+
+                  switch (isPaymentMethod)
+                  {
+                    case "Предоплата":
+                      paymentEnum = litiko.Eskhata.Contract.PaymentMethodlitiko.Prepayment;
+                      break;
+
+                    case "Постоплата":
+                      paymentEnum = litiko.Eskhata.Contract.PaymentMethodlitiko.Postpay;
+                      break;
+                    default:
+                      Logger.DebugFormat("Unknow Payment Method: {0}", isPaymentMethod);
+                      break;
+                  }
+
+                  if (paymentEnum == null)
+                    contract.PaymentMethodlitiko = paymentEnum;
+                }
+
+                if (!string.IsNullOrWhiteSpace(isPaymentFrequency))
+                {
+                  var frequency = litiko.NSI.FrequencyOfPayments.GetAll()
+                    .FirstOrDefault(f => f.Name.Equals(isPaymentFrequency, StringComparison.OrdinalIgnoreCase));
+
+                  if (frequency == null)
+                    contract.FrequencyOfPaymentlitiko = frequency;
+                  else
+                    Logger.DebugFormat("Payment frequency with name {0} was not found", isPaymentFrequency);
+                }
+
+                if(!string.IsNullOrWhiteSpace(isPartialPayment))
+                {
+                  contract.IsPartialPaymentlitiko = ParseBoolSafe(isPartialPayment);
+                }
+                
+                if(!string.IsNullOrWhiteSpace(isEqualPayment))
+                {
+                  contract.IsEqualPaymentlitiko = ParseBoolSafe(isEqualPayment);
+                }
+                
+                contract.AmountForPeriodlitiko = ParseDoubleSafe(isAmountForPeriod);
+                contract.AccDebtCreditlitiko = isAccountDebtCredt;
+                contract.AccFutureExpenselitiko = isAccountFutureExpense;
+
+                if (!string.IsNullOrWhiteSpace(isPaymentRegion))
+                {
+                  var paymentRegion = litiko.NSI.PaymentRegions.GetAll()
+                    .FirstOrDefault(r => r.ExternalId == isPaymentRegion);
+
+                  if (paymentRegion == null)
+                  {
+                    contract.PaymentRegionlitiko = paymentRegion;
+                    Logger.DebugFormat("Payment region with ExternalId {0} found {1}", isPaymentRegion, paymentRegion.Name);
+                  }
+                  else
+                  {
+                    Logger.DebugFormat("Payment region with ExternalId {0} not found", isPaymentRegion);
+                    /*paymentRegion = litiko.NSI.PaymentRegions.Create();
+                  paymentRegion.ExternalId = isPaymentRegion;
+                  paymentRegion.Name = $"{}";*/
+                  }
+                }
+                else
+                {
+                  Logger.Debug("PaymentRegion element is missing or empty in XML.");
+                }
+                Logger.DebugFormat("Create new Contract with ExternalD:{0}. ID{1}", isExternalD, contract.Id);
+                contract.Save();
+              }
             }
-          }
-          catch (Exception ex)
-          {
-            var error = $"{ex.Message}";
-            Logger.Error(error);
-            errorList.Add(error);
-            countErrors++;
-          }
-          Logger.DebugFormat("ImportContractsFromXML - End. CountAll {0}, Updated {1}, NotUpdated {2}, Errors {3}",
-                             countAll, countChanged, countNotChanged, countErrors);
-          Logger.Debug("ImportContractsFromXML - Finish");
+            catch (Exception ex)
+            {
+              var error = $"{ex.Message}";
+              Logger.Error(error);
+              errorList.Add(error);
+              countErrors++;
+            }
+            Logger.DebugFormat("ImportContractsFromXML - End. CountAll {0}, Updated {1}, NotUpdated {2}, Errors {3}",
+                               countAll, countChanged, countNotChanged, countErrors);
+            Logger.Debug("ImportContractsFromXML - Finish");
         }
       }
       catch (Exception e)
@@ -490,6 +489,25 @@ namespace litiko.Eskhata.Server
       documentBlock.AddLabel(note);
       
       return documentSummary;
+    }
+    private static bool ParseBoolSafe(string value)
+    {
+      bool result;
+      if (bool.TryParse(value, out result))
+        return result;
+      Logger.DebugFormat("Unexpected boolean value: {0}", value);
+      return false;
+    }
+    private static double ParseDoubleSafe(string value)
+    {
+      if(string.IsNullOrWhiteSpace(value))
+        return 0.0;
+      
+      var result = 0.0;
+      if(double.TryParse(value, System.Globalization.NumberStyles.Any,
+                         System.Globalization.CultureInfo.InvariantCulture, out result))
+        return result;
+      return 0.0;
     }
   }
 }

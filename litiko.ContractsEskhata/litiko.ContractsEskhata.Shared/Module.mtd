@@ -2,16 +2,7 @@
   "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
   "NameGuid": "724222f8-e094-4707-9021-7f031259333b",
   "Name": "ContractsEskhata",
-  "AsyncHandlers": [
-    {
-      "NameGuid": "9c867ca8-bd7c-4050-bffd-5019247a9e8d",
-      "Name": "ContractsBatchImportHandler",
-      "DelayPeriod": 15,
-      "DelayStrategy": "RegularDelayStrategy",
-      "IsHandlerGenerated": true,
-      "Parameters": []
-    }
-  ],
+  "AsyncHandlers": [],
   "ClientAssemblyName": "litiko.ContractsEskhata.Client",
   "ClientBaseAssemblyName": "litiko.ContractsEskhata.ClientBase",
   "ClientBaseNamespace": "litiko.ContractsEskhata.ClientBase",

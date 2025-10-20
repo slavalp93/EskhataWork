@@ -14,28 +14,4 @@ using Sungero.Company;           // Для работы с сотрудника�
 namespace litiko.ContractsEskhata.Structures.Module
 {
 
-  /// <summary>
-  /// 
-  /// </summary>
-  partial class ContractData
-  {
-    [XmlElement("ContractNumber")]
-    public string ContractNumber {get; set;}
-    
-    [XmlElement("ContractDate")]
-    public string ContractDate { get; set; }
-    
-    [XmlElement("Amount")]
-    public decimal Amount { get; set; }
-
-    [XmlElement("CurrencyAlphaCode")]
-    public string CurrencyAlphaCode { get; set; }
-
-    [XmlElement("CounterpartyInn")]
-    public string CounterpartyInn { get; set; }
-
-    [XmlElement("CounterpartyName")]
-    public string CounterpartyName { get; set; }
-  }
-
 }
