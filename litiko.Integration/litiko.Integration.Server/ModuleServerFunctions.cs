@@ -2955,8 +2955,7 @@ namespace litiko.Integration.Server
       Logger.Debug("R_DR_SET_CONTRACT - Start");
       
       var errorList = new List<string>();      
-      Transactions.Execute(() =>
-      {          
+          
         try
         {                        
           if (dataElements == null)
@@ -3069,8 +3068,7 @@ namespace litiko.Integration.Server
           var errorMessage = string.Format("Error when processing Document. Description: {0}. StackTrace: {1}", ex.Message, ex.StackTrace);
           Logger.Error(errorMessage);
           errorList.Add(ex.Message);
-        }        
-      });      
+        }      
       
       Logger.Debug("R_DR_SET_CONTRACT - Finish"); 
       return errorList;
@@ -3919,7 +3917,7 @@ namespace litiko.Integration.Server
         var documentGroup       = litiko.Eskhata.DocumentGroupBases.As(contractualDocument.DocumentGroup)?.ExternalIdlitiko ?? "";
         var subject             = contractualDocument.Subject ?? "";
         var name                = contractualDocument.Name ?? "";
-        var counterpartySign    = litiko.Eskhata.Contracts.As(contractualDocument.CounterpartySignatory)?.ExternalId ?? "";
+        var counterpartySign    = litiko.Eskhata.Contacts.As(contractualDocument.CounterpartySignatory)?.ExternalIdlitiko ?? "";
         var department          = litiko.Eskhata.Departments.As(contractualDocument.Department)?.ExternalId ?? "";  
         var responsibleEmployee = litiko.Eskhata.Employees.As(contractualDocument.ResponsibleEmployee)?.ExternalId ?? "";
         var author              = litiko.Eskhata.Employees.As(contractualDocument.Author)?.ExternalId ?? "";
