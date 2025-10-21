@@ -3825,7 +3825,7 @@ namespace litiko.Integration.Server
         var incomeTaxRate     = contractualDocument.IncomeTaxRatelitiko?.ToString() ?? "";
         var incomeTaxAmount   = contractualDocument.IncomeTaxAmountlitiko?.ToString() ?? ""; 
         var laborPayment      = ToYesNoNull(contractualDocument.IsIndividualPaymentlitiko); 
-        var note              = contractualDocument.Note?.ToString() ?? "";
+        var note              = contractualDocument.Note ?? "Без примечания";
         var isWithinBudget    = ToYesNoNull(contractualDocument.IsWithinBudgetlitiko);
     
         // ==========================
@@ -3934,7 +3934,7 @@ namespace litiko.Integration.Server
         var vatAmount           = contractualDocument.VatAmount?.ToString() ?? "";
         var incomeTaxRate       = contractualDocument.IncomeTaxRatelitiko?.ToString() ?? "";
         var amountForPeriod     = contractualDocument.AmountForPeriodlitiko?.ToString() ?? "";
-        var note                = contractualDocument.Note ?? "";
+        var note                = contractualDocument.Note ?? "Без примечания";
         var registrationNumber  = contractualDocument.RegistrationNumber ?? "";
         var registrationDate    = contractualDocument.RegistrationDate?.ToString(dateFormat) ?? "";
         var isPartialPayment    = ToYesNoNull(contractualDocument.IsPartialPaymentlitiko);
