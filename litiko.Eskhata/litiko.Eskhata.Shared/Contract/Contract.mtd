@@ -1061,6 +1061,11 @@
           "Name": "contract",
           "ParameterType": "global::litiko.Eskhata.IContract",
           "ParameterTypeFullName": "litiko.Eskhata.IContract, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "contractualDocument",
+          "ParameterType": "global::litiko.Eskhata.IContract",
+          "ParameterTypeFullName": "litiko.Eskhata.IContract, Sungero.Domain.Interfaces"
         }
       ],
       "Placement": "Shared",

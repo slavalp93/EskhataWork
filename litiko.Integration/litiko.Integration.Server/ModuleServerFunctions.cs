@@ -1864,7 +1864,7 @@ namespace litiko.Integration.Server
     /// </summary>
     /// <param name="exchDocID">ИД документа обмена</param>
     /// <param name="counterparty">Организация</param>
-    /// <returns>Список ошибок (List<string>)</returns>
+    /// <returns>Список ошибок (List< string>)</returns>
     [Remote]
     public List<string> R_DR_GET_COMPANY(long exchDocID, Eskhata.ICounterparty counterparty)
     {
