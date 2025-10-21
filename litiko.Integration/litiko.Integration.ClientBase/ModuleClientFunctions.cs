@@ -26,7 +26,7 @@ namespace litiko.Integration.Client
       var contract = litiko.Eskhata.Contracts.As(entity);
       var supAgreement = litiko.Eskhata.SupAgreements.As(entity);
       
-      if ((company != null || bank != null) && string.IsNullOrEmpty(litiko.Eskhata.Counterparties.As(entity).TIN))
+      if ((company != null || person != null) && string.IsNullOrEmpty(litiko.Eskhata.Counterparties.As(entity).TIN))
         return litiko.Eskhata.Companies.Resources.ErrorNeedFillTin;
             
       if (bank != null && string.IsNullOrEmpty(bank.BIC))      
