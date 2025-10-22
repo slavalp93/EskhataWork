@@ -140,7 +140,11 @@ namespace litiko.Eskhata.Server
               
               contract.Subject = isSubject;
               contract.Name = isName;
-              contract.CounterpartySignatorylitiko = int.Parse(isCounterpartySignatory);
+
+              
+              var counterpartySignatory = Sungero.Parties.Counterparties.GetAll().FirstOrDefault(x=>x.ExternalId == isCounterpartySignatory);
+              var contact = litiko.Eskhata.Contacts.As(counterpartySignatory);
+              contract.CounterpartySignatory = contact;
               
               
               // Department
@@ -155,16 +159,17 @@ namespace litiko.Eskhata.Server
               // ResponsibleEmployee
               if (!string.IsNullOrWhiteSpace(isResponsibleEmployee))
               {
-                var employee = litiko.Eskhata.Employees.GetAll().Where(e => e.ExternalId == isResponsibleEmployee).FirstOrDefault();
+                var responsibleEmployee = litiko.Eskhata.Employees.GetAll().Where(e => e.ExternalId == isResponsibleEmployee).FirstOrDefault();
 
-                contract.ResponsibleEmployee = employee;
+                contract.ResponsibleEmployee = responsibleEmployee;
               }
 
               // author
-              var authorId = 0; // null идет почему то
-              if (!string.IsNullOrWhiteSpace(isAuthor) && int.TryParse(isAuthor, out authorId))
+              //var authorId = 0; // null идет почему то
+              if (!string.IsNullOrWhiteSpace(isAuthor) /*&& int.TryParse(isAuthor, out authorId)*/)
               {
-                var author = litiko.Eskhata.Employees.GetAll().Where(x => x.Id == authorId).FirstOrDefault();
+                var isAuthorStr = long.Parse(isAuthor);
+                var author = Sungero.CoreEntities.Users.GetAll().FirstOrDefault(x => x.Id == isAuthorStr);
 
                 contract.Author = author;
               }

@@ -685,6 +685,39 @@
   "OperationsClass": "",
   "Properties": [
     {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "a8cc5c2a-cf89-4611-a4f4-524975ad6abb",
+      "Name": "OurSignatory",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "ed9f1bb0-d1cf-467e-8067-aca85212e44d",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "fba56283-50dd-4ef9-8d22-e339feff7440",
+      "Name": "Department",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "50e10772-7165-4916-b8c5-b9ed30c3c151",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "5f8cb060-a4c0-425d-97ff-e465ccc5b404",
+      "Name": "IsStandard",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "fba56283-50dd-4ef9-8d22-e339feff7440",
+      "Versions": []
+    },
+    {
       "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
       "NameGuid": "6c316926-04e7-453d-9d0e-57b89e8f477b",
       "Name": "PurchaseOrderNumber",
@@ -961,80 +994,6 @@
       "FlatListInStandaloneLookup": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "8470fc48-267e-4164-aa3f-40ef8e422251"
-    },
-    {
-      "$type": "Sungero.Metadata.TextPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "379530f7-d06c-4fcb-9d03-154e82acc757",
-      "Name": "RequestContractlitiko",
-      "Code": "RequestContrac",
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToTextBinder",
-      "PreviousPropertyGuid": "d3fd9bb1-067d-490d-95bb-ead1f9f3a8d7"
-    },
-    {
-      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "acdabf68-534c-4257-8c24-44c6881f5a99",
-      "Name": "InternalAcclitiko",
-      "Code": "InternalAcclit",
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-      "PreviousPropertyGuid": "379530f7-d06c-4fcb-9d03-154e82acc757"
-    },
-    {
-      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "162fc70a-1256-4010-92dd-82c7f7dabbae",
-      "Name": "ResponsibleAccountantlitiko",
-      "Code": "ResponsibleAcc",
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-      "PreviousPropertyGuid": "acdabf68-534c-4257-8c24-44c6881f5a99"
-    },
-    {
-      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "2e0b5ae3-2f2f-44b4-82be-3e0fff223340",
-      "Name": "ResponsibleDepartmentlitiko",
-      "Code": "ResponsibleDep",
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-      "PreviousPropertyGuid": "162fc70a-1256-4010-92dd-82c7f7dabbae"
-    },
-    {
-      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "74c4034c-04ed-4e2f-9f68-35836181c0a6",
-      "Name": "BatchProcessinglitiko",
-      "Code": "BatchProcessin",
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-      "PreviousPropertyGuid": "2e0b5ae3-2f2f-44b4-82be-3e0fff223340"
-    },
-    {
-      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "7a98953a-9949-4d61-aae0-238b4a8bebf1",
-      "Name": "PaymentBasislitiko",
-      "Code": "ContractPaymen",
-      "EntityGuid": "81ef2bbb-e0ab-4a34-ba61-b9351c343069",
-      "IsShowedInList": false,
-      "PreviousPropertyGuid": "74c4034c-04ed-4e2f-9f68-35836181c0a6"
-    },
-    {
-      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "c2a0612a-f611-4950-ba4d-e907ffabf5d4",
-      "Name": "PaymentClosureBasislitiko",
-      "Code": "PaymentClosure",
-      "EntityGuid": "4d6ab7f4-25db-42d3-9b68-8c7aecc159eb",
-      "IsShowedInList": false,
-      "PreviousPropertyGuid": "7a98953a-9949-4d61-aae0-238b4a8bebf1"
-    },
-    {
-      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "143e1298-d5b4-4db2-ad2c-9c1c24a097a4",
-      "Name": "CounterpartySignatorylitiko",
-      "Code": "CounterpartySi",
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
-      "PreviousPropertyGuid": "c2a0612a-f611-4950-ba4d-e907ffabf5d4"
-    },
-    {
-      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "65847b0c-8c79-4ef9-88be-65667de70474",
-      "Name": "VATApplicablelitiko",
-      "Code": "VATApplicablel",
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
-      "PreviousPropertyGuid": "143e1298-d5b4-4db2-ad2c-9c1c24a097a4"
     }
   ],
   "PublicFunctions": [

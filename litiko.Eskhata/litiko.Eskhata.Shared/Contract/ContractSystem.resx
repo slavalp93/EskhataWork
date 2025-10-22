@@ -244,9 +244,6 @@
   <data name="Action_CreateLegalOpinionlitikoConfirmationDescription" xml:space="preserve">
     <value />
   </data>
-  <data name="Property_RequestContractlitiko" xml:space="preserve">
-    <value>ShinaContract</value>
-  </data>
   <data name="Action_StartContractsBatchImportlitiko" xml:space="preserve">
     <value>Выгрузить договора</value>
   </data>
@@ -261,29 +258,5 @@
   </data>
   <data name="Action_StartContractsBatchImportlitikoConfirmationDescription" xml:space="preserve">
     <value />
-  </data>
-  <data name="Property_InternalAcclitiko" xml:space="preserve">
-    <value>Счет в Банке Эсхата</value>
-  </data>
-  <data name="Property_ResponsibleAccountantlitiko" xml:space="preserve">
-    <value>Ответственный бухгалтер</value>
-  </data>
-  <data name="Property_ResponsibleDepartmentlitiko" xml:space="preserve">
-    <value>Ответственное подразделение</value>
-  </data>
-  <data name="Property_BatchProcessinglitiko" xml:space="preserve">
-    <value>Групповая обработка</value>
-  </data>
-  <data name="Property_PaymentBasislitiko" xml:space="preserve">
-    <value>Оплата на основании</value>
-  </data>
-  <data name="Property_PaymentClosureBasislitiko" xml:space="preserve">
-    <value>Закрытие платежа на основании</value>
-  </data>
-  <data name="Property_CounterpartySignatorylitiko" xml:space="preserve">
-    <value>Counterparty sign</value>
-  </data>
-  <data name="Property_VATApplicablelitiko" xml:space="preserve">
-    <value>Облагается НДС</value>
   </data>
 </root>
