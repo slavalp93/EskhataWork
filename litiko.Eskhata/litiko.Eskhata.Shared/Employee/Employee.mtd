@@ -306,6 +306,19 @@
           "RowNumber": 2,
           "RowSpan": 1,
           "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "98ba6ace-a15e-4bb7-b5b8-f4b83fb1fe05",
+          "Name": "Control1litiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "0b3bb168-6122-49a5-9633-c5b81742ae05",
+          "PropertyGuid": "bb736f5b-a1ec-48b4-8dbb-9dc0322ef5a0",
+          "RowNumber": 6,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,

@@ -996,19 +996,11 @@
     },
     {
       "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "a7921fbe-15e4-4523-8ff6-49948965c3e8",
-      "Name": "PaymentTaxRegionlitiko",
-      "Code": "PaymentTaxRegi",
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-      "PreviousPropertyGuid": "2e0b5ae3-2f2f-44b4-82be-3e0fff223340"
-    },
-    {
-      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
       "NameGuid": "74c4034c-04ed-4e2f-9f68-35836181c0a6",
       "Name": "BatchProcessinglitiko",
       "Code": "BatchProcessin",
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-      "PreviousPropertyGuid": "a7921fbe-15e4-4523-8ff6-49948965c3e8"
+      "PreviousPropertyGuid": "2e0b5ae3-2f2f-44b4-82be-3e0fff223340"
     },
     {
       "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
@@ -1059,11 +1051,6 @@
       "Parameters": [
         {
           "Name": "contract",
-          "ParameterType": "global::litiko.Eskhata.IContract",
-          "ParameterTypeFullName": "litiko.Eskhata.IContract, Sungero.Domain.Interfaces"
-        },
-        {
-          "Name": "contractualDocument",
           "ParameterType": "global::litiko.Eskhata.IContract",
           "ParameterTypeFullName": "litiko.Eskhata.IContract, Sungero.Domain.Interfaces"
         }

@@ -271,9 +271,6 @@
   <data name="Property_ResponsibleDepartmentlitiko" xml:space="preserve">
     <value>Ответственное подразделение</value>
   </data>
-  <data name="Property_PaymentTaxRegionlitiko" xml:space="preserve">
-    <value>Регион объекта аренды</value>
-  </data>
   <data name="Property_BatchProcessinglitiko" xml:space="preserve">
     <value>Групповая обработка</value>
   </data>
