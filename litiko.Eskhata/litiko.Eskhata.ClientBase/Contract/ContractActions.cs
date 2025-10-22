@@ -54,7 +54,7 @@ namespace litiko.Eskhata.Client
 
     public override bool CanCreateFromFile(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return !_obj.IsStandard.GetValueOrDefault() && base.CanCreateFromTemplate(e);
+      return base.CanCreateFromTemplate(e); //!_obj.IsStandard.GetValueOrDefault()
     }
 
   }
