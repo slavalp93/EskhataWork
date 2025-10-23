@@ -2963,8 +2963,7 @@ namespace litiko.Integration.Server
       Logger.Debug("R_DR_SET_CONTRACT - Start");
       
       var errorList = new List<string>();      
-      Transactions.Execute(() =>
-      {          
+          
         try
         {                        
           if (dataElements == null)
@@ -3077,8 +3076,7 @@ namespace litiko.Integration.Server
           var errorMessage = string.Format("Error when processing Document. Description: {0}. StackTrace: {1}", ex.Message, ex.StackTrace);
           Logger.Error(errorMessage);
           errorList.Add(ex.Message);
-        }        
-      });      
+        }      
       
       Logger.Debug("R_DR_SET_CONTRACT - Finish"); 
       return errorList;
@@ -3835,7 +3833,7 @@ namespace litiko.Integration.Server
         var incomeTaxRate     = contractualDocument.IncomeTaxRatelitiko?.ToString() ?? "";
         var incomeTaxAmount   = contractualDocument.IncomeTaxAmountlitiko?.ToString() ?? ""; 
         var laborPayment      = ToYesNoNull(contractualDocument.IsIndividualPaymentlitiko); 
-        var note              = contractualDocument.Note?.ToString() ?? "";
+        var note              = contractualDocument.Note ?? "Без примечания";
         var isWithinBudget    = ToYesNoNull(contractualDocument.IsWithinBudgetlitiko);
     
         // ==========================
@@ -3927,7 +3925,7 @@ namespace litiko.Integration.Server
         var documentGroup       = litiko.Eskhata.DocumentGroupBases.As(contractualDocument.DocumentGroup)?.ExternalIdlitiko ?? "";
         var subject             = contractualDocument.Subject ?? "";
         var name                = contractualDocument.Name ?? "";
-        var counterpartySign    = litiko.Eskhata.Contracts.As(contractualDocument.CounterpartySignatory)?.ExternalId ?? "";
+        var counterpartySign    = litiko.Eskhata.Contacts.As(contractualDocument.CounterpartySignatory)?.ExternalIdlitiko ?? "";
         var department          = litiko.Eskhata.Departments.As(contractualDocument.Department)?.ExternalId ?? "";  
         var responsibleEmployee = litiko.Eskhata.Employees.As(contractualDocument.ResponsibleEmployee)?.ExternalId ?? "";
         var author              = litiko.Eskhata.Employees.As(contractualDocument.Author)?.ExternalId ?? "";
@@ -3944,7 +3942,7 @@ namespace litiko.Integration.Server
         var vatAmount           = contractualDocument.VatAmount?.ToString() ?? "";
         var incomeTaxRate       = contractualDocument.IncomeTaxRatelitiko?.ToString() ?? "";
         var amountForPeriod     = contractualDocument.AmountForPeriodlitiko?.ToString() ?? "";
-        var note                = contractualDocument.Note ?? "";
+        var note                = contractualDocument.Note ?? "Без примечания";
         var registrationNumber  = contractualDocument.RegistrationNumber ?? "";
         var registrationDate    = contractualDocument.RegistrationDate?.ToString(dateFormat) ?? "";
         var isPartialPayment    = ToYesNoNull(contractualDocument.IsPartialPaymentlitiko);

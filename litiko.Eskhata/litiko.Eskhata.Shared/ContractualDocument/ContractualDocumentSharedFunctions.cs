@@ -11,6 +11,16 @@ namespace litiko.Eskhata.Shared
   partial class ContractualDocumentFunctions
   {
     /// <summary>
+    /// Установить обязательность свойств в зависимости от заполненных данных.
+    /// </summary>
+    public override void SetRequiredProperties()
+    {
+      base.SetRequiredProperties();
+      
+      _obj.State.Properties.ValidTill.IsRequired = true;
+    } 
+
+    /// <summary>
     /// Обновить карточку документа.
     /// </summary>
     public override void RefreshDocumentForm()

@@ -11,8 +11,15 @@ namespace litiko.Eskhata.Client
   {
     public virtual void StartContractsBatchImportlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      var errors = Functions.Contract.Remote.ImportContractsFromXml(_obj, _obj);
-     
+      var errors = Functions.Contract.Remote.ImportContractsFromXml(_obj);
+      if (errors.Any())
+      {
+        Dialogs.ShowMessage("Импорт выполнен с ошибками:\n" + string.Join("\n", errors));
+      }
+      else
+      {
+        Dialogs.ShowMessage("Импорт выполнен успешно");
+      }
     }
 
 
@@ -47,7 +54,7 @@ namespace litiko.Eskhata.Client
 
     public override bool CanCreateFromFile(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return !_obj.IsStandard.GetValueOrDefault() && base.CanCreateFromTemplate(e);
+      return base.CanCreateFromTemplate(e); //!_obj.IsStandard.GetValueOrDefault()
     }
 
   }

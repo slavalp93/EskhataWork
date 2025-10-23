@@ -133,7 +133,7 @@
 	&lt;request-type&gt;R_DR_GET_DATA&lt;/request-type&gt;
 	&lt;dictionary&gt;{2}&lt;/dictionary&gt;
 	&lt;lastId&gt;{3}&lt;/lastId&gt;
-	&lt;BIC&gt;{4}&lt;/BIC&gt;
+	&lt;bic&gt;{4}&lt;/bic&gt;
 &lt;/request&gt;
 &lt;/root&gt;</value>
   </data>
