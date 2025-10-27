@@ -1,42 +1,34 @@
 using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Sungero.Core;
-using Sungero.CoreEntities;
-using System.Text;
 using System.Xml.Linq;
-using System.Xml;
-using System.Text.RegularExpressions;
-using System.Xml.Serialization;
-using litiko.Eskhata.Contract;
 
 namespace litiko.Eskhata.Server
 {
   partial class ContractFunctions
   {
-    //string xmlPathFile = "C:\\RxData\\git_repository\\Contracts.xml"
     [Remote, Public]
     public List<string> ImportContractsFromXml()
     {
       Logger.Debug("Import contracts from xml - Start");
 
+      int addedCount = 0;
+      int updatedCount = 0;
+      int totalCount = 0;
+      List<string> errorList = new List<string>();
+      
       var xmlPathFile = "Contracts.xml";
-      var errorList = new List<string>();
-      int countAll = 0;
-      int countChanged = 0;
-      int countNotChanged = 0;
-      int countErrors = 0;
-      bool isNew = false;
+      //var result = ResultImportXml.Create();
 
       try
       {
         XDocument xDoc = XDocument.Load(xmlPathFile);
         var documentElements = xDoc.Descendants("Data").Elements("Document");
-        var counterpartyElements = xDoc.Descendants("Counterparty").Elements("Person");
+//        var personElements = xDoc.Descendants("Counterparty").Elements("Person");
+//        var companyElements = xDoc.Descendants("Counterparty").Elements("Company");
         
-        var documentType = Sungero.Docflow.DocumentTypes.GetAll(t => t.DocumentTypeGuid == Sungero.Contracts.PublicConstants.Module.ContractGuid).FirstOrDefault();
+        //var documentType = Sungero.Docflow.DocumentTypes.GetAll(t => t.DocumentTypeGuid == Sungero.Contracts.PublicConstants.Module.ContractGuid).FirstOrDefault();
         
         foreach (var documentElement in documentElements)
         {
@@ -68,11 +60,11 @@ namespace litiko.Eskhata.Server
           var isIncomeTaxRate = documentElement.Element("IncomeTaxRate")?.Value;
           var isPaymentRegion = documentElement.Element("PaymentRegion")?.Value;
           var isPaymentTaxRegion = documentElement.Element("PaymentTaxRegion")?.Value;
-          var isBatchProcessing = documentElement.Element("BatchProcessing")?.Value;
+          //var isBatchProcessing = documentElement.Element("BatchProcessing")?.Value;
           var isPaymentMethod = documentElement.Element("PaymentMethod")?.Value;
           var isPaymentFrequency = documentElement.Element("PaymentFrequency")?.Value;
 
-          var isPaymentBasis = documentElement.Element("PaymentBasis");
+         /* var isPaymentBasis = documentElement.Element("PaymentBasis");
           if (isPaymentBasis != null)
           {
             var isPaymentContract = isPaymentBasis.Element("IsPaymentContract")?.Value;
@@ -91,7 +83,7 @@ namespace litiko.Eskhata.Server
             var isPaymentAct = isPaymentClosureBasis.Element("IsPaymentAct")?.Value;
             var isPaymentOrder = isPaymentClosureBasis.Element("IsPaymentOrder")?.Value;
             var isPaymentWaybill = isPaymentClosureBasis.Element("IsPaymentWaybill")?.Value;
-          }
+          }*/
 
           var isPartialPayment = documentElement.Element("IsPartialPayment")?.Value;
           var isEqualPayment = documentElement.Element("IsEqualPayment")?.Value;
@@ -103,16 +95,20 @@ namespace litiko.Eskhata.Server
           try
           {
             var contract = Eskhata.Contracts.Null;
-            
             contract = Eskhata.Contracts.GetAll(x => x.ExternalId == isExternalD).FirstOrDefault();
+            bool isNew = false;
             
             if (contract != null)
               Logger.DebugFormat("contract with ExternalD:{0} was found. Id:{1}, Name:{2}", isExternalD, contract.Id, contract.Name);
             else
             {
               contract = Eskhata.Contracts.Create();
+
+              addedCount++;
+              isNew = true;
               
               contract.ExternalId = isExternalD;
+              
               var documentKind = litiko.Eskhata.DocumentKinds.GetAll()
                 .FirstOrDefault(k => k.ExternalIdlitiko == isDocumentKind);
               
@@ -138,7 +134,7 @@ namespace litiko.Eskhata.Server
               
               
               // Department
-              if (!string.IsNullOrWhiteSpace(isDepartment)) // Department .. возникла ошибка
+              if (!string.IsNullOrWhiteSpace(isDepartment))
               {
                 var department = litiko.Eskhata.Departments.GetAll()
                   .FirstOrDefault(d => d.ExternalCodelitiko == isDepartment);
@@ -326,23 +322,70 @@ namespace litiko.Eskhata.Server
               contract.RegistrationNumber = isRegistrationNumber;
               contract.RegistrationDate = DateTime.Parse(isRegistrationDate);
               contract.FrequencyExpenseslitiko = contract.FrequencyOfPaymentlitiko;
-              Logger.DebugFormat("Create new Contract with ExternalD:{0}. ID{1}", isExternalD, contract.Id);
               
+              var counterpartyElement = documentElement.Element("Counterparty");
+              if (counterpartyElement != null)
+              {
+                var personElement = counterpartyElement.Element("Person");
+                var companyElement = counterpartyElement.Element("Company");
+
+                if (personElement != null)
+                {
+                  var personExternalId = personElement.Element("ExternalID")?.Value;
+                  
+                  var person = litiko.Eskhata.Counterparties.GetAll()
+                    .FirstOrDefault(x => x.ExternalId == personExternalId);
+                  
+                  ProcessPersonXml(person);
+                  
+                  if (person != null)
+                    contract.Counterparty = person;
+                  else
+                    Logger.DebugFormat("Counterparty Person with ExternalId {0} not found", personExternalId);
+                }
+                else if (companyElement != null)
+                {
+                  var companyExternalId = companyElement.Element("ExternalID")?.Value;
+                  
+                  var company = litiko.Eskhata.Counterparties.GetAll()
+                    .FirstOrDefault(x => x.ExternalId == companyExternalId);
+                  
+                    ProcessCompanyXml(company);
+                    
+                  if (company != null)
+                    contract.Counterparty = company;
+                  else
+                    Logger.DebugFormat("Counterparty Company with ExternalId {0} not found", companyExternalId);
+                }
+                else
+                {
+                  Logger.Debug("No valid Counterparty element found in XML.");
+                }
+              }
+              else
+              {
+                Logger.Debug("No valid Counterparty element found in XML.");
+
+              }
               contract.Save();
+
+              if (isNew)
+                addedCount++;
+              else
+                updatedCount++;
+              
+              Logger.DebugFormat("Create new Contract with ExternalD:{0}. ID{1}. Name:{2}", isExternalD, contract.Id, contract.Name);
+
             }
           }
           catch (Exception ex)
           {
-            var error = $"{ex.Message}";
+            var error = $"Error while reading XML: {ex.Message}";
             Logger.Error(error);
             errorList.Add(error);
-            countErrors++;
           }
-          
-          //          isNew = true;
-          countAll++;
-          Logger.DebugFormat("ImportContractsFromXML - End. CountAll {0}, Updated {1}, NotUpdated {2}, Errors {3}",
-                             countAll, countChanged, countNotChanged, countErrors);
+          Logger.DebugFormat("ImportContractsFromXML - End. CountAll {0}, Added {1}, Updated {2}, Errors {3}",
+                             totalCount, addedCount, updatedCount, errorList.Count);
           Logger.Debug("ImportContractsFromXML - Finish");
         }
       }
@@ -353,6 +396,18 @@ namespace litiko.Eskhata.Server
         errorList.Add(error);
       }
       return errorList;
+    }
+
+    private string ProcessPersonXml(Sungero.Parties.ICounterparty counterparty)
+    {
+      var person = litiko.Eskhata.People.As(counterparty);
+      return person.ExternalId;
+    }
+    
+    private string ProcessCompanyXml(Sungero.Parties.ICounterparty counterparty)
+    {
+      var company = litiko.Eskhata.Companies.As(counterparty);
+      return company.ExternalId;
     }
 
     
