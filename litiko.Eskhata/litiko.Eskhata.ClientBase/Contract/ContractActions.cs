@@ -12,13 +12,14 @@ namespace litiko.Eskhata.Client
     public virtual void StartContractsBatchImportlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var errors = Functions.Contract.Remote.ImportContractsFromXml(_obj);
+      
       if (errors.Any())
       {
         Dialogs.ShowMessage("Импорт выполнен с ошибками:\n" + string.Join("\n", errors));
       }
       else
       {
-        Dialogs.ShowMessage("Импорт выполнен успешно");
+        Dialogs.ShowMessage("Импорт выполнен успешно.");
       }
     }
 

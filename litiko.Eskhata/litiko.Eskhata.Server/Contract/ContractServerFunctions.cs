@@ -55,7 +55,7 @@ namespace litiko.Eskhata.Server
           var isRBO = documentElement.Element("RBO")?.Value ?? "";
           var isValidFrom = documentElement.Element("ValidFrom")?.Value;
           var isValidTill = documentElement.Element("ValidTill")?.Value;
-          var isChangeReason = documentElement.Element("СhangeReason")?.Value;
+          var isChangeReason = documentElement.Element("ChangeReason")?.Value;
           var isAccountDebtCredt = documentElement.Element("AccountDebtCredt")?.Value;
           var isAccountFutureExpense = documentElement.Element("AccountFutureExpense")?.Value;
           var isInternalAcc = documentElement.Element("InternalAcc")?.Value;
@@ -118,11 +118,7 @@ namespace litiko.Eskhata.Server
               
               // DocumentKind вид договора
               documentKind.ExternalIdlitiko = isDocumentKind;
-              //                  documentKind.Name = litiko.Eskhata.DocumentKinds.GetAll()
-              //                    .Where(k => k.ExternalIdlitiko == isDocumentKind)
-              //                    .Select(n => n.Name)
-              //                    .FirstOrDefault();
-
+              
               contract.DocumentKind = documentKind;
               
               var documentGroup = litiko.Eskhata.DocumentGroupBases.GetAll()
@@ -130,21 +126,15 @@ namespace litiko.Eskhata.Server
               
               //DocumentGroup тип договора
               documentGroup.ExternalIdlitiko = isDocumentGroup;
-              //                  documentGroup.Name = litiko.Eskhata.DocumentGroupBases.GetAll()
-              //                    .Where(d => d.ExternalIdlitiko == isDocumentGroup)
-              //                    .Select(n=>n.Name)
-              //                    .FirstOrDefault();
-
+              
               contract.DocumentGroup = documentGroup;
-              //
               
               contract.Subject = isSubject;
               contract.Name = isName;
 
               
-              var counterpartySignatory = Sungero.Parties.Counterparties.GetAll().FirstOrDefault(x=>x.ExternalId == isCounterpartySignatory);
-              var contact = litiko.Eskhata.Contacts.As(counterpartySignatory);
-              contract.CounterpartySignatory = contact;
+              var counterpartySignatory = litiko.Eskhata.Contacts.GetAll().FirstOrDefault(x=>x.ExternalIdlitiko == isCounterpartySignatory);
+              contract.CounterpartySignatory = counterpartySignatory;
               
               
               // Department
@@ -152,7 +142,6 @@ namespace litiko.Eskhata.Server
               {
                 var department = litiko.Eskhata.Departments.GetAll()
                   .FirstOrDefault(d => d.ExternalCodelitiko == isDepartment);
-
                 contract.Department = department;
               }
               
@@ -160,23 +149,19 @@ namespace litiko.Eskhata.Server
               if (!string.IsNullOrWhiteSpace(isResponsibleEmployee))
               {
                 var responsibleEmployee = litiko.Eskhata.Employees.GetAll().Where(e => e.ExternalId == isResponsibleEmployee).FirstOrDefault();
-
                 contract.ResponsibleEmployee = responsibleEmployee;
               }
 
-              // author
-              //var authorId = 0; // null идет почему то
-              if (!string.IsNullOrWhiteSpace(isAuthor) /*&& int.TryParse(isAuthor, out authorId)*/)
+              
+              if (!string.IsNullOrWhiteSpace(isAuthor))
               {
-                var isAuthorStr = long.Parse(isAuthor);
-                var author = Sungero.CoreEntities.Users.GetAll().FirstOrDefault(x => x.Id == isAuthorStr);
-
+                var author = Sungero.Company.Employees.GetAll().FirstOrDefault(x => x.ExternalId == isAuthor);
                 contract.Author = author;
               }
 
-              contract.ResponsibleAccountantlitiko = isResponsibleAccountant;
+              var responsibilityAccountant = litiko.Eskhata.Employees.GetAll().FirstOrDefault(x=>x.ExternalId == isResponsibleAccountant);
               
-              contract.ResponsibleDepartmentlitiko = isResponsibleDepartment;
+              contract.ResponsibleEmployee = responsibilityAccountant;
               
               contract.RBOlitiko = isRBO;
 
@@ -193,9 +178,9 @@ namespace litiko.Eskhata.Server
               var datePatternTill = "dd.MM.yyyy";
               var dateStyleTill = System.Globalization.DateTimeStyles.None;
               DateTime validTill;
-              if (!string.IsNullOrWhiteSpace(isValidFrom) &&
-                  DateTime.TryParseExact(isValidFrom, datePatternTill, null, dateStyleTill, out validTill))
-                contract.ValidFrom = validTill;
+              if (!string.IsNullOrWhiteSpace(isValidTill) &&
+                  DateTime.TryParseExact(isValidTill, datePatternTill, null, dateStyleTill, out validTill))
+                contract.ValidTill = validTill;
 
               contract.ReasonForChangelitiko = isChangeReason;
               
@@ -203,7 +188,7 @@ namespace litiko.Eskhata.Server
               
               contract.AccFutureExpenselitiko = isAccountFutureExpense;
               
-              contract.InternalAcclitiko = isInternalAcc;
+              //contract.InternalAcclitiko = isInternalAcc;
               
               contract.TotalAmountlitiko = ParseDoubleSafe(isTotalAmount);
 
@@ -225,9 +210,17 @@ namespace litiko.Eskhata.Server
                   Logger.Debug($"Currency Operation is not found by code '{isCurrencyOperation}'");
               }
 
-              contract.VATApplicablelitiko = ParseBoolSafe(isVATApplicable);
+              //contract.Vat = ParseBoolSafe(isVATApplicable); // TODO
 
-              contract.VatRatelitiko = ParseDoubleSafe(isVATRate);
+              if (!string.IsNullOrWhiteSpace(isVATRate))
+              {
+                double rateValue;
+                if (double.TryParse(isVATRate.Replace(',', '.'), System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out rateValue))
+                {
+                  var vatRate = Sungero.Commons.VatRates.GetAll().FirstOrDefault(r=>r.Rate == rateValue);
+                  contract.VatRate = vatRate;
+                }
+              }
               
               contract.VatAmount = ParseDoubleSafe(isVATAmount);
               
@@ -332,7 +325,7 @@ namespace litiko.Eskhata.Server
               contract.Note = isNote;
               contract.RegistrationNumber = isRegistrationNumber;
               contract.RegistrationDate = DateTime.Parse(isRegistrationDate);
-              
+              contract.FrequencyExpenseslitiko = contract.FrequencyOfPaymentlitiko;
               Logger.DebugFormat("Create new Contract with ExternalD:{0}. ID{1}", isExternalD, contract.Id);
               
               contract.Save();
@@ -346,8 +339,8 @@ namespace litiko.Eskhata.Server
             countErrors++;
           }
           
-//          isNew = true;
-//          countAll++;
+          //          isNew = true;
+          countAll++;
           Logger.DebugFormat("ImportContractsFromXML - End. CountAll {0}, Updated {1}, NotUpdated {2}, Errors {3}",
                              countAll, countChanged, countNotChanged, countErrors);
           Logger.Debug("ImportContractsFromXML - Finish");
@@ -361,26 +354,7 @@ namespace litiko.Eskhata.Server
       }
       return errorList;
     }
-    private static bool ParseBoolSafe(string value)
-    {
-      bool result;
-      if (bool.TryParse(value, out result))
-        return result;
-      Logger.DebugFormat("Unexpected boolean value: {0}", value);
-      return false;
-    }
-    private static double ParseDoubleSafe(string value)
-    {
-      if(string.IsNullOrWhiteSpace(value))
-        return 0.0;
-      
-      var result = 0.0;
-      if(double.TryParse(value, System.Globalization.NumberStyles.Any,
-                         System.Globalization.CultureInfo.InvariantCulture, out result))
-        return result;
-      return 0.0;
-    }
-    
+
     
     /// <summary>
     /// Создать юрид. заключение.
@@ -506,6 +480,24 @@ namespace litiko.Eskhata.Server
       return documentSummary;
     }
     
-
+    private static bool ParseBoolSafe(string value)
+    {
+      bool result;
+      if (bool.TryParse(value, out result))
+        return result;
+      Logger.DebugFormat("Unexpected boolean value: {0}", value);
+      return false;
+    }
+    private static double ParseDoubleSafe(string value)
+    {
+      if(string.IsNullOrWhiteSpace(value))
+        return 0.0;
+      
+      var result = 0.0;
+      if(double.TryParse(value, System.Globalization.NumberStyles.Any,
+                         System.Globalization.CultureInfo.InvariantCulture, out result))
+        return result;
+      return 0.0;
+    }
   }
 }
