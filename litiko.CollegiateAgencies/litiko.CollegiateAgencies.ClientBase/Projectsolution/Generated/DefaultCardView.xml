@@ -8,7 +8,7 @@
         <property name="View" isnull="true" iskey="true">
           <property name="LinesPerRowMode">None</property>
           <property name="ColumnChooserState" isnull="true" iskey="true">
-            <property name="Location">368,-344</property>
+            <property name="Location">368,-360</property>
             <property name="Size">220,250</property>
           </property>
           <property name="AllowMoveColumnToDropArea">false</property>
@@ -30,7 +30,7 @@
             <property name="Name">Projectsolution_Decided_DecisionRU</property>
             <property name="FieldName">DecisionRU</property>
             <property name="VisibleIndex">0</property>
-            <property name="Width">155</property>
+            <property name="Width">167</property>
             <property name="ActualWidth">23*</property>
           </property>
           <property name="Item2" isnull="true" iskey="true">
@@ -38,7 +38,7 @@
             <property name="Name">Projectsolution_Decided_DecisionTJ</property>
             <property name="FieldName">DecisionTJ</property>
             <property name="VisibleIndex">1</property>
-            <property name="Width">148</property>
+            <property name="Width">159</property>
             <property name="ActualWidth">22*</property>
           </property>
           <property name="Item3" isnull="true" iskey="true">
@@ -46,7 +46,7 @@
             <property name="Name">Projectsolution_Decided_DecisionEN</property>
             <property name="FieldName">DecisionEN</property>
             <property name="VisibleIndex">2</property>
-            <property name="Width">155</property>
+            <property name="Width">167</property>
             <property name="ActualWidth">23*</property>
           </property>
           <property name="Item4" isnull="true" iskey="true">
@@ -54,7 +54,7 @@
             <property name="Name">Projectsolution_Decided_Number</property>
             <property name="FieldName">Number</property>
             <property name="VisibleIndex">3</property>
-            <property name="Width">54</property>
+            <property name="Width">58</property>
             <property name="ActualWidth">8*</property>
           </property>
         </property>
@@ -101,7 +101,7 @@
             <property name="Name">Projectsolution_DecidedMinutes_DecisionRU</property>
             <property name="FieldName">DecisionRU</property>
             <property name="VisibleIndex">1</property>
-            <property name="Width">278</property>
+            <property name="Width">279</property>
             <property name="ActualWidth">23*</property>
           </property>
           <property name="Item3" isnull="true" iskey="true">
@@ -110,7 +110,7 @@
             <property name="Name">Projectsolution_DecidedMinutes_DecisionTJ</property>
             <property name="FieldName">DecisionTJ</property>
             <property name="VisibleIndex">2</property>
-            <property name="Width">266</property>
+            <property name="Width">267</property>
             <property name="ActualWidth">22*</property>
           </property>
           <property name="Item4" isnull="true" iskey="true">
@@ -119,7 +119,7 @@
             <property name="Name">Projectsolution_DecidedMinutes_DecisionEN</property>
             <property name="FieldName">DecisionEN</property>
             <property name="VisibleIndex">3</property>
-            <property name="Width">266</property>
+            <property name="Width">267</property>
             <property name="ActualWidth">22*</property>
           </property>
           <property name="Item5" isnull="true" iskey="true">
@@ -128,7 +128,7 @@
             <property name="Name">Projectsolution_DecidedMinutes_Responsible</property>
             <property name="FieldName">Responsible</property>
             <property name="VisibleIndex">4</property>
-            <property name="Width">266</property>
+            <property name="Width">267</property>
             <property name="ActualWidth">22*</property>
           </property>
           <property name="Item6" isnull="true" iskey="true">
@@ -174,7 +174,7 @@
             <property name="Name">Projectsolution_Voting_Member</property>
             <property name="FieldName">Member</property>
             <property name="VisibleIndex">0</property>
-            <property name="Width">83</property>
+            <property name="Width">98</property>
             <property name="ActualWidth">8*</property>
           </property>
           <property name="Item2" isnull="true" iskey="true">
@@ -182,7 +182,7 @@
             <property name="Name">Projectsolution_Voting_Yes</property>
             <property name="FieldName">Yes</property>
             <property name="VisibleIndex">1</property>
-            <property name="Width">31</property>
+            <property name="Width">37</property>
             <property name="ActualWidth">3*</property>
           </property>
           <property name="Item3" isnull="true" iskey="true">
@@ -190,7 +190,7 @@
             <property name="Name">Projectsolution_Voting_No</property>
             <property name="FieldName">No</property>
             <property name="VisibleIndex">2</property>
-            <property name="Width">62</property>
+            <property name="Width">74</property>
             <property name="ActualWidth">6*</property>
           </property>
           <property name="Item4" isnull="true" iskey="true">
@@ -198,7 +198,7 @@
             <property name="Name">Projectsolution_Voting_Abstained</property>
             <property name="FieldName">Abstained</property>
             <property name="VisibleIndex">3</property>
-            <property name="Width">93</property>
+            <property name="Width">111</property>
             <property name="ActualWidth">9*</property>
           </property>
           <property name="Item5" isnull="true" iskey="true">
@@ -206,7 +206,7 @@
             <property name="Name">Projectsolution_Voting_Comment</property>
             <property name="FieldName">Comment</property>
             <property name="VisibleIndex">4</property>
-            <property name="Width">93</property>
+            <property name="Width">111</property>
             <property name="ActualWidth">9*</property>
           </property>
         </property>
