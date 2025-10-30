@@ -1015,11 +1015,29 @@
         }
       ],
       "Placement": "Shared",
-      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
-      "ReturnTypeFullName": "System.Collections.Generic.List"
+      "ReturnType": "global::litiko.Eskhata.Structures.Contracts.Contract.IResultImportXml",
+      "ReturnTypeFullName": "litiko.Eskhata.Structures.Contracts.Contract.IResultImportXml"
     }
   ],
-  "PublicStructures": [],
+  "PublicStructures": [
+    {
+      "Name": "ResultImportXml",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "Errors",
+          "IsList": true,
+          "IsNullable": true,
+          "TypeFullName": "global::System.Collections.Generic.List<global::System.String>"
+        },
+        {
+          "Name": "ImportedCount",
+          "TypeFullName": "global::System.Int32"
+        }
+      ],
+      "StructureNamespace": "litiko.Eskhata.Structures.Contracts.Contract"
+    }
+  ],
   "ResourcesKeys": [
     "DocumentKindNotFound"
   ],

@@ -14,18 +14,26 @@ namespace litiko.Eskhata.Client
       var result = Functions.Contract.Remote.ImportContractsFromXml(_obj);
 
       var message = new System.Text.StringBuilder();
-      message.AppendLine("Импорт завершён.");
 
-      if (result.Any())
+      message.AppendLine("📦 Импорт договоров завершён.");
+      message.AppendLine($"✅ Успешно импортировано: {result.ImportedCount}");
+
+      if (result.Errors.Any())
       {
         message.AppendLine();
-        message.AppendLine("Ошибки:");
-        foreach (var err in result)
-          message.AppendLine(" - " + err);
+        message.AppendLine("⚠️ Ошибки импорта:");
+        foreach (var error in result.Errors)
+          message.AppendLine(" • " + error);
+      }
+      else
+      {
+        message.AppendLine();
+        message.AppendLine("Все документы успешно импортированы без ошибок ✅");
       }
 
       Dialogs.ShowMessage(message.ToString());
     }
+
 
 
     public virtual bool CanStartContractsBatchImportlitiko(Sungero.Domain.Client.CanExecuteActionArgs e)
