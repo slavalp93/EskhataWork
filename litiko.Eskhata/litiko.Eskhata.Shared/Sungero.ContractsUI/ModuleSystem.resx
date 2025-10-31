@@ -94,4 +94,10 @@
   <data name="CoverDescription_RegionsOfRentallitiko" xml:space="preserve">
     <value>Directory of regions of rental properties.</value>
   </data>
+  <data name="CoverAction_Importlitiko" xml:space="preserve">
+    <value>ImportContracts</value>
+  </data>
+  <data name="CoverDescription_Importlitiko" xml:space="preserve">
+    <value>Import contracts from xml file</value>
+  </data>
 </root>

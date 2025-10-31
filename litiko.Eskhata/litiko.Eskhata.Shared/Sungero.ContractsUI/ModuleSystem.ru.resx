@@ -91,4 +91,10 @@
   <data name="CoverDescription_RegionsOfRentallitiko" xml:space="preserve">
     <value>Справочник регионов объектов аренды.</value>
   </data>
+  <data name="CoverDescription_Importlitiko" xml:space="preserve">
+    <value>Импортирует договора из файла</value>
+  </data>
+  <data name="CoverAction_Importlitiko" xml:space="preserve">
+    <value>Имортировать договоры</value>
+  </data>
 </root>

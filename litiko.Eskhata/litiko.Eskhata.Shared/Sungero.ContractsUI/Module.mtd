@@ -29,6 +29,14 @@
         "PreviousItemGuid": "a9491432-c831-40d5-900d-89aa111af7ad"
       },
       {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "69230be4-8ae0-4e1f-be6c-0c3d4eba5475",
+        "Name": "Importlitiko",
+        "FunctionName": "ImportContracts",
+        "GroupId": "136b5b7b-053a-4ca1-8f05-79af1fc2dffb",
+        "PreviousItemGuid": "1f58bc0f-bdbf-42db-b4bc-d75e41275793"
+      },
+      {
         "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
         "NameGuid": "a9491432-c831-40d5-900d-89aa111af7ad",
         "Name": "ResponsibilityMatrixlitiko",
