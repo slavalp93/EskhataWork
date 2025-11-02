@@ -54,6 +54,7 @@ namespace litiko.Eskhata.Server
           }
           catch (Exception ex)
           {
+            Logger.Debug($"Ошибка при импорте документа №{i + 1}: {ex.Message}");
             result.Errors.Add($"Ошибка при импорте документа №{i + 1}: {ex.Message}");
           }
         }
