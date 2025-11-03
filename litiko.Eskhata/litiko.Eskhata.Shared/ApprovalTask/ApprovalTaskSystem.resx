@@ -148,4 +148,10 @@
   <data name="Property_ExchangeDocIdlitiko" xml:space="preserve">
     <value>Exchange document Id</value>
   </data>
+  <data name="Property_Desigionslitiko" xml:space="preserve">
+    <value>Desigions</value>
+  </data>
+  <data name="Property_MainApprovalTasklitiko" xml:space="preserve">
+    <value>Main approval task</value>
+  </data>
 </root>

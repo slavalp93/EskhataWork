@@ -11,12 +11,74 @@ namespace litiko.Eskhata.Server
   partial class ApprovalTaskRouteHandlers
   {
 
+    public override void StartBlock33(Sungero.Docflow.Server.ApprovalSimpleNotificationArguments e)
+    {
+      base.StartBlock33(e);
+
+      if (_obj.ApprovalRule?.Name == litiko.CollegiateAgencies.PublicConstants.Module.VotingApprovalRuleName)     
+        e.Block.Subject = _obj.Subject.Replace("Голосование:", "Окончено голосование:");
+    }
+
+    public override void CompleteAssignment31(Sungero.Docflow.IApprovalCheckingAssignment assignment, Sungero.Docflow.Server.ApprovalCheckingAssignmentArguments e)
+    {
+      base.CompleteAssignment31(assignment, e);
+      
+      var CustomAssignment = litiko.Eskhata.ApprovalCheckingAssignments.As(assignment);
+      
+      // Передача результатов голосования в проекты решений.
+      if (CustomAssignment != null && CustomAssignment.CustomStageTypelitiko == litiko.Eskhata.ApprovalCheckingAssignment.CustomStageTypelitiko.Voting && assignment.Result == litiko.Eskhata.ApprovalCheckingAssignment.Result.Accept)
+      {
+        var asyncAddVoitingResults = litiko.CollegiateAgencies.AsyncHandlers.AddVoitingResults.Create();
+        asyncAddVoitingResults.AssignmentId = assignment.Id;        
+        asyncAddVoitingResults.ExecuteAsync();
+      }      
+    }
+
+    public override void StartAssignment31(Sungero.Docflow.IApprovalCheckingAssignment assignment, Sungero.Docflow.Server.ApprovalCheckingAssignmentArguments e)
+    {
+      base.StartAssignment31(assignment, e);
+      
+      var stage = _obj.ApprovalRule.Stages
+        .Where(s => s.Stage != null)
+        .Where(s => s.Stage.StageType == Sungero.Docflow.ApprovalStage.StageType.SimpleAgr)
+        .FirstOrDefault(s => s.Number == _obj.StageNumber);
+      
+      if (stage != null)
+      {
+        var CustomStage = litiko.Eskhata.ApprovalStages.As(stage.Stage);
+        var CustomAssignment = litiko.Eskhata.ApprovalCheckingAssignments.As(assignment);
+    
+        #region Голосование
+        if (CustomStage.CustomStageTypelitiko == litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.Voting)
+        {
+          CustomAssignment.CustomStageTypelitiko = litiko.Eskhata.ApprovalCheckingAssignment.CustomStageTypelitiko.Voting;
+          
+          var task = litiko.Eskhata.ApprovalTasks.As(assignment.Task);          
+          var firstDecision = task.Desigionslitiko.FirstOrDefault();
+          if (firstDecision != null)
+          {
+            var projectSolution = litiko.CollegiateAgencies.Projectsolutions.As(firstDecision.Desigion);
+            if (projectSolution != null)
+            {
+              var votingRecord = CustomAssignment.Votinglitiko.AddNew();
+              votingRecord.Number = 1;
+              votingRecord.Decision = projectSolution;
+            }              
+          }                      
+        }                                          
+        #endregion      
+      }      
+    }
+
     public override void StartBlock52(Sungero.Workflow.Server.Route.MonitoringStartBlockEventArguments e)
     {
       base.StartBlock52(e);
       
       // TODO Вынести в настройку частоту мониторинга, например, в карточку метода интеграции
       if (_obj.ExchangeDocIdlitiko != null)
+        e.Block.Period = TimeSpan.FromMinutes(5);
+      
+      if (_obj.ApprovalRule?.Name == litiko.CollegiateAgencies.PublicConstants.Module.VotingApprovalRuleName)
         e.Block.Period = TimeSpan.FromMinutes(5);
     }
 
@@ -59,23 +121,18 @@ namespace litiko.Eskhata.Server
         {
           CustomAssignment.CustomStageTypelitiko = litiko.Eskhata.ApprovalSimpleAssignment.CustomStageTypelitiko.Voting;
           
-          var task = litiko.Eskhata.ApprovalTasks.As(assignment.Task);
-          int number = 1;
-          foreach (var document in task.AddendaGroup.All)
+          var task = litiko.Eskhata.ApprovalTasks.As(assignment.Task);          
+          var firstDecision = task.Desigionslitiko.FirstOrDefault();
+          if (firstDecision != null)
           {
-            var projectSolution = litiko.CollegiateAgencies.Projectsolutions.As(document);
+            var projectSolution = litiko.CollegiateAgencies.Projectsolutions.As(firstDecision.Desigion);
             if (projectSolution != null)
             {
               var votingRecord = CustomAssignment.Votinglitiko.AddNew();
-              votingRecord.Number = number++;
+              votingRecord.Number = 1;
               votingRecord.Decision = projectSolution;
-            }
-          }
-
-          var subject = CustomStage.Subject.TrimEnd(new[] { ' ', '.', ':' });
-          var meeting = task.OtherGroup.All.Where(x => litiko.Eskhata.Meetings.Is(x)).FirstOrDefault();
-          if (meeting != null)
-            CustomAssignment.Subject = Sungero.Docflow.PublicFunctions.Module.TrimSpecialSymbols("{0}: {1}", subject, meeting.DisplayValue);
+            }              
+          }          
         }                                          
         #endregion      
       }      

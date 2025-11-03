@@ -92,7 +92,11 @@ namespace litiko.CollegiateAgencies.Constants
    
    /// <summary> Имя правила согласования по голосованию </summary>
    [Sungero.Core.Public]
-   public const string VotingApprovalRuleName = "Голосование";    
+   public const string VotingApprovalRuleName = "Голосование";
+   
+   /// <summary> Имя правила согласования по голосованию (подзадача)</summary>
+   [Sungero.Core.Public]
+   public const string VotingApprovalRule2Name = "Голосование по решению";    
    
    /// <summary> Guid группы приложений задачи согласования по регламенту </summary>
    [Sungero.Core.Public]

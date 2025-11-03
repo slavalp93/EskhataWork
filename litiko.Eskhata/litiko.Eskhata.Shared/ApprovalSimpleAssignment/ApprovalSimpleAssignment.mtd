@@ -233,7 +233,7 @@
         {
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
           "NameGuid": "75885f4d-7f47-4323-94ae-b991794c0ce3",
-          "Name": "Votinglitikolitiko",
+          "Name": "Votinglitiko",
           "ColumnNumber": 0,
           "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.GridControlToChildCollectionBinder",

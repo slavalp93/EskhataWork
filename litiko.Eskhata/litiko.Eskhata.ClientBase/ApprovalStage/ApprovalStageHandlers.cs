@@ -36,10 +36,7 @@ namespace litiko.Eskhata
           CustomStageTypelitiko.ControlIRD,
           CustomStageTypelitiko.ScanReceivedCon,
           CustomStageTypelitiko.SubmitIssueKou
-        };
-        
-        if (_obj.AllowSendToRework.GetValueOrDefault())
-          allowedValues.Remove(CustomStageTypelitiko.Voting);
+        };        
 
         return query.Where(q => allowedValues.Contains(q));
       }      

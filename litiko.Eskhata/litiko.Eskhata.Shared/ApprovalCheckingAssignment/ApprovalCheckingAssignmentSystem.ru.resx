@@ -58,4 +58,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Property_CustomStageTypelitiko" xml:space="preserve">
+    <value>Тип этапа</value>
+  </data>
+  <data name="Enum_CustomStageTypelitiko_Voting" xml:space="preserve">
+    <value>Голосование</value>
+  </data>
+  <data name="Property_Votinglitiko" xml:space="preserve">
+    <value>Голосование</value>
+  </data>
+  <data name="Resource_52d7741ffda145a3a678f925c3712232" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_c30f7a151d6f4a7a89db073bc27141b4_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_c30f7a151d6f4a7a89db073bc27141b4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_be1f292a6e7e4e769314ca57e93f9f81_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_be1f292a6e7e4e769314ca57e93f9f81" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_99078a64599f458f870281d97fd3e9b6" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_cf45ca53bfe446fdb398de06f4d71fad_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_cf45ca53bfe446fdb398de06f4d71fad" xml:space="preserve">
+    <value />
+  </data>
+  <data name="ControlGroup_4377633005284f2a8e5b6e1c8d5161c6" xml:space="preserve">
+    <value />
+  </data>
 </root>
