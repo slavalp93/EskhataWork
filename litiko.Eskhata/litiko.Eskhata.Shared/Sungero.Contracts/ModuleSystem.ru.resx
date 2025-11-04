@@ -58,40 +58,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CoverAction_ResponsibilityMatrixlitiko" xml:space="preserve">
-    <value>Матрица ответственности</value>
-  </data>
-  <data name="CoverDescription_ResponsibilityMatrixlitiko" xml:space="preserve">
-    <value>Справочник специалистов, ответственных за согласование договорных документов в зависимости от вида договора.</value>
-  </data>
-  <data name="CoverAction_ContractsVsPaymentDoclitiko" xml:space="preserve">
-    <value>Соответствие видов договоров и документов на оплату</value>
-  </data>
-  <data name="CoverDescription_ContractsVsPaymentDoclitiko" xml:space="preserve">
-    <value>Виды платежных документов в зависимости от вида и типа договора</value>
-  </data>
-  <data name="CoverAction_TaxRatelitiko" xml:space="preserve">
-    <value>Ставки налогов</value>
-  </data>
-  <data name="CoverAction_FrequencyOfPaymentlitiko" xml:space="preserve">
-    <value>Периодичности оплаты</value>
-  </data>
-  <data name="CoverAction_PaymentRegionlitiko" xml:space="preserve">
-    <value>Регионы оплаты</value>
-  </data>
-  <data name="CoverAction_RegionsOfRentallitiko" xml:space="preserve">
-    <value>Регионы объектов аренды</value>
-  </data>
-  <data name="CoverDescription_FrequencyOfPaymentlitiko" xml:space="preserve">
-    <value>Периодичности оплаты по договорам</value>
-  </data>
-  <data name="CoverDescription_PaymentRegionlitiko" xml:space="preserve">
-    <value>Справочник регионов оплаты налогов.</value>
-  </data>
-  <data name="CoverDescription_RegionsOfRentallitiko" xml:space="preserve">
-    <value>Справочник регионов объектов аренды.</value>
-  </data>
-  <data name="CoverAction_Importlitiko" xml:space="preserve">
-    <value>Миграция договоров</value>
-  </data>
 </root>

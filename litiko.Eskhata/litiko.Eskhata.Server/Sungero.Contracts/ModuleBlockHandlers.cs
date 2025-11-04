@@ -1,13 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml.Linq;
 using Sungero.Core;
 using Sungero.CoreEntities;
+using Sungero.Workflow;
 
-namespace litiko.Eskhata.Module.ContractsUI.Server
+namespace litiko.Eskhata.Module.Contracts.Server.ContractsBlocks
 {
-  partial class ModuleFunctions
-  {
-  }
 }

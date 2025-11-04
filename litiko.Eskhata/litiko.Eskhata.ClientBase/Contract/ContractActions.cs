@@ -9,7 +9,7 @@ namespace litiko.Eskhata.Client
 {
   partial class ContractActions
   {
-    public virtual void StartContractsBatchImportlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
+    /*public virtual void StartContractsBatchImportlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var result = Functions.Contract.Remote.ImportContractsFromXml(_obj);
 
@@ -40,7 +40,7 @@ namespace litiko.Eskhata.Client
     {
       return true;
     }
-
+*/
 
     public virtual void CreateLegalOpinionlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
     {
