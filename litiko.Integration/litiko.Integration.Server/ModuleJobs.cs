@@ -8,7 +8,6 @@ namespace litiko.Integration.Server
 {
   public class ModuleJobs
   {
-
     /// <summary>
     /// Интеграция. Экспорт обновлений по действующим договорам
     /// </summary>
@@ -211,7 +210,7 @@ namespace litiko.Integration.Server
     }
 
     /// <summary>
-    /// 
+    /// Интеграция. Семейное положение
     /// </summary>
     public virtual void GetMaterialStatuses()
     {
@@ -219,7 +218,7 @@ namespace litiko.Integration.Server
     }
 
     /// <summary>
-    /// 
+    /// Интеграция. Экологические риски
     /// </summary>
     public virtual void GetEcolog()
     {
@@ -227,7 +226,7 @@ namespace litiko.Integration.Server
     }
 
     /// <summary>
-    /// 
+    /// Интеграция. Страны
     /// </summary>
     public virtual void GetCountries()
     {
@@ -235,7 +234,7 @@ namespace litiko.Integration.Server
     }
 
     /// <summary>
-    /// 
+    /// Интеграция. Виды предприятий
     /// </summary>
     public virtual void GetCompanyKinds()
     {
@@ -243,7 +242,7 @@ namespace litiko.Integration.Server
     }
 
     /// <summary>
-    /// 
+    /// Интеграция. Сотрудники
     /// </summary>
     public virtual void GetEmployees()
     {
@@ -251,7 +250,7 @@ namespace litiko.Integration.Server
     }
 
     /// <summary>
-    /// 
+    /// Интеграция. Наши организации
     /// </summary>
     public virtual void GetBusinessUnits()
     {
@@ -259,12 +258,28 @@ namespace litiko.Integration.Server
     }
 
     /// <summary>
-    /// Запрос подразделений из интегрируемой системы
+    /// Интеграция. Подразделения
     /// </summary>
     public virtual void GetDepartments()
     {                
       litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_DEPART);
     }
+    
+    /// <summary>
+    /// Интеграция. Населенные пункты
+    /// </summary>
+    public virtual void GetCities()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_CITIES); 
+    }
+
+    /// <summary>
+    /// Интеграция. Регионы
+    /// </summary>
+    public virtual void GetRegions()
+    {
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_REGIONS); 
+    }    
 
   }
 }

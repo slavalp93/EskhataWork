@@ -43,7 +43,9 @@ namespace litiko.Integration.Server
         CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_CONTRACT_VID, integrationSystem);
         CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_CONTRACT_TYPE, integrationSystem);        
         CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_SET_CONTRACT, integrationSystem);        
-        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT, integrationSystem);        
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_REGIONS, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_CITIES, integrationSystem);
       }
       
       GrantRightsOnEntities();

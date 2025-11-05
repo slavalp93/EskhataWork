@@ -39,6 +39,7 @@
     {
       "NameGuid": "f7845dd6-bae7-4fbb-88e5-fac95fadd461",
       "Name": "PerformAssignment",
+      "DelayPeriod": 15,
       "DelayStrategy": "ExponentialDelayStrategy",
       "IsHandlerGenerated": true,
       "Parameters": [

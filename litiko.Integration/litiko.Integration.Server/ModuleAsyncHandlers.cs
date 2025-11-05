@@ -318,6 +318,12 @@ namespace litiko.Integration.Server
             case Constants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT:
               errorList = Functions.Module.R_DR_SET_CONTRACT(dataElements, null, null);
               break;              
+            case Constants.Module.IntegrationMethods.R_DR_GET_REGIONS:
+              errorList = Functions.Module.R_DR_GET_REGIONS(dataElements);
+              break;
+            case Constants.Module.IntegrationMethods.R_DR_GET_CITIES:
+              errorList = Functions.Module.R_DR_GET_CITIES(dataElements);
+              break;              
           }
           
           if (errorList.Any())

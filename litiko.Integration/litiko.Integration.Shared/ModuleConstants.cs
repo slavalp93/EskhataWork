@@ -103,6 +103,14 @@ namespace litiko.Integration.Constants
       /// <summary> Дополнительное соглашение, Счет, Акт </summary>
       [Sungero.Core.Public]
       public const string R_DR_SET_PAYMENT_DOCUMENT = "R_DR_SET_PAYMENT_DOCUMENT";      
+      
+      /// <summary> Регионы</summary>
+      [Sungero.Core.Public]
+      public const string R_DR_GET_REGIONS = "R_DR_GET_REGIONS";
+      
+      /// <summary> Населенные пункты</summary>
+      [Sungero.Core.Public]
+      public const string R_DR_GET_CITIES = "R_DR_GET_CITIES";      
     }
 
     /// <summary>

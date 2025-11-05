@@ -385,17 +385,7 @@ namespace litiko.Integration.Server
       var integrationMethod = IntegrationMethods.GetAll().Where(x => x.Name == integrationMethodName).FirstOrDefault();
       if (integrationMethod == null)
         throw AppliedCodeException.Create(string.Format("Integration method {0} not found", integrationMethodName));
-      
-      // Проверить, есть ли документы обмена, на которые еще не получен ответ
-      /*
-      var exchDocs = ExchangeDocuments.GetAll().Where(d => d.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.Awaiting || d.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart
-                                                     && Equals(d.IntegrationMethod, integrationMethod)).Select(d => d.Id);
-      if (exchDocs.Any())
-      {
-        Logger.DebugFormat("Pending requests found: {0}", exchDocs.ToString());
-        return;
-      }
-      */      
+            
       var exchDoc = Integration.ExchangeDocuments.Create();
       exchDoc.IntegrationMethod = integrationMethod;
       exchDoc.IsOnline = false;
@@ -1900,6 +1890,8 @@ namespace litiko.Integration.Server
       var isBusiness = element.Element("BUSINESS")?.Value;
       var isPS_REF = element.Element("PS_REF")?.Value;
       var isCountry = element.Element("COUNTRY")?.Value;
+      var isRegion = element.Element("Region")?.Value;
+      var isCity = element.Element("City")?.Value;       
       var isPostAdress = element.Element("PostAdress")?.Value;
       var isLegalAdress = element.Element("LegalAdress")?.Value;
       var isPhone = element.Element("Phone")?.Value;
@@ -2070,6 +2062,26 @@ namespace litiko.Integration.Server
             company.Countrylitiko = country;                                
           }            
         }
+        
+        if (!string.IsNullOrEmpty(isRegion))
+        {
+          var region = Eskhata.Regions.GetAll().Where(x => x.ExternalIdlitiko == isRegion).FirstOrDefault();
+          if (region != null && !Equals(company.Region, region))
+          {
+            Logger.DebugFormat("Change Region: current:{0}, new:{1}", company.Region?.Name, region?.Name);
+            company.Region = region;                    
+          }
+        }
+  
+        if (!string.IsNullOrEmpty(isCity))
+        {
+          var city = Eskhata.Cities.GetAll().Where(x => x.ExternalIdlitiko == isCity).FirstOrDefault();
+          if (city != null && !Equals(company.City, city))
+          {
+            Logger.DebugFormat("Change City: current:{0}, new:{1}", company.City?.Name, city?.Name);
+            company.City = city;                    
+          }
+        }        
 
         if(!string.IsNullOrEmpty(isPostAdress) && company.PostalAddress != isPostAdress)
         {
@@ -2220,6 +2232,8 @@ namespace litiko.Integration.Server
       var isIsLoroCorrespondent = element.Element("IsLoroCorrespondent")?.Value;
       var isIsNostroCorrespondent = element.Element("IsNostroCorrespondent")?.Value;
       var isCountry = element.Element("COUNTRY")?.Value;
+      var isRegion = element.Element("Region")?.Value;
+      var isCity = element.Element("City")?.Value;       
       var isPostAdress = element.Element("PostAdress")?.Value;
       var isLegalAdress = element.Element("LegalAdress")?.Value;
       var isPhone = element.Element("Phone")?.Value;
@@ -2342,6 +2356,26 @@ namespace litiko.Integration.Server
             bank.Countrylitiko = country;
           }            
         }
+        
+        if (!string.IsNullOrEmpty(isRegion))
+        {
+          var region = Eskhata.Regions.GetAll().Where(x => x.ExternalIdlitiko == isRegion).FirstOrDefault();
+          if (region != null && !Equals(bank.Region, region))
+          {
+            Logger.DebugFormat("Change Region: current:{0}, new:{1}", bank.Region?.Name, region?.Name);
+            bank.Region = region;                    
+          }
+        }
+  
+        if (!string.IsNullOrEmpty(isCity))
+        {
+          var city = Eskhata.Cities.GetAll().Where(x => x.ExternalIdlitiko == isCity).FirstOrDefault();
+          if (city != null && !Equals(bank.City, city))
+          {
+            Logger.DebugFormat("Change City: current:{0}, new:{1}", bank.City?.Name, city?.Name);
+            bank.City = city;                    
+          }
+        }        
 
         if(!string.IsNullOrEmpty(isPostAdress) && bank.PostalAddress != isPostAdress)
         {
@@ -2937,6 +2971,178 @@ namespace litiko.Integration.Server
       return errorList;
     }
     
+    /// <summary>
+    /// Обработка справочника Регионы.
+    /// </summary>
+    /// <param name="dataElements">Информация по регионам в виде XElement.</param>
+    /// <returns>Список ошибок (List<string>)</returns>     
+    public List<string> R_DR_GET_REGIONS(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> dataElements)
+    {          
+      Logger.Debug("R_DR_GET_REGIONS - Start");
+      var errorList = new List<string>();
+      int countAll = dataElements.Count();
+      int countChanged = 0;
+      int countNotChanged = 0;
+      int countErrors = 0;
+      
+      foreach (var element in dataElements)
+      {       
+        Transactions.Execute(() =>
+        {
+          var isId = element.Element("ID")?.Value;
+          var isCountry = element.Element("Country")?.Value;
+          var isName = element.Element("Name")?.Value;          
+          
+          try
+          {                        
+            if (string.IsNullOrEmpty(isId) || string.IsNullOrEmpty(isName) || string.IsNullOrEmpty(isCountry))
+              throw AppliedCodeException.Create(string.Format("Not all required fields are filled in. ID:{0}, Name:{1}, Country:{2}", isId, isName, isCountry));
+            
+            var entity = litiko.Eskhata.Regions.GetAll().Where(x => x.ExternalIdlitiko == isId).FirstOrDefault();
+            if (entity != null)
+              Logger.DebugFormat("Region with ExternalId:{0} was found. Id:{1}, Name:{2}", isId, entity.Id, entity.Name);
+            else
+            {              
+              entity = litiko.Eskhata.Regions.Create();
+              entity.ExternalIdlitiko = isId;
+              Logger.DebugFormat("Create new Region with ExternalId:{0}. Id:{1}", isId, entity.Id);
+            }             
+            
+            if (entity.Name != isName)
+            {
+              Logger.DebugFormat("Change Name: current:{0}, new:{1}", entity.Name, isName);
+              entity.Name = isName;              
+            }
+            
+            var country = litiko.Eskhata.Countries.GetAll().Where(x => x.ExternalIdlitiko == isCountry).FirstOrDefault();
+            if (!Equals(entity.Country, country))
+            {
+              Logger.DebugFormat("Change Country: current:{0}, new:{1}", entity.Country?.Id, country?.Id);
+              entity.Country = country;              
+            }                                                            
+            
+            if (entity.State.IsInserted || entity.State.IsChanged)
+            {
+              entity.Save();                                          
+              Logger.DebugFormat("Region successfully saved. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              countChanged++;
+            }
+            else
+            {
+              Logger.DebugFormat("There are no changes in Region. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              countNotChanged++;
+            }
+          }
+          catch (Exception ex)
+          {
+            var errorMessage = string.Format("Error when processing Region with ExternalId:{0}. Description: {1}. StackTrace: {2}", isId, ex.Message, ex.StackTrace);
+            Logger.Error(errorMessage);
+            errorList.Add(errorMessage);
+            countErrors++;
+          }
+        });
+      }
+      Logger.DebugFormat("R_DR_GET_REGIONS - Total: CountAll:{0} CountChanged:{1} CountNotChanged:{2} CountErrors:{3}", countAll, countChanged, countNotChanged, countErrors);
+      
+      Logger.Debug("R_DR_GET_REGIONS - Finish"); 
+      return errorList;
+    }
+    
+    /// <summary>
+    /// Обработка справочника Населенные пункты.
+    /// </summary>
+    /// <param name="dataElements">Информация по населенным пунктам в виде XElement.</param>
+    /// <returns>Список ошибок (List<string>)</returns>     
+    public List<string> R_DR_GET_CITIES(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> dataElements)
+    {          
+      Logger.Debug("R_DR_GET_CITIES - Start");
+      var errorList = new List<string>();
+      int countAll = dataElements.Count();
+      int countChanged = 0;
+      int countNotChanged = 0;
+      int countErrors = 0;
+      
+      foreach (var element in dataElements)
+      {       
+        Transactions.Execute(() =>
+        {
+          var isId = element.Element("ID")?.Value;
+          var isCountry = element.Element("Country")?.Value;
+          var isRegion = element.Element("Region")?.Value;
+          var isName = element.Element("Name")?.Value;
+          var isType = element.Element("Type")?.Value;
+          
+          try
+          {                        
+            if (string.IsNullOrEmpty(isId) || string.IsNullOrEmpty(isName) || string.IsNullOrEmpty(isCountry))
+              throw AppliedCodeException.Create(string.Format("Not all required fields are filled in. ID:{0}, Name:{1}, Country:{2}", isId, isName, isCountry));
+            
+            var entity = litiko.Eskhata.Cities.GetAll().Where(x => x.ExternalIdlitiko == isId).FirstOrDefault();
+            if (entity != null)
+              Logger.DebugFormat("City with ExternalId:{0} was found. Id:{1}, Name:{2}", isId, entity.Id, entity.Name);
+            else
+            {              
+              entity = litiko.Eskhata.Cities.Create();
+              entity.ExternalIdlitiko = isId;
+              Logger.DebugFormat("Create new City with ExternalId:{0}. Id:{1}", isId, entity.Id);
+            }             
+            
+            if (entity.Name != isName)
+            {
+              Logger.DebugFormat("Change Name: current:{0}, new:{1}", entity.Name, isName);
+              entity.Name = isName;              
+            }
+            
+            var country = litiko.Eskhata.Countries.GetAll().Where(x => x.ExternalIdlitiko == isCountry).FirstOrDefault();
+            if (!Equals(entity.Country, country))
+            {
+              Logger.DebugFormat("Change Country: current:{0}, new:{1}", entity.Country?.Id, country?.Id);
+              entity.Country = country;              
+            }                                                            
+            
+            if (!string.IsNullOrEmpty(isRegion))
+            {
+              var region = litiko.Eskhata.Regions.GetAll().Where(x => x.ExternalIdlitiko == isRegion).FirstOrDefault();
+              if (!Equals(entity.Region, region))
+              {
+                Logger.DebugFormat("Change Region: current:{0}, new:{1}", entity.Region?.Id, region?.Id);
+                entity.Region = region;              
+              }                        
+            }
+
+            if (!string.IsNullOrEmpty(isType) && entity.Typelitiko != isType)
+            {
+              Logger.DebugFormat("Change Type: current:{0}, new:{1}", entity.Typelitiko, isType);
+              entity.Typelitiko = isType;
+            }
+            
+            if (entity.State.IsInserted || entity.State.IsChanged)
+            {
+              entity.Save();                                          
+              Logger.DebugFormat("City successfully saved. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              countChanged++;
+            }
+            else
+            {
+              Logger.DebugFormat("There are no changes in City. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              countNotChanged++;
+            }
+          }
+          catch (Exception ex)
+          {
+            var errorMessage = string.Format("Error when processing City with ExternalId:{0}. Description: {1}. StackTrace: {2}", isId, ex.Message, ex.StackTrace);
+            Logger.Error(errorMessage);
+            errorList.Add(errorMessage);
+            countErrors++;
+          }
+        });
+      }
+      Logger.DebugFormat("R_DR_GET_CITIES - Total: CountAll:{0} CountChanged:{1} CountNotChanged:{2} CountErrors:{3}", countAll, countChanged, countNotChanged, countErrors);
+      
+      Logger.Debug("R_DR_GET_CITIES - Finish"); 
+      return errorList;
+    }    
+    
     [Remote]
     public List<string> R_DR_SET_CONTRACT_Online(IExchangeDocument exchDoc, litiko.Eskhata.IOfficialDocument document)
     {
@@ -3154,6 +3360,8 @@ namespace litiko.Integration.Server
       var isCodeOKONHelements = personData.Element("CODE_OKONH").Elements("element");
       var isCodeOKVEDelements = personData.Element("CODE_OKVED").Elements("element");
       var isCountry = personData.Element("COUNTRY")?.Value;
+      var isRegion = personData.Element("Region")?.Value;
+      var isCity = personData.Element("City")?.Value;      
       var isLegalAdress = personData.Element("DOC_BIRTH_PLACE")?.Value;
       var isPostAdress = personData.Element("PostAdress")?.Value;
       var isPhone = personData.Element("Phone")?.Value;
@@ -3369,6 +3577,26 @@ namespace litiko.Integration.Server
           person.Citizenship = country;                    
         }
       }
+      
+      if (!string.IsNullOrEmpty(isRegion))
+      {
+        var region = Eskhata.Regions.GetAll().Where(x => x.ExternalIdlitiko == isRegion).FirstOrDefault();
+        if (region != null && !Equals(person.Region, region))
+        {
+          Logger.DebugFormat("Change Region: current:{0}, new:{1}", person.Region?.Name, region?.Name);
+          person.Region = region;                    
+        }
+      }
+
+      if (!string.IsNullOrEmpty(isCity))
+      {
+        var city = Eskhata.Cities.GetAll().Where(x => x.ExternalIdlitiko == isCity).FirstOrDefault();
+        if (city != null && !Equals(person.City, city))
+        {
+          Logger.DebugFormat("Change City: current:{0}, new:{1}", person.City?.Name, city?.Name);
+          person.City = city;                    
+        }
+      }      
       
       if(!string.IsNullOrEmpty(isPostAdress) && person.PostalAddress != isPostAdress)
       {
@@ -3612,7 +3840,7 @@ namespace litiko.Integration.Server
         var postAddress     = person.PostalAddress ?? "";
         var email           = person.Email ?? "";
         var phone           = person.Phones ?? "";
-        var city            = person.City?.Name ?? "";
+        var city            = Eskhata.Cities.As(person.City)?.ExternalIdlitiko ?? "";
         var street          = person.Streetlitiko ?? "";
         var buildingNumber  = person.HouseNumberlitiko ?? "";
         var website         = person.Homepage ?? "";
@@ -3724,7 +3952,7 @@ namespace litiko.Integration.Server
         var postAddress     = company.PostalAddress ?? "";
         var legalAddress    = company.LegalAddress ?? "";
         var phone           = company.Phones ?? "";
-        var city            = company.City?.Name ?? "";
+        var city            = Eskhata.Cities.As(company.City)?.ExternalIdlitiko ?? "";
         var street          = company.Streetlitiko ?? "";
         var buildingNumber  = company.HouseNumberlitiko ?? "";
         var email           = company.Email ?? "";

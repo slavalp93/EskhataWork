@@ -334,6 +334,20 @@
       "GenerateHandler": true,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T19:00:00"
+    },
+    {
+      "NameGuid": "6a77f63b-d52d-4448-a913-04b9442352e0",
+      "Name": "GetRegions",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T04:00:00"
+    },
+    {
+      "NameGuid": "afd78479-74b5-45bc-9c02-03d19c1004c8",
+      "Name": "GetCities",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T04:15:00"
     }
   ],
   "PublicConstants": [
@@ -354,6 +368,15 @@
       ],
       "TypeName": "System.String",
       "Value": "\"R_DR_GET_BUSINESSUNITS\""
+    },
+    {
+      "Name": "R_DR_GET_CITIES",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_CITIES\""
     },
     {
       "Name": "R_DR_GET_COMPANY",
@@ -498,6 +521,15 @@
       ],
       "TypeName": "System.String",
       "Value": "\"R_DR_GET_PERSON\""
+    },
+    {
+      "Name": "R_DR_GET_REGIONS",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_REGIONS\""
     },
     {
       "Name": "R_DR_GET_TAX_REGIONS",
