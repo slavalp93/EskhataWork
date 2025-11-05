@@ -109,4 +109,7 @@
   <data name="Enum_CustomStageTypelitiko_SubmitIssueKou" xml:space="preserve">
     <value>Вынести вопрос на КОУ</value>
   </data>
+  <data name="Enum_CustomStageTypelitiko_Pause" xml:space="preserve">
+    <value>Пауза</value>
+  </data>
 </root>

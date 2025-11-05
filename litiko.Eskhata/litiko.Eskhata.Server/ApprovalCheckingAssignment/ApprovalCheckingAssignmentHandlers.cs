@@ -28,6 +28,26 @@ namespace litiko.Eskhata
         e.AddError(litiko.CollegiateAgencies.Resources.DocumentIsNotIncludedInAgenda);      
       #endregion
       
+      #region КОУ. Контроль при голосовании.      
+      var isVoiting = _obj.CustomStageTypelitiko == litiko.Eskhata.ApprovalCheckingAssignment.CustomStageTypelitiko.Voting;
+      if (isVoiting && _obj.Result == Sungero.Docflow.ApprovalCheckingAssignment.Result.Accept)
+      {
+        if (_obj.Votinglitiko.Any(d => !d.Yes.GetValueOrDefault() && !d.No.GetValueOrDefault() && !d.Abstained.GetValueOrDefault()))
+          e.AddError(litiko.Eskhata.ApprovalSimpleAssignments.Resources.ErrorVoteAllDecisions);
+        
+        var firstVotingrecord = _obj.Votinglitiko.FirstOrDefault();
+        if (firstVotingrecord != null)
+        {                    
+          if (firstVotingrecord.Yes.GetValueOrDefault())
+            e.Result = CollegiateAgencies.Resources.VotingResultFormat("За", firstVotingrecord.Comment);
+          else if (firstVotingrecord.No.GetValueOrDefault())
+            e.Result = CollegiateAgencies.Resources.VotingResultFormat("Против", firstVotingrecord.Comment);
+          else if (firstVotingrecord.Abstained.GetValueOrDefault())
+            e.Result = CollegiateAgencies.Resources.VotingResultFormat("Воздержался", firstVotingrecord.Comment);                    
+        }
+      }
+      #endregion      
+      
       #region Договора. Контроль получения скана.
       if (stage != null && doc != null && litiko.Eskhata.ApprovalStages.As(stage.Stage).CustomStageTypelitiko == litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.ScanReceivedCon &&
           ContractualDocuments.Is(doc) && _obj.Result == ApprovalCheckingAssignment.Result.Accept)

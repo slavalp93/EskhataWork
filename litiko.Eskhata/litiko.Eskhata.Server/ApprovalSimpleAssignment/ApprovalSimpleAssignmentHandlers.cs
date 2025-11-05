@@ -30,8 +30,22 @@ namespace litiko.Eskhata
       
       #region КОУ. Контроль при голосовании.      
       var isVoiting = _obj.CustomStageTypelitiko == litiko.Eskhata.ApprovalSimpleAssignment.CustomStageTypelitiko.Voting;
-      if (isVoiting && _obj.Votinglitiko.Any(d => !d.Yes.GetValueOrDefault() && !d.No.GetValueOrDefault() && !d.Abstained.GetValueOrDefault()))
-        e.AddError(litiko.Eskhata.ApprovalSimpleAssignments.Resources.ErrorVoteAllDecisions);
+      if (isVoiting && _obj.Result == Sungero.Docflow.ApprovalSimpleAssignment.Result.Complete)
+      {
+        if (_obj.Votinglitiko.Any(d => !d.Yes.GetValueOrDefault() && !d.No.GetValueOrDefault() && !d.Abstained.GetValueOrDefault()))
+          e.AddError(litiko.Eskhata.ApprovalSimpleAssignments.Resources.ErrorVoteAllDecisions);
+
+        var firstVotingrecord = _obj.Votinglitiko.FirstOrDefault();
+        if (firstVotingrecord != null)
+        {
+          if (firstVotingrecord.Yes.GetValueOrDefault())
+            e.Result = CollegiateAgencies.Resources.VotingResultFormat("За", firstVotingrecord.Comment);
+          else if (firstVotingrecord.No.GetValueOrDefault())
+            e.Result = CollegiateAgencies.Resources.VotingResultFormat("Против", firstVotingrecord.Comment);
+          else if (firstVotingrecord.Abstained.GetValueOrDefault())
+            e.Result = CollegiateAgencies.Resources.VotingResultFormat("Воздержался", firstVotingrecord.Comment);                    
+        }
+      }        
       #endregion
       
       #region ВНД. Контроль заполнения полей: "Правовой акт" и "Введение в действие с". 

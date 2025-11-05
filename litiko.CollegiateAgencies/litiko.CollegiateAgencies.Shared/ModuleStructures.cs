@@ -83,5 +83,37 @@ namespace litiko.CollegiateAgencies.Structures.Module
     /// </summary>
     public bool? VoutingAccepted { get; set; }    
   }
+  
+  /// <summary>
+  /// Информация о результате голосования по решению.
+  /// </summary>
+  [Public]
+  partial class VotingInfo
+  {    
+    /// <summary>
+    /// Решение
+    /// </summary>
+    public IProjectsolution Decision { get; set; }
+    
+    /// <summary>
+    /// За
+    /// </summary>
+    public bool Yes { get; set; }
+    
+    /// <summary>
+    /// Против
+    /// </summary>
+    public bool No { get; set; }    
+    
+    /// <summary>
+    /// Воздержался
+    /// </summary>
+    public bool Abstained { get; set; }
+
+    /// <summary>
+    /// Комментарий
+    /// </summary>
+    public string Comment { get; set; }    
+  }
 
 }

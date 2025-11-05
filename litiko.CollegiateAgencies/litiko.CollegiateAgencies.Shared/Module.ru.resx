@@ -169,4 +169,8 @@
   <data name="MeetingOpeningGreeting_TJ" xml:space="preserve">
     <value>Раисикунанда &lt;PresidentFIOTJ&gt; ҳозиринро ба маҷлиси &lt;TypeTJ2&gt;  &lt;CategoryNameForTemplateTJ&gt; хайрамақдам гуфта, маҷлиси &lt;TypeTJ2&gt; зе &lt;CategoryNameForTemplateTJ&gt; Бонкро кушода эълон кард.</value>
   </data>
+  <data name="VotingResult" xml:space="preserve">
+    <value>Результат голосования: {0}
+{1}</value>
+  </data>
 </root>
