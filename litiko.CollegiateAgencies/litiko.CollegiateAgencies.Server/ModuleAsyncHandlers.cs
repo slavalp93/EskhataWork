@@ -8,6 +8,36 @@ namespace litiko.CollegiateAgencies.Server
 {
   public class ModuleAsyncHandlers
   {
+    /// <summary>
+    /// Выполнить задание
+    /// </summary>
+    /// <param name="args"></param>
+    public virtual void PerformAssignment(litiko.CollegiateAgencies.Server.AsyncHandlerInvokeArgs.PerformAssignmentInvokeArgs args)
+    {
+      if (args.RetryIteration > 100)
+      {        
+        args.Retry = false;
+        return;
+      }
+      
+      var assignment = Eskhata.ApprovalSimpleAssignments.Get(args.assignmentId);
+      if (!Locks.TryLock(assignment))
+      {
+        args.Retry = true;
+        Logger.DebugFormat($"Assignment is locked. (ID:{assignment.Id})");
+        return;        
+      }
+      
+      try
+      {
+        assignment.Complete(Eskhata.ApprovalSimpleAssignment.Result.Complete);
+        Logger.DebugFormat($"Assignment performed. (ID:{assignment.Id})");
+      }
+      finally
+      {
+        Locks.Unlock(assignment);
+      }                  
+    }
 
     /// <summary>
     /// Добавить права на изменение документа.

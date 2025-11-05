@@ -171,6 +171,19 @@
   "OperationsClass": "",
   "Properties": [
     {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "5b792013-2adb-4c04-982c-798e8af87664",
+      "Name": "AllowSendToRework",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
+    {
       "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
       "NameGuid": "e7bb000c-7739-48ba-9854-4d55f0498a21",
       "Name": "ApprovalRoles",
@@ -242,6 +255,11 @@
           "NameGuid": "834d161f-afc6-4a3c-8ba3-bef644d247e7",
           "Name": "AccountantAppr",
           "Code": "AccountantAppr"
+        },
+        {
+          "NameGuid": "2c321139-ebf6-4259-8ab3-f818e959a179",
+          "Name": "Pause",
+          "Code": "Pause"
         }
       ],
       "HandledEvents": [

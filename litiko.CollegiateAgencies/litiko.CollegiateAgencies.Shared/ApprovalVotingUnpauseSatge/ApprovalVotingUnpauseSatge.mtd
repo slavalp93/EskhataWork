@@ -1,7 +1,7 @@
 {
   "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
-  "NameGuid": "ddcc5b06-be48-436e-929e-89724edacd03",
-  "Name": "ApprovalVotingTaskStage",
+  "NameGuid": "9edec0c4-a6ae-43ce-8875-cc5c0d295a3b",
+  "Name": "ApprovalVotingUnpauseSatge",
   "BaseGuid": "6831f842-3ea6-412e-9637-c6315a4e6686",
   "CanBeNavigationPropertyType": true,
   "CreationAreaMetadata": {
@@ -18,7 +18,7 @@
     "IsAncestorMetadata": true
   },
   "IconResourcesKeys": [],
-  "IntegrationServiceName": "CollegiateAgenciesVotingTaskStage",
+  "IntegrationServiceName": "CollegiateAgenciesApprovalVotingUnpauseSatge",
   "IsVisible": false,
   "OperationsClass": "",
   "Overridden": [
@@ -27,7 +27,7 @@
   "PublicStructures": [],
   "ResourcesKeys": [],
   "RibbonCardMetadata": {
-    "NameGuid": "275254cc-d236-4665-89dc-8805f67b2856",
+    "NameGuid": "aa660818-72b5-4e94-a60b-b233a885fdd7",
     "Name": "RibbonCard",
     "Categories": [],
     "Elements": [],
@@ -37,7 +37,7 @@
     "RibbonKind": "Card"
   },
   "RibbonCollectionMetadata": {
-    "NameGuid": "052d325d-f601-4e0c-8ab9-7cebad58397b",
+    "NameGuid": "4ae0f8e1-6b9c-45b7-9538-e2c1bc01282f",
     "Name": "RibbonCollection",
     "Categories": [],
     "Elements": [],

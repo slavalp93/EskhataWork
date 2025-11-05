@@ -30,6 +30,7 @@ namespace litiko.CollegiateAgencies.Server
       
       CreateVotingDefaultApprovalRule2();
       CreateApprovalVotingTaskStage();
+      CreateApprovalVotingUnpauseStage();
     }
     
     /// <summary>
@@ -314,6 +315,21 @@ namespace litiko.CollegiateAgencies.Server
       stage.TimeoutInHours = 4;
       stage.Save();
     }
+    
+    /// <summary>
+    /// Создание записи нового типа сценария "Голосование. Cнятие с паузы".
+    /// </summary>
+    public static void CreateApprovalVotingUnpauseStage()
+    {      
+      if (litiko.CollegiateAgencies.ApprovalVotingUnpauseSatges.GetAll().Any())
+        return;
+      
+      InitializationLogger.DebugFormat("Init: Create approval voting unpause stage.");
+      var stage = litiko.CollegiateAgencies.ApprovalVotingUnpauseSatges.Create();
+      stage.Name = "Голосование. Cнятие с паузы";
+      stage.TimeoutInHours = 4;
+      stage.Save();
+    }    
     
     /// <summary>
     /// Создать роль с одним участником.

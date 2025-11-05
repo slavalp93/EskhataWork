@@ -291,6 +291,11 @@
           "NameGuid": "2394a481-ecae-4335-ac80-58cebeca83d5",
           "Name": "IncludeInMeet",
           "Code": "IncludeInMeet"
+        },
+        {
+          "NameGuid": "3a5360d9-a5b3-46cc-ab4a-d8364f73bc45",
+          "Name": "Pause",
+          "Code": "Pause"
         }
       ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",

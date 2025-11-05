@@ -85,11 +85,7 @@ namespace litiko.CollegiateAgencies.Server
           
           subTask.Start();
           Logger.DebugFormat("CreateVotingTaskStage. Subtask started. Voting subtask (ID={0}), approval task (ID={1}) (StartId={2}) (Iteration={3}) (StageNumber={4}) for document (ID={5})",
-                             subTask.Id, approvalTask.Id, approvalTask.StartId, approvalTask.Iteration, approvalTask.StageNumber, document.Id);          
-          
-          // Добавить связь с главной задачей
-          //LinkApprovalTaskAndApprovalSubTask(Eskhata.ApprovalTasks.As(approvalTask), subTask);
-          
+                             subTask.Id, approvalTask.Id, approvalTask.StartId, approvalTask.Iteration, approvalTask.StageNumber, document.Id);                              
         }
         catch (Exception ex)
         {
@@ -101,7 +97,7 @@ namespace litiko.CollegiateAgencies.Server
       
       return this.GetSuccessResult();
     }
-    
+/*    
     /// <summary>
     /// Проверить состояние этапа выполнения сценария.
     /// </summary>
@@ -126,75 +122,7 @@ namespace litiko.CollegiateAgencies.Server
         Logger.DebugFormat("{0}. Not success - there are active subtasks. ApprovalTask Id: {1}.", logPrefix, approvalTask.Id);
       
       return this.GetRetryResult(string.Empty);
-    }    
-    
-    /*
-    /// <summary>
-    /// Связать основную задачу Голосование и задачу Голосование по решению.
-    /// </summary>
-    /// <param name="approvalTask">Основная задача Голосование.</param>
-    /// <param name="subTask">Задача Голосование по решению.</param>
-    public static void LinkApprovalTaskAndApprovalSubTask(Eskhata.IApprovalTask approvalTask, Eskhata.IApprovalTask subTask)
-    {
-      var externalLink = Sungero.Domain.ModuleFunctions.CreateExternalLink();
-      externalLink.EntityId = approvalTask.Id;
-      externalLink.EntityTypeGuid = approvalTask.GetEntityMetadata().GetOriginal().NameGuid;
-      externalLink.ExternalEntityId = subTask.Id.ToString();
-      externalLink.ExternalEntityTypeId = subTask.GetEntityMetadata().GetOriginal().NameGuid.ToString();
-      externalLink.AdditionalInfo = GetApprovalTaskAdditionalInfoKey(approvalTask);
-      externalLink.IsDeleted = false;
-      externalLink.Save();
-      
-      Logger.DebugFormat("ApprovalVotingTaskStage. Approval task (ID={0}) (StartId={1}) (Iteration={2}) (StageNumber={3}) linked with approval task (ID={4}))",
-                         approvalTask.Id, approvalTask.StartId, approvalTask.Iteration, approvalTask.StageNumber, subTask.Id);
     }
-    
-    /// <summary>
-    /// Сформировать дополнительную информацию для ссылки, связывающей задачу Голосование и задачу Голосование по решению.
-    /// </summary>
-    /// <param name="approvalTask">Задача Голосование.</param>
-    /// <returns>Дополнительная информация для ссылки, связывающей задачу Голосование и задачу Голосование по решению.</returns>
-    public static string GetApprovalTaskAdditionalInfoKey(Eskhata.IApprovalTask approvalTask)
-    {
-      return GetApprovalTaskAdditionalInfoKey(approvalTask, approvalTask.StageNumber);
-    }
-
-    /// <summary>
-    /// Сформировать дополнительную информацию для ссылки, связывающей задачу Голосование и задачу Голосование по решению.
-    /// </summary>
-    /// <param name="approvalTask">Задача Голосование.</param>
-    /// <param name="stageNumber">Номер этапа.</param>
-    /// <returns>Дополнительная информация для ссылки, связывающей задачу Голосование и задачу Голосование по решению.</returns>
-    public static string GetApprovalTaskAdditionalInfoKey(Eskhata.IApprovalTask approvalTask, int? stageNumber)
-    {
-      return string.Format("{0}_{1}_{2}_{3}", Constants.ApprovalVotingTaskStage.ApprovalVotingTaskStageLinkCode,
-                           approvalTask.StartId, approvalTask.Iteration, stageNumber);
-    }
-    
-    /// <summary>
-    /// Найти ссылки задач Голосование по решению для задачи Голосование.
-    /// </summary>
-    /// <param name="approvalTask">Задача на согласование по регламенту.</param>
-    /// <returns>Ссылка с задачей на рассмотрение документа.</returns>
-    [Public]
-    public static List<Sungero.Domain.Shared.IExternalLink> GetApprovalTaskExternalLink(IApprovalTask approvalTask)
-    {
-      var additionalInfo = GetApprovalTaskAdditionalInfoKey(approvalTask);
-      return Sungero.Docflow.PublicFunctions.Module.GetExternalLinks(approvalTask, additionalInfo);
-    }
-    
-    /// <summary>
-    /// Найти ссылку с задачей на рассмотрение документа для задачи на согласование по регламенту.
-    /// </summary>
-    /// <param name="approvalTask">Задача на согласование по регламенту.</param>
-    /// <param name="stageNumber">Номер этапа.</param>
-    /// <returns>Ссылка с задачей на рассмотрение документа.</returns>
-    [Public]
-    public static Sungero.Domain.Shared.IExternalLink GetApprovalTaskExternalLink(IApprovalTask approvalTask, int? stageNumber)
-    {
-      var additionalInfo = GetApprovalTaskAdditionalInfoKey(approvalTask, stageNumber);
-      return Docflow.PublicFunctions.Module.GetExternalLink(approvalTask, additionalInfo);
-    }    
-    */
+*/    
   }
 }

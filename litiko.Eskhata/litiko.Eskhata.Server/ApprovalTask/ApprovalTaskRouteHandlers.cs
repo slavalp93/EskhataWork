@@ -135,6 +135,13 @@ namespace litiko.Eskhata.Server
           }          
         }                                          
         #endregion      
+        
+        #region Пауза
+        if (CustomStage.CustomStageTypelitiko == litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.Pause)
+        {
+          CustomAssignment.CustomStageTypelitiko = litiko.Eskhata.ApprovalSimpleAssignment.CustomStageTypelitiko.Pause;
+        }
+        #endregion
       }      
     }
 
