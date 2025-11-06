@@ -73,4 +73,10 @@
   <data name="IntegrationMethodNotFound" xml:space="preserve">
     <value>Метод интеграции {0}  не найден.</value>
   </data>
+  <data name="RoleIntegrationUsers" xml:space="preserve">
+    <value>Пользователи модуля "Интеграция"</value>
+  </data>
+  <data name="DescriptionRoleIntegrationUsers" xml:space="preserve">
+    <value>Предоставляет доступ к видимости модуля "Интеграция"</value>
+  </data>
 </root>

@@ -165,4 +165,10 @@
 &lt;/request&gt;
 &lt;/root&gt;</value>
   </data>
+  <data name="RoleIntegrationUsers" xml:space="preserve">
+    <value>Integration module users</value>
+  </data>
+  <data name="DescriptionRoleIntegrationUsers" xml:space="preserve">
+    <value>Provides access to the visibility of the Integration module.</value>
+  </data>
 </root>

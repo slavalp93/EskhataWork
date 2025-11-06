@@ -352,6 +352,15 @@
   ],
   "PublicConstants": [
     {
+      "Name": "IntegrationUsers",
+      "ParentClasses": [
+        "Module",
+        "RoleGuid"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"9069126A-1BA0-40FC-9AB9-7098F926ECF3\")"
+    },
+    {
       "Name": "R_DR_GET_BANK",
       "ParentClasses": [
         "Module",
@@ -570,7 +579,8 @@
     {
       "Name": "SynchronizationResponsibleRoleGuid",
       "ParentClasses": [
-        "Module"
+        "Module",
+        "RoleGuid"
       ],
       "TypeName": "System.Guid",
       "Value": "new System.Guid(\"6F98BA36-3B7F-4767-8369-88A65578DC5A\")"
@@ -721,7 +731,9 @@
     "DataUpdatedSuccessfully",
     "IntegrationMethodNotFound",
     "VersionRequestToRX_",
-    "RequestXMLTemplateForCurrencyRates"
+    "RequestXMLTemplateForCurrencyRates",
+    "RoleIntegrationUsers",
+    "DescriptionRoleIntegrationUsers"
   ],
   "ServerAssemblyName": "litiko.Integration.Server",
   "ServerNamespace": "litiko.Integration.Server",

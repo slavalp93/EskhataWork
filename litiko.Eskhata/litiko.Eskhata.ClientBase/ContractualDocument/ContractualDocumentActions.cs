@@ -17,7 +17,7 @@ namespace litiko.Eskhata.Client
     public override bool CanExportToABSlitiko(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
       // Доступно роли «Администраторы» и «Ответственные за синхронизацию с учетными системами»
-      return Users.Current.IncludedIn(Roles.Administrators) || Users.Current.IncludedIn(Integration.PublicConstants.Module.SynchronizationResponsibleRoleGuid);
+      return Users.Current.IncludedIn(Roles.Administrators) || Users.Current.IncludedIn(Integration.PublicConstants.Module.RoleGuid.SynchronizationResponsibleRoleGuid);
     }
 
     public virtual void CreateWaybilllitiko(Sungero.Domain.Client.ExecuteActionArgs e)

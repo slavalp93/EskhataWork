@@ -362,7 +362,7 @@ namespace litiko.Integration.Server
       {
         // Отправка уведомления роли "Ответственные за синхронизацию с учетными системами"
         Logger.Debug("Preparing to send notice about errors");        
-        var synchronizationResponsibleRole = Roles.GetAll().Where(r => r.Sid == litiko.Integration.Constants.Module.SynchronizationResponsibleRoleGuid).FirstOrDefault();
+        var synchronizationResponsibleRole = Roles.GetAll().Where(r => r.Sid == litiko.Integration.Constants.Module.RoleGuid.SynchronizationResponsibleRoleGuid).FirstOrDefault();
         if (synchronizationResponsibleRole == null)
           Logger.ErrorFormat("{0} SynchronizationResponsibleRole not found. Notice was not sent! {1}", logPrefix, logPostfix);
         else

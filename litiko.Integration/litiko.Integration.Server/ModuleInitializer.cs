@@ -12,12 +12,13 @@ namespace litiko.Integration.Server
 
     public override bool IsModuleVisible()
     {
-      return Users.Current.IncludedIn(Constants.Module.SynchronizationResponsibleRoleGuid) || Users.Current.IncludedIn(Roles.Administrators);
+      return Users.Current.IncludedIn(Constants.Module.RoleGuid.IntegrationUsers) || Users.Current.IncludedIn(Roles.Administrators);
     }
 
     public override void Initializing(Sungero.Domain.ModuleInitializingEventArgs e)
     {      
       CreateIntegrationSystem("ABS");      
+      CreateRoles();
       
       var integrationSystem = IntegrationSystems.GetAll(r => r.Name == "ABS").FirstOrDefault();
       if (integrationSystem != null)
@@ -49,7 +50,7 @@ namespace litiko.Integration.Server
       }
       
       GrantRightsOnEntities();
-      CreateApprovalFunctionStages();
+      CreateApprovalFunctionStages();      
     }
     
     /// <summary>
@@ -99,7 +100,7 @@ namespace litiko.Integration.Server
       InitializationLogger.Debug("Init: Grant rights on entities.");
       
       // "Ответственные за синхронизацию с учетными системами"
-      var roleSynchronizationResponsible = Roles.GetAll().Where(x => x.Sid == Constants.Module.SynchronizationResponsibleRoleGuid).FirstOrDefault();
+      var roleSynchronizationResponsible = Roles.GetAll().Where(x => x.Sid == Constants.Module.RoleGuid.SynchronizationResponsibleRoleGuid).FirstOrDefault();
       if (roleSynchronizationResponsible != null)
       {
         ExchangeDocuments.AccessRights.Grant(roleSynchronizationResponsible, DefaultAccessRightsTypes.FullAccess);
@@ -141,7 +142,15 @@ namespace litiko.Integration.Server
         stage.Save();      
       }      
       
-    }    
+    }
+
+    /// <summary>
+    /// Создать предопределенные роли.
+    /// </summary>
+    public static void CreateRoles()
+    {           
+      Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(Resources.RoleIntegrationUsers, Resources.DescriptionRoleIntegrationUsers, Constants.Module.RoleGuid.IntegrationUsers);
+    }
 
   }
 }
