@@ -71,7 +71,7 @@
     <value>Данные успешно обновлены.</value>
   </data>
   <data name="IntegrationMethodNotFound" xml:space="preserve">
-    <value>Метод интеграции {0}  не найден.</value>
+    <value>Метод интеграции не найден.</value>
   </data>
   <data name="RoleIntegrationUsers" xml:space="preserve">
     <value>Пользователи модуля "Интеграция"</value>

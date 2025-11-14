@@ -3919,7 +3919,37 @@ namespace litiko.Integration.Server
     {
       return ExchangeQueues.GetAll()
         .Where(x => Equals(x.ExchangeDocument, document));
-    }   
+    }
+
+    /// <summary>
+    /// Получить метод интеграции по сущности
+    /// </summary>
+    /// <param name="entity">Сущность</param>
+    [Remote(IsPure = true)]
+    public Integration.IIntegrationMethod GetIntegrationMethod(Sungero.Domain.Shared.IEntity entity)
+    {
+      if (entity == null)
+        return null;
+            
+      var integrationMethod = Integration.IntegrationMethods.Null;
+      
+      var integrationMethodName = string.Empty;
+      if (Eskhata.Companies.Is(entity))
+        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_GET_COMPANY;
+      else if (Eskhata.Banks.Is(entity))
+        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_GET_BANK;
+      else if (Eskhata.People.Is(entity))
+        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_GET_PERSON;
+      else if (Eskhata.Contracts.Is(entity))
+        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_SET_CONTRACT;
+      else if (Eskhata.SupAgreements.Is(entity))
+        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT;
+      
+      if (!string.IsNullOrEmpty(integrationMethodName))
+        integrationMethod = Integration.IntegrationMethods.GetAll().FirstOrDefault(x => x.Name == integrationMethodName);
+      
+      return integrationMethod;
+    }    
        
     #endregion
     

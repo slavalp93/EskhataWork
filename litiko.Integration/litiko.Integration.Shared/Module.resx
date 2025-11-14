@@ -144,7 +144,7 @@
     <value>Data updated successfully.</value>
   </data>
   <data name="IntegrationMethodNotFound" xml:space="preserve">
-    <value>Integration method {0} not found.</value>
+    <value>Integration method not found.</value>
   </data>
   <data name="VersionRequestToRX_" xml:space="preserve">
     <value>RequestToRX_</value>
