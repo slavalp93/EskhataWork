@@ -4,7 +4,7 @@ using Sungero.Core;
 namespace litiko.Integration.Constants
 {
   public static class Module
-  {   
+  {      
     /// <summary>
     /// Протоколы (методы) интеграции
     /// </summary>    
@@ -131,5 +131,10 @@ namespace litiko.Integration.Constants
       [Public]
       public static readonly Guid SynchronizationResponsibleRoleGuid = Guid.Parse("6F98BA36-3B7F-4767-8369-88A65578DC5A");      
     }
+    
+    /// <summary>
+    /// Не определено
+    /// </summary>
+    public const string UndefinedString = "Не определено";
   }
 }

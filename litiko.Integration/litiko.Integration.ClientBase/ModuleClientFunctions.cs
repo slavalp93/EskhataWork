@@ -33,9 +33,21 @@ namespace litiko.Integration.Client
         return Eskhata.Banks.Resources.ErrorNeedFillBIC;
             
       if (entity.State.IsInserted)
-      {
-        if (Eskhata.Counterparties.Is(entity) && string.IsNullOrEmpty(Eskhata.Counterparties.As(entity).Name))
-          Eskhata.Counterparties.As(entity).Name = "Наименование не определено";
+      {        
+        if (company != null && string.IsNullOrEmpty(company.Name))
+          company.Name = Constants.Module.UndefinedString;
+        
+        if (bank != null && string.IsNullOrEmpty(bank.Name))
+          bank.Name = Constants.Module.UndefinedString;
+        
+        if (person != null)
+        {
+          if (string.IsNullOrEmpty(person.LastName))
+            person.LastName = Constants.Module.UndefinedString;
+          
+          if (string.IsNullOrEmpty(person.FirstName))
+            person.FirstName = Constants.Module.UndefinedString;          
+        }          
         
         entity.Save();
       }     
