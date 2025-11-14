@@ -202,156 +202,286 @@ namespace litiko.Integration.Server
     [Public(WebApiRequestType = RequestType.Post)]
     public byte[] ProcessResponseFromIS(byte[] xmlData)
     {                            
+      var logPrefix = "Integration. ProcessResponseFromIS.";
+      Logger.DebugFormat("{0} Start.", logPrefix);
+
+      const string invalidParamValue = "???";
+
+      string sessionIdStr = string.Empty;
+      long sessionId;
+      string dictionary = string.Empty;
+      string lastIdStr = string.Empty;
+      long lastId;
+
+      string sessionIdForResponse = invalidParamValue;
+      string dictionaryForResponse = invalidParamValue;
+
+      bool hasError = false;
+      
+      #region Предпроверки
+      
+      // Пустое тело запроса
+      if (xmlData == null || xmlData.Length == 0)
+      {
+        return BuildErrorResponse(logPrefix, "Request body is empty", invalidParamValue, invalidParamValue);
+      }
+
+      XmlDocument xmlDoc = new XmlDocument();
+      XmlElement root;
+
       using (var xmlStream = new MemoryStream(xmlData))
       {
-        var logPrefix = "Integration. ProcessResponseFromIS.";
-        Logger.DebugFormat("{0} Start.", logPrefix);  
-      
-        var session_id_str = string.Empty;        
-        long session_id;
-        var dictionary = string.Empty;
-        var lastId_str = string.Empty;
-        long lastId;
-        var invalidParamValue = "???";
-        bool increaseNumberOfPackages = false;
-        string errorMessage = string.Empty;        
-        
-        XmlDocument xmlDoc = new XmlDocument();
-        xmlDoc.Load(xmlStream);                
-        XmlElement root = xmlDoc.DocumentElement;
-            
-        #region Предпроверки
-        XmlNode session_id_Node = root.SelectSingleNode("//head/session_id");
-        if (session_id_Node == null)
-        {
-          errorMessage = "session_id node is absent";
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(invalidParamValue, invalidParamValue, 2, errorMessage));
-        }
-        else
-          session_id_str = session_id_Node.InnerText;
-
-        if (!long.TryParse(session_id_str, out session_id))
-        {
-          errorMessage = "Invalid value in session_id";
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);          
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(invalidParamValue, invalidParamValue, 2, errorMessage));
-        }
-        var logPostfix = string.Format("ExchangeDocId = '{0}'", session_id);
-        
-        XmlNode dictionary_Node = root.SelectSingleNode("//request/dictionary");
-        if (dictionary_Node == null)
-        {
-          errorMessage = "dictionary node is absent";
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);          
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, invalidParamValue, 2, errorMessage));
-        }
-        else
-          dictionary = dictionary_Node.InnerText;
-        
-        if (string.IsNullOrEmpty(dictionary) || string.IsNullOrWhiteSpace(dictionary))
-        {
-          errorMessage = "Invalid value in dictionary";
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);                    
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, invalidParamValue, 2, errorMessage));
-        }
-        
-        XmlNode lastId_Node = root.SelectSingleNode("//request/lastId");
-        if (lastId_Node == null)
-        {
-          errorMessage = "lastId node is absent";
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);                              
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
-        }
-        else
-          lastId_str = lastId_Node.InnerText;
-        
-        if (!long.TryParse(lastId_str, out lastId))
-        {
-          errorMessage = "Invalid value in lastId";
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);              
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
-        }
-        
-        XmlNode data_Node = root.SelectSingleNode("//request/Data");
-        if (data_Node == null)
-        {
-          errorMessage = "Data node is absent";
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);                        
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
-        }
-                
-        var exchDoc = ExchangeDocuments.GetAll().Where(d => d.Id == session_id).FirstOrDefault();
-        if (exchDoc == null)
-        {
-          errorMessage = "Request for session id not found. Session Id=" +session_id.ToString();
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);           
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
-        }
-        
-        #endregion
-                
-        var statusRequestToRX = exchDoc.StatusRequestToRX;
-        var requestToRXInfo = exchDoc.RequestToRXInfo;
-                
         try
-        {                    
-          var exchQueue = ExchangeQueues.Create();
-          exchQueue.ExchangeDocument = exchDoc;
-          exchQueue.Xml = xmlData;
-          exchQueue.Name = Integration.Resources.VersionRequestToRXFormat(lastId);
-          exchQueue.Save();
-          increaseNumberOfPackages = true;
-            
-          // обновить статусы в exchDoc
-          if (lastId > 0)
-            statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;
-          else
-            statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
-            
-          if (requestToRXInfo != "Saved")
-            requestToRXInfo = "Saved";                    
+        {
+          var settings = new XmlReaderSettings
+          {
+            DtdProcessing = DtdProcessing.Prohibit,
+            XmlResolver = null
+          };
+
+          using (var reader = XmlReader.Create(xmlStream, settings))
+          {
+            xmlDoc.Load(reader);
+          }
+        }
+        catch (XmlException ex)
+        {
+          return BuildErrorResponse(
+            logPrefix,
+            string.Format("Invalid XML format: {0}", ex.Message),
+            invalidParamValue,
+            invalidParamValue);
         }
         catch (Exception ex)
         {
-          errorMessage = ex.Message;          
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.{2}", logPrefix, errorMessage, logPostfix);
-          statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
-          requestToRXInfo = errorMessage;                      
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
-        }        
-        
-        if (!exchDoc.IsOnline.GetValueOrDefault())
-        {
-          // Обновляем exchDoc асинхронным обработчиком для не Online-запросов
-          var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
-          asyncHandler.DocId = exchDoc.Id;
-          asyncHandler.StatusRequestToRX = statusRequestToRX.ToString();
-          asyncHandler.RequestToRXInfo = requestToRXInfo;
-          asyncHandler.IncreaseNumberOfPackages = increaseNumberOfPackages;
-          asyncHandler.ExecuteAsync();
-          
-          if (string.IsNullOrEmpty(errorMessage))
-          {
-            if (lastId > 0)
-              // вызвать получение остальной части пакета
-              SendRequestToIS(exchDoc, lastId, null);
-            else
-            {
-              Thread.Sleep(5000); // Пауза на 5 сек.
-              
-              // запустить обработчик пакета
-              var asyncHandlerImportData = Integration.AsyncHandlers.ImportData.Create();
-              asyncHandlerImportData.ExchangeDocId = exchDoc.Id;
-              asyncHandlerImportData.ExecuteAsync();
-            }        
-          }                        
+          return BuildErrorResponse(
+            logPrefix,
+            string.Format("Error while parsing XML: {0}", ex.Message),
+            invalidParamValue,
+            invalidParamValue);
         }
-        
-        Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);
-        return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 1, "Saved"));
+      }
+
+      root = xmlDoc.DocumentElement;
+      if (root == null)
+      {
+        return BuildErrorResponse(
+          logPrefix,
+          "Root XML element is absent",
+          invalidParamValue,
+          invalidParamValue);
       }      
+
+      byte[] errorResponse;
+
+      // head
+      var headNode = RequireNode(root, "head",
+                                 "head node is absent",
+                                 logPrefix,
+                                 invalidParamValue,
+                                 invalidParamValue,
+                                 out errorResponse);
+      if (headNode == null)
+        return errorResponse;
+
+      // head/session_id
+      var sessionIdNode = RequireNode(headNode, "session_id",
+                                      "session_id node is absent",
+                                      logPrefix,
+                                      invalidParamValue,
+                                      invalidParamValue,
+                                      out errorResponse);
+      if (sessionIdNode == null)
+        return errorResponse;
+
+      sessionIdStr = sessionIdNode.InnerText;
+
+      if (!long.TryParse(sessionIdStr, out sessionId))
+      {
+        return BuildErrorResponse(
+          logPrefix,
+          "Invalid value in session_id",
+          invalidParamValue,
+          invalidParamValue);
+      }
+
+      sessionIdForResponse = sessionId.ToString();
+      var logPostfix = string.Format("ExchangeDocId = '{0}'", sessionId);
+
+      // request
+      var requestNode = RequireNode(root, "request",
+                                    "request node is absent",
+                                    logPrefix,
+                                    sessionIdForResponse,
+                                    invalidParamValue,
+                                    out errorResponse);
+      if (requestNode == null)
+        return errorResponse;
+
+      // request/dictionary
+      var dictionaryNode = RequireNode(requestNode, "dictionary",
+                                       "dictionary node is absent",
+                                       logPrefix,
+                                       sessionIdForResponse,
+                                       invalidParamValue,
+                                       out errorResponse);
+      if (dictionaryNode == null)
+        return errorResponse;
+
+      dictionary = dictionaryNode.InnerText;
+      if (string.IsNullOrWhiteSpace(dictionary))
+      {
+        return BuildErrorResponse(
+          logPrefix,
+          "Invalid value in dictionary",
+          sessionIdForResponse,
+          invalidParamValue);
+      }
+
+      dictionaryForResponse = dictionary;
+
+      // request/lastId
+      var lastIdNode = RequireNode(requestNode, "lastId",
+                                   "lastId node is absent",
+                                   logPrefix,
+                                   sessionIdForResponse,
+                                   dictionaryForResponse,
+                                   out errorResponse);
+      if (lastIdNode == null)
+        return errorResponse;
+
+      lastIdStr = lastIdNode.InnerText;
+      if (!long.TryParse(lastIdStr, out lastId))
+      {
+        return BuildErrorResponse(
+          logPrefix,
+          "Invalid value in lastId",
+          sessionIdForResponse,
+          dictionaryForResponse);
+      }
+
+      // request/Data
+      var dataNode = RequireNode(requestNode, "Data",
+                                 "Data node is absent",
+                                 logPrefix,
+                                 sessionIdForResponse,
+                                 dictionaryForResponse,
+                                 out errorResponse);
+      if (dataNode == null)
+        return errorResponse;
+
+      var exchDoc = ExchangeDocuments.GetAll()
+        .FirstOrDefault(d => d.Id == sessionId);
+      if (exchDoc == null)
+      {
+        return BuildErrorResponse(
+          logPrefix,
+          "Request for session id not found. Session Id=" + sessionId,
+          sessionIdForResponse,
+          dictionaryForResponse);
+      }
+
+      #endregion
+
+      var statusRequestToRX = exchDoc.StatusRequestToRX;
+      var requestToRXInfo = exchDoc.RequestToRXInfo;
+
+      try
+      {
+        var exchQueue = ExchangeQueues.Create();
+        exchQueue.ExchangeDocument = exchDoc;
+        exchQueue.Xml = xmlData;
+        exchQueue.Name = Integration.Resources.VersionRequestToRXFormat(lastId);
+        exchQueue.Save();
+
+        // обновить статусы в exchDoc
+        if (lastId > 0)
+          statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;
+        else
+          statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
+
+        if (requestToRXInfo != "Saved")
+          requestToRXInfo = "Saved";
+      }
+      catch (Exception ex)
+      {
+        hasError = true;
+        var errorMessage = ex.Message;
+
+        Logger.ErrorFormat("{0} ErrorMessage: {1}. {2}", logPrefix, errorMessage, logPostfix);
+
+        statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
+        requestToRXInfo = errorMessage;
+
+        return Encoding.UTF8.GetBytes(
+          Integration.Resources.ResponseXMLTemplateFormat(sessionIdForResponse, dictionaryForResponse, 2, errorMessage));
+      }
+
+      if (!exchDoc.IsOnline.GetValueOrDefault())
+      {
+        // Обновляем exchDoc асинхронным обработчиком для не Online-запросов
+        var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
+        asyncHandler.DocId = exchDoc.Id;
+        asyncHandler.StatusRequestToRX = statusRequestToRX.ToString();
+        asyncHandler.RequestToRXInfo = requestToRXInfo;
+        asyncHandler.IncreaseNumberOfPackages = true;
+        asyncHandler.ExecuteAsync();
+
+        if (!hasError)
+        {
+          if (lastId > 0)
+          {
+            // вызвать получение остальной части пакета
+            SendRequestToIS(exchDoc, lastId, null);
+          }
+          else
+          {
+            // TODO: возможно убрать ?
+            Thread.Sleep(1000); // Пауза на 1 сек.
+
+            // запустить обработчик пакета
+            var asyncHandlerImportData = Integration.AsyncHandlers.ImportData.Create();
+            asyncHandlerImportData.ExchangeDocId = exchDoc.Id;
+            asyncHandlerImportData.ExecuteAsync();
+          }
+        }
+      }
+
+      Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);
+      return Encoding.UTF8.GetBytes(
+        Integration.Resources.ResponseXMLTemplateFormat(sessionIdForResponse, dictionaryForResponse, 1, "Saved"));
     }
+    
+    /// <summary>
+    /// Унифицированное формирование ответа об ошибке + логирование.
+    /// </summary>
+    private byte[] BuildErrorResponse(string logPrefix, string errorMessage, string sessionIdForResponse, string dictionaryForResponse)
+    {
+      Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);    
+      return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(sessionIdForResponse, dictionaryForResponse, 2, errorMessage));
+    }
+
+    /// <summary>
+    /// Обязательный узел: если нет — логируем и возвращаем готовый errorResponse.
+    /// </summary>
+    private XmlNode RequireNode(XmlNode parent, string xPath, string errorIfMissing, string logPrefix, string sessionIdForResponse, string dictionaryForResponse, out byte[] errorResponse)
+    {
+      errorResponse = null;
+
+      if (parent == null)
+      {
+        errorResponse = BuildErrorResponse(logPrefix, errorIfMissing, sessionIdForResponse, dictionaryForResponse);
+        return null;
+      }
+
+      var node = parent.SelectSingleNode(xPath);
+      if (node == null)
+      {
+        errorResponse = BuildErrorResponse(logPrefix, errorIfMissing, sessionIdForResponse, dictionaryForResponse);
+      }
+
+      return node;
+    }    
 
     [Public, Remote(IsPure = true)]
     public static long WaitForGettingDataFromIS(long exchDocId, int intervalMilliseconds, int maxAttempts)
