@@ -16,7 +16,7 @@ namespace litiko.Eskhata.Server
       base.StartBlock33(e);
 
       if (_obj.ApprovalRule?.Name == litiko.CollegiateAgencies.PublicConstants.Module.VotingApprovalRuleName)     
-        e.Block.Subject = _obj.Subject.Replace("Голосование:", "Окончено голосование:");
+        e.Block.Subject = _obj.Subject.Replace("Голосование:", "Завершено голосование:");
     }
 
     public override void CompleteAssignment31(Sungero.Docflow.IApprovalCheckingAssignment assignment, Sungero.Docflow.Server.ApprovalCheckingAssignmentArguments e)

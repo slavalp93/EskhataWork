@@ -91,4 +91,13 @@
   <data name="CoverDescription_RegionsOfRentallitiko" xml:space="preserve">
     <value>Справочник регионов объектов аренды.</value>
   </data>
+  <data name="CoverGroup_ContractStatementslitiko" xml:space="preserve">
+    <value>Акты выполненных работ</value>
+  </data>
+  <data name="CoverAction_ContractStatementListlitiko" xml:space="preserve">
+    <value>Реестр актов выполненных работ</value>
+  </data>
+  <data name="CoverDescription_ContractStatementListlitiko" xml:space="preserve">
+    <value>Содержит список всех актов выполненных работ</value>
+  </data>
 </root>

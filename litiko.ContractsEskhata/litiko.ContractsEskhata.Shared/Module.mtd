@@ -52,6 +52,30 @@
   ],
   "IconResourcesKeys": [],
   "Importance": "Medium",
+  "InitializationFunctions": [
+    {
+      "Name": "CreateOrUpdateRole",
+      "Parameters": [
+        {
+          "Name": "roleName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "roleDescription",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "roleGuid",
+          "ParameterType": "global::System.Guid",
+          "ParameterTypeFullName": "System.Guid"
+        }
+      ],
+      "ReturnType": "global::Sungero.CoreEntities.IRole",
+      "ReturnTypeFullName": "Sungero.CoreEntities.IRole, Sungero.Domain.Shared"
+    }
+  ],
   "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "InterfaceNamespace": "litiko.ContractsEskhata",
   "IsolatedAssemblyName": "litiko.ContractsEskhata.Isolated",
@@ -61,6 +85,15 @@
     "IsVisible"
   ],
   "PublicConstants": [
+    {
+      "Name": "ContractsManagers",
+      "ParentClasses": [
+        "Module",
+        "RoleGuid"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"A5114B68-0925-42FA-B5AB-F7411EF58CFC\")"
+    },
     {
       "Name": "LegalOpinion",
       "ParentClasses": [
@@ -78,7 +111,9 @@
     "RequiredToFillIsScanReceived",
     "RequiredToFillIsWithinBudget",
     "RequiredToFillIsOriginalReceived",
-    "RequiredToFillFields"
+    "RequiredToFillFields",
+    "RoleContractsManagersName",
+    "RoleContractsManagersDescription"
   ],
   "ServerAssemblyName": "litiko.ContractsEskhata.Server",
   "ServerNamespace": "litiko.ContractsEskhata.Server",

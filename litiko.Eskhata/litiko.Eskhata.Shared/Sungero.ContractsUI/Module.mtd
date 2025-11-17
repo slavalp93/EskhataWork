@@ -22,6 +22,13 @@
       },
       {
         "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "4396628c-e95a-488d-8cd9-91a9ebf4d46d",
+        "Name": "ContractStatementListlitiko",
+        "EntityTypeId": "5c156641-2ca6-4687-8c1a-2f056a947add",
+        "GroupId": "9f8dc361-f84c-4dd0-b35f-2f714833dcec"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
         "NameGuid": "498c4b32-dd8e-447b-8603-dcbddd37c107",
         "Name": "ContractsVsPaymentDoclitiko",
         "EntityTypeId": "6f5b0bf5-4044-4efe-a948-80141662ec84",
@@ -61,10 +68,82 @@
         "PreviousItemGuid": "498c4b32-dd8e-447b-8603-dcbddd37c107"
       }
     ],
-    "Groups": [],
+    "Groups": [
+      {
+        "NameGuid": "9617fde5-c46a-4c84-9f69-4ae3c6fa12db",
+        "Name": "Invoices",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconInvoices_9617fde5c46a4c849f694ae3c6fa12db.png",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "PreviousItemGuid"
+        ],
+        "PreviousItemGuid": "ed4c55bf-aeea-46b2-ac7f-b1000bcf2423",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02",
+        "Versions": []
+      },
+      {
+        "NameGuid": "3f655ea9-b12d-427d-97de-528d9966cab4",
+        "Name": "Search",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconSearch_3f655ea9b12d427d97de528d9966cab4.png",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "PreviousItemGuid"
+        ],
+        "PreviousItemGuid": "9617fde5-c46a-4c84-9f69-4ae3c6fa12db",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02",
+        "Versions": []
+      },
+      {
+        "NameGuid": "9f8dc361-f84c-4dd0-b35f-2f714833dcec",
+        "Name": "ContractStatementslitiko",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconContractStatementslitiko_9f8dc361f84c4dd0b35f2f714833dcec.png",
+        "PreviousItemGuid": "3f655ea9-b12d-427d-97de-528d9966cab4",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02"
+      },
+      {
+        "NameGuid": "aff028e8-2519-4dcb-a8ab-36cd0b777a17",
+        "Name": "PowersOfAttorney",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconPowersOfAttorney_aff028e825194dcba8ab36cd0b777a17.png",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "PreviousItemGuid"
+        ],
+        "PreviousItemGuid": "9f8dc361-f84c-4dd0-b35f-2f714833dcec",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02"
+      },
+      {
+        "NameGuid": "7ed9b820-fce5-4c81-ac89-8a5859ce989d",
+        "Name": "Group",
+        "BackgroundPosition": "Stretch",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "PreviousItemGuid"
+        ],
+        "PreviousItemGuid": "aff028e8-2519-4dcb-a8ab-36cd0b777a17",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02"
+      },
+      {
+        "NameGuid": "74a83232-2ab3-4786-b5d7-90dd4c6809b4",
+        "Name": "Control",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconControl_74a832322ab34786b5d790dd4c6809b4.png",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "PreviousItemGuid"
+        ],
+        "PreviousItemGuid": "7ed9b820-fce5-4c81-ac89-8a5859ce989d",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02",
+        "Versions": []
+      }
+    ],
     "IsAncestorMetadata": true,
     "Overridden": [
-      "Actions"
+      "Actions",
+      "Groups"
     ],
     "Tabs": [],
     "Versions": []

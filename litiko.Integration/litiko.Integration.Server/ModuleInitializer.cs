@@ -125,7 +125,17 @@ namespace litiko.Integration.Server
         IntegrationMethods.AccessRights.Save();
         ExchangeQueues.AccessRights.Grant(roleCounterpartiesResponsible, DefaultAccessRightsTypes.FullAccess);
         ExchangeQueues.AccessRights.Save();
-      }      
+      }
+
+      // Менеджеры модуля "Договоры"
+      var roleContractsManagers = Roles.GetAll().FirstOrDefault(x => x.Sid == ContractsEskhata.PublicConstants.Module.RoleGuid.ContractsManagers);
+      if (roleContractsManagers != null)
+      {
+        ExchangeDocuments.AccessRights.Grant(roleContractsManagers, DefaultAccessRightsTypes.Create);
+        ExchangeDocuments.AccessRights.Save();      
+        ExchangeQueues.AccessRights.Grant(roleContractsManagers, DefaultAccessRightsTypes.Create);
+        ExchangeQueues.AccessRights.Save();        
+      }
     }
     
     /// <summary>
