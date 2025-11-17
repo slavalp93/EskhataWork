@@ -95,6 +95,14 @@
       },
       {
         "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "5adf0c1c-2e1b-4783-8420-ec8e5d50bc17",
+        "Name": "ShowAddressesTypeslitiko",
+        "EntityTypeId": "d779302f-b699-498e-b301-4f2c08febe9f",
+        "GroupId": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
+        "PreviousItemGuid": "6c7f764f-92a5-4ccf-a74c-71b87a291765"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
         "NameGuid": "6c7f764f-92a5-4ccf-a74c-71b87a291765",
         "Name": "CurrencyRateslitiko",
         "EntityTypeId": "7948764c-2f80-4639-a157-5c22023fcf2b",

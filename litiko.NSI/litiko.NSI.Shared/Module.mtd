@@ -104,6 +104,10 @@
     {
       "ItemId": "d1374008-9e6e-4f41-82a8-a9852f23ace6",
       "PreviousItemId": "7948764c-2f80-4639-a157-5c22023fcf2b"
+    },
+    {
+      "ItemId": "d779302f-b699-498e-b301-4f2c08febe9f",
+      "PreviousItemId": "d1374008-9e6e-4f41-82a8-a9852f23ace6"
     }
   ],
   "HandledEvents": [

@@ -58,70 +58,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CoverAction_ShowOKOPFlitiko" xml:space="preserve">
-    <value>OKOPF</value>
+  <data name="DisplayName" xml:space="preserve">
+    <value>Address type</value>
   </data>
-  <data name="CoverDescription_ShowOKOPFlitiko" xml:space="preserve">
-    <value>All-Russian classifier of organizational and legal forms</value>
-  </data>
-  <data name="CoverAction_ShowOKFSlitiko" xml:space="preserve">
-    <value>OKFS</value>
-  </data>
-  <data name="CoverDescription_ShowOKFSlitiko" xml:space="preserve">
-    <value>All-Russian classifier of forms of ownership</value>
-  </data>
-  <data name="CoverAction_ShowOKONHlitiko" xml:space="preserve">
-    <value>OKONH</value>
-  </data>
-  <data name="CoverDescription_ShowOKONHlitiko" xml:space="preserve">
-    <value>All-Russian classifier of sectors of the national economy</value>
-  </data>
-  <data name="CoverAction_ShowEnvironmentalRisklitiko" xml:space="preserve">
-    <value>Environmental risks</value>
-  </data>
-  <data name="CoverDescription_ShowEnvironmentalRisklitiko" xml:space="preserve">
-    <value>Stores information about environmental risks.</value>
-  </data>
-  <data name="CoverAction_ShowOKVEDlitiko" xml:space="preserve">
-    <value>OKVED</value>
-  </data>
-  <data name="CoverDescription_ShowOKVEDlitiko" xml:space="preserve">
-    <value>All-Russian Classifier of Types of Economic Activities</value>
-  </data>
-  <data name="CoverAction_ShowEnterpriseTypelitiko" xml:space="preserve">
-    <value>Types of enterprises</value>
-  </data>
-  <data name="CoverDescription_ShowEnterpriseTypelitiko" xml:space="preserve">
-    <value>Stores information about types of enterprises</value>
-  </data>
-  <data name="CoverAction_ShowFamilyStatuslitiko" xml:space="preserve">
-    <value>Family statuses</value>
-  </data>
-  <data name="CoverDescription_ShowFamilyStatuslitiko" xml:space="preserve">
-    <value>Stores information about family statuses</value>
-  </data>
-  <data name="CoverAction_ShowIDTypelitiko" xml:space="preserve">
-    <value>ID types</value>
-  </data>
-  <data name="CoverDescription_ShowIDTypelitiko" xml:space="preserve">
-    <value>Stores information about identyty documents.</value>
-  </data>
-  <data name="CoverAction_CurrencyRateslitiko" xml:space="preserve">
-    <value>Currency rates</value>
-  </data>
-  <data name="CoverDescription_CurrencyRateslitiko" xml:space="preserve">
-    <value>Exchange rates of foreign currencies to somoni of the Republic of Tajikistan.</value>
-  </data>
-  <data name="CoverAction_ShowAddressTypeslitiko" xml:space="preserve">
+  <data name="AccusativeDisplayName" xml:space="preserve">
     <value>Addresses types</value>
   </data>
-  <data name="CoverDescription_ShowAddressTypeslitiko" xml:space="preserve">
+  <data name="CollectionDisplayName" xml:space="preserve">
+    <value>Address type</value>
+  </data>
+  <data name="Resource_93005020363f492baa43bb81f6d066a8" xml:space="preserve">
     <value />
   </data>
-  <data name="CoverAction_ShowAddressesTypeslitiko" xml:space="preserve">
-    <value>Addresses types</value>
+  <data name="Control_93005020363f492baa43bb81f6d066a8_EmptyText" xml:space="preserve">
+    <value />
   </data>
-  <data name="CoverDescription_ShowAddressesTypeslitiko" xml:space="preserve">
-    <value>Stores information about addresses types.</value>
+  <data name="ControlGroup_565cfda08b8641dabf66a3eb7dfbc4ab" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_c377dfc16acb497da1f7fffefb15d359" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_c377dfc16acb497da1f7fffefb15d359_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_5e3f88842aaa4fc4a6f2a311984e57cb" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_555274246b2c49db8ff397e52b6d87fc" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_555274246b2c49db8ff397e52b6d87fc_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_46b69fcc2f9640d69a222365e12a60f4" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_46b69fcc2f9640d69a222365e12a60f4_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Resource_4b280b07249943f78fad03a69b091890" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Control_4b280b07249943f78fad03a69b091890_EmptyText" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_Code" xml:space="preserve">
+    <value>Short name</value>
   </data>
 </root>
