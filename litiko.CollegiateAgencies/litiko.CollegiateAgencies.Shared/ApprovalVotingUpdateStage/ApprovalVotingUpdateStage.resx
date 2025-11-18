@@ -64,4 +64,7 @@
   <data name="MeetingIsLocked" xml:space="preserve">
     <value>The meeting ID:{0} is locked.</value>
   </data>
+  <data name="DesigionsNotFound" xml:space="preserve">
+    <value>Desigions not found</value>
+  </data>
 </root>

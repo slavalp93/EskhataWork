@@ -115,4 +115,7 @@
   <data name="ControlGroup_25dd4cc3349f4d3b8245f70d485f6004" xml:space="preserve">
     <value>Voting</value>
   </data>
+  <data name="Enum_CustomStageTypelitiko_Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
 </root>

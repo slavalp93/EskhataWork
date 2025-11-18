@@ -20,34 +20,42 @@ namespace litiko.Integration.Client
       string errorMessage = string.Empty;
       
       #region Предпроверки
-      var company = litiko.Eskhata.Companies.As(entity);
-      var bank = litiko.Eskhata.Banks.As(entity);
-      var person = litiko.Eskhata.People.As(entity);
-      var contract = litiko.Eskhata.Contracts.As(entity);
-      var supAgreement = litiko.Eskhata.SupAgreements.As(entity);
+      var company = Eskhata.Companies.As(entity);
+      var bank = Eskhata.Banks.As(entity);
+      var person = Eskhata.People.As(entity);
+      var contract = Eskhata.Contracts.As(entity);
+      var supAgreement = Eskhata.SupAgreements.As(entity);
       
-      if ((company != null || person != null) && string.IsNullOrEmpty(litiko.Eskhata.Counterparties.As(entity).TIN))
-        return litiko.Eskhata.Companies.Resources.ErrorNeedFillTin;
+      if ((company != null || person != null) && string.IsNullOrEmpty(Eskhata.Counterparties.As(entity).TIN))
+        return Eskhata.Companies.Resources.ErrorNeedFillTin;
             
       if (bank != null && string.IsNullOrEmpty(bank.BIC))      
-        return litiko.Eskhata.Banks.Resources.ErrorNeedFillBIC;
+        return Eskhata.Banks.Resources.ErrorNeedFillBIC;
             
-      // TODO вынести в функцию - получить метод интеграции по типу объекта
-      var integrationMethodName = string.Empty;
-      if (company != null)
-        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_GET_COMPANY;
-      else if (bank != null)
-        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_GET_BANK;
-      else if (person != null)
-        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_GET_PERSON;
-      else if (contract != null)
-        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_SET_CONTRACT;
-      else if (supAgreement != null)
-        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT;
-              
-      var integrationMethod = Integration.IntegrationMethods.GetAll().Where(x => x.Name == integrationMethodName).FirstOrDefault();
+      if (entity.State.IsInserted)
+      {        
+        if (company != null && string.IsNullOrEmpty(company.Name))
+          company.Name = Constants.Module.UndefinedString;
+        
+        if (bank != null && string.IsNullOrEmpty(bank.Name))
+          bank.Name = Constants.Module.UndefinedString;
+        
+        if (person != null)
+        {
+          if (string.IsNullOrEmpty(person.LastName))
+            person.LastName = Constants.Module.UndefinedString;
+          
+          if (string.IsNullOrEmpty(person.FirstName))
+            person.FirstName = Constants.Module.UndefinedString;          
+        }          
+        
+        entity.Save();
+      }     
+      
+      var integrationMethod = Functions.Module.Remote.GetIntegrationMethod(entity);
       if (integrationMethod == null)        
-        return litiko.Integration.Resources.IntegrationMethodNotFoundFormat(integrationMethodName);
+        return litiko.Integration.Resources.IntegrationMethodNotFound;
+                  
       #endregion
             
       var exchDoc = Integration.PublicFunctions.Module.Remote.CreateExchangeDocument();

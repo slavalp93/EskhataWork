@@ -127,15 +127,37 @@ namespace litiko.Eskhata.Client
         var result = dialog.Show();
         if (result == btnOk)
         {
-          List<litiko.CollegiateAgencies.IProjectsolution> projectSolutions = psValue.Value.ToList();
-          var task = Functions.Meeting.Remote.CreateTaskForVoting(_obj, projectSolutions);
+          var selected = psValue.Value.ToList();
+          var selectedIds = selected.Select(s => s.Id).ToList();        
           
-          if (task != null)
-            task.ShowModal();
-          else
+          var blockedIds = Eskhata.ApprovalTasks.GetAll()
+            .Where(t => t.Status == Eskhata.ApprovalTask.Status.InProcess)
+            .SelectMany(t => t.Desigionslitiko
+              .Where(d => d.Desigion != null && selectedIds.Contains(d.Desigion.Id))
+              .Select(d => d.Desigion.Id))
+            .Distinct()
+            .ToList();        
+        
+          var blocked = selected.Where(ps => blockedIds.Contains(ps.Id)).ToList();
+          var allowed = selected.Where(ps => !blockedIds.Contains(ps.Id)).ToList();
+        
+          if (blocked.Any())
           {
-            Dialogs.ShowMessage(litiko.Eskhata.Meetings.Resources.VotingTaskIsNotCreated);
-            return;          
+            var list = string.Join(Environment.NewLine, blocked.Select(p => $"• {p.Name}"));
+            Dialogs.ShowMessage($"Следующие решения не будут отправлены на голосование, т.к. по ним уже есть активные задачи:{Environment.NewLine}{list}");                            
+          }
+          
+          if (allowed.Any())
+          {
+            var task = Functions.Meeting.Remote.CreateTaskForVoting(_obj, allowed);
+            
+            if (task != null)
+              task.ShowModal();
+            else
+            {
+              Dialogs.ShowMessage(litiko.Eskhata.Meetings.Resources.VotingTaskIsNotCreated);
+              return;          
+            }
           }
         }
       }

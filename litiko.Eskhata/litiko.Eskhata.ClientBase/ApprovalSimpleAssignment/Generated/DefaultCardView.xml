@@ -30,7 +30,7 @@
             <property name="Name">ApprovalSimpleAssignment_Votinglitiko_Number</property>
             <property name="FieldName">Number</property>
             <property name="VisibleIndex">0</property>
-            <property name="Width">26</property>
+            <property name="Width">28</property>
             <property name="ActualWidth">3*</property>
           </property>
           <property name="Item2" isnull="true" iskey="true">
@@ -38,7 +38,7 @@
             <property name="Name">ApprovalSimpleAssignment_Votinglitiko_Decision</property>
             <property name="FieldName">Decision</property>
             <property name="VisibleIndex">1</property>
-            <property name="Width">544</property>
+            <property name="Width">577</property>
             <property name="ActualWidth">62*</property>
           </property>
           <property name="Item3" isnull="true" iskey="true">
@@ -46,15 +46,15 @@
             <property name="Name">ApprovalSimpleAssignment_Votinglitiko_Yes</property>
             <property name="FieldName">Yes</property>
             <property name="VisibleIndex">2</property>
-            <property name="Width">35</property>
-            <property name="ActualWidth">4*</property>
+            <property name="Width">47</property>
+            <property name="ActualWidth">5*</property>
           </property>
           <property name="Item4" isnull="true" iskey="true">
             <property name="Visible">true</property>
             <property name="Name">ApprovalSimpleAssignment_Votinglitiko_No</property>
             <property name="FieldName">No</property>
             <property name="VisibleIndex">3</property>
-            <property name="Width">61</property>
+            <property name="Width">65</property>
             <property name="ActualWidth">7*</property>
           </property>
           <property name="Item5" isnull="true" iskey="true">
@@ -62,7 +62,7 @@
             <property name="Name">ApprovalSimpleAssignment_Votinglitiko_Abstained</property>
             <property name="FieldName">Abstained</property>
             <property name="VisibleIndex">4</property>
-            <property name="Width">97</property>
+            <property name="Width">102</property>
             <property name="ActualWidth">11*</property>
           </property>
           <property name="Item6" isnull="true" iskey="true">

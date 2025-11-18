@@ -15,7 +15,7 @@ namespace litiko.Eskhata.Client
       // "Ответственные за синхронизацию с учетными системами"
       // "Ответственные за контрагентов"
       // "Администраторы"
-      var canExecute = Users.Current.IncludedIn(Integration.PublicConstants.Module.SynchronizationResponsibleRoleGuid) || Users.Current.IncludedIn(Roles.Administrators) || Users.Current.IncludedIn(Sungero.Docflow.PublicConstants.Module.RoleGuid.CounterpartiesResponsibleRole);
+      var canExecute = Users.Current.IncludedIn(Integration.PublicConstants.Module.RoleGuid.SynchronizationResponsibleRoleGuid) || Users.Current.IncludedIn(Roles.Administrators) || Users.Current.IncludedIn(Sungero.Docflow.PublicConstants.Module.RoleGuid.CounterpartiesResponsibleRole);
       if (!canExecute)
       {
         e.AddError(Integration.Resources.AvailableActionMessage);

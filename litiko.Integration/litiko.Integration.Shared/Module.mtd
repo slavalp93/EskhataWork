@@ -323,9 +323,32 @@
       "GenerateHandler": true,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T19:00:00"
+    },
+    {
+      "NameGuid": "6a77f63b-d52d-4448-a913-04b9442352e0",
+      "Name": "GetRegions",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T04:00:00"
+    },
+    {
+      "NameGuid": "afd78479-74b5-45bc-9c02-03d19c1004c8",
+      "Name": "GetCities",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T04:15:00"
     }
   ],
   "PublicConstants": [
+    {
+      "Name": "IntegrationUsers",
+      "ParentClasses": [
+        "Module",
+        "RoleGuid"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"9069126A-1BA0-40FC-9AB9-7098F926ECF3\")"
+    },
     {
       "Name": "R_DR_GET_BANK",
       "ParentClasses": [
@@ -343,6 +366,15 @@
       ],
       "TypeName": "System.String",
       "Value": "\"R_DR_GET_BUSINESSUNITS\""
+    },
+    {
+      "Name": "R_DR_GET_CITIES",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_CITIES\""
     },
     {
       "Name": "R_DR_GET_COMPANY",
@@ -489,6 +521,15 @@
       "Value": "\"R_DR_GET_PERSON\""
     },
     {
+      "Name": "R_DR_GET_REGIONS",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_REGIONS\""
+    },
+    {
       "Name": "R_DR_GET_TAX_REGIONS",
       "ParentClasses": [
         "Module",
@@ -536,7 +577,8 @@
     {
       "Name": "SynchronizationResponsibleRoleGuid",
       "ParentClasses": [
-        "Module"
+        "Module",
+        "RoleGuid"
       ],
       "TypeName": "System.Guid",
       "Value": "new System.Guid(\"6F98BA36-3B7F-4767-8369-88A65578DC5A\")"
@@ -687,7 +729,9 @@
     "DataUpdatedSuccessfully",
     "IntegrationMethodNotFound",
     "VersionRequestToRX_",
-    "RequestXMLTemplateForCurrencyRates"
+    "RequestXMLTemplateForCurrencyRates",
+    "RoleIntegrationUsers",
+    "DescriptionRoleIntegrationUsers"
   ],
   "ServerAssemblyName": "litiko.Integration.Server",
   "ServerNamespace": "litiko.Integration.Server",
@@ -712,7 +756,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.142",
+  "Version": "0.0.1.143",
   "Widgets": [],
   "Versions": [
     {

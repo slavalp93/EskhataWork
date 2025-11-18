@@ -106,4 +106,13 @@
   <data name="CoverDescription_ImportCounterpartieslitiko" xml:space="preserve">
     <value>Создание контрагентов из АБС</value>
   </data>
+  <data name="CoverGroup_ContractStatementslitiko" xml:space="preserve">
+    <value>Contract Statements</value>
+  </data>
+  <data name="CoverAction_ContractStatementListlitiko" xml:space="preserve">
+    <value>Contract Statements</value>
+  </data>
+  <data name="CoverDescription_ContractStatementListlitiko" xml:space="preserve">
+    <value>Contains a list of all Contract Statements</value>
+  </data>
 </root>

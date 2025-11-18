@@ -59,6 +59,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ErrorVoteAllDecisions" xml:space="preserve">
-    <value>Необходимо проголосовать по всем пунктам.</value>
+    <value>Необходимо проголосовать: За, Против или Воздержался.</value>
   </data>
 </root>

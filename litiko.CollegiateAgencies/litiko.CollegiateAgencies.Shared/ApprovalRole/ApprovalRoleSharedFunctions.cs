@@ -64,7 +64,9 @@ namespace litiko.CollegiateAgencies.Shared
       if (_obj.Type == litiko.CollegiateAgencies.ApprovalRole.Type.MeetingPresentKOU)
       {
         query = query.Where(k => k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.Agenda.ToString() ||
-                            k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.Minutes.ToString())
+                            k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.Minutes.ToString() ||
+                            k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.ProjectSolution.ToString()
+                           )
           .ToList();        
       }
       #endregion      
@@ -73,7 +75,9 @@ namespace litiko.CollegiateAgencies.Shared
       if (_obj.Type == litiko.CollegiateAgencies.ApprovalRole.Type.MeetingPresentDOP)
       {
         query = query.Where(k => k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.Agenda.ToString() ||
-                            k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.Minutes.ToString())
+                            k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.Minutes.ToString() ||
+                            k.DocumentType.DocumentTypeGuid == PublicConstants.Module.DocumentTypeGuids.ProjectSolution.ToString()
+                           )
           .ToList();        
       }
       #endregion 

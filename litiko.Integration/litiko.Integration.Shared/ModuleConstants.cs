@@ -4,13 +4,7 @@ using Sungero.Core;
 namespace litiko.Integration.Constants
 {
   public static class Module
-  {
-    /// <summary>
-    /// GUID для роли "Ответственные за синхронизацию с учетными системами".
-    /// </summary>
-    [Public]
-    public static readonly Guid SynchronizationResponsibleRoleGuid = Guid.Parse("6F98BA36-3B7F-4767-8369-88A65578DC5A");
-    
+  {      
     /// <summary>
     /// Протоколы (методы) интеграции
     /// </summary>
@@ -107,6 +101,14 @@ namespace litiko.Integration.Constants
       /// <summary> Дополнительное соглашение, Счет, Акт </summary>
       [Sungero.Core.Public]
       public const string R_DR_SET_PAYMENT_DOCUMENT = "R_DR_SET_PAYMENT_DOCUMENT";      
+      
+      /// <summary> Регионы</summary>
+      [Sungero.Core.Public]
+      public const string R_DR_GET_REGIONS = "R_DR_GET_REGIONS";
+      
+      /// <summary> Населенные пункты</summary>
+      [Sungero.Core.Public]
+      public const string R_DR_GET_CITIES = "R_DR_GET_CITIES";      
     }
 
     /// <summary>
@@ -118,5 +120,25 @@ namespace litiko.Integration.Constants
       public const string SendDocumentToIS = "Интеграция. Экспорт документа в АБС";
       
     }
+    
+    public static class RoleGuid
+    {
+      /// <summary> 
+      /// Пользователи модуля "Интеграция" 
+      /// </summary>
+      [Public]
+      public static readonly Guid IntegrationUsers = Guid.Parse("9069126A-1BA0-40FC-9AB9-7098F926ECF3");
+      
+      /// <summary>
+      /// Ответственные за синхронизацию с учетными системами
+      /// </summary>
+      [Public]
+      public static readonly Guid SynchronizationResponsibleRoleGuid = Guid.Parse("6F98BA36-3B7F-4767-8369-88A65578DC5A");      
+    }
+    
+    /// <summary>
+    /// Не определено
+    /// </summary>
+    public const string UndefinedString = "Не определено";
   }
 }

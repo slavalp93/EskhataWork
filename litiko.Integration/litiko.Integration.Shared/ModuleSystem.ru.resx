@@ -229,4 +229,16 @@
   <data name="JobDescription_d5a413e4895a48369d38d7fdafaed77c" xml:space="preserve">
     <value>Отбираются действующие договора с признаком «Требуется обновить в АБС» и вызывается протокол интграции R_DR_SET_CONTRACT для каждого подходящего документа.</value>
   </data>
+  <data name="JobDisplayName_6a77f63bd52d4448a91304b9442352e0" xml:space="preserve">
+    <value>Интеграция. Регионы</value>
+  </data>
+  <data name="JobDescription_6a77f63bd52d4448a91304b9442352e0" xml:space="preserve">
+    <value>Интеграция. Регионы</value>
+  </data>
+  <data name="JobDisplayName_afd7847974b545bc9c0203d19c1004c8" xml:space="preserve">
+    <value>Интеграция. Населенные пункты</value>
+  </data>
+  <data name="JobDescription_afd7847974b545bc9c0203d19c1004c8" xml:space="preserve">
+    <value>Интеграция. Населенные пункты</value>
+  </data>
 </root>

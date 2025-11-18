@@ -20,6 +20,13 @@ namespace litiko.ContractsEskhata.Constants
 
       /// <summary> Акт выполненных работ </summary>     
       public static readonly Guid ContractStatement = Guid.Parse("f2f5774d-5ca3-4725-b31d-ac618f6b8850");      
+    }
+
+    public static class RoleGuid
+    {
+      /// <summary> Менеджеры модуля "Договоры" </summary>
+      [Sungero.Core.Public]
+      public static readonly Guid ContractsManagers = Guid.Parse("A5114B68-0925-42FA-B5AB-F7411EF58CFC");      
     }    
   }
 }

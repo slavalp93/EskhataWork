@@ -64,4 +64,7 @@
   <data name="MeetingIsLocked" xml:space="preserve">
     <value>Совещание ИД:{0} заблокировано.</value>
   </data>
+  <data name="DesigionsNotFound" xml:space="preserve">
+    <value>Решения не найдены в задаче.</value>
+  </data>
 </root>

@@ -222,26 +222,20 @@ namespace litiko.Eskhata.Server
       var agenda = Agendas.GetAll().Where(d => Equals(d.Meeting, _obj)).FirstOrDefault();
       if (agenda == null)
         return null;            
-      
-      //var votingApprovalRule = Sungero.Docflow.ApprovalRules.GetAll().Where(r => r.Name == litiko.CollegiateAgencies.PublicConstants.Module.VotingApprovalRuleName).FirstOrDefault();
+            
       var availableApprovalRules = Sungero.Docflow.PublicFunctions.OfficialDocument.Remote.GetApprovalRules(agenda);
       var votingApprovalRule = availableApprovalRules.Where(r => r.Name == litiko.CollegiateAgencies.PublicConstants.Module.VotingApprovalRuleName).FirstOrDefault();
       if (votingApprovalRule == null)
         return null;
       
-      var task = Sungero.Docflow.ApprovalTasks.Create();
+      var task = Eskhata.ApprovalTasks.Create();
       task.DocumentGroup.All.Add(agenda);            
       foreach (var element in task.AddendaGroup.All)
-      {        
-        if (!projectSolutions.Select(x => x.Id).Contains(element.Id))
-          task.AddendaGroup.All.Remove(element);              
-      }      
+        task.AddendaGroup.All.Remove(element);                  
+      
       foreach (var document in projectSolutions)
-      {
-        if (!task.AddendaGroup.All.Contains(document))
-          task.AddendaGroup.All.Add(document);
-      }
-
+        task.Desigionslitiko.AddNew().Desigion = document;
+      
       if (!task.OtherGroup.All.Contains(_obj))
         task.OtherGroup.All.Add(_obj);
       

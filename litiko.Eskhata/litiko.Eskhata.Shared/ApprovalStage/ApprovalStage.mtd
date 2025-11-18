@@ -175,7 +175,7 @@
       "NameGuid": "5b792013-2adb-4c04-982c-798e8af87664",
       "Name": "AllowSendToRework",
       "HandledEvents": [
-        "ChangedShared"
+        "ValueInputClient"
       ],
       "IsAncestorMetadata": true,
       "Overridden": [
@@ -255,6 +255,11 @@
           "NameGuid": "834d161f-afc6-4a3c-8ba3-bef644d247e7",
           "Name": "AccountantAppr",
           "Code": "AccountantAppr"
+        },
+        {
+          "NameGuid": "2c321139-ebf6-4259-8ab3-f818e959a179",
+          "Name": "Pause",
+          "Code": "Pause"
         }
       ],
       "HandledEvents": [

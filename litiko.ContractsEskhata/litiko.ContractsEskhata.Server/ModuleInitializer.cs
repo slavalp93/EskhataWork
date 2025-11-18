@@ -14,6 +14,8 @@ namespace litiko.ContractsEskhata.Server
     {
       CreateApprovalRoles();
       CreateDocumentKinds();
+      
+      CreateOrUpdateRole(Resources.RoleContractsManagersName, Resources.RoleContractsManagersDescription, Constants.Module.RoleGuid.ContractsManagers);                   
     }
     
     #region Роли согласования
@@ -95,7 +97,60 @@ namespace litiko.ContractsEskhata.Server
       #endregion                 
       
     }    
-    #endregion
+    #endregion    
 
+    /// <summary>
+    /// Создать или обновить роль.
+    /// </summary>
+    /// <param name="roleName">Название роли.</param>
+    /// <param name="roleDescription">Описание роли.</param>
+    /// <param name="roleGuid">Guid роли.</param>
+    /// <returns>Новая роль.</returns>
+    [Public]
+    public static IRole CreateOrUpdateRole(string roleName, string roleDescription, Guid roleGuid)
+    {      
+      var role = Roles.GetAll(r => r.Sid == roleGuid).FirstOrDefault();            
+      if (role == null)
+        role = Roles.GetAll(r => r.Name == roleName).FirstOrDefault();
+      
+      if (role == null)
+      {
+        InitializationLogger.DebugFormat("Init: Create Role {0}", roleName);
+        role = Roles.Create();
+        role.Name = roleName;
+        role.Description = roleDescription;
+        role.Sid = roleGuid;
+        role.IsSystem = true;
+      }
+      else
+      {
+        if (role.Sid != roleGuid)
+        {
+          InitializationLogger.DebugFormat("Role '{0}'(Sid = {1}) update Sid '{2}'", role.Name, role.Sid, roleDescription);
+          role.Sid = roleGuid;
+        }
+        if (role.Name != roleName)
+        {
+          InitializationLogger.DebugFormat("Role '{0}'(Sid = {1}) renamed as '{2}'", role.Name, role.Sid, roleName);
+          role.Name = roleName;          
+        }
+        if (role.Description != roleDescription)
+        {
+          InitializationLogger.DebugFormat("Role '{0}'(Sid = {1}) update Description '{2}'", role.Name, role.Sid, roleDescription);
+          role.Description = roleDescription;          
+        }
+        if (!role.IsSystem.GetValueOrDefault())
+        {
+          InitializationLogger.DebugFormat("Role '{0}'(Sid = {1}) update IsSystem '{2}'", role.Name, role.Sid, roleDescription);
+          role.IsSystem = true;
+        }
+      }
+      
+      if (role.State.IsInserted || role.State.IsChanged)
+        role.Save();
+        
+      return role;
+    }      
+    
   }
 }

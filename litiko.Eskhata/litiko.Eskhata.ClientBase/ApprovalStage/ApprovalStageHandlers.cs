@@ -10,6 +10,14 @@ namespace litiko.Eskhata
   partial class ApprovalStageClientHandlers
   {
 
+    public override void AllowSendToReworkValueInput(Sungero.Presentation.BooleanValueInputEventArgs e)
+    {
+      base.AllowSendToReworkValueInput(e);
+      
+      if (e.NewValue.GetValueOrDefault() && _obj.CustomStageTypelitiko == ApprovalStage.CustomStageTypelitiko.Pause)
+        _obj.CustomStageTypelitiko = null;
+    }
+
     public virtual IEnumerable<Enumeration> CustomStageTypelitikoFiltering(IEnumerable<Enumeration> query)
     {     
       #region Согласование
@@ -20,7 +28,7 @@ namespace litiko.Eskhata
           CustomStageTypelitiko.BudgetCheck,
           CustomStageTypelitiko.BudgetCheckCont,
           CustomStageTypelitiko.AccountantAppr
-        };
+        };        
         
         return query.Where(q => allowedValues.Contains(q));
       }      
@@ -35,12 +43,13 @@ namespace litiko.Eskhata
           CustomStageTypelitiko.IncludeInMeet,
           CustomStageTypelitiko.ControlIRD,
           CustomStageTypelitiko.ScanReceivedCon,
-          CustomStageTypelitiko.SubmitIssueKou
-        };
-        
-        if (_obj.AllowSendToRework.GetValueOrDefault())
-          allowedValues.Remove(CustomStageTypelitiko.Voting);
+          CustomStageTypelitiko.SubmitIssueKou,
+          CustomStageTypelitiko.Pause
+        };        
 
+        if (_obj.AllowSendToRework.GetValueOrDefault())
+          allowedValues.Remove(CustomStageTypelitiko.Pause);
+        
         return query.Where(q => allowedValues.Contains(q));
       }      
       #endregion

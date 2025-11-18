@@ -148,4 +148,10 @@
   <data name="Property_ExchangeDocIdlitiko" xml:space="preserve">
     <value>ИД документа обмена</value>
   </data>
+  <data name="Property_Desigionslitiko" xml:space="preserve">
+    <value>Решения</value>
+  </data>
+  <data name="Property_MainApprovalTasklitiko" xml:space="preserve">
+    <value>Главная задача согласования</value>
+  </data>
 </root>

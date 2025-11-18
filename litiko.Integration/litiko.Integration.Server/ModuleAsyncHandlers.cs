@@ -318,6 +318,12 @@ namespace litiko.Integration.Server
             case Constants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT:
               errorList = Functions.Module.R_DR_SET_CONTRACT(dataElements, null, null);
               break;              
+            case Constants.Module.IntegrationMethods.R_DR_GET_REGIONS:
+              errorList = Functions.Module.R_DR_GET_REGIONS(dataElements);
+              break;
+            case Constants.Module.IntegrationMethods.R_DR_GET_CITIES:
+              errorList = Functions.Module.R_DR_GET_CITIES(dataElements);
+              break;              
           }
           
           if (errorList.Any())
@@ -355,8 +361,8 @@ namespace litiko.Integration.Server
       if (errorList.Any())
       {
         // Отправка уведомления роли "Ответственные за синхронизацию с учетными системами"
-        Logger.Debug("Preparing to send notice about errors");
-        var synchronizationResponsibleRole = Roles.GetAll().Where(r => r.Sid == litiko.Integration.Constants.Module.SynchronizationResponsibleRoleGuid).FirstOrDefault();
+        Logger.Debug("Preparing to send notice about errors");        
+        var synchronizationResponsibleRole = Roles.GetAll().Where(r => r.Sid == litiko.Integration.Constants.Module.RoleGuid.SynchronizationResponsibleRoleGuid).FirstOrDefault();
         if (synchronizationResponsibleRole == null)
           Logger.ErrorFormat("{0} SynchronizationResponsibleRole not found. Notice was not sent! {1}", logPrefix, logPostfix);
         else

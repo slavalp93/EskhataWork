@@ -209,157 +209,287 @@ namespace litiko.Integration.Server
     /// <returns>xml с информацией о результате сохранения в RX</returns>
     [Public(WebApiRequestType = RequestType.Post)]
     public byte[] ProcessResponseFromIS(byte[] xmlData)
-    {
+    {                            
+      var logPrefix = "Integration. ProcessResponseFromIS.";
+      Logger.DebugFormat("{0} Start.", logPrefix);
+
+      const string invalidParamValue = "???";
+
+      string sessionIdStr = string.Empty;
+      long sessionId;
+      string dictionary = string.Empty;
+      string lastIdStr = string.Empty;
+      long lastId;
+
+      string sessionIdForResponse = invalidParamValue;
+      string dictionaryForResponse = invalidParamValue;
+
+      bool hasError = false;
+      
+      #region Предпроверки
+      
+      // Пустое тело запроса
+      if (xmlData == null || xmlData.Length == 0)
+      {
+        return BuildErrorResponse(logPrefix, "Request body is empty", invalidParamValue, invalidParamValue);
+      }
+
+      XmlDocument xmlDoc = new XmlDocument();
+      XmlElement root;
+
       using (var xmlStream = new MemoryStream(xmlData))
       {
-        var logPrefix = "Integration. ProcessResponseFromIS.";
-        Logger.DebugFormat("{0} Start.", logPrefix);
-        
-        var session_id_str = string.Empty;
-        long session_id;
-        var dictionary = string.Empty;
-        var lastId_str = string.Empty;
-        long lastId;
-        var invalidParamValue = "???";
-        bool increaseNumberOfPackages = false;
-        string errorMessage = string.Empty;
-        
-        XmlDocument xmlDoc = new XmlDocument();
-        xmlDoc.Load(xmlStream);
-        XmlElement root = xmlDoc.DocumentElement;
-        
-        #region Предпроверки
-        XmlNode session_id_Node = root.SelectSingleNode("//head/session_id");
-        if (session_id_Node == null)
-        {
-          errorMessage = "session_id node is absent";
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(invalidParamValue, invalidParamValue, 2, errorMessage));
-        }
-        else
-          session_id_str = session_id_Node.InnerText;
-
-        if (!long.TryParse(session_id_str, out session_id))
-        {
-          errorMessage = "Invalid value in session_id";
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(invalidParamValue, invalidParamValue, 2, errorMessage));
-        }
-        var logPostfix = string.Format("ExchangeDocId = '{0}'", session_id);
-        
-        XmlNode dictionary_Node = root.SelectSingleNode("//request/dictionary");
-        if (dictionary_Node == null)
-        {
-          errorMessage = "dictionary node is absent";
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, invalidParamValue, 2, errorMessage));
-        }
-        else
-          dictionary = dictionary_Node.InnerText;
-        
-        if (string.IsNullOrEmpty(dictionary) || string.IsNullOrWhiteSpace(dictionary))
-        {
-          errorMessage = "Invalid value in dictionary";
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, invalidParamValue, 2, errorMessage));
-        }
-        
-        XmlNode lastId_Node = root.SelectSingleNode("//request/lastId");
-        if (lastId_Node == null)
-        {
-          errorMessage = "lastId node is absent";
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
-        }
-        else
-          lastId_str = lastId_Node.InnerText;
-        
-        if (!long.TryParse(lastId_str, out lastId))
-        {
-          errorMessage = "Invalid value in lastId";
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
-        }
-        
-        XmlNode data_Node = root.SelectSingleNode("//request/Data");
-        if (data_Node == null)
-        {
-          errorMessage = "Data node is absent";
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
-        }
-        
-        var exchDoc = ExchangeDocuments.GetAll().Where(d => d.Id == session_id).FirstOrDefault();
-        if (exchDoc == null)
-        {
-          errorMessage = "Request for session id not found. Session Id=" +session_id.ToString();
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
-        }
-        
-        #endregion
-        
-        var statusRequestToRX = exchDoc.StatusRequestToRX;
-        var requestToRXInfo = exchDoc.RequestToRXInfo;
-        
         try
         {
-          var exchQueue = ExchangeQueues.Create();
-          exchQueue.ExchangeDocument = exchDoc;
-          exchQueue.Xml = xmlData;
-          exchQueue.Name = Integration.Resources.VersionRequestToRXFormat(lastId);
-          exchQueue.Save();
-          increaseNumberOfPackages = true;
-          
-          // обновить статусы в exchDoc
-          if (lastId > 0)
-            statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;
-          else
-            statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
-          
-          if (requestToRXInfo != "Saved")
-            requestToRXInfo = "Saved";
+          var settings = new XmlReaderSettings
+          {
+            DtdProcessing = DtdProcessing.Prohibit,
+            XmlResolver = null
+          };
+
+          using (var reader = XmlReader.Create(xmlStream, settings))
+          {
+            xmlDoc.Load(reader);
+          }
+        }
+        catch (XmlException ex)
+        {
+          return BuildErrorResponse(
+            logPrefix,
+            string.Format("Invalid XML format: {0}", ex.Message),
+            invalidParamValue,
+            invalidParamValue);
         }
         catch (Exception ex)
         {
-          errorMessage = ex.Message;
-          Logger.ErrorFormat("{0} ErrorMessage: {1}.{2}", logPrefix, errorMessage, logPostfix);
-          statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
-          requestToRXInfo = errorMessage;
-          return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 2, errorMessage));
-        }        
-        
-        if (!exchDoc.IsOnline.GetValueOrDefault())
+          return BuildErrorResponse(
+            logPrefix,
+            string.Format("Error while parsing XML: {0}", ex.Message),
+            invalidParamValue,
+            invalidParamValue);
+        }
+      }
+
+      root = xmlDoc.DocumentElement;
+      if (root == null)
+      {
+        return BuildErrorResponse(
+          logPrefix,
+          "Root XML element is absent",
+          invalidParamValue,
+          invalidParamValue);
+      }      
+
+      byte[] errorResponse;
+
+      // head
+      var headNode = RequireNode(root, "head",
+                                 "head node is absent",
+                                 logPrefix,
+                                 invalidParamValue,
+                                 invalidParamValue,
+                                 out errorResponse);
+      if (headNode == null)
+        return errorResponse;
+
+      // head/session_id
+      var sessionIdNode = RequireNode(headNode, "session_id",
+                                      "session_id node is absent",
+                                      logPrefix,
+                                      invalidParamValue,
+                                      invalidParamValue,
+                                      out errorResponse);
+      if (sessionIdNode == null)
+        return errorResponse;
+
+      sessionIdStr = sessionIdNode.InnerText;
+
+      if (!long.TryParse(sessionIdStr, out sessionId))
+      {
+        return BuildErrorResponse(
+          logPrefix,
+          "Invalid value in session_id",
+          invalidParamValue,
+          invalidParamValue);
+      }
+
+      sessionIdForResponse = sessionId.ToString();
+      var logPostfix = string.Format("ExchangeDocId = '{0}'", sessionId);
+
+      // request
+      var requestNode = RequireNode(root, "request",
+                                    "request node is absent",
+                                    logPrefix,
+                                    sessionIdForResponse,
+                                    invalidParamValue,
+                                    out errorResponse);
+      if (requestNode == null)
+        return errorResponse;
+
+      // request/dictionary
+      var dictionaryNode = RequireNode(requestNode, "dictionary",
+                                       "dictionary node is absent",
+                                       logPrefix,
+                                       sessionIdForResponse,
+                                       invalidParamValue,
+                                       out errorResponse);
+      if (dictionaryNode == null)
+        return errorResponse;
+
+      dictionary = dictionaryNode.InnerText;
+      if (string.IsNullOrWhiteSpace(dictionary))
+      {
+        return BuildErrorResponse(
+          logPrefix,
+          "Invalid value in dictionary",
+          sessionIdForResponse,
+          invalidParamValue);
+      }
+
+      dictionaryForResponse = dictionary;
+
+      // request/lastId
+      var lastIdNode = RequireNode(requestNode, "lastId",
+                                   "lastId node is absent",
+                                   logPrefix,
+                                   sessionIdForResponse,
+                                   dictionaryForResponse,
+                                   out errorResponse);
+      if (lastIdNode == null)
+        return errorResponse;
+
+      lastIdStr = lastIdNode.InnerText;
+      if (!long.TryParse(lastIdStr, out lastId))
+      {
+        return BuildErrorResponse(
+          logPrefix,
+          "Invalid value in lastId",
+          sessionIdForResponse,
+          dictionaryForResponse);
+      }
+
+      // request/Data
+      var dataNode = RequireNode(requestNode, "Data",
+                                 "Data node is absent",
+                                 logPrefix,
+                                 sessionIdForResponse,
+                                 dictionaryForResponse,
+                                 out errorResponse);
+      if (dataNode == null)
+        return errorResponse;
+
+      var exchDoc = ExchangeDocuments.GetAll()
+        .FirstOrDefault(d => d.Id == sessionId);
+      if (exchDoc == null)
+      {
+        return BuildErrorResponse(
+          logPrefix,
+          "Request for session id not found. Session Id=" + sessionId,
+          sessionIdForResponse,
+          dictionaryForResponse);
+      }
+
+      #endregion
+
+      var statusRequestToRX = exchDoc.StatusRequestToRX;
+      var requestToRXInfo = exchDoc.RequestToRXInfo;
+
+      try
+      {
+        var exchQueue = ExchangeQueues.Create();
+        exchQueue.ExchangeDocument = exchDoc;
+        exchQueue.Xml = xmlData;
+        exchQueue.Name = Integration.Resources.VersionRequestToRXFormat(lastId);
+        exchQueue.Save();
+
+        // обновить статусы в exchDoc
+        if (lastId > 0)
+          statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;
+        else
+          statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
+
+        if (requestToRXInfo != "Saved")
+          requestToRXInfo = "Saved";
+      }
+      catch (Exception ex)
+      {
+        hasError = true;
+        var errorMessage = ex.Message;
+
+        Logger.ErrorFormat("{0} ErrorMessage: {1}. {2}", logPrefix, errorMessage, logPostfix);
+
+        statusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
+        requestToRXInfo = errorMessage;
+
+        return Encoding.UTF8.GetBytes(
+          Integration.Resources.ResponseXMLTemplateFormat(sessionIdForResponse, dictionaryForResponse, 2, errorMessage));
+      }
+
+      if (!exchDoc.IsOnline.GetValueOrDefault())
+      {
+        // Обновляем exchDoc асинхронным обработчиком для не Online-запросов
+        var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
+        asyncHandler.DocId = exchDoc.Id;
+        asyncHandler.StatusRequestToRX = statusRequestToRX.ToString();
+        asyncHandler.RequestToRXInfo = requestToRXInfo;
+        asyncHandler.IncreaseNumberOfPackages = true;
+        asyncHandler.ExecuteAsync();
+
+        if (!hasError)
         {
-          // Обновляем exchDoc асинхронным обработчиком для не Online-запросов
-          var asyncHandler = Integration.AsyncHandlers.UpdateExchangeDoc.Create();
-          asyncHandler.DocId = exchDoc.Id;
-          asyncHandler.StatusRequestToRX = statusRequestToRX.ToString();
-          asyncHandler.RequestToRXInfo = requestToRXInfo;
-          asyncHandler.IncreaseNumberOfPackages = increaseNumberOfPackages;
-          asyncHandler.ExecuteAsync();
-          
-          if (string.IsNullOrEmpty(errorMessage))
+          if (lastId > 0)
           {
-            if (lastId > 0)
-              // вызвать получение остальной части пакета
-              SendRequestToIS(exchDoc, lastId, null);
-            else
-            {
-              Thread.Sleep(5000); // Пауза на 5 сек.
-              
-              // запустить обработчик пакета
-              var asyncHandlerImportData = Integration.AsyncHandlers.ImportData.Create();
-              asyncHandlerImportData.ExchangeDocId = exchDoc.Id;
-              asyncHandlerImportData.ExecuteAsync();
-            }
+            // вызвать получение остальной части пакета
+            SendRequestToIS(exchDoc, lastId, null);
+          }
+          else
+          {
+            // TODO: возможно убрать ?
+            Thread.Sleep(1000); // Пауза на 1 сек.
+
+            // запустить обработчик пакета
+            var asyncHandlerImportData = Integration.AsyncHandlers.ImportData.Create();
+            asyncHandlerImportData.ExchangeDocId = exchDoc.Id;
+            asyncHandlerImportData.ExecuteAsync();
           }
         }
-        
-        Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);
-        return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(session_id, dictionary, 1, "Saved"));
       }
+
+      Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);
+      return Encoding.UTF8.GetBytes(
+        Integration.Resources.ResponseXMLTemplateFormat(sessionIdForResponse, dictionaryForResponse, 1, "Saved"));
     }
+    
+    /// <summary>
+    /// Унифицированное формирование ответа об ошибке + логирование.
+    /// </summary>
+    private byte[] BuildErrorResponse(string logPrefix, string errorMessage, string sessionIdForResponse, string dictionaryForResponse)
+    {
+      Logger.ErrorFormat("{0} ErrorMessage: {1}.", logPrefix, errorMessage);    
+      return Encoding.UTF8.GetBytes(Integration.Resources.ResponseXMLTemplateFormat(sessionIdForResponse, dictionaryForResponse, 2, errorMessage));
+    }
+
+    /// <summary>
+    /// Обязательный узел: если нет — логируем и возвращаем готовый errorResponse.
+    /// </summary>
+    private XmlNode RequireNode(XmlNode parent, string xPath, string errorIfMissing, string logPrefix, string sessionIdForResponse, string dictionaryForResponse, out byte[] errorResponse)
+    {
+      errorResponse = null;
+
+      if (parent == null)
+      {
+        errorResponse = BuildErrorResponse(logPrefix, errorIfMissing, sessionIdForResponse, dictionaryForResponse);
+        return null;
+      }
+
+      var node = parent.SelectSingleNode(xPath);
+      if (node == null)
+      {
+        errorResponse = BuildErrorResponse(logPrefix, errorIfMissing, sessionIdForResponse, dictionaryForResponse);
+      }
+
+      return node;
+    }    
 
     [Public, Remote(IsPure = true)]
     public static long WaitForGettingDataFromIS(long exchDocId, int intervalMilliseconds, int maxAttempts)
@@ -393,17 +523,7 @@ namespace litiko.Integration.Server
       var integrationMethod = IntegrationMethods.GetAll().Where(x => x.Name == integrationMethodName).FirstOrDefault();
       if (integrationMethod == null)
         throw AppliedCodeException.Create(string.Format("Integration method {0} not found", integrationMethodName));
-      
-      // Проверить, есть ли документы обмена, на которые еще не получен ответ
-      /*
-      var exchDocs = ExchangeDocuments.GetAll().Where(d => d.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.Awaiting || d.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart
-                                                     && Equals(d.IntegrationMethod, integrationMethod)).Select(d => d.Id);
-      if (exchDocs.Any())
-      {
-        Logger.DebugFormat("Pending requests found: {0}", exchDocs.ToString());
-        return;
-      }
-       */
+            
       var exchDoc = Integration.ExchangeDocuments.Create();
       exchDoc.IntegrationMethod = integrationMethod;
       exchDoc.IsOnline = false;
@@ -1908,6 +2028,8 @@ namespace litiko.Integration.Server
       var isBusiness = element.Element("BUSINESS")?.Value;
       var isPS_REF = element.Element("PS_REF")?.Value;
       var isCountry = element.Element("COUNTRY")?.Value;
+      var isRegion = element.Element("Region")?.Value;
+      var isCity = element.Element("City")?.Value;       
       var isPostAdress = element.Element("PostAdress")?.Value;
       var isLegalAdress = element.Element("LegalAdress")?.Value;
       var isPhone = element.Element("Phone")?.Value;
@@ -2078,6 +2200,26 @@ namespace litiko.Integration.Server
             company.Countrylitiko = country;                                
           }            
         }
+        
+        if (!string.IsNullOrEmpty(isRegion))
+        {
+          var region = Eskhata.Regions.GetAll().Where(x => x.ExternalIdlitiko == isRegion).FirstOrDefault();
+          if (region != null && !Equals(company.Region, region))
+          {
+            Logger.DebugFormat("Change Region: current:{0}, new:{1}", company.Region?.Name, region?.Name);
+            company.Region = region;                    
+          }
+        }
+  
+        if (!string.IsNullOrEmpty(isCity))
+        {
+          var city = Eskhata.Cities.GetAll().Where(x => x.ExternalIdlitiko == isCity).FirstOrDefault();
+          if (city != null && !Equals(company.City, city))
+          {
+            Logger.DebugFormat("Change City: current:{0}, new:{1}", company.City?.Name, city?.Name);
+            company.City = city;                    
+          }
+        }        
 
         if(!string.IsNullOrEmpty(isPostAdress) && company.PostalAddress != isPostAdress)
         {
@@ -2228,6 +2370,8 @@ namespace litiko.Integration.Server
       var isIsLoroCorrespondent = element.Element("IsLoroCorrespondent")?.Value;
       var isIsNostroCorrespondent = element.Element("IsNostroCorrespondent")?.Value;
       var isCountry = element.Element("COUNTRY")?.Value;
+      var isRegion = element.Element("Region")?.Value;
+      var isCity = element.Element("City")?.Value;       
       var isPostAdress = element.Element("PostAdress")?.Value;
       var isLegalAdress = element.Element("LegalAdress")?.Value;
       var isPhone = element.Element("Phone")?.Value;
@@ -2350,6 +2494,26 @@ namespace litiko.Integration.Server
             bank.Countrylitiko = country;
           }            
         }
+        
+        if (!string.IsNullOrEmpty(isRegion))
+        {
+          var region = Eskhata.Regions.GetAll().Where(x => x.ExternalIdlitiko == isRegion).FirstOrDefault();
+          if (region != null && !Equals(bank.Region, region))
+          {
+            Logger.DebugFormat("Change Region: current:{0}, new:{1}", bank.Region?.Name, region?.Name);
+            bank.Region = region;                    
+          }
+        }
+  
+        if (!string.IsNullOrEmpty(isCity))
+        {
+          var city = Eskhata.Cities.GetAll().Where(x => x.ExternalIdlitiko == isCity).FirstOrDefault();
+          if (city != null && !Equals(bank.City, city))
+          {
+            Logger.DebugFormat("Change City: current:{0}, new:{1}", bank.City?.Name, city?.Name);
+            bank.City = city;                    
+          }
+        }        
 
         if(!string.IsNullOrEmpty(isPostAdress) && bank.PostalAddress != isPostAdress)
         {
@@ -2945,6 +3109,178 @@ namespace litiko.Integration.Server
       return errorList;
     }
     
+    /// <summary>
+    /// Обработка справочника Регионы.
+    /// </summary>
+    /// <param name="dataElements">Информация по регионам в виде XElement.</param>
+    /// <returns>Список ошибок (List<string>)</returns>     
+    public List<string> R_DR_GET_REGIONS(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> dataElements)
+    {          
+      Logger.Debug("R_DR_GET_REGIONS - Start");
+      var errorList = new List<string>();
+      int countAll = dataElements.Count();
+      int countChanged = 0;
+      int countNotChanged = 0;
+      int countErrors = 0;
+      
+      foreach (var element in dataElements)
+      {       
+        Transactions.Execute(() =>
+        {
+          var isId = element.Element("ID")?.Value;
+          var isCountry = element.Element("Country")?.Value;
+          var isName = element.Element("Name")?.Value;          
+          
+          try
+          {                        
+            if (string.IsNullOrEmpty(isId) || string.IsNullOrEmpty(isName) || string.IsNullOrEmpty(isCountry))
+              throw AppliedCodeException.Create(string.Format("Not all required fields are filled in. ID:{0}, Name:{1}, Country:{2}", isId, isName, isCountry));
+            
+            var entity = litiko.Eskhata.Regions.GetAll().Where(x => x.ExternalIdlitiko == isId).FirstOrDefault();
+            if (entity != null)
+              Logger.DebugFormat("Region with ExternalId:{0} was found. Id:{1}, Name:{2}", isId, entity.Id, entity.Name);
+            else
+            {              
+              entity = litiko.Eskhata.Regions.Create();
+              entity.ExternalIdlitiko = isId;
+              Logger.DebugFormat("Create new Region with ExternalId:{0}. Id:{1}", isId, entity.Id);
+            }             
+            
+            if (entity.Name != isName)
+            {
+              Logger.DebugFormat("Change Name: current:{0}, new:{1}", entity.Name, isName);
+              entity.Name = isName;              
+            }
+            
+            var country = litiko.Eskhata.Countries.GetAll().Where(x => x.ExternalIdlitiko == isCountry).FirstOrDefault();
+            if (!Equals(entity.Country, country))
+            {
+              Logger.DebugFormat("Change Country: current:{0}, new:{1}", entity.Country?.Id, country?.Id);
+              entity.Country = country;              
+            }                                                            
+            
+            if (entity.State.IsInserted || entity.State.IsChanged)
+            {
+              entity.Save();                                          
+              Logger.DebugFormat("Region successfully saved. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              countChanged++;
+            }
+            else
+            {
+              Logger.DebugFormat("There are no changes in Region. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              countNotChanged++;
+            }
+          }
+          catch (Exception ex)
+          {
+            var errorMessage = string.Format("Error when processing Region with ExternalId:{0}. Description: {1}. StackTrace: {2}", isId, ex.Message, ex.StackTrace);
+            Logger.Error(errorMessage);
+            errorList.Add(errorMessage);
+            countErrors++;
+          }
+        });
+      }
+      Logger.DebugFormat("R_DR_GET_REGIONS - Total: CountAll:{0} CountChanged:{1} CountNotChanged:{2} CountErrors:{3}", countAll, countChanged, countNotChanged, countErrors);
+      
+      Logger.Debug("R_DR_GET_REGIONS - Finish"); 
+      return errorList;
+    }
+    
+    /// <summary>
+    /// Обработка справочника Населенные пункты.
+    /// </summary>
+    /// <param name="dataElements">Информация по населенным пунктам в виде XElement.</param>
+    /// <returns>Список ошибок (List<string>)</returns>     
+    public List<string> R_DR_GET_CITIES(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> dataElements)
+    {          
+      Logger.Debug("R_DR_GET_CITIES - Start");
+      var errorList = new List<string>();
+      int countAll = dataElements.Count();
+      int countChanged = 0;
+      int countNotChanged = 0;
+      int countErrors = 0;
+      
+      foreach (var element in dataElements)
+      {       
+        Transactions.Execute(() =>
+        {
+          var isId = element.Element("ID")?.Value;
+          var isCountry = element.Element("Country")?.Value;
+          var isRegion = element.Element("Region")?.Value;
+          var isName = element.Element("Name")?.Value;
+          var isType = element.Element("Type")?.Value;
+          
+          try
+          {                        
+            if (string.IsNullOrEmpty(isId) || string.IsNullOrEmpty(isName) || string.IsNullOrEmpty(isCountry))
+              throw AppliedCodeException.Create(string.Format("Not all required fields are filled in. ID:{0}, Name:{1}, Country:{2}", isId, isName, isCountry));
+            
+            var entity = litiko.Eskhata.Cities.GetAll().Where(x => x.ExternalIdlitiko == isId).FirstOrDefault();
+            if (entity != null)
+              Logger.DebugFormat("City with ExternalId:{0} was found. Id:{1}, Name:{2}", isId, entity.Id, entity.Name);
+            else
+            {              
+              entity = litiko.Eskhata.Cities.Create();
+              entity.ExternalIdlitiko = isId;
+              Logger.DebugFormat("Create new City with ExternalId:{0}. Id:{1}", isId, entity.Id);
+            }             
+            
+            if (entity.Name != isName)
+            {
+              Logger.DebugFormat("Change Name: current:{0}, new:{1}", entity.Name, isName);
+              entity.Name = isName;              
+            }
+            
+            var country = litiko.Eskhata.Countries.GetAll().Where(x => x.ExternalIdlitiko == isCountry).FirstOrDefault();
+            if (!Equals(entity.Country, country))
+            {
+              Logger.DebugFormat("Change Country: current:{0}, new:{1}", entity.Country?.Id, country?.Id);
+              entity.Country = country;              
+            }                                                            
+            
+            if (!string.IsNullOrEmpty(isRegion))
+            {
+              var region = litiko.Eskhata.Regions.GetAll().Where(x => x.ExternalIdlitiko == isRegion).FirstOrDefault();
+              if (!Equals(entity.Region, region))
+              {
+                Logger.DebugFormat("Change Region: current:{0}, new:{1}", entity.Region?.Id, region?.Id);
+                entity.Region = region;              
+              }                        
+            }
+
+            if (!string.IsNullOrEmpty(isType) && entity.Typelitiko != isType)
+            {
+              Logger.DebugFormat("Change Type: current:{0}, new:{1}", entity.Typelitiko, isType);
+              entity.Typelitiko = isType;
+            }
+            
+            if (entity.State.IsInserted || entity.State.IsChanged)
+            {
+              entity.Save();                                          
+              Logger.DebugFormat("City successfully saved. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              countChanged++;
+            }
+            else
+            {
+              Logger.DebugFormat("There are no changes in City. ExternalId:{0}, Id:{1}", isId, entity.Id);
+              countNotChanged++;
+            }
+          }
+          catch (Exception ex)
+          {
+            var errorMessage = string.Format("Error when processing City with ExternalId:{0}. Description: {1}. StackTrace: {2}", isId, ex.Message, ex.StackTrace);
+            Logger.Error(errorMessage);
+            errorList.Add(errorMessage);
+            countErrors++;
+          }
+        });
+      }
+      Logger.DebugFormat("R_DR_GET_CITIES - Total: CountAll:{0} CountChanged:{1} CountNotChanged:{2} CountErrors:{3}", countAll, countChanged, countNotChanged, countErrors);
+      
+      Logger.Debug("R_DR_GET_CITIES - Finish"); 
+      return errorList;
+    }    
+    
     [Remote]
     public List<string> R_DR_SET_CONTRACT_Online(IExchangeDocument exchDoc, litiko.Eskhata.IOfficialDocument document)
     {
@@ -3162,6 +3498,8 @@ namespace litiko.Integration.Server
       var isCodeOKONHelements = personData.Element("CODE_OKONH").Elements("element");
       var isCodeOKVEDelements = personData.Element("CODE_OKVED").Elements("element");
       var isCountry = personData.Element("COUNTRY")?.Value;
+      var isRegion = personData.Element("Region")?.Value;
+      var isCity = personData.Element("City")?.Value;      
       var isLegalAdress = personData.Element("DOC_BIRTH_PLACE")?.Value;
       var isPostAdress = personData.Element("PostAdress")?.Value;
       var isPhone = personData.Element("Phone")?.Value;
@@ -3378,6 +3716,26 @@ namespace litiko.Integration.Server
         }
       }
       
+      if (!string.IsNullOrEmpty(isRegion))
+      {
+        var region = Eskhata.Regions.GetAll().Where(x => x.ExternalIdlitiko == isRegion).FirstOrDefault();
+        if (region != null && !Equals(person.Region, region))
+        {
+          Logger.DebugFormat("Change Region: current:{0}, new:{1}", person.Region?.Name, region?.Name);
+          person.Region = region;                    
+        }
+      }
+
+      if (!string.IsNullOrEmpty(isCity))
+      {
+        var city = Eskhata.Cities.GetAll().Where(x => x.ExternalIdlitiko == isCity).FirstOrDefault();
+        if (city != null && !Equals(person.City, city))
+        {
+          Logger.DebugFormat("Change City: current:{0}, new:{1}", person.City?.Name, city?.Name);
+          person.City = city;                    
+        }
+      }      
+      
       if(!string.IsNullOrEmpty(isPostAdress) && person.PostalAddress != isPostAdress)
       {
         Logger.DebugFormat("Change PostalAddress: current:{0}, new:{1}", person.PostalAddress, isPostAdress);
@@ -3570,7 +3928,37 @@ namespace litiko.Integration.Server
       return ExchangeQueues.GetAll()
         .Where(x => Equals(x.ExchangeDocument, document));
     }
-    
+
+    /// <summary>
+    /// Получить метод интеграции по сущности
+    /// </summary>
+    /// <param name="entity">Сущность</param>
+    [Remote(IsPure = true)]
+    public Integration.IIntegrationMethod GetIntegrationMethod(Sungero.Domain.Shared.IEntity entity)
+    {
+      if (entity == null)
+        return null;
+            
+      var integrationMethod = Integration.IntegrationMethods.Null;
+      
+      var integrationMethodName = string.Empty;
+      if (Eskhata.Companies.Is(entity))
+        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_GET_COMPANY;
+      else if (Eskhata.Banks.Is(entity))
+        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_GET_BANK;
+      else if (Eskhata.People.Is(entity))
+        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_GET_PERSON;
+      else if (Eskhata.Contracts.Is(entity))
+        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_SET_CONTRACT;
+      else if (Eskhata.SupAgreements.Is(entity))
+        integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT;
+      
+      if (!string.IsNullOrEmpty(integrationMethodName))
+        integrationMethod = Integration.IntegrationMethods.GetAll().FirstOrDefault(x => x.Name == integrationMethodName);
+      
+      return integrationMethod;
+    }    
+       
     #endregion
     
     #region Экспорт договоров для интеграции
@@ -3620,7 +4008,7 @@ namespace litiko.Integration.Server
         var postAddress     = person.PostalAddress ?? "";
         var email           = person.Email ?? "";
         var phone           = person.Phones ?? "";
-        var city            = person.City?.Name ?? "";
+        var city            = Eskhata.Cities.As(person.City)?.ExternalIdlitiko ?? "";
         var street          = person.Streetlitiko ?? "";
         var buildingNumber  = person.HouseNumberlitiko ?? "";
         var website         = person.Homepage ?? "";
@@ -3732,7 +4120,7 @@ namespace litiko.Integration.Server
         var postAddress     = company.PostalAddress ?? "";
         var legalAddress    = company.LegalAddress ?? "";
         var phone           = company.Phones ?? "";
-        var city            = company.City?.Name ?? "";
+        var city            = Eskhata.Cities.As(company.City)?.ExternalIdlitiko ?? "";
         var street          = company.Streetlitiko ?? "";
         var buildingNumber  = company.HouseNumberlitiko ?? "";
         var email           = company.Email ?? "";
@@ -3818,20 +4206,22 @@ namespace litiko.Integration.Server
         var contractExtId     = contractualDocument.LeadingDocument?.ExternalId ?? "";   
         var documentKind      = litiko.Eskhata.DocumentKinds.As(contractualDocument.DocumentKind)?.ExternalIdlitiko ?? "";
         var subject           = contractualDocument.Subject ?? "";
-        var name              = contractualDocument.Name ?? "";
+        var name              = (contractualDocument.Name ?? "").Substring(0, Math.Min((contractualDocument.Name ?? "").Length, 100));
         var registrationNumber= contractualDocument.RegistrationNumber ?? "";
         var registrationDate  = contractualDocument.RegistrationDate?.ToString(dateFormat) ?? "";
         var validFrom         = contractualDocument.ValidFrom?.ToString(dateFormat) ?? "";
         var validTill         = contractualDocument.ValidTill?.ToString(dateFormat) ?? "";
-        var totalAmount       = contractualDocument.TotalAmountlitiko?.ToString() ?? "";
+        var totalAmount       = contractualDocument.TotalAmountlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
         var currency          = contractualDocument.CurrencyContractlitiko?.AlphaCode ?? "";
         var operationCurrency = contractualDocument.CurrencyOperationlitiko?.AlphaCode ?? "";
-        var currencyRate      = contractualDocument.CurrencyRatelitiko?.Rate.ToString() ?? ""; 
+        var currencyRate      = contractualDocument.CurrencyRatelitiko?.Rate is double r
+          ? r.ToString(System.Globalization.CultureInfo.InvariantCulture)
+          : "";
         var vatApplicable     = ToYesNoNull(contractualDocument.IsVATlitiko);
-        var vatRate           = contractualDocument.VatRatelitiko?.ToString() ?? "";
-        var vatAmount         = contractualDocument.VatAmount?.ToString() ?? "";
-        var incomeTaxRate     = contractualDocument.IncomeTaxRatelitiko?.ToString() ?? "";
-        var incomeTaxAmount   = contractualDocument.IncomeTaxAmountlitiko?.ToString() ?? ""; 
+        var vatRate           = contractualDocument.VatRatelitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        var vatAmount         = contractualDocument.VatAmount?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        var incomeTaxRate     = contractualDocument.IncomeTaxRatelitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        var incomeTaxAmount   = contractualDocument.IncomeTaxAmountlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? ""; 
         var laborPayment      = ToYesNoNull(contractualDocument.IsIndividualPaymentlitiko); 
         var note              = contractualDocument.Note ?? "Без примечания";
         var isWithinBudget    = ToYesNoNull(contractualDocument.IsWithinBudgetlitiko);
@@ -3924,7 +4314,7 @@ namespace litiko.Integration.Server
         var documentKind        = litiko.Eskhata.DocumentKinds.As(contractualDocument.DocumentKind)?.ExternalIdlitiko ?? "";
         var documentGroup       = litiko.Eskhata.DocumentGroupBases.As(contractualDocument.DocumentGroup)?.ExternalIdlitiko ?? "";
         var subject             = contractualDocument.Subject ?? "";
-        var name                = contractualDocument.Name ?? "";
+        var name                = (contractualDocument.Name ?? "").Substring(0, Math.Min((contractualDocument.Name ?? "").Length, 100));
         var counterpartySign    = litiko.Eskhata.Contacts.As(contractualDocument.CounterpartySignatory)?.ExternalIdlitiko ?? "";
         var department          = litiko.Eskhata.Departments.As(contractualDocument.Department)?.ExternalId ?? "";  
         var responsibleEmployee = litiko.Eskhata.Employees.As(contractualDocument.ResponsibleEmployee)?.ExternalId ?? "";
@@ -3934,14 +4324,14 @@ namespace litiko.Integration.Server
         var changeReason        = contractualDocument.ReasonForChangelitiko;
         var accountDebtCredit   = accDebtCredit;
         var accountFutureExp    = accFutureExpense;
-        var totalAmountLitiko   = contractualDocument.TotalAmountlitiko?.ToString() ?? "";
+        var totalAmountLitiko   = contractualDocument.TotalAmountlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
         var currencyContract    = contractualDocument.CurrencyContractlitiko?.AlphaCode ?? "";
         var currencyOperation   = contractualDocument.CurrencyOperationlitiko?.AlphaCode ?? "";
         var vatApplicable       = ToYesNoNull(contractualDocument.IsVATlitiko);
-        var vatRate             = contractualDocument.VatRatelitiko?.ToString() ?? "";
-        var vatAmount           = contractualDocument.VatAmount?.ToString() ?? "";
-        var incomeTaxRate       = contractualDocument.IncomeTaxRatelitiko?.ToString() ?? "";
-        var amountForPeriod     = contractualDocument.AmountForPeriodlitiko?.ToString() ?? "";
+        var vatRate             = contractualDocument.VatRatelitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        var vatAmount           = contractualDocument.VatAmount?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        var incomeTaxRate       = contractualDocument.IncomeTaxRatelitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        var amountForPeriod     = contractualDocument.AmountForPeriodlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
         var note                = contractualDocument.Note ?? "Без примечания";
         var registrationNumber  = contractualDocument.RegistrationNumber ?? "";
         var registrationDate    = contractualDocument.RegistrationDate?.ToString(dateFormat) ?? "";
