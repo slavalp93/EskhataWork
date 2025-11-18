@@ -612,26 +612,6 @@
     },
     {
       "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "2c2de8eb-61e4-47c4-9b82-c22eb80c3132",
-      "Name": "OKVEDlitiko",
-      "EntityGuid": "11112b47-b520-4515-b7d3-7fb32993f8c7",
-      "IsAncestorMetadata": true,
-      "Overridden": [
-        "EntityGuid"
-      ]
-    },
-    {
-      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "9c8c1bda-16cb-49df-aa4e-02e12c326afe",
-      "Name": "OKONHlitiko",
-      "EntityGuid": "8e0d72a8-fb7c-4787-abd6-d5183f1a7361",
-      "IsAncestorMetadata": true,
-      "Overridden": [
-        "EntityGuid"
-      ]
-    },
-    {
-      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
       "NameGuid": "8c43815d-1a3d-47ec-a98d-909052509a21",
       "Name": "ExchangeBoxes",
       "EntityGuid": "20706edd-6737-49c1-bb35-f25318c9e43f",

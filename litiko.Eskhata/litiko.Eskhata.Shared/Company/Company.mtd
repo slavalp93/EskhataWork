@@ -459,21 +459,12 @@
           "Name": "OKONHlitikolitiko",
           "ColumnNumber": 0,
           "ColumnSpan": 2,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiLikeEditorToCollectionBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
           "ParentGuid": "149a02cc-c0af-4bec-8a1b-8d6c0bab1d81",
-          "PropertyGuid": "9c8c1bda-16cb-49df-aa4e-02e12c326afe",
+          "PropertyGuid": "ed0d3135-07ef-4aa3-9254-b023a0430423",
           "RowNumber": 6,
           "RowSpan": 1,
-          "Settings": [
-            {
-              "Name": "NavigationPropertyGuid",
-              "Value": "58fcdb58-58c0-4345-8de0-be32770e9ac9"
-            },
-            {
-              "Name": "IsDuplicatesAllowed",
-              "Value": false
-            }
-          ]
+          "Settings": []
         },
         {
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
@@ -481,21 +472,12 @@
           "Name": "OKVEDlitikolitiko",
           "ColumnNumber": 2,
           "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.MultiLikeEditorToCollectionBinder",
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
           "ParentGuid": "149a02cc-c0af-4bec-8a1b-8d6c0bab1d81",
-          "PropertyGuid": "2c2de8eb-61e4-47c4-9b82-c22eb80c3132",
+          "PropertyGuid": "54fb39b4-9472-4997-9ec0-014760ef79a4",
           "RowNumber": 6,
           "RowSpan": 1,
-          "Settings": [
-            {
-              "Name": "NavigationPropertyGuid",
-              "Value": "72d43a7b-19a6-4de9-ba37-327900ee2ccf"
-            },
-            {
-              "Name": "IsDuplicatesAllowed",
-              "Value": false
-            }
-          ]
+          "Settings": []
         },
         {
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
@@ -722,26 +704,6 @@
   "LayeredFromGuid": "593e143c-616c-4d95-9457-fd916c4aa7f8",
   "OperationsClass": "",
   "Properties": [
-    {
-      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "2c2de8eb-61e4-47c4-9b82-c22eb80c3132",
-      "Name": "OKVEDlitiko",
-      "EntityGuid": "5fd3d814-502c-474f-ab46-8021dcf4b2e2",
-      "IsAncestorMetadata": true,
-      "Overridden": [
-        "EntityGuid"
-      ]
-    },
-    {
-      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "9c8c1bda-16cb-49df-aa4e-02e12c326afe",
-      "Name": "OKONHlitiko",
-      "EntityGuid": "ce008a7b-1e97-4c46-adf1-f5ae23e0b7ba",
-      "IsAncestorMetadata": true,
-      "Overridden": [
-        "EntityGuid"
-      ]
-    },
     {
       "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
       "NameGuid": "8c43815d-1a3d-47ec-a98d-909052509a21",
