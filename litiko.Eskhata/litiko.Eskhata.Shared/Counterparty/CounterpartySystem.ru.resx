@@ -118,4 +118,13 @@
   <data name="Action_FillFromABSlitikoDescription" xml:space="preserve">
     <value>Автоматическое заполнение реквизитов контрагента из АБС</value>
   </data>
+  <data name="Property_Account" xml:space="preserve">
+    <value>Счет в другом банке</value>
+  </data>
+  <data name="Property_AddressTypelitiko" xml:space="preserve">
+    <value>Тип адреса</value>
+  </data>
+  <data name="Property_LegalAddress" xml:space="preserve">
+    <value>Адрес</value>
+  </data>
 </root>

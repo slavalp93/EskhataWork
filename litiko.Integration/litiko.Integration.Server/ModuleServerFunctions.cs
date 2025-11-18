@@ -3766,29 +3766,23 @@ namespace litiko.Integration.Server
           Logger.DebugFormat("Change VATPayerlitiko: current:{0}, new:{1}", person.VATPayerlitiko.GetValueOrDefault(), VATPayer);
           person.VATPayerlitiko = VATPayer;           
         }               
-      }
-            
-      if (!string.IsNullOrEmpty(isIIN))
+      }            
+
+      if(!string.IsNullOrEmpty(isIIN) && person.SINlitiko != isIIN)
       {
-        int untIIN;
-        if (int.TryParse(isIIN, out untIIN) && person.SINlitiko != untIIN)
-        {
-          Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.SINlitiko, untIIN);
-          person.SINlitiko = untIIN;                  
-        }
-        else
-          Logger.ErrorFormat("Can`t convert to int value of IIN:{0}", isIIN);            
-      }      
+        Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.SINlitiko, isIIN);
+        person.SINlitiko = isIIN;       
+      }
 
       if(!string.IsNullOrEmpty(isCorrAcc) && person.Account != isCorrAcc)
       {
-        Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.Account, isCorrAcc);
+        Logger.DebugFormat("Change Account: current:{0}, new:{1}", person.Account, isCorrAcc);
         person.Account = isCorrAcc;                        
       } 
 
       if(!string.IsNullOrEmpty(isInternalAcc) && person.AccountEskhatalitiko != isInternalAcc)
       {
-        Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.AccountEskhatalitiko, isInternalAcc);
+        Logger.DebugFormat("Change AccountEskhatalitiko: current:{0}, new:{1}", person.AccountEskhatalitiko, isInternalAcc);
         person.AccountEskhatalitiko = isInternalAcc;                        
       } 
       

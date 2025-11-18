@@ -347,20 +347,6 @@
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
           "ParentGuid": "9e3df66a-01e8-408a-aa4c-a5c92a1227fb",
           "PropertyGuid": "c0fedb36-4bff-4978-a39e-ee43154bc84b",
-          "RowNumber": 3,
-          "RowSpan": 1,
-          "Settings": [],
-          "Versions": []
-        },
-        {
-          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
-          "NameGuid": "687c94fc-6770-4c17-bb0b-57a69433b001",
-          "Name": "PostalAddresslitiko",
-          "ColumnNumber": 0,
-          "ColumnSpan": 2,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-          "ParentGuid": "9e3df66a-01e8-408a-aa4c-a5c92a1227fb",
-          "PropertyGuid": "4a8264be-df2c-4175-b1f2-776d388e2042",
           "RowNumber": 4,
           "RowSpan": 1,
           "Settings": [],
@@ -708,6 +694,19 @@
           "ParentGuid": "4b9defe5-f46d-4581-b50a-5c0be4a80a50",
           "PropertyGuid": "d6ac6148-eac7-4115-85cd-9e4cbe48accd",
           "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "c5da76b7-5468-4d1b-b961-aa4da24a41a4",
+          "Name": "AddressTypelitikolitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "9e3df66a-01e8-408a-aa4c-a5c92a1227fb",
+          "PropertyGuid": "0a32c7cc-79c2-4829-87fe-ec0216734647",
+          "RowNumber": 3,
           "RowSpan": 1,
           "Settings": []
         }

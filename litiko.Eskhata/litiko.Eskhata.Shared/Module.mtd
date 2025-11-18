@@ -408,7 +408,9 @@
     "INNNonRezidentPersonError",
     "INNRezidentPersonError",
     "VersionCreatedSuccessfully",
-    "LastVersionApproved"
+    "LastVersionApproved",
+    "ExactlyXDigits",
+    "NoMoreThanXCharacters"
   ],
   "ServerAssemblyName": "litiko.Eskhata.Server",
   "ServerNamespace": "litiko.Eskhata.Server",

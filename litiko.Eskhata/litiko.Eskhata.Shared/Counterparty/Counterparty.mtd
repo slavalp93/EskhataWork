@@ -61,6 +61,32 @@
   "Properties": [
     {
       "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "4a8264be-df2c-4175-b1f2-776d388e2042",
+      "Name": "PostalAddress",
+      "IsAncestorMetadata": true,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "Overridden": [
+        "IsShowedInList",
+        "IsVisibility"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "233a4755-18ec-4ee4-b48f-13b8e129a004",
+      "Name": "Account",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
       "NameGuid": "48d3db8f-8ca4-4434-8089-3e4794b48434",
       "Name": "TIN",
       "HandledEvents": [
@@ -192,19 +218,27 @@
       "PreviousPropertyGuid": "49890f77-3125-4813-8433-810c3d6950f8"
     },
     {
-      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
       "NameGuid": "018cca87-6ebb-4f55-bdd8-f96c2f2c356b",
       "Name": "EINlitiko",
       "Code": "EINlitiko",
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "Length": 10,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "ce221cf3-796e-45b6-893b-b1134eeba9cb"
     },
     {
-      "$type": "Sungero.Metadata.IntegerPropertyMetadata, Sungero.Metadata",
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
       "NameGuid": "ddc32bb7-d474-48c2-b654-a0c096fd44a9",
       "Name": "SINlitiko",
       "Code": "SINlitiko",
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "Length": 14,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "018cca87-6ebb-4f55-bdd8-f96c2f2c356b"
     },
     {
@@ -212,6 +246,9 @@
       "NameGuid": "d6ac6148-eac7-4115-85cd-9e4cbe48accd",
       "Name": "AccountEskhatalitiko",
       "Code": "AccountEskhata",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
       "Length": 34,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "ddc32bb7-d474-48c2-b654-a0c096fd44a9"
@@ -232,6 +269,16 @@
       "Length": 50,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "71f6ff04-8ae9-4cb2-b10e-1af1080921d7"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "0a32c7cc-79c2-4829-87fe-ec0216734647",
+      "Name": "AddressTypelitiko",
+      "Code": "AddressTypelit",
+      "EntityGuid": "d779302f-b699-498e-b301-4f2c08febe9f",
+      "FlatListInStandaloneLookup": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "a0c39e3c-f24a-4db7-b611-2ad920a6404a"
     }
   ],
   "PublicStructures": [],

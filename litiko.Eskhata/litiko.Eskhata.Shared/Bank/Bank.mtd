@@ -256,20 +256,6 @@
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
           "ParentGuid": "9e3df66a-01e8-408a-aa4c-a5c92a1227fb",
           "PropertyGuid": "c0fedb36-4bff-4978-a39e-ee43154bc84b",
-          "RowNumber": 3,
-          "RowSpan": 1,
-          "Settings": [],
-          "Versions": []
-        },
-        {
-          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
-          "NameGuid": "687c94fc-6770-4c17-bb0b-57a69433b001",
-          "Name": "PostalAddresslitiko",
-          "ColumnNumber": 0,
-          "ColumnSpan": 2,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-          "ParentGuid": "9e3df66a-01e8-408a-aa4c-a5c92a1227fb",
-          "PropertyGuid": "4a8264be-df2c-4175-b1f2-776d388e2042",
           "RowNumber": 4,
           "RowSpan": 1,
           "Settings": [],
@@ -582,6 +568,19 @@
           "RowNumber": 2,
           "RowSpan": 1,
           "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "3768f34a-c701-4215-9d22-55363910728d",
+          "Name": "AddressTypelitikolitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "9e3df66a-01e8-408a-aa4c-a5c92a1227fb",
+          "PropertyGuid": "0a32c7cc-79c2-4829-87fe-ec0216734647",
+          "RowNumber": 3,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,
@@ -598,6 +597,19 @@
   "LayeredFromGuid": "80c4e311-e95f-449b-984d-1fd540b8f0af",
   "OperationsClass": "",
   "Properties": [
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "92979094-ab38-4de2-87ff-b564dff51880",
+      "Name": "CorrespondentAccount",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
     {
       "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
       "NameGuid": "2c2de8eb-61e4-47c4-9b82-c22eb80c3132",
