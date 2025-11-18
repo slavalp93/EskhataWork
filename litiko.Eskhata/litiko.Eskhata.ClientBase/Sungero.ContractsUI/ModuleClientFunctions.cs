@@ -13,10 +13,57 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
 {
   partial class ModuleFunctions
   {
+    public virtual void ImportCounterparties()
+    {
+      // Вызов удалённого метода и получение результата
+      var result = litiko.Eskhata.Module.Parties.PublicFunctions.Module.Remote.ImportCounterpartyFromXml();
 
-    /// <summary>
-    /// 
-    /// </summary>
+      var message = new System.Text.StringBuilder();
+      message.AppendLine("📦 Импорт контрагентов завершён.");
+    
+      // Общие данные
+      message.AppendLine($"📦 Всего контрагентов в файле: {result.TotalCount}");
+      message.AppendLine($"✅ Всего успешно импортировано: {result.ImportedCount}");
+    
+      // Компании
+      message.AppendLine();
+      message.AppendLine("🏢 Компании:");
+      message.AppendLine($"• Всего в файле: {result.TotalCompanies}");
+      message.AppendLine($"• Импортировано: {result.ImportedCompanies}");
+
+      // Физические лица
+      message.AppendLine();
+      message.AppendLine("👤 Физические лица:");
+      message.AppendLine($"• Всего в файле: {result.TotalPersons}");
+      message.AppendLine($"• Импортировано: {result.ImportedPersons}");
+
+      // Пропущенные сущности
+      if (result.SkippedEntities != null && result.SkippedEntities.Any())
+      {
+        message.AppendLine();
+        message.AppendLine("ℹ️ Контрагенты пропущены (уже есть в системе):");
+        foreach (var name in result.SkippedEntities)
+          message.AppendLine(" • " + name);
+      }
+
+      // Ошибки импорта
+      if (result.Errors != null && result.Errors.Any())
+      {
+        message.AppendLine();
+        message.AppendLine("⚠️ Ошибки импорта:");
+        foreach (var error in result.Errors)
+          message.AppendLine(" • " + error);
+      }
+      else
+      {
+        message.AppendLine();
+        message.AppendLine("Все контрагенты успешно обработаны без ошибок ✅");
+      }
+
+      Dialogs.ShowMessage(message.ToString());
+    }
+
+
     public virtual void ImportContract()
     {
       // Вызов удалённого метода и получение результата
