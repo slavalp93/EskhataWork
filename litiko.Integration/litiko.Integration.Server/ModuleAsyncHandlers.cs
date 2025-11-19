@@ -369,8 +369,14 @@ namespace litiko.Integration.Server
         {
           var newTask = Sungero.Workflow.SimpleTasks.CreateWithNotices(Resources.NoticeSubjectForErrorTask, synchronizationResponsibleRole);
           newTask.NeedsReview = false;
-          newTask.ActiveText = string.Join(Environment.NewLine, errorList);;
+          newTask.ActiveText = string.Join(Environment.NewLine, errorList);
           newTask.Attachments.Add(exchDoc);
+          if (exchDoc.EntityId != null)
+          {
+            var document = Sungero.Docflow.OfficialDocuments.GetAll().FirstOrDefault(d => d.Id == exchDoc.EntityId);
+            if (document != null)
+              newTask.Attachments.Add(document);          
+          }
           newTask.Start();
           Logger.DebugFormat("{0} Notice with Id '{1}' has been started. {2}", logPrefix, newTask.Id, logPostfix);
         }

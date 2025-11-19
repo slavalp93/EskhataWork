@@ -44,7 +44,8 @@ namespace litiko.Integration.Server
       else
       {
         exchDoc = Integration.ExchangeDocuments.Create();
-        exchDoc.IntegrationMethod = integrationMethod;      
+        exchDoc.IntegrationMethod = integrationMethod;
+        exchDoc.EntityId = document.Id;        
         exchDoc.Save();
           
         litiko.Eskhata.ApprovalTasks.As(approvalTask).ExchangeDocIdlitiko = exchDoc.Id;

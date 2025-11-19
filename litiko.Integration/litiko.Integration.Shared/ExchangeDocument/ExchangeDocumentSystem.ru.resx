@@ -148,4 +148,7 @@
   <data name="Action_ExchangeQueueDescription" xml:space="preserve">
     <value>Открытие очереди обмена по документу</value>
   </data>
+  <data name="Property_EntityId" xml:space="preserve">
+    <value>ИД сущности</value>
+  </data>
 </root>
