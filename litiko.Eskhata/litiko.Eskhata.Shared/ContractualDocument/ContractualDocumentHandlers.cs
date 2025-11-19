@@ -12,7 +12,7 @@ namespace litiko.Eskhata
 
     public virtual void CurrencyContractlitikoChanged(litiko.Eskhata.Shared.ContractualDocumentCurrencyContractlitikoChangedEventArgs e)
     {
-      Functions.ContractualDocument.FillCurrencyRate(_obj, e.NewValue, _obj.ValidFrom);
+      Functions.ContractualDocument.FillCurrencyRate(_obj, e.NewValue, Calendar.Today);
       Functions.ContractualDocument.FillTotalAmount(_obj, _obj.TotalAmountlitiko, _obj.CurrencyRatelitiko, e.NewValue);      
     }
 
@@ -64,7 +64,7 @@ namespace litiko.Eskhata
     {
       base.ValidFromChanged(e);
       
-      Functions.ContractualDocument.FillCurrencyRate(_obj, _obj.CurrencyContractlitiko, e.NewValue);
+      //Functions.ContractualDocument.FillCurrencyRate(_obj, _obj.CurrencyContractlitiko, e.NewValue);
     }
 
     public override void TotalAmountChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
