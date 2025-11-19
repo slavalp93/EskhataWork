@@ -76,4 +76,12 @@
   <data name="DocumentIsLocked" xml:space="preserve">
     <value>Document {0} is locked.</value>
   </data>
+  <data name="ErrorIntegration" xml:space="preserve">
+    <value>Error integrating with external system: 
+{0}
+Contact the administrator</value>
+  </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>Unknown error</value>
+  </data>
 </root>

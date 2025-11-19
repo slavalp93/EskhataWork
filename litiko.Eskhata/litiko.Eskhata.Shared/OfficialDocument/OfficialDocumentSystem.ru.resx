@@ -100,4 +100,7 @@
   <data name="Action_ExportToABSlitikoDescription" xml:space="preserve">
     <value>Запуск процесса интеграции по документу с системой АБС</value>
   </data>
+  <data name="Enum_IntegrationStatuslitiko_Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
 </root>

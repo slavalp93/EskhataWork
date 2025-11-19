@@ -360,6 +360,41 @@ namespace litiko.Integration.Server
       
       if (errorList.Any())
       {
+        // Обновить статус интеграции "Ошибка" в документе
+        var document = Eskhata.OfficialDocuments.Null;
+        if (exchDoc.EntityId != null)
+        {
+          document = Eskhata.OfficialDocuments.GetAll().FirstOrDefault(d => d.Id == exchDoc.EntityId);
+          if (document != null)
+          {
+            if (!Locks.TryLock(document))
+            {
+              Logger.ErrorFormat("{0} Document with id = {1} is locked. Sent to retry", logPrefix, document.Id);
+              args.Retry = true;
+              return;
+            }
+            try
+            {
+              if (document.IntegrationStatuslitiko != Eskhata.OfficialDocument.IntegrationStatuslitiko.Error)
+              {
+                document.IntegrationStatuslitiko = Eskhata.OfficialDocument.IntegrationStatuslitiko.Error;
+                document.Save();
+                Logger.DebugFormat("{0} Document with id = {1} is updated.", logPrefix, document.Id);
+              }
+            }
+            catch (Exception ex)
+            {
+              Logger.ErrorFormat("{0} Error saving document id = {1}. Error: {2}", logPrefix, document.Id, ex.Message);
+              args.Retry = true;
+              return;              
+            }
+            finally
+            {
+              Locks.Unlock(document);
+            }
+          }
+        }
+          
         // Отправка уведомления роли "Ответственные за синхронизацию с учетными системами"
         Logger.Debug("Preparing to send notice about errors");        
         var synchronizationResponsibleRole = Roles.GetAll().Where(r => r.Sid == litiko.Integration.Constants.Module.RoleGuid.SynchronizationResponsibleRoleGuid).FirstOrDefault();
@@ -371,12 +406,10 @@ namespace litiko.Integration.Server
           newTask.NeedsReview = false;
           newTask.ActiveText = string.Join(Environment.NewLine, errorList);
           newTask.Attachments.Add(exchDoc);
-          if (exchDoc.EntityId != null)
-          {
-            var document = Sungero.Docflow.OfficialDocuments.GetAll().FirstOrDefault(d => d.Id == exchDoc.EntityId);
-            if (document != null)
-              newTask.Attachments.Add(document);          
-          }
+          
+          if (document != null)
+            newTask.Attachments.Add(document);
+          
           newTask.Start();
           Logger.DebugFormat("{0} Notice with Id '{1}' has been started. {2}", logPrefix, newTask.Id, logPostfix);
         }

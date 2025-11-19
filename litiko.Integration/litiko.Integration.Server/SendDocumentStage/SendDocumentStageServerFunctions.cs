@@ -106,7 +106,22 @@ namespace litiko.Integration.Server
       if (document == null)
         return this.GetErrorResult(SendDocumentStages.Resources.DocumentNotFound);       
       
-      if (Equals(document.IntegrationStatuslitiko, litiko.Eskhata.OfficialDocument.IntegrationStatuslitiko.Success))
+      if (Equals(document.IntegrationStatuslitiko, litiko.Eskhata.OfficialDocument.IntegrationStatuslitiko.Error))
+      {
+        litiko.Eskhata.ApprovalTasks.As(approvalTask).ExchangeDocIdlitiko = null;
+        litiko.Eskhata.ApprovalTasks.As(approvalTask).Save();        
+        
+        var errorInfo = string.Empty;
+        var exchDoc = ExchangeDocuments.GetAll().FirstOrDefault(x => x.Id == exchDocId);
+        if (exchDoc != null && !string.IsNullOrEmpty(exchDoc.RequestToRXInfo))
+          errorInfo = SendDocumentStages.Resources.ErrorIntegrationFormat(exchDoc.RequestToRXInfo);
+        else
+          errorInfo = SendDocumentStages.Resources.ErrorIntegrationFormat(SendDocumentStages.Resources.UnknownError);
+                
+        Logger.DebugFormat("{0}. Error. ApprovalTask Id: {1}. Document Id:{2}. Error: {3}", logPrefix, approvalTask.Id, document.Id, errorInfo);
+        return this.GetErrorResult(errorInfo);
+      }
+      else if (Equals(document.IntegrationStatuslitiko, litiko.Eskhata.OfficialDocument.IntegrationStatuslitiko.Success))
       {
         litiko.Eskhata.ApprovalTasks.As(approvalTask).ExchangeDocIdlitiko = null;
         litiko.Eskhata.ApprovalTasks.As(approvalTask).Save();

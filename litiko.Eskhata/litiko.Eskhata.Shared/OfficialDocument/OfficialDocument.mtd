@@ -225,6 +225,11 @@
           "NameGuid": "ced241c7-6796-484d-b73f-4e7f31f7ff8c",
           "Name": "Success",
           "Code": "Success"
+        },
+        {
+          "NameGuid": "7cbdb903-08c7-4cde-b682-64b0392bb490",
+          "Name": "Error",
+          "Code": "Error"
         }
       ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",

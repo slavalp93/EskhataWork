@@ -39,7 +39,9 @@
     "IntegrationMethodNotFound",
     "ExchangeDocumentNotFound",
     "ExchangeDocumentIsLocked",
-    "DocumentIsLocked"
+    "DocumentIsLocked",
+    "ErrorIntegration",
+    "UnknownError"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "eb8e3edf-6cf2-4f67-93db-925497728389",
