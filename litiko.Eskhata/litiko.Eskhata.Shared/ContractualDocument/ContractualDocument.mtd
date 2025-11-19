@@ -1044,7 +1044,8 @@
   "ResourcesKeys": [
     "CheckCounterpartyPropertiesMessage",
     "CounterpartryInfo",
-    "ReservtionNumberIsRequired"
+    "ReservtionNumberIsRequired",
+    "NeedToFillCounterpartyProperties"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "707c35e2-8440-4c48-956c-7819c9dc0e08",

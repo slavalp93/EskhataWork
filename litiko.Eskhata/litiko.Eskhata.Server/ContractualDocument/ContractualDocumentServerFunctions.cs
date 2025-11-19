@@ -26,50 +26,129 @@ namespace litiko.Eskhata.Server
     /// </summary>
     [Remote(IsPure = true)]
     public List<string> CheckCounterpartyProperties(ICounterparty counterparty)
-    {      
-      var invalidProperties = new List<string>();      
-      if (counterparty != null)
+    {
+      var invalidProperties = new List<string>();
+      if (counterparty == null)
+        return invalidProperties;
+
+      var objType = counterparty.GetType().GetFinalType();
+      var objMetadata = objType.GetEntityMetadata();
+
+      // Кеш свойств по имени
+      var propertiesByName = objMetadata.Properties
+        .ToDictionary(p => p.Name, p => p); // Dictionary<string, Sungero.Metadata.PropertyMetadata>
+
+      var requsitesList = new List<string>();
+      if (Companies.Is(counterparty))
       {
-        var objType = counterparty.GetType().GetFinalType();        
-        var objMetadata = objType.GetEntityMetadata();        
+        requsitesList.Add("Name");
+        requsitesList.Add("LegalName");
+        requsitesList.Add("TIN");
+        requsitesList.Add("OKFSlitiko");
+        requsitesList.Add("OKONHlitiko");
+        requsitesList.Add("OKVEDlitiko");
+        requsitesList.Add("EINlitiko");
+        requsitesList.Add("OKOPFlitiko");
+        requsitesList.Add("City");
+        requsitesList.Add("AddressTypelitiko");
+        requsitesList.Add("LegalAddress");
+      }
+      else if (People.Is(counterparty))
+      {
+        requsitesList.Add("LastName");
+        requsitesList.Add("FirstName");
+        requsitesList.Add("MiddleName");
+        requsitesList.Add("TIN");
+        requsitesList.Add("SINlitiko");
+        requsitesList.Add("Sex");
+        requsitesList.Add("DateOfBirth");
+        requsitesList.Add("City");
+        requsitesList.Add("AddressTypelitiko");
+        requsitesList.Add("LegalAddress");
         
-        // Список отслеживаемых свойств
-        var requsitesList = new List<string>();
-        if (Companies.Is(counterparty))        
+        requsitesList.Add("IdentityKind");
+        requsitesList.Add("IdentitySeries");
+        requsitesList.Add("IdentityNumber");
+        requsitesList.Add("IdentityDateOfIssue");
+        requsitesList.Add("IdentityExpirationDate");
+        requsitesList.Add("IdentityAuthority");
+      }
+      else if (Banks.Is(counterparty))
+      {
+        requsitesList.Add("Name");
+        requsitesList.Add("LegalName");
+        requsitesList.Add("BIC");
+        requsitesList.Add("City");
+        requsitesList.Add("AddressTypelitiko");
+        requsitesList.Add("LegalAddress");
+      }
+
+      // ⬇️ ВАЖНО: оставляем в списке только реально существующие свойства
+      requsitesList = requsitesList
+        .Where(name => propertiesByName.ContainsKey(name))
+        .ToList();
+
+      // Базовая проверка обязательных реквизитов
+      foreach (var propertyName in requsitesList)
+      {
+        if (!IsFilled(counterparty, propertiesByName, propertyName))
+          invalidProperties.Add(GetLocalizedName(propertiesByName, propertyName));
+      }
+
+      // (Account + Bank) ИЛИ AccountEskhatalitiko для Companies/People
+      if (Companies.Is(counterparty) || People.Is(counterparty))
+      {
+        var hasAccountEsk = IsFilled(counterparty, propertiesByName, "AccountEskhatalitiko");
+        var hasAccount    = IsFilled(counterparty, propertiesByName, "Account");
+        var hasBank       = IsFilled(counterparty, propertiesByName, "Bank");
+
+        if (!hasAccountEsk)
         {
-          requsitesList.Add("TIN");
-          requsitesList.Add("EINlitiko");
-          requsitesList.Add("LegalAddress");
-          requsitesList.Add("Phones");
-          requsitesList.Add("Email");
-          requsitesList.Add("Account");
-          requsitesList.Add("Bank");
+          if (!hasAccount)
+            invalidProperties.Add(GetLocalizedName(propertiesByName, "Account"));
+
+          if (!hasBank)
+            invalidProperties.Add(GetLocalizedName(propertiesByName, "Bank"));
         }
-        if (People.Is(counterparty))
+      }
+
+      // CorrespondentAccount ИЛИ AccountEskhatalitiko для Banks
+      if (Banks.Is(counterparty))
+      {
+        var hasCorrAccount = IsFilled(counterparty, propertiesByName, "CorrespondentAccount");
+        var hasAccountEsk  = IsFilled(counterparty, propertiesByName, "AccountEskhatalitiko");
+
+        if (!hasCorrAccount && !hasAccountEsk)
         {
-          requsitesList.Add("LastNameTGlitiko");
-          requsitesList.Add("FirstNameTGlitiko");
-          requsitesList.Add("MiddleNameTGlitiko");
-          requsitesList.Add("LegalAddress");
-          requsitesList.Add("TIN");
-          requsitesList.Add("EINlitiko");                    
-          requsitesList.Add("Account");
-          requsitesList.Add("Bank");
-        }        
-                
-        var properties = objMetadata.Properties.Where(p => requsitesList.Contains(p.Name));      
-        foreach (var propertyMetadata in properties)
-        {          
-          if (propertyMetadata.PropertyType != Sungero.Metadata.PropertyType.Collection)
-          {
-            var propertyValue = propertyMetadata.GetValue(counterparty);
-            if (propertyValue == null)
-              invalidProperties.Add(propertyMetadata.GetLocalizedName());
-          }
+          invalidProperties.Add(GetLocalizedName(propertiesByName, "CorrespondentAccount"));
+          invalidProperties.Add(GetLocalizedName(propertiesByName, "AccountEskhatalitiko"));
         }
       }
       
       return invalidProperties;
+    }
+
+    private bool IsFilled(ICounterparty counterparty, IDictionary<string, Sungero.Metadata.PropertyMetadata> propertiesByName, string propertyName)
+    {
+      Sungero.Metadata.PropertyMetadata prop;
+      
+      if (!propertiesByName.TryGetValue(propertyName, out prop))
+        return false;
+      
+      if (prop.PropertyType == Sungero.Metadata.PropertyType.Collection)
+        return false;
+      
+      return prop.GetValue(counterparty) != null;
+    }
+    
+    private string GetLocalizedName(IDictionary<string, Sungero.Metadata.PropertyMetadata> propertiesByName, string propertyName)
+    {
+      Sungero.Metadata.PropertyMetadata prop;
+      
+      if (propertiesByName.TryGetValue(propertyName, out prop))
+        return prop.GetLocalizedName();
+      
+      return propertyName;
     }
     
     /// <summary>

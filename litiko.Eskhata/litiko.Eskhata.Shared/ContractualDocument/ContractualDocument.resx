@@ -68,4 +68,8 @@ Tax non-resident: {1}{4}Review date:       {3}</value>
   <data name="ReservtionNumberIsRequired" xml:space="preserve">
     <value>For standard documents, a reservation number is required.</value>
   </data>
+  <data name="NeedToFillCounterpartyProperties" xml:space="preserve">
+    <value>The following counterparty properties must be filled in:
+{0}</value>
+  </data>
 </root>

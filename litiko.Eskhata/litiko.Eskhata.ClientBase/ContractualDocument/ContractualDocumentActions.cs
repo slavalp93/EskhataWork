@@ -42,6 +42,13 @@ namespace litiko.Eskhata.Client
         throw new OperationCanceledException();
       }
       
+      List<string> invalidProperties = Functions.ContractualDocument.Remote.CheckCounterpartyProperties(_obj, litiko.Eskhata.Counterparties.As(_obj.Counterparty));
+      if (invalidProperties.Any())
+      {        
+        Dialogs.ShowMessage(Eskhata.ContractualDocuments.Resources.NeedToFillCounterpartyPropertiesFormat(string.Join(", ", invalidProperties)), MessageType.Warning);
+        throw new OperationCanceledException();        
+      }
+      
       base.SendForApproval(e);
     }
 
