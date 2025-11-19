@@ -72,13 +72,13 @@
           "Name": "MainGroup",
           "ColumnDefinitions": [
             {
-              "Percentage": 47.16
+              "Percentage": 48.09
             },
             {
-              "Percentage": 32.47
+              "Percentage": 33.11
             },
             {
-              "Percentage": 18.43
+              "Percentage": 18.79
             }
           ]
         },
