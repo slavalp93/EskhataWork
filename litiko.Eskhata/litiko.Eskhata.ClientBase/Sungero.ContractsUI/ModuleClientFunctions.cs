@@ -20,11 +20,11 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
 
       var message = new System.Text.StringBuilder();
       message.AppendLine("📦 Импорт контрагентов завершён.");
-    
+      
       // Общие данные
       message.AppendLine($"📦 Всего контрагентов в файле: {result.TotalCount}");
       message.AppendLine($"✅ Всего успешно импортировано: {result.ImportedCount}");
-    
+      
       // Компании
       message.AppendLine();
       message.AppendLine("🏢 Компании:");
@@ -66,31 +66,46 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
 
     public virtual void ImportContract()
     {
-      // Вызов удалённого метода и получение результата
-      var result = litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.ImportContractsFromXmlUI();
-
-      // Формирование сообщения для пользователя
-      var message = new System.Text.StringBuilder();
-
-      message.AppendLine("📦 Импорт договоров завершён.");
-      message.AppendLine($"📦 Всего документов в файле: {result.TotalCount}");
-      
-      message.AppendLine($"✅ Успешно импортировано: {result.ImportedCount}");
-
-      if (result.Errors.Any())
+      try
       {
-        message.AppendLine();
-        message.AppendLine("⚠️ Ошибки импорта:");
-        foreach (var error in result.Errors)
-          message.AppendLine(" • " + error);
-      }
-      else
-      {
-        message.AppendLine();
-        message.AppendLine("Все документы успешно импортированы без ошибок ✅");
-      }
+        // Запуск удалённого импорта
+        var result = litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.ImportContractsFromXmlUI();
 
-      Dialogs.ShowMessage(message.ToString());
+        // Формирование финального сообщения
+        var message = new System.Text.StringBuilder();
+        message.AppendLine("📦 Импорт договоров завершён.");
+        message.AppendLine($"📄 Всего документов в файле: {result.TotalCount}");
+        message.AppendLine($"✅ Успешно импортировано: {result.ImportedCount}");
+
+        if (result.Errors.Any())
+        {
+          message.AppendLine();
+          message.AppendLine("⚠️ Возникли ошибки при импорте:");
+
+          foreach (var error in result.Errors)
+            message.AppendLine(" • " + error);
+
+          message.AppendLine();
+          message.AppendLine("Проверьте лог или XML-файл.");
+        }
+        else
+        {
+          message.AppendLine();
+          message.AppendLine("Все документы успешно импортированы без ошибок 🎉");
+        }
+
+        // Показ результата
+        Dialogs.ShowMessage(message.ToString(), MessageType.Information);
+      }
+      catch (Exception ex)
+      {
+        // Ловим фатальные ошибки
+        Logger.Error($"Critical error while importing contracts: {ex.Message}", ex);
+
+        Dialogs.ShowMessage(
+          $"❌ Критическая ошибка при импорте договоров:\n{ex.Message}\nПодробности доступны в логах.",
+          MessageType.Error);
+      }
     }
   }
 }

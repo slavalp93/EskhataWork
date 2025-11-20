@@ -12,6 +12,7 @@ namespace litiko.Eskhata.Module.Contracts.Structures.Module
     public List<string> Errors { get; set; }
     public int ImportedCount { get; set; }
     public int TotalCount { get; set; }
+    //public List<string> Skipped {get; set;}
   }
   
   /// <summary>

@@ -1,163 +1,289 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sungero.Core;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
-using Sungero.CoreEntities;
 using litiko.Eskhata.Module.Parties.Structures.Module;
+using Sungero.Core;
+using Sungero.CoreEntities;
 
 namespace litiko.Eskhata.Module.Parties.Server
 {
   partial class ModuleFunctions
-  {[Public, Remote]
+  {
+    /*[Public, Remote]
+    public IResultImportCounterpartyXml ImportCounterpartyFromXml()
+    {
+      var result =
+        litiko.Eskhata.Module.Parties.Structures.Module.ResultImportCounterpartyXml.Create();
+      result.Errors = new List<string>();
+      // SkippedEntities больше не нужен в этой логике, так как мы либо создаем, либо обновляем
+      result.ImportedCount = 0; // Будет считать только НОВЫХ
+      result.TotalCompanies = 0; // Всего компаний в XML
+      result.ImportedCompanies = 0; // Новых компаний
+      result.TotalPersons = 0; // Всего персон в XML
+      result.ImportedPersons = 0; // Новых персон
+
+      Logger.Debug("Import counterparties from XML - Start");
+
+      var xmlPathFile = "Counterparty.xml";
+
+      if (!System.IO.File.Exists(xmlPathFile))
+      {
+        result.Errors.Add($"Файл '{xmlPathFile}' не найден");
+        Logger.Error($"XML File {xmlPathFile} is not found");
+        return result;
+      }
+
+      try
+      {
+        XDocument xDoc = XDocument.Load(xmlPathFile);
+        var counterpartyElements = xDoc.Descendants("Counterparty").ToList();
+
+        if (!counterpartyElements.Any())
+        {
+          result.Errors.Add("В файле нет элементов <Counterparty> для импорта");
+          Logger.Error("No <Counterparty> elements found");
+          return result;
+        }
+
+        Logger.DebugFormat(
+          "Found {0} <Counterparty> nodes in XML.",
+          counterpartyElements.Count
+         );
+
+        for (int i = 0; i < counterpartyElements.Count; i++)
+        {
+          var counterpartyNode = counterpartyElements[i];
+          result.TotalCount++;
+
+          try
+          {
+            var companies = counterpartyNode.Elements("Company").ToList();
+            var persons = counterpartyNode.Elements("Person").ToList();
+
+            foreach (var companyElement in companies)
+            {
+              var company = ParseCompany(companyElement);
+            }
+
+            foreach (var personElement in persons)
+            {
+              var person = ParsePerson(personElement);
+            }
+
+          }
+          catch (Exception ex)
+          {
+            result.Errors.Add($"Ошибка при обработке Counterparty №{i + 1}: {ex.Message}");
+          }
+        }
+      }
+      catch (Exception ex)
+      {
+        // Если произошла любая ошибка, откатываем все сделанные изменения
+        Logger.Error("General error during Counterparty import, transaction rolled back.",ex);
+        result.Errors.Add($"Критическая ошибка импорта, все изменения отменены: {ex.Message}");
+      }
+      result.TotalCount = result.TotalCompanies + result.TotalPersons;
+      Logger.DebugFormat("Import counterparties finished. Total processed: {0}, Created: {1}, Errors: {2}",result.TotalCount,result.ImportedCount,result.Errors.Count);
+
+      return result;
+    }*/
+
+    /*private List<object> ParseCounterparty(XElement counterpartyRoot)
+    {
+      var result = new List<object>();
+
+      if (counterpartyRoot == null)
+      {
+        Logger.Debug("ParseCounterparty: <Counterparty> not found");
+        return result;
+      }
+
+      // Берём ВСЕ дочерние элементы, сохраняя порядок в XML
+      var nodes = counterpartyRoot.Elements().ToList();
+
+      foreach (var node in nodes)
+      {
+        try
+        {
+          switch (node.Name.LocalName)
+          {
+            case "Company":
+              var company = ParseCompany(node);
+              if (company != null)
+                result.Add(company);
+              break;
+
+            case "Person":
+              var person = ParsePerson(node);
+              if (person != null)
+                result.Add(person);
+              break;
+
+            default:
+              Logger.Debug($"ParseCounterparty: Unknown element <{node.Name}>");
+              break;
+          }
+        }
+        catch (Exception ex)
+        {
+          Logger.Error($"ParseCounterparty: error processing <{node.Name}>: {ex.Message}", ex);
+        }
+      }
+
+      return result;
+    }*/
+[Public, Remote]
 public IResultImportCounterpartyXml ImportCounterpartyFromXml()
 {
     var result = litiko.Eskhata.Module.Parties.Structures.Module.ResultImportCounterpartyXml.Create();
     result.Errors = new List<string>();
-    result.SkippedEntities = new List<string>();
     result.ImportedCount = 0;
-    result.TotalCount = 0;
     result.ImportedCompanies = 0;
-    result.TotalCompanies = 0;
     result.ImportedPersons = 0;
+    result.TotalCompanies = 0;
     result.TotalPersons = 0;
 
-    Logger.Debug("Import counterparties from XML - Start");
+    Logger.Debug("ImportCounterpartyFromXml: Start");
 
     var xmlPathFile = "Counterparty.xml";
 
     if (!System.IO.File.Exists(xmlPathFile))
     {
         result.Errors.Add($"Файл '{xmlPathFile}' не найден");
-        Logger.Error($"XML File {xmlPathFile} is not found");
         return result;
     }
 
     try
     {
-        XDocument xDoc = XDocument.Load(xmlPathFile);
-        var counterpartyElements = xDoc.Descendants("Counterparty").ToList();
+        var xDoc = XDocument.Load(xmlPathFile);
 
-        if (!counterpartyElements.Any())
+        var counterparty = xDoc.Element("Counterparty");
+        if (counterparty == null)
         {
-            result.Errors.Add("В файле нет элементов <Counterparty> для импорта");
-            Logger.Error("No <Counterparty> elements found");
+            result.Errors.Add("Корневой элемент <Counterparty> не найден.");
             return result;
         }
 
-        Logger.DebugFormat("Found {0} <Counterparty> nodes in XML.", counterpartyElements.Count);
+        // Берём ВСЕ дочерние элементы Company/Person в натуральном порядке
+        var nodes = counterparty.Elements().ToList();
+        Logger.Debug($"Found {nodes.Count} child nodes under <Counterparty>");
 
-        foreach (var node in counterpartyElements)
+        foreach (var node in nodes)
         {
-            result.TotalCount++;
-            if (node == null) continue;
-
             try
             {
-                var entities = ParseCounterparty(node);
-                if (entities == null || !entities.Any())
+                switch (node.Name.LocalName)
                 {
-                    result.Errors.Add($"Не удалось распарсить контрагента из элемента №{result.TotalCount}");
-                    continue;
-                }
-
-                foreach (var entity in entities)
-                {
-                    switch (entity)
+                    case "Company":
                     {
-                        case ICompany company:
-                            result.TotalCompanies++;
-                            if (company.Id > 0 && Companies.GetAll().Any(x => x.Id == company.Id))
+                        var company = ParseCompany(node);
+                        if (company != null)
+                        {
+                            bool isNew = company.State.IsInserted;
+
+                            company.Save();
+
+                            if (isNew)
+                            {
                                 result.ImportedCompanies++;
-                            else
-                                result.SkippedEntities.Add(company.Name);
-                            break;
+                                result.ImportedCount++;
+                            }
 
-                        case IPerson person:
-                            result.TotalPersons++;
-                            if (person.Id > 0 && Eskhata.People.GetAll().Any(x => x.Id == person.Id))
-                                result.ImportedPersons++;
-                            else
-                                result.SkippedEntities.Add(person.Name);
-                            break;
+                            result.TotalCompanies++;
+
+                            Logger.DebugFormat($"Created new Company with: " +
+                                               $"Id={company.Id}, " +
+                                               $"Name={company.Name}, " +
+                                               $"ExternalId={company.ExternalId}," +
+                                               $" INN={company.TIN}," +
+                                               $" LegalName={company.LegalName}," +
+                                               $" Inamelitiko={company.Inamelitiko}," +
+                                               $" Nonresident={company.Nonresident}," +
+                                               $" NUNonrezidentlitiko={company.NUNonrezidentlitiko}," +
+                                               $" TRRC={company.TRRC}," +
+                                               $" NCEO={company.NCEO}," +
+                                               $" OKOPFlitiko={(company.OKOPFlitiko != null ? company.OKOPFlitiko.ExternalId : "null")}," +
+                                               $" litiko={(company.OKFSlitiko != null ? company.OKFSlitiko.ExternalId : "null")}," +
+                                               $" RegNumlitiko={company.RegNumlitiko}," +
+                                               $" Numberslitiko={company.Numberslitiko}, " +
+                                               $"Businesslitiko={company.Businesslitiko}," +
+                                               $" EnterpriseTypelitiko={(company.EnterpriseTypelitiko != null ? company.EnterpriseTypelitiko.ExternalId : "null")}," +
+                                               $" Countrylitiko={(company.Countrylitiko != null ? company.Countrylitiko.ExternalIdlitiko : "null")}," +
+                                               $" PostalAddress={company.PostalAddress}," +
+                                               $" LegalAddress={company.LegalAddress}," +
+                                               $" Phones={company.Phones}," +
+                                               $" Email={company.Email}," +
+                                               $" Homepage={company.Homepage}," +
+                                               $" VATPayerlitiko={company.VATPayerlitiko}," +
+                                               $" AccountEskhatalitiko={company.AccountEskhatalitiko}," +
+                                               $" Account={company.Account}, Reliabilitylitiko={company.Reliabilitylitiko}");
+                            
+                        }
+                        break;
                     }
-                }
 
-                // Общее количество реально импортированных
-                result.ImportedCount = result.ImportedCompanies + result.ImportedPersons;
+                    case "Person":
+                    {
+                        var person = ParsePerson(node);
+                        if (person != null)
+                        {
+                            bool isNew = person.State.IsInserted;
+
+                            person.Save();
+
+                            if (isNew)
+                            {
+                                result.ImportedPersons++;
+                                result.ImportedCount++;
+                            }
+
+                            result.TotalPersons++;
+                        }
+                        break;
+                    }
+
+                    default:
+                        Logger.Debug($"Unknown tag <{node.Name.LocalName}> inside <Counterparty>");
+                        break;
+                }
             }
             catch (Exception ex)
             {
-                Logger.Error($"Error parsing Counterparty №{result.TotalCount}: {ex.Message}");
-                result.Errors.Add($"Ошибка при импорте контрагента №{result.TotalCount}: {ex.Message}");
+                var msg = $"Ошибка при обработке элемента <{node.Name}>: {ex.Message}";
+                result.Errors.Add(msg);
+                Logger.Error(msg, ex);
             }
         }
+
+        result.TotalCount = result.TotalCompanies + result.TotalPersons;
     }
     catch (Exception ex)
     {
-        Logger.Error($"General error during Counterparty import: {ex.Message}");
-        result.Errors.Add($"Общая ошибка импорта: {ex.Message}");
+        var error = $"Критическая ошибка импорта: {ex.Message}";
+        result.Errors.Add(error);
+        Logger.Error(error, ex);
     }
 
-    Logger.DebugFormat("Import counterparties finished. Total: {0}, Imported: {1}, Errors: {2}",
-        result.TotalCount, result.ImportedCount, result.Errors.Count);
+    Logger.DebugFormat(
+        "Import finished. Total={0}, New={1}, Errors={2}",
+        result.TotalCount,
+        result.ImportedCount,
+        result.Errors.Count
+    );
 
     return result;
 }
 
 
-
-
-    private List<object> ParseCounterparty(XElement counterpartyElement)
-    {
-      var parsedEntities = new List<object>();
-      if (counterpartyElement == null)
-      {
-        Logger.Debug("No <Counterparty> element found.");
-        return parsedEntities;
-      }
-
-      // --- Companies ---
-      foreach (var companyElement in counterpartyElement.Elements("Company"))
-      {
-        try
-        {
-          var company = ParseCompany(companyElement);
-          if (company != null)
-            parsedEntities.Add(company);
-        }
-        catch (Exception ex)
-        {
-          Logger.Error($"Error parsing Company: {ex.Message}");
-        }
-      }
-
-      // --- Persons ---
-      foreach (var personElement in counterpartyElement.Elements("Person"))
-      {
-        try
-        {
-          var person = ParsePerson(personElement); // должен быть аналог ParseCompany
-          if (person != null)
-            parsedEntities.Add(person);
-        }
-        catch (Exception ex)
-        {
-          Logger.Error($"Error parsing Person: {ex.Message}");
-        }
-      }
-
-      return parsedEntities;
-    }
-
-    
     private ICompany ParseCompany(XElement companyElement)
     {
-      if(companyElement == null)
+      if (companyElement == null)
         return null;
-      
+
       var isId = companyElement.Element("ID")?.Value;
       var isExternalD = companyElement.Element("ExternalD")?.Value;
       var isName = companyElement.Element("Name")?.Value.Trim();
@@ -171,8 +297,12 @@ public IResultImportCounterpartyXml ImportCounterpartyFromXml()
       var isOKPO = companyElement.Element("KOD_OKPO")?.Value;
       var isOKOPF = companyElement.Element("FORMA")?.Value;
       var isOKFS = companyElement.Element("OWNERSHIP")?.Value;
-      var isCodeOKONHelements =companyElement.Element("CODE_OKONH").Elements("element") ?? Enumerable.Empty<XElement>();
-      var isCodeOKVEDelements = companyElement.Element("CODE_OKVED").Elements("element") ?? Enumerable.Empty<XElement>();
+      var isCodeOKONHelements =
+        companyElement.Element("CODE_OKONH").Elements("element")
+        ?? Enumerable.Empty<XElement>();
+      var isCodeOKVEDelements =
+        companyElement.Element("CODE_OKVED").Elements("element")
+        ?? Enumerable.Empty<XElement>();
       var isRegistnum = companyElement.Element("REGIST_NUM")?.Value;
       var isNumbers = companyElement.Element("NUMBERS")?.Value;
       var isBusiness = companyElement.Element("BUSINESS")?.Value;
@@ -181,6 +311,9 @@ public IResultImportCounterpartyXml ImportCounterpartyFromXml()
       var isPostAdress = companyElement.Element("PostAdress")?.Value;
       var isLegalAdress = companyElement.Element("LegalAdress")?.Value;
       var isPhone = companyElement.Element("Phone")?.Value;
+      var isCity = companyElement.Element("City")?.Value; // EXternalId from City
+      var isStreet = companyElement.Element("Street")?.Value;
+      var isBuildingNumber = companyElement.Element("BuildingNumber")?.Value;
       var isEmail = companyElement.Element("Email")?.Value;
       var isWebSite = companyElement.Element("WebSite")?.Value;
       var isTaxNonResident = companyElement.Element("TaxNonResident")?.Value;
@@ -189,10 +322,13 @@ public IResultImportCounterpartyXml ImportCounterpartyFromXml()
       var isCorrAcc = companyElement.Element("CorrAcc")?.Value;
       var isInernalAcc = companyElement.Element("InternalAcc")?.Value;
 
-      var company = litiko.Eskhata.Companies.GetAll().FirstOrDefault(x =>
-                                                                     (!string.IsNullOrEmpty(isExternalD) && x.ExternalId == isExternalD) ||
-                                                                     (!string.IsNullOrEmpty(isINN) && x.TIN == isINN));
-      
+      var company = litiko
+        .Eskhata.Companies.GetAll()
+        .FirstOrDefault(x =>
+                        (!string.IsNullOrEmpty(isExternalD) && x.ExternalId == isExternalD)
+                        || (!string.IsNullOrEmpty(isINN) && x.TIN == isINN)
+                       );
+
       //var company = litiko.Eskhata.Companies.GetAll().FirstOrDefault(x => x.ExternalId == isExternalD || x.TIN == isINN);
 
       if (company != null)
@@ -201,14 +337,20 @@ public IResultImportCounterpartyXml ImportCounterpartyFromXml()
         return company;
       }
 
-      company = litiko.Eskhata.Companies.Create();
-      company.ExternalId = isExternalD;
-      company.Name = isName;
-      company.TIN = isINN;
+      bool isNew = company == null;
+
+      if (isNew)
+      {
+        company = litiko.Eskhata.Companies.Create();
+        company.ExternalId = isExternalD;
+        company.Name = isName;
+        company.TIN = isINN;
+      }
+
       company.LegalName = isLongName;
       company.Inamelitiko = isIName;
       company.Nonresident = ParseBoolSafe(isRezident);
-      company.NUNonrezidentlitiko = ParseBoolSafe(isNunRezident);
+      company.NUNonrezidentlitiko = ParseBoolSafe(isNunRezident); 
       company.TRRC = isKPP;
       company.NCEO = isOKPO;
 
@@ -274,8 +416,24 @@ public IResultImportCounterpartyXml ImportCounterpartyFromXml()
       company.PostalAddress = isPostAdress;
       company.LegalAddress = isLegalAdress;
       company.Phones = isPhone;
+      
+      if (!string.IsNullOrEmpty(isCity))
+      {
+        var city = litiko.Eskhata.Cities.GetAll().FirstOrDefault(x => x.ExternalIdlitiko == isCity);
+        
+        if(city != null)
+          company.City = city;
+      }
+      
+      if (!string.IsNullOrEmpty(isStreet))
+        company.Streetlitiko = isStreet;
+      
+      if (!string.IsNullOrEmpty(isBuildingNumber))
+        company.HouseNumberlitiko = isBuildingNumber;
+      
       company.Email = isEmail;
       company.Homepage = isWebSite;
+      company.NUNonrezidentlitiko = ParseBoolSafe(isTaxNonResident);
       company.VATPayerlitiko = ParseBoolSafe(isVatPayer);
       company.AccountEskhatalitiko = isInernalAcc;
       company.Account = isCorrAcc;
@@ -286,9 +444,11 @@ public IResultImportCounterpartyXml ImportCounterpartyFromXml()
         switch (isReliability.Trim())
         {
           case "Надежный":
+          case"Высокий":
             reliabilityEnum = litiko.Eskhata.Company.Reliabilitylitiko.Reliable;
             break;
           case "Не надежный":
+          case "Низкая":
             reliabilityEnum = litiko.Eskhata.Company.Reliabilitylitiko.NotReliable;
             break;
           default:
@@ -299,8 +459,8 @@ public IResultImportCounterpartyXml ImportCounterpartyFromXml()
         if (reliabilityEnum.HasValue)
           company.Reliabilitylitiko = reliabilityEnum;
       }
-      company.Save();
-      Logger.DebugFormat($"Create new Company: {00}", company.Name);
+      if (isNew)
+        Logger.DebugFormat("Prepare to create new Company: Name={0}, ExternalId={1}, INN={2}", company.Name, company.ExternalId, company.TIN);
       return company;
     }
 
@@ -308,7 +468,7 @@ public IResultImportCounterpartyXml ImportCounterpartyFromXml()
     {
       if (personElement == null)
         return null;
-      
+
       var isExternalD = personElement.Element("ExternalID")?.Value;
       var isLastName = personElement.Element("LastName")?.Value;
       var isFirstName = personElement.Element("FirstName")?.Value;
@@ -340,17 +500,32 @@ public IResultImportCounterpartyXml ImportCounterpartyFromXml()
       var isIdentityDocument = personElement.Element("IdentityDocuments")?.Element("element");
 
       var person = Eskhata.People.GetAll().FirstOrDefault(x => x.ExternalId == isExternalD);
-      
+
       if (person != null)
       {
-        Logger.DebugFormat("Person found: External={0} Id={1} Name={2}", isExternalD, person.Id, person.Name);
+        Logger.DebugFormat(
+          "Person found: External={0} Id={1} Name={2}",
+          isExternalD,
+          person.Id,
+          person.Name
+         );
         return person; // если есть — возвращаем найденного, не создаём дубликат
       }
-      
-      person = Eskhata.People.Create();
-      person.ExternalId = isExternalD;
-      Logger.DebugFormat("Create new Person with ExternalId:{0}. Id:{1}", isExternalD, person.Id);
-      
+
+      bool isNew = person == null;
+
+      if (isNew)
+      {
+        person = Eskhata.People.Create();
+        person.ExternalId = isExternalD;
+      }
+
+      Logger.DebugFormat(
+        "Create new Person with ExternalId:{0}. Id:{1}",
+        isExternalD,
+        person.Id
+       );
+
       if (!string.IsNullOrEmpty(isLastName))
         person.LastName = isLastName.Trim();
       else
@@ -359,12 +534,18 @@ public IResultImportCounterpartyXml ImportCounterpartyFromXml()
       if (!string.IsNullOrEmpty(isFirstName))
         person.FirstName = isFirstName.Trim();
       else
-        Logger.DebugFormat("No FirstName found for Person with ExternalId:{0}", isExternalD);
+        Logger.DebugFormat(
+          "No FirstName found for Person with ExternalId:{0}",
+          isExternalD
+         );
 
       if (!string.IsNullOrEmpty(isMiddleName))
         person.MiddleName = isMiddleName.Trim();
       else
-        Logger.DebugFormat("No MiddleName found for Person with ExternalId:{0}", isExternalD);
+        Logger.DebugFormat(
+          "No MiddleName found for Person with ExternalId:{0}",
+          isExternalD
+         );
 
       if (!string.IsNullOrEmpty(isRezident))
         person.Nonresident = ParseBoolSafe(isRezident);
@@ -379,17 +560,20 @@ public IResultImportCounterpartyXml ImportCounterpartyFromXml()
       if (parsedDate.HasValue)
         person.DateOfBirth = parsedDate.Value;
       else
-        Logger.DebugFormat("No valid DateOfBirth found for Person with ExternalId:{0}", isExternalD);
+        Logger.DebugFormat(
+          "No valid DateOfBirth found for Person with ExternalId:{0}",
+          isExternalD
+         );
 
       if (isSex == "М")
         person.Sex = Eskhata.Person.Sex.Male;
-
       else if (isSex == "Ж")
         person.Sex = Eskhata.Person.Sex.Female;
 
       if (!string.IsNullOrEmpty(isFamilyStatus))
       {
-        var familyStatus = litiko.NSI.FamilyStatuses.GetAll()
+        var familyStatus = litiko
+          .NSI.FamilyStatuses.GetAll()
           .FirstOrDefault(x => x.ExternalId == isFamilyStatus);
         if (familyStatus != null)
           person.FamilyStatuslitiko = familyStatus;
@@ -401,40 +585,83 @@ public IResultImportCounterpartyXml ImportCounterpartyFromXml()
       foreach (var n in isCodeOKONHelements)
       {
         var code = n?.Value;
-        if (string.IsNullOrEmpty(code)) continue;
-        var okonh = litiko.NSI.OKONHs.GetAll().FirstOrDefault(x => x.ExternalId == code);
-        if (okonh != null && !person.OKONHlitiko.Any(x => Equals(x.OKONH, okonh)))
+        if (string.IsNullOrWhiteSpace(code))
+          continue;
+
+        // Ищем справочник OKONH
+        var okonh = litiko.NSI.OKONHs.GetAll()
+          .FirstOrDefault(x => x.ExternalId == code);
+
+        if (okonh == null)
+        {
+          Logger.Debug($"OKONH with ExternalId={code} not found.");
+          continue;
+        }
+
+        // Проверяем, есть ли уже такая запись в коллекции
+        var exists = person.OKONHlitiko
+          .Any(x => x.OKONH != null && x.OKONH.Id == okonh.Id);
+
+        if (!exists)
         {
           var rec = person.OKONHlitiko.AddNew();
           rec.OKONH = okonh;
+          Logger.Debug($"Added OKONH '{code}' to person '{person.Name}'.");
+        }
+        else
+        {
+          Logger.Debug($"OKONH '{code}' already exists for person '{person.Name}'.");
         }
       }
+
 
       foreach (var n in isCodeOKVEDelements)
       {
         var code = n?.Value;
-        if (string.IsNullOrEmpty(code)) continue;
-        var okved = litiko.NSI.OKVEDs.GetAll().FirstOrDefault(x => x.ExternalId == code);
-        if (okved != null && !person.OKVEDlitiko.Any(x => Equals(x.OKVED, okved)))
+        if (string.IsNullOrWhiteSpace(code))
+          continue;
+
+        // Ищем справочник OKVED
+        var okved = litiko.NSI.OKVEDs.GetAll()
+          .FirstOrDefault(x => x.ExternalId == code);
+
+        if (okved == null)
+        {
+          Logger.Debug($"OKVED with ExternalId={code} not found.");
+          continue;
+        }
+
+        // Проверяем, уже есть?
+        var exists = person.OKVEDlitiko
+          .Any(x => x.OKVED != null && x.OKVED.Id == okved.Id);
+
+        if (!exists)
         {
           var rec = person.OKVEDlitiko.AddNew();
           rec.OKVED = okved;
+          Logger.Debug($"Added OKVED '{code}' to person '{person.Name}'.");
+        }
+        else
+        {
+          Logger.Debug($"OKVED '{code}' already exists for person '{person.Name}'.");
         }
       }
-      
+
+
       if (!string.IsNullOrEmpty(isIIN))
         person.SINlitiko = int.Parse(isIIN);
 
       if (!string.IsNullOrEmpty(isCountry))
       {
-        var country = litiko.Eskhata.Countries.GetAll().FirstOrDefault(x => x.ExternalIdlitiko == isCountry);
+        var country = litiko
+          .Eskhata.Countries.GetAll()
+          .FirstOrDefault(x => x.ExternalIdlitiko == isCountry);
         if (country != null)
           person.Citizenship = country;
       }
 
       if (!string.IsNullOrEmpty(isDocBirthPlace))
         person.BirthPlace = isDocBirthPlace.Trim();
-
 
       if (!string.IsNullOrEmpty(isPostAdress))
         person.PostalAddress = isPostAdress.Trim();
@@ -445,14 +672,14 @@ public IResultImportCounterpartyXml ImportCounterpartyFromXml()
       if (!string.IsNullOrEmpty(isPhone))
         person.Phones = isPhone.Trim();
 
-      /*if (!string.IsNullOrEmpty(isCity))
+      if (!string.IsNullOrEmpty(isCity))
       {
         var city = litiko.Eskhata.Cities.GetAll().FirstOrDefault(x => x.ExternalIdlitiko == isCity);
         
         if(city != null)
           person.City = city;
-      }*/
-      
+      }
+
       if (!string.IsNullOrEmpty(isStreet))
         person.Streetlitiko = isStreet.Trim();
 
@@ -487,31 +714,45 @@ public IResultImportCounterpartyXml ImportCounterpartyFromXml()
         if (reliabilityEnum.HasValue)
           person.Reliabilitylitiko = reliabilityEnum;
       }
-
-      if(!string.IsNullOrEmpty(isCorrAcc))
+      
+      if (!string.IsNullOrEmpty(isCorrAcc))
         person.Account = isCorrAcc.Trim();
 
       if (!string.IsNullOrEmpty(isInternalAcc))
         person.AccountEskhatalitiko = isInternalAcc.Trim();
-      
-      var identityElement = personElement.Element("IdentityDocument") ?? personElement.Element("IdentityDocuments")?.Element("element");
+
+      var identityElement =
+        personElement.Element("IdentityDocument")
+        ?? personElement.Element("IdentityDocuments")?.Element("element");
       if (identityElement != null)
       {
-        var idSid = identityElement.Element("TYPE")?.Value ?? identityElement.Element("ID")?.Value;
+        var idSid =
+          identityElement.Element("TYPE")?.Value ?? identityElement.Element("ID")?.Value;
         if (!string.IsNullOrEmpty(idSid))
         {
-          var identityKind = Sungero.Parties.IdentityDocumentKinds.GetAll().FirstOrDefault(x => x.SID == idSid);
-          if (identityKind != null) person.IdentityKind = identityKind;
+          var identityKind = Sungero
+            .Parties.IdentityDocumentKinds.GetAll()
+            .FirstOrDefault(x => x.SID == idSid);
+          if (identityKind != null)
+            person.IdentityKind = identityKind;
           person.IdentityNumber = identityElement.Element("NUM")?.Value;
           person.IdentitySeries = identityElement.Element("SER")?.Value;
           DateTime tmp;
-          if (Calendar.TryParseDate(identityElement.Element("DATE_BEGIN")?.Value, out tmp)) person.IdentityDateOfIssue = tmp;
-          if (Calendar.TryParseDate(identityElement.Element("DATE_END")?.Value, out tmp)) person.IdentityExpirationDate = tmp;
+          if (
+            Calendar.TryParseDate(identityElement.Element("DATE_BEGIN")?.Value, out tmp)
+           )
+            person.IdentityDateOfIssue = tmp;
+          if (Calendar.TryParseDate(identityElement.Element("DATE_END")?.Value, out tmp))
+            person.IdentityExpirationDate = tmp;
         }
       }
-      
-      person.Save();
-      Logger.DebugFormat($"Create new Person: {0}", person.Name);
+
+      if (isNew)
+        Logger.DebugFormat(
+          "Prepared to create new Person: Name='{0}', ExternalId='{1}'",
+          person.Name,
+          isExternalD
+         );
       return person;
     }
 
