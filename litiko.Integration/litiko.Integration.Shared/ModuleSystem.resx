@@ -241,4 +241,10 @@
   <data name="JobDescription_afd7847974b545bc9c0203d19c1004c8" xml:space="preserve">
     <value>Integration. Cities</value>
   </data>
+  <data name="JobDisplayName_6a7d8717813444d7912077e8be09693f" xml:space="preserve">
+    <value>ImportContracts</value>
+  </data>
+  <data name="JobDescription_6a7d8717813444d7912077e8be09693f" xml:space="preserve">
+    <value>ImportContracts</value>
+  </data>
 </root>

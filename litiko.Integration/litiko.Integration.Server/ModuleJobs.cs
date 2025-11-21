@@ -8,12 +8,18 @@ namespace litiko.Integration.Server
 {
   public class ModuleJobs
   {
+
+    public virtual void ImportContracts()
+    {
+      litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.ImportContractsFromXmlUI();
+    }
+    
     /// <summary>
     /// Интеграция. Экспорт обновлений по действующим договорам
     /// </summary>
-    public virtual void ExportUpdatesForActiveContracts()      
+    public virtual void ExportUpdatesForActiveContracts()
     {
-      var logPrefix = "Integration. ExportUpdatesForActiveContracts.";      
+      var logPrefix = "Integration. ExportUpdatesForActiveContracts.";
       Logger.DebugFormat("{0} Start.", logPrefix);
       
       var documents = litiko.Eskhata.Contracts.GetAll()
@@ -25,14 +31,14 @@ namespace litiko.Integration.Server
         var integrationMethod = IntegrationMethods.GetAll().Where(x => x.Name == Constants.Module.IntegrationMethods.R_DR_SET_CONTRACT).FirstOrDefault();
         if (integrationMethod == null)
           throw new AppliedCodeException(SendDocumentStages.Resources.IntegrationMethodNotFoundFormat(Constants.Module.IntegrationMethods.R_DR_SET_CONTRACT));
-      
+        
         Logger.DebugFormat("{0} Found {1} documents.", logPrefix, documents.Count());
         foreach (var document in documents)
         {
           Transactions.Execute(
             () =>
             {
-              if (!Locks.TryLock(document))              
+              if (!Locks.TryLock(document))
                 Logger.ErrorFormat("{0} Document with Id:{1} is locked.", logPrefix, document.Id);
               else
               {
@@ -41,19 +47,19 @@ namespace litiko.Integration.Server
                   var exchDoc = Integration.ExchangeDocuments.Create();
                   exchDoc.IntegrationMethod = integrationMethod;
                   exchDoc.IsOnline = false;
-                  exchDoc.Save();                  
+                  exchDoc.Save();
                   
                   var errorMessage = Functions.Module.SendRequestToIS(exchDoc, 0, document);
                   if (!string.IsNullOrEmpty(errorMessage))
-                    Logger.ErrorFormat("{0} Document with Id:{1} not sent. Error: {2}", logPrefix, document.Id, errorMessage);                  
+                    Logger.ErrorFormat("{0} Document with Id:{1} not sent. Error: {2}", logPrefix, document.Id, errorMessage);
                   else
-                  {                    
+                  {
                     document.IntegrationStatuslitiko = litiko.Eskhata.OfficialDocument.IntegrationStatuslitiko.Send;
                     document.UpdateRquiredlitiko = false;
                     document.Save();
                     
                     Logger.DebugFormat("{0} Document successfully sent. Id:{1}.", logPrefix, document.Id);
-                  }                                    
+                  }
                 }
                 catch (Exception ex)
                 {
@@ -61,18 +67,18 @@ namespace litiko.Integration.Server
                   //throw ex;
                 }
                 finally
-                {                  
+                {
                   Locks.Unlock(document);
-                }                
+                }
               }
             }
-          );
-        }        
+           );
+        }
       }
       else
         Logger.DebugFormat("{0} Documents not found.", logPrefix);
       
-      Logger.DebugFormat("{0} Finish.", logPrefix);      
+      Logger.DebugFormat("{0} Finish.", logPrefix);
     }
 
     /// <summary>
@@ -182,7 +188,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetOKVED()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_OKVED);        
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_OKVED);
     }
 
     /// <summary>
@@ -190,7 +196,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetOKOPF()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_OKOPF);       
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_OKOPF);
     }
 
     /// <summary>
@@ -198,7 +204,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetOKONH()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_OKONH);         
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_OKONH);
     }
 
     /// <summary>
@@ -206,7 +212,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetOKFS()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_OKFS);         
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_OKFS);
     }
 
     /// <summary>
@@ -214,7 +220,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetMaterialStatuses()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_MARITALSTATUSES);       
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_MARITALSTATUSES);
     }
 
     /// <summary>
@@ -222,7 +228,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetEcolog()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_ECOLOG);       
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_ECOLOG);
     }
 
     /// <summary>
@@ -230,7 +236,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetCountries()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_COUNTRIES);      
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_COUNTRIES);
     }
 
     /// <summary>
@@ -246,7 +252,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetEmployees()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_EMPLOYEES);            
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_EMPLOYEES);
     }
 
     /// <summary>
@@ -254,14 +260,14 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetBusinessUnits()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_BUSINESSUNITS);                  
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_BUSINESSUNITS);
     }
 
     /// <summary>
     /// Интеграция. Подразделения
     /// </summary>
     public virtual void GetDepartments()
-    {                
+    {
       litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_DEPART);
     }
     
@@ -270,7 +276,7 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetCities()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_CITIES); 
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_CITIES);
     }
 
     /// <summary>
@@ -278,8 +284,9 @@ namespace litiko.Integration.Server
     /// </summary>
     public virtual void GetRegions()
     {
-      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_REGIONS); 
-    }    
+      litiko.Integration.Functions.Module.BackgroundProcessStart(Constants.Module.IntegrationMethods.R_DR_GET_REGIONS);
+    }
 
+    
   }
 }

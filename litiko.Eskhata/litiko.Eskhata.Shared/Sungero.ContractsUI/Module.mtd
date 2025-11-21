@@ -61,6 +61,14 @@
       },
       {
         "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "d6c89a82-8f84-44c4-a495-52e2666080ee",
+        "Name": "Deletelitiko",
+        "FunctionName": "DeleteData",
+        "GroupId": "136b5b7b-053a-4ca1-8f05-79af1fc2dffb",
+        "PreviousItemGuid": "1cb2641b-ccf1-4ed5-bdde-3a5be7c2ad40"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
         "NameGuid": "e7eaa9ed-7c42-42f1-a42f-8a79c502e4ee",
         "Name": "Importlitiko",
         "FunctionName": "ImportContract",

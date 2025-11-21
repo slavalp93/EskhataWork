@@ -13,6 +13,50 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
 {
   partial class ModuleFunctions
   {
+
+    public virtual void DeleteData()
+    {
+      var dialog = Dialogs.CreateTaskDialog("Очистка данных",
+          "Вы уверены, что хотите УДАЛИТЬ тестовые договоры ('РБ-1...')?",
+          MessageType.Question);
+      
+      // Добавляем кнопку удаления
+      var deleteBtn = dialog.Buttons.AddCustom("Удалить");
+      dialog.Buttons.AddCancel();
+      
+      if (dialog.Show() != deleteBtn) return;
+
+      // 1. Запрашиваем список ID (Сервер)
+      var ids = litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.GetTestContractIds();
+      
+      if (!ids.Any())
+      {
+        Dialogs.ShowMessage("Договоры для удаления не найдены.");
+        return;
+      }
+
+      int success = 0;
+      int errors = 0;
+      
+      // 2. Запускаем цикл НА КЛИЕНТЕ
+      // Удаляем по одному. Ошибки не останавливают процесс.
+      foreach (var id in ids)
+      {
+        try
+        {
+          litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.DeleteContractById(id);
+          success++;
+        }
+        catch (Exception ex)
+        {
+          errors++;
+          // Можно вывести ошибку в консоль браузера, если нужно
+        }
+      }
+
+      Dialogs.ShowMessage($"Готово!\n✅ Удалено: {success}\n❌ Ошибок: {errors}", MessageType.Information);
+    }
+    
     public virtual void ImportCounterparties()
     {
       // Вызов удалённого метода и получение результата
@@ -68,42 +112,23 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
     {
       try
       {
-        // Запуск удалённого импорта
-        var result = litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.ImportContractsFromXmlUI();
+        // Мы просто вызываем метод. Он ничего не возвращает (void), поэтому "var result =" убираем.
+        litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.ImportContractsFromXmlUI();
 
-        // Формирование финального сообщения
-        var message = new System.Text.StringBuilder();
-        message.AppendLine("📦 Импорт договоров завершён.");
-        message.AppendLine($"📄 Всего документов в файле: {result.TotalCount}");
-        message.AppendLine($"✅ Успешно импортировано: {result.ImportedCount}");
-
-        if (result.Errors.Any())
-        {
-          message.AppendLine();
-          message.AppendLine("⚠️ Возникли ошибки при импорте:");
-
-          foreach (var error in result.Errors)
-            message.AppendLine(" • " + error);
-
-          message.AppendLine();
-          message.AppendLine("Проверьте лог или XML-файл.");
-        }
-        else
-        {
-          message.AppendLine();
-          message.AppendLine("Все документы успешно импортированы без ошибок 🎉");
-        }
-
-        // Показ результата
-        Dialogs.ShowMessage(message.ToString(), MessageType.Information);
+        // Сообщаем пользователю, что процесс ушел в фон
+        Dialogs.ShowMessage(
+          "🚀 Импорт договоров успешно запущен в фоновом режиме.\n\n" +
+          "Вы можете продолжать работу. По завершении обработки (через несколько минут) " +
+          "вам придет уведомление (Задание) с детальной статистикой и списком ошибок.",
+          MessageType.Information);
       }
       catch (Exception ex)
       {
-        // Ловим фатальные ошибки
-        Logger.Error($"Critical error while importing contracts: {ex.Message}", ex);
+        // Этот блок сработает, только если не найден файл или упал сам запуск асинхронного обработчика
+        Logger.Error($"Critical error while starting import: {ex.Message}", ex);
 
         Dialogs.ShowMessage(
-          $"❌ Критическая ошибка при импорте договоров:\n{ex.Message}\nПодробности доступны в логах.",
+          $"❌ Не удалось запустить импорт:\n{ex.Message}\nПроверьте наличие файла и права доступа.",
           MessageType.Error);
       }
     }

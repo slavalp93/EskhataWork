@@ -103,4 +103,7 @@
   <data name="CoverDescription_ContractStatementListlitiko" xml:space="preserve">
     <value>Содержит список всех актов выполненных работ</value>
   </data>
+  <data name="CoverAction_ImportCounterpartieslitiko" xml:space="preserve">
+    <value>Миграция контрагентов с файла XML</value>
+  </data>
 </root>

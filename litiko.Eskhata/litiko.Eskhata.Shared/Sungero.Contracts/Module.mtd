@@ -3,7 +3,28 @@
   "NameGuid": "ae370d4f-ecf5-471d-849a-50b97b187ebb",
   "Name": "Contracts",
   "AssociatedGuid": "78d05f91-7585-42b9-addc-5b14478d4680",
-  "AsyncHandlers": [],
+  "AsyncHandlers": [
+    {
+      "NameGuid": "c28a06bb-86a0-42d6-a3ba-bfc7b9921726",
+      "Name": "ImportContractsAsynclitiko",
+      "DelayPeriod": 1,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "MaxRetryCount": 5,
+      "Parameters": [
+        {
+          "NameGuid": "4c060377-c5b3-4a78-a65a-2f36649c3502",
+          "Name": "XmlFilePath",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "e421f818-914a-48f1-b0ee-aec12644656c",
+          "Name": "UserId",
+          "ParameterType": "Double"
+        }
+      ]
+    }
+  ],
   "BaseGuid": "f9d15b1c-2784-4c84-8348-1e162d70b988",
   "ClientBaseAssemblyName": "litiko.Eskhata.ClientBase",
   "ClientBaseNamespace": "litiko.Eskhata.Module.Contracts.ClientBase",
@@ -35,11 +56,32 @@
   "NeedResetAppliedCache": true,
   "PublicFunctions": [
     {
+      "Name": "DeleteContractById",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "id",
+          "ParameterType": "global::System.Int64",
+          "ParameterTypeFullName": "System.Int64"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "GetTestContractIds",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::System.Int64>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
       "Name": "ImportContractsFromXmlUI",
       "IsRemote": true,
       "Placement": "Shared",
-      "ReturnType": "global::litiko.Eskhata.Module.Contracts.Structures.Module.IResultImportXmlUI",
-      "ReturnTypeFullName": "litiko.Eskhata.Module.Contracts.Structures.Module.IResultImportXmlUI"
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
     }
   ],
   "PublicStructures": [
