@@ -337,13 +337,6 @@
       "GenerateHandler": true,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T04:15:00"
-    },
-    {
-      "NameGuid": "6a7d8717-8134-44d7-9120-77e8be09693f",
-      "Name": "ImportContracts",
-      "GenerateHandler": true,
-      "MonthSchedule": "Monthly",
-      "StartAt": "1753-01-01T08:30:00"
     }
   ],
   "PublicConstants": [

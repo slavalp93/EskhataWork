@@ -14,32 +14,40 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
   partial class ModuleFunctions
   {
 
-    public virtual void DeleteData()
+    public virtual void DeleteByKeyword()
     {
-      var dialog = Dialogs.CreateTaskDialog("Очистка данных",
-          "Вы уверены, что хотите УДАЛИТЬ тестовые договоры ('РБ-1...')?",
-          MessageType.Question);
+      // 1. Запрашиваем ключевое слово
+      var dialog = Dialogs.CreateInputDialog("Удаление по ключевому слову");
+      var keywordInput = dialog.AddString("Введите слово для поиска:", true);
       
-      // Добавляем кнопку удаления
-      var deleteBtn = dialog.Buttons.AddCustom("Удалить");
-      dialog.Buttons.AddCancel();
-      
-      if (dialog.Show() != deleteBtn) return;
+      if (dialog.Show() != DialogButtons.Ok) return;
 
-      // 1. Запрашиваем список ID (Сервер)
-      var ids = litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.GetTestContractIds();
-      
+      var keyword = keywordInput.Value;
+
+      // 2. Ищем ID на сервере
+      var ids = litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.GetContractIdsByKeyword(keyword);
+
       if (!ids.Any())
       {
-        Dialogs.ShowMessage("Договоры для удаления не найдены.");
+        Dialogs.ShowMessage($"По запросу '{keyword}' ничего не найдено.");
         return;
       }
+      
+      var confirmDialog = Dialogs.CreateTaskDialog("Внимание!",
+                                                   $"Найдено документов: {ids.Count}.\nКритерий поиска: '{keyword}'\n\nУДАЛИТЬ ИХ БЕЗВОЗВРАТНО?",
+                                                   MessageType.Question);
+
+      var btnYes = confirmDialog.Buttons.AddYes();
+      confirmDialog.Buttons.AddNo();
+
+      // Если нажали НЕ "Да" — выходим
+      if (confirmDialog.Show() != btnYes) return;
 
       int success = 0;
       int errors = 0;
-      
-      // 2. Запускаем цикл НА КЛИЕНТЕ
-      // Удаляем по одному. Ошибки не останавливают процесс.
+      string lastError = "";
+
+      // 4. Запускаем удаление
       foreach (var id in ids)
       {
         try
@@ -50,13 +58,17 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
         catch (Exception ex)
         {
           errors++;
-          // Можно вывести ошибку в консоль браузера, если нужно
+          lastError = ex.Message;
         }
       }
 
-      Dialogs.ShowMessage($"Готово!\n✅ Удалено: {success}\n❌ Ошибок: {errors}", MessageType.Information);
+      // 5. Итог
+      var msg = $"Готово!\n✅ Удалено: {success}\n❌ Ошибок: {errors}";
+      if (errors > 0) msg += $"\nПример ошибки: {lastError}";
+      
+      Dialogs.ShowMessage(msg, errors > 0 ? MessageType.Warning : MessageType.Information);
     }
-    
+
     public virtual void ImportCounterparties()
     {
       // Вызов удалённого метода и получение результата
@@ -64,11 +76,11 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
 
       var message = new System.Text.StringBuilder();
       message.AppendLine("📦 Импорт контрагентов завершён.");
-      
+
       // Общие данные
       message.AppendLine($"📦 Всего контрагентов в файле: {result.TotalCount}");
       message.AppendLine($"✅ Всего успешно импортировано: {result.ImportedCount}");
-      
+
       // Компании
       message.AppendLine();
       message.AppendLine("🏢 Компании:");
@@ -108,28 +120,89 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
     }
 
 
-    public virtual void ImportContract()
+    /* public virtual void ImportContract()
     {
       try
       {
-        // Мы просто вызываем метод. Он ничего не возвращает (void), поэтому "var result =" убираем.
-        litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.ImportContractsFromXmlUI();
+        // Запуск удалённого импорта
+        var result = litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.ImportContractsFromXmlUI();
 
-        // Сообщаем пользователю, что процесс ушел в фон
-        Dialogs.ShowMessage(
-          "🚀 Импорт договоров успешно запущен в фоновом режиме.\n\n" +
-          "Вы можете продолжать работу. По завершении обработки (через несколько минут) " +
-          "вам придет уведомление (Задание) с детальной статистикой и списком ошибок.",
-          MessageType.Information);
+        // Формирование финального сообщения
+        var message = new System.Text.StringBuilder();
+        message.AppendLine("📦 Импорт договоров завершён.");
+        message.AppendLine($"📄 Всего документов в файле: {result.TotalCount}");
+        message.AppendLine($"✅ Успешно импортировано: {result.ImportedCount}");
+
+        if (result.Errors.Any())
+        {
+          message.AppendLine();
+          message.AppendLine("⚠️ Возникли ошибки при импорте:");
+
+          foreach (var error in result.Errors)
+            message.AppendLine(" • " + error);
+
+          message.AppendLine();
+          message.AppendLine("Проверьте лог или XML-файл.");
+        }
+        else
+        {
+          message.AppendLine();
+          message.AppendLine("Все документы успешно импортированы без ошибок 🎉");
+        }
+
+        // Показ результата
+        Dialogs.ShowMessage(message.ToString(), MessageType.Information);
       }
       catch (Exception ex)
       {
-        // Этот блок сработает, только если не найден файл или упал сам запуск асинхронного обработчика
-        Logger.Error($"Critical error while starting import: {ex.Message}", ex);
+        // Ловим фатальные ошибки
+        Logger.Error($"Critical error while importing contracts: {ex.Message}", ex);
 
         Dialogs.ShowMessage(
-          $"❌ Не удалось запустить импорт:\n{ex.Message}\nПроверьте наличие файла и права доступа.",
+          $"❌ Критическая ошибка при импорте договоров:\n{ex.Message}\nПодробности доступны в логах.",
           MessageType.Error);
+      }
+    }*/
+
+    public virtual void ImportContractsFromUI()
+    {
+      var dialog = Dialogs.CreateInputDialog("Импорт договоров (XML)");
+      
+      var fileInput = dialog.AddFileSelect("Выберите файл XML", true);
+      fileInput.WithFilter("XML", "xml");
+
+      if (dialog.Show() != DialogButtons.Ok) return;
+
+      byte[] fileBytes = fileInput.Value.Content;
+      string fileName = fileInput.Value.Name;
+
+      string fileBase64 = Convert.ToBase64String(fileBytes);
+      try
+      {
+        var result = litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.ImportContractsFromXmlUI(fileBase64, fileName);
+
+        var sb = new System.Text.StringBuilder();
+        sb.AppendLine($"Всего записей в файле: {result.TotalCount}");
+        sb.AppendLine("--------------------------------");
+        sb.AppendLine($"✅ Создано новых: {result.ImportedCount}");
+        sb.AppendLine($"🔄 Пропущено (дубли): {result.DuplicateCount}");
+        sb.AppendLine($"❌ Ошибок: {result.Errors.Count}");
+        
+
+        if (result.Errors.Any())
+        {
+          sb.AppendLine("\nСписок ошибок (первые 10):");
+          foreach(var err in result.Errors.Take(10))
+            sb.AppendLine("- " + err);
+        }
+
+        var icon = result.Errors.Any() ? MessageType.Warning : MessageType.Information;
+        
+        Dialogs.ShowMessage(sb.ToString(), icon);
+      }
+      catch (Exception ex)
+      {
+        Dialogs.ShowMessage($"Ошибка: {ex.Message}", MessageType.Error);
       }
     }
   }
