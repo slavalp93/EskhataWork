@@ -68,4 +68,8 @@
   <data name="ReservtionNumberIsRequired" xml:space="preserve">
     <value>Для типовых документов требуется зарезервировать номер</value>
   </data>
+  <data name="NeedToFillCounterpartyProperties" xml:space="preserve">
+    <value>Требуется заполнить следующие свойства контрагента:
+{0}</value>
+  </data>
 </root>

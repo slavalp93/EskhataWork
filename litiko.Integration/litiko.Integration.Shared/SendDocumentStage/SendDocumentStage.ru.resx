@@ -76,4 +76,12 @@
   <data name="DocumentIsLocked" xml:space="preserve">
     <value>Документ {0} заблокирован.</value>
   </data>
+  <data name="ErrorIntegration" xml:space="preserve">
+    <value>Ошибка интеграции с внешней системой: 
+{0}
+Обратитесь к администратору</value>
+  </data>
+  <data name="UnknownError" xml:space="preserve">
+    <value>Неизвестная ошибка</value>
+  </data>
 </root>

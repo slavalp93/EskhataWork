@@ -106,4 +106,7 @@
   <data name="Action_ExportToABSlitikoConfirmationDescription" xml:space="preserve">
     <value />
   </data>
+  <data name="Enum_IntegrationStatuslitiko_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
 </root>

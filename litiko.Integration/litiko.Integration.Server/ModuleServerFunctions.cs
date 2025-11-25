@@ -2123,44 +2123,30 @@ namespace litiko.Integration.Server
         
         if(isCodeOKONHelements.Any())
         {
-          var elementValues = isCodeOKONHelements.Select(x => x.Value).ToList();
-          if(company.OKONHlitiko.Select(x => x.OKONH.ExternalId).Any(x => !elementValues.Contains(x)))
+          var firstValue = isCodeOKONHelements.Select(x => x.Value).FirstOrDefault();
+          if (firstValue != null)
           {
-            company.OKONHlitiko.Clear();
-            Logger.DebugFormat("Change OKONHlitiko: Clear");
-          }
-          
-          foreach (var isCodeOKONH in isCodeOKONHelements)
-          {
-            var okonh = litiko.NSI.OKONHs.GetAll().Where(x => x.ExternalId == isCodeOKONH.Value).FirstOrDefault();
-            if(okonh != null && !company.OKONHlitiko.Any(x => Equals(x.OKONH, okonh)))
+            var nsiRecord = litiko.NSI.OKONHs.GetAll().FirstOrDefault(x => x.ExternalId == firstValue);
+            if(nsiRecord != null && !Equals(company.OKONHlitiko, nsiRecord))
             {
-              var newRecord = company.OKONHlitiko.AddNew();
-              newRecord.OKONH = okonh;
-              Logger.DebugFormat("Change OKONHlitiko: added:{0}", okonh.Name);
+              Logger.DebugFormat("Change OKONHlitiko: current:{0}, new:{1}", company.OKONHlitiko?.Name, nsiRecord.Name);
+              company.OKONHlitiko = nsiRecord;               
             }
-          }
+          }                       
         }
         
         if(isCodeOKVEDelements.Any())
         {
-          var elementValues = isCodeOKVEDelements.Select(x => x.Value).ToList();
-          if(company.OKVEDlitiko.Select(x => x.OKVED.ExternalId).Any(x => !elementValues.Contains(x)))
+          var firstValue = isCodeOKVEDelements.Select(x => x.Value).FirstOrDefault();
+          if (firstValue != null)
           {
-            company.OKVEDlitiko.Clear();
-            Logger.DebugFormat("Change OKVEDlitiko: Clear");
-          }
-          
-          foreach (var isCodeOKVED in isCodeOKVEDelements)
-          {
-            var okved = litiko.NSI.OKVEDs.GetAll().Where(x => x.ExternalId == isCodeOKVED.Value).FirstOrDefault();
-            if(okved != null && !company.OKVEDlitiko.Any(x => Equals(x.OKVED, okved)))
+            var nsiRecord = litiko.NSI.OKVEDs.GetAll().FirstOrDefault(x => x.ExternalId == firstValue);
+            if(nsiRecord != null && !Equals(company.OKVEDlitiko, nsiRecord))
             {
-              var newRecord = company.OKVEDlitiko.AddNew();
-              newRecord.OKVED = okved;
-              Logger.DebugFormat("Change OKVEDlitiko: added:{0}", okved.Name);
+              Logger.DebugFormat("Change OKVEDlitiko: current:{0}, new:{1}", company.OKVEDlitiko?.Name, nsiRecord.Name);
+              company.OKVEDlitiko = nsiRecord;               
             }
-          }
+          }                        
         }
         
         if(!string.IsNullOrEmpty(isRegistnum) && company.RegNumlitiko != isRegistnum)
@@ -3495,8 +3481,8 @@ namespace litiko.Integration.Server
       var isDateOfBirth = personData.Element("DATE_PERS")?.Value;
       var isFamilyStatus = personData.Element("MARIGE_ST")?.Value;
       var isINN = personData.Element("INN")?.Value;
-      var isCodeOKONHelements = personData.Element("CODE_OKONH").Elements("element");
-      var isCodeOKVEDelements = personData.Element("CODE_OKVED").Elements("element");
+      //var isCodeOKONHelements = personData.Element("CODE_OKONH").Elements("element");
+      //var isCodeOKVEDelements = personData.Element("CODE_OKVED").Elements("element");
       var isCountry = personData.Element("COUNTRY")?.Value;
       var isRegion = personData.Element("Region")?.Value;
       var isCity = personData.Element("City")?.Value;      
@@ -3663,7 +3649,8 @@ namespace litiko.Integration.Server
         Logger.DebugFormat("Change TIN: current:{0}, new:{1}", person.TIN, isINN);
         person.TIN = isINN;                        
       }      
-        
+      
+      /*      
       if(isCodeOKONHelements.Any())
       {
         var elementValues = isCodeOKONHelements.Select(x => x.Value).ToList();
@@ -3703,8 +3690,9 @@ namespace litiko.Integration.Server
             newRecord.OKVED = okved;
             Logger.DebugFormat("Change OKVEDlitiko: added:{0}", okved.Name);
           }
-        }
-      }
+        }              
+      }      
+      */
       
       if (!string.IsNullOrEmpty(isCountry))
       {
@@ -3774,29 +3762,23 @@ namespace litiko.Integration.Server
           Logger.DebugFormat("Change VATPayerlitiko: current:{0}, new:{1}", person.VATPayerlitiko.GetValueOrDefault(), VATPayer);
           person.VATPayerlitiko = VATPayer;           
         }               
-      }
-      
-      if (!string.IsNullOrEmpty(isIIN))
+      }            
+
+      if(!string.IsNullOrEmpty(isIIN) && person.SINlitiko != isIIN)
       {
-        int untIIN;
-        if (int.TryParse(isIIN, out untIIN) && person.SINlitiko != untIIN)
-        {
-          Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.SINlitiko, untIIN);
-          person.SINlitiko = untIIN;                  
-        }
-        else
-          Logger.ErrorFormat("Can`t convert to int value of IIN:{0}", isIIN);
+        Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.SINlitiko, isIIN);
+        person.SINlitiko = isIIN;       
       }
 
       if(!string.IsNullOrEmpty(isCorrAcc) && person.Account != isCorrAcc)
       {
-        Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.Account, isCorrAcc);
+        Logger.DebugFormat("Change Account: current:{0}, new:{1}", person.Account, isCorrAcc);
         person.Account = isCorrAcc;                        
       } 
 
       if(!string.IsNullOrEmpty(isInternalAcc) && person.AccountEskhatalitiko != isInternalAcc)
       {
-        Logger.DebugFormat("Change SINlitiko: current:{0}, new:{1}", person.AccountEskhatalitiko, isInternalAcc);
+        Logger.DebugFormat("Change AccountEskhatalitiko: current:{0}, new:{1}", person.AccountEskhatalitiko, isInternalAcc);
         person.AccountEskhatalitiko = isInternalAcc;                        
       } 
       
@@ -3997,7 +3979,7 @@ namespace litiko.Integration.Server
         var middleName      = person.MiddleName ?? "";
         var rezident        = ToYesNoNull(!person.Nonresident);
         var nuRezident      = ToYesNoNull(!person.NUNonrezidentlitiko);
-        var iName           = person.Inamelitiko ?? "";
+        //var iName           = person.Inamelitiko ?? "";
         var datePers        = person.DateOfBirth?.ToString("dd.MM.yyyy") ?? "";
         var sex             = person.Sex.HasValue ? person.Info.Properties.Sex.GetLocalizedValue(person.Sex.Value) : "";
         var marigeSt        = person.FamilyStatuslitiko?.ExternalId ?? "";
@@ -4005,6 +3987,7 @@ namespace litiko.Integration.Server
         var iin             = person.SINlitiko?.ToString() ?? "";
         var country         = litiko.Eskhata.Countries.As(person.Citizenship)?.ExternalIdlitiko ?? "";
         var docBirthPlace   = person.BirthPlace ?? "";
+        var addressType     = person.AddressTypelitiko?.ExternalId ?? "";
         var postAddress     = person.PostalAddress ?? "";
         var email           = person.Email ?? "";
         var phone           = person.Phones ?? "";
@@ -4012,10 +3995,11 @@ namespace litiko.Integration.Server
         var street          = person.Streetlitiko ?? "";
         var buildingNumber  = person.HouseNumberlitiko ?? "";
         var website         = person.Homepage ?? "";
-        var taxNonResident  = ToYesNoNull(person.NUNonrezidentlitiko);
-        var vatPayer        = ToYesNoNull(person.VATPayerlitiko);
-        var reliability     = person.Reliabilitylitiko.HasValue ? person.Info.Properties.Reliabilitylitiko.GetLocalizedValue(person.Reliabilitylitiko.Value) : ""; 
+        //var taxNonResident  = ToYesNoNull(person.NUNonrezidentlitiko);
+        //var vatPayer        = ToYesNoNull(person.VATPayerlitiko);
+        //var reliability     = person.Reliabilitylitiko.HasValue ? person.Info.Properties.Reliabilitylitiko.GetLocalizedValue(person.Reliabilitylitiko.Value) : ""; 
         var corrAcc         = person.Account ?? "";
+        var bank            = person.Bank?.ExternalId ?? "";
         var internalAcc     = person.AccountEskhatalitiko ?? "";
     
         var idDocId         = person.IdentityKind?.SID ?? "";        
@@ -4024,20 +4008,7 @@ namespace litiko.Integration.Server
         var idDocEnd        = person.IdentityExpirationDate?.ToString(dateFormat) ?? "";
         var idDocNum        = person.IdentityNumber ?? "";
         var idDocSer        = person.IdentitySeries ?? "";
-        var idDocWho        = person.IdentityAuthority ?? "";
-    
-        // ==========================
-        // Коллекции (OKONH, OKVED)
-        // ==========================
-        var codeOkonh = person.OKONHlitiko?.Any() == true
-            ? new XElement("CODE_OKONH",
-                person.OKONHlitiko.Select(c => new XElement("element", c.OKONH?.ExternalId ?? "")))
-            : null;
-    
-        var codeOkved = person.OKVEDlitiko?.Any() == true
-            ? new XElement("CODE_OKVED",
-                person.OKVEDlitiko.Select(c => new XElement("element", c.OKVED?.ExternalId ?? "")))
-            : null;
+        var idDocWho        = person.IdentityAuthority ?? "";    
     
         // ==========================
         // Формирование XML
@@ -4050,16 +4021,15 @@ namespace litiko.Integration.Server
             new XElement("MiddleName", middleName),
             new XElement("REZIDENT", rezident),
             new XElement("NU_REZIDENT", nuRezident),
-            new XElement("I_NAME", iName),
+            //new XElement("I_NAME", iName),
             new XElement("DATE_PERS", datePers),
             new XElement("SEX", sex),
             new XElement("MARIGE_ST", marigeSt),
             new XElement("INN", inn),
-            codeOkonh,
-            codeOkved,
             new XElement("IIN", iin),
             new XElement("COUNTRY", country),
             new XElement("DOC_BIRTH_PLACE", docBirthPlace),
+            new XElement("AdressType", addressType),
             new XElement("PostAdress", postAddress),
             new XElement("Email", email),
             new XElement("Phone", phone),
@@ -4067,15 +4037,16 @@ namespace litiko.Integration.Server
             new XElement("Street", street),
             new XElement("BuildingNumber", buildingNumber),
             new XElement("WebSite", website),
-            new XElement("TaxNonResident", taxNonResident),
-            new XElement("VATPayer", vatPayer),
-            new XElement("Reliability", reliability),
+            //new XElement("TaxNonResident", taxNonResident),
+            //new XElement("VATPayer", vatPayer),
+            //new XElement("Reliability", reliability),
             new XElement("CorrAcc", corrAcc),
+            new XElement("Bank", bank),
             new XElement("InternalAcc", internalAcc),
             new XElement("IdentityDocuments",
                 new XElement("element",
                     new XElement("ID", idDocId),
-                    new XElement("TYPE", idDocId),
+                    //new XElement("TYPE", idDocId),
                     new XElement("NAME", idDocName),
                     new XElement("DATE_BEGIN", idDocBegin),
                     new XElement("DATE_END", idDocEnd),
@@ -4111,13 +4082,14 @@ namespace litiko.Integration.Server
         var kodOkpo         = company.NCEO ?? "";
         var forma           = company.OKOPFlitiko?.ExternalId ?? "";
         var ownership       = company.OKFSlitiko?.ExternalId ?? "";
-        var iin             = company.SINlitiko?.ToString() ?? "";
+        //var iin             = company.SINlitiko?.ToString() ?? "";
         var registNum       = company.RegNumlitiko ?? "";
         var numbers         = company.Numberslitiko?.ToString() ?? "";
         var business        = company.Businesslitiko ?? "";
         var psRef           = company.EnterpriseTypelitiko?.ExternalId ?? "";
         var country         = company.Countrylitiko?.ExternalIdlitiko ?? "";
-        var postAddress     = company.PostalAddress ?? "";
+        //var postAddress     = company.PostalAddress ?? "";
+        var addressType     = company.AddressTypelitiko?.ExternalId ?? "";
         var legalAddress    = company.LegalAddress ?? "";
         var phone           = company.Phones ?? "";
         var city            = Eskhata.Cities.As(company.City)?.ExternalIdlitiko ?? "";
@@ -4125,24 +4097,15 @@ namespace litiko.Integration.Server
         var buildingNumber  = company.HouseNumberlitiko ?? "";
         var email           = company.Email ?? "";
         var website         = company.Homepage ?? "";
-        var taxNonResident  = ToYesNoNull(company.NUNonrezidentlitiko);
+        //var taxNonResident  = ToYesNoNull(company.NUNonrezidentlitiko);
         var vatPayer        = ToYesNoNull(company.VATPayerlitiko);
-        var reliability     = company.Reliabilitylitiko.HasValue ? company.Info.Properties.Reliabilitylitiko.GetLocalizedValue(company.Reliabilitylitiko.Value) : "";          
+        //var reliability     = company.Reliabilitylitiko.HasValue ? company.Info.Properties.Reliabilitylitiko.GetLocalizedValue(company.Reliabilitylitiko.Value) : "";          
         var corrAcc         = company.Account ?? "";
+        var bank            = company.Bank?.ExternalId ?? "";
         var internalAcc     = company.AccountEskhatalitiko ?? "";
-    
-        // ==========================
-        // Коллекции
-        // ==========================
-        var codeOkonh = company.OKONHlitiko?.Any() == true
-            ? new XElement("CODE_OKONH",
-                company.OKONHlitiko.Select(c => new XElement("element", c.OKONH?.ExternalId ?? "")))
-            : null;
-    
-        var codeOkved = company.OKVEDlitiko?.Any() == true
-            ? new XElement("CODE_OKVED",
-                company.OKVEDlitiko.Select(c => new XElement("element", c.OKVED.ExternalId ?? "")))
-            : null;
+        var code_OKONH      = company.OKONHlitiko?.ExternalId ?? "";
+        var code_OKVED      = company.OKVEDlitiko?.ExternalId ?? "";        
+        var ein             = company.EINlitiko ?? "";        
     
         // ==========================
         // Формирование XML
@@ -4160,15 +4123,16 @@ namespace litiko.Integration.Server
             new XElement("KOD_OKPO", kodOkpo),
             new XElement("FORMA", forma),
             new XElement("OWNERSHIP", ownership),
-            codeOkonh,
-            codeOkved,
-            new XElement("IIN", iin),
+            new XElement("CODE_OKONH", code_OKONH),
+            new XElement("CODE_OKVED", code_OKVED),
+            //new XElement("IIN", iin),
             new XElement("REGIST_NUM", registNum),
             new XElement("NUMBERS", numbers),
             new XElement("BUSINESS", business),
             new XElement("PS_REF", psRef),
             new XElement("COUNTRY", country),
-            new XElement("PostAdress", postAddress),
+            //new XElement("PostAdress", postAddress),
+            new XElement("AdressType", addressType),
             new XElement("LegalAdress", legalAddress),
             new XElement("Phone", phone),
             new XElement("City", city),
@@ -4176,11 +4140,13 @@ namespace litiko.Integration.Server
             new XElement("BuildingNumber", buildingNumber),
             new XElement("Email", email),
             new XElement("WebSite", website),
-            new XElement("TaxNonResident", taxNonResident),
+            //new XElement("TaxNonResident", taxNonResident),
             new XElement("VATPayer", vatPayer),
-            new XElement("Reliability", reliability),
+            //new XElement("Reliability", reliability),
             new XElement("CorrAcc", corrAcc),
-            new XElement("InternalAcc", internalAcc)
+            new XElement("Bank", bank),
+            new XElement("InternalAcc", internalAcc),
+            new XElement("EIN", ein)
         );
     }
     

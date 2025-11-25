@@ -60,6 +60,7 @@ namespace litiko.Integration.Client
             
       var exchDoc = Integration.PublicFunctions.Module.Remote.CreateExchangeDocument();
       exchDoc.IntegrationMethod = integrationMethod;
+      exchDoc.EntityId = entity.Id;
       exchDoc.IsOnline = true;
       exchDoc.Save();
       

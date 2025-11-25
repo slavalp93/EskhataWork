@@ -166,4 +166,7 @@
   <data name="Property_IsOnline" xml:space="preserve">
     <value>Online</value>
   </data>
+  <data name="Property_EntityId" xml:space="preserve">
+    <value>Entity id</value>
+  </data>
 </root>
