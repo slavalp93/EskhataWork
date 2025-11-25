@@ -18,16 +18,14 @@ namespace litiko.Eskhata.Module.Contracts.Server
     [Remote, Public]
     public IResultImportXmlUI ImportContractsFromXmlUI(string fileBase64, string fileName)
     {
-      // 1. Инициализация результата
       var result = litiko.Eskhata.Module.Contracts.Structures.Module.ResultImportXmlUI.Create();
       result.Errors = new List<string>();
       result.ImportedCount = 0;
       result.TotalCount = 0;
-      result.DuplicateCount = 0; // Убедитесь, что это поле есть в Структуре!
+      result.DuplicateCount = 0;
 
       Logger.DebugFormat("Start synchronous import from file: {0}", fileName);
 
-      // 2. Конвертация Base64 -> Byte[]
       byte[] fileBytes;
       try
       {
@@ -43,7 +41,6 @@ namespace litiko.Eskhata.Module.Contracts.Server
 
       try
       {
-        // 3. Чтение XML из памяти
         XDocument xDoc;
         using (var stream = new MemoryStream(fileBytes))
         {
@@ -62,7 +59,7 @@ namespace litiko.Eskhata.Module.Contracts.Server
 
         // =================================================================================
         // ЭТАП 1: КЕШИРОВАНИЕ ДАННЫХ (ОПТИМИЗАЦИЯ)
-        // Загружаем справочники в память 1 раз, чтобы не дергать БД 500 раз.
+        // Загружаем справочники в память 1 раз, чтобы не дергать БД
         // =================================================================================
         
         // Собираем все ExternalID из файла для поиска дублей
@@ -77,7 +74,7 @@ namespace litiko.Eskhata.Module.Contracts.Server
           .Where(x => !string.IsNullOrEmpty(x))
           .Distinct().ToList();
 
-        // Загружаем ID существующих договоров в HashSet для мгновенного поиска
+        // Загружаем ID существующих договоров для мгновенного поиска
         var existingContractsExtIds = Eskhata.Contracts.GetAll()
           .Where(x => xmlExternalIds.Contains(x.ExternalId))
           .Select(x => x.ExternalId)
@@ -123,7 +120,7 @@ namespace litiko.Eskhata.Module.Contracts.Server
             if (existingContractsExtIds.Contains(extId))
             {
               result.DuplicateCount++;
-              // Logger.Debug($"Дубликат пропущен: {extId}");
+              Logger.Debug($"Дубликат пропущен: {extId}");
               continue;
             }
 
@@ -178,12 +175,9 @@ namespace litiko.Eskhata.Module.Contracts.Server
       var extId = docXml.Element("ExternalD")?.Value?.Trim();
       var name = docXml.Element("Name")?.Value;
 
-      // 1. Создание карточки
       var contract = Eskhata.Contracts.Create();
       contract.ExternalId = extId;
       contract.Name = !string.IsNullOrEmpty(name) ? name : "Без имени";
-
-      // 2. Заполнение ССЫЛОЧНЫХ полей (Поиск в памяти - БЫСТРО)
       
       // Контрагент
       var cpId = docXml.Element("CounterpartyExternalId")?.Value?.Trim();
@@ -251,7 +245,7 @@ namespace litiko.Eskhata.Module.Contracts.Server
       if (!string.IsNullOrEmpty(freqName))
         contract.FrequencyOfPaymentlitiko = frequencies.FirstOrDefault(f => f.Name == freqName);
       
-      // 3. Заполнение ПРОСТЫХ полей
+      // Заполнение ПРОСТЫХ полей
       contract.Subject = docXml.Element("Subject")?.Value;
       contract.RBOlitiko = docXml.Element("RBO")?.Value;
       contract.ReasonForChangelitiko = docXml.Element("ChangeReason")?.Value;
@@ -282,12 +276,9 @@ namespace litiko.Eskhata.Module.Contracts.Server
       if (payMethod == "Предоплата") contract.PaymentMethodlitiko = litiko.Eskhata.Contract.PaymentMethodlitiko.Prepayment;
       else if (payMethod == "Постоплата") contract.PaymentMethodlitiko = litiko.Eskhata.Contract.PaymentMethodlitiko.Postpay;
 
-      // 4. Сохранение
       contract.Save();
       return contract;
     }
-
-    // --- ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ (HELPERS) ---
 
     private static DateTime? TryParseDate(string date)
     {
@@ -296,7 +287,6 @@ namespace litiko.Eskhata.Module.Contracts.Server
 
       DateTime result;
 
-      // Поддерживаем оба формата: 1.12.2025 и 01.12.2025
       string[] formats = { "dd.MM.yyyy", "d.MM.yyyy", "dd.M.yyyy", "d.M.yyyy" };
 
       if (DateTime.TryParseExact(date, formats,System.Globalization.CultureInfo.InvariantCulture,System.Globalization.DateTimeStyles.None,out result))
@@ -322,8 +312,6 @@ namespace litiko.Eskhata.Module.Contracts.Server
       return norm == "1" || norm == "true" || norm == "yes" || norm == "да";
     }
 
-    // --- МЕТОДЫ УДАЛЕНИЯ (Оставляем как вы просили) ---
-
     /// <summary>
     /// Поиск ID договоров по ключевому слову (Имя, Тема или ExternalId)
     /// </summary>
@@ -333,7 +321,6 @@ namespace litiko.Eskhata.Module.Contracts.Server
       if (string.IsNullOrWhiteSpace(keyword)) 
         return new List<long>();
 
-      // Ищем совпадение в Имени ИЛИ в Теме ИЛИ во Внешнем номере
       return Eskhata.Contracts.GetAll()
         .Where(c => (c.Name != null && c.Name.Contains(keyword)) || 
                     (c.Subject != null && c.Subject.Contains(keyword)) ||

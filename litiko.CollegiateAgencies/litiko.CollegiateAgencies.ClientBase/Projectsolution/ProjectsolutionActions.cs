@@ -9,52 +9,51 @@ namespace litiko.CollegiateAgencies.Client
 {
   partial class ProjectsolutionActions
   {
-   public virtual void TranslateTjToRu(Sungero.Domain.Client.ExecuteActionArgs e)
+    public virtual void TranslateTjToRu(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      var sourseSubject = _obj.SubjectTJ;
-      var sourseListened = _obj.ListenedTJ;
+      var inputs = new List<string>();
+      
+      inputs.Add(_obj.SubjectTJ ?? "");
+      inputs.Add(_obj.ListenedTJ ?? "");
+      
+      foreach(var d in _obj.Decided)
+        inputs.Add(d.DecisionTJ ?? "");
 
-//      if (string.IsNullOrWhiteSpace(sourseSubject))
-//      {
-//        e.AddWarning("Поле «Заголовок (TJ)» пустое.");
-//      }
-//      if (string.IsNullOrWhiteSpace(sourseListened))
-//      {
-//        e.AddWarning("Поле «Слушали (TJ)» пустое.");
-//      }
-//      if (!_obj.Decided.Any(d => !string.IsNullOrWhiteSpace(d.DecisionTJ)))
-//      {
-//        e.AddWarning("Поле «Решили (TJ)» пустое.");
-//      }
+      if (inputs.All(string.IsNullOrWhiteSpace))
+      {
+        Dialogs.NotifyMessage("Нет данных на таджикском языке для перевода.");
+        return;
+      }
 
       try
       {
-        // Заголовок
-        var translatedSubject = litiko.DocflowEskhata.PublicFunctions.Module.Remote.TranslateTjToRu(sourseSubject);
-        if (!string.IsNullOrWhiteSpace(translatedSubject))
-          _obj.Subject = translatedSubject;
+        var outputs = litiko.DocflowEskhata.PublicFunctions.Module.Remote.TranslateList(inputs, "tj->ru");
 
-        // Слушали
-        var translatedListened = litiko.DocflowEskhata.PublicFunctions.Module.Remote.TranslateTjToRu(sourseListened);
-        if (!string.IsNullOrWhiteSpace(translatedListened))
-          _obj.ListenedRU = translatedListened;
+        if (outputs.Count != inputs.Count)
+        {
+          e.AddWarning("Не удалось перевести данные (ошибка сервера).");
+          return;
+        }
 
-        // Постановили (Пункт решения)
+        int i = 0;
+        
+        if (!string.IsNullOrWhiteSpace(outputs[i])) _obj.Subject = outputs[i];
+        i++;
+
+        if (!string.IsNullOrWhiteSpace(outputs[i])) _obj.ListenedRU = outputs[i];
+        i++;
+
         foreach (var decided in _obj.Decided)
         {
-          if (!string.IsNullOrWhiteSpace(decided.DecisionTJ))
-          {
-            var translatedDecided = litiko.DocflowEskhata.PublicFunctions.Module.Remote.TranslateTjToRu(decided.DecisionTJ);
-            if (!string.IsNullOrWhiteSpace(translatedDecided))
-              decided.DecisionRU = translatedDecided;
-          }
+          if (!string.IsNullOrWhiteSpace(outputs[i])) decided.DecisionRU = outputs[i];
+          i++;
         }
 
         Dialogs.NotifyMessage("Перевод TJ->RU выполнен.");
       }
       catch (Exception ex)
       {
-        e.AddWarning("Ошибка перевода TJ->RU: " + ex.Message + ".");
+        e.AddWarning("Ошибка перевода TJ->RU: " + ex.Message);
       }
     }
 
@@ -63,40 +62,32 @@ namespace litiko.CollegiateAgencies.Client
       return true;
     }
 
-     public virtual void TranslateRuToEn(Sungero.Domain.Client.ExecuteActionArgs e)
+    public virtual void TranslateRuToEn(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      var sourceListened = _obj.ListenedRU;
+      var inputs = new List<string>();
+      inputs.Add(_obj.ListenedRU ?? "");
 
-//      if (string.IsNullOrWhiteSpace(sourceListened))
-//      {
-//        e.AddWarning("Поле «Слушали (RU)» не заполнено.");
-//      }
+      foreach(var d in _obj.Decided)
+        inputs.Add(d.DecisionRU ?? "");
 
-//      if (!_obj.Decided.Any(d => !string.IsNullOrWhiteSpace(d.DecisionRU)))
-//      {
-//        e.AddWarning("Поле «Решили (RU)» не заполнено.");
-//      }
+      if (inputs.All(string.IsNullOrWhiteSpace)) return;
 
       try
       {
-        // Слушали
-        if (!string.IsNullOrWhiteSpace(sourceListened))
-        {
-          var translatedListened = litiko.DocflowEskhata.PublicFunctions.Module.Remote.TranslateRuToEn(sourceListened);
-          if (!string.IsNullOrWhiteSpace(translatedListened))
-            _obj.ListenedEN = translatedListened;
-        }
+        var outputs = litiko.DocflowEskhata.PublicFunctions.Module.Remote.TranslateList(inputs, "ru->en");
 
-        // Постановили (Пункт решения)
+        if (outputs.Count != inputs.Count) return;
+
+        int i = 0;
+        if (!string.IsNullOrWhiteSpace(outputs[i])) _obj.ListenedEN = outputs[i];
+        i++;
+
         foreach (var decided in _obj.Decided)
         {
-          if (!string.IsNullOrWhiteSpace(decided.DecisionRU))
-          {
-            var translatedDecision = litiko.DocflowEskhata.PublicFunctions.Module.Remote.TranslateRuToEn(decided.DecisionRU);
-            if (!string.IsNullOrWhiteSpace(translatedDecision))
-              decided.DecisionEN = translatedDecision;
-          }
+          if (!string.IsNullOrWhiteSpace(outputs[i])) decided.DecisionEN = outputs[i];
+          i++;
         }
+        
         Dialogs.NotifyMessage("Перевод RU->EN выполнен.");
       }
       catch (Exception ex)
@@ -112,39 +103,42 @@ namespace litiko.CollegiateAgencies.Client
 
     public virtual void TranslateRuToTjToEn(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      var sourseSubject = _obj.Subject;
-      var sourseListened = _obj.ListenedRU;
+      var inputs = new List<string>();
+      inputs.Add(_obj.Subject ?? "");
+      inputs.Add(_obj.ListenedRU ?? "");
+      foreach(var d in _obj.Decided) inputs.Add(d.DecisionRU ?? "");
+
+      if (inputs.All(string.IsNullOrWhiteSpace))
+      {
+        Dialogs.NotifyMessage("Нет данных на русском языке.");
+        return;
+      }
 
       try
       {
-        // Заголовок
-        var translatedSubject = litiko.DocflowEskhata.PublicFunctions.Module.Remote.TranslateRuToTj(sourseSubject);
-        if (!string.IsNullOrWhiteSpace(translatedSubject))
-          _obj.SubjectTJ = translatedSubject;
-
-        // Слушали
-        var translatedListened = litiko.DocflowEskhata.PublicFunctions.Module.Remote.TranslateRuToTj(sourseListened);
-        if (!string.IsNullOrWhiteSpace(translatedListened))
-          _obj.ListenedTJ = translatedListened;
-
-        // Постановили (Пункт решения)
-        foreach (var decided in _obj.Decided)
+        var tjOutputs = litiko.DocflowEskhata.PublicFunctions.Module.Remote.TranslateList(inputs, "ru->tj");
+        
+        if (tjOutputs.Count == inputs.Count)
         {
-          if (!string.IsNullOrWhiteSpace(decided.DecisionRU))
+          int i = 0;
+          if (!string.IsNullOrWhiteSpace(tjOutputs[i])) _obj.SubjectTJ = tjOutputs[i];
+          i++;
+          if (!string.IsNullOrWhiteSpace(tjOutputs[i])) _obj.ListenedTJ = tjOutputs[i];
+          i++;
+          foreach(var d in _obj.Decided)
           {
-            var translatedDecided = litiko.DocflowEskhata.PublicFunctions.Module.Remote.TranslateRuToTj(decided.DecisionRU);
-            if (!string.IsNullOrWhiteSpace(translatedDecided))
-              decided.DecisionTJ = translatedDecided;
+            if (!string.IsNullOrWhiteSpace(tjOutputs[i])) d.DecisionTJ = tjOutputs[i];
+            i++;
           }
         }
-        
+
         TranslateRuToEn(e);
 
-        Dialogs.NotifyMessage("Перевод RU->TJ выполнен.");
+        Dialogs.NotifyMessage("Перевод RU->TJ и RU->EN выполнен.");
       }
       catch (Exception ex)
       {
-        e.AddWarning("Ошибка перевода RU->TJ: " + ex.Message + ".");
+        e.AddWarning("Ошибка комплексного перевода: " + ex.Message);
       }
     }
 
@@ -152,24 +146,25 @@ namespace litiko.CollegiateAgencies.Client
     {
       return true;
     }
-
+    
+    
     public virtual void CreateResolution(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      var addendum = Functions.Projectsolution.Remote.CreateResolution();      
+      var addendum = Functions.Projectsolution.Remote.CreateResolution();
       addendum.LeadingDocument = _obj;
       addendum.OurSignatory = _obj.Meeting?.President;
-      addendum.Show();      
+      addendum.Show();
     }
 
     public virtual bool CanCreateResolution(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      var roleCreationResolutions = Roles.GetAll(r => r.Sid == Constants.Module.RoleGuid.CreationResolutions).SingleOrDefault();            
+      var roleCreationResolutions = Roles.GetAll(r => r.Sid == Constants.Module.RoleGuid.CreationResolutions).SingleOrDefault();
       return !_obj.State.IsChanged && (Users.Current.IncludedIn(roleCreationResolutions) || Users.Current.IncludedIn(Roles.Administrators));
     }
 
     public virtual void CreateExtractProtocol(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      var addendum = Functions.Projectsolution.Remote.CreateExtractProtocol();      
+      var addendum = Functions.Projectsolution.Remote.CreateExtractProtocol();
       addendum.LeadingDocument = _obj;
       addendum.Show();
     }
@@ -192,7 +187,7 @@ namespace litiko.CollegiateAgencies.Client
       {
         Dialogs.ShowMessage(litiko.CollegiateAgencies.Resources.NoVersionMessage, MessageType.Warning);
         throw new OperationCanceledException();
-      }      
+      }
       
       base.SendForApproval(e);
     }
@@ -249,9 +244,9 @@ namespace litiko.CollegiateAgencies.Client
         if (litiko.Eskhata.Meetings.GetAll().Any(x => x.Id == meetingId))
         {
           _obj.Meeting = meeting;
-          _obj.Save();                 
+          _obj.Save();
         }
-      }      
+      }
       #endregion
       
       #region Включение в существующее совещанее
@@ -271,7 +266,7 @@ namespace litiko.CollegiateAgencies.Client
             Functions.Projectsolution.ProcessIncludingInMeeting(_obj, meeting, false);
             
             _obj.Meeting = meeting;
-            _obj.Save();          
+            _obj.Save();
           }
           else
           {
@@ -280,16 +275,16 @@ namespace litiko.CollegiateAgencies.Client
           }
           
         }
-      }      
+      }
       #endregion
 
     }
 
     public virtual bool CanIncludeInAgenda(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
-      return _obj.InternalApprovalState == InternalApprovalState.Signed && (Equals(Sungero.Company.Employees.As(Users.Current), _obj.MeetingCategory?.Secretary) || 
-        Substitutions.UsersWhoSubstitute(Users.As(_obj.MeetingCategory?.Secretary)).Any(u => Equals(u, Users.Current)) ||
-        Users.Current.IncludedIn(Roles.Administrators));            
+      return _obj.InternalApprovalState == InternalApprovalState.Signed && (Equals(Sungero.Company.Employees.As(Users.Current), _obj.MeetingCategory?.Secretary) ||
+                                                                            Substitutions.UsersWhoSubstitute(Users.As(_obj.MeetingCategory?.Secretary)).Any(u => Equals(u, Users.Current)) ||
+                                                                            Users.Current.IncludedIn(Roles.Administrators));
     }
 
   }

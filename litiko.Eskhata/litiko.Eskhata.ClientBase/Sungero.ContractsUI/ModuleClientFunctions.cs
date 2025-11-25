@@ -16,7 +16,6 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
 
     public virtual void DeleteByKeyword()
     {
-      // 1. Запрашиваем ключевое слово
       var dialog = Dialogs.CreateInputDialog("Удаление по ключевому слову");
       var keywordInput = dialog.AddString("Введите слово для поиска:", true);
       
@@ -24,7 +23,6 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
 
       var keyword = keywordInput.Value;
 
-      // 2. Ищем ID на сервере
       var ids = litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.GetContractIdsByKeyword(keyword);
 
       if (!ids.Any())
@@ -40,14 +38,12 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
       var btnYes = confirmDialog.Buttons.AddYes();
       confirmDialog.Buttons.AddNo();
 
-      // Если нажали НЕ "Да" — выходим
       if (confirmDialog.Show() != btnYes) return;
 
       int success = 0;
       int errors = 0;
       string lastError = "";
 
-      // 4. Запускаем удаление
       foreach (var id in ids)
       {
         try
@@ -62,7 +58,6 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
         }
       }
 
-      // 5. Итог
       var msg = $"Готово!\n✅ Удалено: {success}\n❌ Ошибок: {errors}";
       if (errors > 0) msg += $"\nПример ошибки: {lastError}";
       
@@ -71,29 +66,24 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
 
     public virtual void ImportCounterparties()
     {
-      // Вызов удалённого метода и получение результата
       var result = litiko.Eskhata.Module.Parties.PublicFunctions.Module.Remote.ImportCounterpartyFromXml();
 
       var message = new System.Text.StringBuilder();
       message.AppendLine("📦 Импорт контрагентов завершён.");
 
-      // Общие данные
       message.AppendLine($"📦 Всего контрагентов в файле: {result.TotalCount}");
       message.AppendLine($"✅ Всего успешно импортировано: {result.ImportedCount}");
 
-      // Компании
       message.AppendLine();
       message.AppendLine("🏢 Компании:");
       message.AppendLine($"• Всего в файле: {result.TotalCompanies}");
       message.AppendLine($"• Импортировано: {result.ImportedCompanies}");
 
-      // Физические лица
       message.AppendLine();
       message.AppendLine("👤 Физические лица:");
       message.AppendLine($"• Всего в файле: {result.TotalPersons}");
       message.AppendLine($"• Импортировано: {result.ImportedPersons}");
 
-      // Пропущенные сущности
       if (result.SkippedEntities != null && result.SkippedEntities.Any())
       {
         message.AppendLine();
@@ -102,7 +92,6 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
           message.AppendLine(" • " + name);
       }
 
-      // Ошибки импорта
       if (result.Errors != null && result.Errors.Any())
       {
         message.AppendLine();
@@ -118,51 +107,6 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
 
       Dialogs.ShowMessage(message.ToString());
     }
-
-
-    /* public virtual void ImportContract()
-    {
-      try
-      {
-        // Запуск удалённого импорта
-        var result = litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.ImportContractsFromXmlUI();
-
-        // Формирование финального сообщения
-        var message = new System.Text.StringBuilder();
-        message.AppendLine("📦 Импорт договоров завершён.");
-        message.AppendLine($"📄 Всего документов в файле: {result.TotalCount}");
-        message.AppendLine($"✅ Успешно импортировано: {result.ImportedCount}");
-
-        if (result.Errors.Any())
-        {
-          message.AppendLine();
-          message.AppendLine("⚠️ Возникли ошибки при импорте:");
-
-          foreach (var error in result.Errors)
-            message.AppendLine(" • " + error);
-
-          message.AppendLine();
-          message.AppendLine("Проверьте лог или XML-файл.");
-        }
-        else
-        {
-          message.AppendLine();
-          message.AppendLine("Все документы успешно импортированы без ошибок 🎉");
-        }
-
-        // Показ результата
-        Dialogs.ShowMessage(message.ToString(), MessageType.Information);
-      }
-      catch (Exception ex)
-      {
-        // Ловим фатальные ошибки
-        Logger.Error($"Critical error while importing contracts: {ex.Message}", ex);
-
-        Dialogs.ShowMessage(
-          $"❌ Критическая ошибка при импорте договоров:\n{ex.Message}\nПодробности доступны в логах.",
-          MessageType.Error);
-      }
-    }*/
 
     public virtual void ImportContractsFromUI()
     {
@@ -188,7 +132,6 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
         sb.AppendLine($"🔄 Пропущено (дубли): {result.DuplicateCount}");
         sb.AppendLine($"❌ Ошибок: {result.Errors.Count}");
         
-
         if (result.Errors.Any())
         {
           sb.AppendLine("\nСписок ошибок (первые 10):");

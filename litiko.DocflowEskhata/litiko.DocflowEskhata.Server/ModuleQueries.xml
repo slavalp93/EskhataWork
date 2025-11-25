@@ -15,10 +15,9 @@ BEGIN
 
   IF NOT EXISTS(SELECT 1 FROM Sungero_Docflow_ApiKeys WHERE Key = 'ApiKey')
   THEN
-    INSERT INTO Sungero_Docflow_ApiKeys(Key, Value) VALUES ('ApiKey', 'AIzaSyCQSaUNUwNNbdntgYdEpFdOG6mrOP8-0_4');
+    INSERT INTO Sungero_Docflow_ApiKeys(Key, Value) VALUES ('ApiKey', '');
   END IF;
-END$$
-]]></postgres>
+END$$]]></postgres>
   </query>
   <query key="InserIntoSungeroDocflowApiKeysValue">
     <postgres><![CDATA[do $$

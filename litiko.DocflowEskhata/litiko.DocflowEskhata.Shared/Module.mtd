@@ -298,46 +298,23 @@
   ],
   "PublicFunctions": [
     {
-      "Name": "TranslateRuToEn",
+      "Name": "TranslateList",
       "IsRemote": true,
       "Parameters": [
         {
-          "Name": "text",
+          "Name": "texts",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.String>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "direction",
           "ParameterType": "global::System.String",
           "ParameterTypeFullName": "System.String"
         }
       ],
       "Placement": "Shared",
-      "ReturnType": "global::System.String",
-      "ReturnTypeFullName": "System.String"
-    },
-    {
-      "Name": "TranslateRuToTj",
-      "IsRemote": true,
-      "Parameters": [
-        {
-          "Name": "text",
-          "ParameterType": "global::System.String",
-          "ParameterTypeFullName": "System.String"
-        }
-      ],
-      "Placement": "Shared",
-      "ReturnType": "global::System.String",
-      "ReturnTypeFullName": "System.String"
-    },
-    {
-      "Name": "TranslateTjToRu",
-      "IsRemote": true,
-      "Parameters": [
-        {
-          "Name": "text",
-          "ParameterType": "global::System.String",
-          "ParameterTypeFullName": "System.String"
-        }
-      ],
-      "Placement": "Shared",
-      "ReturnType": "global::System.String",
-      "ReturnTypeFullName": "System.String"
+      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
     }
   ],
   "PublicStructures": [],
