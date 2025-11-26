@@ -35,6 +35,7 @@ namespace litiko.Eskhata.Server
       var person = People.As(counterparty);
       var bank = Banks.As(counterparty);      
 
+      // Кеш метаданных свойств по имени
       var propertiesByName = new Dictionary<string, Sungero.Metadata.PropertyMetadata>();
 
       var requsitesList = new List<string>();
@@ -87,12 +88,8 @@ namespace litiko.Eskhata.Server
         requsitesList.Add("AddressTypelitiko");
         requsitesList.Add("LegalAddress");
       }
-
-      // Кеш свойств по имени
-      //var propertiesByName = objMetadata.Properties
-      //  .ToDictionary(p => p.Name, p => p); // Dictionary<string, Sungero.Metadata.PropertyMetadata>
       
-      // ⬇️ ВАЖНО: оставляем в списке только реально существующие свойства
+      // Оставляем в списке только реально существующие свойства
       requsitesList = requsitesList
         .Where(name => propertiesByName.ContainsKey(name))
         .ToList();
