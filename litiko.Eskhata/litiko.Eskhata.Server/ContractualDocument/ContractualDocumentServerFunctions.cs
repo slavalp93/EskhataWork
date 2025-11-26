@@ -31,16 +31,17 @@ namespace litiko.Eskhata.Server
       if (counterparty == null)
         return invalidProperties;
 
-      var objType = counterparty.GetType().GetFinalType();
-      var objMetadata = objType.GetEntityMetadata();
+      var company = Companies.As(counterparty);
+      var person = People.As(counterparty);
+      var bank = Banks.As(counterparty);      
 
-      // Кеш свойств по имени
-      var propertiesByName = objMetadata.Properties
-        .ToDictionary(p => p.Name, p => p); // Dictionary<string, Sungero.Metadata.PropertyMetadata>
+      var propertiesByName = new Dictionary<string, Sungero.Metadata.PropertyMetadata>();
 
       var requsitesList = new List<string>();
-      if (Companies.Is(counterparty))
+      if (company != null)
       {
+        propertiesByName = company.GetEntityMetadata().Properties.ToDictionary(p => p.Name, p => p);
+        
         requsitesList.Add("Name");
         requsitesList.Add("LegalName");
         requsitesList.Add("TIN");
@@ -53,8 +54,10 @@ namespace litiko.Eskhata.Server
         requsitesList.Add("AddressTypelitiko");
         requsitesList.Add("LegalAddress");
       }
-      else if (People.Is(counterparty))
+      else if (person != null)
       {
+        propertiesByName = person.GetEntityMetadata().Properties.ToDictionary(p => p.Name, p => p);
+        
         requsitesList.Add("LastName");
         requsitesList.Add("FirstName");
         requsitesList.Add("MiddleName");
@@ -73,8 +76,10 @@ namespace litiko.Eskhata.Server
         requsitesList.Add("IdentityExpirationDate");
         requsitesList.Add("IdentityAuthority");
       }
-      else if (Banks.Is(counterparty))
+      else if (bank != null)
       {
+        propertiesByName = bank.GetEntityMetadata().Properties.ToDictionary(p => p.Name, p => p);
+        
         requsitesList.Add("Name");
         requsitesList.Add("LegalName");
         requsitesList.Add("BIC");
@@ -83,6 +88,10 @@ namespace litiko.Eskhata.Server
         requsitesList.Add("LegalAddress");
       }
 
+      // Кеш свойств по имени
+      //var propertiesByName = objMetadata.Properties
+      //  .ToDictionary(p => p.Name, p => p); // Dictionary<string, Sungero.Metadata.PropertyMetadata>
+      
       // ⬇️ ВАЖНО: оставляем в списке только реально существующие свойства
       requsitesList = requsitesList
         .Where(name => propertiesByName.ContainsKey(name))
