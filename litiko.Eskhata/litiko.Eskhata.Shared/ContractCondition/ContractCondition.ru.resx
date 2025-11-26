@@ -70,4 +70,7 @@
   <data name="DocumentGroup" xml:space="preserve">
     <value>Тип договора - {0}?</value>
   </data>
+  <data name="IntStatusError" xml:space="preserve">
+    <value>Статус интеграции - Ошибка?</value>
+  </data>
 </root>

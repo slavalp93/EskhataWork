@@ -33,7 +33,12 @@ namespace litiko.Eskhata.Server
         {          
           return litiko.Eskhata.ContractConditions.Resources.DocumentGroupFormat(ConditionMultiSelectNameBuilder(_obj.DocumentGroupslitiko.Select(x => x.DocumentGroup.Name).ToList()));
           
-        }        
+        }
+        
+        if (_obj.ConditionType == ConditionType.IntStatusError)
+        {          
+          return litiko.Eskhata.ContractConditions.Resources.IntStatusError;
+        }
       }
       
       return base.GetConditionName();
