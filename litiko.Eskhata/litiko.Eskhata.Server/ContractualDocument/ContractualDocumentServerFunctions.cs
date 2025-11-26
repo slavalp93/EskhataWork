@@ -121,12 +121,12 @@ namespace litiko.Eskhata.Server
       // CorrespondentAccount ИЛИ AccountEskhatalitiko для Banks
       if (Banks.Is(counterparty))
       {
-        var hasCorrAccount = IsFilled(counterparty, propertiesByName, "CorrespondentAccount");
+        var hasCorrAccount = IsFilled(counterparty, propertiesByName, "CorrespondentAccountlitiko");
         var hasAccountEsk  = IsFilled(counterparty, propertiesByName, "AccountEskhatalitiko");
 
         if (!hasCorrAccount && !hasAccountEsk)
         {
-          invalidProperties.Add(GetLocalizedName(propertiesByName, "CorrespondentAccount"));
+          invalidProperties.Add(GetLocalizedName(propertiesByName, "CorrespondentAccountlitiko"));
           invalidProperties.Add(GetLocalizedName(propertiesByName, "AccountEskhatalitiko"));
         }
       }

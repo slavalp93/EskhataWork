@@ -193,4 +193,7 @@
   <data name="Action_FillFromABSlitikoDescription" xml:space="preserve">
     <value>Автоматическое заполнение реквизитов банка из АБС по БИК</value>
   </data>
+  <data name="Property_CorrespondentAccountlitiko" xml:space="preserve">
+    <value>Корр. счет</value>
+  </data>
 </root>

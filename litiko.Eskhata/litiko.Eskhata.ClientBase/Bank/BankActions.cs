@@ -26,8 +26,8 @@ namespace litiko.Eskhata.Client
         _obj.State.Properties.SWIFT.HighlightColor = Colors.Common.Green; 
       if (_obj.State.Properties.TIN.IsChanged)
         _obj.State.Properties.TIN.HighlightColor = Colors.Common.Green;         
-      if (_obj.State.Properties.CorrespondentAccount.IsChanged)
-        _obj.State.Properties.CorrespondentAccount.HighlightColor = Colors.Common.Green;        
+      if (_obj.State.Properties.CorrespondentAccountlitiko.IsChanged)
+        _obj.State.Properties.CorrespondentAccountlitiko.HighlightColor = Colors.Common.Green;        
       if (_obj.State.Properties.Countrylitiko.IsChanged)
         _obj.State.Properties.Countrylitiko.HighlightColor = Colors.Common.Green;
       if (_obj.State.Properties.PostalAddress.IsChanged)

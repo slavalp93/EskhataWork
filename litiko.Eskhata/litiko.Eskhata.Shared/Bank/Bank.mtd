@@ -309,7 +309,7 @@
           "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
           "ParentGuid": "149a02cc-c0af-4bec-8a1b-8d6c0bab1d81",
-          "PropertyGuid": "92979094-ab38-4de2-87ff-b564dff51880",
+          "PropertyGuid": "b30c9d26-1fc7-493c-b257-26c3049655a4",
           "RowNumber": 5,
           "RowSpan": 1,
           "Settings": [],
@@ -601,12 +601,16 @@
       "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
       "NameGuid": "92979094-ab38-4de2-87ff-b564dff51880",
       "Name": "CorrespondentAccount",
-      "HandledEvents": [
-        "ValueInputClient"
-      ],
+      "CanBeSearch": false,
       "IsAncestorMetadata": true,
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "IsVisibility": false,
       "Overridden": [
-        "HandledEvents"
+        "IsEnabled",
+        "IsShowedInList",
+        "CanBeSearch",
+        "IsVisibility"
       ],
       "Versions": []
     },
@@ -654,6 +658,15 @@
       "FlatListInStandaloneLookup": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "fd9189a6-1998-4065-91f1-5ddeceda26cb"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "b30c9d26-1fc7-493c-b257-26c3049655a4",
+      "Name": "CorrespondentAccountlitiko",
+      "Code": "CorrAcclitiko",
+      "Length": 20,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "9c71ccc8-73df-49ce-9a9d-1aefac505a0d"
     }
   ],
   "PublicStructures": [],

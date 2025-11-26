@@ -2427,10 +2427,10 @@ namespace litiko.Integration.Server
           bank.TRRC = isKPP;                          
         }
             
-        if(!string.IsNullOrEmpty(isCorrAcc) && bank.CorrespondentAccount != isCorrAcc)
+        if(!string.IsNullOrEmpty(isCorrAcc) && bank.CorrespondentAccountlitiko != isCorrAcc)
         {
-          Logger.DebugFormat("Change CorrespondentAccount: current:{0}, new:{1}", bank.CorrespondentAccount, isCorrAcc);
-          bank.CorrespondentAccount = isCorrAcc;         
+          Logger.DebugFormat("Change CorrespondentAccountlitiko: current:{0}, new:{1}", bank.CorrespondentAccountlitiko, isCorrAcc);
+          bank.CorrespondentAccountlitiko = isCorrAcc;         
         }        
 
         if(!string.IsNullOrEmpty(isIsSettlements))
