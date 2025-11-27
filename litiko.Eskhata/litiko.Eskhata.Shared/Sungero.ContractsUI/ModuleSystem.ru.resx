@@ -91,6 +91,9 @@
   <data name="CoverDescription_RegionsOfRentallitiko" xml:space="preserve">
     <value>Справочник регионов объектов аренды.</value>
   </data>
+  <data name="CoverAction_Importlitiko" xml:space="preserve">
+    <value>Миграция договоров</value>
+  </data>
   <data name="CoverGroup_ContractStatementslitiko" xml:space="preserve">
     <value>Акты выполненных работ</value>
   </data>
@@ -99,5 +102,11 @@
   </data>
   <data name="CoverDescription_ContractStatementListlitiko" xml:space="preserve">
     <value>Содержит список всех актов выполненных работ</value>
+  </data>
+  <data name="CoverAction_DeleteContractslitiko" xml:space="preserve">
+    <value>Удаление договоров</value>
+  </data>
+  <data name="CoverAction_ImportCounterpartieslitiko" xml:space="preserve">
+    <value>Импорт контрагентов</value>
   </data>
 </root>

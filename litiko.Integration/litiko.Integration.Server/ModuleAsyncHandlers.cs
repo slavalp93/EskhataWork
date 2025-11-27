@@ -15,14 +15,14 @@ namespace litiko.Integration.Server
     /// <summary>
     /// Интеграция. Обновление документа обмена.
     /// </summary>
-    /// <param name="args"></param>    
+    /// <param name="args"></param>
     public virtual void UpdateExchangeDoc(litiko.Integration.Server.AsyncHandlerInvokeArgs.UpdateExchangeDocInvokeArgs args)
     {
       var logPostfix = string.Format("ExchangeDocId = '{0}'", args.DocId);
       var logPrefix = "Integration. Async handler UpdateExchangeDoc.";
       Logger.DebugFormat("{0} Start. {1}", logPrefix, logPostfix);
       
-      var exchDoc =  Integration.ExchangeDocuments.GetAll().Where(d => d.Id == args.DocId).FirstOrDefault();      
+      var exchDoc =  Integration.ExchangeDocuments.GetAll().Where(d => d.Id == args.DocId).FirstOrDefault();
       if (exchDoc == null)
       {
         Logger.ErrorFormat("{0} ExchangeDocument with id = {1} not found.", logPrefix, args.DocId);
@@ -49,10 +49,10 @@ namespace litiko.Integration.Server
               break;
             case "Sent":
               exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Sent;
-              break;              
+              break;
             case "Error":
               exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
-              break;                
+              break;
           }
         }
         
@@ -68,16 +68,16 @@ namespace litiko.Integration.Server
               break;
             case "ReceivedPart":
               if (exchDoc.StatusRequestToRX == null || exchDoc.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.Awaiting)
-                exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;              
-              break;              
+                exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;
+              break;
             case "ReceivedAll":
               if (exchDoc.StatusRequestToRX == null || exchDoc.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.Awaiting || exchDoc.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart)
                 exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
               break;
             case "Error":
               exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
-              break;              
-          }          
+              break;
+          }
         }
         
         if (!string.IsNullOrEmpty(args.RequestToRXInfo) && string.IsNullOrEmpty(exchDoc.RequestToRXInfo))
@@ -95,16 +95,16 @@ namespace litiko.Integration.Server
         var errorMessage = string.Format("{0}. An error occured. ErrorMessage – {1}, StackTrace - {2}. {3}", logPrefix, ex.Message, ex.StackTrace, logPostfix);
         Logger.Error(errorMessage);
         args.Retry = true;
-        //exchDoc.RequestToRXInfo = ex.Message.Length >= 1000 ? ex.Message.Substring(0, 999) : ex.Message;          
+        //exchDoc.RequestToRXInfo = ex.Message.Length >= 1000 ? ex.Message.Substring(0, 999) : ex.Message;
       }
       finally
       {
         // Снимаем блокировку с сущности.
         Locks.Unlock(exchDoc);
-      }      
+      }
       
       // Логируем завершение работы обработчика.
-      Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);       
+      Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);
     }
 
     /// <summary>
@@ -112,13 +112,13 @@ namespace litiko.Integration.Server
     /// </summary>
     /// <param name="args"></param>
     public virtual void ImportData(litiko.Integration.Server.AsyncHandlerInvokeArgs.ImportDataInvokeArgs args)
-    {      
+    {
       var logPostfix = string.Format("ExchangeDocId = '{0}'", args.ExchangeDocId);
       var logPrefix = "Integration. Async handler ImportData.";
       var errorList = new List<string>();
-      Logger.DebugFormat("{0} Start. {1}", logPrefix, logPostfix);      
+      Logger.DebugFormat("{0} Start. {1}", logPrefix, logPostfix);
       
-      var exchDoc =  Integration.ExchangeDocuments.GetAll().Where(d => d.Id == args.ExchangeDocId).FirstOrDefault();      
+      var exchDoc =  Integration.ExchangeDocuments.GetAll().Where(d => d.Id == args.ExchangeDocId).FirstOrDefault();
       if (exchDoc == null)
       {
         Logger.ErrorFormat("{0} ExchangeDocument with id = {1} not found.", logPrefix, args.ExchangeDocId);
@@ -153,7 +153,7 @@ namespace litiko.Integration.Server
               using (var ms = new MemoryStream(exchQueue.Xml))
               {
                 exchDoc.CreateVersionFrom(ms, "xml");
-                exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;              
+                exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;
                 Logger.DebugFormat("{0} Full xml version created. {1}", logPrefix, logPostfix);
                 versionFullXML = exchDoc.LastVersion;                
               }              
@@ -220,8 +220,8 @@ namespace litiko.Integration.Server
           }          
           
           if (exchDoc.State.IsChanged)
-            exchDoc.Save();        
-        }        
+            exchDoc.Save();
+        }
         #endregion
         
         #region Обработка данных в зависимости от метода интеграции, указанного в xml
@@ -329,7 +329,7 @@ namespace litiko.Integration.Server
           if (errorList.Any())
           {
             exchDoc.StatusProcessingRx = Integration.ExchangeDocument.StatusProcessingRx.Error;
-            var lastError = errorList.Last();            
+            var lastError = errorList.Last();
             exchDoc.RequestToRXInfo = lastError.Length >= 1000 ? lastError.Substring(0, 999) : lastError;
             exchDoc.Save();
           }
@@ -347,10 +347,10 @@ namespace litiko.Integration.Server
         var errorMessage = string.Format("{0}. An error occured. ErrorMessage – {1}, StackTrace - {2}. {3}", logPrefix, ex.Message, ex.StackTrace, logPostfix);
         Logger.Error(errorMessage);
         errorList.Add(errorMessage);
-                
+        
         exchDoc.StatusProcessingRx = Integration.ExchangeDocument.StatusProcessingRx.Error;
         exchDoc.RequestToRXInfo = ex.Message.Length >= 1000 ? ex.Message.Substring(0, 999) : ex.Message;
-        exchDoc.Save();           
+        exchDoc.Save();
       }
       finally
       {
@@ -418,7 +418,7 @@ namespace litiko.Integration.Server
         Logger.Debug("{0} There are no errors. {1}", logPrefix, logPostfix);
       
       // Логируем завершение работы обработчика.
-      Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);      
+      Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);
     }
 
   }

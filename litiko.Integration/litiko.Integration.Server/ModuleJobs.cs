@@ -127,8 +127,8 @@ namespace litiko.Integration.Server
     /// Интеграция. Удаление старых документов обмена
     /// </summary>
     public virtual void RemovingOldExchangeDocs()
-    {      
-      var logPrefix = "Integration. RemovingOldExchangeDocs.";      
+    {
+      var logPrefix = "Integration. RemovingOldExchangeDocs.";
       Logger.DebugFormat("{0} Start.", logPrefix);
       
       var createdNinetyDaysAgo = Calendar.Now.AddDays(-90).Date;
@@ -160,16 +160,16 @@ namespace litiko.Integration.Server
                 // Удаляем сам документ обмена
                 ExchangeDocuments.Delete(exchangeDoc);
                 
-                Logger.DebugFormat("{0} Document successfully deleted Id:{1}.", logPrefix, exchangeDocId);              
+                Logger.DebugFormat("{0} Document successfully deleted Id:{1}.", logPrefix, exchangeDocId);
               }
               catch (Exception ex)
-              {                                                
+              {
                 Logger.Error(string.Format("{0} Failed to delete document. Id:{1}.", logPrefix, exchangeDocId), ex);
                 throw;
-              }              
+              }
             }
-          );
-        }        
+           );
+        }
       }
       else
         Logger.DebugFormat("{0} No documents available for deletion.", logPrefix);

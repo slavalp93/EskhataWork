@@ -5,6 +5,14 @@ namespace litiko.DocflowEskhata.Constants
 {
   public static class Module
   {
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public const string ApiKey = "ApiKes";
+    public const string ApiKey2 = "ApiKey";
+    
+    
     public static class DocumentTypeGuids
     {
       [Sungero.Core.Public]

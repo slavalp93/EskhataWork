@@ -31,7 +31,92 @@
   "IconResourcesKeys": [],
   "Importance": "Medium",
   "LayeredFromGuid": "243b34ec-8425-4c7e-b66f-27f7b9c8f38d",
-  "PublicStructures": [],
+  "PublicFunctions": [
+    {
+      "Name": "ImportCounterpartyFromXml",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "fileBase64",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "fileName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::litiko.Eskhata.Module.Parties.Structures.Module.IResultImportCounterpartyXml",
+      "ReturnTypeFullName": "litiko.Eskhata.Module.Parties.Structures.Module.IResultImportCounterpartyXml"
+    }
+  ],
+  "PublicStructures": [
+    {
+      "Name": "ResultImportCounterpartyXml",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "Errors",
+          "IsList": true,
+          "IsNullable": true,
+          "TypeFullName": "global::System.Collections.Generic.List<global::System.String>"
+        },
+        {
+          "Name": "TotalCompanies",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "ImportedCompanies",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "TotalPersons",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "ImportedPersons",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "ImportedCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "TotalCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "DuplicateCompanies",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "DuplicatePersons",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "SkippedCompanies",
+          "IsList": true,
+          "IsNullable": true,
+          "TypeFullName": "global::System.Collections.Generic.List<global::System.String>"
+        },
+        {
+          "Name": "SkippedPersons",
+          "IsList": true,
+          "IsNullable": true,
+          "TypeFullName": "global::System.Collections.Generic.List<global::System.String>"
+        },
+        {
+          "Name": "SkippedEntities",
+          "IsList": true,
+          "IsNullable": true,
+          "TypeFullName": "global::System.Collections.Generic.List<global::System.String>"
+        }
+      ],
+      "StructureNamespace": "litiko.Eskhata.Module.Parties.Structures.Module"
+    }
+  ],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.Eskhata.Module.Parties",
   "ResourcesKeys": [],
