@@ -35,6 +35,18 @@
     {
       "Name": "ImportCounterpartyFromXml",
       "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "fileBase64",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "fileName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
       "Placement": "Shared",
       "ReturnType": "global::litiko.Eskhata.Module.Parties.Structures.Module.IResultImportCounterpartyXml",
       "ReturnTypeFullName": "litiko.Eskhata.Module.Parties.Structures.Module.IResultImportCounterpartyXml"
@@ -73,6 +85,14 @@
         },
         {
           "Name": "TotalCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "DuplicateCompanies",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "DuplicatePersons",
           "TypeFullName": "global::System.Int32"
         },
         {

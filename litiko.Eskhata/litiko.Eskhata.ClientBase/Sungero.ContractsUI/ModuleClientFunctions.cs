@@ -66,46 +66,74 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
 
     public virtual void ImportCounterparties()
     {
-      var result = litiko.Eskhata.Module.Parties.PublicFunctions.Module.Remote.ImportCounterpartyFromXml();
+      var dialog = Dialogs.CreateInputDialog("Импорт контрагентов (XML)");
+      
+      var fileInput = dialog.AddFileSelect("Выберите файл XML", true);
+      fileInput.WithFilter("XML", "xml");
 
-      var message = new System.Text.StringBuilder();
-      message.AppendLine("📦 Импорт контрагентов завершён.");
+      if (dialog.Show() != DialogButtons.Ok) return;
 
-      message.AppendLine($"📦 Всего контрагентов в файле: {result.TotalCount}");
-      message.AppendLine($"✅ Всего успешно импортировано: {result.ImportedCount}");
+      byte[] fileBytes = fileInput.Value.Content;
+      string fileName = fileInput.Value.Name;
 
-      message.AppendLine();
-      message.AppendLine("🏢 Компании:");
-      message.AppendLine($"• Всего в файле: {result.TotalCompanies}");
-      message.AppendLine($"• Импортировано: {result.ImportedCompanies}");
+      string fileBase64 = Convert.ToBase64String(fileBytes);
 
-      message.AppendLine();
-      message.AppendLine("👤 Физические лица:");
-      message.AppendLine($"• Всего в файле: {result.TotalPersons}");
-      message.AppendLine($"• Импортировано: {result.ImportedPersons}");
-
-      if (result.SkippedEntities != null && result.SkippedEntities.Any())
+      try
       {
-        message.AppendLine();
-        message.AppendLine("ℹ️ Контрагенты пропущены (уже есть в системе):");
-        foreach (var name in result.SkippedEntities)
-          message.AppendLine(" • " + name);
-      }
+        var result = litiko.Eskhata.Module.Parties.PublicFunctions.Module.Remote.ImportCounterpartyFromXml(fileBase64, fileName);
 
-      if (result.Errors != null && result.Errors.Any())
-      {
-        message.AppendLine();
-        message.AppendLine("⚠️ Ошибки импорта:");
-        foreach (var error in result.Errors)
-          message.AppendLine(" • " + error);
-      }
-      else
-      {
-        message.AppendLine();
-        message.AppendLine("Все контрагенты успешно обработаны без ошибок ✅");
-      }
+        var sb = new System.Text.StringBuilder();
+        sb.AppendLine($"📦 Обработка файла завершена. Всего записей: {result.TotalCount}");
+        sb.AppendLine("--------------------------------");
 
-      Dialogs.ShowMessage(message.ToString());
+        sb.AppendLine("🏢 Компании:");
+        sb.AppendLine($"• Всего: {result.TotalCompanies}");
+        
+        if (result.ImportedCompanies > 0)
+          sb.AppendLine($"• ✨ Новых (создано): {result.ImportedCompanies}");
+        
+        if (result.DuplicateCompanies > 0)
+          sb.AppendLine($"• 🔄 Дубликатов (обновлено): {result.DuplicateCompanies}");
+        
+        if (result.TotalCompanies > 0 && result.ImportedCompanies == 0 && result.DuplicateCompanies == 0)
+          sb.AppendLine("• ⚠️ Не импортировано (см. ошибки)");
+
+        sb.AppendLine();
+
+        sb.AppendLine("👤 Физические лица:");
+        sb.AppendLine($"• Всего: {result.TotalPersons}");
+        
+        if (result.ImportedPersons > 0)
+          sb.AppendLine($"• ✨ Новых (создано): {result.ImportedPersons}");
+        
+        if (result.DuplicatePersons > 0)
+          sb.AppendLine($"• 🔄 Дубликатов (обновлено): {result.DuplicatePersons}");
+
+        sb.AppendLine("--------------------------------");
+        
+        var totalDuplicates = result.DuplicateCompanies + result.DuplicatePersons;
+        
+        sb.AppendLine($"✅ Успешно создано: {result.ImportedCount}");
+        sb.AppendLine($"♻️ Найдено дублей: {totalDuplicates}");
+
+        if (result.Errors != null && result.Errors.Any())
+        {
+          sb.AppendLine();
+          sb.AppendLine($"⚠️ Ошибок: {result.Errors.Count}");
+        }
+        else
+        {
+          sb.AppendLine();
+          sb.AppendLine("Ошибок нет ✅");
+        }
+
+        var icon = (result.Errors != null && result.Errors.Any()) ? MessageType.Warning : MessageType.Information;
+        Dialogs.ShowMessage(sb.ToString(), icon);
+      }
+      catch (Exception ex)
+      {
+        Dialogs.ShowMessage($"Ошибка: {ex.Message}", MessageType.Error);
+      }
     }
 
     public virtual void ImportContractsFromUI()
