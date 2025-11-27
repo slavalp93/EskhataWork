@@ -8,6 +8,7 @@ namespace litiko.NSI.Server
 {
   public class ModuleFunctions
   {
+    
     /// <summary>
     /// Получить запись матрицы ответственности по договору
     /// </summary>

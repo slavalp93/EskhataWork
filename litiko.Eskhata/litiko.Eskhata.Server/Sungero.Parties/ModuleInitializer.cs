@@ -10,6 +10,15 @@ namespace litiko.Eskhata.Module.Parties.Server
   public partial class ModuleInitializer
   {
 
+    public override void Initializing(Sungero.Domain.ModuleInitializingEventArgs e)
+    {
+      CreateDefaultDueDiligenceWebsites();
+      CreateDistributionListCounterparty();
+      //UpdateBanksFromCBR();
+      CreateCounterpartyIndices();
+      CreateIdentityDocumentKinds();
+    }
+
     public override bool IsModuleVisible()
     {
       //return base.IsModuleVisible();

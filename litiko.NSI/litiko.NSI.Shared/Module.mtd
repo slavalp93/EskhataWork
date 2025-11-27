@@ -120,6 +120,16 @@
   "IsolatedAssemblyName": "litiko.NSI.Isolated",
   "IsolatedNamespace": "litiko.NSI.Isolated",
   "IsVisible": false,
+  "Jobs": [
+    {
+      "NameGuid": "03c55f03-b143-42e6-bac9-8bce19836264",
+      "Name": "ClearCitiesAndRegions",
+      "GenerateHandler": true,
+      "IsEnabled": false,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    }
+  ],
   "Overridden": [
     "IsVisible"
   ],

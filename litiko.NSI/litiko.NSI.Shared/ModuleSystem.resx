@@ -64,4 +64,10 @@
   <data name="CoverTitle" xml:space="preserve">
     <value>NSI</value>
   </data>
+  <data name="JobDisplayName_03c55f03b14342e6bac98bce19836264" xml:space="preserve">
+    <value>Administration. Removing unnecessary cities, regions, countries and banks.</value>
+  </data>
+  <data name="JobDescription_03c55f03b14342e6bac98bce19836264" xml:space="preserve">
+    <value>Administration. Removing unnecessary cities, regions, countries and banks.</value>
+  </data>
 </root>
