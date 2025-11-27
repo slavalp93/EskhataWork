@@ -2028,7 +2028,7 @@ namespace litiko.Integration.Server
       var isBusiness = element.Element("BUSINESS")?.Value;
       var isPS_REF = element.Element("PS_REF")?.Value;
       var isCountry = element.Element("COUNTRY")?.Value;
-      var isRegion = element.Element("Region")?.Value;
+      //var isRegion = element.Element("Region")?.Value;
       var isCity = element.Element("City")?.Value;       
       var isPostAdress = element.Element("PostAdress")?.Value;
       var isLegalAdress = element.Element("LegalAdress")?.Value;
@@ -2187,6 +2187,7 @@ namespace litiko.Integration.Server
           }            
         }
         
+        /*
         if (!string.IsNullOrEmpty(isRegion))
         {
           var region = Eskhata.Regions.GetAll().Where(x => x.ExternalIdlitiko == isRegion).FirstOrDefault();
@@ -2196,6 +2197,7 @@ namespace litiko.Integration.Server
             company.Region = region;                    
           }
         }
+        */
   
         if (!string.IsNullOrEmpty(isCity))
         {
@@ -2356,7 +2358,7 @@ namespace litiko.Integration.Server
       var isIsLoroCorrespondent = element.Element("IsLoroCorrespondent")?.Value;
       var isIsNostroCorrespondent = element.Element("IsNostroCorrespondent")?.Value;
       var isCountry = element.Element("COUNTRY")?.Value;
-      var isRegion = element.Element("Region")?.Value;
+      //var isRegion = element.Element("Region")?.Value;
       var isCity = element.Element("City")?.Value;       
       var isPostAdress = element.Element("PostAdress")?.Value;
       var isLegalAdress = element.Element("LegalAdress")?.Value;
@@ -2481,6 +2483,7 @@ namespace litiko.Integration.Server
           }            
         }
         
+        /*
         if (!string.IsNullOrEmpty(isRegion))
         {
           var region = Eskhata.Regions.GetAll().Where(x => x.ExternalIdlitiko == isRegion).FirstOrDefault();
@@ -2490,7 +2493,8 @@ namespace litiko.Integration.Server
             bank.Region = region;                    
           }
         }
-  
+        */
+        
         if (!string.IsNullOrEmpty(isCity))
         {
           var city = Eskhata.Cities.GetAll().Where(x => x.ExternalIdlitiko == isCity).FirstOrDefault();
@@ -3484,7 +3488,7 @@ namespace litiko.Integration.Server
       //var isCodeOKONHelements = personData.Element("CODE_OKONH").Elements("element");
       //var isCodeOKVEDelements = personData.Element("CODE_OKVED").Elements("element");
       var isCountry = personData.Element("COUNTRY")?.Value;
-      var isRegion = personData.Element("Region")?.Value;
+      //var isRegion = personData.Element("Region")?.Value;
       var isCity = personData.Element("City")?.Value;      
       var isLegalAdress = personData.Element("DOC_BIRTH_PLACE")?.Value;
       var isPostAdress = personData.Element("PostAdress")?.Value;
@@ -3703,7 +3707,8 @@ namespace litiko.Integration.Server
           person.Citizenship = country;                    
         }
       }
-      
+
+      /*
       if (!string.IsNullOrEmpty(isRegion))
       {
         var region = Eskhata.Regions.GetAll().Where(x => x.ExternalIdlitiko == isRegion).FirstOrDefault();
@@ -3713,6 +3718,7 @@ namespace litiko.Integration.Server
           person.Region = region;                    
         }
       }
+*/
 
       if (!string.IsNullOrEmpty(isCity))
       {

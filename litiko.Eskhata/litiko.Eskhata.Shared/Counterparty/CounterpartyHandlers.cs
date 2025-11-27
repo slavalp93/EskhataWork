@@ -10,5 +10,11 @@ namespace litiko.Eskhata
   partial class CounterpartySharedHandlers
   {
 
+    public override void RegionChanged(Sungero.Parties.Shared.CounterpartyRegionChangedEventArgs e)
+    {
+      // Ничего не проверять
+      // base.RegionChanged(e);
+    }
+
   }
 }
