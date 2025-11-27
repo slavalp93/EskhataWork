@@ -119,7 +119,7 @@
     </Layout>
   </collapsableTree>
   <treeListLayout>
-    <GridViewSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <GridViewSettings>
       <ColumnWidths>
         <string>230</string>
         <string>Auto</string>

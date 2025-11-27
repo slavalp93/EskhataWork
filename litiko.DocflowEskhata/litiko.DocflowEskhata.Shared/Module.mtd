@@ -141,6 +141,11 @@
       "NameGuid": "d3422580-b228-4130-b888-f76c9abe0a3d",
       "Name": "DotNetEnv",
       "Scope": "Both"
+    },
+    {
+      "NameGuid": "9192663b-8fa9-470d-9622-8d067e4d89d9",
+      "Name": "Spra",
+      "Scope": "Both"
     }
   ],
   "Overridden": [
@@ -293,46 +298,23 @@
   ],
   "PublicFunctions": [
     {
-      "Name": "TranslateRuToEn",
+      "Name": "TranslateList",
       "IsRemote": true,
       "Parameters": [
         {
-          "Name": "text",
+          "Name": "texts",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.String>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "direction",
           "ParameterType": "global::System.String",
           "ParameterTypeFullName": "System.String"
         }
       ],
       "Placement": "Shared",
-      "ReturnType": "global::System.String",
-      "ReturnTypeFullName": "System.String"
-    },
-    {
-      "Name": "TranslateRuToTj",
-      "IsRemote": true,
-      "Parameters": [
-        {
-          "Name": "text",
-          "ParameterType": "global::System.String",
-          "ParameterTypeFullName": "System.String"
-        }
-      ],
-      "Placement": "Shared",
-      "ReturnType": "global::System.String",
-      "ReturnTypeFullName": "System.String"
-    },
-    {
-      "Name": "TranslateTjToRu",
-      "IsRemote": true,
-      "Parameters": [
-        {
-          "Name": "text",
-          "ParameterType": "global::System.String",
-          "ParameterTypeFullName": "System.String"
-        }
-      ],
-      "Placement": "Shared",
-      "ReturnType": "global::System.String",
-      "ReturnTypeFullName": "System.String"
+      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
     }
   ],
   "PublicStructures": [],
@@ -351,8 +333,6 @@
     "OutgoingCorrespondence",
     "OutgoingCorrespondenceNBT",
     "OutgoingPoACorrespondence",
-    "ApiKeyGemini1",
-    "ApiKeyGemini2",
     "EnvFile",
     "EnvPathFile"
   ],

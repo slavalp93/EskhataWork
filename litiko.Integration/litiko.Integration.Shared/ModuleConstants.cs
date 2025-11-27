@@ -7,7 +7,7 @@ namespace litiko.Integration.Constants
   {      
     /// <summary>
     /// Протоколы (методы) интеграции
-    /// </summary>    
+    /// </summary>
     public static class IntegrationMethods
     {
       /// <summary> Подразделения </summary>
@@ -17,10 +17,14 @@ namespace litiko.Integration.Constants
       /// <summary> Сотрудники </summary>
       [Sungero.Core.Public]
       public const string R_DR_GET_EMPLOYEES = "R_DR_GET_EMPLOYEES";
+      
+      /// <summary> Договоры </summary>
+      [Sungero.Core.Public]
+      public const string R_DR_SET_CONTRACTS = "R_DR_SET_CONTRACTS";
 
       /// <summary> Наши организации </summary>
       [Sungero.Core.Public]
-      public const string R_DR_GET_BUSINESSUNITS = "R_DR_GET_BUSINESSUNITS";      
+      public const string R_DR_GET_BUSINESSUNITS = "R_DR_GET_BUSINESSUNITS";
       
       /// <summary> Организации </summary>
       [Sungero.Core.Public]
@@ -92,7 +96,7 @@ namespace litiko.Integration.Constants
 
       /// <summary> Договор </summary>
       [Sungero.Core.Public]
-      public const string R_DR_SET_CONTRACT = "R_DR_SET_CONTRACT";      
+      public const string R_DR_SET_CONTRACT = "R_DR_SET_CONTRACT";
       
       /// <summary> Дополнительное соглашение, Счет, Акт </summary>
       [Sungero.Core.Public]
