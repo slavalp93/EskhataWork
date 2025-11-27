@@ -2434,11 +2434,11 @@ namespace litiko.Integration.Server
           Logger.DebugFormat("Change TRRC: current:{0}, new:{1}", bank.TRRC, isKPP);
           bank.TRRC = isKPP;                          
         }
-        
-        if(!string.IsNullOrEmpty(isCorrAcc) && bank.CorrespondentAccount != isCorrAcc)
+            
+        if(!string.IsNullOrEmpty(isCorrAcc) && bank.CorrespondentAccountlitiko != isCorrAcc)
         {
-          Logger.DebugFormat("Change CorrespondentAccount: current:{0}, new:{1}", bank.CorrespondentAccount, isCorrAcc);
-          bank.CorrespondentAccount = isCorrAcc;         
+          Logger.DebugFormat("Change CorrespondentAccountlitiko: current:{0}, new:{1}", bank.CorrespondentAccountlitiko, isCorrAcc);
+          bank.CorrespondentAccountlitiko = isCorrAcc;         
         }        
 
         if(!string.IsNullOrEmpty(isIsSettlements))

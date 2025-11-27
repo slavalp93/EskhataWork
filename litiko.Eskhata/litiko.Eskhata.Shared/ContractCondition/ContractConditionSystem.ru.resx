@@ -88,4 +88,7 @@
   <data name="Property_DocumentGroupslitiko" xml:space="preserve">
     <value>Типы договоров</value>
   </data>
+  <data name="Enum_ConditionType_IntStatusError" xml:space="preserve">
+    <value>Статус интеграции - Ошибка</value>
+  </data>
 </root>

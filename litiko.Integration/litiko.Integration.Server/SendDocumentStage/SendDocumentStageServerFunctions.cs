@@ -113,7 +113,7 @@ namespace litiko.Integration.Server
         
         var errorInfo = string.Empty;
         var exchDoc = ExchangeDocuments.GetAll().FirstOrDefault(x => x.Id == exchDocId);
-        if (exchDoc != null && !string.IsNullOrEmpty(exchDoc.RequestToRXInfo))
+        if (exchDoc != null && !string.IsNullOrEmpty(exchDoc.RequestToRXInfo) && exchDoc.RequestToRXInfo != "Saved")
           errorInfo = SendDocumentStages.Resources.ErrorIntegrationFormat(exchDoc.RequestToRXInfo);
         else
           errorInfo = SendDocumentStages.Resources.ErrorIntegrationFormat(SendDocumentStages.Resources.UnknownError);

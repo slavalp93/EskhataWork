@@ -47,6 +47,7 @@ namespace litiko.Eskhata.Shared
           
       baseSupport[Sungero.Contracts.PublicConstants.Module.ContractGuid].Add(ConditionType.PaymentBasedOn);
       baseSupport[Sungero.Contracts.PublicConstants.Module.ContractGuid].Add(ConditionType.DocumentGroup);
+      baseSupport[Sungero.Contracts.PublicConstants.Module.ContractGuid].Add(ConditionType.IntStatusError);
          
       return baseSupport;
     }
@@ -105,6 +106,16 @@ namespace litiko.Eskhata.Shared
         return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(null, Sungero.Docflow.ConditionBases.Resources.CannotPerformConditionCheck);
       }
       #endregion
+      
+      #region Статус интеграции - Ошибка
+      if (_obj.ConditionType == ConditionType.IntStatusError)
+      {        
+        if (document != null)
+          return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(Eskhata.OfficialDocuments.As(document).IntegrationStatuslitiko == Eskhata.OfficialDocument.IntegrationStatuslitiko.Error, string.Empty);
+        
+        return Sungero.Docflow.Structures.ConditionBase.ConditionResult.Create(null, Sungero.Docflow.ConditionBases.Resources.CannotPerformConditionCheck);
+      }
+      #endregion      
       
       return base.CheckCondition(document, task);
     }    

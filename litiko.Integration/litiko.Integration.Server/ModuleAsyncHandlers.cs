@@ -80,8 +80,8 @@ namespace litiko.Integration.Server
           }
         }
         
-        if (!string.IsNullOrEmpty(args.RequestToRXInfo) && exchDoc.RequestToRXInfo != args.RequestToRXInfo)
-          exchDoc.RequestToRXInfo = args.RequestToRXInfo.Length >= 1000 ? args.RequestToRXInfo.Substring(0, 999) : args.RequestToRXInfo;
+        if (!string.IsNullOrEmpty(args.RequestToRXInfo) && string.IsNullOrEmpty(exchDoc.RequestToRXInfo))
+          exchDoc.RequestToRXInfo = args.RequestToRXInfo.Length >= 1000 ? args.RequestToRXInfo.Substring(0, 999) : args.RequestToRXInfo;        
         
         if (args.IncreaseNumberOfPackages)
           exchDoc.RequestToRXPacketCount++;

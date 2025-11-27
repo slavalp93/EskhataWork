@@ -193,4 +193,7 @@
   <data name="Action_FillFromABSlitikoDescription" xml:space="preserve">
     <value>Automatic filling of bank details from ABS using BIC</value>
   </data>
+  <data name="Property_CorrespondentAccountlitiko" xml:space="preserve">
+    <value>Corresp. account</value>
+  </data>
 </root>
