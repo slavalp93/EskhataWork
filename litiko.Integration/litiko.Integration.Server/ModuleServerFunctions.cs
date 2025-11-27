@@ -4313,7 +4313,7 @@ namespace litiko.Integration.Server
             new XElement("RBO", rbo),
             new XElement("ValidFrom", validFrom),
             new XElement("ValidTill", validTill),
-            new XElement("СhangeReason", changeReason), 
+            new XElement("ChangeReason", changeReason), 
             new XElement("AccountDebtCredt", accountDebtCredit),
             new XElement("AccountFutureExpense", accountFutureExp),
             new XElement("TotalAmount", totalAmountLitiko),
