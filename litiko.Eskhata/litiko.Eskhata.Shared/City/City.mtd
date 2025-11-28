@@ -24,6 +24,16 @@
   "OperationsClass": "",
   "Properties": [
     {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "7310bace-434f-4c7b-9059-8b89a5ea0ab7",
+      "Name": "Region",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsRequired"
+      ],
+      "Versions": []
+    },
+    {
       "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
       "NameGuid": "3e5db8ef-fd3a-430c-a3d1-beb6636bc656",
       "Name": "ExternalIdlitiko",
