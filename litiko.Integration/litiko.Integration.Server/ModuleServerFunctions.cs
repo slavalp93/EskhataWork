@@ -3553,6 +3553,12 @@ namespace litiko.Integration.Server
       }
       else
         needSave = false;
+
+      if (person.ExternalId != isID)
+      {
+        Logger.DebugFormat("Change ExternalId: current:{0}, new:{1}", person.ExternalId, isID);
+        person.ExternalId = isID;        
+      }
       
       if (!string.IsNullOrEmpty(isLastNameRu) && person.LastName != isLastNameRu)
       {
