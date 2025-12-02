@@ -4266,7 +4266,7 @@ namespace litiko.Integration.Server
                    .FirstOrDefault(e => e != null);
     
         var responsibleAccountantId = litiko.Eskhata.Employees.As(responsibleAccountant)?.ExternalId ?? string.Empty;
-        var responsibleDepartmentId = litiko.Eskhata.Employees.As(responsibleAccountant)?.Department?.ExternalId ?? string.Empty;
+        //var responsibleDepartmentId = litiko.Eskhata.Employees.As(responsibleAccountant)?.Department?.ExternalId ?? string.Empty;
         var batchProcessing = ToYesNoNull(matrix?.BatchProcessing);
     
         // PaymentBasis
@@ -4329,7 +4329,7 @@ namespace litiko.Integration.Server
             new XElement("ResponsibleEmployee", responsibleEmployee),
             new XElement("Author", author),
             new XElement("ResponsibleAccountant", responsibleAccountantId), 
-            new XElement("ResponsibleDepartment", responsibleDepartmentId), 
+            //new XElement("ResponsibleDepartment", responsibleDepartmentId), 
             new XElement("RBO", rbo),
             new XElement("ValidFrom", validFrom),
             new XElement("ValidTill", validTill),

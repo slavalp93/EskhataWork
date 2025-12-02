@@ -5,15 +5,6 @@
   "AccessRightsMode": "Both",
   "Actions": [
     {
-      "NameGuid": "b807b816-dafa-4b17-acac-f06aa306c543",
-      "Name": "CreateFromFile",
-      "GenerateHandler": true,
-      "IsAncestorMetadata": true,
-      "Overridden": [
-        "GenerateHandler"
-      ]
-    },
-    {
       "NameGuid": "3ce1db8c-5796-4b0b-b5e7-2a76050237be",
       "Name": "CreateLegalOpinionlitiko",
       "ActionArea": "CardAndCollection",
@@ -624,7 +615,7 @@
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
           "NameGuid": "81311079-3832-4944-82ef-590e7a78573f",
           "Name": "AmountForPeriodlitikolitiko",
-          "ColumnNumber": 1,
+          "ColumnNumber": 0,
           "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
           "ParentGuid": "9783066c-8edb-4db0-ad30-8b6b82ac8b14",
@@ -658,6 +649,19 @@
           "RowNumber": 5,
           "RowSpan": 1,
           "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "d2a46a63-46e4-4c83-871f-9c4785d79d90",
+          "Name": "Controllitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "9783066c-8edb-4db0-ad30-8b6b82ac8b14",
+          "PropertyGuid": "87ef78f8-fe0f-4a1c-8383-cb4016c94790",
+          "RowNumber": 3,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,
@@ -668,8 +672,7 @@
     }
   ],
   "HandledEvents": [
-    "CreatedServer",
-    "ShowingClient"
+    "CreatedServer"
   ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "f37c7e63-b134-4446-9b5b-f8811f6c9666",
@@ -945,6 +948,9 @@
       "NameGuid": "4fae7cfa-4767-44cf-899b-01a5f92fe698",
       "Name": "AmountForPeriodlitiko",
       "Code": "AmountForPerio",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "47987ff0-97f5-494f-aa73-a3218227cd8a"
     },
@@ -953,16 +959,16 @@
       "NameGuid": "d3d4ab8f-b082-41c7-ad52-8a2bdf448906",
       "Name": "AccDebtCreditlitiko",
       "Code": "AccDebtCreditl",
-      "Length": 34,
+      "Length": 20,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-      "PreviousPropertyGuid": "4fae7cfa-4767-44cf-899b-01a5f92fe698"
+      "PreviousPropertyGuid": "87ef78f8-fe0f-4a1c-8383-cb4016c94790"
     },
     {
       "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
       "NameGuid": "e9d15626-c373-4bf4-98d0-aa3c739e70a9",
       "Name": "AccFutureExpenselitiko",
       "Code": "AccFutureExpen",
-      "Length": 34,
+      "Length": 20,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "d3d4ab8f-b082-41c7-ad52-8a2bdf448906"
     },
@@ -995,6 +1001,16 @@
       "FlatListInStandaloneLookup": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "8470fc48-267e-4164-aa3f-40ef8e422251"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "87ef78f8-fe0f-4a1c-8383-cb4016c94790",
+      "Name": "AmountForPeriodInWordslitiko",
+      "CanBeSearch": false,
+      "Code": "AmountFPInW",
+      "IsShowedInList": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "4fae7cfa-4767-44cf-899b-01a5f92fe698"
     }
   ],
   "PublicFunctions": [

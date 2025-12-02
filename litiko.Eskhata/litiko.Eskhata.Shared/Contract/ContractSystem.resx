@@ -194,10 +194,10 @@
     <value />
   </data>
   <data name="Property_PaymentRegionlitiko" xml:space="preserve">
-    <value>Payment region</value>
+    <value>Region for rental tax</value>
   </data>
   <data name="Property_RegionOfRentallitiko" xml:space="preserve">
-    <value>Region of rental</value>
+    <value>Region for tax payment</value>
   </data>
   <data name="Property_FrequencyExpenseslitiko" xml:space="preserve">
     <value>Frequency of allocation to expenses</value>
@@ -243,5 +243,8 @@
   </data>
   <data name="Action_CreateLegalOpinionlitikoConfirmationDescription" xml:space="preserve">
     <value />
+  </data>
+  <data name="Property_AmountForPeriodInWordslitiko" xml:space="preserve">
+    <value>Amount for period in words</value>
   </data>
 </root>

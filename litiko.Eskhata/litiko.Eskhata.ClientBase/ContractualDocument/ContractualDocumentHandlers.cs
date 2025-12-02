@@ -10,6 +10,15 @@ namespace litiko.Eskhata
   partial class ContractualDocumentClientHandlers
   {
 
+    public override void SubjectValueInput(Sungero.Presentation.StringValueInputEventArgs e)
+    {
+      var len = !string.IsNullOrWhiteSpace(e.NewValue) ? e.NewValue.Length : 0;
+      if (len > 100)
+        e.AddError(Resources.NoMoreThanXCharactersFormat(100));
+      
+      base.SubjectValueInput(e);
+    }
+
     public override void TotalAmountValueInput(Sungero.Presentation.DoubleValueInputEventArgs e)
     {      
       if (e.NewValue < 0)

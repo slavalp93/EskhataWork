@@ -167,7 +167,7 @@
     <value>Ставки налогов</value>
   </data>
   <data name="Property_IncomeTaxRatelitiko" xml:space="preserve">
-    <value>Налог на доходы</value>
+    <value>Ставка налога на доходы</value>
   </data>
   <data name="Property_IncomeTaxAmountlitiko" xml:space="preserve">
     <value>Сумма налога на доходы</value>
@@ -176,13 +176,13 @@
     <value>Оплата труда физ лиц</value>
   </data>
   <data name="Property_FSZNRatelitiko" xml:space="preserve">
-    <value>ФСЗН</value>
+    <value>Ставка ФСЗН</value>
   </data>
   <data name="Property_FSZNAmountlitiko" xml:space="preserve">
     <value>Сумма ФСЗН</value>
   </data>
   <data name="Property_PennyRatelitiko" xml:space="preserve">
-    <value>Пенс. взнос</value>
+    <value>Ставка пенс. взноса</value>
   </data>
   <data name="Property_PennyAmountlitiko" xml:space="preserve">
     <value>Сумма пенс. взноса</value>

@@ -9,6 +9,7 @@ namespace litiko.Eskhata.Client
 {
   partial class ContractActions
   {
+
     /*public virtual void StartContractsBatchImportlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var result = Functions.Contract.Remote.ImportContractsFromXml(_obj);
@@ -58,16 +59,6 @@ namespace litiko.Eskhata.Client
     public virtual bool CanCreateLegalOpinionlitiko(Sungero.Domain.Client.CanExecuteActionArgs e)
     {
       return true;
-    }
-
-    public override void CreateFromFile(Sungero.Domain.Client.ExecuteActionArgs e)
-    {
-      base.CreateFromFile(e);
-    }
-
-    public override bool CanCreateFromFile(Sungero.Domain.Client.CanExecuteActionArgs e)
-    {
-      return base.CanCreateFromTemplate(e); //!_obj.IsStandard.GetValueOrDefault()
     }
 
   }

@@ -9,6 +9,16 @@ namespace litiko.Eskhata.Client
 {
   partial class ContractualDocumentActions
   {
+    public override void CreateFromTemplate(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      base.CreateFromTemplate(e);
+    }
+
+    public override bool CanCreateFromTemplate(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return base.CanCreateFromTemplate(e) && _obj.IsStandard.GetValueOrDefault();
+    }
+
     public override void ExportToABSlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       base.ExportToABSlitiko(e);

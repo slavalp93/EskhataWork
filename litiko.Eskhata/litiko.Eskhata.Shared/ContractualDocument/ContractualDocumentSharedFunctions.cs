@@ -18,6 +18,9 @@ namespace litiko.Eskhata.Shared
       base.SetRequiredProperties();
       
       _obj.State.Properties.ValidTill.IsRequired = true;
+      
+      var defaultCurrency = Sungero.Commons.PublicFunctions.Currency.Remote.GetDefaultCurrency();
+      _obj.State.Properties.CurrencyOperationlitiko.IsRequired = !Equals(_obj.CurrencyContractlitiko, defaultCurrency);
     } 
 
     /// <summary>
@@ -33,6 +36,13 @@ namespace litiko.Eskhata.Shared
       _obj.State.Properties.CaseFile.IsEnabled = canUpdate;
       _obj.State.Properties.PlacedToCaseFileDate.IsEnabled = canUpdate;
       _obj.State.Properties.StoredIn.IsEnabled = canUpdate;
+      
+      bool isCompany = Eskhata.Companies.Is(_obj.Counterparty);
+      _obj.State.Properties.IsVATlitiko.IsVisible = isCompany;
+      _obj.State.Properties.VatRatelitiko.IsVisible = isCompany;
+      _obj.State.Properties.VatAmount.IsVisible = isCompany;
+      
+      _obj.State.Properties.TotalAmount.IsEnabled = false;
       
       // TODO убрать из обновления формы
       _obj.State.Controls.CounterpartryInfolitiko.Refresh();
@@ -133,7 +143,7 @@ namespace litiko.Eskhata.Shared
     /// <param name="amount">Общая сумма.</param>
     /// <param name="currencyRate">Курс валюты.</param>
     /// <param name="currency">Валюта.</param>
-    public void FillTotalAmount(double? amount, litiko.NSI.ICurrencyRate currencyRate, Sungero.Commons.ICurrency currency)
+    public virtual void FillTotalAmount(double? amount, litiko.NSI.ICurrencyRate currencyRate, Sungero.Commons.ICurrency currency)
     {                  
       if (amount == null)
       {
@@ -242,7 +252,7 @@ namespace litiko.Eskhata.Shared
       
       if (!Equals(_obj.ResponsibilityMatrixlitiko, matrix))
         _obj.ResponsibilityMatrixlitiko = matrix;
-    }
+    }       
     
   }
 }

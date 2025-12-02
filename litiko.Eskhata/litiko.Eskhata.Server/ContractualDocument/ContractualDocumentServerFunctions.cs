@@ -182,9 +182,17 @@ namespace litiko.Eskhata.Server
         
         //block.AddLabel(ContractualDocuments.Resources.CounterpartryInfoFormat(VATPayer, NUNRezident, reliability, reviewDate, "\t\t\t\t"));        
 
-        block.AddLabel("Плательщик НДС:                       ", styleLabel);
-        block.AddLabel(VATPayer);
-        block.AddLabel("\t\t\t\t ");
+        if (Eskhata.Companies.Is(counterparty) || Eskhata.Banks.Is(counterparty))
+        {
+          block.AddLabel("Плательщик НДС:                       ", styleLabel);
+          block.AddLabel(VATPayer);        
+        }
+        else
+        {
+          block.AddLabel("\t\t\t\t\t\t     ", styleLabel);
+          block.AddLabel("      ");        
+        }        
+        block.AddLabel("\t\t\t\t");
         block.AddLabel("Благонадежность:", styleLabel);
         block.AddLabel(reliability);
         block.AddLineBreak();
@@ -257,15 +265,11 @@ namespace litiko.Eskhata.Server
                    .Select(l => Employees.As(l.Member))
                    .FirstOrDefault(e => e != null);
         
-        var responsibleAccountantFIO = responsibleEmployee?.Name ?? string.Empty;
-        var responsibleDepartment = responsibleEmployee?.Department?.Name ?? string.Empty;
+        var responsibleAccountantFIO = responsibleEmployee?.Name ?? string.Empty;        
 
         block.AddLabel("Ответственный бухгалтер: ", styleLabel);
         block.AddLabel(responsibleAccountantFIO);      
         block.AddLineBreak();                
-        block.AddLabel("Ответственное подразделение: ", styleLabel);
-        block.AddLabel(responsibleDepartment);      
-        block.AddLineBreak();
         
         string accountEskhata = string.Empty;
         string accountAnother = string.Empty;
