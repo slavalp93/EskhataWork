@@ -65,6 +65,12 @@ namespace litiko.Eskhata.Client
             approvalTask.OtherGroup.All.Add(doc);          
         }
         
+        // Проверка: <Контрагент>
+        approvalTask.Subject = Eskhata.Counterparties.Resources.VerificationTaskSubjectFormat(_obj.Name);
+        
+        // Прошу проверить контрагента и дать заключение.
+        approvalTask.ActiveText = Eskhata.Counterparties.Resources.VerificationTaskActiveText;
+        
         approvalTask.Show();
         e.CloseFormAfterAction = true;
       }
