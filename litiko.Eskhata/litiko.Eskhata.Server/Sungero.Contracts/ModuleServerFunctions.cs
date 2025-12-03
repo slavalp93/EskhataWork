@@ -80,7 +80,7 @@ namespace litiko.Eskhata.Module.Contracts.Server
           .Select(x => x.ExternalId)
           .ToList();
 
-        // Загружаем справочники в списки (In-Memory Cache)
+        // Загружаем справочники в списки 
         var currencies = litiko.Eskhata.Currencies.GetAll().ToList();
         var docKinds = litiko.Eskhata.DocumentKinds.GetAll().ToList();
         var docGroups = litiko.Eskhata.DocumentGroupBases.GetAll().ToList();
@@ -224,7 +224,7 @@ namespace litiko.Eskhata.Module.Contracts.Server
       // Подразделение
       var depId = docXml.Element("Department")?.Value?.Trim();
       if(!string.IsNullOrEmpty(depId))
-        contract.Department = departments.FirstOrDefault(d => d.ExternalCodelitiko == depId);
+        contract.Department = departments.FirstOrDefault(d => d.ExternalId == depId);
 
       // Подписант
       var signId = docXml.Element("CounterpartySignatory")?.Value?.Trim();

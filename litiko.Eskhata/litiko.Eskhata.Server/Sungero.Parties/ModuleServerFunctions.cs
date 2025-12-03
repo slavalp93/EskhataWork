@@ -188,12 +188,8 @@ namespace litiko.Eskhata.Module.Parties.Server
       var isNunRezident = companyElement.Element("NU_REZIDENT")?.Value;
       var isKPP = companyElement.Element("KPP")?.Value;
       var isOKPO = companyElement.Element("KOD_OKPO")?.Value;
-      var isCodeOKONHelements =
-        companyElement.Element("CODE_OKONH").Elements("element")
-        ?? Enumerable.Empty<XElement>();
-      var isCodeOKVEDelements =
-        companyElement.Element("CODE_OKVED").Elements("element")
-        ?? Enumerable.Empty<XElement>();
+      var isCodeOKONHelements = companyElement.Element("CODE_OKONH").Elements("element") ?? Enumerable.Empty<XElement>();
+      var isCodeOKVEDelements = companyElement.Element("CODE_OKVED").Elements("element") ?? Enumerable.Empty<XElement>();
       var isOKOPF = companyElement.Element("FORMA")?.Value;
       var isOKFS = companyElement.Element("OWNERSHIP")?.Value;
       var isRegistnum = companyElement.Element("REGIST_NUM")?.Value;
