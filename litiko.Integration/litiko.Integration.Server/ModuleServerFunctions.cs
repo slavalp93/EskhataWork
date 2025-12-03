@@ -4201,7 +4201,6 @@ namespace litiko.Integration.Server
         var incomeTaxRate     = contractualDocument.IncomeTaxRatelitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
         var incomeTaxAmount   = contractualDocument.IncomeTaxAmountlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? ""; 
         var laborPayment      = ToYesNoNull(contractualDocument.IsIndividualPaymentlitiko); 
-        var note              = contractualDocument.Note ?? "Без примечания";
         var isWithinBudget    = ToYesNoNull(contractualDocument.IsWithinBudgetlitiko);
     
         // ==========================
@@ -4231,8 +4230,7 @@ namespace litiko.Integration.Server
             new XElement("VATAmount", vatAmount),
             new XElement("IncomeTaxRate", incomeTaxRate),
             new XElement("IncomeTaxAmount", incomeTaxAmount),
-            new XElement("LaborPayment", laborPayment),
-            new XElement("Note", note)
+            new XElement("LaborPayment", laborPayment)            
         );
     
         return new XElement("Data", documentElement);
@@ -4254,8 +4252,6 @@ namespace litiko.Integration.Server
         var accFutureExpense = contractualDocument.AccFutureExpenselitiko ?? "";
         var paymentRegion    = contractualDocument.PaymentRegionlitiko?.ExternalId ?? "";
         var paymentTaxRegion = contractualDocument.RegionOfRentallitiko?.ExternalId ?? "";        
-        var paymentMethod    = contractualDocument.PaymentMethodlitiko.HasValue ? contractualDocument.Info.Properties.PaymentMethodlitiko.GetLocalizedValue(contractualDocument.PaymentMethodlitiko.Value) : "";
-        var paymentFrequency = contractualDocument.FrequencyOfPaymentlitiko?.Name ?? "";
     
         var matrix = NSI.PublicFunctions.Module.GetResponsibilityMatrix(contractualDocument);
         var responsibleAccountant =
@@ -4266,7 +4262,6 @@ namespace litiko.Integration.Server
                    .FirstOrDefault(e => e != null);
     
         var responsibleAccountantId = litiko.Eskhata.Employees.As(responsibleAccountant)?.ExternalId ?? string.Empty;
-        //var responsibleDepartmentId = litiko.Eskhata.Employees.As(responsibleAccountant)?.Department?.ExternalId ?? string.Empty;
         var batchProcessing = ToYesNoNull(matrix?.BatchProcessing);
     
         // PaymentBasis
@@ -4292,11 +4287,9 @@ namespace litiko.Integration.Server
         var documentKind        = litiko.Eskhata.DocumentKinds.As(contractualDocument.DocumentKind)?.ExternalIdlitiko ?? "";
         var documentGroup       = litiko.Eskhata.DocumentGroupBases.As(contractualDocument.DocumentGroup)?.ExternalIdlitiko ?? "";
         var subject             = contractualDocument.Subject ?? "";
-        var name                = (contractualDocument.Name ?? "").Substring(0, Math.Min((contractualDocument.Name ?? "").Length, 100));
-        var counterpartySign    = litiko.Eskhata.Contacts.As(contractualDocument.CounterpartySignatory)?.ExternalIdlitiko ?? "";
+        var name                = (contractualDocument.Name ?? "").Substring(0, Math.Min((contractualDocument.Name ?? "").Length, 100));        
         var department          = litiko.Eskhata.Departments.As(contractualDocument.Department)?.ExternalId ?? "";  
-        var responsibleEmployee = litiko.Eskhata.Employees.As(contractualDocument.ResponsibleEmployee)?.ExternalId ?? "";
-        var author              = litiko.Eskhata.Employees.As(contractualDocument.Author)?.ExternalId ?? "";
+        var responsibleEmployee = litiko.Eskhata.Employees.As(contractualDocument.ResponsibleEmployee)?.ExternalId ?? "";        
         var validFrom           = contractualDocument.ValidFrom?.ToString(dateFormat) ?? ""; 
         var validTill           = contractualDocument.ValidTill?.ToString(dateFormat) ?? "";
         var changeReason        = contractualDocument.ReasonForChangelitiko;
@@ -4309,11 +4302,9 @@ namespace litiko.Integration.Server
         var vatRate             = contractualDocument.VatRatelitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
         var vatAmount           = contractualDocument.VatAmount?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
         var incomeTaxRate       = contractualDocument.IncomeTaxRatelitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
-        var amountForPeriod     = contractualDocument.AmountForPeriodlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
-        var note                = contractualDocument.Note ?? "Без примечания";
+        var amountForPeriod     = contractualDocument.AmountForPeriodlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";        
         var registrationNumber  = contractualDocument.RegistrationNumber ?? "";
-        var registrationDate    = contractualDocument.RegistrationDate?.ToString(dateFormat) ?? "";
-        var isPartialPayment    = ToYesNoNull(contractualDocument.IsPartialPaymentlitiko);
+        var registrationDate    = contractualDocument.RegistrationDate?.ToString(dateFormat) ?? "";        
         var isEqualPayment      = ToYesNoNull(contractualDocument.IsEqualPaymentlitiko);
         var laborPayment        = ToYesNoNull(contractualDocument.IsIndividualPaymentlitiko); 
         
@@ -4324,10 +4315,10 @@ namespace litiko.Integration.Server
             new XElement("DocumentGroup", documentGroup),
             new XElement("Subject", subject),
             new XElement("Name", name),
-            new XElement("CounterpartySignatory", counterpartySign),
+            //new XElement("CounterpartySignatory", counterpartySign),
             new XElement("Department", department),
             new XElement("ResponsibleEmployee", responsibleEmployee),
-            new XElement("Author", author),
+            //new XElement("Author", author),
             new XElement("ResponsibleAccountant", responsibleAccountantId), 
             //new XElement("ResponsibleDepartment", responsibleDepartmentId), 
             new XElement("RBO", rbo),
@@ -4346,8 +4337,8 @@ namespace litiko.Integration.Server
             new XElement("PaymentRegion", paymentRegion),
             new XElement("PaymentTaxRegion", paymentTaxRegion),
             new XElement("BatchProcessing", batchProcessing), 
-            new XElement("PaymentMethod", paymentMethod),
-            new XElement("PaymentFrequency", paymentFrequency),
+            //new XElement("PaymentMethod", paymentMethod),
+            //new XElement("PaymentFrequency", paymentFrequency),
             new XElement("PaymentBasis",
                 new XElement("IsPaymentContract",   isPaymentContract),
                 new XElement("IsPaymentInvoice",    isPaymentInvoice),
@@ -4362,11 +4353,11 @@ namespace litiko.Integration.Server
                 new XElement("IsPaymentAct",        isClosureAct),
                 new XElement("IsPaymentWaybill",    isClosureWaybill)
             ),
-            new XElement("IsPartialPayment", isPartialPayment),
+            //new XElement("IsPartialPayment", isPartialPayment),
             new XElement("IsEqualPayment", isEqualPayment),
             new XElement("LaborPayment", laborPayment),
             new XElement("AmountForPeriod", amountForPeriod),
-            new XElement("Note", note),
+            //new XElement("Note", note),
             new XElement("RegistrationNumber", registrationNumber),
             new XElement("RegistrationDate", registrationDate)
         );
