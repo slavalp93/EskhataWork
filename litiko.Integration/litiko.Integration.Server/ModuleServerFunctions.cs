@@ -2029,9 +2029,12 @@ namespace litiko.Integration.Server
       var isPS_REF = element.Element("PS_REF")?.Value;
       var isCountry = element.Element("COUNTRY")?.Value;
       //var isRegion = element.Element("Region")?.Value;
-      var isCity = element.Element("City")?.Value;       
-      var isPostAdress = element.Element("PostAdress")?.Value;
-      var isLegalAdress = element.Element("LegalAdress")?.Value;
+      var isAddressType = element.Element("AddressType")?.Value;
+      var isCity = element.Element("City")?.Value;
+      var isStreet = element.Element("Street")?.Value;
+      var isHouseNumber = element.Element("HouseNumber")?.Value;
+      //var isPostAdress = element.Element("PostAdress")?.Value;
+      //var isLegalAdress = element.Element("LegalAdress")?.Value;
       var isPhone = element.Element("Phone")?.Value;
       var isEmail = element.Element("Email")?.Value;
       var isWebSite = element.Element("WebSite")?.Value;
@@ -2199,6 +2202,16 @@ namespace litiko.Integration.Server
         }
         */
   
+        if (!string.IsNullOrEmpty(isAddressType))
+        {
+          var addressType = NSI.AddressTypes.GetAll().Where(x => x.ExternalId == isAddressType).FirstOrDefault();
+          if (addressType != null && !Equals(company.AddressTypelitiko, addressType))
+          {
+            Logger.DebugFormat("Change AddressTypelitiko: current:{0}, new:{1}", company.AddressTypelitiko.Id, addressType.Id);
+            company.AddressTypelitiko = addressType;                    
+          }
+        }
+  
         if (!string.IsNullOrEmpty(isCity))
         {
           var city = Eskhata.Cities.GetAll().Where(x => x.ExternalIdlitiko == isCity).FirstOrDefault();
@@ -2207,18 +2220,18 @@ namespace litiko.Integration.Server
             Logger.DebugFormat("Change City: current:{0}, new:{1}", company.City?.Name, city?.Name);
             company.City = city;                    
           }
-        }        
-
-        if(!string.IsNullOrEmpty(isPostAdress) && company.PostalAddress != isPostAdress)
-        {
-          Logger.DebugFormat("Change PostalAddress: current:{0}, new:{1}", company.PostalAddress, isPostAdress);
-          company.PostalAddress = isPostAdress;                          
+        }      
+  
+        if (!string.IsNullOrEmpty(isStreet) && company.Streetlitiko != isStreet)
+        {        
+          Logger.DebugFormat("Change Streetlitiko: current:{0}, new:{1}", company.Streetlitiko, isStreet);
+          company.Streetlitiko = isStreet;                    
         }
-
-        if(!string.IsNullOrEmpty(isLegalAdress) && company.LegalAddress != isLegalAdress)
-        {
-          Logger.DebugFormat("Change LegalAddress: current:{0}, new:{1}", company.LegalAddress, isLegalAdress);
-          company.LegalAddress = isLegalAdress;                          
+  
+        if (!string.IsNullOrEmpty(isHouseNumber) && company.HouseNumberlitiko != isHouseNumber)
+        {        
+          Logger.DebugFormat("Change HouseNumberlitiko: current:{0}, new:{1}", company.HouseNumberlitiko, isHouseNumber);
+          company.HouseNumberlitiko = isHouseNumber;                    
         }
 
         if(!string.IsNullOrEmpty(isPhone) && company.Phones != isPhone)
@@ -2359,9 +2372,12 @@ namespace litiko.Integration.Server
       var isIsNostroCorrespondent = element.Element("IsNostroCorrespondent")?.Value;
       var isCountry = element.Element("COUNTRY")?.Value;
       //var isRegion = element.Element("Region")?.Value;
-      var isCity = element.Element("City")?.Value;       
-      var isPostAdress = element.Element("PostAdress")?.Value;
-      var isLegalAdress = element.Element("LegalAdress")?.Value;
+      var isAddressType = element.Element("AddressType")?.Value;
+      var isCity = element.Element("City")?.Value;
+      var isStreet = element.Element("Street")?.Value;
+      var isHouseNumber = element.Element("HouseNumber")?.Value;
+      //var isPostAdress = element.Element("PostAdress")?.Value;
+      //var isLegalAdress = element.Element("LegalAdress")?.Value;
       var isPhone = element.Element("Phone")?.Value;
       var isEmail = element.Element("Email")?.Value;
       var isWebSite = element.Element("WebSite")?.Value;
@@ -2495,6 +2511,16 @@ namespace litiko.Integration.Server
         }
         */
         
+        if (!string.IsNullOrEmpty(isAddressType))
+        {
+          var addressType = NSI.AddressTypes.GetAll().Where(x => x.ExternalId == isAddressType).FirstOrDefault();
+          if (addressType != null && !Equals(bank.AddressTypelitiko, addressType))
+          {
+            Logger.DebugFormat("Change AddressTypelitiko: current:{0}, new:{1}", bank.AddressTypelitiko.Id, addressType.Id);
+            bank.AddressTypelitiko = addressType;                    
+          }
+        }
+  
         if (!string.IsNullOrEmpty(isCity))
         {
           var city = Eskhata.Cities.GetAll().Where(x => x.ExternalIdlitiko == isCity).FirstOrDefault();
@@ -2503,18 +2529,18 @@ namespace litiko.Integration.Server
             Logger.DebugFormat("Change City: current:{0}, new:{1}", bank.City?.Name, city?.Name);
             bank.City = city;                    
           }
-        }        
-
-        if(!string.IsNullOrEmpty(isPostAdress) && bank.PostalAddress != isPostAdress)
-        {
-          Logger.DebugFormat("Change PostalAddress: current:{0}, new:{1}", bank.PostalAddress, isPostAdress);
-          bank.PostalAddress = isPostAdress;                         
+        }      
+  
+        if (!string.IsNullOrEmpty(isStreet) && bank.Streetlitiko != isStreet)
+        {        
+          Logger.DebugFormat("Change Streetlitiko: current:{0}, new:{1}", bank.Streetlitiko, isStreet);
+          bank.Streetlitiko = isStreet;                    
         }
-
-        if(!string.IsNullOrEmpty(isLegalAdress) && bank.LegalAddress != isLegalAdress)
-        {
-          Logger.DebugFormat("Change LegalAddress: current:{0}, new:{1}", bank.LegalAddress, isLegalAdress);
-          bank.LegalAddress = isLegalAdress;                          
+  
+        if (!string.IsNullOrEmpty(isHouseNumber) && bank.HouseNumberlitiko != isHouseNumber)
+        {        
+          Logger.DebugFormat("Change HouseNumberlitiko: current:{0}, new:{1}", bank.HouseNumberlitiko, isHouseNumber);
+          bank.HouseNumberlitiko = isHouseNumber;                    
         }
 
         if(!string.IsNullOrEmpty(isPhone) && bank.Phones != isPhone)
@@ -3489,9 +3515,12 @@ namespace litiko.Integration.Server
       //var isCodeOKVEDelements = personData.Element("CODE_OKVED").Elements("element");
       var isCountry = personData.Element("COUNTRY")?.Value;
       //var isRegion = personData.Element("Region")?.Value;
-      var isCity = personData.Element("City")?.Value;      
-      var isLegalAdress = personData.Element("DOC_BIRTH_PLACE")?.Value;
-      var isPostAdress = personData.Element("PostAdress")?.Value;
+      var isAddressType = personData.Element("AddressType")?.Value;
+      var isCity = personData.Element("City")?.Value;
+      var isStreet = personData.Element("Street")?.Value;
+      var isHouseNumber = personData.Element("HouseNumber")?.Value;
+      //var isLegalAdress = personData.Element("DOC_BIRTH_PLACE")?.Value;
+      //var isPostAdress = personData.Element("PostAdress")?.Value;
       var isPhone = personData.Element("Phone")?.Value;
       var isEmail = personData.Element("Email")?.Value;
       var isWebSite = personData.Element("WebSite")?.Value;
@@ -3726,6 +3755,16 @@ namespace litiko.Integration.Server
       }
 */
 
+      if (!string.IsNullOrEmpty(isAddressType))
+      {
+        var addressType = NSI.AddressTypes.GetAll().Where(x => x.ExternalId == isAddressType).FirstOrDefault();
+        if (addressType != null && !Equals(person.AddressTypelitiko, addressType))
+        {
+          Logger.DebugFormat("Change AddressTypelitiko: current:{0}, new:{1}", person.AddressTypelitiko.Id, addressType.Id);
+          person.AddressTypelitiko = addressType;                    
+        }
+      }
+
       if (!string.IsNullOrEmpty(isCity))
       {
         var city = Eskhata.Cities.GetAll().Where(x => x.ExternalIdlitiko == isCity).FirstOrDefault();
@@ -3735,19 +3774,19 @@ namespace litiko.Integration.Server
           person.City = city;                    
         }
       }      
+
+      if (!string.IsNullOrEmpty(isStreet) && person.Streetlitiko != isStreet)
+      {        
+        Logger.DebugFormat("Change Streetlitiko: current:{0}, new:{1}", person.Streetlitiko, isStreet);
+        person.Streetlitiko = isStreet;                    
+      }
+
+      if (!string.IsNullOrEmpty(isHouseNumber) && person.HouseNumberlitiko != isHouseNumber)
+      {        
+        Logger.DebugFormat("Change HouseNumberlitiko: current:{0}, new:{1}", person.HouseNumberlitiko, isHouseNumber);
+        person.HouseNumberlitiko = isHouseNumber;                    
+      }
       
-      if(!string.IsNullOrEmpty(isPostAdress) && person.PostalAddress != isPostAdress)
-      {
-        Logger.DebugFormat("Change PostalAddress: current:{0}, new:{1}", person.PostalAddress, isPostAdress);
-        person.PostalAddress = isPostAdress;                        
-      }
-
-      if(!string.IsNullOrEmpty(isLegalAdress) && person.LegalAddress != isLegalAdress)
-      {
-        Logger.DebugFormat("Change LegalAddress: current:{0}, new:{1}", person.LegalAddress, isLegalAdress);
-        person.LegalAddress = isLegalAdress;                        
-      }
-
       if(!string.IsNullOrEmpty(isPhone) && person.Phones != isPhone)
       {
         Logger.DebugFormat("Change Phones: current:{0}, new:{1}", person.Phones, isPhone);
