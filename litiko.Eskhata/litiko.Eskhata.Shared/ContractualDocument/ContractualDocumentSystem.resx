@@ -220,4 +220,10 @@
   <data name="Property_UpdateRquiredlitiko" xml:space="preserve">
     <value>Update required in ABS</value>
   </data>
+  <data name="Property_AmountToBePaidlitiko" xml:space="preserve">
+    <value>Amount to be paid</value>
+  </data>
+  <data name="Property_AmountOfExpenseslitiko" xml:space="preserve">
+    <value>Amount of expenses</value>
+  </data>
 </root>

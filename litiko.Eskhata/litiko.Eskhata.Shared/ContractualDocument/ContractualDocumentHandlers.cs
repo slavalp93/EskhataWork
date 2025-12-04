@@ -10,9 +10,20 @@ namespace litiko.Eskhata
   partial class ContractualDocumentSharedHandlers
   {
 
+    public virtual void FSZNAmountlitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
+    {
+      Functions.ContractualDocument.FillAmountOfExpenses(_obj, _obj.Counterparty, _obj.TotalAmount, _obj.VatAmount, e.NewValue);
+    }
+
+    public virtual void IncomeTaxAmountlitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
+    {
+      Functions.ContractualDocument.FillAmountToBePaid(_obj, _obj.TotalAmount, e.NewValue);
+    }
+
     public override void VatAmountChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
     {
       Sungero.Docflow.PublicFunctions.ContractualDocumentBase.FillNetAmount(_obj, _obj.TotalAmount, e.NewValue);
+      Functions.ContractualDocument.FillAmountOfExpenses(_obj, _obj.Counterparty, _obj.TotalAmount, e.NewValue, _obj.FSZNAmountlitiko);
     }
 
     public virtual void CurrencyContractlitikoChanged(litiko.Eskhata.Shared.ContractualDocumentCurrencyContractlitikoChangedEventArgs e)
@@ -65,7 +76,9 @@ namespace litiko.Eskhata
       Sungero.Docflow.PublicFunctions.ContractualDocumentBase.FillNetAmount(_obj, e.NewValue, _obj.VatAmount);
       Functions.ContractualDocument.FillPennyAmount(_obj, e.NewValue, _obj.TaxRatelitiko, _obj.IsIndividualPaymentlitiko);
       Functions.ContractualDocument.FillIncomeTaxAmount(_obj, e.NewValue, _obj.TaxRatelitiko);      
-      Functions.ContractualDocument.FillFSZNAmount(_obj, e.NewValue, _obj.TaxRatelitiko, _obj.IsIndividualPaymentlitiko);      
+      Functions.ContractualDocument.FillFSZNAmount(_obj, e.NewValue, _obj.TaxRatelitiko, _obj.IsIndividualPaymentlitiko);
+      Functions.ContractualDocument.FillAmountToBePaid(_obj, e.NewValue, _obj.IncomeTaxAmountlitiko);
+      Functions.ContractualDocument.FillAmountOfExpenses(_obj, _obj.Counterparty, e.NewValue, _obj.VatAmount, _obj.FSZNAmountlitiko);
     }
 
     public virtual void TaxRatelitikoChanged(litiko.Eskhata.Shared.ContractualDocumentTaxRatelitikoChangedEventArgs e)
@@ -94,7 +107,8 @@ namespace litiko.Eskhata
       var counterprty = litiko.Eskhata.Counterparties.As(e.NewValue);
       
       _obj.IsVATlitiko = counterprty?.VATPayerlitiko;
-      _obj.IsIndividualPaymentlitiko = People.Is(counterprty);      
+      _obj.IsIndividualPaymentlitiko = People.Is(counterprty);
+      Functions.ContractualDocument.FillAmountOfExpenses(_obj, e.NewValue, _obj.TotalAmount, _obj.VatAmount, _obj.FSZNAmountlitiko);
     }
 
     public override void LeadingDocumentChanged(Sungero.Docflow.Shared.OfficialDocumentLeadingDocumentChangedEventArgs e)

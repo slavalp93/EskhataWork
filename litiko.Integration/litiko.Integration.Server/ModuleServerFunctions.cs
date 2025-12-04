@@ -4202,6 +4202,9 @@ namespace litiko.Integration.Server
         var incomeTaxAmount   = contractualDocument.IncomeTaxAmountlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? ""; 
         var laborPayment      = ToYesNoNull(contractualDocument.IsIndividualPaymentlitiko); 
         var isWithinBudget    = ToYesNoNull(contractualDocument.IsWithinBudgetlitiko);
+        
+        var amountToBePaid      = contractualDocument.AmountToBePaidlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        var amountOfExpenses    = contractualDocument.AmountOfExpenseslitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
     
         // ==========================
         // Формирование XML
@@ -4230,7 +4233,9 @@ namespace litiko.Integration.Server
             new XElement("VATAmount", vatAmount),
             new XElement("IncomeTaxRate", incomeTaxRate),
             new XElement("IncomeTaxAmount", incomeTaxAmount),
-            new XElement("LaborPayment", laborPayment)            
+            new XElement("LaborPayment", laborPayment),
+            new XElement("AmountToBePaid", amountToBePaid),
+            new XElement("AmountOfExpenses", amountOfExpenses)
         );
     
         return new XElement("Data", documentElement);
@@ -4308,6 +4313,9 @@ namespace litiko.Integration.Server
         var isEqualPayment      = ToYesNoNull(contractualDocument.IsEqualPaymentlitiko);
         var laborPayment        = ToYesNoNull(contractualDocument.IsIndividualPaymentlitiko); 
         
+        var amountToBePaid      = contractualDocument.AmountToBePaidlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        var amountOfExpenses    = contractualDocument.AmountOfExpenseslitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        
         var documentElement = new XElement("Document",
             new XElement("ID", documentId),
             new XElement("ExternalD", externalId),
@@ -4359,7 +4367,9 @@ namespace litiko.Integration.Server
             new XElement("AmountForPeriod", amountForPeriod),
             //new XElement("Note", note),
             new XElement("RegistrationNumber", registrationNumber),
-            new XElement("RegistrationDate", registrationDate)
+            new XElement("RegistrationDate", registrationDate),
+            new XElement("AmountToBePaid", amountToBePaid),
+            new XElement("AmountOfExpenses", amountOfExpenses)
         );
     
         // Company

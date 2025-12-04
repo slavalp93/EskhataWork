@@ -205,4 +205,10 @@
   <data name="Property_UpdateRquiredlitiko" xml:space="preserve">
     <value>Требуется обновить в АБС</value>
   </data>
+  <data name="Property_AmountToBePaidlitiko" xml:space="preserve">
+    <value>Сумма к оплате</value>
+  </data>
+  <data name="Property_AmountOfExpenseslitiko" xml:space="preserve">
+    <value>Сумма затрат по договору</value>
+  </data>
 </root>
