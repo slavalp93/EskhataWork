@@ -10,36 +10,26 @@ namespace litiko.Eskhata
   partial class ContractualDocumentSharedHandlers
   {
 
+    public override void VatAmountChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
+    {
+      Sungero.Docflow.PublicFunctions.ContractualDocumentBase.FillNetAmount(_obj, _obj.TotalAmount, e.NewValue);
+    }
+
     public virtual void CurrencyContractlitikoChanged(litiko.Eskhata.Shared.ContractualDocumentCurrencyContractlitikoChangedEventArgs e)
     {
       Functions.ContractualDocument.FillCurrencyRate(_obj, e.NewValue, Calendar.Today);
       Functions.ContractualDocument.FillTotalAmount(_obj, _obj.TotalAmountlitiko, _obj.CurrencyRatelitiko, e.NewValue);      
     }
 
-    public virtual void PennyRatelitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
-    {
-      Functions.ContractualDocument.FillPennyAmount(_obj, _obj.TotalAmount, e.NewValue, _obj.IsIndividualPaymentlitiko);
-    }
-
     public virtual void IsVATlitikoChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
     {
-      Functions.ContractualDocument.FillVatAmount(_obj, _obj.TotalAmount, _obj.VatRatelitiko, e.NewValue);
+      Functions.ContractualDocument.FillVatAmount(_obj, _obj.TotalAmount, _obj.TaxRatelitiko, e.NewValue);
     }
 
     public virtual void IsIndividualPaymentlitikoChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
     {
-      Functions.ContractualDocument.FillFSZNAmount(_obj, _obj.TotalAmount, _obj.FSZNRatelitiko, e.NewValue);
-      Functions.ContractualDocument.FillPennyAmount(_obj, _obj.TotalAmount, _obj.PennyRatelitiko, e.NewValue);
-    }
-
-    public virtual void FSZNRatelitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
-    {
-      Functions.ContractualDocument.FillFSZNAmount(_obj, _obj.TotalAmount, e.NewValue, _obj.IsIndividualPaymentlitiko);
-    }
-
-    public virtual void IncomeTaxRatelitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
-    {
-      Functions.ContractualDocument.FillIncomeTaxAmount(_obj, _obj.TotalAmount, e.NewValue);
+      Functions.ContractualDocument.FillFSZNAmount(_obj, _obj.TotalAmount, _obj.TaxRatelitiko, e.NewValue);
+      Functions.ContractualDocument.FillPennyAmount(_obj, _obj.TotalAmount, _obj.TaxRatelitiko, e.NewValue);
     }
 
     public virtual void CurrencyRatelitikoChanged(litiko.Eskhata.Shared.ContractualDocumentCurrencyRatelitikoChangedEventArgs e)
@@ -71,16 +61,21 @@ namespace litiko.Eskhata
     {
       //base.TotalAmountChanged(e);
       
-      Functions.ContractualDocument.FillVatAmount(_obj, e.NewValue, _obj.VatRatelitiko, _obj.IsVATlitiko);
+      Functions.ContractualDocument.FillVatAmount(_obj, e.NewValue, _obj.TaxRatelitiko, _obj.IsVATlitiko);
       Sungero.Docflow.PublicFunctions.ContractualDocumentBase.FillNetAmount(_obj, e.NewValue, _obj.VatAmount);
-      Functions.ContractualDocument.FillIncomeTaxAmount(_obj, e.NewValue, _obj.IncomeTaxRatelitiko);      
-      Functions.ContractualDocument.FillFSZNAmount(_obj, e.NewValue, _obj.FSZNRatelitiko, _obj.IsIndividualPaymentlitiko);
-      Functions.ContractualDocument.FillPennyAmount(_obj, e.NewValue, _obj.PennyRatelitiko, _obj.IsIndividualPaymentlitiko);
+      Functions.ContractualDocument.FillPennyAmount(_obj, e.NewValue, _obj.TaxRatelitiko, _obj.IsIndividualPaymentlitiko);
+      Functions.ContractualDocument.FillIncomeTaxAmount(_obj, e.NewValue, _obj.TaxRatelitiko);      
+      Functions.ContractualDocument.FillFSZNAmount(_obj, e.NewValue, _obj.TaxRatelitiko, _obj.IsIndividualPaymentlitiko);      
     }
 
     public virtual void TaxRatelitikoChanged(litiko.Eskhata.Shared.ContractualDocumentTaxRatelitikoChangedEventArgs e)
     {
-      _obj.VatRatelitiko = e.NewValue?.VAT;      
+      Functions.ContractualDocument.FillVatAmount(_obj, _obj.TotalAmount, e.NewValue, _obj.IsVATlitiko);
+      Functions.ContractualDocument.FillPennyAmount(_obj, _obj.TotalAmount, e.NewValue, _obj.IsIndividualPaymentlitiko);
+      Functions.ContractualDocument.FillIncomeTaxAmount(_obj, _obj.TotalAmount, e.NewValue);
+      Functions.ContractualDocument.FillFSZNAmount(_obj, _obj.TotalAmount, e.NewValue, _obj.IsIndividualPaymentlitiko);
+      
+      _obj.VatRatelitiko = e.NewValue?.VAT;
       _obj.IncomeTaxRatelitiko = e.NewValue?.IncomeTax;      
       _obj.FSZNRatelitiko = e.NewValue?.FSZN;
       _obj.PennyRatelitiko = e.NewValue?.PensionContribution;
@@ -89,10 +84,7 @@ namespace litiko.Eskhata
     public virtual void VatRatelitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
     {
       // Очистить базавое свойство
-      _obj.VatRate = null;
-      
-      Functions.ContractualDocument.FillVatAmount(_obj, _obj.TotalAmount, e.NewValue, _obj.IsVATlitiko);
-      Sungero.Docflow.PublicFunctions.ContractualDocumentBase.FillNetAmount(_obj, _obj.TotalAmount, _obj.VatAmount);      
+      _obj.VatRate = null;            
     }
 
     public override void CounterpartyChanged(Sungero.Docflow.Shared.ContractualDocumentBaseCounterpartyChangedEventArgs e)

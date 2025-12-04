@@ -728,10 +728,14 @@
       "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
       "NameGuid": "08598cbc-3d38-4dac-a193-c0fac61637d1",
       "Name": "VatAmount",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "IsAncestorMetadata": true,
       "IsEnabled": false,
       "Overridden": [
-        "IsEnabled"
+        "IsEnabled",
+        "HandledEvents"
       ]
     },
     {
@@ -909,9 +913,6 @@
       "Name": "IncomeTaxRatelitiko",
       "CanBeSearch": false,
       "Code": "IncomeTaxRatel",
-      "HandledEvents": [
-        "ChangedShared"
-      ],
       "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "b836689e-46bf-4131-8fa6-23f5c9c213a1"
@@ -944,9 +945,6 @@
       "Name": "FSZNRatelitiko",
       "CanBeSearch": false,
       "Code": "FSZNRatelitiko",
-      "HandledEvents": [
-        "ChangedShared"
-      ],
       "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "007493c1-c401-4673-af6f-c06c663b5fd2"
@@ -967,9 +965,6 @@
       "Name": "PennyRatelitiko",
       "CanBeSearch": false,
       "Code": "PennyRatelitik",
-      "HandledEvents": [
-        "ChangedShared"
-      ],
       "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "cab838fe-ecd9-4b8c-86fc-3d6817ece897"
