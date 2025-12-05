@@ -224,7 +224,7 @@ namespace litiko.Eskhata.Module.Contracts.Server
       // Подразделение
       var depId = docXml.Element("Department")?.Value?.Trim();
       if(!string.IsNullOrEmpty(depId))
-        contract.Department = departments.FirstOrDefault(d => d.ExternalCodelitiko == depId);
+        contract.Department = departments.FirstOrDefault(d => d.ExternalId == depId);
 
       // Подписант
       var signId = docXml.Element("CounterpartySignatory")?.Value?.Trim();
