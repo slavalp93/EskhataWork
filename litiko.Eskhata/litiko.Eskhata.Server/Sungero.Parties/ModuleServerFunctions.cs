@@ -447,14 +447,13 @@ namespace litiko.Eskhata.Module.Parties.Server
       if (!string.IsNullOrEmpty(isInternalAcc)) person.AccountEskhatalitiko = isInternalAcc.Trim();
 
       // Документ (Паспорт)
-      var identityElement = personElement.Element("IdentityDocument") ?? personElement.Element("IdentityDocuments")?.Element("element");
+      var identityElement = personElement.Element("IdentityDocument").Element("element");
       if (identityElement != null)
       {
-        var idSid = identityElement.Element("TYPE")?.Value ?? identityElement.Element("ID")?.Value;
+        var idSid = identityElement.Element("TYPE")?.Value;
         if (!string.IsNullOrEmpty(idSid))
         {
           var identityKind = Sungero.Parties.IdentityDocumentKinds.GetAll().FirstOrDefault(x => x.SID == idSid);
-          // Если по SID не нашли, можно попробовать поискать по ExternalId, если он там есть, или по Name
           
           if (identityKind != null) person.IdentityKind = identityKind;
           
