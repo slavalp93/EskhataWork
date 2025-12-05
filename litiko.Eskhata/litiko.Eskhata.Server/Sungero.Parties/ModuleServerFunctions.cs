@@ -447,25 +447,32 @@ namespace litiko.Eskhata.Module.Parties.Server
       if (!string.IsNullOrEmpty(isInternalAcc)) person.AccountEskhatalitiko = isInternalAcc.Trim();
 
       // Документ (Паспорт)
-      var identityElement = personElement.Element("IdentityDocument").Element("element");
+      var identityElement = personElement.Element("IdentityDocument");
+      
       if (identityElement != null)
       {
-        var idSid = identityElement.Element("TYPE")?.Value;
-        if (!string.IsNullOrEmpty(idSid))
+        var xmlType = identityElement.Element("TYPE")?.Value;
+        var xmlName = identityElement.Element("NAME")?.Value;
+        
+        var identityKind = Sungero.Parties.IdentityDocumentKinds.GetAll()
+            .FirstOrDefault(x => x.SID == xmlType || x.Name == xmlName);
+        
+        if (identityKind != null)
         {
-          var identityKind = Sungero.Parties.IdentityDocumentKinds.GetAll().FirstOrDefault(x => x.SID == idSid);
-          
-          if (identityKind != null) person.IdentityKind = identityKind;
-          
-          person.IdentityNumber = identityElement.Element("NUM")?.Value;
-          person.IdentitySeries = identityElement.Element("SER")?.Value;
-          
-          DateTime tmp;
-          if (Calendar.TryParseDate(identityElement.Element("DATE_BEGIN")?.Value, out tmp))
-            person.IdentityDateOfIssue = tmp;
-          if (Calendar.TryParseDate(identityElement.Element("DATE_END")?.Value, out tmp))
-            person.IdentityExpirationDate = tmp;
+            person.IdentityKind = identityKind;
         }
+        else
+        {
+            Logger.Error("IdentityKind is not found! Identity data`s is not full.");
+        }
+        
+        person.IdentityNumber = identityElement.Element("NUM")?.Value;
+        person.IdentitySeries = identityElement.Element("SER")?.Value;
+        
+        person.IdentityAuthority = identityElement.Element("WHO")?.Value;
+        
+        person.IdentityDateOfIssue = TryParseDate(identityElement.Element("DATE_BEGIN")?.Value);
+        person.IdentityExpirationDate = TryParseDate(identityElement.Element("DATE_END")?.Value);
       }
 
       return person;
