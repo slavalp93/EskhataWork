@@ -94,6 +94,9 @@
   <data name="CoverAction_Importlitiko" xml:space="preserve">
     <value>Миграция договоров</value>
   </data>
+  <data name="CoverAction_Importlitiko" xml:space="preserve">
+    <value>Миграция договоров</value>
+  </data>
   <data name="CoverGroup_ContractStatementslitiko" xml:space="preserve">
     <value>Акты выполненных работ</value>
   </data>

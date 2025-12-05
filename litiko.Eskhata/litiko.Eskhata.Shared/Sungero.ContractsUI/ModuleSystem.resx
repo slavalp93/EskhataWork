@@ -106,6 +106,18 @@
   <data name="CoverDescription_ImportCounterpartieslitiko" xml:space="preserve">
     <value>Импорт контрагентов из АБС которые сохранены в XML файле</value>
   </data>
+  <data name="CoverDescription_Importlitiko" xml:space="preserve">
+    <value>Миграция договоров с XML файла</value>
+  </data>
+  <data name="CoverAction_Importlitiko" xml:space="preserve">
+    <value>Importlitiko</value>
+  </data>
+  <data name="CoverAction_ImportCounterpartieslitiko" xml:space="preserve">
+    <value>ImportCounterpartieslitiko</value>
+  </data>
+  <data name="CoverDescription_ImportCounterpartieslitiko" xml:space="preserve">
+    <value>Импорт контрагентов из АБС которые сохранены в XML файле</value>
+  </data>
   <data name="CoverGroup_ContractStatementslitiko" xml:space="preserve">
     <value>Contract Statements</value>
   </data>
