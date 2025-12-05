@@ -40,13 +40,13 @@
           "Name": "ControlGroup",
           "ColumnDefinitions": [
             {
-              "Percentage": 33.33
+              "Percentage": 32.04
             },
             {
-              "Percentage": 33.33
+              "Percentage": 41.02
             },
             {
-              "Percentage": 33.33
+              "Percentage": 26.94
             }
           ]
         },
@@ -119,12 +119,12 @@
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
           "NameGuid": "615f8fc3-7a5b-4370-86af-3ead068fb631",
           "Name": "PensionContribution",
-          "ColumnNumber": 2,
+          "ColumnNumber": 0,
           "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
           "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
           "PropertyGuid": "8ab2134c-b74a-400e-920d-1a150314f3f4",
-          "RowNumber": 4,
+          "RowNumber": 8,
           "RowSpan": 1,
           "Settings": []
         },
@@ -132,12 +132,12 @@
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
           "NameGuid": "07e26913-0d95-41f5-89ff-d1e98d47599b",
           "Name": "IncomeTax",
-          "ColumnNumber": 1,
+          "ColumnNumber": 0,
           "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
           "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
           "PropertyGuid": "afd0b87b-0493-4f3d-9e98-7f60a495df2b",
-          "RowNumber": 5,
+          "RowNumber": 6,
           "RowSpan": 1,
           "Settings": []
         },
@@ -145,12 +145,12 @@
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
           "NameGuid": "3de73926-2fd3-46d7-bcc5-8860a22dbeab",
           "Name": "VAT",
-          "ColumnNumber": 1,
+          "ColumnNumber": 0,
           "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
           "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
           "PropertyGuid": "8b8c2eab-ce64-4eea-b554-fdee4491b44d",
-          "RowNumber": 4,
+          "RowNumber": 5,
           "RowSpan": 1,
           "Settings": []
         },
@@ -158,12 +158,77 @@
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
           "NameGuid": "ea940606-9837-4a68-9e9b-0980fffdafe3",
           "Name": "FSZN",
-          "ColumnNumber": 2,
+          "ColumnNumber": 0,
           "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
           "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
           "PropertyGuid": "cd732bf4-1729-4168-9eea-c4e834ded4b2",
+          "RowNumber": 9,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "34dd6b0d-050a-4dec-8a31-1e385278ae75",
+          "Name": "VATmethod",
+          "ColumnNumber": 1,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+          "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
+          "PropertyGuid": "7d61b72c-0ebd-4189-b2d4-bba52fd32093",
           "RowNumber": 5,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "b04427d7-4640-4417-8778-b4463e143c55",
+          "Name": "IncomeTaxMethod",
+          "ColumnNumber": 1,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+          "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
+          "PropertyGuid": "81027ed7-711c-46d3-b01a-2e83a4804f34",
+          "RowNumber": 6,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "9470dfc3-6c21-463f-8916-368e24d6dac4",
+          "Name": "IncomeTaxLimit",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+          "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
+          "PropertyGuid": "23ffdb6d-ce21-44df-88c2-bfaad28404c4",
+          "RowNumber": 7,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "ed08dc23-7391-415d-ada1-95d149cc492e",
+          "Name": "PensionContributionMethod",
+          "ColumnNumber": 1,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+          "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
+          "PropertyGuid": "4e5f1efe-37d5-4e72-a5c6-8ce395446715",
+          "RowNumber": 8,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "6c886132-1590-4f9e-9cd6-d5e2828fdd75",
+          "Name": "FSZNMethod",
+          "ColumnNumber": 1,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+          "ParentGuid": "b6aa539c-fb87-413a-8578-90c8b4b5e764",
+          "PropertyGuid": "d32e3e76-fc2d-497f-ba83-e6424498e9e1",
+          "RowNumber": 9,
           "RowSpan": 1,
           "Settings": []
         }
@@ -172,7 +237,8 @@
   ],
   "HandledEvents": [
     "CreatedServer",
-    "BeforeSaveServer"
+    "BeforeSaveServer",
+    "RefreshClient"
   ],
   "IconResourcesKeys": [],
   "IntegrationServiceName": "NSITaxRate",
@@ -255,6 +321,9 @@
       "NameGuid": "8b8c2eab-ce64-4eea-b554-fdee4491b44d",
       "Name": "VAT",
       "Code": "VAT",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "8223fb4b-8d3d-4a1a-907f-3f87cf6a10d6"
     },
@@ -263,24 +332,139 @@
       "NameGuid": "8ab2134c-b74a-400e-920d-1a150314f3f4",
       "Name": "PensionContribution",
       "Code": "PensionContrib",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
-      "PreviousPropertyGuid": "8b8c2eab-ce64-4eea-b554-fdee4491b44d"
+      "PreviousPropertyGuid": "d32e3e76-fc2d-497f-ba83-e6424498e9e1"
     },
     {
       "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
       "NameGuid": "afd0b87b-0493-4f3d-9e98-7f60a495df2b",
       "Name": "IncomeTax",
       "Code": "IncomeTax",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
-      "PreviousPropertyGuid": "8ab2134c-b74a-400e-920d-1a150314f3f4"
+      "PreviousPropertyGuid": "7d61b72c-0ebd-4189-b2d4-bba52fd32093"
     },
     {
       "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
       "NameGuid": "cd732bf4-1729-4168-9eea-c4e834ded4b2",
       "Name": "FSZN",
       "Code": "FSZN",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "23ffdb6d-ce21-44df-88c2-bfaad28404c4"
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "7d61b72c-0ebd-4189-b2d4-bba52fd32093",
+      "Name": "VATMethod",
+      "Code": "VATMethod",
+      "DirectValues": [
+        {
+          "NameGuid": "3497702e-70b4-4ddf-9bef-b47a58519b3f",
+          "Name": "Included",
+          "Code": "Included"
+        },
+        {
+          "NameGuid": "26147a6e-9d15-4f84-80fb-3fb31f83d36d",
+          "Name": "OnTop",
+          "Code": "OnTop"
+        },
+        {
+          "NameGuid": "a4d4bc34-f115-461c-8ac8-7edbc78c2566",
+          "Name": "DuringCustoms",
+          "Code": "DuringCustoms"
+        }
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "8b8c2eab-ce64-4eea-b554-fdee4491b44d"
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "81027ed7-711c-46d3-b01a-2e83a4804f34",
+      "Name": "IncomeTaxMethod",
+      "Code": "IncomeTaxMetho",
+      "DirectValues": [
+        {
+          "NameGuid": "7bd96002-386a-40c1-b4c8-58e8c257efec",
+          "Name": "NotHold",
+          "Code": "NotHold"
+        },
+        {
+          "NameGuid": "99aed4d4-7690-4f52-b446-4171f567ce11",
+          "Name": "FromAmount1",
+          "Code": "FromAmount1"
+        },
+        {
+          "NameGuid": "d9ff664b-6106-4c52-918a-e29bf733d770",
+          "Name": "FromAmount2",
+          "Code": "FromAmount2"
+        },
+        {
+          "NameGuid": "ed5574d7-4b43-4b24-86d3-6192779888cb",
+          "Name": "FromAmount3",
+          "Code": "FromAmount3"
+        }
+      ],
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
       "PreviousPropertyGuid": "afd0b87b-0493-4f3d-9e98-7f60a495df2b"
+    },
+    {
+      "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "23ffdb6d-ce21-44df-88c2-bfaad28404c4",
+      "Name": "IncomeTaxLimit",
+      "Code": "IncomeTaxLimit",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "81027ed7-711c-46d3-b01a-2e83a4804f34"
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d32e3e76-fc2d-497f-ba83-e6424498e9e1",
+      "Name": "FSZNMethod",
+      "Code": "FSZNMethod",
+      "DirectValues": [
+        {
+          "NameGuid": "1f97a280-92c7-497f-b0fa-118d8895522c",
+          "Name": "NotAccrued",
+          "Code": "NotAccrued"
+        },
+        {
+          "NameGuid": "d9e02e23-0666-4efd-83fc-0749d68f8e79",
+          "Name": "AccruedOnTop",
+          "Code": "AccruedOnTop"
+        }
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "cd732bf4-1729-4168-9eea-c4e834ded4b2"
+    },
+    {
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "4e5f1efe-37d5-4e72-a5c6-8ce395446715",
+      "Name": "PensionContributionMethod",
+      "Code": "PensionContrM",
+      "DirectValues": [
+        {
+          "NameGuid": "ed027956-78e8-4a8f-b35f-157b7204ea1a",
+          "Name": "NotHold",
+          "Code": "NotHold"
+        },
+        {
+          "NameGuid": "f65ffacd-d361-4461-8ba4-1bd2ea105af7",
+          "Name": "FromAmount",
+          "Code": "FromAmount"
+        }
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "8ab2134c-b74a-400e-920d-1a150314f3f4"
     }
   ],
   "PublicStructures": [],

@@ -83,16 +83,28 @@
     <value>Payment frequency under contracts</value>
   </data>
   <data name="CoverAction_PaymentRegionlitiko" xml:space="preserve">
-    <value>Payment regions</value>
+    <value>Regions for rental tax</value>
   </data>
   <data name="CoverDescription_PaymentRegionlitiko" xml:space="preserve">
-    <value>Directory of tax payment regions.</value>
+    <value>Directory of regions for rental tax.</value>
   </data>
   <data name="CoverAction_RegionsOfRentallitiko" xml:space="preserve">
-    <value>Regions of rental</value>
+    <value>Regions for tax payment</value>
   </data>
   <data name="CoverDescription_RegionsOfRentallitiko" xml:space="preserve">
-    <value>Directory of regions of rental properties.</value>
+    <value>Directory of regions for tax payment.</value>
+  </data>
+  <data name="CoverDescription_Importlitiko" xml:space="preserve">
+    <value>Миграция договоров с XML файла</value>
+  </data>
+  <data name="CoverAction_Importlitiko" xml:space="preserve">
+    <value>Importlitiko</value>
+  </data>
+  <data name="CoverAction_ImportCounterpartieslitiko" xml:space="preserve">
+    <value>ImportCounterpartieslitiko</value>
+  </data>
+  <data name="CoverDescription_ImportCounterpartieslitiko" xml:space="preserve">
+    <value>Импорт контрагентов из АБС которые сохранены в XML файле</value>
   </data>
   <data name="CoverDescription_Importlitiko" xml:space="preserve">
     <value>Миграция договоров с XML файла</value>

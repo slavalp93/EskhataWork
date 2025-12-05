@@ -60,6 +60,38 @@
   "OperationsClass": "",
   "Properties": [
     {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "93db464a-c19f-441c-bf41-7ad6b9ea2fb5",
+      "Name": "City",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "78b9f52c-febf-4a73-89ae-c7a4723e3944",
+      "Name": "Region",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "IsAncestorMetadata": true,
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "Overridden": [
+        "IsEnabled",
+        "IsShowedInList",
+        "IsVisibility",
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
+    {
       "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
       "NameGuid": "4a8264be-df2c-4175-b1f2-776d388e2042",
       "Name": "PostalAddress",
@@ -240,6 +272,9 @@
       "NameGuid": "71f6ff04-8ae9-4cb2-b10e-1af1080921d7",
       "Name": "Streetlitiko",
       "Code": "Streetlitiko",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "d6ac6148-eac7-4115-85cd-9e4cbe48accd"
     },
@@ -248,6 +283,9 @@
       "NameGuid": "a0c39e3c-f24a-4db7-b611-2ad920a6404a",
       "Name": "HouseNumberlitiko",
       "Code": "HouseNumberlit",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "Length": 50,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "71f6ff04-8ae9-4cb2-b10e-1af1080921d7"
@@ -285,7 +323,10 @@
   ],
   "PublicStructures": [],
   "ResourcesKeys": [
-    "InformationAboutCounterpartyIsRequired"
+    "InformationAboutCounterpartyIsRequired",
+    "VerificationTaskSubject",
+    "VerificationTaskActiveText",
+    "AddressTemplate"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "f301c37e-0718-450e-b2eb-f3ad159dbd08",

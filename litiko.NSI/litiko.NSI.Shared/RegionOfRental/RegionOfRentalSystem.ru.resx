@@ -59,12 +59,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DisplayName" xml:space="preserve">
-    <value>Регион объектов аренды</value>
+    <value>Регион для оплаты налога</value>
   </data>
   <data name="AccusativeDisplayName" xml:space="preserve">
-    <value>Регион объектов аренды</value>
+    <value>Регион для оплаты налога</value>
   </data>
   <data name="CollectionDisplayName" xml:space="preserve">
-    <value>Регионы объектов аренды</value>
+    <value>Регионы для оплаты налога</value>
   </data>
 </root>

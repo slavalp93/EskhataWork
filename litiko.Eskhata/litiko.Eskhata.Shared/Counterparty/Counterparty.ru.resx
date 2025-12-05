@@ -61,4 +61,10 @@
   <data name="InformationAboutCounterpartyIsRequired" xml:space="preserve">
     <value>Необходимо наличие документа "Сведения о контрагенте".</value>
   </data>
+  <data name="VerificationTaskSubject" xml:space="preserve">
+    <value>Проверка: {0}.</value>
+  </data>
+  <data name="VerificationTaskActiveText" xml:space="preserve">
+    <value>Прошу проверить контрагента и дать заключение.</value>
+  </data>
 </root>

@@ -194,10 +194,10 @@
     <value />
   </data>
   <data name="Property_PaymentRegionlitiko" xml:space="preserve">
-    <value>Регион оплаты</value>
+    <value>Регион для налога по арендам</value>
   </data>
   <data name="Property_RegionOfRentallitiko" xml:space="preserve">
-    <value>Регион объекта аренды</value>
+    <value>Регион для оплаты налога</value>
   </data>
   <data name="Property_FrequencyExpenseslitiko" xml:space="preserve">
     <value>Периодичность отнесения на расходы </value>
@@ -237,5 +237,8 @@
   </data>
   <data name="Action_CreateLegalOpinionlitikoDescription" xml:space="preserve">
     <value>Создание юридичиского заключения к договору. </value>
+  </data>
+  <data name="Property_AmountForPeriodInWordslitiko" xml:space="preserve">
+    <value>Сумма за период прописью</value>
   </data>
 </root>

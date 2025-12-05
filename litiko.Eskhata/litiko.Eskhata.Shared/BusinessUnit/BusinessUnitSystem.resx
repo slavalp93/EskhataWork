@@ -229,4 +229,10 @@
   <data name="Property_Countrylitiko" xml:space="preserve">
     <value>Country</value>
   </data>
+  <data name="Property_Account" xml:space="preserve">
+    <value>Account in another bank</value>
+  </data>
+  <data name="Property_AccountEskhatalitiko" xml:space="preserve">
+    <value>Bank Eskhata Account</value>
+  </data>
 </root>

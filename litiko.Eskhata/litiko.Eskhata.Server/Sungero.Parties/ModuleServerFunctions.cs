@@ -4,6 +4,7 @@ using System.Linq;
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.XPath;
 using litiko.Eskhata.Module.Parties.Structures.Module;
 using Sungero.Core;
 using Sungero.CoreEntities;
@@ -28,6 +29,7 @@ namespace litiko.Eskhata.Module.Parties.Server
       Logger.Debug("Start import counterparty from file: {0}", fileName);
 
       byte[] fileBytes;
+      
       try
       {
         if(string.IsNullOrEmpty(fileBase64))
@@ -43,6 +45,7 @@ namespace litiko.Eskhata.Module.Parties.Server
       try
       {
         XDocument xDoc;
+        
         using(var stream = new MemoryStream(fileBytes))
         {
           xDoc = XDocument.Load(stream);

@@ -10,6 +10,11 @@ namespace litiko.Eskhata
   partial class ContractSharedHandlers
   {
 
+    public virtual void AmountForPeriodlitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
+    {
+      Functions.Contract.FillTotalAmount(_obj, e.NewValue, _obj.CurrencyRatelitiko, _obj.Currency);
+    }
+
     public override void CounterpartyChanged(Sungero.Docflow.Shared.ContractualDocumentBaseCounterpartyChangedEventArgs e)
     {
       base.CounterpartyChanged(e);
@@ -26,18 +31,15 @@ namespace litiko.Eskhata
     }
 
     public virtual void IsEqualPaymentlitikoChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
-    {
-      if (!_obj.IsPartialPaymentlitiko.HasValue || _obj.IsPartialPaymentlitiko.GetValueOrDefault() == e.NewValue)
-        _obj.IsPartialPaymentlitiko = !e.NewValue;
+    {      
+      if (e.NewValue.GetValueOrDefault())
+        _obj.IsPartialPaymentlitiko = false;
     }
 
     public virtual void IsPartialPaymentlitikoChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
-    {
-      if (!_obj.IsEqualPaymentlitiko.HasValue || _obj.IsEqualPaymentlitiko.GetValueOrDefault() == e.NewValue)
-        _obj.IsEqualPaymentlitiko = !e.NewValue;
-      
+    {      
       if (e.NewValue.GetValueOrDefault())
-        _obj.AmountForPeriodlitiko = null;
+        _obj.IsEqualPaymentlitiko = false;           
     }
 
     public override void DocumentKindChanged(Sungero.Docflow.Shared.OfficialDocumentDocumentKindChangedEventArgs e)

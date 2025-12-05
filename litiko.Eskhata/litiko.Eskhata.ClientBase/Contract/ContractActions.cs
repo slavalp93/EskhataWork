@@ -60,16 +60,6 @@ namespace litiko.Eskhata.Client
       return true;
     }
 
-    public override void CreateFromFile(Sungero.Domain.Client.ExecuteActionArgs e)
-    {
-      base.CreateFromFile(e);
-    }
-
-    public override bool CanCreateFromFile(Sungero.Domain.Client.CanExecuteActionArgs e)
-    {
-      return base.CanCreateFromTemplate(e); //!_obj.IsStandard.GetValueOrDefault()
-    }
-
   }
 
 

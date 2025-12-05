@@ -102,13 +102,21 @@ namespace litiko.Eskhata.Client
         if (contract != null)
         {
           var notFilledFields = new List<string>();
-          if (string.IsNullOrEmpty(contract.AccDebtCreditlitiko))
+          
+          // Счет расчетов с дебиторами и кредиторами
+          if (contract.PaymentMethodlitiko == Eskhata.Contract.PaymentMethodlitiko.Postpay && string.IsNullOrEmpty(contract.AccDebtCreditlitiko))
             notFilledFields.Add(contract.Info.Properties.AccDebtCreditlitiko.LocalizedName);
           
-          if (string.IsNullOrEmpty(contract.AccFutureExpenselitiko))
+          // Счет расходов будущ. периодов
+          if (contract.PaymentMethodlitiko == Eskhata.Contract.PaymentMethodlitiko.Prepayment && string.IsNullOrEmpty(contract.AccFutureExpenselitiko))
             notFilledFields.Add(contract.Info.Properties.AccFutureExpenselitiko.LocalizedName);
           
-          if (contract.PaymentRegionlitiko == null)
+          // Регион для оплаты налога
+          if (contract.DocumentKind?.Name == "Прочие оплаты профессиональных услуг" && Eskhata.People.Is(contract.Counterparty) && contract.RegionOfRentallitiko == null)
+            notFilledFields.Add(contract.Info.Properties.RegionOfRentallitiko.LocalizedName);          
+          
+          // Регион для налога по арендам
+          if (contract.DocumentKind?.Name == "Аренда" && Eskhata.People.Is(contract.Counterparty) && contract.PaymentRegionlitiko == null)
             notFilledFields.Add(contract.Info.Properties.PaymentRegionlitiko.LocalizedName);
           
           if (notFilledFields.Any())

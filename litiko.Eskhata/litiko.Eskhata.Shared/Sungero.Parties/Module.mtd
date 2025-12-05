@@ -26,7 +26,8 @@
   "CompanyCode": "Sungero",
   "ExplorerTreeOrder": [],
   "HandledEvents": [
-    "VisibilityServer"
+    "VisibilityServer",
+    "InitializingServer"
   ],
   "IconResourcesKeys": [],
   "Importance": "Medium",

@@ -18,6 +18,9 @@ namespace litiko.Eskhata.Shared
       base.SetRequiredProperties();
       
       _obj.State.Properties.ValidTill.IsRequired = true;
+      
+      var defaultCurrency = Sungero.Commons.PublicFunctions.Currency.Remote.GetDefaultCurrency();
+      _obj.State.Properties.CurrencyOperationlitiko.IsRequired = !Equals(_obj.CurrencyContractlitiko, defaultCurrency);
     } 
 
     /// <summary>
@@ -34,31 +37,61 @@ namespace litiko.Eskhata.Shared
       _obj.State.Properties.PlacedToCaseFileDate.IsEnabled = canUpdate;
       _obj.State.Properties.StoredIn.IsEnabled = canUpdate;
       
+      bool isCompany = Eskhata.Companies.Is(_obj.Counterparty);
+      _obj.State.Properties.IsVATlitiko.IsVisible = isCompany;
+      _obj.State.Properties.VatRatelitiko.IsVisible = isCompany;
+      _obj.State.Properties.VatAmount.IsVisible = isCompany;
+      
+      _obj.State.Properties.TotalAmount.IsEnabled = false;
+      
       // TODO убрать из обновления формы
       _obj.State.Controls.CounterpartryInfolitiko.Refresh();
-    }
+    }   
 
     /// <summary>
     /// Заполнить сумму НДС.
     /// </summary>
-    /// <param name="totalAmount">Сумма.</param>
-    /// <param name="vatRate">Ставка НДС.</param>
-    /// <param name="vatRate">Облагается НДС.</param>    
-    public void FillVatAmount(double? totalAmount, double? vatRate, bool? IsVAT)
+    /// <param name="amount">Сумма в нац. валюте</param>
+    /// <param name="taxRate">Ставка налогов.</param>
+    /// <param name="IsVAT">Облагается НДС.</param>    
+    public void FillVatAmount(double? amount, NSI.ITaxRate taxRate, bool? IsVAT)
     {      
-      if (totalAmount == null || vatRate == null || !IsVAT.GetValueOrDefault())
+      var rate = taxRate?.VAT;
+      var method = taxRate?.VATMethod;      
+      
+      if (taxRate == null || !IsVAT.GetValueOrDefault() || amount.GetValueOrDefault() == 0 || rate.GetValueOrDefault() == 0 || method == null)
       {
         _obj.VatAmount = null;
         return;
       }      
       
-      if (totalAmount.HasValue && vatRate.HasValue)
+      double? calculatedAmount;
+      if (method.Value == NSI.TaxRate.VATMethod.Included)
       {
-        var rateValue = Math.Round((double)vatRate.Value / 100, 2);
-        _obj.VatAmount = Math.Round(totalAmount.Value * rateValue / (1 + rateValue), 2);      
+        // Включен в сумму договора
+        calculatedAmount = Math.Round(
+          amount.Value * (rate.Value / (100 + rate.Value)),
+          2);
       }      
+      else if (method.Value == NSI.TaxRate.VATMethod.OnTop)
+      {
+        // Начисляется сверх суммы договора
+        calculatedAmount = Math.Round(
+          amount.Value * (rate.Value / 100),
+          2);
+      }
+      else if (method.Value == NSI.TaxRate.VATMethod.DuringCustoms)
+      {
+        // Оплачивается при проведении таможенных процедур
+        calculatedAmount = null;
+      }
+      else
+        calculatedAmount = null;
+      
+      if (!Equals(_obj.VatAmount, calculatedAmount))
+        _obj.VatAmount = calculatedAmount;      
     }
-    
+   
     /// <summary>
     /// Заполнить ссылку на Ставки налогов.
     /// </summary>
@@ -133,7 +166,7 @@ namespace litiko.Eskhata.Shared
     /// <param name="amount">Общая сумма.</param>
     /// <param name="currencyRate">Курс валюты.</param>
     /// <param name="currency">Валюта.</param>
-    public void FillTotalAmount(double? amount, litiko.NSI.ICurrencyRate currencyRate, Sungero.Commons.ICurrency currency)
+    public virtual void FillTotalAmount(double? amount, litiko.NSI.ICurrencyRate currencyRate, Sungero.Commons.ICurrency currency)
     {                  
       if (amount == null)
       {
@@ -165,17 +198,45 @@ namespace litiko.Eskhata.Shared
     /// Заполнить сумму налога на доходы.
     /// </summary>
     /// <param name="amount">Сумма в нац. валюте</param>
-    /// <param name="incomeTaxRate">Ставка налога на доходы.</param>
-    public void FillIncomeTaxAmount(double? amount, double? incomeTaxRate)
+    /// <param name="taxRate">Ставка налогов.</param>
+    public void FillIncomeTaxAmount(double? amount, NSI.ITaxRate taxRate)
     {            
-      if (amount == null || incomeTaxRate == null)
+      var rate = taxRate?.IncomeTax;
+      var method = taxRate?.IncomeTaxMethod;
+      if (taxRate == null || amount.GetValueOrDefault() == 0 || rate.GetValueOrDefault() == 0 || method == null)
       {
         _obj.IncomeTaxAmountlitiko = null;
         return;
       }
-            
-      var rateValue = Math.Round(incomeTaxRate.Value / 100, 2);
-      var calculatedAmount = Math.Round(amount.Value * rateValue, 2);
+      
+      double? calculatedAmount;      
+      if (method.Value == NSI.TaxRate.IncomeTaxMethod.FromAmount1)
+      {
+        // Удерживается от суммы договора
+        calculatedAmount = Math.Round(
+          amount.Value * (rate.Value / 100),
+          2);
+      }
+      else if (method.Value == NSI.TaxRate.IncomeTaxMethod.FromAmount2)
+      {
+        // Удерживается от суммы договора за вычетом пенс. взноса        
+        calculatedAmount = Math.Round(
+          (amount.Value - _obj.PennyAmountlitiko.GetValueOrDefault()) * (rate.Value / 100),
+          2);
+      }
+      else if (method.Value == NSI.TaxRate.IncomeTaxMethod.FromAmount3)
+      {
+        // Удерживается от суммы договора с лимитом
+        var limit = taxRate.IncomeTaxLimit.GetValueOrDefault();
+        if (amount.Value > limit)
+          calculatedAmount = Math.Round(
+            (amount.Value - limit) * (rate.Value / 100),
+            2);
+        else
+          calculatedAmount = null;
+      }
+      else
+        calculatedAmount = null;
       
       if (!Equals(_obj.IncomeTaxAmountlitiko, calculatedAmount))
         _obj.IncomeTaxAmountlitiko = calculatedAmount;
@@ -185,18 +246,28 @@ namespace litiko.Eskhata.Shared
     /// Заполнить сумму ФСЗН.
     /// </summary>
     /// <param name="amount">Сумма в нац. валюте</param>
-    /// <param name="fsznTaxRate">Ставка ФСЗН.</param>    
+    /// <param name="taxRate">Ставка налогов.</param>
     /// <param name="isIndividualPayment">Оплата труда физ лиц.</param> 
-    public void FillFSZNAmount(double? amount, double? fsznTaxRate, bool? isIndividualPayment)
+    public void FillFSZNAmount(double? amount, NSI.ITaxRate taxRate, bool? isIndividualPayment)
     {            
-      if (amount == null || fsznTaxRate == null || !isIndividualPayment.GetValueOrDefault())
+      var rate = taxRate?.FSZN;
+      var method = taxRate?.FSZNMethod;
+      if (amount.GetValueOrDefault() == 0 || rate.GetValueOrDefault() == 0 || !isIndividualPayment.GetValueOrDefault() || method == null)
       {
         _obj.FSZNAmountlitiko = null;
         return;
       }
             
-      var rateValue = Math.Round(fsznTaxRate.Value / 100, 2);
-      var calculatedAmount = Math.Round(amount.Value * rateValue, 2);
+      double? calculatedAmount;
+      if (method.Value == NSI.TaxRate.FSZNMethod.AccruedOnTop)
+      {
+        // Начисляется сверх суммы договора 
+        calculatedAmount = Math.Round(
+          amount.Value * (rate.Value / 100),
+          2);
+      }
+      else
+        calculatedAmount = null;      
       
       if (!Equals(_obj.FSZNAmountlitiko, calculatedAmount))
         _obj.FSZNAmountlitiko = calculatedAmount;
@@ -206,18 +277,28 @@ namespace litiko.Eskhata.Shared
     /// Заполнить сумму пенсионного взноса.
     /// </summary>
     /// <param name="amount">Сумма в нац. валюте</param>
-    /// <param name="pennyTaxRate">Ставка пенс. взноса</param>    
+    /// <param name="taxRate">Ставка налогов.</param>
     /// <param name="isIndividualPayment">Оплата труда физ лиц.</param> 
-    public void FillPennyAmount(double? amount, double? pennyTaxRate, bool? isIndividualPayment)
+    public void FillPennyAmount(double? amount, NSI.ITaxRate taxRate, bool? isIndividualPayment)
     {            
-      if (amount == null || pennyTaxRate == null || !isIndividualPayment.GetValueOrDefault())
+      var rate = taxRate?.PensionContribution;
+      var method = taxRate?.PensionContributionMethod;
+      if (amount.GetValueOrDefault() == 0 || rate.GetValueOrDefault() == 0 || !isIndividualPayment.GetValueOrDefault() || method == null)
       {
         _obj.PennyAmountlitiko = null;
         return;
       }
             
-      var rateValue = Math.Round(pennyTaxRate.Value / 100, 2);
-      var calculatedAmount = Math.Round(amount.Value * rateValue, 2);
+      double? calculatedAmount;
+      if (method.Value == NSI.TaxRate.PensionContributionMethod.FromAmount)
+      {
+        // Удерживается от суммы договора
+        calculatedAmount = Math.Round(
+          amount.Value * (rate.Value / 100),
+          2);
+      }
+      else
+        calculatedAmount = null;      
       
       if (!Equals(_obj.PennyAmountlitiko, calculatedAmount))
         _obj.PennyAmountlitiko = calculatedAmount;
@@ -243,6 +324,55 @@ namespace litiko.Eskhata.Shared
       if (!Equals(_obj.ResponsibilityMatrixlitiko, matrix))
         _obj.ResponsibilityMatrixlitiko = matrix;
     }
+    
+    /// <summary>
+    /// Заполнить сумму к оплате.
+    /// </summary>
+    /// <param name="totalAmount">Сумма в нац. валюте</param>
+    /// <param name="incomeTaxAmount">Сумма налога на доходы.</param>    
+    public void FillAmountToBePaid(double? totalAmount, double? incomeTaxAmount)
+    {            
+      double? calculatedAmount = Math.Round(
+          totalAmount.GetValueOrDefault() - incomeTaxAmount.GetValueOrDefault(),
+          2);                  
+      
+      if (!Equals(_obj.AmountToBePaidlitiko, calculatedAmount))
+        _obj.AmountToBePaidlitiko = calculatedAmount;
+    }
+    
+    /// <summary>
+    /// Заполнить сумму затрат по договору.
+    /// </summary>
+    /// <param name="counterparty">Контрагент</param>
+    /// <param name="totalAmount">Сумма в нац. валюте.</param>
+    /// <param name="vatAmount">Сумма НДС</param>
+    /// <param name="fsznAmount">Сумма ФСЗН</param>
+    public void FillAmountOfExpenses(Sungero.Parties.ICounterparty counterparty, double? totalAmount, double? vatAmount, double? fsznAmount)
+    {            
+      var nunrezident = Eskhata.Counterparties.As(counterparty)?.NUNonrezidentlitiko;
+      if (nunrezident == null)
+      {
+        _obj.AmountOfExpenseslitiko = null;
+        return;
+      }
+      
+      double? calculatedAmount;
+      if (nunrezident.GetValueOrDefault())
+      {
+        calculatedAmount = Math.Round(
+          totalAmount.GetValueOrDefault() + vatAmount.GetValueOrDefault() + fsznAmount.GetValueOrDefault(),
+          2);      
+      }
+      else
+      {
+        calculatedAmount = Math.Round(
+          totalAmount.GetValueOrDefault() + fsznAmount.GetValueOrDefault(),
+          2);       
+      }
+      
+      if (!Equals(_obj.AmountOfExpenseslitiko, calculatedAmount))
+        _obj.AmountOfExpenseslitiko = calculatedAmount;      
+    }    
     
   }
 }

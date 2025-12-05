@@ -61,4 +61,10 @@
   <data name="DisplayName" xml:space="preserve">
     <value>НСИ</value>
   </data>
+  <data name="JobDisplayName_03c55f03b14342e6bac98bce19836264" xml:space="preserve">
+    <value>Администрирование. Удаление лишних населенных пунктов, регионов, стран и банков.</value>
+  </data>
+  <data name="JobDescription_03c55f03b14342e6bac98bce19836264" xml:space="preserve">
+    <value>Администрирование. Удаление лишних населенных пунктов, регионов, стран и банков.</value>
+  </data>
 </root>

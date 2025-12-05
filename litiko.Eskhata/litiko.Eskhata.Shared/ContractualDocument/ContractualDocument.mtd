@@ -5,6 +5,16 @@
   "AccessRightsMode": "Both",
   "Actions": [
     {
+      "NameGuid": "bada190c-5ad2-4129-ab51-553b481492f0",
+      "Name": "CreateFromTemplate",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ],
+      "Versions": []
+    },
+    {
       "NameGuid": "ee2e8155-3df0-4352-9ab4-406c5d5cab0d",
       "Name": "ExportToABSlitiko",
       "GenerateHandler": true,
@@ -645,6 +655,32 @@
           "RowNumber": 4,
           "RowSpan": 1,
           "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "be71e793-a7a6-49b8-9496-f650487d38a4",
+          "Name": "AmountToBePaidlitikolitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+          "ParentGuid": "af3d3d41-3d05-42a9-9cd8-dbdbcdb5e4c3",
+          "PropertyGuid": "52619ca0-cc50-4a8a-9016-9ba7ef2dde92",
+          "RowNumber": 9,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "f02c8fa6-f812-41c6-9cc6-71d51408ac09",
+          "Name": "AmountOfExpenseslitikolitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+          "ParentGuid": "af3d3d41-3d05-42a9-9cd8-dbdbcdb5e4c3",
+          "PropertyGuid": "23495914-31c5-47a9-9cad-8464e122a9d4",
+          "RowNumber": 10,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "ParentFormGuid": "fa03f748-4397-42ef-bdc2-22119af7bf7f"
@@ -660,6 +696,19 @@
   "OpenCardByDefaultInCollection": true,
   "OperationsClass": "",
   "Properties": [
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "4bc39efb-1f46-4a1e-8b8c-04f2b90d6a8b",
+      "Name": "Subject",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
     {
       "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
       "NameGuid": "96c9e3f6-9201-4e6c-92e0-acf7a1624081",
@@ -705,10 +754,14 @@
       "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
       "NameGuid": "08598cbc-3d38-4dac-a193-c0fac61637d1",
       "Name": "VatAmount",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "IsAncestorMetadata": true,
       "IsEnabled": false,
       "Overridden": [
-        "IsEnabled"
+        "IsEnabled",
+        "HandledEvents"
       ]
     },
     {
@@ -886,9 +939,6 @@
       "Name": "IncomeTaxRatelitiko",
       "CanBeSearch": false,
       "Code": "IncomeTaxRatel",
-      "HandledEvents": [
-        "ChangedShared"
-      ],
       "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "b836689e-46bf-4131-8fa6-23f5c9c213a1"
@@ -899,6 +949,9 @@
       "Name": "IncomeTaxAmountlitiko",
       "CanBeSearch": false,
       "Code": "IncomeTaxAmoun",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "e1e1c24a-ada8-4737-ab89-3adc4ece6e33"
@@ -921,9 +974,6 @@
       "Name": "FSZNRatelitiko",
       "CanBeSearch": false,
       "Code": "FSZNRatelitiko",
-      "HandledEvents": [
-        "ChangedShared"
-      ],
       "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "007493c1-c401-4673-af6f-c06c663b5fd2"
@@ -934,6 +984,9 @@
       "Name": "FSZNAmountlitiko",
       "CanBeSearch": false,
       "Code": "FSZNAmountliti",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "60b8a33a-5fc5-42c5-a41e-a7fa2223f46b"
@@ -944,9 +997,6 @@
       "Name": "PennyRatelitiko",
       "CanBeSearch": false,
       "Code": "PennyRatelitik",
-      "HandledEvents": [
-        "ChangedShared"
-      ],
       "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "cab838fe-ecd9-4b8c-86fc-3d6817ece897"
@@ -995,6 +1045,26 @@
       "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
       "PreviousPropertyGuid": "9543f412-9d7a-407c-af27-9736d6356cbb"
+    },
+    {
+      "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "52619ca0-cc50-4a8a-9016-9ba7ef2dde92",
+      "Name": "AmountToBePaidlitiko",
+      "CanBeSearch": false,
+      "Code": "AmountToBePaid",
+      "IsEnabled": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "33bbf737-89bb-4924-ab13-6b159b2b4402"
+    },
+    {
+      "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "23495914-31c5-47a9-9cad-8464e122a9d4",
+      "Name": "AmountOfExpenseslitiko",
+      "CanBeSearch": false,
+      "Code": "AmountOfExpens",
+      "IsEnabled": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "52619ca0-cc50-4a8a-9016-9ba7ef2dde92"
     }
   ],
   "PublicFunctions": [

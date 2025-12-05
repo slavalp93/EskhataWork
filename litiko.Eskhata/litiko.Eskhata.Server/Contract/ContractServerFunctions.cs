@@ -8,6 +8,7 @@ namespace litiko.Eskhata.Server
 {
   partial class ContractFunctions
   {
+
     /// <summary>
     /// Создать юрид. заключение.
     /// </summary>

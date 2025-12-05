@@ -112,4 +112,52 @@
   <data name="Action_ShowDuplicatesDescription" xml:space="preserve">
     <value>Показать дубли</value>
   </data>
+  <data name="Property_VATMethod" xml:space="preserve">
+    <value>Способ учета НДС</value>
+  </data>
+  <data name="Enum_VATMethod_Included" xml:space="preserve">
+    <value>Включен в сумму договора</value>
+  </data>
+  <data name="Enum_VATMethod_OnTop" xml:space="preserve">
+    <value>Начисляется сверх суммы договора</value>
+  </data>
+  <data name="Enum_VATMethod_DuringCustoms" xml:space="preserve">
+    <value>Оплачивается при проведении таможенных процедур</value>
+  </data>
+  <data name="Property_IncomeTaxMethod" xml:space="preserve">
+    <value>Способ учета налога на доходы</value>
+  </data>
+  <data name="Enum_IncomeTaxMethod_NotHold" xml:space="preserve">
+    <value>Не удерживается</value>
+  </data>
+  <data name="Enum_IncomeTaxMethod_FromAmount1" xml:space="preserve">
+    <value>Удерживается от суммы договора</value>
+  </data>
+  <data name="Enum_IncomeTaxMethod_FromAmount2" xml:space="preserve">
+    <value>Удерживается от суммы договора с лимитом</value>
+  </data>
+  <data name="Enum_IncomeTaxMethod_FromAmount3" xml:space="preserve">
+    <value>Удерживается от суммы договора за вычетом пенс. взноса</value>
+  </data>
+  <data name="Property_IncomeTaxLimit" xml:space="preserve">
+    <value>Лимит</value>
+  </data>
+  <data name="Property_FSZNMethod" xml:space="preserve">
+    <value>Способ учета ФЗСН</value>
+  </data>
+  <data name="Enum_FSZNMethod_NotAccrued" xml:space="preserve">
+    <value>Не начисляется</value>
+  </data>
+  <data name="Enum_FSZNMethod_AccruedOnTop" xml:space="preserve">
+    <value>Начисляется сверх суммы договора</value>
+  </data>
+  <data name="Property_PensionContributionMethod" xml:space="preserve">
+    <value>Способ учета пенс. взноса</value>
+  </data>
+  <data name="Enum_PensionContributionMethod_NotHold" xml:space="preserve">
+    <value>Не удерживается</value>
+  </data>
+  <data name="Enum_PensionContributionMethod_FromAmount" xml:space="preserve">
+    <value>Удерживается от суммы договора</value>
+  </data>
 </root>

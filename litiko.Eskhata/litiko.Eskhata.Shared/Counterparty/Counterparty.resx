@@ -61,4 +61,13 @@
   <data name="InformationAboutCounterpartyIsRequired" xml:space="preserve">
     <value>The document "Information about the counterparty" is required</value>
   </data>
+  <data name="VerificationTaskSubject" xml:space="preserve">
+    <value>Check: {0}.</value>
+  </data>
+  <data name="VerificationTaskActiveText" xml:space="preserve">
+    <value>Please check the counterparty and provide an opinion.</value>
+  </data>
+  <data name="AddressTemplate" xml:space="preserve">
+    <value>{0}, қучаи {1}, ҳучраи {2}</value>
+  </data>
 </root>

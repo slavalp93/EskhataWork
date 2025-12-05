@@ -2028,10 +2028,13 @@ namespace litiko.Integration.Server
       var isBusiness = element.Element("BUSINESS")?.Value;
       var isPS_REF = element.Element("PS_REF")?.Value;
       var isCountry = element.Element("COUNTRY")?.Value;
-      var isRegion = element.Element("Region")?.Value;
-      var isCity = element.Element("City")?.Value;       
-      var isPostAdress = element.Element("PostAdress")?.Value;
-      var isLegalAdress = element.Element("LegalAdress")?.Value;
+      //var isRegion = element.Element("Region")?.Value;
+      var isAddressType = element.Element("AddressType")?.Value;
+      var isCity = element.Element("City")?.Value;
+      var isStreet = element.Element("Street")?.Value;
+      var isHouseNumber = element.Element("HouseNumber")?.Value;
+      //var isPostAdress = element.Element("PostAdress")?.Value;
+      //var isLegalAdress = element.Element("LegalAdress")?.Value;
       var isPhone = element.Element("Phone")?.Value;
       var isEmail = element.Element("Email")?.Value;
       var isWebSite = element.Element("WebSite")?.Value;
@@ -2187,6 +2190,7 @@ namespace litiko.Integration.Server
           }            
         }
         
+        /*
         if (!string.IsNullOrEmpty(isRegion))
         {
           var region = Eskhata.Regions.GetAll().Where(x => x.ExternalIdlitiko == isRegion).FirstOrDefault();
@@ -2194,6 +2198,17 @@ namespace litiko.Integration.Server
           {
             Logger.DebugFormat("Change Region: current:{0}, new:{1}", company.Region?.Name, region?.Name);
             company.Region = region;                    
+          }
+        }
+        */
+  
+        if (!string.IsNullOrEmpty(isAddressType))
+        {
+          var addressType = NSI.AddressTypes.GetAll().Where(x => x.ExternalId == isAddressType).FirstOrDefault();
+          if (addressType != null && !Equals(company.AddressTypelitiko, addressType))
+          {
+            Logger.DebugFormat("Change AddressTypelitiko: current:{0}, new:{1}", company.AddressTypelitiko.Id, addressType.Id);
+            company.AddressTypelitiko = addressType;                    
           }
         }
   
@@ -2205,18 +2220,18 @@ namespace litiko.Integration.Server
             Logger.DebugFormat("Change City: current:{0}, new:{1}", company.City?.Name, city?.Name);
             company.City = city;                    
           }
-        }        
-
-        if(!string.IsNullOrEmpty(isPostAdress) && company.PostalAddress != isPostAdress)
-        {
-          Logger.DebugFormat("Change PostalAddress: current:{0}, new:{1}", company.PostalAddress, isPostAdress);
-          company.PostalAddress = isPostAdress;                          
+        }      
+  
+        if (!string.IsNullOrEmpty(isStreet) && company.Streetlitiko != isStreet)
+        {        
+          Logger.DebugFormat("Change Streetlitiko: current:{0}, new:{1}", company.Streetlitiko, isStreet);
+          company.Streetlitiko = isStreet;                    
         }
-
-        if(!string.IsNullOrEmpty(isLegalAdress) && company.LegalAddress != isLegalAdress)
-        {
-          Logger.DebugFormat("Change LegalAddress: current:{0}, new:{1}", company.LegalAddress, isLegalAdress);
-          company.LegalAddress = isLegalAdress;                          
+  
+        if (!string.IsNullOrEmpty(isHouseNumber) && company.HouseNumberlitiko != isHouseNumber)
+        {        
+          Logger.DebugFormat("Change HouseNumberlitiko: current:{0}, new:{1}", company.HouseNumberlitiko, isHouseNumber);
+          company.HouseNumberlitiko = isHouseNumber;                    
         }
 
         if(!string.IsNullOrEmpty(isPhone) && company.Phones != isPhone)
@@ -2356,10 +2371,13 @@ namespace litiko.Integration.Server
       var isIsLoroCorrespondent = element.Element("IsLoroCorrespondent")?.Value;
       var isIsNostroCorrespondent = element.Element("IsNostroCorrespondent")?.Value;
       var isCountry = element.Element("COUNTRY")?.Value;
-      var isRegion = element.Element("Region")?.Value;
-      var isCity = element.Element("City")?.Value;       
-      var isPostAdress = element.Element("PostAdress")?.Value;
-      var isLegalAdress = element.Element("LegalAdress")?.Value;
+      //var isRegion = element.Element("Region")?.Value;
+      var isAddressType = element.Element("AddressType")?.Value;
+      var isCity = element.Element("City")?.Value;
+      var isStreet = element.Element("Street")?.Value;
+      var isHouseNumber = element.Element("HouseNumber")?.Value;
+      //var isPostAdress = element.Element("PostAdress")?.Value;
+      //var isLegalAdress = element.Element("LegalAdress")?.Value;
       var isPhone = element.Element("Phone")?.Value;
       var isEmail = element.Element("Email")?.Value;
       var isWebSite = element.Element("WebSite")?.Value;
@@ -2481,6 +2499,7 @@ namespace litiko.Integration.Server
           }            
         }
         
+        /*
         if (!string.IsNullOrEmpty(isRegion))
         {
           var region = Eskhata.Regions.GetAll().Where(x => x.ExternalIdlitiko == isRegion).FirstOrDefault();
@@ -2488,6 +2507,17 @@ namespace litiko.Integration.Server
           {
             Logger.DebugFormat("Change Region: current:{0}, new:{1}", bank.Region?.Name, region?.Name);
             bank.Region = region;                    
+          }
+        }
+        */
+        
+        if (!string.IsNullOrEmpty(isAddressType))
+        {
+          var addressType = NSI.AddressTypes.GetAll().Where(x => x.ExternalId == isAddressType).FirstOrDefault();
+          if (addressType != null && !Equals(bank.AddressTypelitiko, addressType))
+          {
+            Logger.DebugFormat("Change AddressTypelitiko: current:{0}, new:{1}", bank.AddressTypelitiko.Id, addressType.Id);
+            bank.AddressTypelitiko = addressType;                    
           }
         }
   
@@ -2499,18 +2529,18 @@ namespace litiko.Integration.Server
             Logger.DebugFormat("Change City: current:{0}, new:{1}", bank.City?.Name, city?.Name);
             bank.City = city;                    
           }
-        }        
-
-        if(!string.IsNullOrEmpty(isPostAdress) && bank.PostalAddress != isPostAdress)
-        {
-          Logger.DebugFormat("Change PostalAddress: current:{0}, new:{1}", bank.PostalAddress, isPostAdress);
-          bank.PostalAddress = isPostAdress;                         
+        }      
+  
+        if (!string.IsNullOrEmpty(isStreet) && bank.Streetlitiko != isStreet)
+        {        
+          Logger.DebugFormat("Change Streetlitiko: current:{0}, new:{1}", bank.Streetlitiko, isStreet);
+          bank.Streetlitiko = isStreet;                    
         }
-
-        if(!string.IsNullOrEmpty(isLegalAdress) && bank.LegalAddress != isLegalAdress)
-        {
-          Logger.DebugFormat("Change LegalAddress: current:{0}, new:{1}", bank.LegalAddress, isLegalAdress);
-          bank.LegalAddress = isLegalAdress;                          
+  
+        if (!string.IsNullOrEmpty(isHouseNumber) && bank.HouseNumberlitiko != isHouseNumber)
+        {        
+          Logger.DebugFormat("Change HouseNumberlitiko: current:{0}, new:{1}", bank.HouseNumberlitiko, isHouseNumber);
+          bank.HouseNumberlitiko = isHouseNumber;                    
         }
 
         if(!string.IsNullOrEmpty(isPhone) && bank.Phones != isPhone)
@@ -3484,10 +3514,13 @@ namespace litiko.Integration.Server
       //var isCodeOKONHelements = personData.Element("CODE_OKONH").Elements("element");
       //var isCodeOKVEDelements = personData.Element("CODE_OKVED").Elements("element");
       var isCountry = personData.Element("COUNTRY")?.Value;
-      var isRegion = personData.Element("Region")?.Value;
-      var isCity = personData.Element("City")?.Value;      
-      var isLegalAdress = personData.Element("DOC_BIRTH_PLACE")?.Value;
-      var isPostAdress = personData.Element("PostAdress")?.Value;
+      //var isRegion = personData.Element("Region")?.Value;
+      var isAddressType = personData.Element("AddressType")?.Value;
+      var isCity = personData.Element("City")?.Value;
+      var isStreet = personData.Element("Street")?.Value;
+      var isHouseNumber = personData.Element("HouseNumber")?.Value;
+      //var isLegalAdress = personData.Element("DOC_BIRTH_PLACE")?.Value;
+      //var isPostAdress = personData.Element("PostAdress")?.Value;
       var isPhone = personData.Element("Phone")?.Value;
       var isEmail = personData.Element("Email")?.Value;
       var isWebSite = personData.Element("WebSite")?.Value;
@@ -3549,6 +3582,12 @@ namespace litiko.Integration.Server
       }
       else
         needSave = false;
+
+      if (person.ExternalId != isID)
+      {
+        Logger.DebugFormat("Change ExternalId: current:{0}, new:{1}", person.ExternalId, isID);
+        person.ExternalId = isID;        
+      }
       
       if (!string.IsNullOrEmpty(isLastNameRu) && person.LastName != isLastNameRu)
       {
@@ -3703,7 +3742,8 @@ namespace litiko.Integration.Server
           person.Citizenship = country;                    
         }
       }
-      
+
+      /*
       if (!string.IsNullOrEmpty(isRegion))
       {
         var region = Eskhata.Regions.GetAll().Where(x => x.ExternalIdlitiko == isRegion).FirstOrDefault();
@@ -3711,6 +3751,17 @@ namespace litiko.Integration.Server
         {
           Logger.DebugFormat("Change Region: current:{0}, new:{1}", person.Region?.Name, region?.Name);
           person.Region = region;                    
+        }
+      }
+*/
+
+      if (!string.IsNullOrEmpty(isAddressType))
+      {
+        var addressType = NSI.AddressTypes.GetAll().Where(x => x.ExternalId == isAddressType).FirstOrDefault();
+        if (addressType != null && !Equals(person.AddressTypelitiko, addressType))
+        {
+          Logger.DebugFormat("Change AddressTypelitiko: current:{0}, new:{1}", person.AddressTypelitiko.Id, addressType.Id);
+          person.AddressTypelitiko = addressType;                    
         }
       }
 
@@ -3723,19 +3774,19 @@ namespace litiko.Integration.Server
           person.City = city;                    
         }
       }      
+
+      if (!string.IsNullOrEmpty(isStreet) && person.Streetlitiko != isStreet)
+      {        
+        Logger.DebugFormat("Change Streetlitiko: current:{0}, new:{1}", person.Streetlitiko, isStreet);
+        person.Streetlitiko = isStreet;                    
+      }
+
+      if (!string.IsNullOrEmpty(isHouseNumber) && person.HouseNumberlitiko != isHouseNumber)
+      {        
+        Logger.DebugFormat("Change HouseNumberlitiko: current:{0}, new:{1}", person.HouseNumberlitiko, isHouseNumber);
+        person.HouseNumberlitiko = isHouseNumber;                    
+      }
       
-      if(!string.IsNullOrEmpty(isPostAdress) && person.PostalAddress != isPostAdress)
-      {
-        Logger.DebugFormat("Change PostalAddress: current:{0}, new:{1}", person.PostalAddress, isPostAdress);
-        person.PostalAddress = isPostAdress;                        
-      }
-
-      if(!string.IsNullOrEmpty(isLegalAdress) && person.LegalAddress != isLegalAdress)
-      {
-        Logger.DebugFormat("Change LegalAddress: current:{0}, new:{1}", person.LegalAddress, isLegalAdress);
-        person.LegalAddress = isLegalAdress;                        
-      }
-
       if(!string.IsNullOrEmpty(isPhone) && person.Phones != isPhone)
       {
         Logger.DebugFormat("Change Phones: current:{0}, new:{1}", person.Phones, isPhone);
@@ -4189,8 +4240,10 @@ namespace litiko.Integration.Server
         var incomeTaxRate     = contractualDocument.IncomeTaxRatelitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
         var incomeTaxAmount   = contractualDocument.IncomeTaxAmountlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? ""; 
         var laborPayment      = ToYesNoNull(contractualDocument.IsIndividualPaymentlitiko); 
-        var note              = contractualDocument.Note ?? "Без примечания";
         var isWithinBudget    = ToYesNoNull(contractualDocument.IsWithinBudgetlitiko);
+        
+        var amountToBePaid      = contractualDocument.AmountToBePaidlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        var amountOfExpenses    = contractualDocument.AmountOfExpenseslitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
     
         // ==========================
         // Формирование XML
@@ -4220,7 +4273,8 @@ namespace litiko.Integration.Server
             new XElement("IncomeTaxRate", incomeTaxRate),
             new XElement("IncomeTaxAmount", incomeTaxAmount),
             new XElement("LaborPayment", laborPayment),
-            new XElement("Note", note)
+            new XElement("AmountToBePaid", amountToBePaid),
+            new XElement("AmountOfExpenses", amountOfExpenses)
         );
     
         return new XElement("Data", documentElement);
@@ -4242,8 +4296,6 @@ namespace litiko.Integration.Server
         var accFutureExpense = contractualDocument.AccFutureExpenselitiko ?? "";
         var paymentRegion    = contractualDocument.PaymentRegionlitiko?.ExternalId ?? "";
         var paymentTaxRegion = contractualDocument.RegionOfRentallitiko?.ExternalId ?? "";        
-        var paymentMethod    = contractualDocument.PaymentMethodlitiko.HasValue ? contractualDocument.Info.Properties.PaymentMethodlitiko.GetLocalizedValue(contractualDocument.PaymentMethodlitiko.Value) : "";
-        var paymentFrequency = contractualDocument.FrequencyOfPaymentlitiko?.Name ?? "";
     
         var matrix = NSI.PublicFunctions.Module.GetResponsibilityMatrix(contractualDocument);
         var responsibleAccountant =
@@ -4254,7 +4306,6 @@ namespace litiko.Integration.Server
                    .FirstOrDefault(e => e != null);
     
         var responsibleAccountantId = litiko.Eskhata.Employees.As(responsibleAccountant)?.ExternalId ?? string.Empty;
-        var responsibleDepartmentId = litiko.Eskhata.Employees.As(responsibleAccountant)?.Department?.ExternalId ?? string.Empty;
         var batchProcessing = ToYesNoNull(matrix?.BatchProcessing);
     
         // PaymentBasis
@@ -4280,11 +4331,9 @@ namespace litiko.Integration.Server
         var documentKind        = litiko.Eskhata.DocumentKinds.As(contractualDocument.DocumentKind)?.ExternalIdlitiko ?? "";
         var documentGroup       = litiko.Eskhata.DocumentGroupBases.As(contractualDocument.DocumentGroup)?.ExternalIdlitiko ?? "";
         var subject             = contractualDocument.Subject ?? "";
-        var name                = (contractualDocument.Name ?? "").Substring(0, Math.Min((contractualDocument.Name ?? "").Length, 100));
-        var counterpartySign    = litiko.Eskhata.Contacts.As(contractualDocument.CounterpartySignatory)?.ExternalIdlitiko ?? "";
+        var name                = (contractualDocument.Name ?? "").Substring(0, Math.Min((contractualDocument.Name ?? "").Length, 100));        
         var department          = litiko.Eskhata.Departments.As(contractualDocument.Department)?.ExternalId ?? "";  
-        var responsibleEmployee = litiko.Eskhata.Employees.As(contractualDocument.ResponsibleEmployee)?.ExternalId ?? "";
-        var author              = litiko.Eskhata.Employees.As(contractualDocument.Author)?.ExternalId ?? "";
+        var responsibleEmployee = litiko.Eskhata.Employees.As(contractualDocument.ResponsibleEmployee)?.ExternalId ?? "";        
         var validFrom           = contractualDocument.ValidFrom?.ToString(dateFormat) ?? ""; 
         var validTill           = contractualDocument.ValidTill?.ToString(dateFormat) ?? "";
         var changeReason        = contractualDocument.ReasonForChangelitiko;
@@ -4297,13 +4346,14 @@ namespace litiko.Integration.Server
         var vatRate             = contractualDocument.VatRatelitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
         var vatAmount           = contractualDocument.VatAmount?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
         var incomeTaxRate       = contractualDocument.IncomeTaxRatelitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
-        var amountForPeriod     = contractualDocument.AmountForPeriodlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
-        var note                = contractualDocument.Note ?? "Без примечания";
+        var amountForPeriod     = contractualDocument.AmountForPeriodlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";        
         var registrationNumber  = contractualDocument.RegistrationNumber ?? "";
-        var registrationDate    = contractualDocument.RegistrationDate?.ToString(dateFormat) ?? "";
-        var isPartialPayment    = ToYesNoNull(contractualDocument.IsPartialPaymentlitiko);
+        var registrationDate    = contractualDocument.RegistrationDate?.ToString(dateFormat) ?? "";        
         var isEqualPayment      = ToYesNoNull(contractualDocument.IsEqualPaymentlitiko);
         var laborPayment        = ToYesNoNull(contractualDocument.IsIndividualPaymentlitiko); 
+        
+        var amountToBePaid      = contractualDocument.AmountToBePaidlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        var amountOfExpenses    = contractualDocument.AmountOfExpenseslitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
         
         var documentElement = new XElement("Document",
             new XElement("ID", documentId),
@@ -4312,16 +4362,16 @@ namespace litiko.Integration.Server
             new XElement("DocumentGroup", documentGroup),
             new XElement("Subject", subject),
             new XElement("Name", name),
-            new XElement("CounterpartySignatory", counterpartySign),
+            //new XElement("CounterpartySignatory", counterpartySign),
             new XElement("Department", department),
             new XElement("ResponsibleEmployee", responsibleEmployee),
-            new XElement("Author", author),
+            //new XElement("Author", author),
             new XElement("ResponsibleAccountant", responsibleAccountantId), 
-            new XElement("ResponsibleDepartment", responsibleDepartmentId), 
+            //new XElement("ResponsibleDepartment", responsibleDepartmentId), 
             new XElement("RBO", rbo),
             new XElement("ValidFrom", validFrom),
             new XElement("ValidTill", validTill),
-            new XElement("СhangeReason", changeReason), 
+            new XElement("ChangeReason", changeReason), 
             new XElement("AccountDebtCredt", accountDebtCredit),
             new XElement("AccountFutureExpense", accountFutureExp),
             new XElement("TotalAmount", totalAmountLitiko),
@@ -4334,8 +4384,8 @@ namespace litiko.Integration.Server
             new XElement("PaymentRegion", paymentRegion),
             new XElement("PaymentTaxRegion", paymentTaxRegion),
             new XElement("BatchProcessing", batchProcessing), 
-            new XElement("PaymentMethod", paymentMethod),
-            new XElement("PaymentFrequency", paymentFrequency),
+            //new XElement("PaymentMethod", paymentMethod),
+            //new XElement("PaymentFrequency", paymentFrequency),
             new XElement("PaymentBasis",
                 new XElement("IsPaymentContract",   isPaymentContract),
                 new XElement("IsPaymentInvoice",    isPaymentInvoice),
@@ -4350,13 +4400,15 @@ namespace litiko.Integration.Server
                 new XElement("IsPaymentAct",        isClosureAct),
                 new XElement("IsPaymentWaybill",    isClosureWaybill)
             ),
-            new XElement("IsPartialPayment", isPartialPayment),
+            //new XElement("IsPartialPayment", isPartialPayment),
             new XElement("IsEqualPayment", isEqualPayment),
             new XElement("LaborPayment", laborPayment),
             new XElement("AmountForPeriod", amountForPeriod),
-            new XElement("Note", note),
+            //new XElement("Note", note),
             new XElement("RegistrationNumber", registrationNumber),
-            new XElement("RegistrationDate", registrationDate)
+            new XElement("RegistrationDate", registrationDate),
+            new XElement("AmountToBePaid", amountToBePaid),
+            new XElement("AmountOfExpenses", amountOfExpenses)
         );
     
         // Company

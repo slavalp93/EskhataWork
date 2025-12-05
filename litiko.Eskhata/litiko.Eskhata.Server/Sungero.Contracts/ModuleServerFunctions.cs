@@ -80,7 +80,7 @@ namespace litiko.Eskhata.Module.Contracts.Server
           .Select(x => x.ExternalId)
           .ToList();
 
-        // Загружаем справочники в списки 
+        // Загружаем справочники в списки (In-Memory Cache)
         var currencies = litiko.Eskhata.Currencies.GetAll().ToList();
         var docKinds = litiko.Eskhata.DocumentKinds.GetAll().ToList();
         var docGroups = litiko.Eskhata.DocumentGroupBases.GetAll().ToList();
