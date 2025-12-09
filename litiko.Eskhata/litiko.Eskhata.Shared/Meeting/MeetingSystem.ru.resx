@@ -98,10 +98,10 @@
     <value>Форма проведения</value>
   </data>
   <data name="Enum_Formalitiko_Intramural" xml:space="preserve">
-    <value>Очное</value>
+    <value>Очное собрание</value>
   </data>
   <data name="Enum_Formalitiko_Extramurallitiko" xml:space="preserve">
-    <value>Заочное</value>
+    <value>Заочное собрание</value>
   </data>
   <data name="Property_Votinglitiko" xml:space="preserve">
     <value>Голосование</value>

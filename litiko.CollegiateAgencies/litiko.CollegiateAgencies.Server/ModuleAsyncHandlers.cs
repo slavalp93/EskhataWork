@@ -8,6 +8,36 @@ namespace litiko.CollegiateAgencies.Server
 {
   public class ModuleAsyncHandlers
   {
+    /// <summary>
+    /// Выполнить задание
+    /// </summary>
+    /// <param name="args"></param>
+    public virtual void PerformAssignment(litiko.CollegiateAgencies.Server.AsyncHandlerInvokeArgs.PerformAssignmentInvokeArgs args)
+    {
+      if (args.RetryIteration > 100)
+      {        
+        args.Retry = false;
+        return;
+      }
+      
+      var assignment = Eskhata.ApprovalSimpleAssignments.Get(args.assignmentId);
+      if (!Locks.TryLock(assignment))
+      {
+        args.Retry = true;
+        Logger.DebugFormat($"Assignment is locked. (ID:{assignment.Id})");
+        return;        
+      }
+      
+      try
+      {
+        assignment.Complete(Eskhata.ApprovalSimpleAssignment.Result.Complete);
+        Logger.DebugFormat($"Assignment performed. (ID:{assignment.Id})");
+      }
+      finally
+      {
+        Locks.Unlock(assignment);
+      }                  
+    }
 
     /// <summary>
     /// Добавить права на изменение документа.
@@ -45,29 +75,50 @@ namespace litiko.CollegiateAgencies.Server
       }
 
       Logger.DebugFormat("AddVoitingResults: Запуск добавления результата голосования по заданию id - {0}. Итерация - {1}", args.AssignmentId, args.RetryIteration);
-      long votingAssignmnetId = args.AssignmentId;      
-      var votingAssignmnet = litiko.Eskhata.ApprovalSimpleAssignments.GetAll().Where(a => a.Id == votingAssignmnetId).FirstOrDefault();
+      long votingAssignmentId = args.AssignmentId;      
       
-      if (votingAssignmnet == null)
+      var votingAssignment = Sungero.Workflow.Assignments.GetAll(x => x.Id == votingAssignmentId).FirstOrDefault();
+      if (votingAssignment == null)
       {
-        Logger.DebugFormat("AddVoitingResults: Не найдено задание голосования id - {0}.", votingAssignmnetId);
+        Logger.DebugFormat("AddVoitingResults: Не найдено задание голосования id - {0}.", votingAssignmentId);
         return;
       }
-            
-      if (!votingAssignmnet.Votinglitiko.Any())
+      
+      var votingCollection = new List<litiko.CollegiateAgencies.Structures.Module.IVotingInfo>();                     
+
+      if (litiko.Eskhata.ApprovalSimpleAssignments.Is(votingAssignment))
+        votingCollection = litiko.Eskhata.ApprovalSimpleAssignments.As(votingAssignment)
+          .Votinglitiko
+          .Select(v => litiko.CollegiateAgencies.Structures.Module.VotingInfo.Create(v.Decision,
+                                                                                    v.Yes.GetValueOrDefault(),
+                                                                                    v.No.GetValueOrDefault(),
+                                                                                    v.Abstained.GetValueOrDefault(),
+                                                                                    v.Comment))
+          .ToList();
+      else if (litiko.Eskhata.ApprovalCheckingAssignments.Is(votingAssignment))
+        votingCollection = litiko.Eskhata.ApprovalCheckingAssignments.As(votingAssignment)
+          .Votinglitiko
+          .Select(v => litiko.CollegiateAgencies.Structures.Module.VotingInfo.Create(v.Decision,
+                                                                                    v.Yes.GetValueOrDefault(),
+                                                                                    v.No.GetValueOrDefault(),
+                                                                                    v.Abstained.GetValueOrDefault(),
+                                                                                    v.Comment))
+          .ToList();
+      
+      if (!votingCollection.Any())
       {
-        Logger.DebugFormat("AddVoitingResults: В задании id - {0} нет голосуемых решений.", votingAssignmnetId);
+        Logger.DebugFormat("AddVoitingResults: В задании id - {0} нет голосуемых решений.", votingAssignmentId);
         return;        
       }
       
-      var voterEmployee = Sungero.Company.Employees.As(votingAssignmnet.Performer);
+      var voterEmployee = Sungero.Company.Employees.As(votingAssignment.Performer);
       
-      foreach (var element in votingAssignmnet.Votinglitiko)
+      foreach (var element in votingCollection)
       {
         var projectSolution = element.Decision;
-        var votedYes = element.Yes.GetValueOrDefault();
-        var votedNo = element.No.GetValueOrDefault();
-        var votedAbstained = element.Abstained.GetValueOrDefault();        
+        var votedYes = element.Yes;
+        var votedNo = element.No;
+        var votedAbstained = element.Abstained;        
         var comment = element.Comment;
         
         if (projectSolution != null)

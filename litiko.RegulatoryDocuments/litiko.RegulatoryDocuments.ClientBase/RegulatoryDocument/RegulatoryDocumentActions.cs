@@ -197,6 +197,12 @@ namespace litiko.RegulatoryDocuments.Client
         return;      
       }
           
+      // Vals added 25.09.10 
+      var createdTasks = Sungero.Docflow.PublicFunctions.Module.Remote.GetApprovalTasks(_obj);
+      if (createdTasks.Any()) {
+        Dialogs.ShowMessage(litiko.RegulatoryDocuments.RegulatoryDocuments.Resources.DocumentHasIncompleteTasks);
+        return;
+      }
       
       base.SendForApproval(e);
     }

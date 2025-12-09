@@ -64,4 +64,16 @@
   <data name="CommentNeeded" xml:space="preserve">
     <value>For the “Not agree” option, you must write a comment.</value>
   </data>
+  <data name="RequiredToFillBudget" xml:space="preserve">
+    <value>It is required to fill in the “Budget” and “Budget Remaining” fields in the Project solution card.</value>
+  </data>
+  <data name="ConfirmBudgetAndBalance" xml:space="preserve">
+    <value>Do you confirm the Budget and Budget Balance values?</value>
+  </data>
+  <data name="BudgetControl" xml:space="preserve">
+    <value>Please verify the values in the document card</value>
+  </data>
+  <data name="BudgetNotConfirmed" xml:space="preserve">
+    <value>Budget not confirmed</value>
+  </data>
 </root>

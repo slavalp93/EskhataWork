@@ -7,8 +7,4 @@ using litiko.Eskhata.Bank;
 
 namespace litiko.Eskhata
 {
-  partial class BankClientHandlers
-  {
-
-  }
 }

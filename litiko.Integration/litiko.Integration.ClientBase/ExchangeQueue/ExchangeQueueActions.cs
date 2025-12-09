@@ -16,22 +16,8 @@ namespace litiko.Integration.Client
         Dialogs.NotifyMessage("XML отсутствует");      
       else
       {			  
-			  string nameFile = string.Format("XML_{0}", _obj.Name.ToString());
-			  
-        using (var xmlStream = new MemoryStream(_obj.Xml))
-        {
-          var doc = Sungero.Docflow.SimpleDocuments.Create();
-          doc.DocumentKind = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(Sungero.Docflow.PublicConstants.Module.Initialize.SimpleDocumentKind);
-          doc.Name = nameFile;
-          doc.Subject = nameFile;
-          doc.Note = "#TEMP#";
-          doc.CreateVersionFrom(xmlStream, "xml");
-          doc.Save();          
-  
-          bool b = doc.Export();
-          
-          //Sungero.Docflow.SimpleDocuments.Delete(doc);
-        }		    
+			  string fileName = string.Format("{0}.xml", _obj.Name.ToString());			  
+			  Sungero.Core.EntityDataPropertyExtensions.Open(_obj.Xml, fileName);
       }      
     }
 

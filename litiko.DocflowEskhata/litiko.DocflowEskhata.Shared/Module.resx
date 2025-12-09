@@ -94,4 +94,10 @@
   <data name="OutgoingPoACorrespondence" xml:space="preserve">
     <value>Outgoing correspondence by power of attorney</value>
   </data>
+  <data name="EnvFile" xml:space="preserve">
+    <value>C:\\RxData\\git_repository\\Eskhata_Work\\.env</value>
+  </data>
+  <data name="EnvPathFile" xml:space="preserve">
+    <value>C:\\RxData\\git_repository\\Eskhata_Work\\.env</value>
+  </data>
 </root>

@@ -2,6 +2,24 @@
   "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
   "NameGuid": "7466ead6-2162-47df-9ff2-7dc848d040cf",
   "Name": "Counterparty",
+  "Actions": [
+    {
+      "NameGuid": "988cee70-a1fe-411c-b972-a84981e1ec2e",
+      "Name": "SendToVerificationlitiko",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_SendToVerificationlitiko_large_988cee70a1fe411cb972a84981e1ec2e.png",
+      "SmallIconName": "Action_SendToVerificationlitiko_small_988cee70a1fe411cb972a84981e1ec2e.png"
+    },
+    {
+      "NameGuid": "eccb2b8d-e791-4d8c-8ab3-64e5f274912b",
+      "Name": "FillFromABSlitiko",
+      "ActionArea": "Card",
+      "GenerateHandler": true,
+      "LargeIconName": "Action_FillFromABSlitiko_large_eccb2b8de7914d8c8ab364e5f274912b.png",
+      "SmallIconName": "Action_FillFromABSlitiko_small_eccb2b8de7914d8c8ab364e5f274912b.png"
+    }
+  ],
   "BaseGuid": "294767f1-009f-4fbd-80fc-f98c49ddc560",
   "CanBeNavigationPropertyType": true,
   "CreationAreaMetadata": {
@@ -41,6 +59,64 @@
   "LayeredFromGuid": "294767f1-009f-4fbd-80fc-f98c49ddc560",
   "OperationsClass": "",
   "Properties": [
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "93db464a-c19f-441c-bf41-7ad6b9ea2fb5",
+      "Name": "City",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "78b9f52c-febf-4a73-89ae-c7a4723e3944",
+      "Name": "Region",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "IsAncestorMetadata": true,
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "Overridden": [
+        "IsEnabled",
+        "IsShowedInList",
+        "IsVisibility",
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "4a8264be-df2c-4175-b1f2-776d388e2042",
+      "Name": "PostalAddress",
+      "IsAncestorMetadata": true,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "Overridden": [
+        "IsShowedInList",
+        "IsVisibility"
+      ],
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "233a4755-18ec-4ee4-b48f-13b8e129a004",
+      "Name": "Account",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "HandledEvents"
+      ],
+      "Versions": []
+    },
     {
       "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
       "NameGuid": "48d3db8f-8ca4-4434-8089-3e4794b48434",
@@ -120,31 +196,172 @@
       "PreviousPropertyGuid": "cd987209-47bc-4b52-b52b-37072a926d5f"
     },
     {
-      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "9c8c1bda-16cb-49df-aa4e-02e12c326afe",
-      "Name": "OKONHlitiko",
-      "Code": "CounterpOKONH",
-      "EntityGuid": "fec15447-29be-4389-9966-75375a52e39c",
-      "IsShowedInList": false,
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "cef89963-753f-4811-8e49-2b87d1e08bc6",
+      "Name": "VATPayerlitiko",
+      "Code": "VATPayerlitiko",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
       "PreviousPropertyGuid": "b7939aea-a9cb-4e17-ab8d-2487580b734e"
     },
     {
-      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "2c2de8eb-61e4-47c4-9b82-c22eb80c3132",
+      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "49890f77-3125-4813-8433-810c3d6950f8",
+      "Name": "Reliabilitylitiko",
+      "Code": "Reliabilitylit",
+      "DirectValues": [
+        {
+          "NameGuid": "2a66192f-af64-4a1e-b579-8953ff24d4a2",
+          "Name": "Reliable",
+          "Code": "Reliable"
+        },
+        {
+          "NameGuid": "e728c77a-56d2-4880-aa57-70214300ece4",
+          "Name": "NotReliable",
+          "Code": "NotReliable"
+        }
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+      "PreviousPropertyGuid": "cef89963-753f-4811-8e49-2b87d1e08bc6"
+    },
+    {
+      "$type": "Sungero.Metadata.DateTimePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "ce221cf3-796e-45b6-893b-b1134eeba9cb",
+      "Name": "DateOfInspectionlitiko",
+      "Code": "DateOfInspecti",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DateTimeEditorToDateTimeBinder",
+      "PreviousPropertyGuid": "49890f77-3125-4813-8433-810c3d6950f8"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "018cca87-6ebb-4f55-bdd8-f96c2f2c356b",
+      "Name": "EINlitiko",
+      "Code": "EINlitiko",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "Length": 10,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "ce221cf3-796e-45b6-893b-b1134eeba9cb"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "ddc32bb7-d474-48c2-b654-a0c096fd44a9",
+      "Name": "SINlitiko",
+      "Code": "SINlitiko",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "Length": 14,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "018cca87-6ebb-4f55-bdd8-f96c2f2c356b"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d6ac6148-eac7-4115-85cd-9e4cbe48accd",
+      "Name": "AccountEskhatalitiko",
+      "Code": "AccountEskhata",
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
+      "Length": 34,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "ddc32bb7-d474-48c2-b654-a0c096fd44a9"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "71f6ff04-8ae9-4cb2-b10e-1af1080921d7",
+      "Name": "Streetlitiko",
+      "Code": "Streetlitiko",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "d6ac6148-eac7-4115-85cd-9e4cbe48accd"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "a0c39e3c-f24a-4db7-b611-2ad920a6404a",
+      "Name": "HouseNumberlitiko",
+      "Code": "HouseNumberlit",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
+      "Length": 50,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "71f6ff04-8ae9-4cb2-b10e-1af1080921d7"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "0a32c7cc-79c2-4829-87fe-ec0216734647",
+      "Name": "AddressTypelitiko",
+      "Code": "AddressTypelit",
+      "EntityGuid": "d779302f-b699-498e-b301-4f2c08febe9f",
+      "FlatListInStandaloneLookup": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "a0c39e3c-f24a-4db7-b611-2ad920a6404a"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "ed0d3135-07ef-4aa3-9254-b023a0430423",
+      "Name": "OKONHlitiko",
+      "Code": "OKONHlitiko",
+      "EntityGuid": "28e5b3f5-3283-41a4-bf61-2231b1702a1b",
+      "FlatListInStandaloneLookup": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "0a32c7cc-79c2-4829-87fe-ec0216734647"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "54fb39b4-9472-4997-9ec0-014760ef79a4",
       "Name": "OKVEDlitiko",
-      "Code": "CounterpOKVED",
-      "EntityGuid": "eb73e7c2-4a03-4c71-bb5d-accbab247b14",
-      "IsShowedInList": false,
-      "PreviousPropertyGuid": "9c8c1bda-16cb-49df-aa4e-02e12c326afe"
+      "Code": "OKVEDlitiko",
+      "EntityGuid": "539ec71a-7f00-425b-b7cc-494426732339",
+      "FlatListInStandaloneLookup": true,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "ed0d3135-07ef-4aa3-9254-b023a0430423"
+    }
+  ],
+  "PublicConstants": [
+    {
+      "Name": "VerificationApprovalRuleName",
+      "ParentClasses": [
+        "Counterparty"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Проверка контрагента\""
     }
   ],
   "PublicStructures": [],
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "InformationAboutCounterpartyIsRequired",
+    "VerificationTaskSubject",
+    "VerificationTaskActiveText",
+    "AddressTemplate"
+  ],
   "RibbonCardMetadata": {
     "NameGuid": "f301c37e-0718-450e-b2eb-f3ad159dbd08",
     "Name": "RibbonCard",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "97f2da79-4911-4358-af8f-aa20a2153b16",
+        "Name": "ActionButtonlitiko",
+        "ActionGuid": "988cee70-a1fe-411c-b972-a84981e1ec2e",
+        "ButtonSize": "Large",
+        "Index": 0,
+        "ParentGuid": "f329dc86-efcb-484a-bdfd-999e6f96e971"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "8aaa60bc-82a8-4227-9bfb-c4de3d069f45",
+        "Name": "FillFromABSlitiko",
+        "ActionGuid": "eccb2b8d-e791-4d8c-8ab3-64e5f274912b",
+        "ButtonSize": "Large",
+        "Index": -1,
+        "ParentGuid": "aa25262b-e782-4a70-829e-0856dd1e2b57"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": [],

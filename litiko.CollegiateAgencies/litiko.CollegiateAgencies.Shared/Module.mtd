@@ -35,6 +35,20 @@
           "ParameterType": "LongInteger"
         }
       ]
+    },
+    {
+      "NameGuid": "f7845dd6-bae7-4fbb-88e5-fac95fadd461",
+      "Name": "PerformAssignment",
+      "DelayPeriod": 15,
+      "DelayStrategy": "ExponentialDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "60a8fcab-1ef4-47aa-abb1-a39c25b8f4b5",
+          "Name": "assignmentId",
+          "ParameterType": "LongInteger"
+        }
+      ]
     }
   ],
   "ClientAssemblyName": "litiko.CollegiateAgencies.Client",
@@ -186,8 +200,16 @@
       "PreviousItemId": "a1b630d3-e1d2-4e70-90ef-e5b047027918"
     },
     {
-      "ItemId": "0896e8c1-b6c1-4159-bfaa-74e636e74091",
+      "ItemId": "ddcc5b06-be48-436e-929e-89724edacd03",
       "PreviousItemId": "f52953f6-067d-459d-a585-8f288aeeed1d"
+    },
+    {
+      "ItemId": "9edec0c4-a6ae-43ce-8875-cc5c0d295a3b",
+      "PreviousItemId": "ddcc5b06-be48-436e-929e-89724edacd03"
+    },
+    {
+      "ItemId": "0896e8c1-b6c1-4159-bfaa-74e636e74091",
+      "PreviousItemId": "9edec0c4-a6ae-43ce-8875-cc5c0d295a3b"
     }
   ],
   "HandledEvents": [
@@ -230,7 +252,7 @@
   "IsolatedAssemblyName": "litiko.CollegiateAgencies.Isolated",
   "IsolatedFunctions": [
     {
-      "NameGuid": "d6d577b8-db46-4c9f-a7ab-fdaeb1e76d1a",
+      "NameGuid": "3514dea1-61d7-453b-92ca-1834336a1802",
       "Name": "FillMinutesBodyByTemplate",
       "IsolatedAreaId": "ff738b72-b42f-494d-adaf-be32d268cc2d",
       "Parameters": [
@@ -455,6 +477,15 @@
       "Value": "new System.Guid(\"a145af0a-35bc-40ac-b616-8eb7418cf785\")"
     },
     {
+      "Name": "ResponsibleEmployeeAHD",
+      "ParentClasses": [
+        "Module",
+        "RoleGuid"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"e2251d5e-3141-4c53-aa91-7ac7a8d6f700\")"
+    },
+    {
       "Name": "Secretaries",
       "ParentClasses": [
         "Module",
@@ -471,6 +502,14 @@
       ],
       "TypeName": "System.Guid",
       "Value": "new System.Guid(\"61b23bd1-ca9a-457a-9afc-5873168cea60\")"
+    },
+    {
+      "Name": "VotingApprovalRule2Name",
+      "ParentClasses": [
+        "Module"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Голосование по решению\""
     },
     {
       "Name": "VotingApprovalRuleName",
@@ -526,6 +565,23 @@
       "Placement": "Shared",
       "ReturnType": "void",
       "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "TryUnPauseVotingTask",
+      "Parameters": [
+        {
+          "Name": "approvalTaskId",
+          "ParameterType": "global::System.Int64",
+          "ParameterTypeFullName": "System.Int64"
+        },
+        {
+          "Name": "exceptTasksId",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Int64>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
     }
   ],
   "PublicStructures": [
@@ -534,6 +590,11 @@
       "IsIsolated": true,
       "IsPublic": true,
       "Properties": [
+        {
+          "Name": "Number",
+          "IsNullable": true,
+          "TypeFullName": "global::System.Nullable<global::System.Int32>"
+        },
         {
           "Name": "ProjectSolutionTittle",
           "IsNullable": true,
@@ -600,6 +661,36 @@
         }
       ],
       "StructureNamespace": "litiko.CollegiateAgencies.Structures.Module"
+    },
+    {
+      "Name": "VotingInfo",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "Decision",
+          "IsEntity": true,
+          "IsNullable": true,
+          "TypeFullName": "global::litiko.CollegiateAgencies.IProjectsolution"
+        },
+        {
+          "Name": "Yes",
+          "TypeFullName": "global::System.Boolean"
+        },
+        {
+          "Name": "No",
+          "TypeFullName": "global::System.Boolean"
+        },
+        {
+          "Name": "Abstained",
+          "TypeFullName": "global::System.Boolean"
+        },
+        {
+          "Name": "Comment",
+          "IsNullable": true,
+          "TypeFullName": "global::System.String"
+        }
+      ],
+      "StructureNamespace": "litiko.CollegiateAgencies.Structures.Module"
     }
   ],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
@@ -635,7 +726,15 @@
     "NoVersionMessage",
     "SaveObjectMessage",
     "RoleAdditionalBoardMembers",
-    "DescriptionAdditionalBoardMembers"
+    "DescriptionAdditionalBoardMembers",
+    "DocumentKindIsEmpty",
+    "ResponsibleEmployeeAHD",
+    "ResponsibleEmployeeAHDDescription",
+    "BeforeActionItemProjectSolutionRequired",
+    "ProjectSolutionApprovalMissing",
+    "MeetingOpeningGreeting_RU",
+    "MeetingOpeningGreeting_TJ",
+    "VotingResult"
   ],
   "ServerAssemblyName": "litiko.CollegiateAgencies.Server",
   "ServerNamespace": "litiko.CollegiateAgencies.Server",
@@ -857,7 +956,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.85",
+  "Version": "0.0.1.116",
   "Widgets": [],
   "Versions": [
     {

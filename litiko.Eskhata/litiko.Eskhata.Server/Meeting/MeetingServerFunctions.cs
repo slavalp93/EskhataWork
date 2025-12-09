@@ -151,7 +151,7 @@ namespace litiko.Eskhata.Server
       foreach (var element in _obj.Absentlitiko.Where(x => x.Employee != null))
       {
         var employee = element.Employee;
-        var reason = element.Reason;
+        var reason = element.AbsentReason?.Name;
         string name = string.Empty;
         if (!inTJ)          
           name = withShortName ? Sungero.Company.PublicFunctions.Employee.GetShortName(Sungero.Company.Employees.As(employee), true) : employee.Name;
@@ -221,25 +221,21 @@ namespace litiko.Eskhata.Server
       
       var agenda = Agendas.GetAll().Where(d => Equals(d.Meeting, _obj)).FirstOrDefault();
       if (agenda == null)
-        return null;
-      
-      var votingApprovalRule = Sungero.Docflow.ApprovalRules.GetAll().Where(r => r.Name == litiko.CollegiateAgencies.PublicConstants.Module.VotingApprovalRuleName).FirstOrDefault();
+        return null;            
+            
+      var availableApprovalRules = Sungero.Docflow.PublicFunctions.OfficialDocument.Remote.GetApprovalRules(agenda);
+      var votingApprovalRule = availableApprovalRules.Where(r => r.Name == litiko.CollegiateAgencies.PublicConstants.Module.VotingApprovalRuleName).FirstOrDefault();
       if (votingApprovalRule == null)
         return null;
       
-      var task = Sungero.Docflow.ApprovalTasks.Create();
+      var task = Eskhata.ApprovalTasks.Create();
       task.DocumentGroup.All.Add(agenda);            
       foreach (var element in task.AddendaGroup.All)
-      {        
-        if (!projectSolutions.Select(x => x.Id).Contains(element.Id))
-          task.AddendaGroup.All.Remove(element);              
-      }      
+        task.AddendaGroup.All.Remove(element);                  
+      
       foreach (var document in projectSolutions)
-      {
-        if (!task.AddendaGroup.All.Contains(document))
-          task.AddendaGroup.All.Add(document);
-      }
-
+        task.Desigionslitiko.AddNew().Desigion = document;
+      
       if (!task.OtherGroup.All.Contains(_obj))
         task.OtherGroup.All.Add(_obj);
       
@@ -324,6 +320,9 @@ namespace litiko.Eskhata.Server
           actionItem.Assignee = decision.Responsible;
           actionItem.Deadline = decision.Date;
           
+          // Vals added 25.09.10 Добавляем проектное решение и приложения + выдаём права исполнителю
+          AddProjectSolutionWithAddendaToActionItem(projectSolution, actionItem);
+
           foreach (var property in actionItem.State.Properties)
             property.IsRequired = false;          
           
@@ -354,7 +353,46 @@ namespace litiko.Eskhata.Server
       if (Users.Current != null)
         startActionItemsAsyncHandler.StartedByUserId = Users.Current.Id;
       startActionItemsAsyncHandler.ExecuteAsync(startedNotification, completedNotification, errorNotification, Users.Current);
-    }        
+    }  
+
+    #region Private Functions
+    /// <summary>
+    /// Добавляет проектное решение и его приложения в поручение и выдаёт права исполнителю.
+    /// </summary>
+    /// <param name="projectSolution">Документ проекта, который нужно добавить.</param>
+    /// <param name="actionItem">Поручение, в которое добавляются вложения.</param>
+    private void AddProjectSolutionWithAddendaToActionItem(Sungero.Docflow.IOfficialDocument projectSolution,
+                                                                  Sungero.RecordManagement.IActionItemExecutionTask actionItem)
+    {
+        if (projectSolution == null || actionItem == null)
+            return;
+    
+        // Приводим к IOfficialDocument
+        var projectDoc = Sungero.Docflow.OfficialDocuments.As(projectSolution);
+        if (projectDoc == null)
+            return;
+
+        // Добавляем проектное решение во вложения
+        if (!actionItem.OtherGroup.All.Contains(projectSolution))
+            actionItem.OtherGroup.All.Add(projectSolution);
+    
+        // Выдаём права исполнителю
+        if (actionItem.Assignee != null)
+        {
+            projectSolution.AccessRights.Grant(actionItem.Assignee, DefaultAccessRightsTypes.Read);
+            projectSolution.Save();
+
+            // Получаем приложения документа (Addenda)
+            var addenda = projectDoc.Relations.GetRelated(Sungero.Docflow.PublicConstants.Module.AddendumRelationName);
+            
+            foreach (var doc in addenda)
+            {
+                doc.AccessRights.Grant(actionItem.Assignee, DefaultAccessRightsTypes.Read);
+                doc.Save();
+            }
+        }
+    }    
+    #endregion    
        
   }
 }

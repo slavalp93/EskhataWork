@@ -229,4 +229,10 @@
   <data name="Property_Countrylitiko" xml:space="preserve">
     <value>Юрисдикция</value>
   </data>
+  <data name="Property_Account" xml:space="preserve">
+    <value>Счет в другом банке</value>
+  </data>
+  <data name="Property_AccountEskhatalitiko" xml:space="preserve">
+    <value>Счет в Банке Эсхата</value>
+  </data>
 </root>

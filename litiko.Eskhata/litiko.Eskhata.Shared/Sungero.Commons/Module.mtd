@@ -79,7 +79,7 @@
         "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
         "NameGuid": "2a06d19f-c151-42dc-b834-c9914b453340",
         "Name": "ShowIDTypelitiko",
-        "EntityTypeId": "a41cc530-6875-4bde-a348-5ae69965a938",
+        "EntityTypeId": "9cfefa75-b807-46e3-b09c-d8b232b21f4f",
         "GroupId": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
         "IsVisibleInDesktopClient": false,
         "PreviousItemGuid": "bdfea838-c8fa-429f-9865-9aa7aa3ed883"
@@ -92,6 +92,22 @@
         "GroupId": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
         "IsVisibleInDesktopClient": false,
         "PreviousItemGuid": "cbbea2d5-fb3c-4bda-a872-29246a0b0b37"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "5adf0c1c-2e1b-4783-8420-ec8e5d50bc17",
+        "Name": "ShowAddressesTypeslitiko",
+        "EntityTypeId": "d779302f-b699-498e-b301-4f2c08febe9f",
+        "GroupId": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
+        "PreviousItemGuid": "6c7f764f-92a5-4ccf-a74c-71b87a291765"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "6c7f764f-92a5-4ccf-a74c-71b87a291765",
+        "Name": "CurrencyRateslitiko",
+        "EntityTypeId": "7948764c-2f80-4639-a157-5c22023fcf2b",
+        "GroupId": "056413d6-d13e-41cf-a4e3-1b05196c4d4f",
+        "PreviousItemGuid": "2a06d19f-c151-42dc-b834-c9914b453340"
       },
       {
         "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",

@@ -127,9 +127,6 @@
   <data name="Enum_StatusProcessingRx_Error" xml:space="preserve">
     <value>Ошибка</value>
   </data>
-  <data name="Property_Counterparty" xml:space="preserve">
-    <value>Контрагент</value>
-  </data>
   <data name="Action_StartProcessingXML" xml:space="preserve">
     <value>Запустить обработку XML</value>
   </data>
@@ -141,5 +138,17 @@
   </data>
   <data name="Ribbon_Group_314bba1b43e4404a9e80e4976afce26b" xml:space="preserve">
     <value>Обработка XML</value>
+  </data>
+  <data name="Action_ExchangeQueue" xml:space="preserve">
+    <value>Очередь обмена</value>
+  </data>
+  <data name="Action_ExchangeQueueHint" xml:space="preserve">
+    <value>Открыть очередь обмена</value>
+  </data>
+  <data name="Action_ExchangeQueueDescription" xml:space="preserve">
+    <value>Открытие очереди обмена по документу</value>
+  </data>
+  <data name="Property_EntityId" xml:space="preserve">
+    <value>ИД сущности</value>
   </data>
 </root>

@@ -12,33 +12,45 @@ namespace litiko.Integration.Server
 
     public override bool IsModuleVisible()
     {
-      return Users.Current.IncludedIn(Constants.Module.SynchronizationResponsibleRoleGuid) || Users.Current.IncludedIn(Roles.Administrators);
+      return Users.Current.IncludedIn(Constants.Module.RoleGuid.IntegrationUsers) || Users.Current.IncludedIn(Roles.Administrators);
     }
 
     public override void Initializing(Sungero.Domain.ModuleInitializingEventArgs e)
     {      
-      CreateIntegrationSystem("ABS");
+      CreateIntegrationSystem("ABS");      
+      CreateRoles();
       
       var integrationSystem = IntegrationSystems.GetAll(r => r.Name == "ABS").FirstOrDefault();
       if (integrationSystem != null)
       {
-        CreateIntegrationMethod("R_DR_GET_DEPART", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_EMPLOYEES", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_BUSINESSUNITS", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_COMPANY", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_BANK", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_COUNTRIES", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_OKOPF", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_OKFS", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_OKONH", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_OKVED", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_COMPANYKINDS", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_TYPESOFIDCARDS", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_ECOLOG", integrationSystem);
-        CreateIntegrationMethod("R_DR_GET_MARITALSTATUSES", integrationSystem);      
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_DEPART, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_EMPLOYEES, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_BUSINESSUNITS, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_COMPANY, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_BANK, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_PERSON, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_COUNTRIES, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_OKOPF, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_OKFS, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_OKONH, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_OKVED, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_COMPANYKINDS, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_TYPESOFIDCARDS, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_ECOLOG, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_MARITALSTATUSES, integrationSystem);       
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_CURRENCY_RATES, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_PAYMENT_REGIONS, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_TAX_REGIONS, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_CONTRACT_VID, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_CONTRACT_TYPE, integrationSystem);        
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_SET_CONTRACT, integrationSystem);        
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_REGIONS, integrationSystem);
+        CreateIntegrationMethod(Constants.Module.IntegrationMethods.R_DR_GET_CITIES, integrationSystem);
       }
       
       GrantRightsOnEntities();
+      CreateApprovalFunctionStages();      
     }
     
     /// <summary>
@@ -88,7 +100,7 @@ namespace litiko.Integration.Server
       InitializationLogger.Debug("Init: Grant rights on entities.");
       
       // "Ответственные за синхронизацию с учетными системами"
-      var roleSynchronizationResponsible = Roles.GetAll().Where(x => x.Sid == Constants.Module.SynchronizationResponsibleRoleGuid).FirstOrDefault();
+      var roleSynchronizationResponsible = Roles.GetAll().Where(x => x.Sid == Constants.Module.RoleGuid.SynchronizationResponsibleRoleGuid).FirstOrDefault();
       if (roleSynchronizationResponsible != null)
       {
         ExchangeDocuments.AccessRights.Grant(roleSynchronizationResponsible, DefaultAccessRightsTypes.FullAccess);
@@ -111,9 +123,44 @@ namespace litiko.Integration.Server
         IntegrationSystems.AccessRights.Save();
         IntegrationMethods.AccessRights.Grant(roleCounterpartiesResponsible, DefaultAccessRightsTypes.Read);
         IntegrationMethods.AccessRights.Save();
-        ExchangeQueues.AccessRights.Grant(roleCounterpartiesResponsible, DefaultAccessRightsTypes.Create);
+        ExchangeQueues.AccessRights.Grant(roleCounterpartiesResponsible, DefaultAccessRightsTypes.FullAccess);
         ExchangeQueues.AccessRights.Save();
-      }      
+      }
+
+      // Менеджеры модуля "Договоры"
+      var roleContractsManagers = Roles.GetAll().FirstOrDefault(x => x.Sid == ContractsEskhata.PublicConstants.Module.RoleGuid.ContractsManagers);
+      if (roleContractsManagers != null)
+      {
+        ExchangeDocuments.AccessRights.Grant(roleContractsManagers, DefaultAccessRightsTypes.Create);
+        ExchangeDocuments.AccessRights.Save();      
+        ExchangeQueues.AccessRights.Grant(roleContractsManagers, DefaultAccessRightsTypes.Create);
+        ExchangeQueues.AccessRights.Save();        
+      }
     }
+    
+    /// <summary>
+    /// Создать записи новых типов сценариев.
+    /// </summary>    
+    public static void CreateApprovalFunctionStages()
+    {                              
+      if (!litiko.Integration.SendDocumentStages.GetAll(x => x.Name == litiko.Integration.Constants.Module.ApprovalFunctionStages.SendDocumentToIS).Any())
+      {
+        InitializationLogger.DebugFormat("Init: Create stage Sending document to information system.");
+        var stage = litiko.Integration.SendDocumentStages.Create();
+        stage.Name = litiko.Integration.Constants.Module.ApprovalFunctionStages.SendDocumentToIS;
+        stage.TimeoutInHours = 4;
+        stage.Save();      
+      }      
+      
+    }
+
+    /// <summary>
+    /// Создать предопределенные роли.
+    /// </summary>
+    public static void CreateRoles()
+    {           
+      Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(Resources.RoleIntegrationUsers, Resources.DescriptionRoleIntegrationUsers, Constants.Module.RoleGuid.IntegrationUsers);
+    }
+
   }
 }

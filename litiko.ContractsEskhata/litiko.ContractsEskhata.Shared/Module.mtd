@@ -1,0 +1,135 @@
+{
+  "$type": "Sungero.Metadata.ModuleMetadata, Sungero.Metadata",
+  "NameGuid": "724222f8-e094-4707-9021-7f031259333b",
+  "Name": "ContractsEskhata",
+  "AsyncHandlers": [],
+  "ClientAssemblyName": "litiko.ContractsEskhata.Client",
+  "ClientBaseAssemblyName": "litiko.ContractsEskhata.ClientBase",
+  "ClientBaseNamespace": "litiko.ContractsEskhata.ClientBase",
+  "ClientNamespace": "litiko.ContractsEskhata.Client",
+  "Code": "Contrac",
+  "CompanyCode": "litiko",
+  "Cover": {
+    "NameGuid": "746c642f-0257-463f-9ff3-bb83ece4e7ac",
+    "Actions": [],
+    "Background": null,
+    "Footer": {
+      "NameGuid": "b77e637b-1f35-4f1b-ae4f-664ec8a80bd4",
+      "BackgroundPosition": "Stretch"
+    },
+    "Groups": [],
+    "Header": {
+      "NameGuid": "72144071-4096-4f8b-b283-1d54579c6ba2",
+      "BackgroundPosition": "Stretch"
+    },
+    "Tabs": []
+  },
+  "Dependencies": [
+    {
+      "Id": "78d05f91-7585-42b9-addc-5b14478d4680",
+      "IsSolutionModule": true,
+      "MaxVersion": "",
+      "MinVersion": ""
+    },
+    {
+      "Id": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
+    },
+    {
+      "Id": "f9d15b1c-2784-4c84-8348-1e162d70b988",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
+    }
+  ],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "7b849979-6f7c-49db-83e8-22ac096cf123"
+    }
+  ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
+  "IconResourcesKeys": [],
+  "Importance": "Medium",
+  "InitializationFunctions": [
+    {
+      "Name": "CreateOrUpdateRole",
+      "Parameters": [
+        {
+          "Name": "roleName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "roleDescription",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "roleGuid",
+          "ParameterType": "global::System.Guid",
+          "ParameterTypeFullName": "System.Guid"
+        }
+      ],
+      "ReturnType": "global::Sungero.CoreEntities.IRole",
+      "ReturnTypeFullName": "Sungero.CoreEntities.IRole, Sungero.Domain.Shared"
+    }
+  ],
+  "InterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "InterfaceNamespace": "litiko.ContractsEskhata",
+  "IsolatedAssemblyName": "litiko.ContractsEskhata.Isolated",
+  "IsolatedNamespace": "litiko.ContractsEskhata.Isolated",
+  "IsVisible": false,
+  "Overridden": [
+    "IsVisible"
+  ],
+  "PublicConstants": [
+    {
+      "Name": "ContractsManagers",
+      "ParentClasses": [
+        "Module",
+        "RoleGuid"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"A5114B68-0925-42FA-B5AB-F7411EF58CFC\")"
+    },
+    {
+      "Name": "LegalOpinion",
+      "ParentClasses": [
+        "Module",
+        "DocumentKindGuids"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"7bcb9652-df6a-43f5-bac1-c8a36b934f1f\")"
+    }
+  ],
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "litiko.ContractsEskhata",
+  "ResourcesKeys": [
+    "RequiredToFillIsScanReceived",
+    "RequiredToFillIsWithinBudget",
+    "RequiredToFillIsOriginalReceived",
+    "RequiredToFillFields",
+    "RoleContractsManagersName",
+    "RoleContractsManagersDescription"
+  ],
+  "ServerAssemblyName": "litiko.ContractsEskhata.Server",
+  "ServerNamespace": "litiko.ContractsEskhata.Server",
+  "SharedAssemblyName": "litiko.ContractsEskhata.Shared",
+  "SharedNamespace": "litiko.ContractsEskhata.Shared",
+  "SpecialFolders": [],
+  "Version": "0.0.1.26",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "DomainApi",
+      "Number": 3
+    }
+  ]
+}

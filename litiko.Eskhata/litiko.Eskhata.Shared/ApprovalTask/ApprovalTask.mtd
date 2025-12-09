@@ -202,7 +202,7 @@
           "ColumnSpan": 1,
           "GroupType": "WithTitleNoBorder",
           "ParentGuid": "d9eeae24-1053-4e45-9131-63492979c0fc",
-          "RowNumber": 2,
+          "RowNumber": 3,
           "RowSpan": 1,
           "Versions": []
         },
@@ -259,7 +259,7 @@
           "ColumnSpan": 1,
           "GroupType": "WithTitleNoBorder",
           "ParentGuid": "d9eeae24-1053-4e45-9131-63492979c0fc",
-          "RowNumber": 3,
+          "RowNumber": 4,
           "RowSpan": 1,
           "Versions": []
         },
@@ -307,7 +307,7 @@
           "ColumnSpan": 1,
           "GroupType": "WithTitleNoBorder",
           "ParentGuid": "d9eeae24-1053-4e45-9131-63492979c0fc",
-          "RowNumber": 4,
+          "RowNumber": 5,
           "RowSpan": 1,
           "Versions": []
         },
@@ -369,7 +369,7 @@
           "ColumnSpan": 1,
           "GroupType": "WithTitleNoBorder",
           "ParentGuid": "d9eeae24-1053-4e45-9131-63492979c0fc",
-          "RowNumber": 1,
+          "RowNumber": 2,
           "RowSpan": 1
         },
         {
@@ -389,6 +389,29 @@
               "Value": "3e2a9391-1919-4c94-bc4a-1860be548b14"
             }
           ]
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "079d8265-1226-4cd1-a66c-01e9acf7584e",
+          "Name": "Desigionslitikolitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.GridControlToChildCollectionBinder",
+          "HeaderLocation": "None",
+          "ParentGuid": "7225e254-61ef-4332-99de-51c1a8550078",
+          "PropertyGuid": "9686b092-933c-48b2-b7b0-b4b6d7216071",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": [
+            {
+              "Name": "Height",
+              "Value": 100
+            },
+            {
+              "Name": "NeedExpand",
+              "Value": true
+            }
+          ]
         }
       ],
       "IsAncestorMetadata": true,
@@ -397,6 +420,9 @@
       ],
       "Versions": []
     }
+  ],
+  "HandledEvents": [
+    "BeforeAbortServer"
   ],
   "IconResourcesKeys": [],
   "IsCreateVersionsOnLayerForbidden": true,
@@ -515,6 +541,41 @@
       "IsEnabled": false,
       "IsShowedInList": false,
       "PreviousPropertyGuid": "cf4b7cca-a1d3-42ba-a620-ae8577333b8e"
+    },
+    {
+      "$type": "Sungero.Metadata.LongIntegerPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "d23b5bdd-20b6-4ffb-81c0-3462c5f4803f",
+      "Name": "ExchangeDocIdlitiko",
+      "CanBeSearch": false,
+      "Code": "ExchangeDocIdl",
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+      "PreviousPropertyGuid": "4a7e638a-f5a5-4560-b9ba-cf07f1793724"
+    },
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "9686b092-933c-48b2-b7b0-b4b6d7216071",
+      "Name": "Desigionslitiko",
+      "Code": "ApprovalTaskDe",
+      "EntityGuid": "c05a325e-dc08-41ae-9376-c094f6dc6c71",
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "PreviousPropertyGuid": "d23b5bdd-20b6-4ffb-81c0-3462c5f4803f"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "838b722d-14ce-4604-968e-be00d39cbc14",
+      "Name": "MainApprovalTasklitiko",
+      "CanBeSearch": false,
+      "Code": "MainApprovalTa",
+      "EntityGuid": "1bc72831-b65e-4e1b-b722-011f844115bb",
+      "FlatListInStandaloneLookup": true,
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "IsVisibility": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+      "PreviousPropertyGuid": "9686b092-933c-48b2-b7b0-b4b6d7216071"
     }
   ],
   "PublicFunctions": [

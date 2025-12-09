@@ -130,12 +130,6 @@
   <data name="Control_8aa590633d62455fb454b27459ee3d32_EmptyText" xml:space="preserve">
     <value />
   </data>
-  <data name="Resource_687c94fc67704c17bb0b57a69433b001" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Control_687c94fc67704c17bb0b57a69433b001_EmptyText" xml:space="preserve">
-    <value />
-  </data>
   <data name="ControlGroup_4b9defe5f46d4581b50a5c0be4a80a50" xml:space="preserve">
     <value>Банковские реквизиты</value>
   </data>
@@ -211,13 +205,13 @@
   <data name="Property_Countrylitiko" xml:space="preserve">
     <value>Юрисдикция</value>
   </data>
-  <data name="Action_FillFromABSlitiko" xml:space="preserve">
-    <value>Заполнить из АБС по ИНН</value>
-  </data>
   <data name="Action_FillFromABSlitikoHint" xml:space="preserve">
     <value>Автоматическое заполнение реквизитов контрагента из АБС по ИНН</value>
   </data>
   <data name="Action_FillFromABSlitikoDescription" xml:space="preserve">
     <value>Автоматическое заполнение реквизитов контрагента из АБС по ИНН</value>
+  </data>
+  <data name="Action_FillFromABSlitiko" xml:space="preserve">
+    <value>Заполнить из АБС по ИНН</value>
   </data>
 </root>

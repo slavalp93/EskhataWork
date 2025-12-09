@@ -9,6 +9,5 @@ namespace litiko.Eskhata.Server
 {
   partial class CounterpartyFunctions
   {
-
   }
 }

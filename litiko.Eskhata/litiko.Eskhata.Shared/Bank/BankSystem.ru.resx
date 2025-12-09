@@ -106,12 +106,6 @@
   <data name="Control_8aa590633d62455fb454b27459ee3d32_EmptyText" xml:space="preserve">
     <value />
   </data>
-  <data name="Resource_687c94fc67704c17bb0b57a69433b001" xml:space="preserve">
-    <value />
-  </data>
-  <data name="Control_687c94fc67704c17bb0b57a69433b001_EmptyText" xml:space="preserve">
-    <value />
-  </data>
   <data name="ControlGroup_69a4139490424b338d9ce5253d0a8c27" xml:space="preserve">
     <value>Примечание</value>
   </data>
@@ -190,13 +184,16 @@
   <data name="Property_Countrylitiko" xml:space="preserve">
     <value>Юрисдикция</value>
   </data>
-  <data name="Action_FillFromABSlitikoHint" xml:space="preserve">
-    <value>Автоматическое заполнение реквизитов банка из АБС по БИК</value>
-  </data>
   <data name="Action_FillFromABSlitiko" xml:space="preserve">
     <value>Заполнить из АБС по БИК</value>
   </data>
+  <data name="Action_FillFromABSlitikoHint" xml:space="preserve">
+    <value>Автоматическое заполнение реквизитов банка из АБС по БИК</value>
+  </data>
   <data name="Action_FillFromABSlitikoDescription" xml:space="preserve">
     <value>Автоматическое заполнение реквизитов банка из АБС по БИК</value>
+  </data>
+  <data name="Property_CorrespondentAccountlitiko" xml:space="preserve">
+    <value>Корр. счет</value>
   </data>
 </root>

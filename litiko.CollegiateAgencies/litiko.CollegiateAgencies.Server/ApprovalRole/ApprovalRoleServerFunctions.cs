@@ -191,6 +191,13 @@ namespace litiko.CollegiateAgencies.Server
             meeting = litiko.Eskhata.Meetings.As(minutes.Meeting);
         }
         
+        if (litiko.CollegiateAgencies.Projectsolutions.Is(document))
+        {
+          var projectSolution = litiko.CollegiateAgencies.Projectsolutions.As(document);
+          if (projectSolution.Meeting != null)
+            meeting = litiko.Eskhata.Meetings.As(projectSolution.Meeting);
+        }
+        
         if (meeting != null)
         {
           // Председатель
@@ -224,6 +231,13 @@ namespace litiko.CollegiateAgencies.Server
           if (minutes.Meeting != null)
             meeting = litiko.Eskhata.Meetings.As(minutes.Meeting);
         }
+        
+        if (litiko.CollegiateAgencies.Projectsolutions.Is(document))
+        {
+          var projectSolution = litiko.CollegiateAgencies.Projectsolutions.As(document);
+          if (projectSolution.Meeting != null)
+            meeting = litiko.Eskhata.Meetings.As(projectSolution.Meeting);
+        }        
         
         if (meeting != null && meeting.MeetingCategorylitiko?.Name == "Заседание Правления")
         {                                        

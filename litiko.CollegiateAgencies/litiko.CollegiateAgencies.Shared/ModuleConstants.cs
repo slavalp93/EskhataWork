@@ -69,6 +69,10 @@ namespace litiko.CollegiateAgencies.Constants
       /// <summary> Создание постановлений </summary>
       [Sungero.Core.Public]
       public static readonly Guid AdditionalBoardMembers = Guid.Parse("b1cea7fe-3950-43eb-97ab-70c36e81b2fa");      
+      
+      /// <summary> Ответственный сотрудник АХД </summary>
+      [Sungero.Core.Public]
+      public static readonly Guid ResponsibleEmployeeAHD = Guid.Parse("e2251d5e-3141-4c53-aa91-7ac7a8d6f700");      
     }
     
     public static class ParamNames
@@ -88,7 +92,11 @@ namespace litiko.CollegiateAgencies.Constants
    
    /// <summary> Имя правила согласования по голосованию </summary>
    [Sungero.Core.Public]
-   public const string VotingApprovalRuleName = "Голосование";    
+   public const string VotingApprovalRuleName = "Голосование";
+   
+   /// <summary> Имя правила согласования по голосованию (подзадача)</summary>
+   [Sungero.Core.Public]
+   public const string VotingApprovalRule2Name = "Голосование по решению";    
    
    /// <summary> Guid группы приложений задачи согласования по регламенту </summary>
    [Sungero.Core.Public]

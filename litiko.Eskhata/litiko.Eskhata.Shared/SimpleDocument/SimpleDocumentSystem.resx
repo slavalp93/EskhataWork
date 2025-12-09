@@ -58,4 +58,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Action_CreateProjectSolutionlitiko" xml:space="preserve">
+    <value>Submit the issue to the KOU</value>
+  </data>
+  <data name="Action_CreateProjectSolutionlitikoDescription" xml:space="preserve">
+    <value>Create a new document with the type Project Solution.</value>
+  </data>
+  <data name="Action_CreateProjectSolutionlitikoHint" xml:space="preserve">
+    <value>Create a new document with the type Project Solution.</value>
+  </data>
+  <data name="Action_CreateProjectSolutionlitikoConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_CreateProjectSolutionlitikoConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
 </root>

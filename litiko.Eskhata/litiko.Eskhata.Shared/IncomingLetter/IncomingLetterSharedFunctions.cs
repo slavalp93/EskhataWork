@@ -9,6 +9,15 @@ namespace litiko.Eskhata.Shared
 {
   partial class IncomingLetterFunctions
   {
-    
+    /// <summary>
+    /// Установить обязательность свойств.
+    /// </summary>
+    public override void SetRequiredProperties()
+    {
+      base.SetRequiredProperties();
+
+      _obj.State.Properties.Dated.IsRequired = true;
+      _obj.State.Properties.InNumber.IsRequired = true;
+    }     
   }
 }

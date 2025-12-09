@@ -10,15 +10,64 @@ namespace litiko.Eskhata
   partial class ApprovalStageClientHandlers
   {
 
-    public virtual IEnumerable<Enumeration> CustomStageTypelitikoFiltering(IEnumerable<Enumeration> query)
+    public override void AllowSendToReworkValueInput(Sungero.Presentation.BooleanValueInputEventArgs e)
     {
-      if (_obj.StageType != StageType.SimpleAgr || _obj.AllowSendToRework.GetValueOrDefault())
-        query = query.Where(q => !Equals(q, CustomStageTypelitiko.Voting));
+      base.AllowSendToReworkValueInput(e);
       
-      if (_obj.StageType != StageType.SimpleAgr)
-        query = query.Where(q => !Equals(q, CustomStageTypelitiko.IncludeInMeet) && !Equals(q, CustomStageTypelitiko.ControlIRD));           
+      if (e.NewValue.GetValueOrDefault() && _obj.CustomStageTypelitiko == ApprovalStage.CustomStageTypelitiko.Pause)
+        _obj.CustomStageTypelitiko = null;
+    }
+
+    public virtual IEnumerable<Enumeration> CustomStageTypelitikoFiltering(IEnumerable<Enumeration> query)
+    {     
+      #region Согласование
+      if (_obj.StageType == StageType.Approvers)
+      {        
+        var allowedValues = new List<Enumeration>
+        {
+          CustomStageTypelitiko.BudgetCheck,
+          CustomStageTypelitiko.BudgetCheckCont,
+          CustomStageTypelitiko.AccountantAppr
+        };        
+        
+        return query.Where(q => allowedValues.Contains(q));
+      }      
+      #endregion
+
+      #region Задание
+      if (_obj.StageType == StageType.SimpleAgr)
+      {
+        var allowedValues = new List<Enumeration>
+        {
+          CustomStageTypelitiko.Voting,
+          CustomStageTypelitiko.IncludeInMeet,
+          CustomStageTypelitiko.ControlIRD,
+          CustomStageTypelitiko.ScanReceivedCon,
+          CustomStageTypelitiko.SubmitIssueKou,
+          CustomStageTypelitiko.Pause
+        };        
+
+        if (_obj.AllowSendToRework.GetValueOrDefault())
+          allowedValues.Remove(CustomStageTypelitiko.Pause);
+        
+        return query.Where(q => allowedValues.Contains(q));
+      }      
+      #endregion
+
+      #region Контроль возврата
+      if (_obj.StageType == StageType.CheckReturn)
+      {
+        var allowedValues = new List<Enumeration>
+        {
+          CustomStageTypelitiko.OrigReceivedCon
+        };        
+
+        return query.Where(q => allowedValues.Contains(q));
+      }      
+      #endregion
       
-      return query;
+      // Для всех остальных — недоступны никакие значения
+      return Enumerable.Empty<Enumeration>();
     }
   }
 

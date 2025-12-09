@@ -12,14 +12,40 @@ namespace litiko.NSI.Server
 
     public override void Initializing(Sungero.Domain.ModuleInitializingEventArgs e)
     {
-      // Выдать права на справочники
+      #region Права на справочники
       var allUsers = Roles.AllUsers;
       if (allUsers != null)
       {
         InitializationLogger.Debug("Init: Grant rights on NSIBases to all users.");
         NSI.NSIBases.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
         NSI.NSIBases.AccessRights.Save();
-      }      
+                
+        ResponsibilityMatrices.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
+        ResponsibilityMatrices.AccessRights.Save();
+                
+        ContractsVsPaymentDocs.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
+        ContractsVsPaymentDocs.AccessRights.Save();
+                
+        TaxRates.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
+        TaxRates.AccessRights.Save();
+        
+        FrequencyOfPayments.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
+        FrequencyOfPayments.AccessRights.Save();
+        
+        CurrencyRates.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
+        CurrencyRates.AccessRights.Save();
+
+        AddressTypes.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
+        AddressTypes.AccessRights.Save();
+      }
+
+      var roleContractsManagers = Roles.GetAll().FirstOrDefault(r => r.Sid == ContractsEskhata.PublicConstants.Module.RoleGuid.ContractsManagers);
+      if (roleContractsManagers != null)
+      {
+        AddressTypes.AccessRights.Grant(roleContractsManagers, DefaultAccessRightsTypes.FullAccess);
+        AddressTypes.AccessRights.Save();        
+      }
+      #endregion      
     }
   }
 }

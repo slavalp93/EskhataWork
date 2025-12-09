@@ -51,6 +51,19 @@
           "RowNumber": 0,
           "RowSpan": 1,
           "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "36cbb20e-7a43-4798-a708-4b708c628a91",
+          "Name": "ExchangeDocument",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "02880bf9-6c37-48d4-9791-847c3ccb050d",
+          "PropertyGuid": "0c995c8f-942f-44b6-9dfd-900ff575830e",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": []
         }
       ]
     }
@@ -60,12 +73,14 @@
   ],
   "HideFromCreationArea": true,
   "HideFromNavigationEditorCreationArea": true,
+  "IconName": "ExchangeQueue.ico",
   "IconResourcesKeys": [],
   "IntegrationServiceName": "IntegrationExchangeQueue",
   "OperationsClass": "",
   "Overridden": [
     "HideFromNavigationEditorCreationArea",
-    "HideFromCreationArea"
+    "HideFromCreationArea",
+    "IconName"
   ],
   "Properties": [
     {

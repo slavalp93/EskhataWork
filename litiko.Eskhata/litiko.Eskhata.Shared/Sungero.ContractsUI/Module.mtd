@@ -1,0 +1,197 @@
+{
+  "$type": "Sungero.Metadata.LayerModuleMetadata, Sungero.Metadata",
+  "NameGuid": "cb41f564-72b6-4f6f-91a3-8b9ac4323094",
+  "Name": "ContractsUI",
+  "AssociatedGuid": "78d05f91-7585-42b9-addc-5b14478d4680",
+  "AsyncHandlers": [],
+  "BaseGuid": "3c8b7d3a-187d-4445-8a8c-1d00ece44556",
+  "ClientBaseAssemblyName": "litiko.Eskhata.ClientBase",
+  "ClientBaseNamespace": "litiko.Eskhata.Module.ContractsUI.ClientBase",
+  "Code": "ContrUI",
+  "CompanyCode": "Sungero",
+  "Cover": {
+    "NameGuid": "e760d7e0-cecb-4289-8e26-9071ecbdae96",
+    "Actions": [
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "17964aa7-54bd-4dda-95ee-14ee5647d8e6",
+        "Name": "PaymentRegionlitiko",
+        "EntityTypeId": "8586403e-a068-4c8a-b153-c6a168578e24",
+        "GroupId": "ed4c55bf-aeea-46b2-ac7f-b1000bcf2423",
+        "PreviousItemGuid": "eb33a580-be00-4b6c-af62-08c48126486f"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "1cb2641b-ccf1-4ed5-bdde-3a5be7c2ad40",
+        "Name": "ImportCounterpartieslitiko",
+        "FunctionName": "ImportCounterparties",
+        "GroupId": "136b5b7b-053a-4ca1-8f05-79af1fc2dffb",
+        "PreviousItemGuid": "e7eaa9ed-7c42-42f1-a42f-8a79c502e4ee"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "4396628c-e95a-488d-8cd9-91a9ebf4d46d",
+        "Name": "ContractStatementListlitiko",
+        "EntityTypeId": "5c156641-2ca6-4687-8c1a-2f056a947add",
+        "GroupId": "9f8dc361-f84c-4dd0-b35f-2f714833dcec"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "498c4b32-dd8e-447b-8603-dcbddd37c107",
+        "Name": "ContractsVsPaymentDoclitiko",
+        "EntityTypeId": "6f5b0bf5-4044-4efe-a948-80141662ec84",
+        "GroupId": "ed4c55bf-aeea-46b2-ac7f-b1000bcf2423",
+        "PreviousItemGuid": "a9491432-c831-40d5-900d-89aa111af7ad"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "a9491432-c831-40d5-900d-89aa111af7ad",
+        "Name": "ResponsibilityMatrixlitiko",
+        "EntityTypeId": "4636a00a-7ace-4bf0-93f5-8a74240a0ad7",
+        "GroupId": "ed4c55bf-aeea-46b2-ac7f-b1000bcf2423",
+        "PreviousItemGuid": "abdff18b-f34c-4237-b145-d2417aa5d5aa"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "bf454207-748e-4afb-98d1-de3a1186093d",
+        "Name": "RegionsOfRentallitiko",
+        "EntityTypeId": "c540a83c-c37a-4053-a817-1f52f801fa06",
+        "GroupId": "ed4c55bf-aeea-46b2-ac7f-b1000bcf2423",
+        "PreviousItemGuid": "17964aa7-54bd-4dda-95ee-14ee5647d8e6"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "e7eaa9ed-7c42-42f1-a42f-8a79c502e4ee",
+        "Name": "Importlitiko",
+        "FunctionName": "ImportContractsFromUI",
+        "GroupId": "136b5b7b-053a-4ca1-8f05-79af1fc2dffb",
+        "PreviousItemGuid": "1f58bc0f-bdbf-42db-b4bc-d75e41275793"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "eb33a580-be00-4b6c-af62-08c48126486f",
+        "Name": "FrequencyOfPaymentlitiko",
+        "EntityTypeId": "e5095b15-da6f-41c2-a451-81aac76232ae",
+        "GroupId": "ed4c55bf-aeea-46b2-ac7f-b1000bcf2423",
+        "PreviousItemGuid": "ec37f093-a38f-40f6-900b-70852b0bf91c"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "ec37f093-a38f-40f6-900b-70852b0bf91c",
+        "Name": "TaxRatelitiko",
+        "EntityTypeId": "994ce51a-6661-4176-951f-2000120cb252",
+        "GroupId": "ed4c55bf-aeea-46b2-ac7f-b1000bcf2423",
+        "PreviousItemGuid": "498c4b32-dd8e-447b-8603-dcbddd37c107"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "fc16c357-80b3-40bf-953e-0901cb7555fe",
+        "Name": "DeleteContractslitiko",
+        "FunctionName": "DeleteByKeyword",
+        "GroupId": "136b5b7b-053a-4ca1-8f05-79af1fc2dffb",
+        "PreviousItemGuid": "1cb2641b-ccf1-4ed5-bdde-3a5be7c2ad40"
+      }
+    ],
+    "Groups": [
+      {
+        "NameGuid": "9617fde5-c46a-4c84-9f69-4ae3c6fa12db",
+        "Name": "Invoices",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconInvoices_9617fde5c46a4c849f694ae3c6fa12db.png",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "PreviousItemGuid"
+        ],
+        "PreviousItemGuid": "ed4c55bf-aeea-46b2-ac7f-b1000bcf2423",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02",
+        "Versions": []
+      },
+      {
+        "NameGuid": "3f655ea9-b12d-427d-97de-528d9966cab4",
+        "Name": "Search",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconSearch_3f655ea9b12d427d97de528d9966cab4.png",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "PreviousItemGuid"
+        ],
+        "PreviousItemGuid": "9617fde5-c46a-4c84-9f69-4ae3c6fa12db",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02",
+        "Versions": []
+      },
+      {
+        "NameGuid": "9f8dc361-f84c-4dd0-b35f-2f714833dcec",
+        "Name": "ContractStatementslitiko",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconContractStatementslitiko_9f8dc361f84c4dd0b35f2f714833dcec.png",
+        "PreviousItemGuid": "3f655ea9-b12d-427d-97de-528d9966cab4",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02"
+      },
+      {
+        "NameGuid": "aff028e8-2519-4dcb-a8ab-36cd0b777a17",
+        "Name": "PowersOfAttorney",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconPowersOfAttorney_aff028e825194dcba8ab36cd0b777a17.png",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "PreviousItemGuid"
+        ],
+        "PreviousItemGuid": "9f8dc361-f84c-4dd0-b35f-2f714833dcec",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02"
+      },
+      {
+        "NameGuid": "7ed9b820-fce5-4c81-ac89-8a5859ce989d",
+        "Name": "Group",
+        "BackgroundPosition": "Stretch",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "PreviousItemGuid"
+        ],
+        "PreviousItemGuid": "aff028e8-2519-4dcb-a8ab-36cd0b777a17",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02"
+      },
+      {
+        "NameGuid": "74a83232-2ab3-4786-b5d7-90dd4c6809b4",
+        "Name": "Control",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconControl_74a832322ab34786b5d790dd4c6809b4.png",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "PreviousItemGuid"
+        ],
+        "PreviousItemGuid": "7ed9b820-fce5-4c81-ac89-8a5859ce989d",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02",
+        "Versions": []
+      }
+    ],
+    "IsAncestorMetadata": true,
+    "Overridden": [
+      "Actions",
+      "Groups"
+    ],
+    "Tabs": [],
+    "Versions": []
+  },
+  "ExplorerTreeOrder": [],
+  "IconResourcesKeys": [],
+  "Importance": "High",
+  "IsLicensed": true,
+  "LayeredFromGuid": "3c8b7d3a-187d-4445-8a8c-1d00ece44556",
+  "PublicStructures": [],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "litiko.Eskhata.Module.ContractsUI",
+  "ResourcesKeys": [],
+  "SpecialFolders": [],
+  "Version": "4.8.138.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "LayerModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    }
+  ]
+}

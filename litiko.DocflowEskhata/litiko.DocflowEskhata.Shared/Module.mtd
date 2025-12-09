@@ -131,6 +131,21 @@
       "NameGuid": "a797a8de-93bf-47ea-81e1-d1aec50478de",
       "Name": "Drawing",
       "Scope": "Both"
+    },
+    {
+      "NameGuid": "0f469fe9-b6e3-429f-be4b-67219e7db73f",
+      "Name": "NewtonsoftJSON",
+      "Scope": "Both"
+    },
+    {
+      "NameGuid": "d3422580-b228-4130-b888-f76c9abe0a3d",
+      "Name": "DotNetEnv",
+      "Scope": "Both"
+    },
+    {
+      "NameGuid": "9192663b-8fa9-470d-9622-8d067e4d89d9",
+      "Name": "Spra",
+      "Scope": "Both"
     }
   ],
   "Overridden": [
@@ -281,6 +296,27 @@
       "Value": "new System.Guid(\"4a530f9c-593b-4b7e-a8af-2ef8b6d33029\")"
     }
   ],
+  "PublicFunctions": [
+    {
+      "Name": "TranslateList",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "texts",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.String>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        },
+        {
+          "Name": "direction",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    }
+  ],
   "PublicStructures": [],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.DocflowEskhata",
@@ -296,14 +332,16 @@
     "IncomingLettersOrganisations",
     "OutgoingCorrespondence",
     "OutgoingCorrespondenceNBT",
-    "OutgoingPoACorrespondence"
+    "OutgoingPoACorrespondence",
+    "EnvFile",
+    "EnvPathFile"
   ],
   "ServerAssemblyName": "litiko.DocflowEskhata.Server",
   "ServerNamespace": "litiko.DocflowEskhata.Server",
   "SharedAssemblyName": "litiko.DocflowEskhata.Shared",
   "SharedNamespace": "litiko.DocflowEskhata.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.116",
+  "Version": "0.0.1.147",
   "Widgets": [],
   "Versions": [
     {

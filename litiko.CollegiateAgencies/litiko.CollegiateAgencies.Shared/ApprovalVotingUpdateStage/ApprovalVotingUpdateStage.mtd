@@ -27,7 +27,8 @@
   "PublicStructures": [],
   "ResourcesKeys": [
     "MeetingNotFound",
-    "MeetingIsLocked"
+    "MeetingIsLocked",
+    "DesigionsNotFound"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "518c2bfa-aba9-4f5f-8985-e784289b8bba",

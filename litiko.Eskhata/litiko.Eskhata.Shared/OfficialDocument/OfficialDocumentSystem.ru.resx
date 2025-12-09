@@ -82,4 +82,25 @@
   <data name="Control_bd703d698c344d2f96a79b16e199bf48_EmptyText" xml:space="preserve">
     <value />
   </data>
+  <data name="Property_IntegrationStatuslitiko" xml:space="preserve">
+    <value>Статус интеграции</value>
+  </data>
+  <data name="Enum_IntegrationStatuslitiko_Send" xml:space="preserve">
+    <value>Отправлено в ИС</value>
+  </data>
+  <data name="Enum_IntegrationStatuslitiko_Success" xml:space="preserve">
+    <value>Успешно</value>
+  </data>
+  <data name="Action_ExportToABSlitiko" xml:space="preserve">
+    <value>Экспорт в АБС</value>
+  </data>
+  <data name="Action_ExportToABSlitikoHint" xml:space="preserve">
+    <value>Передать информацию о документе в систему АБС</value>
+  </data>
+  <data name="Action_ExportToABSlitikoDescription" xml:space="preserve">
+    <value>Запуск процесса интеграции по документу с системой АБС</value>
+  </data>
+  <data name="Enum_IntegrationStatuslitiko_Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
 </root>
