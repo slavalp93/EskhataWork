@@ -410,7 +410,8 @@
     "VersionCreatedSuccessfully",
     "LastVersionApproved",
     "ExactlyXDigits",
-    "NoMoreThanXCharacters"
+    "NoMoreThanXCharacters",
+    "ExactlyXChar"
   ],
   "ServerAssemblyName": "litiko.Eskhata.Server",
   "ServerNamespace": "litiko.Eskhata.Server",
