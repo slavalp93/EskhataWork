@@ -25,14 +25,6 @@ namespace litiko.Eskhata
         e.AddError(Resources.NoMoreThanXCharactersFormat(20));
     }
 
-    public virtual void SINlitikoValueInput(Sungero.Presentation.StringValueInputEventArgs e)
-    {
-      if (!string.IsNullOrWhiteSpace(e.NewValue) && !Regex.IsMatch(e.NewValue, @"^[0-9]{14}$"))
-      {
-        e.AddError(Resources.ExactlyXDigitsFormat(14));
-      }     
-    }
-
     public virtual void EINlitikoValueInput(Sungero.Presentation.StringValueInputEventArgs e)
     {
       if (!string.IsNullOrWhiteSpace(e.NewValue) && !Regex.IsMatch(e.NewValue, @"^[0-9]{10}$"))

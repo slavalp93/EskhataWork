@@ -248,9 +248,6 @@
       "NameGuid": "ddc32bb7-d474-48c2-b654-a0c096fd44a9",
       "Name": "SINlitiko",
       "Code": "SINlitiko",
-      "HandledEvents": [
-        "ValueInputClient"
-      ],
       "Length": 14,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "018cca87-6ebb-4f55-bdd8-f96c2f2c356b"
