@@ -3342,9 +3342,9 @@ namespace litiko.Integration.Server
             throw AppliedCodeException.Create($"Counterparty node is absent");              
             
           var isId = documentElement.Element("ID")?.Value;
-          var isExternalD = documentElement.Element("ExternalD")?.Value;
-          if (string.IsNullOrEmpty(isId) || string.IsNullOrEmpty(isExternalD))
-            throw AppliedCodeException.Create($"Not all required fields are filled in. ID:{isId}, ExternalD:{isExternalD}");
+          var isExternalID = documentElement.Element("ExternalID")?.Value;
+          if (string.IsNullOrEmpty(isId) || string.IsNullOrEmpty(isExternalID))
+            throw AppliedCodeException.Create($"Not all required fields are filled in. ID:{isId}, ExternalID:{isExternalID}");
           
           long docId;
           if (!System.Int64.TryParse(isId, out docId))
@@ -3366,8 +3366,8 @@ namespace litiko.Integration.Server
           
           try          
           {
-            if (document.ExternalId != isExternalD)          
-              document.ExternalId = isExternalD;
+            if (document.ExternalId != isExternalID)          
+              document.ExternalId = isExternalID;
             
             if (!Equals(document.IntegrationStatuslitiko, litiko.Eskhata.OfficialDocument.IntegrationStatuslitiko.Success))
               document.IntegrationStatuslitiko = litiko.Eskhata.OfficialDocument.IntegrationStatuslitiko.Success;            
@@ -3398,7 +3398,7 @@ namespace litiko.Integration.Server
             throw AppliedCodeException.Create("Counterparty node must have <Company> or <Person> node");
           
           var isConterpartyId = counterpartyDataElement.Element("ID")?.Value;
-          var isConterpartyExternalId = counterpartyDataElement.Element("ExternalD")?.Value;
+          var isConterpartyExternalId = counterpartyDataElement.Element("ExternalID")?.Value;
           long conterpartyId;
           if (!System.Int64.TryParse(isConterpartyId, out conterpartyId))
             throw AppliedCodeException.Create($"Invalid value in <Counterparty><ID> node:{isConterpartyId}");
@@ -3409,7 +3409,7 @@ namespace litiko.Integration.Server
             isForcedLocked = Locks.TryLock(counterparty);
             try
             {
-              counterparty.ExternalId = isExternalD;
+              counterparty.ExternalId = isConterpartyExternalId;
               counterparty.Save();
               Logger.Debug($"Counterparty:{isConterpartyExternalId} updated successfully");                      
             }
