@@ -513,22 +513,9 @@
         },
         {
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
-          "NameGuid": "b5b99e26-5f13-4be5-a180-e129711d4917",
-          "Name": "EINlitikolitiko",
-          "ColumnNumber": 0,
-          "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
-          "ParentGuid": "149a02cc-c0af-4bec-8a1b-8d6c0bab1d81",
-          "PropertyGuid": "018cca87-6ebb-4f55-bdd8-f96c2f2c356b",
-          "RowNumber": 11,
-          "RowSpan": 1,
-          "Settings": []
-        },
-        {
-          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
           "NameGuid": "b4ad7adb-c46e-4dad-91cb-a8e4bedaaf11",
           "Name": "SINlitikolitiko",
-          "ColumnNumber": 1,
+          "ColumnNumber": 0,
           "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
           "ParentGuid": "149a02cc-c0af-4bec-8a1b-8d6c0bab1d81",
