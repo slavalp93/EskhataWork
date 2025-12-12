@@ -2207,7 +2207,7 @@ namespace litiko.Integration.Server
           var addressType = NSI.AddressTypes.GetAll().Where(x => x.ExternalId == isAddressType).FirstOrDefault();
           if (addressType != null && !Equals(company.AddressTypelitiko, addressType))
           {
-            Logger.DebugFormat("Change AddressTypelitiko: current:{0}, new:{1}", company.AddressTypelitiko.Id, addressType.Id);
+            Logger.DebugFormat("Change AddressTypelitiko: current:{0}, new:{1}", company.AddressTypelitiko?.Id, addressType.Id);
             company.AddressTypelitiko = addressType;                    
           }
         }
@@ -2516,7 +2516,7 @@ namespace litiko.Integration.Server
           var addressType = NSI.AddressTypes.GetAll().Where(x => x.ExternalId == isAddressType).FirstOrDefault();
           if (addressType != null && !Equals(bank.AddressTypelitiko, addressType))
           {
-            Logger.DebugFormat("Change AddressTypelitiko: current:{0}, new:{1}", bank.AddressTypelitiko.Id, addressType.Id);
+            Logger.DebugFormat("Change AddressTypelitiko: current:{0}, new:{1}", bank.AddressTypelitiko?.Id, addressType.Id);
             bank.AddressTypelitiko = addressType;                    
           }
         }
@@ -3760,7 +3760,7 @@ namespace litiko.Integration.Server
         var addressType = NSI.AddressTypes.GetAll().Where(x => x.ExternalId == isAddressType).FirstOrDefault();
         if (addressType != null && !Equals(person.AddressTypelitiko, addressType))
         {
-          Logger.DebugFormat("Change AddressTypelitiko: current:{0}, new:{1}", person.AddressTypelitiko.Id, addressType.Id);
+          Logger.DebugFormat("Change AddressTypelitiko: current:{0}, new:{1}", person.AddressTypelitiko?.Id, addressType.Id);
           person.AddressTypelitiko = addressType;                    
         }
       }
