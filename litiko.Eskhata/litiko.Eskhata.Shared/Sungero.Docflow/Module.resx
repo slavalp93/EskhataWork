@@ -83,4 +83,10 @@
   <data name="RegistrationNumberAnchorSymbol" xml:space="preserve">
     <value>⚓№</value>
   </data>
+  <data name="DocflowAccessAllowerdRoleName" xml:space="preserve">
+    <value>Access to the Document Management module</value>
+  </data>
+  <data name="DocflowAccessAllowerdRoleDescription" xml:space="preserve">
+    <value>Members of this role have access to the Docflow module</value>
+  </data>
 </root>

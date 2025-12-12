@@ -24,6 +24,9 @@ namespace litiko.Eskhata.Module.Docflow.Server
           Sungero.Docflow.DocumentKinds.AccessRights.Save();
         }        
       }
+      
+      // Создание роли "Доступ к модулю Документооборот"
+      Sungero.Docflow.PublicInitializationFunctions.Module.CreateRole(Resources.DocflowAccessAllowerdRoleName, Resources.DocflowAccessAllowerdRoleDescription, Constants.Module.RoleGuid.DocflowAccessAllowed);
     }
 
     public override bool IsModuleVisible()
@@ -33,7 +36,9 @@ namespace litiko.Eskhata.Module.Docflow.Server
       // "Ответственные за настройку регистрации"
       return Users.Current.IncludedIn(Sungero.Docflow.PublicConstants.Module.RoleGuid.RegistrationManagersRole) ||        
         // "Администраторы"
-        Users.Current.IncludedIn(Roles.Administrators);      
+        Users.Current.IncludedIn(Roles.Administrators) ||
+        //Доступ к модулю Документооборот
+        Users.Current.IncludedIn(Constants.Module.RoleGuid.DocflowAccessAllowed);
     }
   }
 }

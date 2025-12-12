@@ -65,21 +65,26 @@ namespace litiko.Eskhata
         // Получаем связанные документы в прочих (OtherGroup)
         var relatedDocs = doc.Relations.GetRelatedFrom();  
     
-        var projectSolution = relatedDocs.FirstOrDefault(d => litiko.CollegiateAgencies.Projectsolutions.Is(d));
-        if (projectSolution == null)
+        var projectSolutions = relatedDocs.Where(d => litiko.CollegiateAgencies.Projectsolutions.Is(d));
+        
+        if (!projectSolutions.Any())
         {
           e.AddError(litiko.CollegiateAgencies.Resources.BeforeActionItemProjectSolutionRequired);
           return;
         }
         
-        var officialDoc = Sungero.Docflow.OfficialDocuments.As(projectSolution);
-        
-        var createdTasks = litiko.Eskhata.Module.Docflow.PublicFunctions.Module.Remote.GetApprovalTasksWithCompleted(officialDoc);
-        // Получаем все стартованные задачи согласования по документу
-        
-        if (!createdTasks.Any())
+        foreach (var projectSolution in projectSolutions)
         {
-            e.AddError(litiko.CollegiateAgencies.Resources.ProjectSolutionApprovalMissing);
+          var officialDoc = Sungero.Docflow.OfficialDocuments.As(projectSolution);
+          
+          var createdTasks = litiko.Eskhata.Module.Docflow.PublicFunctions.Module.Remote.GetApprovalTasksWithCompleted(officialDoc);
+          // Получаем все стартованные задачи согласования по документу
+          
+          if (!createdTasks.Any())
+          {
+              e.AddError(litiko.CollegiateAgencies.Resources.ProjectSolutionApprovalMissing);
+              return;
+          }
         }
       }      
       #endregion        

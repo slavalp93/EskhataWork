@@ -79,4 +79,7 @@
   <data name="Enum_Type_MeetingPresentDOP" xml:space="preserve">
     <value>Additional members of the KOU present</value>
   </data>
+  <data name="Enum_Type_ProjectSolutionsAuthors" xml:space="preserve">
+    <value>Authors of project solutions</value>
+  </data>
 </root>
