@@ -4294,8 +4294,8 @@ namespace litiko.Integration.Server
         var rbo              = contractualDocument.RBOlitiko ?? "";
         var accDebtCredit    = contractualDocument.AccDebtCreditlitiko ?? "";
         var accFutureExpense = contractualDocument.AccFutureExpenselitiko ?? "";
-        var paymentRegion    = contractualDocument.PaymentRegionlitiko?.ExternalId ?? "";
-        var paymentTaxRegion = contractualDocument.RegionOfRentallitiko?.ExternalId ?? "";        
+        var paymentRegion    = contractualDocument.RegionOfRentallitiko?.ExternalId ?? "";
+        var paymentTaxRegion = contractualDocument.PaymentRegionlitiko?.ExternalId ?? "";
     
         var matrix = NSI.PublicFunctions.Module.GetResponsibilityMatrix(contractualDocument);
         var responsibleAccountant =
