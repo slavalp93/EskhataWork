@@ -254,7 +254,26 @@ namespace litiko.CollegiateAgencies.Server
         }
       }
       #endregion
-
+      
+      #region Авторы проект решений
+      if (_obj.Type == litiko.CollegiateAgencies.ApprovalRole.Type.ProjectSolutionsAuthors)
+      {
+        if (litiko.Eskhata.Minuteses.Is(document))
+        {
+          var minutes = litiko.Eskhata.Minuteses.As(document);
+          var meeting = litiko.Eskhata.Meetings.As(minutes.Meeting);
+          
+          if (meeting != null)
+          {
+            var projectSolutionsAuthors = meeting.ProjectSolutionslitiko.Select(x => x.ProjectSolution.PreparedBy);
+            
+            if (projectSolutionsAuthors.Any())
+              result.AddRange(projectSolutionsAuthors);
+          }
+        }
+      }
+      #endregion
+      
       return result;
     }
   }

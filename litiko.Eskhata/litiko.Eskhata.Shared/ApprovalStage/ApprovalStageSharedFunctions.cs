@@ -56,6 +56,7 @@ namespace litiko.Eskhata.Shared
         baseRoles.Add(ContractsEskhata.ApprovalRole.Type.RespAccountant);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresentKOU);
         baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.MeetingPresentDOP);
+        baseRoles.Add(CollegiateAgencies.ApprovalRole.Type.ProjectSolutionsAuthors);
       }
       #endregion
       

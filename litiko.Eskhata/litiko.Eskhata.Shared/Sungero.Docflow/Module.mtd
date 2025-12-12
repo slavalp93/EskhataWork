@@ -571,6 +571,17 @@
   ],
   "LayeredFromGuid": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
   "NeedResetAppliedCache": true,
+  "PublicConstants": [
+    {
+      "Name": "DocflowAccessAllowed",
+      "ParentClasses": [
+        "Module",
+        "RoleGuid"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"97EB6298-9867-4020-AFED-5249675AA703\")"
+    }
+  ],
   "PublicFunctions": [
     {
       "Name": "GeneratePublicBodyWithSignatureMarkEskhata",
@@ -655,7 +666,9 @@
     "RegistrationDayAnchorSymbol",
     "RegistrationMonthAnchorSymbol",
     "RegistrationYearAnchorSymbol",
-    "RegistrationNumberAnchorSymbol"
+    "RegistrationNumberAnchorSymbol",
+    "DocflowAccessAllowerdRoleName",
+    "DocflowAccessAllowerdRoleDescription"
   ],
   "SpecialFolders": [],
   "Version": "4.8.138.0",
