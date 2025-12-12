@@ -909,6 +909,9 @@
           "Code": "Postpay"
         }
       ],
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
       "PreviousPropertyGuid": "cfc30ce1-e272-49b8-a20b-928fb8f2b26d"
     },

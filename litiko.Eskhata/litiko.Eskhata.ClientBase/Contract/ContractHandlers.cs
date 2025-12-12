@@ -10,6 +10,11 @@ namespace litiko.Eskhata
   partial class ContractClientHandlers
   {
 
+    public virtual void PaymentMethodlitikoValueInput(Sungero.Presentation.EnumerationValueInputEventArgs e)
+    {
+      Functions.Contract.RefreshDocumentForm(_obj);
+    }
+
     public override void Showing(Sungero.Presentation.FormShowingEventArgs e)
     {
       base.Showing(e);

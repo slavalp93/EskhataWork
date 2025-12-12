@@ -11,6 +11,12 @@ namespace litiko.Eskhata
   partial class CounterpartyClientHandlers
   {
 
+    public virtual void SINlitikoValueInput(Sungero.Presentation.StringValueInputEventArgs e)
+    {
+      if (!string.IsNullOrWhiteSpace(e.NewValue) && e.NewValue.Length != 14)      
+        e.AddError(Resources.ExactlyXCharFormat(14));      
+    }
+
     public virtual void AccountEskhatalitikoValueInput(Sungero.Presentation.StringValueInputEventArgs e)
     {
       var len = !string.IsNullOrWhiteSpace(e.NewValue) ? e.NewValue.Length : 0;
@@ -23,14 +29,6 @@ namespace litiko.Eskhata
       var len = !string.IsNullOrWhiteSpace(e.NewValue) ? e.NewValue.Length : 0;
       if (len > 20)
         e.AddError(Resources.NoMoreThanXCharactersFormat(20));
-    }
-
-    public virtual void SINlitikoValueInput(Sungero.Presentation.StringValueInputEventArgs e)
-    {
-      if (!string.IsNullOrWhiteSpace(e.NewValue) && !Regex.IsMatch(e.NewValue, @"^[0-9]{14}$"))
-      {
-        e.AddError(Resources.ExactlyXDigitsFormat(14));
-      }     
     }
 
     public virtual void EINlitikoValueInput(Sungero.Presentation.StringValueInputEventArgs e)
