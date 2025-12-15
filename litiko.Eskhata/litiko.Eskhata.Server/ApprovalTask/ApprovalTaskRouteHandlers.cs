@@ -11,6 +11,17 @@ namespace litiko.Eskhata.Server
   partial class ApprovalTaskRouteHandlers
   {
 
+    public override void StartBlock5(Sungero.Docflow.Server.ApprovalReworkAssignmentArguments e)
+    {
+      base.StartBlock5(e);
+      
+      if (_obj.ApprovalRule?.Name == Eskhata.PublicConstants.Parties.Counterparty.VerificationApprovalRuleName)
+      {
+        var counterparty = _obj.OtherGroup.All.FirstOrDefault(x => Eskhata.Counterparties.Is(x));
+        if (counterparty != null)
+          e.Block.Subject = "Доработайте: " + Eskhata.Counterparties.As(counterparty).Name;      
+    }
+
     public override void StartBlock31(Sungero.Docflow.Server.ApprovalCheckingAssignmentArguments e)
     {
       base.StartBlock31(e);
@@ -29,6 +40,12 @@ namespace litiko.Eskhata.Server
 
       if (_obj.ApprovalRule?.Name == litiko.CollegiateAgencies.PublicConstants.Module.VotingApprovalRuleName)     
         e.Block.Subject = _obj.Subject.Replace("Голосование:", "Завершено голосование:");
+      
+      if (_obj.ApprovalRule?.Name == Eskhata.PublicConstants.Parties.Counterparty.VerificationApprovalRuleName)
+      {
+        var counterparty = _obj.OtherGroup.All.FirstOrDefault(x => Eskhata.Counterparties.Is(x));
+        if (counterparty != null)
+          e.Block.Subject = "Выполнена проверка контрагента: " + Eskhata.Counterparties.As(counterparty).Name;         
     }
 
     public override void CompleteAssignment31(Sungero.Docflow.IApprovalCheckingAssignment assignment, Sungero.Docflow.Server.ApprovalCheckingAssignmentArguments e)
