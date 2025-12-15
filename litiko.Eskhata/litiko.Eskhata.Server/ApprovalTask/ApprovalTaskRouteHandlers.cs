@@ -19,7 +19,8 @@ namespace litiko.Eskhata.Server
       {
         var counterparty = _obj.OtherGroup.All.FirstOrDefault(x => Eskhata.Counterparties.Is(x));
         if (counterparty != null)
-          e.Block.Subject = "Доработайте: " + Eskhata.Counterparties.As(counterparty).Name;      
+          e.Block.Subject = "Доработайте: " + Eskhata.Counterparties.As(counterparty).Name; 
+      }
     }
 
     public override void StartBlock31(Sungero.Docflow.Server.ApprovalCheckingAssignmentArguments e)
@@ -45,7 +46,8 @@ namespace litiko.Eskhata.Server
       {
         var counterparty = _obj.OtherGroup.All.FirstOrDefault(x => Eskhata.Counterparties.Is(x));
         if (counterparty != null)
-          e.Block.Subject = "Выполнена проверка контрагента: " + Eskhata.Counterparties.As(counterparty).Name;         
+          e.Block.Subject = "Выполнена проверка контрагента: " + Eskhata.Counterparties.As(counterparty).Name;
+      }
     }
 
     public override void CompleteAssignment31(Sungero.Docflow.IApprovalCheckingAssignment assignment, Sungero.Docflow.Server.ApprovalCheckingAssignmentArguments e)
