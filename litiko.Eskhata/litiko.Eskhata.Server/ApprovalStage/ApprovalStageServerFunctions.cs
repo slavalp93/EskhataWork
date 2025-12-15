@@ -48,6 +48,14 @@ namespace litiko.Eskhata.Server
       if (roleMeetingPresentDOP != null)
       {
         recipients.AddRange(litiko.CollegiateAgencies.PublicFunctions.ApprovalRole.Remote.GetRolePerformers(roleMeetingPresentDOP, task));
+      }
+
+      var roleProjectSolutionsAuthors = _obj.ApprovalRoles.Where(x => x.ApprovalRole.Type == litiko.CollegiateAgencies.ApprovalRole.Type.ProjectSolutionsAuthors)
+        .Select(x => litiko.CollegiateAgencies.ApprovalRoles.As(x.ApprovalRole))
+        .Where(x => x != null).SingleOrDefault();
+      if (roleProjectSolutionsAuthors != null)
+      {
+        recipients.AddRange(litiko.CollegiateAgencies.PublicFunctions.ApprovalRole.Remote.GetRolePerformers(roleProjectSolutionsAuthors, task));
       }      
       
       return recipients;

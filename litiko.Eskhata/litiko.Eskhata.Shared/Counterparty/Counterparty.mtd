@@ -321,6 +321,16 @@
       "PreviousPropertyGuid": "ed0d3135-07ef-4aa3-9254-b023a0430423"
     }
   ],
+  "PublicConstants": [
+    {
+      "Name": "VerificationApprovalRuleName",
+      "ParentClasses": [
+        "Counterparty"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"Проверка контрагента\""
+    }
+  ],
   "PublicStructures": [],
   "ResourcesKeys": [
     "InformationAboutCounterpartyIsRequired",

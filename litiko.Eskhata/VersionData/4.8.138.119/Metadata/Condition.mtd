@@ -131,6 +131,11 @@
           "NameGuid": "eb523691-213b-4106-9876-0287e3900288",
           "Name": "OrganForApprov",
           "Code": "OrganForApprov"
+        },
+        {
+          "NameGuid": "e5cccdc7-7be1-4da7-aaf6-775a474c6ffa",
+          "Name": "StandardRespons",
+          "Code": "StandardRespons"
         }
       ],
       "IsAncestorMetadata": true,
@@ -244,7 +249,8 @@
     "IsRecommendatConditionName",
     "IRDTypeConditionName",
     "CannotComputeCondition",
-    "OrganForApprovConditionName"
+    "OrganForApprovConditionName",
+    "StandardResponseConditionName"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "997055c7-5c5b-49af-9ebd-5a00efff04ca",

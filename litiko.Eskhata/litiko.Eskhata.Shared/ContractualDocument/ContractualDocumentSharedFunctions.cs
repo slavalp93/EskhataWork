@@ -219,14 +219,7 @@ namespace litiko.Eskhata.Shared
       }
       else if (method.Value == NSI.TaxRate.IncomeTaxMethod.FromAmount2)
       {
-        // Удерживается от суммы договора за вычетом пенс. взноса        
-        calculatedAmount = Math.Round(
-          (amount.Value - _obj.PennyAmountlitiko.GetValueOrDefault()) * (rate.Value / 100),
-          2);
-      }
-      else if (method.Value == NSI.TaxRate.IncomeTaxMethod.FromAmount3)
-      {
-        // Удерживается от суммы договора с лимитом
+        // Удерживается от суммы договора с лимитом        
         var limit = taxRate.IncomeTaxLimit.GetValueOrDefault();
         if (amount.Value > limit)
           calculatedAmount = Math.Round(
@@ -234,6 +227,13 @@ namespace litiko.Eskhata.Shared
             2);
         else
           calculatedAmount = null;
+      }
+      else if (method.Value == NSI.TaxRate.IncomeTaxMethod.FromAmount3)
+      {
+        // Удерживается от суммы договора за вычетом пенс. взноса
+        calculatedAmount = Math.Round(
+          (amount.Value - _obj.PennyAmountlitiko.GetValueOrDefault()) * (rate.Value / 100),
+          2);
       }
       else
         calculatedAmount = null;
