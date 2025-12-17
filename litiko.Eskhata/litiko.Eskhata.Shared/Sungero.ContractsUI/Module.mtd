@@ -172,7 +172,12 @@
     "Tabs": [],
     "Versions": []
   },
-  "ExplorerTreeOrder": [],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "d394be6d-71ae-4766-8867-388d742a9289",
+      "PreviousItemId": "37d0e546-5b38-4b60-b680-5ab862dcea47"
+    }
+  ],
   "IconResourcesKeys": [],
   "Importance": "High",
   "IsLicensed": true,
@@ -181,7 +186,23 @@
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.Eskhata.Module.ContractsUI",
   "ResourcesKeys": [],
-  "SpecialFolders": [],
+  "SpecialFolders": [
+    {
+      "NameGuid": "d394be6d-71ae-4766-8867-388d742a9289",
+      "Name": "Mappinglitiko",
+      "DefaultContentType": "c584e7b4-d1ff-432e-9c2a-26ddd5cc5775",
+      "DisplayType": "Module",
+      "FilterPanel": {
+        "NameGuid": "74acee19-3ae7-4f14-9c45-9e95822f6ca7",
+        "Name": "FilterPanel",
+        "Controls": [],
+        "IsEnabled": false
+      },
+      "IsShow": true,
+      "Kind": "Computable",
+      "NeedShowMarkedCount": false
+    }
+  ],
   "Version": "4.8.138.0",
   "Widgets": [],
   "Versions": [

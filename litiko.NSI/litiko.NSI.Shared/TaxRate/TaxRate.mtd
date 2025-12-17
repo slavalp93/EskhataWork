@@ -10,6 +10,26 @@
       "GenerateHandler": true,
       "LargeIconName": "Action_ShowDuplicates_large_dea57647f12840eb91d86dd969cae906.png",
       "SmallIconName": "Action_ShowDuplicates_small_dea57647f12840eb91d86dd969cae906.png"
+    },
+    {
+      "NameGuid": "6a1bb8b8-977e-4747-9c6c-d46f73579181",
+      "Name": "Export",
+      "ActionArea": "Collection",
+      "GenerateHandler": true,
+      "IsEmptySelectionAllowed": true,
+      "IsVisibleInDesktopClient": false,
+      "LargeIconName": "Action_Export_large_6a1bb8b8977e47479c6cd46f73579181.png",
+      "SmallIconName": "Action_Export_small_6a1bb8b8977e47479c6cd46f73579181.png"
+    },
+    {
+      "NameGuid": "0b679233-74c8-4690-b4c6-07ba04037ca4",
+      "Name": "Import",
+      "ActionArea": "Collection",
+      "GenerateHandler": true,
+      "IsEmptySelectionAllowed": true,
+      "IsVisibleInDesktopClient": false,
+      "LargeIconName": "Action_Import_large_0b67923374c84690b4c607ba04037ca4.png",
+      "SmallIconName": "Action_Import_small_0b67923374c84690b4c607ba04037ca4.png"
     }
   ],
   "BaseGuid": "04581d26-0780-4cfd-b3cd-c2cafc5798b0",
@@ -493,7 +513,26 @@
     "NameGuid": "99c66256-16c8-455c-a49c-4bb38b9df8e1",
     "Name": "RibbonCollection",
     "Categories": [],
-    "Elements": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "79d389bc-e5c9-4a11-ac30-c658bf965085",
+        "Name": "ExportButton",
+        "ActionGuid": "6a1bb8b8-977e-4747-9c6c-d46f73579181",
+        "ButtonSize": "Large",
+        "Index": 1001,
+        "ParentGuid": "2509cc57-494f-4021-abb8-e011df7384b1"
+      },
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "1f3c9c7c-2f5b-42af-9e75-8c701bf95f9a",
+        "Name": "ImportButton",
+        "ActionGuid": "0b679233-74c8-4690-b4c6-07ba04037ca4",
+        "ButtonSize": "Large",
+        "Index": 1002,
+        "ParentGuid": "2509cc57-494f-4021-abb8-e011df7384b1"
+      }
+    ],
     "Groups": [],
     "IsAncestorMetadata": true,
     "Pages": []
