@@ -94,9 +94,6 @@
   <data name="CoverAction_Importlitiko" xml:space="preserve">
     <value>Миграция договоров</value>
   </data>
-  <data name="CoverAction_Importlitiko" xml:space="preserve">
-    <value>Миграция договоров</value>
-  </data>
   <data name="CoverGroup_ContractStatementslitiko" xml:space="preserve">
     <value>Акты выполненных работ</value>
   </data>
@@ -111,5 +108,8 @@
   </data>
   <data name="CoverAction_ImportCounterpartieslitiko" xml:space="preserve">
     <value>Импорт контрагентов</value>
+  </data>
+  <data name="sf_d394be6d_71ae_4766_8867_388d742a9289" xml:space="preserve">
+    <value>Маппинг</value>
   </data>
 </root>

@@ -160,4 +160,22 @@
   <data name="Enum_PensionContributionMethod_FromAmount" xml:space="preserve">
     <value>Удерживается от суммы договора</value>
   </data>
+  <data name="Action_Export" xml:space="preserve">
+    <value>Экспорт</value>
+  </data>
+  <data name="Action_ExportHint" xml:space="preserve">
+    <value>Экспорт</value>
+  </data>
+  <data name="Action_ExportDescription" xml:space="preserve">
+    <value>Экспорт</value>
+  </data>
+  <data name="Action_Import" xml:space="preserve">
+    <value>Импорт</value>
+  </data>
+  <data name="Action_ImportHint" xml:space="preserve">
+    <value>Импорт</value>
+  </data>
+  <data name="Action_ImportDescription" xml:space="preserve">
+    <value>Импорт</value>
+  </data>
 </root>

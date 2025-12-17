@@ -108,6 +108,10 @@
     {
       "ItemId": "d779302f-b699-498e-b301-4f2c08febe9f",
       "PreviousItemId": "d1374008-9e6e-4f41-82a8-a9852f23ace6"
+    },
+    {
+      "ItemId": "c584e7b4-d1ff-432e-9c2a-26ddd5cc5775",
+      "PreviousItemId": "d779302f-b699-498e-b301-4f2c08febe9f"
     }
   ],
   "HandledEvents": [
@@ -134,6 +138,25 @@
     "IsVisible"
   ],
   "PublicFunctions": [
+    {
+      "Name": "AddToMapping",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "entityType",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "objIds",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Int64>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
     {
       "Name": "GetContractsVsPaymentDoc",
       "Parameters": [
@@ -164,7 +187,37 @@
       "ReturnTypeFullName": "litiko.NSI.IResponsibilityMatrix, Sungero.Domain.Interfaces"
     }
   ],
-  "PublicStructures": [],
+  "PublicStructures": [
+    {
+      "Name": "ResultImportXml",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "TotalCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "ImportedCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "ChangedCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "SkippedCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "Errors",
+          "IsList": true,
+          "IsNullable": true,
+          "TypeFullName": "global::System.Collections.Generic.List<global::System.String>"
+        }
+      ],
+      "StructureNamespace": "litiko.NSI.Structures.Module"
+    }
+  ],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.NSI",
   "ResourcesKeys": [
