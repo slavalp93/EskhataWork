@@ -12,6 +12,11 @@ namespace litiko.Eskhata
 
     public virtual void PaymentMethodlitikoValueInput(Sungero.Presentation.EnumerationValueInputEventArgs e)
     {
+      if (e.NewValue == Eskhata.Contract.PaymentMethodlitiko.Postpay)
+        _obj.AccFutureExpenselitiko = null;
+      if (e.NewValue == Eskhata.Contract.PaymentMethodlitiko.Prepayment)
+        _obj.AccDebtCreditlitiko = null;
+      
       Functions.Contract.RefreshDocumentForm(_obj);
     }
 

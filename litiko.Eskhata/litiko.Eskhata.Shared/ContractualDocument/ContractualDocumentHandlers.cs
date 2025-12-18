@@ -10,6 +10,13 @@ namespace litiko.Eskhata
   partial class ContractualDocumentSharedHandlers
   {
 
+    public override void DocumentKindChanged(Sungero.Docflow.Shared.OfficialDocumentDocumentKindChangedEventArgs e)
+    {
+      base.DocumentKindChanged(e);
+      
+      _obj.IsIndividualPaymentlitiko = People.Is(_obj.Counterparty) && e.NewValue?.Name != "Аренда";
+    }
+
     public virtual void FSZNAmountlitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
     {
       Functions.ContractualDocument.FillAmountOfExpenses(_obj, _obj.Counterparty, _obj.TotalAmount, _obj.VatAmount, e.NewValue);
@@ -107,7 +114,7 @@ namespace litiko.Eskhata
       var counterprty = litiko.Eskhata.Counterparties.As(e.NewValue);
       
       _obj.IsVATlitiko = counterprty?.VATPayerlitiko;
-      _obj.IsIndividualPaymentlitiko = People.Is(counterprty);
+      _obj.IsIndividualPaymentlitiko = People.Is(counterprty) && _obj.DocumentKind?.Name != "Аренда";
       Functions.ContractualDocument.FillAmountOfExpenses(_obj, e.NewValue, _obj.TotalAmount, _obj.VatAmount, _obj.FSZNAmountlitiko);
     }
 

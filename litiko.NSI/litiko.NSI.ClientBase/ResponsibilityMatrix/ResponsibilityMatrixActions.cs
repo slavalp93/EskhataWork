@@ -7,8 +7,35 @@ using litiko.NSI.ResponsibilityMatrix;
 
 namespace litiko.NSI.Client
 {
+  internal static class ResponsibilityMatrixStaticActions
+  {
+
+    public static bool CanExport(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return Users.Current.IncludedIn(Roles.Administrators);
+    }
+
+    public static void Export(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      var zip = NSI.Functions.Module.Remote.ExportResponsibilityMatrix();
+      zip.Export();      
+    }
+
+    public static bool CanImport(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return Users.Current.IncludedIn(Roles.Administrators);
+    }
+
+    public static void Import(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      
+    }
+  }
+
   partial class ResponsibilityMatrixActions
   {
+
+
     public virtual void ShowDuplicates(Sungero.Domain.Client.ExecuteActionArgs e)
     {      
       var duplicates = Functions.ResponsibilityMatrix.Remote.GetDuplicates(_obj);
