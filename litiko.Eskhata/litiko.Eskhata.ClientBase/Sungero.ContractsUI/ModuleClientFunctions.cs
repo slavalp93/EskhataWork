@@ -115,11 +115,13 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
         
         sb.AppendLine($"✅ Успешно создано: {result.ImportedCount}");
         sb.AppendLine($"♻️ Найдено дублей: {totalDuplicates}");
+        sb.AppendLine($"❌ Ошибок: {result.Errors.Count}");
 
-        if (result.Errors != null && result.Errors.Any())
+        if (result.Errors.Any())
         {
-          sb.AppendLine();
-          sb.AppendLine($"⚠️ Ошибок: {result.Errors.Count}");
+          sb.AppendLine("\nСписок ошибок:");
+          foreach(var err in result.Errors)
+            sb.AppendLine("- " + err);
         }
         else
         {
@@ -162,8 +164,8 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
         
         if (result.Errors.Any())
         {
-          sb.AppendLine("\nСписок ошибок (первые 10):");
-          foreach(var err in result.Errors.Take(10))
+          sb.AppendLine("\nСписок ошибок:");
+          foreach(var err in result.Errors)
             sb.AppendLine("- " + err);
         }
 
