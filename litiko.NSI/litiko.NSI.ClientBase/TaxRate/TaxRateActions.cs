@@ -28,7 +28,7 @@ namespace litiko.NSI.Client
 
     public static void Import(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      
+      Functions.Module.ImportClientAction(Constants.Module.ImportEntityTypes.TaxRate);
     }
   }
 
