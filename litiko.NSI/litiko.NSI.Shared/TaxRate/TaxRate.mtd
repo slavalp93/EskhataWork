@@ -29,6 +29,7 @@
       "IsEmptySelectionAllowed": true,
       "IsVisibleInDesktopClient": false,
       "LargeIconName": "Action_Import_large_0b67923374c84690b4c607ba04037ca4.png",
+      "NeedRefreshCollectionAfterExecute": true,
       "SmallIconName": "Action_Import_small_0b67923374c84690b4c607ba04037ca4.png"
     }
   ],
