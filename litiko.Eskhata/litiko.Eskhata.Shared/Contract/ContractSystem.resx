@@ -194,10 +194,10 @@
     <value />
   </data>
   <data name="Property_PaymentRegionlitiko" xml:space="preserve">
-    <value>Region for rental tax</value>
+    <value>Region for tax payment</value>
   </data>
   <data name="Property_RegionOfRentallitiko" xml:space="preserve">
-    <value>Region for tax payment</value>
+    <value>Region for rental tax</value>
   </data>
   <data name="Property_FrequencyExpenseslitiko" xml:space="preserve">
     <value>Frequency of allocation to expenses</value>

@@ -76,19 +76,19 @@
   <data name="CoverAction_FrequencyOfPaymentlitiko" xml:space="preserve">
     <value>Периодичности оплаты</value>
   </data>
-  <data name="CoverAction_PaymentRegionlitiko" xml:space="preserve">
+  <data name="CoverAction_RegionsOfRentallitiko" xml:space="preserve">
     <value>Регионы для налога по арендам</value>
   </data>
-  <data name="CoverAction_RegionsOfRentallitiko" xml:space="preserve">
+  <data name="CoverAction_PaymentRegionslitiko" xml:space="preserve">
     <value>Регионы для оплаты налога</value>
   </data>
   <data name="CoverDescription_FrequencyOfPaymentlitiko" xml:space="preserve">
     <value>Периодичности оплаты по договорам</value>
   </data>
-  <data name="CoverDescription_PaymentRegionlitiko" xml:space="preserve">
+  <data name="CoverDescription_RegionsOfRentallitiko" xml:space="preserve">
     <value>Справочник регионов для налога по арендам</value>
   </data>
-  <data name="CoverDescription_RegionsOfRentallitiko" xml:space="preserve">
+  <data name="CoverDescription_PaymentRegionslitiko" xml:space="preserve">
     <value>Справочник регионов для оплаты налога.</value>
   </data>
   <data name="CoverAction_Importlitiko" xml:space="preserve">

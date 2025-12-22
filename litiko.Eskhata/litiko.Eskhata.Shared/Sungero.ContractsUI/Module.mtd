@@ -15,8 +15,8 @@
       {
         "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
         "NameGuid": "17964aa7-54bd-4dda-95ee-14ee5647d8e6",
-        "Name": "PaymentRegionlitiko",
-        "EntityTypeId": "8586403e-a068-4c8a-b153-c6a168578e24",
+        "Name": "RegionsOfRentallitiko",
+        "EntityTypeId": "c540a83c-c37a-4053-a817-1f52f801fa06",
         "GroupId": "ed4c55bf-aeea-46b2-ac7f-b1000bcf2423",
         "PreviousItemGuid": "eb33a580-be00-4b6c-af62-08c48126486f"
       },
@@ -54,8 +54,8 @@
       {
         "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
         "NameGuid": "bf454207-748e-4afb-98d1-de3a1186093d",
-        "Name": "RegionsOfRentallitiko",
-        "EntityTypeId": "c540a83c-c37a-4053-a817-1f52f801fa06",
+        "Name": "PaymentRegionslitiko",
+        "EntityTypeId": "8586403e-a068-4c8a-b153-c6a168578e24",
         "GroupId": "ed4c55bf-aeea-46b2-ac7f-b1000bcf2423",
         "PreviousItemGuid": "17964aa7-54bd-4dda-95ee-14ee5647d8e6"
       },

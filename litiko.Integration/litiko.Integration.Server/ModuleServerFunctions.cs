@@ -2732,7 +2732,7 @@ namespace litiko.Integration.Server
     }
     
     /// <summary>
-    /// Обработка справочника Регионы оплаты.
+    /// Обработка справочника Регионы для оплаты налога.
     /// </summary>
     /// <param name="dataElements">Информация по регионам оплаты в виде XElement.</param>
     /// <returns>Список ошибок (List<string>)</returns>
@@ -2815,7 +2815,7 @@ namespace litiko.Integration.Server
     }
     
     /// <summary>
-    /// Обработка справочника Регионы объектов аренды.
+    /// Обработка справочника Регион для налога по арендам.
     /// </summary>
     /// <param name="dataElements">Информация по регионам объектов аренды в виде XElement.</param>
     /// <returns>Список ошибок (List<string>)</returns>
