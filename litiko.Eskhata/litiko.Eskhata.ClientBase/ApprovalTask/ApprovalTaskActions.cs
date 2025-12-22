@@ -39,7 +39,15 @@ namespace litiko.Eskhata.Client
         if (meeting != null)        
         {         
           var president = meeting.President;
-          var categoryMembers = meeting.MeetingCategorylitiko?.Members.Where(x => x.Member != null);
+          var categoryMembers = meeting.MeetingCategorylitiko?.Members.Where(x => x.Member != null);          
+          var secretary = meeting.Secretary;
+          var subsSecretaryUsers = new List<IUser>();
+          if (secretary != null)
+          {
+            subsSecretaryUsers = Sungero.CoreEntities.Substitutions.ActiveUsersWhoSubstitute(secretary)
+              .Where(x => x.IsSystem == false)
+              .ToList();
+          }
           foreach (var psDocument in meeting.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null))
           {
             var projectSolution = psDocument.ProjectSolution;                            
@@ -67,7 +75,18 @@ namespace litiko.Eskhata.Client
               {                                
                 if (!projectSolution.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.Change, roleAdditionalBoardMembers))
                   projectSolution.AccessRights.Grant(roleAdditionalBoardMembers, DefaultAccessRightsTypes.Change);             
-              }              
+              }
+              
+              // Замещающие секретаря
+              if (subsSecretaryUsers.Any())
+              {
+                foreach (var user in subsSecretaryUsers)
+                {
+                  if (!projectSolution.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.FullAccess, user))
+                    projectSolution.AccessRights.Grant(user, DefaultAccessRightsTypes.FullAccess);
+                }
+                projectSolution.AccessRights.Save();
+              }
                 
               // Установить усиленный строгий доступ
               if (projectSolution.AccessRights.CanSetStrictMode(AccessRightsStrictMode.Enhanced))
@@ -123,6 +142,14 @@ namespace litiko.Eskhata.Client
         {         
           var president = meeting.President;
           var categoryMembers = meeting.Presentlitiko.Where(x => x.Employee != null);
+          var secretary = meeting.Secretary;
+          var subsSecretaryUsers = new List<IUser>();
+          if (secretary != null)
+          {
+            subsSecretaryUsers = Sungero.CoreEntities.Substitutions.ActiveUsersWhoSubstitute(secretary)
+              .Where(x => x.IsSystem == false)
+              .ToList();
+          }          
           foreach (var psDocument in meeting.ProjectSolutionslitiko.Where(x => x.ProjectSolution != null))
           {
             var projectSolution = psDocument.ProjectSolution;                            
@@ -143,7 +170,25 @@ namespace litiko.Eskhata.Client
                   projectSolution.AccessRights.Grant(member, DefaultAccessRightsTypes.Change);
                   projectSolution.AccessRights.Save();
                 }
-              }                
+              }
+
+              // Замещающие секретаря
+              if (subsSecretaryUsers.Any())
+              {
+                foreach (var user in subsSecretaryUsers)
+                {
+                  if (!projectSolution.AccessRights.IsGrantedDirectly(DefaultAccessRightsTypes.FullAccess, user))
+                    projectSolution.AccessRights.Grant(user, DefaultAccessRightsTypes.FullAccess);
+                }
+                projectSolution.AccessRights.Save();
+              }
+                
+              // Установить усиленный строгий доступ
+              if (projectSolution.AccessRights.StrictMode == AccessRightsStrictMode.None && projectSolution.AccessRights.CanSetStrictMode(AccessRightsStrictMode.Enhanced))
+              {
+                projectSolution.AccessRights.SetStrictMode(AccessRightsStrictMode.Enhanced);
+                projectSolution.AccessRights.Save();
+              }              
             }
 
             // Права на связанные с ПР документы
