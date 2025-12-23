@@ -49,6 +49,19 @@
           "ParameterType": "LongInteger"
         }
       ]
+    },
+    {
+      "NameGuid": "66679bfd-30e0-48a5-b51a-1d1eb9535a9e",
+      "Name": "SetStrictMode",
+      "DelayStrategy": "ExponentialDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "915dbaf4-f10e-442e-99c9-6fdc054d7dc4",
+          "Name": "DocId",
+          "ParameterType": "LongInteger"
+        }
+      ]
     }
   ],
   "ClientAssemblyName": "litiko.CollegiateAgencies.Client",
