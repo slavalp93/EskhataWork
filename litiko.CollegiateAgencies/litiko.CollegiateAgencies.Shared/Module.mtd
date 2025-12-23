@@ -53,6 +53,7 @@
     {
       "NameGuid": "66679bfd-30e0-48a5-b51a-1d1eb9535a9e",
       "Name": "SetStrictMode",
+      "DelayPeriod": 15,
       "DelayStrategy": "ExponentialDelayStrategy",
       "IsHandlerGenerated": true,
       "Parameters": [
@@ -969,7 +970,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.123",
+  "Version": "0.0.1.124",
   "Widgets": [],
   "Versions": [
     {
