@@ -103,10 +103,10 @@ namespace litiko.Eskhata.Module.Contracts.Server
         {
           result.TotalCount++;
           var docXml = documentElements[i];
+          var extId = docXml.Element("ExternalD")?.Value?.Trim();
 
           try
           {
-            var extId = docXml.Element("ExternalD")?.Value?.Trim();
             
             // Валидация ID
             if (string.IsNullOrEmpty(extId))
@@ -141,7 +141,8 @@ namespace litiko.Eskhata.Module.Contracts.Server
           }
           catch (Exception ex)
           {
-            var errMsg = $"Ошибка в документе №{i + 1}: {ex.Message}";
+            var docIdentifier = !string.IsNullOrEmpty(extId) ? $"ExtID: {extId}" : $"№{i + 1}";
+            var errMsg = $"Ошибка в документе {docIdentifier}: {ex.Message}";
             result.Errors.Add(errMsg);
             Logger.Error(errMsg);
           }
@@ -171,56 +172,54 @@ namespace litiko.Eskhata.Module.Contracts.Server
                                              List<litiko.NSI.IFrequencyOfPayment> frequencies,
                                              List<litiko.Eskhata.ICounterparty> counterparties)
     {
-      var extId = docXml.Element("ExternalD")?.Value?.Trim();
+      var externalId = docXml.Element("ExternalD")?.Value?.Trim();
       var name = docXml.Element("Name")?.Value;
       
       // Проверка Контрагента
-      litiko.Eskhata.ICounterparty foundCp = null;
-      var cpId = docXml.Element("CounterpartyExternalId")?.Value?.Trim();
-      if (!string.IsNullOrEmpty(cpId))
+      litiko.Eskhata.ICounterparty foundCounterparty = null;
+      var counterpartyExternalId = docXml.Element("CounterpartyExternalId")?.Value?.Trim();
+      if (!string.IsNullOrEmpty(counterpartyExternalId))
       {
-        foundCp = counterparties.FirstOrDefault(c => c.ExternalId == cpId);
-        if (foundCp == null)
+        foundCounterparty = counterparties.FirstOrDefault(c => c.ExternalId == counterpartyExternalId);
+        if (foundCounterparty == null)
         {
           // КРИТИЧЕСКАЯ ОШИБКА: Нет контрагента -> Нельзя создать договор
-          result.Errors.Add($"Договор {extId}: Контрагент с ID '{cpId}' не найден в системе.");
+          result.Errors.Add($"Договор {externalId}: Контрагент с ID '{counterpartyExternalId}' не найден в системе.");
           return null;
         }
       }
       else
       {
-        result.Errors.Add($"Договор {extId}: Не указан ID контрагента.");
+        result.Errors.Add($"Договор {externalId}: Не указан ID контрагента.");
         return null;
       }
 
-      // Проверка Вида документа
-      litiko.Eskhata.IDocumentKind foundKind = null;
-      var kindId = docXml.Element("DocumentKind")?.Value?.Trim();
-      if (!string.IsNullOrEmpty(kindId))
+      litiko.Eskhata.IDocumentKind foundDocumentKind = null;
+      var documentKindId = docXml.Element("DocumentKind")?.Value?.Trim();
+      if (!string.IsNullOrEmpty(documentKindId))
       {
-        // Внимание: ищем по ExternalIdlitiko, как было у тебя в коде. Убедись, что поле верное.
-        foundKind = docKinds.FirstOrDefault(k => k.ExternalIdlitiko == kindId);
-        if (foundKind == null)
+        foundDocumentKind = docKinds.FirstOrDefault(k => k.ExternalIdlitiko == documentKindId);
+        if (foundDocumentKind == null)
         {
           // КРИТИЧЕСКАЯ ОШИБКА: Нет вида документа -> Нельзя создать договор
-          result.Errors.Add($"Договор {extId}: Вид документа '{kindId}' не найден.");
+          result.Errors.Add($"Договор {externalId}: Вид документа '{documentKindId}' не найден.");
           return null;
         }
       }
       else
       {
         // Если вид обязателен
-        result.Errors.Add($"Договор {extId}: Не указан Вид документа.");
+        result.Errors.Add($"Договор {externalId}: Не указан Вид документа.");
         return null;
       }
 
 
       var contract = Eskhata.Contracts.Create();
-      contract.ExternalId = extId;
+      contract.ExternalId = externalId;
       contract.Name = !string.IsNullOrEmpty(name) ? name : "Без имени";
 
-      if (cpId != null) contract.Counterparty = foundCp;
-      if (foundKind != null) contract.DocumentKind = foundKind;
+      contract.Counterparty = foundCounterparty;
+      contract.DocumentKind = foundDocumentKind;
       
       // Контрагент
       /*cpId = docXml.Element("CounterpartyExternalId")?.Value?.Trim();
@@ -241,55 +240,65 @@ namespace litiko.Eskhata.Module.Contracts.Server
       }*/
 
       // Группа
-      var grpId = docXml.Element("DocumentGroup")?.Value?.Trim();
-      if(!string.IsNullOrEmpty(grpId))
-        contract.DocumentGroup = docGroups.FirstOrDefault(g => g.ExternalIdlitiko == grpId);
+      var documentGroupId = docXml.Element("DocumentGroup")?.Value?.Trim();
+      if(!string.IsNullOrEmpty(documentGroupId))
+        contract.DocumentGroup = docGroups.FirstOrDefault(g => g.ExternalIdlitiko == documentGroupId);
 
       // Валюта
-      var curCode = docXml.Element("Currency")?.Value?.Trim();
-      if (!string.IsNullOrEmpty(curCode))
-        contract.Currency = currencies.FirstOrDefault(c => c.AlphaCode == curCode || c.NumericCode == curCode);
+      var currency = docXml.Element("Currency")?.Value?.Trim();
+      if (!string.IsNullOrEmpty(currency))
+        contract.Currency = currencies.FirstOrDefault(c => c.AlphaCode == currency || c.NumericCode == currency);
 
       // Валюта операции
-      var curOpCode = docXml.Element("OperationCurrency")?.Value?.Trim();
+      var curOpCode = docXml.Element("OperationCurrency")?.Value?.Trim(); // если пусто, то будет TJS логика реализована в АБС при выгрузке
       if (!string.IsNullOrEmpty(curOpCode))
         contract.CurrencyOperationlitiko = currencies.FirstOrDefault(c => c.AlphaCode == curOpCode || c.NumericCode == curOpCode);
 
-      litiko.Eskhata.IEmployee author = null;
-      var authId = docXml.Element("Author")?.Value?.Trim();
-      if (!string.IsNullOrEmpty(authId))
-      {
-        author = employees.FirstOrDefault(e => e.ExternalId == authId);
-        contract.Author = author;
-      }
+      //  Сначала ищем ОТВЕТСТВЕННОГО
+      litiko.Eskhata.IEmployee responsibleObj = null;
+      var empId = docXml.Element("ResponsibleEmployee")?.Value?.Trim();
       
-      var empId = docXml.Element("ResponsibleEmployee")?.Value?.Trim(); ;
       if (!string.IsNullOrEmpty(empId))
       {
-        var responsibleEmployee = employees.FirstOrDefault(e => e.ExternalId == empId);
-        if (responsibleEmployee != null)
-          contract.ResponsibleEmployee = responsibleEmployee;
+        responsibleObj = employees.FirstOrDefault(e => e.ExternalId == empId);
+        if (responsibleObj != null)
+        {
+          contract.ResponsibleEmployee = responsibleObj;
+        }
+      }
+
+      var authId = docXml.Element("Author")?.Value?.Trim();
+
+      if (!string.IsNullOrEmpty(authId))
+      {
+        var authorObj = employees.FirstOrDefault(e => e.ExternalId == authId);
+        if (authorObj != null)
+        {
+          contract.Author = authorObj;
+        }
       }
       else
       {
-        if (author != null)
-          contract.ResponsibleEmployee = author;
+        if (responsibleObj != null)
+        {
+          contract.Author = responsibleObj;
+        }
       }
-
+      
       // Подразделение
-      var depId = docXml.Element("Department")?.Value?.Trim();
-      if(!string.IsNullOrEmpty(depId))
-        contract.Department = departments.FirstOrDefault(d => d.ExternalId == depId);
+      var department = docXml.Element("Department")?.Value?.Trim();
+      if(!string.IsNullOrEmpty(department))
+        contract.Department = departments.FirstOrDefault(d => d.ExternalId == department);
 
       // Подписант
-      var signId = docXml.Element("CounterpartySignatory")?.Value?.Trim();
-      if(!string.IsNullOrEmpty(signId))
-        contract.CounterpartySignatory = contacts.FirstOrDefault(c => c.ExternalIdlitiko == signId);
+      var counterpartySignatory = docXml.Element("CounterpartySignatory")?.Value?.Trim();
+      if(!string.IsNullOrEmpty(counterpartySignatory))
+        contract.CounterpartySignatory = contacts.FirstOrDefault(c => c.ExternalIdlitiko == counterpartySignatory);
       
       // Регионы
-      var payRegId = docXml.Element("PaymentRegion")?.Value?.Trim();
-      if (!string.IsNullOrEmpty(payRegId))
-        contract.PaymentRegionlitiko = payRegions.FirstOrDefault(r => r.ExternalId == payRegId || r.Code == payRegId);
+      var paymentRegion = docXml.Element("PaymentRegion")?.Value?.Trim();
+      if (!string.IsNullOrEmpty(paymentRegion))
+        contract.PaymentRegionlitiko = payRegions.FirstOrDefault(r => r.ExternalId == paymentRegion || r.Code == paymentRegion);
       
       var rentRegId = docXml.Element("PaymentTaxRegion")?.Value?.Trim();
       if (!string.IsNullOrEmpty(rentRegId))
@@ -304,8 +313,8 @@ namespace litiko.Eskhata.Module.Contracts.Server
       contract.Subject = docXml.Element("Subject")?.Value;
       contract.RBOlitiko = docXml.Element("RBO")?.Value;
       contract.ReasonForChangelitiko = docXml.Element("ChangeReason")?.Value;
-      contract.AccDebtCreditlitiko = docXml.Element("AccountDebtCredt")?.Value;
-      contract.AccFutureExpenselitiko = docXml.Element("AccountFutureExpense")?.Value;
+
+      // contract.CorrAcc это поле берется из карточки контрагента
       contract.Note = docXml.Element("Note")?.Value;
       contract.RegistrationNumber = docXml.Element("RegistrationNumber")?.Value;
 
@@ -326,50 +335,107 @@ namespace litiko.Eskhata.Module.Contracts.Server
       contract.ValidTill = TryParseDate(docXml.Element("ValidTill")?.Value);
       contract.RegistrationDate = TryParseDate(docXml.Element("RegistrationDate")?.Value);
 
-      // Enums (Перечисления)
-      var payMethod = docXml.Element("PaymentMethod")?.Value?.Trim();
-      if (payMethod == "Предоплата") contract.PaymentMethodlitiko = litiko.Eskhata.Contract.PaymentMethodlitiko.Prepayment;
-      else if (payMethod == "Постоплата") contract.PaymentMethodlitiko = litiko.Eskhata.Contract.PaymentMethodlitiko.Postpay;
-
-      // =================================================================================
-      // ЛОГГЕР ДАННЫХ (БЕЗОПАСНЫЙ)
-      // =================================================================================
-      Logger.Debug($"Prepared Contract data: " +
-                   $"ID: {contract.Id} " +
-                   $"ExtID: {contract.ExternalId} " +
-                   $"Name: {contract.Name} " +
-                   $"Subject: {contract.Subject} " +
-                   // Ссылочные типы проверяем на null
-                   $"Counterparty: {(contract.Counterparty != null ? contract.Counterparty.Name : "null")} " +
-                   $"Kind: {(contract.DocumentKind != null ? contract.DocumentKind.Name : "null")} " +
-                   $"Group: {(contract.DocumentGroup != null ? contract.DocumentGroup.Name : "null")} " +
-                   $"Currency: {(contract.Currency != null ? contract.Currency.AlphaCode : "null")} " +
-                   $"OpCurrency: {(contract.CurrencyOperationlitiko != null ? contract.CurrencyOperationlitiko.AlphaCode : "null")} " +
-                   $"Responsible: {(contract.ResponsibleEmployee != null ? contract.ResponsibleEmployee.Name : "null")} " +
-                   $"Author: {(contract.Author != null ? contract.Author.Name : "null")} " +
-                   $"Department: {(contract.Department != null ? contract.Department.Name : "null")} " +
-                   $"Signatory: {(contract.CounterpartySignatory != null ? contract.CounterpartySignatory.Name : "null")} " +
-                   $"PayRegion: {(contract.PaymentRegionlitiko != null ? contract.PaymentRegionlitiko.Name : "null")} " +
-                   $"RentRegion: {(contract.RegionOfRentallitiko != null ? contract.RegionOfRentallitiko.Name : "null")} " +
-                   $"Frequency: {(contract.FrequencyOfPaymentlitiko != null ? contract.FrequencyOfPaymentlitiko.Name : "null")} " +
-                   // Числа и суммы
-                   $"TotalAmount: {contract.TotalAmountlitiko} " +
-                   $"VATAmount: {contract.VatAmount} " +
-                   $"VATRate: {contract.VatRatelitiko} " +
-                   // Даты (форматируем)
-                   $"ValidFrom: {contract.ValidFrom:dd.MM.yyyy} " +
-                   $"ValidTill: {contract.ValidTill:dd.MM.yyyy} " +
-                   $"RegDate: {contract.RegistrationDate:dd.MM.yyyy} " +
-                   $"RegNum: {contract.RegistrationNumber} " +
-                   // Булевы и Enum
-                   $"IsVAT: {contract.IsVATlitiko} " +
-                   $"IsPartial: {contract.IsPartialPaymentlitiko} " +
-                   $"PayMethod: {contract.PaymentMethodlitiko} " +
-                   $"RBO: {contract.RBOlitiko} " +
-                   $"Note: {contract.Note}");
-
+      var rawAccount = docXml.Element("AccountDebtCredt")?.Value?.Trim();
+      var xmlPayMethod = docXml.Element("PaymentMethod")?.Value?.Trim();
       
+      if (!string.IsNullOrEmpty(rawAccount))
+      {
+        if (rawAccount.StartsWith("17"))
+        {
+          contract.PaymentMethodlitiko = litiko.Eskhata.Contract.PaymentMethodlitiko.Prepayment;
+        }
+        else if (rawAccount.StartsWith("26"))
+        {
+          contract.PaymentMethodlitiko = litiko.Eskhata.Contract.PaymentMethodlitiko.Postpay;
+        }
+        else
+        {
+          if (xmlPayMethod == "Предоплата") contract.PaymentMethodlitiko = litiko.Eskhata.Contract.PaymentMethodlitiko.Prepayment;
+          else if (xmlPayMethod == "Постоплата") contract.PaymentMethodlitiko = litiko.Eskhata.Contract.PaymentMethodlitiko.Postpay;
+        }
+      }
+      else
+      {
+        if (xmlPayMethod == "Предоплата") contract.PaymentMethodlitiko = litiko.Eskhata.Contract.PaymentMethodlitiko.Prepayment;
+        else if (xmlPayMethod == "Постоплата") contract.PaymentMethodlitiko = litiko.Eskhata.Contract.PaymentMethodlitiko.Postpay;
+      }
+
       contract.Save();
+
+      bool needSecondSave = false;
+
+      if (!string.IsNullOrEmpty(rawAccount))
+      {
+        if (rawAccount.StartsWith("26"))
+        {
+          if (contract.AccDebtCreditlitiko != rawAccount)
+          {
+            contract.AccDebtCreditlitiko = rawAccount;
+            contract.AccFutureExpenselitiko = null;
+            needSecondSave = true;
+          }
+        }
+        else if (rawAccount.StartsWith("17"))
+        {
+          if (contract.AccFutureExpenselitiko != rawAccount)
+          {
+            contract.AccFutureExpenselitiko = rawAccount;
+            contract.AccDebtCreditlitiko = null;
+            needSecondSave = true;
+          }
+        }
+        else
+        {
+          if (contract.AccDebtCreditlitiko != rawAccount)
+          {
+            contract.AccDebtCreditlitiko = rawAccount;
+            needSecondSave = true;
+          }
+        }
+      }
+
+      if (needSecondSave)
+      {
+        Logger.Debug($"Applying account '{rawAccount}' via second save.");
+        contract.Save();
+      }
+
+      Logger.Debug($"Prepared Contract data: " +
+                   $"ID: {contract.Id}| " +
+                   $"ExternalID: {contract.ExternalId}| " +
+                   $"DocumentKind: {contract.DocumentKind}| " +
+                   $"DocumentGroup: {contract.DocumentGroup}| " +
+                   $"Subject: {contract.Subject}| " +
+                   $"Name: {contract.Name}| " +
+                   $"CounterpartySignatory: {contract.CounterpartySignatory}| " +
+                   $"Department: {contract.Department}| " +
+                   $"ResponsibleEmployee: {contract.ResponsibleEmployee}| " +
+                   $"Author: {contract.Author}| " +
+                   $"RBO: {contract.RBOlitiko}| " +
+                   $"ValidFrom: {contract.ValidFrom:dd.MM.yyyy}| " +
+                   $"ValidTill: {contract.ValidTill:dd.MM.yyyy}| " +
+                   $"ChangeReason: {contract.ReasonForChangelitiko}| " +
+                   $"AccountDebtCredt: {contract.AccDebtCreditlitiko}| " +
+                   $"AccountFutureExpense: {contract.AccFutureExpenselitiko}| " +
+                   $"TotalAmount: {contract.TotalAmountlitiko}| " +
+                   $"Currency: {contract.Currency} " +
+                   $"OperationCurrency: {contract.CurrencyOperationlitiko}| " +
+                   $"VATApplicable: {contract.IsVATlitiko}| " +
+                   $"VATRate: {contract.VatRatelitiko}| " +
+                   $"VATAmount: {contract.VatAmount}| " +
+                   $"IncomeTaxRate: {contract.IncomeTaxRatelitiko}| " +
+                   $"PaymentRegion: {contract.PaymentRegionlitiko}| " +
+                   $"PaymentTaxRegion: {contract.RegionOfRentallitiko}| " +
+                   $"PaymentMethod: {contract.PaymentMethodlitiko}| " +
+                   $"PaymentFrequency: {contract.FrequencyOfPaymentlitiko}| " +
+                   $"IsPartialPayment: {contract.IsPartialPaymentlitiko}| " +
+                   $"IsEqual: {contract.IsEqualPaymentlitiko}| " +
+                   $"AmountForPeriod: {contract.AmountForPeriodlitiko}| " +
+                   $"Note: {contract.Note}| " +
+                   $"RegistrationNumber: {contract.RegistrationNumber}| " +
+                   $"RegistrationDate: {contract.RegistrationDate:dd.MM.yyyy}| " +
+                   $"CounterpartyExternalId: {contract.Counterparty}| ");
+      
       return contract;
     }
 

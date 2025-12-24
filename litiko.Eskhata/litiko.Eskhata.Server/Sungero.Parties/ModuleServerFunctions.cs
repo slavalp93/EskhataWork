@@ -114,38 +114,38 @@ namespace litiko.Eskhata.Module.Parties.Server
                     result.TotalCompanies++;
 
                     Logger.Debug($"Created Company with: " +
-                                 $"ID: {company.Id} " +
-                                 $"ExternalID: {company.ExternalId} " +
-                                 $"Name: {company.Name} " +
-                                 $"LegalName: {company.LegalName} " +
-                                 $"INN: {company.TIN} " +
-                                 $"KPP: {company.TRRC} " +
-                                 $"OKPO: {company.NCEO} " +
-                                 $"IName: {company.Inamelitiko} " +
-                                 $"Nonresident: {company.Nonresident} " +
-                                 $"NuRezident: {company.NUNonrezidentlitiko} " +
-                                 $"OKOPF: {(company.OKOPFlitiko != null ? company.OKOPFlitiko.ExternalId : "null")} " +
-                                 $"OKFS: {(company.OKFSlitiko != null ? company.OKFSlitiko.ExternalId : "null")} " +
-                                 $"OKONH: {(company.OKONHlitiko != null ? company.OKONHlitiko.ExternalId : "null")} " +
-                                 $"OKVED: {(company.OKVEDlitiko != null ? company.OKVEDlitiko.ExternalId : "null")} " +
-                                 $"RegNum: {company.RegNumlitiko} " +
-                                 $"Numbers: {company.Numberslitiko} " +
-                                 $"Business: {company.Businesslitiko} " +
-                                 $"EnterpriseType: {(company.EnterpriseTypelitiko != null ? company.EnterpriseTypelitiko.Name : "null")} " +
-                                 $"Country: {(company.Countrylitiko != null ? company.Countrylitiko.Name : "null")} " +
-                                 $"City: {(company.City != null ? company.City.Name : "null")} " +
-                                 $"PostAddress: {company.PostalAddress} " +
-                                 $"LegalAddress: {company.LegalAddress} " +
-                                 $"Street: {company.Streetlitiko} " +
-                                 $"BuildingNumber: {company.HouseNumberlitiko} " +
-                                 $"Phone: {company.Phones} " +
-                                 $"Email: {company.Email} " +
-                                 $"Bank: {company.Bank} " +
-                                 $"WebSite: {company.Homepage} " +
-                                 $"VatPayer: {company.VATPayerlitiko} " +
-                                 $"Reliability: {company.Reliabilitylitiko} " +
-                                 $"CorrAcc: {company.Account} " +
-                                 $"InternalAcc: {company.AccountEskhatalitiko}");
+                                 $"ID: {company.Id}| " +
+                                 $"ExternalID: {company.ExternalId}| " +
+                                 $"Name: {company.Name}| " +
+                                 $"LegalName: {company.LegalName}| " +
+                                 $"INN: {company.TIN}| " +
+                                 $"KPP: {company.TRRC}| " +
+                                 $"OKPO: {company.NCEO}| " +
+                                 $"IName: {company.Inamelitiko}| " +
+                                 $"Nonresident: {company.Nonresident}| " +
+                                 $"NuRezident: {company.NUNonrezidentlitiko}| " +
+                                 $"OKOPF: {(company.OKOPFlitiko != null ? company.OKOPFlitiko.ExternalId : "null")}| " +
+                                 $"OKFS: {(company.OKFSlitiko != null ? company.OKFSlitiko.ExternalId : "null")}| " +
+                                 $"OKONH: {(company.OKONHlitiko != null ? company.OKONHlitiko.ExternalId : "null")}| " +
+                                 $"OKVED: {(company.OKVEDlitiko != null ? company.OKVEDlitiko.ExternalId : "null")}| " +
+                                 $"RegNum: {company.RegNumlitiko}| " +
+                                 $"Numbers: {company.Numberslitiko}| " +
+                                 $"Business: {company.Businesslitiko}| " +
+                                 $"EnterpriseType: {(company.EnterpriseTypelitiko != null ? company.EnterpriseTypelitiko.Name : "null")}| " +
+                                 $"Country: {(company.Countrylitiko != null ? company.Countrylitiko.Name : "null")}| " +
+                                 $"City: {(company.City != null ? company.City.Name : "null")}| " +
+                                 $"PostAddress: {company.PostalAddress}| " +
+                                 $"LegalAddress: {company.LegalAddress}| " +
+                                 $"Street: {company.Streetlitiko}| " +
+                                 $"BuildingNumber: {company.HouseNumberlitiko}| " +
+                                 $"Phone: {company.Phones}| " +
+                                 $"Email: {company.Email}| " +
+                                 $"Bank: {company.Bank}| " +
+                                 $"WebSite: {company.Homepage}| " +
+                                 $"VatPayer: {company.VATPayerlitiko}| " +
+                                 $"Reliability: {company.Reliabilitylitiko}| " +
+                                 $"CorrAcc: {company.Account}| " +
+                                 $"InternalAcc: {company.AccountEskhatalitiko}|");
                     company.Save();
 
                     if (isNew)
@@ -171,41 +171,41 @@ namespace litiko.Eskhata.Module.Parties.Server
                     result.TotalPersons++;
 
                     Logger.Debug($"Created Person with: " +
-                                 $"Id={person.Id}, " +
-                                 $"ExternalID={person.ExternalId}, " +
-                                 $"LastName={person.LastName}, " +
-                                 $"FirstName={person.FirstName}, " +
-                                 $"MiddleName={person.MiddleName}, " +
-                                 $"Nonresident={person.Nonresident}, " +
-                                 $"NuRezident={person.NUNonrezidentlitiko}, " +
-                                 $"IName={person.Inamelitiko}, " +
-                                 $"DatePers={person.DateOfBirth:dd.MM.yyyy}, " +
-                                 $"Sex={person.Sex}, " +
-                                 $"MariageSt={(person.FamilyStatuslitiko != null ? person.FamilyStatuslitiko.Name : "null")}, " +
-                                 $"INN={person.TIN}, " +
-                                 $"IIN={person.SINlitiko}, " +
-                                 $"Country={(person.Citizenship != null ? person.Citizenship.Name : "null")}, " +
-                                 $"DocBirthPlace={person.BirthPlace}, " +
-                                 $"PostAddress={person.PostalAddress}, " +
-                                 $"Email={person.Email}, " +
-                                 $"Bank={person.Bank}," +
-                                 $"Phone={person.Phones}, " +
-                                 $"City={(person.City != null ? person.City.Name : "null")}, " +
-                                 $"Street={person.Streetlitiko}, " +
-                                 $"BuildingNumber={person.HouseNumberlitiko}, " +
-                                 $"WebSite={person.Homepage}, " +
-                                 $"TaxNonResident={person.NUNonrezidentlitiko}, " +
-                                 $"VatPayer={person.VATPayerlitiko}, " +
-                                 $"Reliability={person.Reliabilitylitiko}, " +
-                                 $"CorrAcc={person.Account}, " +
-                                 $"InternalAcc={person.AccountEskhatalitiko}, " +
+                                 $"Id={person.Id}| " +
+                                 $"ExternalID={person.ExternalId}| " +
+                                 $"LastName={person.LastName}| " +
+                                 $"FirstName={person.FirstName}| " +
+                                 $"MiddleName={person.MiddleName}| " +
+                                 $"Nonresident={person.Nonresident}| " +
+                                 $"NuRezident={person.NUNonrezidentlitiko}| " +
+                                 $"IName={person.Inamelitiko}| " +
+                                 $"DatePers={person.DateOfBirth:dd.MM.yyyy}| " +
+                                 $"Sex={person.Sex}| " +
+                                 $"MariageSt={(person.FamilyStatuslitiko != null ? person.FamilyStatuslitiko.Name : "null")}| " +
+                                 $"INN={person.TIN}| " +
+                                 $"IIN={person.SINlitiko}| " +
+                                 $"Country={(person.Citizenship != null ? person.Citizenship.Name : "null")}| " +
+                                 $"DocBirthPlace={person.BirthPlace}| " +
+                                 $"PostAddress={person.PostalAddress}| " +
+                                 $"Email={person.Email}| " +
+                                 $"Bank={person.Bank}|" +
+                                 $"Phone={person.Phones}| " +
+                                 $"City={(person.City != null ? person.City.Name : "null")}| " +
+                                 $"Street={person.Streetlitiko}| " +
+                                 $"BuildingNumber={person.HouseNumberlitiko}| " +
+                                 $"WebSite={person.Homepage}| " +
+                                 $"TaxNonResident={person.NUNonrezidentlitiko}| " +
+                                 $"VatPayer={person.VATPayerlitiko}| " +
+                                 $"Reliability={person.Reliabilitylitiko}| " +
+                                 $"CorrAcc={person.Account}| " +
+                                 $"InternalAcc={person.AccountEskhatalitiko}| " +
                                  $"Identity -> " +
-                                 $"Kind={(person.IdentityKind != null ? person.IdentityKind.Name : "null")}, " +
-                                 $"Num={person.IdentityNumber}, " +
-                                 $"Ser={person.IdentitySeries}, " +
-                                 $"Who={person.IdentityAuthority}, " +
-                                 $"DateBegin={person.IdentityDateOfIssue:dd.MM.yyyy}, " +
-                                 $"DateEnd={person.IdentityExpirationDate:dd.MM.yyyy}");
+                                 $"Kind={(person.IdentityKind != null ? person.IdentityKind.Name : "null")}| " +
+                                 $"Num={person.IdentityNumber}| " +
+                                 $"Ser={person.IdentitySeries}| " +
+                                 $"Who={person.IdentityAuthority}| " +
+                                 $"DateBegin={person.IdentityDateOfIssue:dd.MM.yyyy}| " +
+                                 $"DateEnd={person.IdentityExpirationDate:dd.MM.yyyy}|");
                     
                     person.Save();
                     
