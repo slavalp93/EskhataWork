@@ -10,6 +10,11 @@ namespace litiko.Eskhata
   partial class ContractualDocumentSharedHandlers
   {
 
+    public virtual void PennyAmountlitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
+    {
+      Functions.ContractualDocument.FillAmountToBePaid(_obj, _obj.TotalAmount, _obj.IncomeTaxAmountlitiko, e.NewValue);
+    }
+
     public override void DocumentKindChanged(Sungero.Docflow.Shared.OfficialDocumentDocumentKindChangedEventArgs e)
     {
       base.DocumentKindChanged(e);
@@ -24,7 +29,7 @@ namespace litiko.Eskhata
 
     public virtual void IncomeTaxAmountlitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
     {
-      Functions.ContractualDocument.FillAmountToBePaid(_obj, _obj.TotalAmount, e.NewValue);
+      Functions.ContractualDocument.FillAmountToBePaid(_obj, _obj.TotalAmount, e.NewValue, _obj.PennyAmountlitiko);
     }
 
     public override void VatAmountChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
@@ -84,7 +89,7 @@ namespace litiko.Eskhata
       Functions.ContractualDocument.FillPennyAmount(_obj, e.NewValue, _obj.TaxRatelitiko, _obj.IsIndividualPaymentlitiko);
       Functions.ContractualDocument.FillIncomeTaxAmount(_obj, e.NewValue, _obj.TaxRatelitiko);      
       Functions.ContractualDocument.FillFSZNAmount(_obj, e.NewValue, _obj.TaxRatelitiko, _obj.IsIndividualPaymentlitiko);
-      Functions.ContractualDocument.FillAmountToBePaid(_obj, e.NewValue, _obj.IncomeTaxAmountlitiko);
+      Functions.ContractualDocument.FillAmountToBePaid(_obj, e.NewValue, _obj.IncomeTaxAmountlitiko, _obj.PennyAmountlitiko);
       Functions.ContractualDocument.FillAmountOfExpenses(_obj, _obj.Counterparty, e.NewValue, _obj.VatAmount, _obj.FSZNAmountlitiko);
     }
 

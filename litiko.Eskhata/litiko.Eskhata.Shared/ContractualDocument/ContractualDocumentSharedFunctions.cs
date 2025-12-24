@@ -330,11 +330,17 @@ namespace litiko.Eskhata.Shared
     /// </summary>
     /// <param name="totalAmount">Сумма в нац. валюте</param>
     /// <param name="incomeTaxAmount">Сумма налога на доходы.</param>    
-    public void FillAmountToBePaid(double? totalAmount, double? incomeTaxAmount)
+    public void FillAmountToBePaid(double? totalAmount, double? incomeTaxAmount, double? pennyAmount)
     {            
-      double? calculatedAmount = Math.Round(
+      double? calculatedAmount;
+      if (_obj.DocumentKind?.Name == "Прочие оплаты профессиональных услуг")
+        calculatedAmount = Math.Round(
+          totalAmount.GetValueOrDefault() - incomeTaxAmount.GetValueOrDefault() - pennyAmount.GetValueOrDefault(),
+          2);
+      else
+        calculatedAmount = Math.Round(
           totalAmount.GetValueOrDefault() - incomeTaxAmount.GetValueOrDefault(),
-          2);                  
+          2);
       
       if (!Equals(_obj.AmountToBePaidlitiko, calculatedAmount))
         _obj.AmountToBePaidlitiko = calculatedAmount;

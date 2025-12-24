@@ -9,6 +9,20 @@ namespace litiko.CollegiateAgencies.Server
   public class ModuleAsyncHandlers
   {
     /// <summary>
+    /// Установить усиленный строгий доступ на документ
+    /// </summary>
+    /// <param name="args"></param>
+    public virtual void SetStrictMode(litiko.CollegiateAgencies.Server.AsyncHandlerInvokeArgs.SetStrictModeInvokeArgs args)
+    {      
+      var document = Sungero.Docflow.OfficialDocuments.Get(args.DocId);
+      if (document.AccessRights.StrictMode == AccessRightsStrictMode.None && document.AccessRights.CanSetStrictMode(AccessRightsStrictMode.Enhanced))
+      {
+        document.AccessRights.SetStrictMode(AccessRightsStrictMode.Enhanced);
+        document.AccessRights.Save();
+      }
+    }
+    
+    /// <summary>
     /// Выполнить задание
     /// </summary>
     /// <param name="args"></param>

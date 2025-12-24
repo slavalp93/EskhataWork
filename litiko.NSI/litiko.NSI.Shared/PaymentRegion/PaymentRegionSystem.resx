@@ -59,13 +59,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DisplayName" xml:space="preserve">
-    <value>Region for rental tax</value>
+    <value>Region for tax payment</value>
   </data>
   <data name="AccusativeDisplayName" xml:space="preserve">
-    <value>Region for rental tax</value>
+    <value>Region for tax payment</value>
   </data>
   <data name="CollectionDisplayName" xml:space="preserve">
-    <value>Regions for rental tax</value>
+    <value>Regions for tax payment</value>
   </data>
   <data name="Property_Marker" xml:space="preserve">
     <value>Marker</value>

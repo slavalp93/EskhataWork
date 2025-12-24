@@ -1020,6 +1020,9 @@
       "Name": "PennyAmountlitiko",
       "CanBeSearch": false,
       "Code": "PennyAmountlit",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "IsEnabled": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "6ca8db79-203e-4cbd-861a-c7ae62425372"

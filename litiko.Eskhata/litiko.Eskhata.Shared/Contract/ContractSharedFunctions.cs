@@ -37,8 +37,8 @@ namespace litiko.Eskhata.Shared
       _obj.State.Properties.RBOlitiko.IsVisible = _obj.DocumentGroup?.Name == "Аренда здания (МХБ, филиал, ГО)" && Eskhata.People.Is(_obj.Counterparty);
       _obj.State.Properties.AmountForPeriodlitiko.IsVisible = _obj.IsEqualPaymentlitiko.GetValueOrDefault() || _obj.IsPartialPaymentlitiko.GetValueOrDefault();
       _obj.State.Properties.AmountForPeriodInWordslitiko.IsVisible = _obj.State.Properties.AmountForPeriodlitiko.IsVisible;
-      _obj.State.Properties.RegionOfRentallitiko.IsVisible = _obj.DocumentKind?.Name == "Прочие оплаты профессиональных услуг" && Eskhata.People.Is(_obj.Counterparty);
-      _obj.State.Properties.PaymentRegionlitiko.IsVisible = _obj.DocumentKind?.Name == "Аренда" && Eskhata.People.Is(_obj.Counterparty);
+      _obj.State.Properties.RegionOfRentallitiko.IsVisible = _obj.DocumentKind?.Name == "Аренда" && Eskhata.People.Is(_obj.Counterparty);
+      _obj.State.Properties.PaymentRegionlitiko.IsVisible = _obj.DocumentKind?.Name == "Прочие оплаты профессиональных услуг" && Eskhata.People.Is(_obj.Counterparty);
       _obj.State.Properties.AccDebtCreditlitiko.IsVisible = _obj.PaymentMethodlitiko == Eskhata.Contract.PaymentMethodlitiko.Postpay;
       _obj.State.Properties.AccFutureExpenselitiko.IsVisible = _obj.PaymentMethodlitiko == Eskhata.Contract.PaymentMethodlitiko.Prepayment;
     }

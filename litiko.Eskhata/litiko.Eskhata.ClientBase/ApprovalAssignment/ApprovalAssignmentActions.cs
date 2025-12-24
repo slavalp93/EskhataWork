@@ -112,12 +112,12 @@ namespace litiko.Eskhata.Client
             notFilledFields.Add(contract.Info.Properties.AccFutureExpenselitiko.LocalizedName);
           
           // Регион для оплаты налога
-          if (contract.DocumentKind?.Name == "Прочие оплаты профессиональных услуг" && Eskhata.People.Is(contract.Counterparty) && contract.RegionOfRentallitiko == null)
-            notFilledFields.Add(contract.Info.Properties.RegionOfRentallitiko.LocalizedName);          
+          if (contract.DocumentKind?.Name == "Прочие оплаты профессиональных услуг" && Eskhata.People.Is(contract.Counterparty) && contract.PaymentRegionlitiko == null)
+            notFilledFields.Add(contract.Info.Properties.PaymentRegionlitiko.LocalizedName);          
           
           // Регион для налога по арендам
-          if (contract.DocumentKind?.Name == "Аренда" && Eskhata.People.Is(contract.Counterparty) && contract.PaymentRegionlitiko == null)
-            notFilledFields.Add(contract.Info.Properties.PaymentRegionlitiko.LocalizedName);
+          if (contract.DocumentKind?.Name == "Аренда" && Eskhata.People.Is(contract.Counterparty) && contract.RegionOfRentallitiko == null)
+            notFilledFields.Add(contract.Info.Properties.RegionOfRentallitiko.LocalizedName);
           
           if (notFilledFields.Any())
           {

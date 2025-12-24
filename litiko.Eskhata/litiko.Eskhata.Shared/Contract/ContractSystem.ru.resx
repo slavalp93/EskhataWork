@@ -194,10 +194,10 @@
     <value />
   </data>
   <data name="Property_PaymentRegionlitiko" xml:space="preserve">
-    <value>Регион для налога по арендам</value>
+    <value>Регион для оплаты налога</value>
   </data>
   <data name="Property_RegionOfRentallitiko" xml:space="preserve">
-    <value>Регион для оплаты налога</value>
+    <value>Регион для налога по арендам</value>
   </data>
   <data name="Property_FrequencyExpenseslitiko" xml:space="preserve">
     <value>Периодичность отнесения на расходы </value>
