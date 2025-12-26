@@ -87,6 +87,10 @@ namespace litiko.Eskhata.Module.Parties.Server
           .Where(x => x.ExternalIdlitiko != null && x.ExternalIdlitiko != "")
           .ToDictionary(x => x.ExternalIdlitiko);
 
+        var addressTypeDict = litiko.NSI.AddressTypes.GetAll()
+          .Where(x => x.ExternalId != null && x.ExternalId != "")
+          .ToDictionary(x=>x.ExternalId);
+
         int nodeIndex = 0;
 
         foreach (var node in nodes)
@@ -105,7 +109,7 @@ namespace litiko.Eskhata.Module.Parties.Server
             {
               case "Company":
                 {
-                  var company = ParseCompany(node, okonhDict, okvedDict, okopfDict, okfsDict, countryDict, cityDict);
+                  var company = ParseCompany(node, okonhDict, okvedDict, okopfDict, okfsDict, countryDict, cityDict, addressTypeDict);
                   
                   if (company != null)
                   {
@@ -134,6 +138,7 @@ namespace litiko.Eskhata.Module.Parties.Server
                                  $"EnterpriseType: {(company.EnterpriseTypelitiko != null ? company.EnterpriseTypelitiko.Name : "null")}| " +
                                  $"Country: {(company.Countrylitiko != null ? company.Countrylitiko.Name : "null")}| " +
                                  $"City: {(company.City != null ? company.City.Name : "null")}| " +
+                                 $"AddressType: {company.AddressTypelitiko}| " +
                                  $"PostAddress: {company.PostalAddress}| " +
                                  $"LegalAddress: {company.LegalAddress}| " +
                                  $"Street: {company.Streetlitiko}| " +
@@ -163,7 +168,7 @@ namespace litiko.Eskhata.Module.Parties.Server
 
               case "Person":
                 {
-                  var person = ParsePerson(node, countryDict, cityDict);
+                  var person = ParsePerson(node, countryDict, cityDict, addressTypeDict);
                   if (person != null)
                   {
                     bool isNew = person.State.IsInserted;
@@ -191,6 +196,7 @@ namespace litiko.Eskhata.Module.Parties.Server
                                  $"Bank={person.Bank}|" +
                                  $"Phone={person.Phones}| " +
                                  $"City={(person.City != null ? person.City.Name : "null")}| " +
+                                 $"AddressType: {person.AddressTypelitiko}| " +
                                  $"Street={person.Streetlitiko}| " +
                                  $"BuildingNumber={person.HouseNumberlitiko}| " +
                                  $"WebSite={person.Homepage}| " +
@@ -245,7 +251,8 @@ namespace litiko.Eskhata.Module.Parties.Server
         result.Errors.Add(error);
         Logger.Error(error, ex);
       }
-
+      
+      Logger.Debug("End import counterparty from file: {0}", fileName);
       return result;
     }
 
@@ -255,7 +262,8 @@ namespace litiko.Eskhata.Module.Parties.Server
                                   Dictionary<string, litiko.NSI.IOKOPF> okopfDict,
                                   Dictionary<string, litiko.NSI.IOKFS> okfsDict,
                                   Dictionary<string, litiko.Eskhata.ICountry> countryDict,
-                                  Dictionary<string, litiko.Eskhata.ICity> cityDict)
+                                  Dictionary<string, litiko.Eskhata.ICity> cityDict,
+                                  Dictionary<string, litiko.NSI.IAddressType> addressType)
     {
       if (companyElement == null) return null;
 
@@ -290,6 +298,7 @@ namespace litiko.Eskhata.Module.Parties.Server
       var isReliability = companyElement.Element("Reliability")?.Value;
       var isCorrAcc = companyElement.Element("CorrAcc")?.Value;
       var isInernalAcc = companyElement.Element("InternalAcc")?.Value;
+      var isAddressType = companyElement.Element("AddressType")?.Value;
 
       var company = litiko.Eskhata.Companies.GetAll()
         .FirstOrDefault(x => (!string.IsNullOrEmpty(isExternalD) && x.ExternalId == isExternalD) ||
@@ -363,6 +372,10 @@ namespace litiko.Eskhata.Module.Parties.Server
       if (!string.IsNullOrEmpty(isLegalAdress))company.LegalAddress = isLegalAdress;
       if (!string.IsNullOrEmpty(isPhone))company.Phones = isPhone;
       
+      litiko.NSI.IAddressType foundAddressType = null;
+      if (!string.IsNullOrEmpty(isAddressType) && addressType.TryGetValue(isAddressType, out foundAddressType))
+        company.AddressTypelitiko = foundAddressType; 
+      
       ICity foundCity = null;
       if (!string.IsNullOrEmpty(isCity) && cityDict.TryGetValue(isCity, out foundCity))
         company.City = foundCity;
@@ -372,6 +385,7 @@ namespace litiko.Eskhata.Module.Parties.Server
 
       var bank = Sungero.Parties.Banks.GetAll().FirstOrDefault(x => x.ExternalId == isBank);
       company.Bank = bank;
+      
       if (!string.IsNullOrEmpty(isEmail))company.Email = isEmail;
       if (!string.IsNullOrEmpty(isWebSite))company.Homepage = isWebSite;
       if (!string.IsNullOrEmpty(isTaxNonResident))company.NUNonrezidentlitiko = ParseBoolSafe(isTaxNonResident);
@@ -383,9 +397,9 @@ namespace litiko.Eskhata.Module.Parties.Server
       {
         Sungero.Core.Enumeration? reliabilityEnum = null;
         var relTrim = isReliability.Trim();
-        if (relTrim.Equals("Надежный", StringComparison.OrdinalIgnoreCase) || relTrim.Equals("Высокий", StringComparison.OrdinalIgnoreCase))
+        if (relTrim.Equals("Надежный", StringComparison.OrdinalIgnoreCase) || relTrim.Equals("Высокий", StringComparison.OrdinalIgnoreCase) || relTrim.Equals("НИЗКИЙ", StringComparison.OrdinalIgnoreCase) || relTrim.Equals("ВЫСОКИЙ", StringComparison.OrdinalIgnoreCase))
           reliabilityEnum = litiko.Eskhata.Company.Reliabilitylitiko.Reliable;
-        else if (relTrim.Equals("Не надежный", StringComparison.OrdinalIgnoreCase) || relTrim.Equals("Низкая", StringComparison.OrdinalIgnoreCase))
+        else if (relTrim.Equals("Не надежный", StringComparison.OrdinalIgnoreCase) || relTrim.Equals("Низкая", StringComparison.OrdinalIgnoreCase) || relTrim.Equals("НИЗКИЙ", StringComparison.OrdinalIgnoreCase) || relTrim.Equals("ВЫСОКИЙ", StringComparison.OrdinalIgnoreCase))
           reliabilityEnum = litiko.Eskhata.Company.Reliabilitylitiko.NotReliable;
         
         if (reliabilityEnum.HasValue) company.Reliabilitylitiko = reliabilityEnum;
@@ -394,7 +408,7 @@ namespace litiko.Eskhata.Module.Parties.Server
       return company;
     }
 
-    private IPerson ParsePerson(XElement personElement, Dictionary<string, litiko.Eskhata.ICountry> countryDict, Dictionary<string, litiko.Eskhata.ICity> cityDict)
+    private IPerson ParsePerson(XElement personElement, Dictionary<string, litiko.Eskhata.ICountry> countryDict, Dictionary<string, litiko.Eskhata.ICity> cityDict, Dictionary<string, litiko.NSI.IAddressType> addressType)
     {
       if (personElement == null) return null;
 
@@ -425,7 +439,8 @@ namespace litiko.Eskhata.Module.Parties.Server
       var isReliability = personElement.Element("Reliability")?.Value;
       var isCorrAcc = personElement.Element("CorrAcc")?.Value;
       var isInternalAcc = personElement.Element("InternalAcc")?.Value;
-
+      var isAddressType = personElement.Element("AddressType")?.Value;
+      
       var person = Eskhata.People.GetAll()
         .FirstOrDefault(x =>  (!string.IsNullOrEmpty(isExternalD) && x.ExternalId == isExternalD) || (!string.IsNullOrEmpty(isINN) && x.TIN == isINN));
       
@@ -469,6 +484,10 @@ namespace litiko.Eskhata.Module.Parties.Server
       if (!string.IsNullOrEmpty(isEmail)) person.Email = isEmail.Trim();
       if (!string.IsNullOrEmpty(isPhone)) person.Phones = isPhone.Trim();
 
+      litiko.NSI.IAddressType foundAddressType = null;
+      if (!string.IsNullOrEmpty(isAddressType) && addressType.TryGetValue(isAddressType, out foundAddressType))
+        person.AddressTypelitiko = foundAddressType; 
+        
       ICity foundCity = null;
       if (!string.IsNullOrEmpty(isCity) && cityDict.TryGetValue(isCity, out foundCity))
         person.City = foundCity;

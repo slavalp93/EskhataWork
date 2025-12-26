@@ -95,6 +95,10 @@ namespace litiko.Eskhata.Module.Contracts.Server
           .Where(c => xmlCounterpartyIds.Contains(c.ExternalId))
           .ToList();
 
+        var banks = litiko.Eskhata.Banks.GetAll()
+          .Where(b => xmlCounterpartyIds.Contains(b.ExternalId))
+          .ToList();
+
         // =================================================================================
         // ЭТАП 2: ЦИКЛ ОБРАБОТКИ
         // =================================================================================
@@ -128,7 +132,7 @@ namespace litiko.Eskhata.Module.Contracts.Server
             var contract = ParseContractOptimized(docXml, result,
                                                   currencies, docKinds, docGroups, departments,
                                                   employees, contacts, paymentRegions, rentRegions,
-                                                  frequencies, counterparties);
+                                                  frequencies, counterparties, banks);
             
             
             
@@ -154,6 +158,8 @@ namespace litiko.Eskhata.Module.Contracts.Server
         result.Errors.Add($"Критическая ошибка: {ex.Message}");
       }
       
+      Logger.DebugFormat("End synchronous import from file: {0}", fileName);
+
       return result;
     }
 
@@ -170,21 +176,35 @@ namespace litiko.Eskhata.Module.Contracts.Server
                                              List<litiko.NSI.IPaymentRegion> payRegions,
                                              List<litiko.NSI.IRegionOfRental> rentRegions,
                                              List<litiko.NSI.IFrequencyOfPayment> frequencies,
-                                             List<litiko.Eskhata.ICounterparty> counterparties)
+                                             List<litiko.Eskhata.ICounterparty> counterparties,
+                                             List<litiko.Eskhata.IBank> banks)
     {
       var externalId = docXml.Element("ExternalD")?.Value?.Trim();
+      
       var name = docXml.Element("Name")?.Value;
       
       // Проверка Контрагента
       litiko.Eskhata.ICounterparty foundCounterparty = null;
       var counterpartyExternalId = docXml.Element("CounterpartyExternalId")?.Value?.Trim();
+      
       if (!string.IsNullOrEmpty(counterpartyExternalId))
       {
+        // А) Ищем в общем списке контрагентов
         foundCounterparty = counterparties.FirstOrDefault(c => c.ExternalId == counterpartyExternalId);
+        
+        // Б) Если не нашли, ищем в Банках
         if (foundCounterparty == null)
         {
-          // КРИТИЧЕСКАЯ ОШИБКА: Нет контрагента -> Нельзя создать договор
-          result.Errors.Add($"Договор {externalId}: Контрагент с ID '{counterpartyExternalId}' не найден в системе.");
+          var foundBank = banks.FirstOrDefault(b => b.ExternalId == counterpartyExternalId);
+          if (foundBank != null)
+          {
+            foundCounterparty = foundBank;
+          }
+        }
+
+        if (foundCounterparty == null)
+        {
+          result.Errors.Add($"Договор {externalId}: Контрагент/Банк с ID '{counterpartyExternalId}' не найден.");
           return null;
         }
       }
