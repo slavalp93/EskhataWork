@@ -89,14 +89,14 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
         sb.AppendLine("🏢 Компании:");
         sb.AppendLine($"• Всего: {result.TotalCompanies}");
         
-        if (result.ImportedCompanies > 0)
-          sb.AppendLine($"• ✨ Новых (создано): {result.ImportedCompanies}");
+        if (result.ImportedCompanies > 0)   
+          sb.AppendLine($"• ✨ Создано новых: {result.ImportedCompanies}");
         
         if (result.DuplicateCompanies > 0)
-          sb.AppendLine($"• 🔄 Дубликатов (обновлено): {result.DuplicateCompanies}");
+          sb.AppendLine($"• 🔄 Дубликатов: {result.DuplicateCompanies}");
         
         if (result.TotalCompanies > 0 && result.ImportedCompanies == 0 && result.DuplicateCompanies == 0)
-          sb.AppendLine("• ⚠️ Не импортировано (см. ошибки)");
+          sb.AppendLine("• ⚠️ Не импортировано (см. ошибки):");
 
         sb.AppendLine();
 
@@ -104,10 +104,10 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
         sb.AppendLine($"• Всего: {result.TotalPersons}");
         
         if (result.ImportedPersons > 0)
-          sb.AppendLine($"• ✨ Новых (создано): {result.ImportedPersons}");
+          sb.AppendLine($"• ✨ Создано новых: {result.ImportedPersons}");
         
         if (result.DuplicatePersons > 0)
-          sb.AppendLine($"• 🔄 Дубликатов (обновлено): {result.DuplicatePersons}");
+          sb.AppendLine($"• 🔄 Дубликатов: {result.DuplicatePersons}");
 
         sb.AppendLine("--------------------------------");
         
