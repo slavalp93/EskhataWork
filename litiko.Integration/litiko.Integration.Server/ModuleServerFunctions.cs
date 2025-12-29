@@ -4163,7 +4163,7 @@ namespace litiko.Integration.Server
         // ==========================
         return new XElement("Company",
             new XElement("ID", id),
-            new XElement("ExternalD", externalId),
+            new XElement("ExternalID", externalId),
             new XElement("Name", name),
             new XElement("LONG_NAME", longName),
             new XElement("I_NAME", iName),
@@ -4250,10 +4250,10 @@ namespace litiko.Integration.Server
         // ==========================
         var documentElement = new XElement("Document",
             new XElement("ID", documentId),
-            new XElement("ExternalD", externalId),
+            new XElement("ExternalID", externalId),
             new XElement("Contract",
                 new XElement("ID", contractId),
-                new XElement("ExternalD", contractExtId)
+                new XElement("ExternalID", contractExtId)
             ),
             new XElement("DocumentKind", documentKind),
             new XElement("Subject", subject),
@@ -4357,7 +4357,7 @@ namespace litiko.Integration.Server
         
         var documentElement = new XElement("Document",
             new XElement("ID", documentId),
-            new XElement("ExternalD", externalId),
+            new XElement("ExternalID", externalId),
             new XElement("DocumentKind", documentKind),
             new XElement("DocumentGroup", documentGroup),
             new XElement("Subject", subject),
