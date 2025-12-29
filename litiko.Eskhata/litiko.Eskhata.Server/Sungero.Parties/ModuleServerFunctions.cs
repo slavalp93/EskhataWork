@@ -268,7 +268,7 @@ namespace litiko.Eskhata.Module.Parties.Server
       if (companyElement == null) return null;
 
       var isId = companyElement.Element("ID")?.Value;
-      var isExternalD = companyElement.Element("ExternalD")?.Value;
+      var isExternalID = companyElement.Element("ExternalID")?.Value;
       var isName = companyElement.Element("Name")?.Value.Trim();
       var isINN = companyElement.Element("INN")?.Value;
       var isLongName = companyElement.Element("LONG_NAME")?.Value.Trim();
@@ -301,7 +301,7 @@ namespace litiko.Eskhata.Module.Parties.Server
       var isAddressType = companyElement.Element("AddressType")?.Value;
 
       var company = litiko.Eskhata.Companies.GetAll()
-        .FirstOrDefault(x => (!string.IsNullOrEmpty(isExternalD) && x.ExternalId == isExternalD) ||
+        .FirstOrDefault(x => (!string.IsNullOrEmpty(isExternalID) && x.ExternalId == isExternalID) ||
                         (!string.IsNullOrEmpty(isINN) && x.TIN == isINN));
 
       bool isNew = company == null;
@@ -309,7 +309,7 @@ namespace litiko.Eskhata.Module.Parties.Server
       if (isNew)
       {
         company = litiko.Eskhata.Companies.Create();
-        company.ExternalId = isExternalD;
+        company.ExternalId = isExternalID;
         company.TIN = isINN;
       }
       
@@ -412,7 +412,7 @@ namespace litiko.Eskhata.Module.Parties.Server
     {
       if (personElement == null) return null;
 
-      var isExternalD = personElement.Element("ExternalID")?.Value;
+      var isExternalID = personElement.Element("ExternalID")?.Value;
       var isLastName = personElement.Element("LastName")?.Value;
       var isFirstName = personElement.Element("FirstName")?.Value;
       var isMiddleName = personElement.Element("MiddleName")?.Value;
@@ -442,14 +442,14 @@ namespace litiko.Eskhata.Module.Parties.Server
       var isAddressType = personElement.Element("AddressType")?.Value;
       
       var person = Eskhata.People.GetAll()
-        .FirstOrDefault(x =>  (!string.IsNullOrEmpty(isExternalD) && x.ExternalId == isExternalD) || (!string.IsNullOrEmpty(isINN) && x.TIN == isINN));
+        .FirstOrDefault(x =>  (!string.IsNullOrEmpty(isExternalID) && x.ExternalId == isExternalID) || (!string.IsNullOrEmpty(isINN) && x.TIN == isINN));
       
       bool isNew = person == null;
 
       if (isNew)
       {
         person = Eskhata.People.Create();
-        person.ExternalId = isExternalD;
+        person.ExternalId = isExternalID;
       }
 
       if (!string.IsNullOrEmpty(isLastName)) person.LastName = isLastName.Trim();

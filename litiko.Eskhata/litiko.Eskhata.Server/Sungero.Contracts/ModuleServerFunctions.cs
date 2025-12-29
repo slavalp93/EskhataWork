@@ -63,7 +63,7 @@ namespace litiko.Eskhata.Module.Contracts.Server
         // =================================================================================
         
         var xmlExternalIds = documentElements
-          .Select(x => x.Element("ExternalD")?.Value?.Trim())
+          .Select(x => x.Element("ExternalID")?.Value?.Trim())
           .Where(x => !string.IsNullOrEmpty(x))
           .Distinct().ToList();
         
@@ -107,7 +107,7 @@ namespace litiko.Eskhata.Module.Contracts.Server
         {
           result.TotalCount++;
           var docXml = documentElements[i];
-          var extId = docXml.Element("ExternalD")?.Value?.Trim();
+          var extId = docXml.Element("ExternalID")?.Value?.Trim();
 
           try
           {
@@ -115,7 +115,7 @@ namespace litiko.Eskhata.Module.Contracts.Server
             // Валидация ID
             if (string.IsNullOrEmpty(extId))
             {
-              result.Errors.Add($"Документ №{i+1}: Отсутствует ExternalD");
+              result.Errors.Add($"Документ №{i+1}: Отсутствует ExternalID");
               continue;
             }
             
@@ -179,7 +179,7 @@ namespace litiko.Eskhata.Module.Contracts.Server
                                              List<litiko.Eskhata.ICounterparty> counterparties,
                                              List<litiko.Eskhata.IBank> banks)
     {
-      var externalId = docXml.Element("ExternalD")?.Value?.Trim();
+      var externalId = docXml.Element("ExternalID")?.Value?.Trim();
       
       var name = docXml.Element("Name")?.Value;
       
