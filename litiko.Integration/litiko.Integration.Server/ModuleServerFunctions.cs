@@ -4221,7 +4221,7 @@ namespace litiko.Integration.Server
         var externalId        = contractualDocument.ExternalId ?? "";
         var contractId        = contractualDocument.LeadingDocument?.Id.ToString() ?? ""; 
         var contractExtId     = contractualDocument.LeadingDocument?.ExternalId ?? "";   
-        var documentKind      = litiko.Eskhata.DocumentKinds.As(contractualDocument.DocumentKind)?.ExternalIdlitiko ?? "";
+        var documentKind      = contractualDocument.DocumentKind?.Name ?? "";
         var subject           = contractualDocument.Subject ?? "";
         var name              = (contractualDocument.Name ?? "").Substring(0, Math.Min((contractualDocument.Name ?? "").Length, 100));
         var registrationNumber= contractualDocument.RegistrationNumber ?? "";
