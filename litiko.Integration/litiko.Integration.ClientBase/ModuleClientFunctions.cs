@@ -105,7 +105,7 @@ namespace litiko.Integration.Client
         else if (contract != null)
           errorList = litiko.Integration.Functions.Module.Remote.R_DR_SET_CONTRACT_Online(exchDoc, contract);
         else if (supAgreement != null)
-          errorList = litiko.Integration.Functions.Module.Remote.R_DR_SET_CONTRACT_Online(exchDoc, supAgreement);
+          errorList = litiko.Integration.Functions.Module.Remote.R_DR_SET_PAYMENT_DOCUMENT_Online(exchDoc, supAgreement);
                 
         if (errorList.Any())
         {

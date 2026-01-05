@@ -3303,6 +3303,12 @@ namespace litiko.Integration.Server
       return R_DR_SET_CONTRACT(null, exchDoc, document);
     }
     
+    [Remote]
+    public List<string> R_DR_SET_PAYMENT_DOCUMENT_Online(IExchangeDocument exchDoc, litiko.Eskhata.IOfficialDocument document)
+    {
+      return R_DR_SET_PAYMENT_DOCUMENT(null, exchDoc, document);
+    }    
+    
     /// <summary>
     /// Обработка договорного документа.
     /// </summary>
@@ -3433,6 +3439,98 @@ namespace litiko.Integration.Server
       Logger.Debug("R_DR_SET_CONTRACT - Finish"); 
       return errorList;
     }      
+    
+    /// <summary>
+    /// Обработка договорного документа.
+    /// </summary>
+    /// <param name="dataElements">Информация о договорном документе в виде XElement.</param>
+    /// <param name="exchDoc">Документ обмена (при online интеграции).</param>
+    /// <param name="document">Документ (при online интеграции).</param>
+    /// <returns>Список ошибок (List<string>)</returns>
+    public List<string> R_DR_SET_PAYMENT_DOCUMENT(System.Collections.Generic.IEnumerable<System.Xml.Linq.XElement> dataElements,IExchangeDocument exchDoc, litiko.Eskhata.IOfficialDocument document)
+    {
+      Logger.Debug("R_DR_SET_PAYMENT_DOCUMENT - Start");
+      
+      var errorList = new List<string>();
+      
+      try
+      {
+        if (dataElements == null)
+        {
+          XDocument xmlDoc = XDocument.Load(exchDoc.LastVersion.Body.Read());
+          
+          string state = xmlDoc.Root.Element("request")?.Element("stateId")?.Value;
+          string stateMsg = xmlDoc.Root.Element("request")?.Element("stateMsg")?.Value;
+          bool statusIS = state != "0";
+          if (!statusIS)
+            throw AppliedCodeException.Create($"State message from IS:{stateMsg}");
+          
+          dataElements = xmlDoc.Descendants("Data").Elements();
+          if (!dataElements.Any())
+            throw AppliedCodeException.Create("Empty Data node.");
+        }
+        
+        var documentElement = dataElements.FirstOrDefault(x => x.Name == "Document");
+        if (documentElement == null)
+          throw AppliedCodeException.Create($"Document node is absent");        
+        
+        var isId = documentElement.Element("ID")?.Value;
+        var isExternalID = documentElement.Element("ExternalID")?.Value;
+        if (string.IsNullOrEmpty(isId) || string.IsNullOrEmpty(isExternalID))
+          throw AppliedCodeException.Create($"Not all required fields are filled in. ID:{isId}, ExternalID:{isExternalID}");
+        
+        long docId;
+        if (!System.Int64.TryParse(isId, out docId))
+          throw AppliedCodeException.Create($"Invalid value in <Document><ID> node:{isId}");
+        
+        bool isForcedLocked = false;
+        if (document == null)
+        {
+          document = litiko.Eskhata.OfficialDocuments.Get(docId);
+          isForcedLocked = Locks.TryLock(document);
+          if (!isForcedLocked)
+            throw AppliedCodeException.Create(SendDocumentStages.Resources.DocumentIsLockedFormat(document.Id));
+        }
+        else
+        {
+          if (document.Id != docId)
+            throw AppliedCodeException.Create($"The document ID:{isId} does not match");
+        }
+        
+        try
+        {
+          if (document.ExternalId != isExternalID)
+            document.ExternalId = isExternalID;
+          
+          if (!Equals(document.IntegrationStatuslitiko, litiko.Eskhata.OfficialDocument.IntegrationStatuslitiko.Success))
+            document.IntegrationStatuslitiko = litiko.Eskhata.OfficialDocument.IntegrationStatuslitiko.Success;
+          
+          if (document.State.IsChanged)
+          {
+            if (isForcedLocked)
+              document.Save();
+            
+            Logger.Debug($"Document:{docId} updated successfully");
+          }
+          else
+            Logger.Debug($"There are no changes in document:{docId}");
+        }
+        finally
+        {
+          if (isForcedLocked)
+            Locks.Unlock(document);
+        }                
+      }
+      catch (Exception ex)
+      {
+        var errorMessage = string.Format("Error when processing Document. Description: {0}. StackTrace: {1}", ex.Message, ex.StackTrace);
+        Logger.Error(errorMessage);
+        errorList.Add(ex.Message);
+      }
+      
+      Logger.Debug("R_DR_SET_PAYMENT_DOCUMENT - Finish");
+      return errorList;
+    }
     
     #endregion
     
