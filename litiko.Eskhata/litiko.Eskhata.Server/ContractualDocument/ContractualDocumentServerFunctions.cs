@@ -60,10 +60,8 @@ namespace litiko.Eskhata.Server
         propertiesByName = person.GetEntityMetadata().Properties.ToDictionary(p => p.Name, p => p);
         
         requsitesList.Add("LastName");
-        requsitesList.Add("FirstName");
-        requsitesList.Add("MiddleName");
-        requsitesList.Add("TIN");
-        requsitesList.Add("SINlitiko");
+        requsitesList.Add("FirstName");        
+        requsitesList.Add("TIN");                                
         requsitesList.Add("Sex");
         requsitesList.Add("DateOfBirth");
         requsitesList.Add("City");
@@ -131,21 +129,47 @@ namespace litiko.Eskhata.Server
         }
       }
       
+      // СИН не обязателен только для 'Аренда'. Во всех остальных случаях — обязателен.
+      if (person != null)
+      {
+        var docKind = Sungero.Docflow.DocumentKinds.Null;
+        if (SupAgreements.Is(_obj))
+          docKind = SupAgreements.As(_obj).LeadingDocument?.DocumentKind;
+        else
+          docKind = _obj.DocumentKind;
+        
+        var kindName = (docKind?.Name ?? "").Trim();
+        
+        if (!kindName.Equals("Аренда", StringComparison.InvariantCultureIgnoreCase))
+        {
+          if (!IsFilled(person, propertiesByName, "SINlitiko"))
+            invalidProperties.Add(GetLocalizedName(propertiesByName, "SINlitiko"));
+        }
+
+      }
+      
       return invalidProperties;
     }
 
     private bool IsFilled(ICounterparty counterparty, IDictionary<string, Sungero.Metadata.PropertyMetadata> propertiesByName, string propertyName)
     {
       Sungero.Metadata.PropertyMetadata prop;
-      
       if (!propertiesByName.TryGetValue(propertyName, out prop))
         return false;
-      
+
       if (prop.PropertyType == Sungero.Metadata.PropertyType.Collection)
         return false;
-      
-      return prop.GetValue(counterparty) != null;
+
+      var propValue = prop.GetValue(counterparty);
+      if (propValue == null)
+        return false;
+
+      if (propValue is string s)
+        return !string.IsNullOrWhiteSpace(s);
+
+      return true;
     }
+
     
     private string GetLocalizedName(IDictionary<string, Sungero.Metadata.PropertyMetadata> propertiesByName, string propertyName)
     {

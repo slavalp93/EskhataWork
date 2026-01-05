@@ -57,10 +57,10 @@ namespace litiko.CollegiateAgencies.Server
           newTask.Start();                      
         }
       }
-            
-      return this.GetSuccessResult();
+                 
       Logger.DebugFormat("ApprovalSentNoticeStage. Finish, approval task (ID={0}) (StartId={1}) (Iteration={2}) (StageNumber={3}).",
-                         approvalTask.Id, approvalTask.StartId, approvalTask.Iteration, approvalTask.StageNumber);       
+                         approvalTask.Id, approvalTask.StartId, approvalTask.Iteration, approvalTask.StageNumber);
+      return this.GetSuccessResult();
     }
   }
 }
