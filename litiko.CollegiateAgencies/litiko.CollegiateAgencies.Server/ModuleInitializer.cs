@@ -32,6 +32,7 @@ namespace litiko.CollegiateAgencies.Server
       CreateVotingDefaultApprovalRule2();
       CreateApprovalVotingTaskStage();
       CreateApprovalVotingUnpauseStage();
+      CreateApprovalSentNoticeStage();
     }
     
     /// <summary>
@@ -372,6 +373,22 @@ namespace litiko.CollegiateAgencies.Server
         }
       }
       return role;
+    }    
+    
+    /// <summary>
+    /// Создание записи нового типа сценария "Уведомление авторов проектов решений о рассмотрении вопроса".
+    /// </summary>
+    public static void CreateApprovalSentNoticeStage()
+    {      
+      if (litiko.CollegiateAgencies.ApprovalSentNoticeStages.GetAll().Any())
+        return;
+      
+      InitializationLogger.DebugFormat("Init: Create approval sent notice stage.");
+      var stage = litiko.CollegiateAgencies.ApprovalSentNoticeStages.Create();
+      stage.Name = "Уведомление авторов проектов решений о рассмотрении вопроса";
+      stage.Subject = "Рассмотрен вопрос";
+      stage.TimeoutInHours = 4;
+      stage.Save();
     }    
   }
 }

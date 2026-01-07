@@ -316,7 +316,7 @@ namespace litiko.Integration.Server
               errorList = Functions.Module.R_DR_SET_CONTRACT(dataElements, null, null);
               break;
             case Constants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT:
-              errorList = Functions.Module.R_DR_SET_CONTRACT(dataElements, null, null);
+              errorList = Functions.Module.R_DR_SET_PAYMENT_DOCUMENT(dataElements, null, null);
               break;              
             case Constants.Module.IntegrationMethods.R_DR_GET_REGIONS:
               errorList = Functions.Module.R_DR_GET_REGIONS(dataElements);
