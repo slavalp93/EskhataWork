@@ -7,15 +7,62 @@ using litiko.Eskhata.Module.Contracts.Structures.Module;
 using Sungero.Core;
 using Sungero.CoreEntities;
 using Sungero.Domain.Shared;
+using Sungero.Domain; 
+
 
 namespace litiko.Eskhata.Module.Contracts.Server
 {
   partial class ModuleFunctions
   {
+    
     /// <summary>
-    /// Импорт договоров из XML (Синхронно, передача через Base64)
+    /// Точка входа для импорта. Сохраняет файл и ставит задачу в очередь.
     /// </summary>
     [Remote, Public]
+    public string StartAsyncImportContracts(string fileBase64, string fileName)
+    {
+      if (string.IsNullOrEmpty(fileBase64))
+        return "Файл пуст или не передан.";
+
+      try
+      {
+        var migrationDoc = litiko.ContractsEskhata.MigrationDocuments.Create();
+        migrationDoc.Name = "Migration_" + fileName;
+        
+        var fileBytes = Convert.FromBase64String(fileBase64);
+        
+        using (var stream = new MemoryStream(fileBytes))
+          migrationDoc.CreateVersionFrom(stream, "xml");
+        
+        migrationDoc.Save();
+        
+        var args = litiko.Eskhata.Module.Contracts.AsyncHandlers.ImportContractsAsyncHandlerlitiko.Create();
+        args.MigrationDocumentId = migrationDoc.Id;
+        args.AuthorId = Users.Current.Id;
+        args.ExecuteAsync();
+
+        return "Файл загружен в БД. Импорт запущен в фоновом режиме. Вы получите уведомление по завершении.";
+      }
+      catch (Exception ex)
+      {
+        Logger.Error("Ошибка при постановке импорта в очередь", ex);
+        return "Критическая ошибка: " + ex.Message;
+      }
+    }
+
+    /// <summary>
+    /// Точка входа для удаления мигрированных договоров.
+    /// </summary>
+    [Remote, Public]
+    public void RunAsyncDeleteMigratedContracts()
+    {
+      var args = litiko.Eskhata.Module.Contracts.AsyncHandlers.DeleteMigratedContractAsynclitiko.Create();
+      args.AuthorId = Users.Current.Id;
+      args.ExecuteAsync();
+    }
+  }
+  #region Синхронное выполнение
+    /*[Remote, Public]
     public IResultImportXmlUI ImportContractsFromXmlUI(string fileBase64, string fileName)
     {
       var result = litiko.Eskhata.Module.Contracts.Structures.Module.ResultImportXmlUI.Create();
@@ -67,17 +114,16 @@ namespace litiko.Eskhata.Module.Contracts.Server
           .Where(x => !string.IsNullOrEmpty(x))
           .Distinct().ToList();
         
+        var existingContractsExtIds = Eskhata.Contracts.GetAll()
+          .Where(x => xmlExternalIds.Contains(x.ExternalId))
+          .Select(x => x.ExternalId)
+          .ToList();
+
         // Собираем ExternalID контрагентов
         var xmlCounterpartyIds = documentElements
           .Select(x => x.Element("CounterpartyExternalId")?.Value?.Trim())
           .Where(x => !string.IsNullOrEmpty(x))
           .Distinct().ToList();
-
-        // Загружаем ID существующих договоров для мгновенного поиска
-        var existingContractsExtIds = Eskhata.Contracts.GetAll()
-          .Where(x => xmlExternalIds.Contains(x.ExternalId))
-          .Select(x => x.ExternalId)
-          .ToList();
 
         // Загружаем справочники в списки (In-Memory Cache)
         var currencies = litiko.Eskhata.Currencies.GetAll().ToList();
@@ -162,22 +208,24 @@ namespace litiko.Eskhata.Module.Contracts.Server
 
       return result;
     }
+     
 
-    /// <summary>
-    /// Оптимизированный парсинг. Ищет данные в переданных списках, а не в БД.
-    /// </summary>
-    private IContract ParseContractOptimized(XElement docXml, IResultImportXmlUI result,
-                                             List<litiko.Eskhata.ICurrency> currencies,
-                                             List<litiko.Eskhata.IDocumentKind> docKinds,
-                                             List<litiko.Eskhata.IDocumentGroupBase> docGroups,
-                                             List<litiko.Eskhata.IDepartment> departments,
-                                             List<litiko.Eskhata.IEmployee> employees,
-                                             List<litiko.Eskhata.IContact> contacts,
-                                             List<litiko.NSI.IPaymentRegion> payRegions,
-                                             List<litiko.NSI.IRegionOfRental> rentRegions,
-                                             List<litiko.NSI.IFrequencyOfPayment> frequencies,
-                                             List<litiko.Eskhata.ICounterparty> counterparties,
-                                             List<litiko.Eskhata.IBank> banks)
+   
+      /// <summary>
+      /// Оптимизированный парсинг. Ищет данные в переданных списках, а не в БД.
+      /// </summary>
+      private IContract ParseContractOptimized(XElement docXml, IResultImportXmlUI result,
+                                               List<litiko.Eskhata.ICurrency> currencies,
+                                               List<litiko.Eskhata.IDocumentKind> docKinds,
+                                               List<litiko.Eskhata.IDocumentGroupBase> docGroups,
+                                               List<litiko.Eskhata.IDepartment> departments,
+                                               List<litiko.Eskhata.IEmployee> employees,
+                                               List<litiko.Eskhata.IContact> contacts,
+                                               List<litiko.NSI.IPaymentRegion> payRegions,
+                                               List<litiko.NSI.IRegionOfRental> rentRegions,
+                                               List<litiko.NSI.IFrequencyOfPayment> frequencies,
+                                               List<litiko.Eskhata.ICounterparty> counterparties,
+                                               List<litiko.Eskhata.IBank> banks)
     {
       var externalId = docXml.Element("ExternalID")?.Value?.Trim();
       
@@ -258,7 +306,7 @@ namespace litiko.Eskhata.Module.Contracts.Server
         if (kind != null) contract.DocumentKind = kind;
         else result.Errors.Add($"Договор {extId}: Вид {kindId} не найден.");
       }*/
-
+/*
       // Группа
       var documentGroupId = docXml.Element("DocumentGroup")?.Value?.Trim();
       if(!string.IsNullOrEmpty(documentGroupId))
@@ -379,6 +427,8 @@ namespace litiko.Eskhata.Module.Contracts.Server
         if (xmlPayMethod == "Предоплата") contract.PaymentMethodlitiko = litiko.Eskhata.Contract.PaymentMethodlitiko.Prepayment;
         else if (xmlPayMethod == "Постоплата") contract.PaymentMethodlitiko = litiko.Eskhata.Contract.PaymentMethodlitiko.Postpay;
       }
+      
+      contract.IsMigratedlitiko = true;
 
       contract.Save();
 
@@ -519,5 +569,13 @@ namespace litiko.Eskhata.Module.Contracts.Server
 
       Eskhata.Contracts.Delete(contract);
     }
-  }
+    
+    [Remote, Public]
+    public void RunAsyncDelete()
+    {
+      var args = litiko.Eskhata.Module.ContractsUI.AsyncHandlers.DeleteMigratedContractAsyncslitiko.Create();
+      
+    }
+  }*/
+  #endregion
 }

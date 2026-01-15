@@ -697,6 +697,14 @@
       "FlatListInStandaloneLookup": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "b6883ea8-c626-4f05-985c-8fd0c5f69503"
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "07fb5cf1-a1d6-4073-b13a-84ec8274b860",
+      "Name": "IsMigratedlitiko",
+      "Code": "IsMigratedP",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "453655a2-af52-44a1-839b-726e95360416"
     }
   ],
   "PublicFunctions": [

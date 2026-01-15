@@ -190,4 +190,7 @@
   <data name="Action_FillFromABSlitikoDescription" xml:space="preserve">
     <value>Automatic filling of the counterparty details from the ABS according to the TIN</value>
   </data>
+  <data name="Property_IsMigratedlitiko" xml:space="preserve">
+    <value>Мигрированный</value>
+  </data>
 </root>

@@ -241,4 +241,7 @@
   <data name="Property_AmountForPeriodInWordslitiko" xml:space="preserve">
     <value>Сумма за период прописью</value>
   </data>
+  <data name="Property_IsMigratedlitiko" xml:space="preserve">
+    <value>Мигрированный</value>
+  </data>
 </root>

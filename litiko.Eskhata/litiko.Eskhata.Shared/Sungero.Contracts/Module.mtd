@@ -3,7 +3,46 @@
   "NameGuid": "ae370d4f-ecf5-471d-849a-50b97b187ebb",
   "Name": "Contracts",
   "AssociatedGuid": "78d05f91-7585-42b9-addc-5b14478d4680",
-  "AsyncHandlers": [],
+  "AsyncHandlers": [
+    {
+      "NameGuid": "94cd3c97-f93d-4ebe-93e9-ad0bf7f2c431",
+      "Name": "ImportContractsAsyncHandlerlitiko",
+      "DelayPeriod": 15,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "3b24a0ea-3a49-4733-b76b-b41a0f7fc238",
+          "Name": "XmlPathFile",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "50f5f7d9-d0af-4076-8574-5fbb54a6ea8f",
+          "Name": "AuthorId",
+          "ParameterType": "LongInteger"
+        },
+        {
+          "NameGuid": "8505f222-95ac-43f9-b4bc-4bdfcc2fde8e",
+          "Name": "MigrationDocumentId",
+          "ParameterType": "LongInteger"
+        }
+      ]
+    },
+    {
+      "NameGuid": "eddedf0a-ab1e-433c-addd-89353c681c4b",
+      "Name": "DeleteMigratedContractAsynclitiko",
+      "DelayPeriod": 15,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "75ef5cdc-bc7b-45a1-930b-c195e65e83f5",
+          "Name": "AuthorId",
+          "ParameterType": "LongInteger"
+        }
+      ]
+    }
+  ],
   "BaseGuid": "f9d15b1c-2784-4c84-8348-1e162d70b988",
   "ClientBaseAssemblyName": "litiko.Eskhata.ClientBase",
   "ClientBaseNamespace": "litiko.Eskhata.Module.Contracts.ClientBase",
@@ -38,35 +77,14 @@
   "NeedResetAppliedCache": true,
   "PublicFunctions": [
     {
-      "Name": "DeleteContractById",
+      "Name": "RunAsyncDeleteMigratedContracts",
       "IsRemote": true,
-      "Parameters": [
-        {
-          "Name": "id",
-          "ParameterType": "global::System.Int64",
-          "ParameterTypeFullName": "System.Int64"
-        }
-      ],
       "Placement": "Shared",
       "ReturnType": "void",
       "ReturnTypeFullName": "System.Void"
     },
     {
-      "Name": "GetContractIdsByKeyword",
-      "IsRemote": true,
-      "Parameters": [
-        {
-          "Name": "keyword",
-          "ParameterType": "global::System.String",
-          "ParameterTypeFullName": "System.String"
-        }
-      ],
-      "Placement": "Shared",
-      "ReturnType": "global::System.Collections.Generic.List<global::System.Int64>",
-      "ReturnTypeFullName": "System.Collections.Generic.List"
-    },
-    {
-      "Name": "ImportContractsFromXmlUI",
+      "Name": "StartAsyncImportContracts",
       "IsRemote": true,
       "Parameters": [
         {
@@ -81,8 +99,8 @@
         }
       ],
       "Placement": "Shared",
-      "ReturnType": "global::litiko.Eskhata.Module.Contracts.Structures.Module.IResultImportXmlUI",
-      "ReturnTypeFullName": "litiko.Eskhata.Module.Contracts.Structures.Module.IResultImportXmlUI"
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
     }
   ],
   "PublicStructures": [

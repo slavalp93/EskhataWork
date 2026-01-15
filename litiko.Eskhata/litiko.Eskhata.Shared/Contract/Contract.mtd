@@ -1015,6 +1015,14 @@
       "IsShowedInList": false,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "4fae7cfa-4767-44cf-899b-01a5f92fe698"
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "abf1b99a-4786-4dd4-8dc9-203e2d16a405",
+      "Name": "IsMigratedlitiko",
+      "Code": "IsMigrated",
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+      "PreviousPropertyGuid": "d3fd9bb1-067d-490d-95bb-ead1f9f3a8d7"
     }
   ],
   "PublicFunctions": [

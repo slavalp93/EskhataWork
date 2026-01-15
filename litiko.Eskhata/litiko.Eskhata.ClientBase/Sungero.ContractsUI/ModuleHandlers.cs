@@ -6,5 +6,4 @@ using Sungero.CoreEntities;
 
 namespace litiko.Eskhata.Module.ContractsUI.Client
 {
-
 }

@@ -247,4 +247,7 @@
   <data name="Property_AmountForPeriodInWordslitiko" xml:space="preserve">
     <value>Amount for period in words</value>
   </data>
+  <data name="Property_IsMigratedlitiko" xml:space="preserve">
+    <value>Is migrated</value>
+  </data>
 </root>

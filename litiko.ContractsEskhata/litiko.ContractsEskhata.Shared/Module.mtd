@@ -45,6 +45,14 @@
   "ExplorerTreeOrder": [
     {
       "ItemId": "7b849979-6f7c-49db-83e8-22ac096cf123"
+    },
+    {
+      "ItemId": "4bf833f1-fd92-4561-8c14-f06465626ba9",
+      "PreviousItemId": "7b849979-6f7c-49db-83e8-22ac096cf123"
+    },
+    {
+      "ItemId": "90802f36-a4ef-4335-b686-f704cdc100ce",
+      "PreviousItemId": "4bf833f1-fd92-4561-8c14-f06465626ba9"
     }
   ],
   "HandledEvents": [

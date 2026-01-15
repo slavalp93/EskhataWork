@@ -17,6 +17,40 @@
           "ParameterType": "LongInteger"
         }
       ]
+    },
+    {
+      "NameGuid": "2391c9fb-c9a7-4a84-b0a3-320d77443b14",
+      "Name": "ImportPartiesAsyncHandlerlitiko",
+      "DelayPeriod": 3,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "MaxRetryCount": 5,
+      "Parameters": [
+        {
+          "NameGuid": "680d96c7-77f8-4d28-95a5-cec68baf3f14",
+          "Name": "MigrationDocumentId",
+          "ParameterType": "LongInteger"
+        },
+        {
+          "NameGuid": "c46a08ef-e333-4263-9b84-cf38419cda80",
+          "Name": "AuthorId",
+          "ParameterType": "LongInteger"
+        }
+      ]
+    },
+    {
+      "NameGuid": "7c419a8a-056c-48b7-9297-0f7972f7d911",
+      "Name": "DeleteMigratedPartiesAsynclitiko",
+      "DelayPeriod": 15,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "d425cb90-78db-4190-971d-0916c85f6047",
+          "Name": "AuthorId",
+          "ParameterType": "LongInteger"
+        }
+      ]
     }
   ],
   "BaseGuid": "243b34ec-8425-4c7e-b66f-27f7b9c8f38d",
@@ -34,7 +68,14 @@
   "LayeredFromGuid": "243b34ec-8425-4c7e-b66f-27f7b9c8f38d",
   "PublicFunctions": [
     {
-      "Name": "ImportCounterpartyFromXml",
+      "Name": "RunAsyncDeleteMigratedParties",
+      "IsRemote": true,
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "StartAsyncImportParties",
       "IsRemote": true,
       "Parameters": [
         {
@@ -49,8 +90,8 @@
         }
       ],
       "Placement": "Shared",
-      "ReturnType": "global::litiko.Eskhata.Module.Parties.Structures.Module.IResultImportCounterpartyXml",
-      "ReturnTypeFullName": "litiko.Eskhata.Module.Parties.Structures.Module.IResultImportCounterpartyXml"
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
     }
   ],
   "PublicStructures": [
