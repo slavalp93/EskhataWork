@@ -663,7 +663,7 @@
       "WebApiRequestType": "Post"
     },
     {
-      "Name": "R_DR_GET_PERSON",
+      "Name": "SendRequestToIS",
       "IsRemote": true,
       "Parameters": [
         {
@@ -756,7 +756,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.164",
+  "Version": "0.0.1.165",
   "Widgets": [],
   "Versions": [
     {
