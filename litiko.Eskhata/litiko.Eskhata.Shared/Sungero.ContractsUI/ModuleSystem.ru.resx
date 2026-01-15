@@ -91,9 +91,6 @@
   <data name="CoverDescription_PaymentRegionslitiko" xml:space="preserve">
     <value>Справочник регионов для оплаты налога.</value>
   </data>
-  <data name="CoverAction_Importlitiko" xml:space="preserve">
-    <value>Миграция договоров</value>
-  </data>
   <data name="CoverGroup_ContractStatementslitiko" xml:space="preserve">
     <value>Акты выполненных работ</value>
   </data>
@@ -103,13 +100,28 @@
   <data name="CoverDescription_ContractStatementListlitiko" xml:space="preserve">
     <value>Содержит список всех актов выполненных работ</value>
   </data>
-  <data name="CoverAction_DeleteContractslitiko" xml:space="preserve">
-    <value>Удаление договоров</value>
-  </data>
-  <data name="CoverAction_ImportCounterpartieslitiko" xml:space="preserve">
-    <value>Импорт контрагентов</value>
-  </data>
   <data name="sf_d394be6d_71ae_4766_8867_388d742a9289" xml:space="preserve">
     <value>Маппинг</value>
+  </data>
+  <data name="CoverAction_ContractMigrationAsynclitiko" xml:space="preserve">
+    <value>Миграция договоров</value>
+  </data>
+  <data name="CoverGroup_Migrationlitiko" xml:space="preserve">
+    <value>Миграция</value>
+  </data>
+  <data name="CoverAction_ImportCounterpartyAsynclitiko" xml:space="preserve">
+    <value>Миграция контрагентов</value>
+  </data>
+  <data name="CoverAction_DeleteContractAsynclitiko" xml:space="preserve">
+    <value>Удаление всех мигрированных договоров</value>
+  </data>
+  <data name="sf_632bcf54_8ebb_4286_8ddc_8f80628cc16a" xml:space="preserve">
+    <value>Мигрированные договора</value>
+  </data>
+  <data name="CoverAction_MigrtedContractsListlitiko" xml:space="preserve">
+    <value>Реест мигрированных договоров</value>
+  </data>
+  <data name="CoverAction_DeleteCounterpartyAsynclitiko" xml:space="preserve">
+    <value>Удаление всех мигрированных контрагентов</value>
   </data>
 </root>

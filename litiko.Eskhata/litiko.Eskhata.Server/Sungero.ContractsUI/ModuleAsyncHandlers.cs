@@ -6,7 +6,7 @@ using Sungero.CoreEntities;
 
 namespace litiko.Eskhata.Module.ContractsUI.Server
 {
-  partial class ModuleAsyncHandlers 
+  partial class ModuleAsyncHandlers
   {
 
   }

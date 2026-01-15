@@ -58,4 +58,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AsyncHandler_Description_94cd3c97f93d4ebe93e9ad0bf7f2c431" xml:space="preserve">
+    <value>Асинхронная миграция договоров</value>
+  </data>
+  <data name="AsyncHandler_Description_eddedf0aab1e433caddd89353c681c4b" xml:space="preserve">
+    <value>Удаление мигрированных договоров</value>
+  </data>
 </root>

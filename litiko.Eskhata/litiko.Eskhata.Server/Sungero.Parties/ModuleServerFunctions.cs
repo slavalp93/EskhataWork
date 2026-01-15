@@ -13,7 +13,55 @@ namespace litiko.Eskhata.Module.Parties.Server
 {
   partial class ModuleFunctions
   {
-    [Public, Remote]
+    [Remote, Public]
+    public string StartAsyncImportParties(string fileBase64, string fileName)
+    {
+      Logger.Debug("StartAsyncImportParties");
+      
+      if (string.IsNullOrEmpty(fileBase64))
+        return "Файл пуст.";
+
+      try
+      {
+        var migrationParties = ContractsEskhata.MigrationDocuments.Create();
+        if(migrationParties == null)
+          return "Ошибка. Не удалось инициализировать объект MigrationParties в памяти";
+        migrationParties.Name = "PartiesMigration_" + fileName;
+        
+        var fileBytes = Convert.FromBase64String(fileBase64);
+        using (var stream = new MemoryStream(fileBytes))
+          migrationParties.CreateVersionFrom(stream, "xml");
+        
+        migrationParties.Save();
+
+        var args = litiko.Eskhata.Module.Parties.AsyncHandlers.ImportPartiesAsyncHandlerlitiko.Create();
+        args.MigrationDocumentId = migrationParties.Id;
+        args.AuthorId = Users.Current.Id;
+        args.ExecuteAsync();
+
+        return "Файл загружен в БД. Асинхронный импорт контрагентов запущен.";
+      }
+      catch (Exception ex)
+      {
+        Logger.Error("Error starting async parties import", ex);
+        return "Ошибка старта: " + ex.Message;
+      }
+    }
+
+    /// <summary>
+    /// Точка входа для удаления мигрированных контрагентов.
+    /// </summary>
+    [Remote, Public]
+    public void RunAsyncDeleteMigratedParties()
+    {
+      var args = litiko.Eskhata.Module.Parties.AsyncHandlers.DeleteMigratedPartiesAsynclitiko.Create();
+      args.AuthorId = Users.Current.Id;
+      args.ExecuteAsync();
+    }
+  }
+  
+  #region MIgration sinchroniusly
+  /*[Public, Remote]
     public IResultImportCounterpartyXml ImportCounterpartyFromXml(string fileBase64, string fileName)
     {
       var result = litiko.Eskhata.Module.Parties.Structures.Module.ResultImportCounterpartyXml.Create();
@@ -374,7 +422,7 @@ namespace litiko.Eskhata.Module.Parties.Server
       
       litiko.NSI.IAddressType foundAddressType = null;
       if (!string.IsNullOrEmpty(isAddressType) && addressType.TryGetValue(isAddressType, out foundAddressType))
-        company.AddressTypelitiko = foundAddressType; 
+        company.AddressTypelitiko = foundAddressType;
       
       ICity foundCity = null;
       if (!string.IsNullOrEmpty(isCity) && cityDict.TryGetValue(isCity, out foundCity))
@@ -486,7 +534,7 @@ namespace litiko.Eskhata.Module.Parties.Server
 
       litiko.NSI.IAddressType foundAddressType = null;
       if (!string.IsNullOrEmpty(isAddressType) && addressType.TryGetValue(isAddressType, out foundAddressType))
-        person.AddressTypelitiko = foundAddressType; 
+        person.AddressTypelitiko = foundAddressType;
         
       ICity foundCity = null;
       if (!string.IsNullOrEmpty(isCity) && cityDict.TryGetValue(isCity, out foundCity))
@@ -576,5 +624,6 @@ namespace litiko.Eskhata.Module.Parties.Server
         return true;
       return false;
     }
-  }
+  }*/
+  #endregion
 }
