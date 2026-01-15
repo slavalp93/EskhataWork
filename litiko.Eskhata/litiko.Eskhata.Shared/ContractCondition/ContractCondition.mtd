@@ -104,6 +104,11 @@
           "NameGuid": "6ef8bbdc-213d-456f-bbb0-f3cc3de53ca7",
           "Name": "DocumentGroup",
           "Code": "DocumentGroup"
+        },
+        {
+          "NameGuid": "95b5efac-a4cd-4ddf-a34e-85d388cbde9f",
+          "Name": "IntStatusError",
+          "Code": "IntStatusError"
         }
       ],
       "IsAncestorMetadata": true,
@@ -195,7 +200,8 @@
     "ContractIsMoreThan",
     "ContractsVsPaymentDocIsNotFound",
     "PaymentBasedOn",
-    "DocumentGroup"
+    "DocumentGroup",
+    "IntStatusError"
   ],
   "RibbonCardMetadata": {
     "NameGuid": "e803ff34-d61a-4d36-941f-7728c5124827",

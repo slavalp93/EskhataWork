@@ -94,12 +94,6 @@
   <data name="OutgoingPoACorrespondence" xml:space="preserve">
     <value>Outgoing correspondence by power of attorney</value>
   </data>
-  <data name="ApiKeyGemini1" xml:space="preserve">
-    <value>AIzaSyDzMtXOYvFYE-XZa12mgQzkPH9V1EYdHSE</value>
-  </data>
-  <data name="ApiKeyGemini2" xml:space="preserve">
-    <value>AIzaSyA1DRyrU2CkvXTyufFL4xeoZMvFGmKztWk</value>
-  </data>
   <data name="EnvFile" xml:space="preserve">
     <value>C:\\RxData\\git_repository\\Eskhata_Work\\.env</value>
   </data>

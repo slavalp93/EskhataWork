@@ -79,4 +79,13 @@
   <data name="LastVersionApproved" xml:space="preserve">
     <value>Подписание недоступно т.к. последняя версия документа уже подписана утверждающей подписью.</value>
   </data>
+  <data name="ExactlyXDigits" xml:space="preserve">
+    <value>Значение должно содержать ровно {0} цифр.</value>
+  </data>
+  <data name="NoMoreThanXCharacters" xml:space="preserve">
+    <value>Значение должно содержать не более {0} символов.</value>
+  </data>
+  <data name="ExactlyXChar" xml:space="preserve">
+    <value>Значение должно содержать ровно {0} символов.</value>
+  </data>
 </root>

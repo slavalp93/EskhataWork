@@ -172,6 +172,10 @@
     {
       "ItemId": "794b9791-d0ed-47ba-8f0e-bfa4e8184211",
       "PreviousItemId": "96d31d03-06b2-4266-8058-815ecc7bad28"
+    },
+    {
+      "ItemId": "88367dcc-767e-40ab-8b41-48c9348ee051",
+      "PreviousItemId": "794b9791-d0ed-47ba-8f0e-bfa4e8184211"
     }
   ],
   "HandledEvents": [
@@ -189,7 +193,6 @@
       "NameGuid": "84443891-a824-44dd-8bba-fa74c19505e1",
       "Name": "GetDepartments",
       "GenerateHandler": true,
-      "IsEnabled": false,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T00:00:00"
     },
@@ -197,7 +200,6 @@
       "NameGuid": "3b371135-10d3-4828-943d-12ef13f39e31",
       "Name": "GetBusinessUnits",
       "GenerateHandler": true,
-      "IsEnabled": false,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
     },
@@ -205,7 +207,6 @@
       "NameGuid": "20708545-3d61-492d-9b8c-e9cee3281235",
       "Name": "GetEmployees",
       "GenerateHandler": true,
-      "IsEnabled": false,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
     },
@@ -213,7 +214,6 @@
       "NameGuid": "23a2bc5c-e588-4a48-970c-fe90ec6662df",
       "Name": "GetCompanyKinds",
       "GenerateHandler": true,
-      "IsEnabled": false,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
     },
@@ -221,7 +221,6 @@
       "NameGuid": "cca63b4b-e1b9-4c79-b323-a8382062ddc8",
       "Name": "GetCountries",
       "GenerateHandler": true,
-      "IsEnabled": false,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
     },
@@ -229,7 +228,6 @@
       "NameGuid": "2add48cc-84a3-4144-adab-c435482ce936",
       "Name": "GetEcolog",
       "GenerateHandler": true,
-      "IsEnabled": false,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
     },
@@ -237,7 +235,6 @@
       "NameGuid": "bdb06ee3-a597-4904-965d-4ee3b39c6fa4",
       "Name": "GetMaterialStatuses",
       "GenerateHandler": true,
-      "IsEnabled": false,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
     },
@@ -245,7 +242,6 @@
       "NameGuid": "202442d0-e5f5-4d63-b589-fcd2b9875e28",
       "Name": "GetOKFS",
       "GenerateHandler": true,
-      "IsEnabled": false,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
     },
@@ -253,7 +249,6 @@
       "NameGuid": "8960cd48-7ffd-4d8b-a319-37170d3d87b9",
       "Name": "GetOKONH",
       "GenerateHandler": true,
-      "IsEnabled": false,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
     },
@@ -261,7 +256,6 @@
       "NameGuid": "99c50527-e3fe-4a8c-93b8-1f2369547f2e",
       "Name": "GetOKOPF",
       "GenerateHandler": true,
-      "IsEnabled": false,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
     },
@@ -269,7 +263,6 @@
       "NameGuid": "0f7f09fe-1d33-4103-84c5-47b389580edd",
       "Name": "GetOKVED",
       "GenerateHandler": true,
-      "IsEnabled": false,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
     },
@@ -314,19 +307,316 @@
       "GenerateHandler": true,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T08:30:00"
+    },
+    {
+      "NameGuid": "94ffe050-c727-4a32-b51e-23edc5d37cc5",
+      "Name": "GetIdentityDocumentKinds",
+      "DaysOfWeekSchedule": "Monday",
+      "GenerateHandler": true,
+      "Monthly": "Weekly",
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T05:00:00"
+    },
+    {
+      "NameGuid": "d5a413e4-895a-4836-9d38-d7fdafaed77c",
+      "Name": "ExportUpdatesForActiveContracts",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T19:00:00"
+    },
+    {
+      "NameGuid": "6a77f63b-d52d-4448-a913-04b9442352e0",
+      "Name": "GetRegions",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T04:00:00"
+    },
+    {
+      "NameGuid": "afd78479-74b5-45bc-9c02-03d19c1004c8",
+      "Name": "GetCities",
+      "GenerateHandler": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T04:15:00"
     }
   ],
   "PublicConstants": [
     {
+      "Name": "IntegrationUsers",
+      "ParentClasses": [
+        "Module",
+        "RoleGuid"
+      ],
+      "TypeName": "System.Guid",
+      "Value": "new System.Guid(\"9069126A-1BA0-40FC-9AB9-7098F926ECF3\")"
+    },
+    {
+      "Name": "R_DR_GET_BANK",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_BANK\""
+    },
+    {
+      "Name": "R_DR_GET_BUSINESSUNITS",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_BUSINESSUNITS\""
+    },
+    {
+      "Name": "R_DR_GET_CITIES",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_CITIES\""
+    },
+    {
+      "Name": "R_DR_GET_COMPANY",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_COMPANY\""
+    },
+    {
+      "Name": "R_DR_GET_COMPANYKINDS",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_COMPANYKINDS\""
+    },
+    {
+      "Name": "R_DR_GET_CONTRACT_TYPE",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_CONTRACT_TYPE\""
+    },
+    {
+      "Name": "R_DR_GET_CONTRACT_VID",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_CONTRACT_VID\""
+    },
+    {
+      "Name": "R_DR_GET_COUNTRIES",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_COUNTRIES\""
+    },
+    {
+      "Name": "R_DR_GET_CURRENCY_RATES",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_CURRENCY_RATES\""
+    },
+    {
+      "Name": "R_DR_GET_DEPART",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_DEPART\""
+    },
+    {
+      "Name": "R_DR_GET_ECOLOG",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_ECOLOG\""
+    },
+    {
+      "Name": "R_DR_GET_EMPLOYEES",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_EMPLOYEES\""
+    },
+    {
+      "Name": "R_DR_GET_MARITALSTATUSES",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_MARITALSTATUSES\""
+    },
+    {
+      "Name": "R_DR_GET_OKFS",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_OKFS\""
+    },
+    {
+      "Name": "R_DR_GET_OKONH",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_OKONH\""
+    },
+    {
+      "Name": "R_DR_GET_OKOPF",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_OKOPF\""
+    },
+    {
+      "Name": "R_DR_GET_OKVED",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_OKVED\""
+    },
+    {
+      "Name": "R_DR_GET_PAYMENT_REGIONS",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_PAYMENT_REGIONS\""
+    },
+    {
+      "Name": "R_DR_GET_PERSON",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_PERSON\""
+    },
+    {
+      "Name": "R_DR_GET_REGIONS",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_REGIONS\""
+    },
+    {
+      "Name": "R_DR_GET_TAX_REGIONS",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_TAX_REGIONS\""
+    },
+    {
+      "Name": "R_DR_GET_TYPESOFIDCARDS",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_GET_TYPESOFIDCARDS\""
+    },
+    {
+      "Name": "R_DR_SET_CONTRACT",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_SET_CONTRACT\""
+    },
+    {
+      "Name": "R_DR_SET_CONTRACTS",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_SET_CONTRACTS\""
+    },
+    {
+      "Name": "R_DR_SET_PAYMENT_DOCUMENT",
+      "ParentClasses": [
+        "Module",
+        "IntegrationMethods"
+      ],
+      "TypeName": "System.String",
+      "Value": "\"R_DR_SET_PAYMENT_DOCUMENT\""
+    },
+    {
       "Name": "SynchronizationResponsibleRoleGuid",
       "ParentClasses": [
-        "Module"
+        "Module",
+        "RoleGuid"
       ],
       "TypeName": "System.Guid",
       "Value": "new System.Guid(\"6F98BA36-3B7F-4767-8369-88A65578DC5A\")"
     }
   ],
   "PublicFunctions": [
+    {
+      "Name": "BuildDocumentXml",
+      "Parameters": [
+        {
+          "Name": "document",
+          "ParameterType": "global::Sungero.Docflow.IOfficialDocument",
+          "ParameterTypeFullName": "Sungero.Docflow.IOfficialDocument, Sungero.Domain.Interfaces"
+        },
+        {
+          "Name": "session_id",
+          "ParameterType": "global::System.Int64",
+          "ParameterTypeFullName": "System.Int64"
+        },
+        {
+          "Name": "application_key",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "dictionary",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "lastId",
+          "ParameterType": "global::System.Int64",
+          "ParameterTypeFullName": "System.Int64"
+        }
+      ],
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
     {
       "Name": "CreateExchangeDocument",
       "IsRemote": true,
@@ -349,6 +639,19 @@
       "ReturnTypeFullName": "Sungero.Content.IElectronicDocumentVersions, Sungero.Content.Shared"
     },
     {
+      "Name": "IntegrationClientAction",
+      "Parameters": [
+        {
+          "Name": "entity",
+          "ParameterType": "global::Sungero.Domain.Shared.IEntity",
+          "ParameterTypeFullName": "Sungero.Domain.Shared.IEntity, Sungero.Domain.Shared"
+        }
+      ],
+      "Placement": "Client",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
+    {
       "Name": "ProcessResponseFromIS",
       "Parameters": [
         {
@@ -360,64 +663,7 @@
       "WebApiRequestType": "Post"
     },
     {
-      "Name": "R_DR_GET_BANK",
-      "IsRemote": true,
-      "Parameters": [
-        {
-          "Name": "exchDocID",
-          "ParameterType": "global::System.Int64",
-          "ParameterTypeFullName": "System.Int64"
-        },
-        {
-          "Name": "counterparty",
-          "ParameterType": "global::litiko.Eskhata.ICounterparty",
-          "ParameterTypeFullName": "litiko.Eskhata.ICounterparty, Sungero.Domain.Interfaces"
-        }
-      ],
-      "Placement": "Shared",
-      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
-      "ReturnTypeFullName": "System.Collections.Generic.List"
-    },
-    {
-      "Name": "R_DR_GET_COMPANY",
-      "IsRemote": true,
-      "Parameters": [
-        {
-          "Name": "exchDocID",
-          "ParameterType": "global::System.Int64",
-          "ParameterTypeFullName": "System.Int64"
-        },
-        {
-          "Name": "counterparty",
-          "ParameterType": "global::litiko.Eskhata.ICounterparty",
-          "ParameterTypeFullName": "litiko.Eskhata.ICounterparty, Sungero.Domain.Interfaces"
-        }
-      ],
-      "Placement": "Shared",
-      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
-      "ReturnTypeFullName": "System.Collections.Generic.List"
-    },
-    {
       "Name": "R_DR_GET_PERSON",
-      "IsRemote": true,
-      "Parameters": [
-        {
-          "Name": "exchDocID",
-          "ParameterType": "global::System.Int64",
-          "ParameterTypeFullName": "System.Int64"
-        },
-        {
-          "Name": "counterparty",
-          "ParameterType": "global::litiko.Eskhata.ICounterparty",
-          "ParameterTypeFullName": "litiko.Eskhata.ICounterparty, Sungero.Domain.Interfaces"
-        }
-      ],
-      "Placement": "Shared",
-      "ReturnType": "global::System.Collections.Generic.List<global::System.String>",
-      "ReturnTypeFullName": "System.Collections.Generic.List"
-    },
-    {
-      "Name": "SendRequestToIS",
       "IsRemote": true,
       "Parameters": [
         {
@@ -483,7 +729,9 @@
     "DataUpdatedSuccessfully",
     "IntegrationMethodNotFound",
     "VersionRequestToRX_",
-    "RequestXMLTemplateForCurrencyRates"
+    "RequestXMLTemplateForCurrencyRates",
+    "RoleIntegrationUsers",
+    "DescriptionRoleIntegrationUsers"
   ],
   "ServerAssemblyName": "litiko.Integration.Server",
   "ServerNamespace": "litiko.Integration.Server",
@@ -508,7 +756,7 @@
       "NeedShowMarkedCount": false
     }
   ],
-  "Version": "0.0.1.135",
+  "Version": "0.0.1.164",
   "Widgets": [],
   "Versions": [
     {

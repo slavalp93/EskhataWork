@@ -130,4 +130,13 @@
   <data name="Action_FillFromABSlitikoConfirmationDescription" xml:space="preserve">
     <value />
   </data>
+  <data name="Property_Account" xml:space="preserve">
+    <value>Account in another bank</value>
+  </data>
+  <data name="Property_AddressTypelitiko" xml:space="preserve">
+    <value>Address type</value>
+  </data>
+  <data name="Property_LegalAddress" xml:space="preserve">
+    <value>Address</value>
+  </data>
 </root>

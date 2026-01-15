@@ -62,6 +62,11 @@
           "NameGuid": "accffd3f-1058-4e04-9cc2-e86e2c8ef3f6",
           "Name": "MeetingPresentDOP",
           "Code": "MeetingPresentD"
+        },
+        {
+          "NameGuid": "9448d600-1d16-4d94-a654-38fad8e991ca",
+          "Name": "ProjectSolutionsAuthors",
+          "Code": "ProjSolAuthors"
         }
       ],
       "IsAncestorMetadata": true,

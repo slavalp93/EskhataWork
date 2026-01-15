@@ -64,4 +64,13 @@
   <data name="Property_ExternalIdlitiko" xml:space="preserve">
     <value>ИД во внешней системе</value>
   </data>
+  <data name="Action_AddToMappinglitiko" xml:space="preserve">
+    <value>Добавить в маппинг</value>
+  </data>
+  <data name="Action_AddToMappinglitikoHint" xml:space="preserve">
+    <value>Добавить в маппинг</value>
+  </data>
+  <data name="Action_AddToMappinglitikoDescription" xml:space="preserve">
+    <value>Добавить в маппинг</value>
+  </data>
 </root>

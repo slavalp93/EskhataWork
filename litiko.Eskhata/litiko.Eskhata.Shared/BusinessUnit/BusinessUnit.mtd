@@ -607,6 +607,19 @@
           "RowNumber": 11,
           "RowSpan": 1,
           "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "208f0ec5-9bc9-4446-a1d1-3f00b323f566",
+          "Name": "AccountEskhatalitikolitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "9da605c7-bdd9-4e69-93bc-03b9e8426253",
+          "PropertyGuid": "ad6e7859-4e65-4a0d-8ae8-955830128f2a",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,
@@ -801,6 +814,15 @@
       "FlatListInStandaloneLookup": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "4ed05ff7-9572-47b3-8711-a79f680a44ce"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "ad6e7859-4e65-4a0d-8ae8-955830128f2a",
+      "Name": "AccountEskhatalitiko",
+      "Code": "AccountEskhata",
+      "Length": 20,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "0e220cfd-348d-4b03-b854-d5b39c41b6de"
     }
   ],
   "PublicStructures": [],

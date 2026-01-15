@@ -217,4 +217,28 @@
   <data name="JobDescription_ca66ee7158854185b3ce67a5353c9a74" xml:space="preserve">
     <value>Integration. Contract types.</value>
   </data>
+  <data name="JobDisplayName_94ffe050c7274a32b51e23edc5d37cc5" xml:space="preserve">
+    <value>Integration. Identity Document Kinds</value>
+  </data>
+  <data name="JobDescription_94ffe050c7274a32b51e23edc5d37cc5" xml:space="preserve">
+    <value>Integration. Identity Document Kinds</value>
+  </data>
+  <data name="JobDisplayName_d5a413e4895a48369d38d7fdafaed77c" xml:space="preserve">
+    <value>Integration. Export updates for active contracts</value>
+  </data>
+  <data name="JobDescription_d5a413e4895a48369d38d7fdafaed77c" xml:space="preserve">
+    <value>Active contracts with the “Requires updating in ABS” flag are selected and the R_DR_SET_CONTRACT integration protocol is called for each suitable document.</value>
+  </data>
+  <data name="JobDisplayName_6a77f63bd52d4448a91304b9442352e0" xml:space="preserve">
+    <value>Integration. Regions</value>
+  </data>
+  <data name="JobDescription_6a77f63bd52d4448a91304b9442352e0" xml:space="preserve">
+    <value>Integration. Regions</value>
+  </data>
+  <data name="JobDisplayName_afd7847974b545bc9c0203d19c1004c8" xml:space="preserve">
+    <value>Integration. Cities</value>
+  </data>
+  <data name="JobDescription_afd7847974b545bc9c0203d19c1004c8" xml:space="preserve">
+    <value>Integration. Cities</value>
+  </data>
 </root>

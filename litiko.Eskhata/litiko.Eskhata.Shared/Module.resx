@@ -79,4 +79,13 @@
   <data name="LastVersionApproved" xml:space="preserve">
     <value>Signing is not available because the latest version of the document has already been signed with an approving signature.</value>
   </data>
+  <data name="ExactlyXDigits" xml:space="preserve">
+    <value>The value must contain exactly {0} digits.</value>
+  </data>
+  <data name="NoMoreThanXCharacters" xml:space="preserve">
+    <value>The value must contain no more than {0} characters.</value>
+  </data>
+  <data name="ExactlyXChar" xml:space="preserve">
+    <value>The value must contain exactly {0} characters.</value>
+  </data>
 </root>

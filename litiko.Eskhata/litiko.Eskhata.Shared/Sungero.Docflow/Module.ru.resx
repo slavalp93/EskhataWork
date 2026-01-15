@@ -83,4 +83,10 @@
   <data name="RegistrationNumberAnchorSymbol" xml:space="preserve">
     <value>⚓№</value>
   </data>
+  <data name="DocflowAccessAllowerdRoleName" xml:space="preserve">
+    <value>Доступ к модулю Документооборот</value>
+  </data>
+  <data name="DocflowAccessAllowerdRoleDescription" xml:space="preserve">
+    <value>Участники данной роли имеют доступ к модулю Документооборот</value>
+  </data>
 </root>

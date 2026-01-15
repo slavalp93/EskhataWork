@@ -82,16 +82,46 @@
   <data name="CoverDescription_FrequencyOfPaymentlitiko" xml:space="preserve">
     <value>Payment frequency under contracts</value>
   </data>
-  <data name="CoverAction_PaymentRegionlitiko" xml:space="preserve">
-    <value>Payment regions</value>
-  </data>
-  <data name="CoverDescription_PaymentRegionlitiko" xml:space="preserve">
-    <value>Directory of tax payment regions.</value>
-  </data>
   <data name="CoverAction_RegionsOfRentallitiko" xml:space="preserve">
-    <value>Regions of rental</value>
+    <value>Regions for rental tax</value>
   </data>
   <data name="CoverDescription_RegionsOfRentallitiko" xml:space="preserve">
-    <value>Directory of regions of rental properties.</value>
+    <value>Directory of regions for rental tax.</value>
+  </data>
+  <data name="CoverAction_PaymentRegionslitiko" xml:space="preserve">
+    <value>Regions for tax payment</value>
+  </data>
+  <data name="CoverDescription_PaymentRegionslitiko" xml:space="preserve">
+    <value>Directory of regions for tax payment.</value>
+  </data>
+  <data name="CoverDescription_Importlitiko" xml:space="preserve">
+    <value>Миграция договоров с XML файла</value>
+  </data>
+  <data name="CoverAction_Importlitiko" xml:space="preserve">
+    <value>Importlitiko</value>
+  </data>
+  <data name="CoverAction_ImportCounterpartieslitiko" xml:space="preserve">
+    <value>ImportCounterpartieslitiko</value>
+  </data>
+  <data name="CoverDescription_ImportCounterpartieslitiko" xml:space="preserve">
+    <value>Импорт контрагентов из АБС которые сохранены в XML файле</value>
+  </data>
+  <data name="CoverGroup_ContractStatementslitiko" xml:space="preserve">
+    <value>Contract Statements</value>
+  </data>
+  <data name="CoverAction_ContractStatementListlitiko" xml:space="preserve">
+    <value>Contract Statements</value>
+  </data>
+  <data name="CoverDescription_ContractStatementListlitiko" xml:space="preserve">
+    <value>Contains a list of all Contract Statements</value>
+  </data>
+  <data name="CoverAction_DeleteContractslitiko" xml:space="preserve">
+    <value>DeleteContractslitiko</value>
+  </data>
+  <data name="CoverDescription_DeleteContractslitiko" xml:space="preserve">
+    <value>Удаление договоров по названию</value>
+  </data>
+  <data name="sf_d394be6d_71ae_4766_8867_388d742a9289" xml:space="preserve">
+    <value>Mapping</value>
   </data>
 </root>

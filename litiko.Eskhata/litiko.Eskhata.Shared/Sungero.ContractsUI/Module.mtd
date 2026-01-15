@@ -15,10 +15,25 @@
       {
         "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
         "NameGuid": "17964aa7-54bd-4dda-95ee-14ee5647d8e6",
-        "Name": "PaymentRegionlitiko",
-        "EntityTypeId": "8586403e-a068-4c8a-b153-c6a168578e24",
+        "Name": "RegionsOfRentallitiko",
+        "EntityTypeId": "c540a83c-c37a-4053-a817-1f52f801fa06",
         "GroupId": "ed4c55bf-aeea-46b2-ac7f-b1000bcf2423",
         "PreviousItemGuid": "eb33a580-be00-4b6c-af62-08c48126486f"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "1cb2641b-ccf1-4ed5-bdde-3a5be7c2ad40",
+        "Name": "ImportCounterpartieslitiko",
+        "FunctionName": "ImportCounterparties",
+        "GroupId": "136b5b7b-053a-4ca1-8f05-79af1fc2dffb",
+        "PreviousItemGuid": "e7eaa9ed-7c42-42f1-a42f-8a79c502e4ee"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
+        "NameGuid": "4396628c-e95a-488d-8cd9-91a9ebf4d46d",
+        "Name": "ContractStatementListlitiko",
+        "EntityTypeId": "5c156641-2ca6-4687-8c1a-2f056a947add",
+        "GroupId": "9f8dc361-f84c-4dd0-b35f-2f714833dcec"
       },
       {
         "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
@@ -39,10 +54,18 @@
       {
         "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
         "NameGuid": "bf454207-748e-4afb-98d1-de3a1186093d",
-        "Name": "RegionsOfRentallitiko",
-        "EntityTypeId": "c540a83c-c37a-4053-a817-1f52f801fa06",
+        "Name": "PaymentRegionslitiko",
+        "EntityTypeId": "8586403e-a068-4c8a-b153-c6a168578e24",
         "GroupId": "ed4c55bf-aeea-46b2-ac7f-b1000bcf2423",
         "PreviousItemGuid": "17964aa7-54bd-4dda-95ee-14ee5647d8e6"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "e7eaa9ed-7c42-42f1-a42f-8a79c502e4ee",
+        "Name": "Importlitiko",
+        "FunctionName": "ImportContractsFromUI",
+        "GroupId": "136b5b7b-053a-4ca1-8f05-79af1fc2dffb",
+        "PreviousItemGuid": "1f58bc0f-bdbf-42db-b4bc-d75e41275793"
       },
       {
         "$type": "Sungero.Metadata.CoverEntityListActionMetadata, Sungero.Metadata",
@@ -59,17 +82,102 @@
         "EntityTypeId": "994ce51a-6661-4176-951f-2000120cb252",
         "GroupId": "ed4c55bf-aeea-46b2-ac7f-b1000bcf2423",
         "PreviousItemGuid": "498c4b32-dd8e-447b-8603-dcbddd37c107"
+      },
+      {
+        "$type": "Sungero.Metadata.CoverFunctionActionMetadata, Sungero.Metadata",
+        "NameGuid": "fc16c357-80b3-40bf-953e-0901cb7555fe",
+        "Name": "DeleteContractslitiko",
+        "FunctionName": "DeleteByKeyword",
+        "GroupId": "136b5b7b-053a-4ca1-8f05-79af1fc2dffb",
+        "PreviousItemGuid": "1cb2641b-ccf1-4ed5-bdde-3a5be7c2ad40"
       }
     ],
-    "Groups": [],
+    "Groups": [
+      {
+        "NameGuid": "9617fde5-c46a-4c84-9f69-4ae3c6fa12db",
+        "Name": "Invoices",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconInvoices_9617fde5c46a4c849f694ae3c6fa12db.png",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "PreviousItemGuid"
+        ],
+        "PreviousItemGuid": "ed4c55bf-aeea-46b2-ac7f-b1000bcf2423",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02",
+        "Versions": []
+      },
+      {
+        "NameGuid": "3f655ea9-b12d-427d-97de-528d9966cab4",
+        "Name": "Search",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconSearch_3f655ea9b12d427d97de528d9966cab4.png",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "PreviousItemGuid"
+        ],
+        "PreviousItemGuid": "9617fde5-c46a-4c84-9f69-4ae3c6fa12db",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02",
+        "Versions": []
+      },
+      {
+        "NameGuid": "9f8dc361-f84c-4dd0-b35f-2f714833dcec",
+        "Name": "ContractStatementslitiko",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconContractStatementslitiko_9f8dc361f84c4dd0b35f2f714833dcec.png",
+        "PreviousItemGuid": "3f655ea9-b12d-427d-97de-528d9966cab4",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02"
+      },
+      {
+        "NameGuid": "aff028e8-2519-4dcb-a8ab-36cd0b777a17",
+        "Name": "PowersOfAttorney",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconPowersOfAttorney_aff028e825194dcba8ab36cd0b777a17.png",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "PreviousItemGuid"
+        ],
+        "PreviousItemGuid": "9f8dc361-f84c-4dd0-b35f-2f714833dcec",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02"
+      },
+      {
+        "NameGuid": "7ed9b820-fce5-4c81-ac89-8a5859ce989d",
+        "Name": "Group",
+        "BackgroundPosition": "Stretch",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "PreviousItemGuid"
+        ],
+        "PreviousItemGuid": "aff028e8-2519-4dcb-a8ab-36cd0b777a17",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02"
+      },
+      {
+        "NameGuid": "74a83232-2ab3-4786-b5d7-90dd4c6809b4",
+        "Name": "Control",
+        "BackgroundPosition": "Stretch",
+        "IconName": "GroupIconControl_74a832322ab34786b5d790dd4c6809b4.png",
+        "IsAncestorMetadata": true,
+        "Overridden": [
+          "PreviousItemGuid"
+        ],
+        "PreviousItemGuid": "7ed9b820-fce5-4c81-ac89-8a5859ce989d",
+        "TabId": "0bf75d9d-0906-4fcc-89bf-64a2a57cbb02",
+        "Versions": []
+      }
+    ],
     "IsAncestorMetadata": true,
     "Overridden": [
-      "Actions"
+      "Actions",
+      "Groups"
     ],
     "Tabs": [],
     "Versions": []
   },
-  "ExplorerTreeOrder": [],
+  "ExplorerTreeOrder": [
+    {
+      "ItemId": "d394be6d-71ae-4766-8867-388d742a9289",
+      "PreviousItemId": "37d0e546-5b38-4b60-b680-5ab862dcea47"
+    }
+  ],
   "IconResourcesKeys": [],
   "Importance": "High",
   "IsLicensed": true,
@@ -78,7 +186,23 @@
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.Eskhata.Module.ContractsUI",
   "ResourcesKeys": [],
-  "SpecialFolders": [],
+  "SpecialFolders": [
+    {
+      "NameGuid": "d394be6d-71ae-4766-8867-388d742a9289",
+      "Name": "Mappinglitiko",
+      "DefaultContentType": "c584e7b4-d1ff-432e-9c2a-26ddd5cc5775",
+      "DisplayType": "Module",
+      "FilterPanel": {
+        "NameGuid": "74acee19-3ae7-4f14-9c45-9e95822f6ca7",
+        "Name": "FilterPanel",
+        "Controls": [],
+        "IsEnabled": false
+      },
+      "IsShow": true,
+      "Kind": "Computable",
+      "NeedShowMarkedCount": false
+    }
+  ],
   "Version": "4.8.138.0",
   "Widgets": [],
   "Versions": [

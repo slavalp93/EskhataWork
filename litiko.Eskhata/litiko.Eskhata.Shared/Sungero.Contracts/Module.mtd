@@ -1,0 +1,131 @@
+{
+  "$type": "Sungero.Metadata.LayerModuleMetadata, Sungero.Metadata",
+  "NameGuid": "ae370d4f-ecf5-471d-849a-50b97b187ebb",
+  "Name": "Contracts",
+  "AssociatedGuid": "78d05f91-7585-42b9-addc-5b14478d4680",
+  "AsyncHandlers": [],
+  "BaseGuid": "f9d15b1c-2784-4c84-8348-1e162d70b988",
+  "ClientBaseAssemblyName": "litiko.Eskhata.ClientBase",
+  "ClientBaseNamespace": "litiko.Eskhata.Module.Contracts.ClientBase",
+  "Code": "Contrac",
+  "CompanyCode": "Sungero",
+  "ExplorerTreeOrder": [],
+  "IconResourcesKeys": [],
+  "Importance": "High",
+  "IsVisible": false,
+  "Jobs": [
+    {
+      "NameGuid": "86eb396d-180f-428b-aa35-241ca1a1d4ee",
+      "Name": "SendNotificationForExpiringContracts",
+      "IsAncestorMetadata": true,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T06:00:00",
+      "Versions": []
+    },
+    {
+      "NameGuid": "ef1fbe43-58c9-4f41-999e-bb4ae5024e5e",
+      "Name": "SendTaskForContractMilestones",
+      "IsAncestorMetadata": true,
+      "MonthSchedule": "Monthly",
+      "Overridden": [
+        "GenerateHandler"
+      ],
+      "StartAt": "1753-01-01T06:00:00",
+      "Versions": []
+    }
+  ],
+  "LayeredFromGuid": "f9d15b1c-2784-4c84-8348-1e162d70b988",
+  "NeedResetAppliedCache": true,
+  "PublicFunctions": [
+    {
+      "Name": "DeleteContractById",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "id",
+          "ParameterType": "global::System.Int64",
+          "ParameterTypeFullName": "System.Int64"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "void",
+      "ReturnTypeFullName": "System.Void"
+    },
+    {
+      "Name": "GetContractIdsByKeyword",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "keyword",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.Collections.Generic.List<global::System.Int64>",
+      "ReturnTypeFullName": "System.Collections.Generic.List"
+    },
+    {
+      "Name": "ImportContractsFromXmlUI",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "fileBase64",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "fileName",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::litiko.Eskhata.Module.Contracts.Structures.Module.IResultImportXmlUI",
+      "ReturnTypeFullName": "litiko.Eskhata.Module.Contracts.Structures.Module.IResultImportXmlUI"
+    }
+  ],
+  "PublicStructures": [
+    {
+      "Name": "ResultImportXmlUI",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "Errors",
+          "IsList": true,
+          "IsNullable": true,
+          "TypeFullName": "global::System.Collections.Generic.List<global::System.String>"
+        },
+        {
+          "Name": "ImportedCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "TotalCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "DuplicateCount",
+          "TypeFullName": "global::System.Int32"
+        }
+      ],
+      "StructureNamespace": "litiko.Eskhata.Module.Contracts.Structures.Module"
+    }
+  ],
+  "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
+  "ResourceInterfaceNamespace": "litiko.Eskhata.Module.Contracts",
+  "ResourcesKeys": [],
+  "SpecialFolders": [],
+  "Version": "4.8.138.0",
+  "Widgets": [],
+  "Versions": [
+    {
+      "Type": "LayerModuleMetadata",
+      "Number": 8
+    },
+    {
+      "Type": "ModuleMetadata",
+      "Number": 8
+    }
+  ]
+}

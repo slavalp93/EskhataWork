@@ -15,14 +15,14 @@ namespace litiko.Integration.Server
     /// <summary>
     /// Интеграция. Обновление документа обмена.
     /// </summary>
-    /// <param name="args"></param>    
+    /// <param name="args"></param>
     public virtual void UpdateExchangeDoc(litiko.Integration.Server.AsyncHandlerInvokeArgs.UpdateExchangeDocInvokeArgs args)
     {
       var logPostfix = string.Format("ExchangeDocId = '{0}'", args.DocId);
       var logPrefix = "Integration. Async handler UpdateExchangeDoc.";
       Logger.DebugFormat("{0} Start. {1}", logPrefix, logPostfix);
       
-      var exchDoc =  Integration.ExchangeDocuments.GetAll().Where(d => d.Id == args.DocId).FirstOrDefault();      
+      var exchDoc =  Integration.ExchangeDocuments.GetAll().Where(d => d.Id == args.DocId).FirstOrDefault();
       if (exchDoc == null)
       {
         Logger.ErrorFormat("{0} ExchangeDocument with id = {1} not found.", logPrefix, args.DocId);
@@ -49,10 +49,10 @@ namespace litiko.Integration.Server
               break;
             case "Sent":
               exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Sent;
-              break;              
+              break;
             case "Error":
               exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
-              break;                
+              break;
           }
         }
         
@@ -68,19 +68,19 @@ namespace litiko.Integration.Server
               break;
             case "ReceivedPart":
               if (exchDoc.StatusRequestToRX == null || exchDoc.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.Awaiting)
-                exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;              
-              break;              
+                exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart;
+              break;
             case "ReceivedAll":
               if (exchDoc.StatusRequestToRX == null || exchDoc.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.Awaiting || exchDoc.StatusRequestToRX == Integration.ExchangeDocument.StatusRequestToRX.ReceivedPart)
                 exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
               break;
             case "Error":
               exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.Error;
-              break;              
-          }          
+              break;
+          }
         }
         
-        if (!string.IsNullOrEmpty(args.RequestToRXInfo) && exchDoc.RequestToRXInfo != args.RequestToRXInfo)
+        if (!string.IsNullOrEmpty(args.RequestToRXInfo) && string.IsNullOrEmpty(exchDoc.RequestToRXInfo))
           exchDoc.RequestToRXInfo = args.RequestToRXInfo.Length >= 1000 ? args.RequestToRXInfo.Substring(0, 999) : args.RequestToRXInfo;        
         
         if (args.IncreaseNumberOfPackages)
@@ -95,16 +95,16 @@ namespace litiko.Integration.Server
         var errorMessage = string.Format("{0}. An error occured. ErrorMessage – {1}, StackTrace - {2}. {3}", logPrefix, ex.Message, ex.StackTrace, logPostfix);
         Logger.Error(errorMessage);
         args.Retry = true;
-        //exchDoc.RequestToRXInfo = ex.Message.Length >= 1000 ? ex.Message.Substring(0, 999) : ex.Message;          
+        //exchDoc.RequestToRXInfo = ex.Message.Length >= 1000 ? ex.Message.Substring(0, 999) : ex.Message;
       }
       finally
       {
         // Снимаем блокировку с сущности.
         Locks.Unlock(exchDoc);
-      }      
+      }
       
       // Логируем завершение работы обработчика.
-      Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);       
+      Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);
     }
 
     /// <summary>
@@ -112,13 +112,13 @@ namespace litiko.Integration.Server
     /// </summary>
     /// <param name="args"></param>
     public virtual void ImportData(litiko.Integration.Server.AsyncHandlerInvokeArgs.ImportDataInvokeArgs args)
-    {      
+    {
       var logPostfix = string.Format("ExchangeDocId = '{0}'", args.ExchangeDocId);
       var logPrefix = "Integration. Async handler ImportData.";
       var errorList = new List<string>();
-      Logger.DebugFormat("{0} Start. {1}", logPrefix, logPostfix);      
+      Logger.DebugFormat("{0} Start. {1}", logPrefix, logPostfix);
       
-      var exchDoc =  Integration.ExchangeDocuments.GetAll().Where(d => d.Id == args.ExchangeDocId).FirstOrDefault();      
+      var exchDoc =  Integration.ExchangeDocuments.GetAll().Where(d => d.Id == args.ExchangeDocId).FirstOrDefault();
       if (exchDoc == null)
       {
         Logger.ErrorFormat("{0} ExchangeDocument with id = {1} not found.", logPrefix, args.ExchangeDocId);
@@ -145,65 +145,83 @@ namespace litiko.Integration.Server
           if (exchQueues.Count() > 0)
           {
             Logger.DebugFormat("{0} Creating full xml version. Packets count: {1}. {2}", logPrefix, exchDoc.RequestToRXPacketCount, logPostfix);
-            List<XElement> dataElements = new List<XElement>();
-            XElement headElement = null;
-            XElement requestElement = null;
             
-            foreach (var exchQueue in exchQueues)
+            // Если есть только одна часть с индексом пакета 0, берем ее, иначе - собираем из частей
+            if (exchQueues.Count() == 1 && exchQueues.FirstOrDefault()?.Name == Integration.Resources.VersionRequestToRXFormat(0).ToString())
             {
-              using (var xmlStream = new MemoryStream(exchQueue.Xml))
+              var exchQueue = exchQueues.FirstOrDefault();
+              using (var ms = new MemoryStream(exchQueue.Xml))
               {
-                XDocument doc = XDocument.Load(xmlStream);
-                var elements = doc.Descendants("Data").Elements("element");
-                dataElements.AddRange(elements);
-                if (headElement == null && requestElement == null)
-                {
-                  headElement = doc.Root.Element("head");
-                  requestElement = doc.Root.Element("request");
-                }                
-              }
-            }
-
-            // Создание новой версии XML
-            if (dataElements.Any())
-            {
-              using (MemoryStream ms = new MemoryStream())
-              {            
-                XmlWriterSettings xws = new XmlWriterSettings();
-                xws.OmitXmlDeclaration = false;
-                xws.Indent = true;
-                
-                using (XmlWriter xw = XmlWriter.Create(ms, xws))
-                {
-                  // Копирование структуры request без <Data>
-                  XElement newRequestElement = new XElement(requestElement);
-                  newRequestElement.Element("Data").Remove();
-          
-                  // Создание нового элемента <Data> с объединенными элементами
-                  XElement newDataElement = new XElement("Data", dataElements);
-          
-                  // Добавление нового <Data> к запросу
-                  newRequestElement.Add(newDataElement);
-                  
-                  // Создание нового XML документа
-                  XDocument newDoc = new XDocument(
-                    new XDeclaration("1.0", "UTF-8", null),  
-                    new XElement("root", headElement, newRequestElement)
-                  );
-                  newDoc.WriteTo(xw);
-                }
-                
                 exchDoc.CreateVersionFrom(ms, "xml");
-                exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;              
+                exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;
                 Logger.DebugFormat("{0} Full xml version created. {1}", logPrefix, logPostfix);
-                versionFullXML = exchDoc.LastVersion;  
-              }                            
-            }            
+                versionFullXML = exchDoc.LastVersion;                
+              }              
+            }
+            else
+            {
+              List<XElement> dataElements = new List<XElement>();
+              XElement headElement = null;
+              XElement requestElement = null;
+              
+              foreach (var exchQueue in exchQueues)
+              {
+                using (var xmlStream = new MemoryStream(exchQueue.Xml))
+                {
+                  XDocument doc = XDocument.Load(xmlStream);
+                  var elements = doc.Descendants("Data").Elements("element");
+                  if (!elements.Any())
+                    elements = doc.Descendants("Data").Elements();
+                  dataElements.AddRange(elements);
+                  if (headElement == null && requestElement == null)
+                  {
+                    headElement = doc.Root.Element("head");
+                    requestElement = doc.Root.Element("request");
+                  }                
+                }
+              }
+  
+              // Создание новой версии XML
+              if (dataElements.Any())
+              {
+                using (MemoryStream ms = new MemoryStream())
+                {            
+                  XmlWriterSettings xws = new XmlWriterSettings();
+                  xws.OmitXmlDeclaration = false;
+                  xws.Indent = true;
+                  
+                  using (XmlWriter xw = XmlWriter.Create(ms, xws))
+                  {
+                    // Копирование структуры request без <Data>
+                    XElement newRequestElement = new XElement(requestElement);
+                    newRequestElement.Element("Data").Remove();
+            
+                    // Создание нового элемента <Data> с объединенными элементами
+                    XElement newDataElement = new XElement("Data", dataElements);
+            
+                    // Добавление нового <Data> к запросу
+                    newRequestElement.Add(newDataElement);
+                    
+                    // Создание нового XML документа
+                    XDocument newDoc = new XDocument(
+                      new XDeclaration("1.0", "UTF-8", null),  
+                      new XElement("root", headElement, newRequestElement)
+                    );
+                    newDoc.WriteTo(xw);
+                  }
+                  
+                  exchDoc.CreateVersionFrom(ms, "xml");
+                  exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;              
+                  Logger.DebugFormat("{0} Full xml version created. {1}", logPrefix, logPostfix);
+                  versionFullXML = exchDoc.LastVersion;  
+                }                            
+              }            
+            }                        
           }          
           
           if (exchDoc.State.IsChanged)
-            exchDoc.Save();        
-        }        
+            exchDoc.Save();
+        }
         #endregion
         
         #region Обработка данных в зависимости от метода интеграции, указанного в xml
@@ -213,79 +231,105 @@ namespace litiko.Integration.Server
         }
         else
         {
-          XDocument xmlDoc = XDocument.Load(versionFullXML.Body.Read());
-          var dataElements = xmlDoc.Descendants("Data").Elements("element");                    
-          if (!dataElements.Any())
-          {
-            throw AppliedCodeException.Create("Empty Data node.");
-          }
-          
+          XDocument xmlDoc = XDocument.Load(versionFullXML.Body.Read());          
           var dictionary = xmlDoc.Root.Element("request").Element("dictionary").Value;
+          
+          // Проверка статуса обработки в ИС (<stateId> и <stateMsg>)                    
+          string state = xmlDoc.Root.Element("request")?.Element("stateId")?.Value;
+          string stateMsg = xmlDoc.Root.Element("request")?.Element("stateMsg")?.Value;
+          bool statusIS = state != "0";
+          if (!statusIS)
+            throw AppliedCodeException.Create($"State message from IS:{stateMsg}");         
+          
+          IEnumerable<XElement> dataElements;
+          if (dictionary == Constants.Module.IntegrationMethods.R_DR_SET_CONTRACT || dictionary == Constants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT)
+            dataElements = xmlDoc.Descendants("Data").Elements();
+          else
+            dataElements = xmlDoc.Descendants("Data").Elements("element");
+          
+          if (!dataElements.Any())
+            throw AppliedCodeException.Create("Empty Data node.");          
+          
           switch (dictionary)
           {
-            case "R_DR_GET_DEPART":
+            case Constants.Module.IntegrationMethods.R_DR_GET_DEPART:
               errorList = Functions.Module.R_DR_GET_DEPART(dataElements);
               break;
-            case "R_DR_GET_EMPLOYEES":
+            case Constants.Module.IntegrationMethods.R_DR_GET_EMPLOYEES:
               errorList = Functions.Module.R_DR_GET_EMPLOYEES(dataElements);
               break;
-            case "R_DR_GET_BUSINESSUNITS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_BUSINESSUNITS:
               errorList = Functions.Module.R_DR_GET_BUSINESSUNITS(dataElements);
               break;
-            case "R_DR_GET_COMPANY":
+            case Constants.Module.IntegrationMethods.R_DR_GET_COMPANY:
               // Обработка выполняется на клиенте;
               break;
-            case "R_DR_GET_BANK":
+            case Constants.Module.IntegrationMethods.R_DR_GET_BANK:
               // Обработка выполняется на клиенте;
               break;
-            case "R_DR_GET_COUNTRIES":
+            case Constants.Module.IntegrationMethods.R_DR_GET_PERSON:
+              // Обработка выполняется на клиенте;
+              break;              
+            case Constants.Module.IntegrationMethods.R_DR_GET_COUNTRIES:
               errorList = Functions.Module.R_DR_GET_COUNTRIES(dataElements);
               break;
-            case "R_DR_GET_OKOPF":
+            case Constants.Module.IntegrationMethods.R_DR_GET_OKOPF:
               errorList = Functions.Module.R_DR_GET_OKOPF(dataElements);
               break;
-            case "R_DR_GET_OKFS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_OKFS:
               errorList = Functions.Module.R_DR_GET_OKFS(dataElements);
               break;
-            case "R_DR_GET_OKONH":
+            case Constants.Module.IntegrationMethods.R_DR_GET_OKONH:
               errorList = Functions.Module.R_DR_GET_OKONH(dataElements);
               break;
-            case "R_DR_GET_OKVED":
+            case Constants.Module.IntegrationMethods.R_DR_GET_OKVED:
               errorList = Functions.Module.R_DR_GET_OKVED(dataElements);
               break;
-            case "R_DR_GET_COMPANYKINDS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_COMPANYKINDS:
               errorList = Functions.Module.R_DR_GET_COMPANYKINDS(dataElements);
               break;
-            case "R_DR_GET_TYPESOFIDCARDS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_TYPESOFIDCARDS:
               errorList = Functions.Module.R_DR_GET_TYPESOFIDCARDS(dataElements);
               break;
-            case "R_DR_GET_ECOLOG":
+            case Constants.Module.IntegrationMethods.R_DR_GET_ECOLOG:
               errorList = Functions.Module.R_DR_GET_ECOLOG(dataElements);
               break;
-            case "R_DR_GET_MARITALSTATUSES":
+            case Constants.Module.IntegrationMethods.R_DR_GET_MARITALSTATUSES:
               errorList = Functions.Module.R_DR_GET_MARITALSTATUSES(dataElements);
               break;
-            case "R_DR_GET_CURRENCY_RATES":
+            case Constants.Module.IntegrationMethods.R_DR_GET_CURRENCY_RATES:
               errorList = Functions.Module.R_DR_GET_CURRENCY_RATES(dataElements);
               break;
-            case "R_DR_GET_PAYMENT_REGIONS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_PAYMENT_REGIONS:
               errorList = Functions.Module.R_DR_GET_PAYMENT_REGIONS(dataElements);
               break;
-            case "R_DR_GET_TAX_REGIONS":
+            case Constants.Module.IntegrationMethods.R_DR_GET_TAX_REGIONS:
               errorList = Functions.Module.R_DR_GET_TAX_REGIONS(dataElements);
               break;
-            case "R_DR_GET_CONTRACT_VID":
+            case Constants.Module.IntegrationMethods.R_DR_GET_CONTRACT_VID:
               errorList = Functions.Module.R_DR_GET_CONTRACT_VID(dataElements);
               break;
-            case "R_DR_GET_CONTRACT_TYPE":
+            case Constants.Module.IntegrationMethods.R_DR_GET_CONTRACT_TYPE:
               errorList = Functions.Module.R_DR_GET_CONTRACT_TYPE(dataElements);
               break;
+            case Constants.Module.IntegrationMethods.R_DR_SET_CONTRACT:
+              errorList = Functions.Module.R_DR_SET_CONTRACT(dataElements, null, null);
+              break;
+            case Constants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT:
+              errorList = Functions.Module.R_DR_SET_PAYMENT_DOCUMENT(dataElements, null, null);
+              break;              
+            case Constants.Module.IntegrationMethods.R_DR_GET_REGIONS:
+              errorList = Functions.Module.R_DR_GET_REGIONS(dataElements);
+              break;
+            case Constants.Module.IntegrationMethods.R_DR_GET_CITIES:
+              errorList = Functions.Module.R_DR_GET_CITIES(dataElements);
+              break;              
           }
           
           if (errorList.Any())
           {
             exchDoc.StatusProcessingRx = Integration.ExchangeDocument.StatusProcessingRx.Error;
-            var lastError = errorList.Last();            
+            var lastError = errorList.Last();
             exchDoc.RequestToRXInfo = lastError.Length >= 1000 ? lastError.Substring(0, 999) : lastError;
             exchDoc.Save();
           }
@@ -303,10 +347,10 @@ namespace litiko.Integration.Server
         var errorMessage = string.Format("{0}. An error occured. ErrorMessage – {1}, StackTrace - {2}. {3}", logPrefix, ex.Message, ex.StackTrace, logPostfix);
         Logger.Error(errorMessage);
         errorList.Add(errorMessage);
-                
+        
         exchDoc.StatusProcessingRx = Integration.ExchangeDocument.StatusProcessingRx.Error;
         exchDoc.RequestToRXInfo = ex.Message.Length >= 1000 ? ex.Message.Substring(0, 999) : ex.Message;
-        exchDoc.Save();           
+        exchDoc.Save();
       }
       finally
       {
@@ -316,17 +360,56 @@ namespace litiko.Integration.Server
       
       if (errorList.Any())
       {
+        // Обновить статус интеграции "Ошибка" в документе
+        var document = Eskhata.OfficialDocuments.Null;
+        if (exchDoc.EntityId != null)
+        {
+          document = Eskhata.OfficialDocuments.GetAll().FirstOrDefault(d => d.Id == exchDoc.EntityId);
+          if (document != null)
+          {
+            if (!Locks.TryLock(document))
+            {
+              Logger.ErrorFormat("{0} Document with id = {1} is locked. Sent to retry", logPrefix, document.Id);
+              args.Retry = true;
+              return;
+            }
+            try
+            {
+              if (document.IntegrationStatuslitiko != Eskhata.OfficialDocument.IntegrationStatuslitiko.Error)
+              {
+                document.IntegrationStatuslitiko = Eskhata.OfficialDocument.IntegrationStatuslitiko.Error;
+                document.Save();
+                Logger.DebugFormat("{0} Document with id = {1} is updated.", logPrefix, document.Id);
+              }
+            }
+            catch (Exception ex)
+            {
+              Logger.ErrorFormat("{0} Error saving document id = {1}. Error: {2}", logPrefix, document.Id, ex.Message);
+              args.Retry = true;
+              return;              
+            }
+            finally
+            {
+              Locks.Unlock(document);
+            }
+          }
+        }
+          
         // Отправка уведомления роли "Ответственные за синхронизацию с учетными системами"
         Logger.Debug("Preparing to send notice about errors");        
-        var synchronizationResponsibleRole = Roles.GetAll().Where(r => r.Sid == litiko.Integration.Constants.Module.SynchronizationResponsibleRoleGuid).FirstOrDefault();
+        var synchronizationResponsibleRole = Roles.GetAll().Where(r => r.Sid == litiko.Integration.Constants.Module.RoleGuid.SynchronizationResponsibleRoleGuid).FirstOrDefault();
         if (synchronizationResponsibleRole == null)
           Logger.ErrorFormat("{0} SynchronizationResponsibleRole not found. Notice was not sent! {1}", logPrefix, logPostfix);
         else
         {
           var newTask = Sungero.Workflow.SimpleTasks.CreateWithNotices(Resources.NoticeSubjectForErrorTask, synchronizationResponsibleRole);
           newTask.NeedsReview = false;
-          newTask.ActiveText = string.Join(Environment.NewLine, errorList);;
+          newTask.ActiveText = string.Join(Environment.NewLine, errorList);
           newTask.Attachments.Add(exchDoc);
+          
+          if (document != null)
+            newTask.Attachments.Add(document);
+          
           newTask.Start();
           Logger.DebugFormat("{0} Notice with Id '{1}' has been started. {2}", logPrefix, newTask.Id, logPostfix);
         }
@@ -335,7 +418,7 @@ namespace litiko.Integration.Server
         Logger.Debug("{0} There are no errors. {1}", logPrefix, logPostfix);
       
       // Логируем завершение работы обработчика.
-      Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);      
+      Logger.DebugFormat("{0} Finish. {1}", logPrefix, logPostfix);
     }
 
   }

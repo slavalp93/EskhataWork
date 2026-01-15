@@ -103,4 +103,97 @@
   <data name="Property_FSZN" xml:space="preserve">
     <value>FSZN, %</value>
   </data>
+  <data name="Action_ShowDuplicates" xml:space="preserve">
+    <value>ShowDuplicates</value>
+  </data>
+  <data name="Action_ShowDuplicatesDescription" xml:space="preserve">
+    <value>ShowDuplicates</value>
+  </data>
+  <data name="Action_ShowDuplicatesHint" xml:space="preserve">
+    <value>ShowDuplicates</value>
+  </data>
+  <data name="Action_ShowDuplicatesConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ShowDuplicatesConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Property_VATMethod" xml:space="preserve">
+    <value>VAT accounting method</value>
+  </data>
+  <data name="Enum_VATMethod_Included" xml:space="preserve">
+    <value>Included in the contract amount</value>
+  </data>
+  <data name="Enum_VATMethod_OnTop" xml:space="preserve">
+    <value>Accrued on top of the contract amount</value>
+  </data>
+  <data name="Enum_VATMethod_DuringCustoms" xml:space="preserve">
+    <value>Paid during customs procedures</value>
+  </data>
+  <data name="Property_IncomeTaxMethod" xml:space="preserve">
+    <value>Income tax method</value>
+  </data>
+  <data name="Enum_IncomeTaxMethod_NotHold" xml:space="preserve">
+    <value>Doesn't hold</value>
+  </data>
+  <data name="Enum_IncomeTaxMethod_FromAmount1" xml:space="preserve">
+    <value>Deducted from the contract amount</value>
+  </data>
+  <data name="Enum_IncomeTaxMethod_FromAmount2" xml:space="preserve">
+    <value>Deducted from the contract amount with a limit</value>
+  </data>
+  <data name="Enum_IncomeTaxMethod_FromAmount3" xml:space="preserve">
+    <value>Deducted from the contract amount minus the pension contribution</value>
+  </data>
+  <data name="Property_IncomeTaxLimit" xml:space="preserve">
+    <value>Limit</value>
+  </data>
+  <data name="Property_FSZNMethod" xml:space="preserve">
+    <value>FSZN method</value>
+  </data>
+  <data name="Enum_FSZNMethod_NotAccrued" xml:space="preserve">
+    <value>Not accrued</value>
+  </data>
+  <data name="Enum_FSZNMethod_AccruedOnTop" xml:space="preserve">
+    <value>Accrued on top of the contract amount</value>
+  </data>
+  <data name="Property_PensionContributionMethod" xml:space="preserve">
+    <value>Pens. contribution method</value>
+  </data>
+  <data name="Enum_PensionContributionMethod_NotHold" xml:space="preserve">
+    <value>Doesn't hold</value>
+  </data>
+  <data name="Enum_PensionContributionMethod_FromAmount" xml:space="preserve">
+    <value>Deducted from the contract amount</value>
+  </data>
+  <data name="Action_Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Action_ExportDescription" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Action_ExportHint" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Action_ExportConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ExportConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="Action_ImportDescription" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="Action_ImportHint" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="Action_ImportConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_ImportConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
 </root>

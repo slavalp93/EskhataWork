@@ -133,7 +133,7 @@
 	&lt;request-type&gt;R_DR_GET_DATA&lt;/request-type&gt;
 	&lt;dictionary&gt;{2}&lt;/dictionary&gt;
 	&lt;lastId&gt;{3}&lt;/lastId&gt;
-	&lt;BIC&gt;{4}&lt;/BIC&gt;
+	&lt;bic&gt;{4}&lt;/bic&gt;
 &lt;/request&gt;
 &lt;/root&gt;</value>
   </data>
@@ -144,7 +144,7 @@
     <value>Data updated successfully.</value>
   </data>
   <data name="IntegrationMethodNotFound" xml:space="preserve">
-    <value>Integration method {0} not found.</value>
+    <value>Integration method not found.</value>
   </data>
   <data name="VersionRequestToRX_" xml:space="preserve">
     <value>RequestToRX_</value>
@@ -164,5 +164,11 @@
 	&lt;lastExchangeDate&gt;{4}&lt;/lastExchangeDate&gt;
 &lt;/request&gt;
 &lt;/root&gt;</value>
+  </data>
+  <data name="RoleIntegrationUsers" xml:space="preserve">
+    <value>Integration module users</value>
+  </data>
+  <data name="DescriptionRoleIntegrationUsers" xml:space="preserve">
+    <value>Provides access to the visibility of the Integration module.</value>
   </data>
 </root>

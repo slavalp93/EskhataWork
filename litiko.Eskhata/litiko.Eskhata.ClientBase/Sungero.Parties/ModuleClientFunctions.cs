@@ -4,10 +4,10 @@ using System.Linq;
 using Sungero.Core;
 using Sungero.CoreEntities;
 
+
 namespace litiko.Eskhata.Module.Parties.Client
 {
   partial class ModuleFunctions
   {
-
   }
 }

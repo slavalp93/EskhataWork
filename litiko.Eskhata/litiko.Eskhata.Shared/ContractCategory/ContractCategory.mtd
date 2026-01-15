@@ -1,0 +1,87 @@
+{
+  "$type": "Sungero.Metadata.EntityMetadata, Sungero.Metadata",
+  "NameGuid": "37af61ed-29ac-4b13-bd1b-4a9e3d94d101",
+  "Name": "ContractCategory",
+  "Actions": [
+    {
+      "NameGuid": "6e34e08a-74f0-479e-b701-bcc8a6387157",
+      "Name": "AddToMappinglitiko",
+      "ActionArea": "Collection",
+      "GenerateHandler": true,
+      "IsBulkSelectAction": true,
+      "IsVisibleInDesktopClient": false,
+      "LargeIconName": "Action_AddToMappinglitiko_large_6e34e08a74f0479eb701bcc8a6387157.png",
+      "SmallIconName": "Action_AddToMappinglitiko_small_6e34e08a74f0479eb701bcc8a6387157.png"
+    }
+  ],
+  "BaseGuid": "eb34ad64-f23b-4c9f-9d48-74834fbbe33e",
+  "CanBeNavigationPropertyType": true,
+  "CreationAreaMetadata": {
+    "NameGuid": "b84bad87-65ba-4490-96b1-cec3e1294f3b",
+    "Name": "CreationArea",
+    "Buttons": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "ExtraSearchProperties": [],
+  "FilterPanel": {
+    "NameGuid": "b0125fbd-3b91-4dbb-914a-689276216404",
+    "Name": "FilterPanel",
+    "Controls": [],
+    "IsAncestorMetadata": true,
+    "Versions": []
+  },
+  "IconResourcesKeys": [],
+  "LayeredFromGuid": "eb34ad64-f23b-4c9f-9d48-74834fbbe33e",
+  "OperationsClass": "",
+  "Properties": [
+    {
+      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "4289ae81-adbb-4195-af93-cb8df6add31a",
+      "Name": "DocumentKinds",
+      "EntityGuid": "151d378e-5265-485f-8baa-80f8b5a19375",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "EntityGuid"
+      ],
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "RibbonCardMetadata": {
+    "NameGuid": "cce9dda8-04ae-4f9a-bd35-9a02867777ac",
+    "Name": "RibbonCard",
+    "Categories": [],
+    "Elements": [],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": [],
+    "RibbonKind": "Card"
+  },
+  "RibbonCollectionMetadata": {
+    "NameGuid": "1eb53530-791a-4baa-9006-a23a992c5327",
+    "Name": "RibbonCollection",
+    "Categories": [],
+    "Elements": [
+      {
+        "$type": "Sungero.Metadata.RibbonActionButtonMetadata, Sungero.Metadata",
+        "NameGuid": "20bdadf9-3838-4f50-966f-a179a3665feb",
+        "Name": "AddToMappinglitiko",
+        "ActionGuid": "6e34e08a-74f0-479e-b701-bcc8a6387157",
+        "ButtonSize": "Large",
+        "Index": 11,
+        "ParentGuid": "9107f29a-b5d6-43d9-8656-5ea9f3b17604"
+      }
+    ],
+    "Groups": [],
+    "IsAncestorMetadata": true,
+    "Pages": []
+  },
+  "Versions": [
+    {
+      "Type": "EntityMetadata",
+      "Number": 12
+    }
+  ]
+}

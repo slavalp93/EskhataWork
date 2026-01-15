@@ -11,114 +11,26 @@ namespace litiko.Eskhata.Client
   {
     public virtual void FillFromABSlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
     {
-      #region Предпроверки      
+      
       // "Ответственные за синхронизацию с учетными системами"
       // "Ответственные за контрагентов"
       // "Администраторы"
-      var canExecute = Users.Current.IncludedIn(Integration.PublicConstants.Module.SynchronizationResponsibleRoleGuid) || Users.Current.IncludedIn(Roles.Administrators) || Users.Current.IncludedIn(Sungero.Docflow.PublicConstants.Module.RoleGuid.CounterpartiesResponsibleRole);
+      var canExecute = Users.Current.IncludedIn(Integration.PublicConstants.Module.RoleGuid.SynchronizationResponsibleRoleGuid) || Users.Current.IncludedIn(Roles.Administrators) || Users.Current.IncludedIn(Sungero.Docflow.PublicConstants.Module.RoleGuid.CounterpartiesResponsibleRole);
       if (!canExecute)
       {
         e.AddError(Integration.Resources.AvailableActionMessage);
         return;
       }
       
-      var company = Companies.As(_obj);
-      var bank = Banks.As(_obj);
-      var person = People.As(_obj);
-      
-      if ((company != null || bank != null) && string.IsNullOrEmpty(_obj.TIN))
-      {
-        e.AddError(Companies.Resources.ErrorNeedFillTin);
-        return;
-      }
-      
-      if (bank != null && string.IsNullOrEmpty(bank.BIC))
-      {
-        e.AddError(Banks.Resources.ErrorNeedFillBIC);
-        return;
-      }      
-      
-      var integrationMethodName = string.Empty;
-      if (company != null)
-        integrationMethodName = "R_DR_GET_COMPANY";
-      else if (bank != null)
-        integrationMethodName = "R_DR_GET_BANK";
-      else if (person != null)
-        integrationMethodName = "R_DR_GET_PERSON";
-              
-      var integrationMethod = Integration.IntegrationMethods.GetAll().Where(x => x.Name == integrationMethodName).FirstOrDefault();
-      if (integrationMethod == null)
-      {
-        e.AddError(litiko.Integration.Resources.IntegrationMethodNotFoundFormat(integrationMethodName));
-        return;        
-      }       
-      #endregion
-      
-      var exchDoc = Integration.PublicFunctions.Module.Remote.CreateExchangeDocument();
-      exchDoc.IntegrationMethod = integrationMethod;      
-      exchDoc.Save();
-      var exchDocId = exchDoc.Id;      
-      
-      //var errorMessage = string.Empty;
-      var errorMessage =  Integration.PublicFunctions.Module.Remote.SendRequestToIS(exchDoc, 0, _obj);
+      string errorMessage = litiko.Integration.PublicFunctions.Module.IntegrationClientAction(_obj);
       if (!string.IsNullOrEmpty(errorMessage))
       {
-        exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Error;
-        exchDoc.RequestToISInfo = errorMessage.Length >= 1000 ? errorMessage.Substring(0, 999) : errorMessage;
-        exchDoc.Save();
         e.AddError(errorMessage);
         return;
       }
       else
-      {
-        exchDoc.StatusRequestToIS = Integration.ExchangeDocument.StatusRequestToIS.Sent;        
-        exchDoc.Save();
-      }
-            
-      long exchangeQueueId = Integration.PublicFunctions.Module.Remote.WaitForGettingDataFromIS(exchDocId, 1000, 10);
-      if (exchangeQueueId > 0)
-      {                
-        
-        #region Создать версию из xml
-        var exchQueue = litiko.Integration.ExchangeQueues.Get(exchangeQueueId);
-        using (var xmlStream = new System.IO.MemoryStream(exchQueue.Xml))
-        {
-          exchDoc.CreateVersionFrom(xmlStream, "xml");
-          exchDoc.LastVersion.Note = Integration.Resources.VersionRequestToRXFull;                                    
-          exchDoc.StatusRequestToRX = Integration.ExchangeDocument.StatusRequestToRX.ReceivedFull;
-          exchDoc.RequestToRXInfo = "Saved";
-          exchDoc.RequestToRXPacketCount = 1;
-          exchDoc.Save();
-        }        
-        #endregion
-        
-        var errorList = new List<string>();        
-        if (company != null)
-          errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_COMPANY(exchDocId, _obj);
-        else if (bank != null)
-          errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_BANK(exchDocId, _obj);
-        else if (person != null)
-          errorList = litiko.Integration.PublicFunctions.Module.Remote.R_DR_GET_PERSON(exchDocId, _obj);
-                
-        if (errorList.Any())
-        {
-          var lastError = errorList.LastOrDefault();          
-          exchDoc.RequestToRXInfo = lastError.Length >= 1000 ? lastError.Substring(0, 999) : lastError;
-          exchDoc.StatusProcessingRx = Integration.ExchangeDocument.StatusProcessingRx.Error;          
-          exchDoc.Save();
-          
-          e.AddInformation(lastError);
-        }
-        else
-        {
-          exchDoc.StatusProcessingRx = Integration.ExchangeDocument.StatusProcessingRx.Success;          
-          exchDoc.Save();
-          
-          e.AddInformation(litiko.Integration.Resources.DataUpdatedSuccessfully);
-        }        
-      }
-      else
-        e.AddInformation(litiko.Integration.Resources.ResponseNotReceived);      
+        e.AddInformation(litiko.Integration.Resources.DataUpdatedSuccessfully);      
+      
     }
 
     public virtual bool CanFillFromABSlitiko(Sungero.Domain.Client.CanExecuteActionArgs e)
@@ -152,6 +64,12 @@ namespace litiko.Eskhata.Client
           if (!approvalTask.OtherGroup.All.Contains(doc))
             approvalTask.OtherGroup.All.Add(doc);          
         }
+        
+        // Проверка: <Контрагент>
+        approvalTask.Subject = Eskhata.Counterparties.Resources.VerificationTaskSubjectFormat(_obj.Name);
+        
+        // Прошу проверить контрагента и дать заключение.
+        approvalTask.ActiveText = Eskhata.Counterparties.Resources.VerificationTaskActiveText;
         
         approvalTask.Show();
         e.CloseFormAfterAction = true;

@@ -12,7 +12,7 @@ namespace litiko.NSI.Server
 
     public override void Initializing(Sungero.Domain.ModuleInitializingEventArgs e)
     {
-      // Выдать права на справочники
+      #region Права на справочники
       var allUsers = Roles.AllUsers;
       if (allUsers != null)
       {
@@ -33,8 +33,19 @@ namespace litiko.NSI.Server
         FrequencyOfPayments.AccessRights.Save();
         
         CurrencyRates.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
-        CurrencyRates.AccessRights.Save();        
+        CurrencyRates.AccessRights.Save();
+
+        AddressTypes.AccessRights.Grant(allUsers, DefaultAccessRightsTypes.Read);
+        AddressTypes.AccessRights.Save();
       }
+
+      var roleContractsManagers = Roles.GetAll().FirstOrDefault(r => r.Sid == ContractsEskhata.PublicConstants.Module.RoleGuid.ContractsManagers);
+      if (roleContractsManagers != null)
+      {
+        AddressTypes.AccessRights.Grant(roleContractsManagers, DefaultAccessRightsTypes.FullAccess);
+        AddressTypes.AccessRights.Save();        
+      }
+      #endregion      
     }
   }
 }

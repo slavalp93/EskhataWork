@@ -71,4 +71,10 @@
     <value>The following fields in the document card must be filled in:
 {0}</value>
   </data>
+  <data name="RoleContractsManagersName" xml:space="preserve">
+    <value>"Contracts" Module Managers</value>
+  </data>
+  <data name="RoleContractsManagersDescription" xml:space="preserve">
+    <value>Users with access to objects in the "Contracts" module</value>
+  </data>
 </root>

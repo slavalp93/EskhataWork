@@ -191,6 +191,13 @@ namespace litiko.CollegiateAgencies.Server
             meeting = litiko.Eskhata.Meetings.As(minutes.Meeting);
         }
         
+        if (litiko.CollegiateAgencies.Projectsolutions.Is(document))
+        {
+          var projectSolution = litiko.CollegiateAgencies.Projectsolutions.As(document);
+          if (projectSolution.Meeting != null)
+            meeting = litiko.Eskhata.Meetings.As(projectSolution.Meeting);
+        }
+        
         if (meeting != null)
         {
           // Председатель
@@ -225,6 +232,13 @@ namespace litiko.CollegiateAgencies.Server
             meeting = litiko.Eskhata.Meetings.As(minutes.Meeting);
         }
         
+        if (litiko.CollegiateAgencies.Projectsolutions.Is(document))
+        {
+          var projectSolution = litiko.CollegiateAgencies.Projectsolutions.As(document);
+          if (projectSolution.Meeting != null)
+            meeting = litiko.Eskhata.Meetings.As(projectSolution.Meeting);
+        }        
+        
         if (meeting != null && meeting.MeetingCategorylitiko?.Name == "Заседание Правления")
         {                                        
           var roleAdditionalBoardMembers = Roles.GetAll(x => x.Sid == litiko.CollegiateAgencies.PublicConstants.Module.RoleGuid.AdditionalBoardMembers).FirstOrDefault();
@@ -240,7 +254,26 @@ namespace litiko.CollegiateAgencies.Server
         }
       }
       #endregion
-
+      
+      #region Авторы проект решений
+      if (_obj.Type == litiko.CollegiateAgencies.ApprovalRole.Type.ProjectSolutionsAuthors)
+      {
+        if (litiko.Eskhata.Minuteses.Is(document))
+        {
+          var minutes = litiko.Eskhata.Minuteses.As(document);
+          var meeting = litiko.Eskhata.Meetings.As(minutes.Meeting);
+          
+          if (meeting != null)
+          {
+            var projectSolutionsAuthors = meeting.ProjectSolutionslitiko.Select(x => x.ProjectSolution.PreparedBy);
+            
+            if (projectSolutionsAuthors.Any())
+              result.AddRange(projectSolutionsAuthors);
+          }
+        }
+      }
+      #endregion
+      
       return result;
     }
   }

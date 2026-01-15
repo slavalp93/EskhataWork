@@ -35,7 +35,7 @@ namespace litiko.Eskhata.Shared
     public void FillVoters()
     {      
       var votingStage = litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.Voting;
-      var isVoting = this.HasCustomStage(votingStage);
+      var isVoting = this.HasCustomStage(votingStage) || _obj.ApprovalRule?.Name == litiko.CollegiateAgencies.PublicConstants.Module.VotingApprovalRuleName;
       
       if (isVoting)
       {
@@ -61,12 +61,12 @@ namespace litiko.Eskhata.Shared
     {
       base.SetVisibleProperties(refreshParameters);
                               
-      bool isVoting = this.HasCustomStage(litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.Voting);
+      bool isVoting = this.HasCustomStage(litiko.Eskhata.ApprovalStage.CustomStageTypelitiko.Voting) ||
+        _obj.ApprovalRule?.Name == litiko.CollegiateAgencies.PublicConstants.Module.VotingApprovalRuleName;
+      
       _obj.State.Properties.Voterslitiko.IsVisible = isVoting;
-      if (isVoting)
-      {
-        _obj.State.Properties.ReqApprovers.IsVisible = false;
-      }            
+      _obj.State.Properties.Desigionslitiko.IsVisible = isVoting;
+      _obj.State.Properties.ReqApprovers.IsVisible = isVoting ? false : true;      
     }    
   }
 }

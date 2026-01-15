@@ -124,4 +124,31 @@
   <data name="Property_PCBIsPaymentInsurance" xml:space="preserve">
     <value>Страховой полис</value>
   </data>
+  <data name="Action_ShowDuplicates" xml:space="preserve">
+    <value>Показать дубли</value>
+  </data>
+  <data name="Action_ShowDuplicatesHint" xml:space="preserve">
+    <value>Показать дубли</value>
+  </data>
+  <data name="Action_ShowDuplicatesDescription" xml:space="preserve">
+    <value>Показать дубли</value>
+  </data>
+  <data name="Action_Export" xml:space="preserve">
+    <value>Экспорт</value>
+  </data>
+  <data name="Action_ExportHint" xml:space="preserve">
+    <value>Экспорт</value>
+  </data>
+  <data name="Action_ExportDescription" xml:space="preserve">
+    <value>Экспорт</value>
+  </data>
+  <data name="Action_Import" xml:space="preserve">
+    <value>Импорт</value>
+  </data>
+  <data name="Action_ImportHint" xml:space="preserve">
+    <value>Импорт</value>
+  </data>
+  <data name="Action_ImportDescription" xml:space="preserve">
+    <value>Импорт</value>
+  </data>
 </root>

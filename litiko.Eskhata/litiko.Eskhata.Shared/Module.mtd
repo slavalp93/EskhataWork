@@ -64,6 +64,21 @@
       "Id": "e99ae7e2-edb7-4904-a19a-4577f07609a4",
       "MaxVersion": "",
       "MinVersion": "4.8.138.0"
+    },
+    {
+      "Id": "df83a2ea-8d43-4ec4-a34a-2e61863014df",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
+    },
+    {
+      "Id": "593dcc11-15ee-49f2-b4ef-bf4cf7867055",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
+    },
+    {
+      "Id": "4e25caec-c722-4740-bcfd-c4f803840ac6",
+      "MaxVersion": "",
+      "MinVersion": "4.8.138.0"
     }
   ],
   "DesktopViews": [],
@@ -322,6 +337,26 @@
     {
       "ItemId": "bcd78809-1194-4fe3-9039-024c65a26e71",
       "PreviousItemId": "4065a5df-f8c6-44c3-8457-50e87aa14f52"
+    },
+    {
+      "ItemId": "45798ef5-a7c3-42fa-8233-8850723195f7",
+      "PreviousItemId": "bcd78809-1194-4fe3-9039-024c65a26e71"
+    },
+    {
+      "ItemId": "7b13c192-2de7-42c8-bdc7-a7be4e9f7b7b",
+      "PreviousItemId": "45798ef5-a7c3-42fa-8233-8850723195f7"
+    },
+    {
+      "ItemId": "5c156641-2ca6-4687-8c1a-2f056a947add",
+      "PreviousItemId": "7b13c192-2de7-42c8-bdc7-a7be4e9f7b7b"
+    },
+    {
+      "ItemId": "b7eef6ab-bd70-4fbd-b726-debd244a790d",
+      "PreviousItemId": "5c156641-2ca6-4687-8c1a-2f056a947add"
+    },
+    {
+      "ItemId": "37af61ed-29ac-4b13-bd1b-4a9e3d94d101",
+      "PreviousItemId": "b7eef6ab-bd70-4fbd-b726-debd244a790d"
     }
   ],
   "IconResourcesKeys": [],
@@ -377,14 +412,17 @@
     "INNNonRezidentPersonError",
     "INNRezidentPersonError",
     "VersionCreatedSuccessfully",
-    "LastVersionApproved"
+    "LastVersionApproved",
+    "ExactlyXDigits",
+    "NoMoreThanXCharacters",
+    "ExactlyXChar"
   ],
   "ServerAssemblyName": "litiko.Eskhata.Server",
   "ServerNamespace": "litiko.Eskhata.Server",
   "SharedAssemblyName": "litiko.Eskhata.Shared",
   "SharedNamespace": "litiko.Eskhata.Shared",
   "SpecialFolders": [],
-  "Version": "4.8.138.135",
+  "Version": "4.8.138.164",
   "Widgets": [],
   "Versions": [
     {

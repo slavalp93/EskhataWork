@@ -104,6 +104,14 @@
     {
       "ItemId": "d1374008-9e6e-4f41-82a8-a9852f23ace6",
       "PreviousItemId": "7948764c-2f80-4639-a157-5c22023fcf2b"
+    },
+    {
+      "ItemId": "d779302f-b699-498e-b301-4f2c08febe9f",
+      "PreviousItemId": "d1374008-9e6e-4f41-82a8-a9852f23ace6"
+    },
+    {
+      "ItemId": "c584e7b4-d1ff-432e-9c2a-26ddd5cc5775",
+      "PreviousItemId": "d779302f-b699-498e-b301-4f2c08febe9f"
     }
   ],
   "HandledEvents": [
@@ -116,10 +124,39 @@
   "IsolatedAssemblyName": "litiko.NSI.Isolated",
   "IsolatedNamespace": "litiko.NSI.Isolated",
   "IsVisible": false,
+  "Jobs": [
+    {
+      "NameGuid": "03c55f03-b143-42e6-bac9-8bce19836264",
+      "Name": "ClearCitiesAndRegions",
+      "GenerateHandler": true,
+      "IsEnabled": false,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
+    }
+  ],
   "Overridden": [
     "IsVisible"
   ],
   "PublicFunctions": [
+    {
+      "Name": "AddToMapping",
+      "IsRemote": true,
+      "Parameters": [
+        {
+          "Name": "entityType",
+          "ParameterType": "global::System.String",
+          "ParameterTypeFullName": "System.String"
+        },
+        {
+          "Name": "objIds",
+          "ParameterType": "global::System.Collections.Generic.List<global::System.Int64>",
+          "ParameterTypeFullName": "System.Collections.Generic.List"
+        }
+      ],
+      "Placement": "Shared",
+      "ReturnType": "global::System.String",
+      "ReturnTypeFullName": "System.String"
+    },
     {
       "Name": "GetContractsVsPaymentDoc",
       "Parameters": [
@@ -150,16 +187,48 @@
       "ReturnTypeFullName": "litiko.NSI.IResponsibilityMatrix, Sungero.Domain.Interfaces"
     }
   ],
-  "PublicStructures": [],
+  "PublicStructures": [
+    {
+      "Name": "ResultImportXml",
+      "IsPublic": true,
+      "Properties": [
+        {
+          "Name": "TotalCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "ImportedCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "ChangedCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "SkippedCount",
+          "TypeFullName": "global::System.Int32"
+        },
+        {
+          "Name": "Errors",
+          "IsList": true,
+          "IsNullable": true,
+          "TypeFullName": "global::System.Collections.Generic.List<global::System.String>"
+        }
+      ],
+      "StructureNamespace": "litiko.NSI.Structures.Module"
+    }
+  ],
   "ResourceInterfaceAssemblyName": "Sungero.Domain.Interfaces",
   "ResourceInterfaceNamespace": "litiko.NSI",
-  "ResourcesKeys": [],
+  "ResourcesKeys": [
+    "DuplicatesFound"
+  ],
   "ServerAssemblyName": "litiko.NSI.Server",
   "ServerNamespace": "litiko.NSI.Server",
   "SharedAssemblyName": "litiko.NSI.Shared",
   "SharedNamespace": "litiko.NSI.Shared",
   "SpecialFolders": [],
-  "Version": "0.0.1.135",
+  "Version": "0.0.1.164",
   "Widgets": [],
   "Versions": [
     {

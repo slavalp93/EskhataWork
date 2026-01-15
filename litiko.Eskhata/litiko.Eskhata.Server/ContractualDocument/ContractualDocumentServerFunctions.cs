@@ -26,50 +26,159 @@ namespace litiko.Eskhata.Server
     /// </summary>
     [Remote(IsPure = true)]
     public List<string> CheckCounterpartyProperties(ICounterparty counterparty)
-    {      
-      var invalidProperties = new List<string>();      
-      if (counterparty != null)
+    {
+      var invalidProperties = new List<string>();
+      if (counterparty == null)
+        return invalidProperties;
+
+      var company = Companies.As(counterparty);
+      var person = People.As(counterparty);
+      var bank = Banks.As(counterparty);      
+
+      // Кеш метаданных свойств по имени
+      var propertiesByName = new Dictionary<string, Sungero.Metadata.PropertyMetadata>();
+
+      var requsitesList = new List<string>();
+      if (company != null)
       {
-        var objType = counterparty.GetType().GetFinalType();        
-        var objMetadata = objType.GetEntityMetadata();        
+        propertiesByName = company.GetEntityMetadata().Properties.ToDictionary(p => p.Name, p => p);
         
-        // Список отслеживаемых свойств
-        var requsitesList = new List<string>();
-        if (Companies.Is(counterparty))        
+        requsitesList.Add("Name");
+        requsitesList.Add("LegalName");
+        requsitesList.Add("TIN");
+        requsitesList.Add("OKFSlitiko");
+        requsitesList.Add("OKONHlitiko");
+        requsitesList.Add("OKVEDlitiko");
+        requsitesList.Add("EINlitiko");
+        requsitesList.Add("OKOPFlitiko");
+        requsitesList.Add("City");
+        requsitesList.Add("AddressTypelitiko");
+        requsitesList.Add("LegalAddress");
+      }
+      else if (person != null)
+      {
+        propertiesByName = person.GetEntityMetadata().Properties.ToDictionary(p => p.Name, p => p);
+        
+        requsitesList.Add("LastName");
+        requsitesList.Add("FirstName");        
+        requsitesList.Add("TIN");                                
+        requsitesList.Add("Sex");
+        requsitesList.Add("DateOfBirth");
+        requsitesList.Add("City");
+        requsitesList.Add("AddressTypelitiko");
+        requsitesList.Add("LegalAddress");
+        
+        requsitesList.Add("IdentityKind");
+        requsitesList.Add("IdentitySeries");
+        requsitesList.Add("IdentityNumber");
+        requsitesList.Add("IdentityDateOfIssue");
+        requsitesList.Add("IdentityExpirationDate");
+        requsitesList.Add("IdentityAuthority");
+      }
+      else if (bank != null)
+      {
+        propertiesByName = bank.GetEntityMetadata().Properties.ToDictionary(p => p.Name, p => p);
+        
+        requsitesList.Add("Name");
+        requsitesList.Add("LegalName");
+        requsitesList.Add("BIC");
+        requsitesList.Add("City");
+        requsitesList.Add("AddressTypelitiko");
+        requsitesList.Add("LegalAddress");
+      }
+      
+      // Оставляем в списке только реально существующие свойства
+      requsitesList = requsitesList
+        .Where(name => propertiesByName.ContainsKey(name))
+        .ToList();
+
+      // Базовая проверка обязательных реквизитов
+      foreach (var propertyName in requsitesList)
+      {
+        if (!IsFilled(counterparty, propertiesByName, propertyName))
+          invalidProperties.Add(GetLocalizedName(propertiesByName, propertyName));
+      }
+
+      // (Account + Bank) ИЛИ AccountEskhatalitiko для Companies/People
+      if (Companies.Is(counterparty) || People.Is(counterparty))
+      {
+        var hasAccountEsk = IsFilled(counterparty, propertiesByName, "AccountEskhatalitiko");
+        var hasAccount    = IsFilled(counterparty, propertiesByName, "Account");
+        var hasBank       = IsFilled(counterparty, propertiesByName, "Bank");
+
+        if (!hasAccountEsk)
         {
-          requsitesList.Add("TIN");
-          requsitesList.Add("EINlitiko");
-          requsitesList.Add("LegalAddress");
-          requsitesList.Add("Phones");
-          requsitesList.Add("Email");
-          requsitesList.Add("Account");
-          requsitesList.Add("Bank");
+          if (!hasAccount)
+            invalidProperties.Add(GetLocalizedName(propertiesByName, "Account"));
+
+          if (!hasBank)
+            invalidProperties.Add(GetLocalizedName(propertiesByName, "Bank"));
         }
-        if (People.Is(counterparty))
+      }
+
+      // CorrespondentAccount ИЛИ AccountEskhatalitiko для Banks
+      if (Banks.Is(counterparty))
+      {
+        var hasCorrAccount = IsFilled(counterparty, propertiesByName, "CorrespondentAccountlitiko");
+        var hasAccountEsk  = IsFilled(counterparty, propertiesByName, "AccountEskhatalitiko");
+
+        if (!hasCorrAccount && !hasAccountEsk)
         {
-          requsitesList.Add("LastNameTGlitiko");
-          requsitesList.Add("FirstNameTGlitiko");
-          requsitesList.Add("MiddleNameTGlitiko");
-          requsitesList.Add("LegalAddress");
-          requsitesList.Add("TIN");
-          requsitesList.Add("EINlitiko");                    
-          requsitesList.Add("Account");
-          requsitesList.Add("Bank");
-        }        
-                
-        var properties = objMetadata.Properties.Where(p => requsitesList.Contains(p.Name));      
-        foreach (var propertyMetadata in properties)
-        {          
-          if (propertyMetadata.PropertyType != Sungero.Metadata.PropertyType.Collection)
-          {
-            var propertyValue = propertyMetadata.GetValue(counterparty);
-            if (propertyValue == null)
-              invalidProperties.Add(propertyMetadata.GetLocalizedName());
-          }
+          invalidProperties.Add(GetLocalizedName(propertiesByName, "CorrespondentAccountlitiko"));
+          invalidProperties.Add(GetLocalizedName(propertiesByName, "AccountEskhatalitiko"));
         }
       }
       
+      // СИН не обязателен только для 'Аренда'. Во всех остальных случаях — обязателен.
+      if (person != null)
+      {
+        var docKind = Sungero.Docflow.DocumentKinds.Null;
+        if (SupAgreements.Is(_obj))
+          docKind = SupAgreements.As(_obj).LeadingDocument?.DocumentKind;
+        else
+          docKind = _obj.DocumentKind;
+        
+        var kindName = (docKind?.Name ?? "").Trim();
+        
+        if (!kindName.Equals("Аренда", StringComparison.InvariantCultureIgnoreCase))
+        {
+          if (!IsFilled(person, propertiesByName, "SINlitiko"))
+            invalidProperties.Add(GetLocalizedName(propertiesByName, "SINlitiko"));
+        }
+
+      }
+      
       return invalidProperties;
+    }
+
+    private bool IsFilled(ICounterparty counterparty, IDictionary<string, Sungero.Metadata.PropertyMetadata> propertiesByName, string propertyName)
+    {
+      Sungero.Metadata.PropertyMetadata prop;
+      if (!propertiesByName.TryGetValue(propertyName, out prop))
+        return false;
+
+      if (prop.PropertyType == Sungero.Metadata.PropertyType.Collection)
+        return false;
+
+      var propValue = prop.GetValue(counterparty);
+      if (propValue == null)
+        return false;
+
+      if (propValue is string s)
+        return !string.IsNullOrWhiteSpace(s);
+
+      return true;
+    }
+
+    
+    private string GetLocalizedName(IDictionary<string, Sungero.Metadata.PropertyMetadata> propertiesByName, string propertyName)
+    {
+      Sungero.Metadata.PropertyMetadata prop;
+      
+      if (propertiesByName.TryGetValue(propertyName, out prop))
+        return prop.GetLocalizedName();
+      
+      return propertyName;
     }
     
     /// <summary>
@@ -97,9 +206,17 @@ namespace litiko.Eskhata.Server
         
         //block.AddLabel(ContractualDocuments.Resources.CounterpartryInfoFormat(VATPayer, NUNRezident, reliability, reviewDate, "\t\t\t\t"));        
 
-        block.AddLabel("Плательщик НДС:                       ", styleLabel);
-        block.AddLabel(VATPayer);
-        block.AddLabel("\t\t\t\t ");
+        if (Eskhata.Companies.Is(counterparty) || Eskhata.Banks.Is(counterparty))
+        {
+          block.AddLabel("Плательщик НДС:                       ", styleLabel);
+          block.AddLabel(VATPayer);        
+        }
+        else
+        {
+          block.AddLabel("\t\t\t\t\t\t     ", styleLabel);
+          block.AddLabel("      ");        
+        }        
+        block.AddLabel("\t\t\t\t");
         block.AddLabel("Благонадежность:", styleLabel);
         block.AddLabel(reliability);
         block.AddLineBreak();
@@ -172,15 +289,11 @@ namespace litiko.Eskhata.Server
                    .Select(l => Employees.As(l.Member))
                    .FirstOrDefault(e => e != null);
         
-        var responsibleAccountantFIO = responsibleEmployee?.Name ?? string.Empty;
-        var responsibleDepartment = responsibleEmployee?.Department?.Name ?? string.Empty;
+        var responsibleAccountantFIO = responsibleEmployee?.Name ?? string.Empty;        
 
         block.AddLabel("Ответственный бухгалтер: ", styleLabel);
         block.AddLabel(responsibleAccountantFIO);      
         block.AddLineBreak();                
-        block.AddLabel("Ответственное подразделение: ", styleLabel);
-        block.AddLabel(responsibleDepartment);      
-        block.AddLineBreak();
         
         string accountEskhata = string.Empty;
         string accountAnother = string.Empty;

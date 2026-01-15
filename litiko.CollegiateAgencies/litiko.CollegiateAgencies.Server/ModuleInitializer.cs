@@ -24,9 +24,15 @@ namespace litiko.CollegiateAgencies.Server
       CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.MeetingInvited, "Приглашенные сотрудники");
       CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.MeetingPresentKOU, "Присутствующие члены КОУ");
       CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.MeetingPresentDOP, "Присутствующие доп. члены КОУ");
+      CreateApprovalRole(litiko.CollegiateAgencies.ApprovalRole.Type.ProjectSolutionsAuthors, "Авторы проект решений");
       
       CreateVotingDefaultApprovalRule();
       CreateApprovalVotingUpdateStage();
+      
+      CreateVotingDefaultApprovalRule2();
+      CreateApprovalVotingTaskStage();
+      CreateApprovalVotingUnpauseStage();
+      CreateApprovalSentNoticeStage();
     }
     
     /// <summary>
@@ -237,14 +243,14 @@ namespace litiko.CollegiateAgencies.Server
     /// Создать правило Голосование.
     /// </summary>
     public static void CreateVotingDefaultApprovalRule()
-    {
-      InitializationLogger.Debug("Init: Create default voting approval rule");
-            
+    {                  
       var isRulealreadyCreated = Sungero.Docflow.ApprovalRuleBases.GetAll().Any(r => r.IsDefaultRule == true && r.Name == Constants.Module.VotingApprovalRuleName);            
       var docKindAgenda = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(Sungero.Meetings.PublicConstants.Module.AgendaKind);
       if (isRulealreadyCreated || docKindAgenda == null)
         return;
-            
+      
+      InitializationLogger.Debug("Init: Create default voting approval rule");
+      
       var stages = new List<Enumeration> { Sungero.Docflow.ApprovalStage.StageType.SimpleAgr, Sungero.Docflow.ApprovalStage.StageType.Notice };
       var rule = Sungero.Docflow.ApprovalRules.Create();
       rule.Status = Sungero.Docflow.ApprovalRuleBase.Status.Active;
@@ -258,7 +264,31 @@ namespace litiko.CollegiateAgencies.Server
       rule.Save();     
     }
 
-
+    /// <summary>
+    /// Создать правило Голосование по решению.
+    /// </summary>
+    public static void CreateVotingDefaultApprovalRule2()
+    {                 
+      var isRulealreadyCreated = Sungero.Docflow.ApprovalRuleBases.GetAll().Any(r => r.IsDefaultRule == true && r.Name == Constants.Module.VotingApprovalRule2Name);            
+      var docKindProjectSolution = Sungero.Docflow.PublicFunctions.DocumentKind.GetNativeDocumentKind(PublicConstants.Module.DocumentKindGuids.ProjectSolution);
+      if (isRulealreadyCreated || docKindProjectSolution == null)
+        return;
+      
+      InitializationLogger.Debug("Init: Create default voting approval rule 2");
+      
+      var stages = new List<Enumeration> { Sungero.Docflow.ApprovalStage.StageType.SimpleAgr };
+      var rule = Sungero.Docflow.ApprovalRules.Create();
+      rule.Status = Sungero.Docflow.ApprovalRuleBase.Status.Active;
+      rule.Name = Constants.Module.VotingApprovalRule2Name;
+      rule.DocumentFlow = Sungero.Docflow.ApprovalRuleBase.DocumentFlow.Inner;
+      rule.IsDefaultRule = true;
+      rule.DocumentKinds.AddNew().DocumentKind = docKindProjectSolution;
+      
+      Sungero.Docflow.PublicInitializationFunctions.Module.SetRuleStages(rule, stages);
+      Sungero.Docflow.PublicFunctions.ApprovalRuleBase.CreateAutoTransitions(rule);
+      rule.Save();     
+    }
+    
     /// <summary>
     /// Создание записи нового типа сценария "Этап обновления результатов голосования в совещании".
     /// </summary>
@@ -269,6 +299,36 @@ namespace litiko.CollegiateAgencies.Server
         return;
       var stage = litiko.CollegiateAgencies.ApprovalVotingUpdateStages.Create();
       stage.Name = "Обновление результатов голосования в совещании";
+      stage.TimeoutInHours = 4;
+      stage.Save();
+    }    
+
+    /// <summary>
+    /// Создание записи нового типа сценария "Голосование по решению".
+    /// </summary>
+    public static void CreateApprovalVotingTaskStage()
+    {      
+      if (litiko.CollegiateAgencies.ApprovalVotingTaskStages.GetAll().Any())
+        return;
+      
+      InitializationLogger.DebugFormat("Init: Create approval voting task stage.");
+      var stage = litiko.CollegiateAgencies.ApprovalVotingTaskStages.Create();
+      stage.Name = "Голосование по решению";
+      stage.TimeoutInHours = 4;
+      stage.Save();
+    }
+    
+    /// <summary>
+    /// Создание записи нового типа сценария "Голосование. Cнятие с паузы".
+    /// </summary>
+    public static void CreateApprovalVotingUnpauseStage()
+    {      
+      if (litiko.CollegiateAgencies.ApprovalVotingUnpauseSatges.GetAll().Any())
+        return;
+      
+      InitializationLogger.DebugFormat("Init: Create approval voting unpause stage.");
+      var stage = litiko.CollegiateAgencies.ApprovalVotingUnpauseSatges.Create();
+      stage.Name = "Голосование. Cнятие с паузы";
       stage.TimeoutInHours = 4;
       stage.Save();
     }    
@@ -313,6 +373,22 @@ namespace litiko.CollegiateAgencies.Server
         }
       }
       return role;
+    }    
+    
+    /// <summary>
+    /// Создание записи нового типа сценария "Уведомление авторов проектов решений о рассмотрении вопроса".
+    /// </summary>
+    public static void CreateApprovalSentNoticeStage()
+    {      
+      if (litiko.CollegiateAgencies.ApprovalSentNoticeStages.GetAll().Any())
+        return;
+      
+      InitializationLogger.DebugFormat("Init: Create approval sent notice stage.");
+      var stage = litiko.CollegiateAgencies.ApprovalSentNoticeStages.Create();
+      stage.Name = "Уведомление авторов проектов решений о рассмотрении вопроса";
+      stage.Subject = "Рассмотрен вопрос";
+      stage.TimeoutInHours = 4;
+      stage.Save();
     }    
   }
 }

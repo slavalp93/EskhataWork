@@ -9,6 +9,29 @@ namespace litiko.Eskhata.Client
 {
   partial class ContractualDocumentActions
   {
+    public override void CreateFromTemplate(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      base.CreateFromTemplate(e);
+    }
+
+    public override bool CanCreateFromTemplate(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      return base.CanCreateFromTemplate(e) && _obj.IsStandard.GetValueOrDefault();
+    }
+
+    public override void ExportToABSlitiko(Sungero.Domain.Client.ExecuteActionArgs e)
+    {
+      base.ExportToABSlitiko(e);
+    }
+
+    public override bool CanExportToABSlitiko(Sungero.Domain.Client.CanExecuteActionArgs e)
+    {
+      // Доступно роли «Администраторы» и «Ответственные за синхронизацию с учетными системами» и «Менеджеры модуля "Договоры"»
+      return Users.Current.IncludedIn(Roles.Administrators) || 
+        Users.Current.IncludedIn(Integration.PublicConstants.Module.RoleGuid.SynchronizationResponsibleRoleGuid) ||
+        Users.Current.IncludedIn(ContractsEskhata.PublicConstants.Module.RoleGuid.ContractsManagers);
+    }
+
     public virtual void CreateWaybilllitiko(Sungero.Domain.Client.ExecuteActionArgs e)
     {
       var waybill = litiko.Eskhata.Functions.ContractualDocument.Remote.CreateWaybill();      
@@ -27,6 +50,13 @@ namespace litiko.Eskhata.Client
       {
         Dialogs.ShowMessage(litiko.Eskhata.ContractualDocuments.Resources.ReservtionNumberIsRequired, MessageType.Warning);
         throw new OperationCanceledException();
+      }
+      
+      List<string> invalidProperties = Functions.ContractualDocument.Remote.CheckCounterpartyProperties(_obj, litiko.Eskhata.Counterparties.As(_obj.Counterparty));
+      if (invalidProperties.Any())
+      {        
+        Dialogs.ShowMessage(Eskhata.ContractualDocuments.Resources.NeedToFillCounterpartyPropertiesFormat(string.Join(", ", invalidProperties)), MessageType.Warning);
+        throw new OperationCanceledException();        
       }
       
       base.SendForApproval(e);

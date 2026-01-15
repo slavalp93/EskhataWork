@@ -176,7 +176,7 @@
     <value>Tax rate</value>
   </data>
   <data name="Property_IncomeTaxRatelitiko" xml:space="preserve">
-    <value>Income tax</value>
+    <value>Income tax rate</value>
   </data>
   <data name="Property_IncomeTaxAmountlitiko" xml:space="preserve">
     <value>Income tax amount</value>
@@ -216,5 +216,14 @@
   </data>
   <data name="Property_CurrencyContractlitiko" xml:space="preserve">
     <value>Contract currency</value>
+  </data>
+  <data name="Property_UpdateRquiredlitiko" xml:space="preserve">
+    <value>Update required in ABS</value>
+  </data>
+  <data name="Property_AmountToBePaidlitiko" xml:space="preserve">
+    <value>Amount to be paid</value>
+  </data>
+  <data name="Property_AmountOfExpenseslitiko" xml:space="preserve">
+    <value>Amount of expenses</value>
   </data>
 </root>

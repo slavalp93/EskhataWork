@@ -256,20 +256,6 @@
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
           "ParentGuid": "9e3df66a-01e8-408a-aa4c-a5c92a1227fb",
           "PropertyGuid": "c0fedb36-4bff-4978-a39e-ee43154bc84b",
-          "RowNumber": 3,
-          "RowSpan": 1,
-          "Settings": [],
-          "Versions": []
-        },
-        {
-          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
-          "NameGuid": "687c94fc-6770-4c17-bb0b-57a69433b001",
-          "Name": "PostalAddresslitiko",
-          "ColumnNumber": 0,
-          "ColumnSpan": 2,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-          "ParentGuid": "9e3df66a-01e8-408a-aa4c-a5c92a1227fb",
-          "PropertyGuid": "4a8264be-df2c-4175-b1f2-776d388e2042",
           "RowNumber": 4,
           "RowSpan": 1,
           "Settings": [],
@@ -323,7 +309,7 @@
           "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
           "ParentGuid": "149a02cc-c0af-4bec-8a1b-8d6c0bab1d81",
-          "PropertyGuid": "92979094-ab38-4de2-87ff-b564dff51880",
+          "PropertyGuid": "b30c9d26-1fc7-493c-b257-26c3049655a4",
           "RowNumber": 5,
           "RowSpan": 1,
           "Settings": [],
@@ -582,6 +568,19 @@
           "RowNumber": 2,
           "RowSpan": 1,
           "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "3768f34a-c701-4215-9d22-55363910728d",
+          "Name": "AddressTypelitikolitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "9e3df66a-01e8-408a-aa4c-a5c92a1227fb",
+          "PropertyGuid": "0a32c7cc-79c2-4829-87fe-ec0216734647",
+          "RowNumber": 3,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,
@@ -599,24 +598,21 @@
   "OperationsClass": "",
   "Properties": [
     {
-      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "2c2de8eb-61e4-47c4-9b82-c22eb80c3132",
-      "Name": "OKVEDlitiko",
-      "EntityGuid": "11112b47-b520-4515-b7d3-7fb32993f8c7",
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "92979094-ab38-4de2-87ff-b564dff51880",
+      "Name": "CorrespondentAccount",
+      "CanBeSearch": false,
       "IsAncestorMetadata": true,
+      "IsEnabled": false,
+      "IsShowedInList": false,
+      "IsVisibility": false,
       "Overridden": [
-        "EntityGuid"
-      ]
-    },
-    {
-      "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "9c8c1bda-16cb-49df-aa4e-02e12c326afe",
-      "Name": "OKONHlitiko",
-      "EntityGuid": "8e0d72a8-fb7c-4787-abd6-d5183f1a7361",
-      "IsAncestorMetadata": true,
-      "Overridden": [
-        "EntityGuid"
-      ]
+        "IsEnabled",
+        "IsShowedInList",
+        "CanBeSearch",
+        "IsVisibility"
+      ],
+      "Versions": []
     },
     {
       "$type": "Sungero.Metadata.CollectionPropertyMetadata, Sungero.Metadata",
@@ -662,6 +658,15 @@
       "FlatListInStandaloneLookup": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "fd9189a6-1998-4065-91f1-5ddeceda26cb"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "b30c9d26-1fc7-493c-b257-26c3049655a4",
+      "Name": "CorrespondentAccountlitiko",
+      "Code": "CorrAcclitiko",
+      "Length": 20,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "9c71ccc8-73df-49ce-9a9d-1aefac505a0d"
     }
   ],
   "PublicStructures": [],

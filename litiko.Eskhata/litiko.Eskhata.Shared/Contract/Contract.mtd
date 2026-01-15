@@ -5,15 +5,6 @@
   "AccessRightsMode": "Both",
   "Actions": [
     {
-      "NameGuid": "b807b816-dafa-4b17-acac-f06aa306c543",
-      "Name": "CreateFromFile",
-      "GenerateHandler": true,
-      "IsAncestorMetadata": true,
-      "Overridden": [
-        "GenerateHandler"
-      ]
-    },
-    {
       "NameGuid": "3ce1db8c-5796-4b0b-b5e7-2a76050237be",
       "Name": "CreateLegalOpinionlitiko",
       "ActionArea": "CardAndCollection",
@@ -624,7 +615,7 @@
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
           "NameGuid": "81311079-3832-4944-82ef-590e7a78573f",
           "Name": "AmountForPeriodlitikolitiko",
-          "ColumnNumber": 1,
+          "ColumnNumber": 0,
           "ColumnSpan": 1,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
           "ParentGuid": "9783066c-8edb-4db0-ad30-8b6b82ac8b14",
@@ -658,6 +649,19 @@
           "RowNumber": 5,
           "RowSpan": 1,
           "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "d2a46a63-46e4-4c83-871f-9c4785d79d90",
+          "Name": "Controllitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 2,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+          "ParentGuid": "9783066c-8edb-4db0-ad30-8b6b82ac8b14",
+          "PropertyGuid": "87ef78f8-fe0f-4a1c-8383-cb4016c94790",
+          "RowNumber": 3,
+          "RowSpan": 1,
+          "Settings": []
         }
       ],
       "IsAncestorMetadata": true,
@@ -668,13 +672,97 @@
     }
   ],
   "HandledEvents": [
-    "CreatedServer"
+    "CreatedServer",
+    "ShowingClient"
   ],
   "IconResourcesKeys": [],
   "LayeredFromGuid": "f37c7e63-b134-4446-9b5b-f8811f6c9666",
   "OpenCardByDefaultInCollection": true,
   "OperationsClass": "",
   "Properties": [
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "3f77d83a-4524-42fa-b7ee-bb8e2f400b10",
+      "Name": "ExternalId",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "IsShowedInList"
+      ]
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "a8cc5c2a-cf89-4611-a4f4-524975ad6abb",
+      "Name": "OurSignatory",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "ed9f1bb0-d1cf-467e-8067-aca85212e44d",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "fba56283-50dd-4ef9-8d22-e339feff7440",
+      "Name": "Department",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "50e10772-7165-4916-b8c5-b9ed30c3c151",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "5f8cb060-a4c0-425d-97ff-e465ccc5b404",
+      "Name": "IsStandard",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "fba56283-50dd-4ef9-8d22-e339feff7440",
+      "Versions": []
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "6c316926-04e7-453d-9d0e-57b89e8f477b",
+      "Name": "PurchaseOrderNumber",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "38f94413-bf41-4f87-b5a7-cf9f1485d61f"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "38f94413-bf41-4f87-b5a7-cf9f1485d61f",
+      "Name": "VatRate",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "d01721b5-5731-4638-a4ef-f7c33181310e"
+    },
+    {
+      "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
+      "NameGuid": "08598cbc-3d38-4dac-a193-c0fac61637d1",
+      "Name": "VatAmount",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "7bead9d6-4768-4538-8925-4d223a99ca78"
+    },
+    {
+      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "90dcb094-0fea-422c-b6f8-5f28d51f0782",
+      "Name": "Contact",
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "PreviousPropertyGuid"
+      ],
+      "PreviousPropertyGuid": "6c316926-04e7-453d-9d0e-57b89e8f477b",
+      "Versions": []
+    },
     {
       "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
       "NameGuid": "50e10772-7165-4916-b8c5-b9ed30c3c151",
@@ -821,6 +909,9 @@
           "Code": "Postpay"
         }
       ],
+      "HandledEvents": [
+        "ValueInputClient"
+      ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
       "PreviousPropertyGuid": "cfc30ce1-e272-49b8-a20b-928fb8f2b26d"
     },
@@ -861,6 +952,9 @@
       "NameGuid": "4fae7cfa-4767-44cf-899b-01a5f92fe698",
       "Name": "AmountForPeriodlitiko",
       "Code": "AmountForPerio",
+      "HandledEvents": [
+        "ChangedShared"
+      ],
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
       "PreviousPropertyGuid": "47987ff0-97f5-494f-aa73-a3218227cd8a"
     },
@@ -869,16 +963,16 @@
       "NameGuid": "d3d4ab8f-b082-41c7-ad52-8a2bdf448906",
       "Name": "AccDebtCreditlitiko",
       "Code": "AccDebtCreditl",
-      "Length": 34,
+      "Length": 20,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-      "PreviousPropertyGuid": "4fae7cfa-4767-44cf-899b-01a5f92fe698"
+      "PreviousPropertyGuid": "87ef78f8-fe0f-4a1c-8383-cb4016c94790"
     },
     {
       "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
       "NameGuid": "e9d15626-c373-4bf4-98d0-aa3c739e70a9",
       "Name": "AccFutureExpenselitiko",
       "Code": "AccFutureExpen",
-      "Length": 34,
+      "Length": 20,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
       "PreviousPropertyGuid": "d3d4ab8f-b082-41c7-ad52-8a2bdf448906"
     },
@@ -911,6 +1005,16 @@
       "FlatListInStandaloneLookup": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "8470fc48-267e-4164-aa3f-40ef8e422251"
+    },
+    {
+      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
+      "NameGuid": "87ef78f8-fe0f-4a1c-8383-cb4016c94790",
+      "Name": "AmountForPeriodInWordslitiko",
+      "CanBeSearch": false,
+      "Code": "AmountFPInW",
+      "IsShowedInList": false,
+      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
+      "PreviousPropertyGuid": "4fae7cfa-4767-44cf-899b-01a5f92fe698"
     }
   ],
   "PublicFunctions": [

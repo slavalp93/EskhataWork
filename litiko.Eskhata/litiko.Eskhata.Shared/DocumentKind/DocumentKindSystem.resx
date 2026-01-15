@@ -64,4 +64,19 @@
   <data name="Property_ExternalIdlitiko" xml:space="preserve">
     <value>ID in external system</value>
   </data>
+  <data name="Action_AddToMappinglitiko" xml:space="preserve">
+    <value>Add to mapping</value>
+  </data>
+  <data name="Action_AddToMappinglitikoDescription" xml:space="preserve">
+    <value>Add to mapping</value>
+  </data>
+  <data name="Action_AddToMappinglitikoHint" xml:space="preserve">
+    <value>Add to mapping</value>
+  </data>
+  <data name="Action_AddToMappinglitikoConfirmationMessage" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Action_AddToMappinglitikoConfirmationDescription" xml:space="preserve">
+    <value />
+  </data>
 </root>

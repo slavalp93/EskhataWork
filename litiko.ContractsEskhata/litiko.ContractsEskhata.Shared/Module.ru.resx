@@ -71,4 +71,10 @@
     <value>Требуется заполнить следующие поля в карточке документа:
 {0}</value>
   </data>
+  <data name="RoleContractsManagersName" xml:space="preserve">
+    <value>Менеджеры модуля "Договоры"</value>
+  </data>
+  <data name="RoleContractsManagersDescription" xml:space="preserve">
+    <value>Пользователи с доступом к объектам модуля "Договоры"</value>
+  </data>
 </root>
