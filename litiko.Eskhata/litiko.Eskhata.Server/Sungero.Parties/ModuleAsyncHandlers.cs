@@ -83,6 +83,40 @@ namespace litiko.Eskhata.Module.Parties.Server
                                            result.ImportedCount++;
                                          }
                                          else result.DuplicateCompanies++;
+                                         Logger.Debug($"Created Company with: " +
+                                                      $"ID: {company.Id}| " +
+                                                      $"ExternalID: {company.ExternalId}| " +
+                                                      $"Name: {company.Name}| " +
+                                                      $"LegalName: {company.LegalName}| " +
+                                                      $"INN: {company.TIN}| " +
+                                                      $"KPP: {company.TRRC}| " +
+                                                      $"OKPO: {company.NCEO}| " +
+                                                      $"IName: {company.Inamelitiko}| " +
+                                                      $"Nonresident: {company.Nonresident}| " +
+                                                      $"NuRezident: {company.NUNonrezidentlitiko}| " +
+                                                      $"OKOPF: {(company.OKOPFlitiko != null ? company.OKOPFlitiko.ExternalId : "null")}| " +
+                                                      $"OKFS: {(company.OKFSlitiko != null ? company.OKFSlitiko.ExternalId : "null")}| " +
+                                                      $"OKONH: {(company.OKONHlitiko != null ? company.OKONHlitiko.ExternalId : "null")}| " +
+                                                      $"OKVED: {(company.OKVEDlitiko != null ? company.OKVEDlitiko.ExternalId : "null")}| " +
+                                                      $"RegNum: {company.RegNumlitiko}| " +
+                                                      $"Numbers: {company.Numberslitiko}| " +
+                                                      $"Business: {company.Businesslitiko}| " +
+                                                      $"EnterpriseType: {(company.EnterpriseTypelitiko != null ? company.EnterpriseTypelitiko.Name : "null")}| " +
+                                                      $"Country: {(company.Countrylitiko != null ? company.Countrylitiko.Name : "null")}| " +
+                                                      $"City: {(company.City != null ? company.City.Name : "null")}| " +
+                                                      $"AddressType: {company.AddressTypelitiko}| " +
+                                                      $"PostAddress: {company.PostalAddress}| " +
+                                                      $"LegalAddress: {company.LegalAddress}| " +
+                                                      $"Street: {company.Streetlitiko}| " +
+                                                      $"BuildingNumber: {company.HouseNumberlitiko}| " +
+                                                      $"Phone: {company.Phones}| " +
+                                                      $"Email: {company.Email}| " +
+                                                      $"Bank: {company.Bank}| " +
+                                                      $"WebSite: {company.Homepage}| " +
+                                                      $"VatPayer: {company.VATPayerlitiko}| " +
+                                                      $"Reliability: {company.Reliabilitylitiko}| " +
+                                                      $"CorrAcc: {company.Account}| " +
+                                                      $"InternalAcc: {company.AccountEskhatalitiko}|");
                                          company.Save();
                                        }
                                      }
@@ -99,6 +133,43 @@ namespace litiko.Eskhata.Module.Parties.Server
                                            result.ImportedCount++;
                                          }
                                          else result.DuplicatePersons++;
+                                         Logger.Debug($"Created Person with: " +
+                                                      $"Id={person.Id}| " +
+                                                      $"ExternalID={person.ExternalId}| " +
+                                                      $"LastName={person.LastName}| " +
+                                                      $"FirstName={person.FirstName}| " +
+                                                      $"MiddleName={person.MiddleName}| " +
+                                                      $"Nonresident={person.Nonresident}| " +
+                                                      $"NuRezident={person.NUNonrezidentlitiko}| " +
+                                                      $"IName={person.Inamelitiko}| " +
+                                                      $"DatePers={person.DateOfBirth:dd.MM.yyyy}| " +
+                                                      $"Sex={person.Sex}| " +
+                                                      $"MariageSt={(person.FamilyStatuslitiko != null ? person.FamilyStatuslitiko.Name : "null")}| " +
+                                                      $"INN={person.TIN}| " +
+                                                      $"IIN={person.SINlitiko}| " +
+                                                      $"Country={(person.Citizenship != null ? person.Citizenship.Name : "null")}| " +
+                                                      $"DocBirthPlace={person.BirthPlace}| " +
+                                                      $"PostAddress={person.PostalAddress}| " +
+                                                      $"Email={person.Email}| " +
+                                                      $"Bank={person.Bank}|" +
+                                                      $"Phone={person.Phones}| " +
+                                                      $"City={(person.City != null ? person.City.Name : "null")}| " +
+                                                      $"AddressType: {person.AddressTypelitiko}| " +
+                                                      $"Street={person.Streetlitiko}| " +
+                                                      $"BuildingNumber={person.HouseNumberlitiko}| " +
+                                                      $"WebSite={person.Homepage}| " +
+                                                      $"TaxNonResident={person.NUNonrezidentlitiko}| " +
+                                                      $"VatPayer={person.VATPayerlitiko}| " +
+                                                      $"Reliability={person.Reliabilitylitiko}| " +
+                                                      $"CorrAcc={person.Account}| " +
+                                                      $"InternalAcc={person.AccountEskhatalitiko}| " +
+                                                      $"Identity -> " +
+                                                      $"Kind={(person.IdentityKind != null ? person.IdentityKind.Name : "null")}| " +
+                                                      $"Num={person.IdentityNumber}| " +
+                                                      $"Ser={person.IdentitySeries}| " +
+                                                      $"Who={person.IdentityAuthority}| " +
+                                                      $"DateBegin={person.IdentityDateOfIssue:dd.MM.yyyy}| " +
+                                                      $"DateEnd={person.IdentityExpirationDate:dd.MM.yyyy}|");
                                          person.Save();
                                        }
                                      }
@@ -171,6 +242,7 @@ namespace litiko.Eskhata.Module.Parties.Server
       company.Name = companyElement.Element("Name")?.Value.Trim() ?? "Без имени";
       company.LegalName = companyElement.Element("LONG_NAME")?.Value.Trim();
       company.Inamelitiko = companyElement.Element("I_NAME")?.Value.Trim();
+      company.EINlitiko = companyElement.Element("IIN")?.Value.Trim(); // у юрлица вместо иин идет РЯМ
       company.Nonresident = ParseBoolSafe(companyElement.Element("REZIDENT")?.Value);
       company.NUNonrezidentlitiko = ParseBoolSafe(companyElement.Element("NU_REZIDENT")?.Value);
       company.TRRC = companyElement.Element("KPP")?.Value;
@@ -252,7 +324,7 @@ namespace litiko.Eskhata.Module.Parties.Server
       person.Nonresident = ParseBoolSafe(personElement.Element("REZIDENT")?.Value);
       person.Inamelitiko = personElement.Element("I_NAME")?.Value?.Trim();
       person.TIN = isINN;
-      person.SINlitiko = personElement.Element("I_IIN")?.Value;
+      person.SINlitiko = personElement.Element("IIN")?.Value;
       person.BirthPlace = personElement.Element("DOC_BIRTH_PLACE")?.Value;
       person.PostalAddress = personElement.Element("PostAdress")?.Value;
       person.Email = personElement.Element("Email")?.Value;
@@ -299,39 +371,72 @@ namespace litiko.Eskhata.Module.Parties.Server
     // =====================================================================
     // УДАЛЕНИЕ МИГРИРОВАННЫХ
     // =====================================================================
-    public virtual void DeleteMigratedPartiesAsync(litiko.Eskhata.Module.Parties.Server.AsyncHandlerInvokeArgs.DeleteMigratedPartiesAsynclitikoInvokeArgs args)
+    public virtual void DeleteMigratedPartiesAsynclitiko(litiko.Eskhata.Module.Parties.Server.AsyncHandlerInvokeArgs.DeleteMigratedPartiesAsynclitikoInvokeArgs args)
     {
-      int deleted = 0;
+      // 1. Отключаем автоматический повтор при ошибках
+      args.Retry = false;
+      int deletedCount = 0;
+      int errorCount = 0;
+      var errorDetails = new List<string>();
+
+      // 2. Получаем ID всех мигрированных
       var companyIds = Eskhata.Companies.GetAll(c => c.IsMigratedlitiko == true).Select(c => c.Id).ToList();
       var personIds = Eskhata.People.GetAll(p => p.IsMigratedlitiko == true).Select(p => p.Id).ToList();
-
-      int batchSize = 50;
       
-      // Компании
-      for (int i = 0; i < companyIds.Count; i += batchSize) {
-        var batch = companyIds.Skip(i).Take(batchSize).ToList();
-        Transactions.Execute(() => {
-                               foreach (var id in batch) {
-                                 var obj = Eskhata.Companies.Get(id);
-                                 if (Locks.GetLockInfo(obj).IsLocked) Locks.Unlock(obj);
-                                 Eskhata.Companies.Delete(obj);
-                                 deleted++;
-                               }
-                             });
-      }
+      Logger.DebugFormat("[MIGR_DELETE] Начинаю удаление: Компаний - {0}, Персон - {1}", companyIds.Count, personIds.Count);
 
-      // Персоны
-      for (int i = 0; i < personIds.Count; i += batchSize) {
-        var batch = personIds.Skip(i).Take(batchSize).ToList();
-        Transactions.Execute(() =>
-                             {
-                               foreach (var id in batch) {
-                                 var obj = Eskhata.People.Get(id);
-                                 if (Locks.GetLockInfo(obj).IsLocked) Locks.Unlock(obj);
-                                 Eskhata.People.Delete(obj);
-                                 deleted++;
-                               }
-                             });
+      // 3. Функция удаления (внутренняя для удобства)
+      // Мы будем удалять по одному, чтобы ссылки на одном объекте не блокировали удаление других
+      Action<long, bool> safeDelete = (id, isCompany) => 
+      {
+        try 
+        {
+          // Каждое удаление в своей маленькой транзакции
+          Transactions.Execute(() => 
+          {
+            IEntity obj = isCompany ? (IEntity)Eskhata.Companies.Get(id) : (IEntity)Eskhata.People.Get(id);
+            if (obj != null)
+            {
+              if (Locks.GetLockInfo(obj).IsLocked) Locks.Unlock(obj);
+              
+              if (isCompany) Eskhata.Companies.Delete((litiko.Eskhata.ICompany)obj);
+              else Eskhata.People.Delete((litiko.Eskhata.IPerson)obj);
+              
+              deletedCount++;
+            }
+          });
+        }
+        catch (Exception ex)
+        {
+          errorCount++;
+          // Логируем только уникальные причины ошибок, чтобы не раздувать лог
+          if (errorDetails.Count < 10) errorDetails.Add(ex.Message);
+          Logger.DebugFormat("[MIGR_DELETE] Не удалось удалить {0} ID {1}: {2}", isCompany ? "Компанию" : "Персону", id, ex.Message);
+        }
+      };
+
+      // 4. Запускаем удаление
+      foreach (var id in companyIds) safeDelete(id, true);
+      foreach (var id in personIds) safeDelete(id, false);
+
+      // 5. Уведомление пользователю
+      var author = Employees.GetAll(e => e.Id == args.AuthorId).FirstOrDefault();
+      if (author != null)
+      {
+        var notice = Sungero.Workflow.SimpleTasks.CreateWithNotices("Результат очистки контрагентов", author);
+        var sb = new System.Text.StringBuilder();
+        sb.AppendLine("Очистка завершена.");
+        sb.AppendLine(string.Format("✅ Удалено: {0}", deletedCount));
+        sb.AppendLine(string.Format("❌ Не удалено (есть ссылки или блокировки): {0}", errorCount));
+        
+        if (errorDetails.Any())
+        {
+          sb.AppendLine("\nПричины ошибок:");
+          foreach (var err in errorDetails) sb.AppendLine("- " + err);
+        }
+        
+        notice.ActiveText = sb.ToString();
+        notice.Start();
       }
     }
 
@@ -372,30 +477,30 @@ namespace litiko.Eskhata.Module.Parties.Server
       notice.Start();
     }
     
-    public virtual void DeleteMigratedPartiesAsynclitiko(litiko.Eskhata.Module.Parties.Server.AsyncHandlerInvokeArgs.DeleteMigratedPartiesAsynclitikoInvokeArgs args)
-    {
-      args.Retry = false;
-      int deleted = 0;
-      int errors = 0;
-
-      // Получаем список всех мигрированных (Компании + Персоны)
-      var companyIds = Eskhata.Companies.GetAll(c => c.IsMigratedlitiko == true).Select(c => c.Id).ToList();
-      var personIds = Eskhata.People.GetAll(p => p.IsMigratedlitiko == true).Select(p => p.Id).ToList();
-
-      // Удаляем Компании
-      deleted += DeleteEntitiesBatch(companyIds, typeof(litiko.Eskhata.ICompany), ref errors);
-      // Удаляем Персон
-      deleted += DeleteEntitiesBatch(personIds, typeof(litiko.Eskhata.IPerson), ref errors);
-
-      // Уведомление
-      var author = Employees.GetAll(e => e.Id == args.AuthorId).FirstOrDefault();
-      if (author != null)
-      {
-        var notice = Sungero.Workflow.SimpleTasks.CreateWithNotices("Очистка контрагентов завершена", author);
-        notice.ActiveText = string.Format("Удалено: {0}\nОшибок (связи/блокировки): {1}", deleted, errors);
-        notice.Start();
-      }
-    }
+//    public virtual void DeleteMigratedPartiesAsynclitiko(litiko.Eskhata.Module.Parties.Server.AsyncHandlerInvokeArgs.DeleteMigratedPartiesAsynclitikoInvokeArgs args)
+//    {
+//      args.Retry = false;
+//      int deleted = 0;
+//      int errors = 0;
+//
+//      // Получаем список всех мигрированных (Компании + Персоны)
+//      var companyIds = Eskhata.Companies.GetAll(c => c.IsMigratedlitiko == true).Select(c => c.Id).ToList();
+//      var personIds = Eskhata.People.GetAll(p => p.IsMigratedlitiko == true).Select(p => p.Id).ToList();
+//
+//      // Удаляем Компании
+//      deleted += DeleteEntitiesBatch(companyIds, typeof(litiko.Eskhata.ICompany), ref errors);
+//      // Удаляем Персон
+//      deleted += DeleteEntitiesBatch(personIds, typeof(litiko.Eskhata.IPerson), ref errors);
+//
+//      // Уведомление
+//      var author = Employees.GetAll(e => e.Id == args.AuthorId).FirstOrDefault();
+//      if (author != null)
+//      {
+//        var notice = Sungero.Workflow.SimpleTasks.CreateWithNotices("Очистка контрагентов завершена", author);
+//        notice.ActiveText = string.Format("Удалено: {0}\nОшибок (связи/блокировки): {1}", deleted, errors);
+//        notice.Start();
+//      }
+//    }
 
     // Вспомогательный метод для пакетного удаления
     private int DeleteEntitiesBatch(List<long> ids, Type type, ref int errors)

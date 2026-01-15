@@ -16,7 +16,7 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
     public virtual void DeleteMigratedPartiesAsync()
     {
       litiko.Eskhata.Module.Parties.PublicFunctions.Module.Remote.RunAsyncDeleteMigratedParties();
-      Dialogs.NotifyMessage("Запущено удаление мигрированных контрагентов.");
+      Dialogs.NotifyMessage("Запущено фоновое удаление мигрированных контрагентов. Система уведомит вас по завершении.");
     }
 
     /// <summary>
@@ -24,7 +24,7 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
     /// </summary>
     public virtual void ImportCounterpariesAsync()
     {
-      var dialog = Dialogs.CreateInputDialog("Импорт контрагентов (Асинхронно)");
+      var dialog = Dialogs.CreateInputDialog("Миграция контрагентов");
       var fileInput = dialog.AddFileSelect("Выберите файл XML", true);
       fileInput.WithFilter("XML", "xml");
 
@@ -45,7 +45,7 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
       litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.RunAsyncDeleteMigratedContracts();
       
       // 2. Мгновенно уведомляем пользователя
-      Dialogs.NotifyMessage("Запущена фоновая очистка мигрированных договоров. Система уведомит вас по завершении.");
+      Dialogs.NotifyMessage("Запущена фоновое удаление мигрированных договоров. Система уведомит вас по завершении.");
     }
 
     /// <summary>
@@ -53,7 +53,7 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
     /// </summary>
     public virtual void ImportContractsFromUIAsync()
     {
-      var dialog = Dialogs.CreateInputDialog("Импорт договоров (XML)");
+      var dialog = Dialogs.CreateInputDialog("Миграция договоров");
       
       var fileInput = dialog.AddFileSelect("Выберите файл XML", true);
       fileInput.WithFilter("XML", "xml");
@@ -73,7 +73,7 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
       }
       catch (Exception ex)
       {
-        Dialogs.ShowMessage($"Не удалось запустить импорт: {ex.Message}", MessageType.Error);
+        Dialogs.ShowMessage($"Не удалось запустить миграцию: {ex.Message}", MessageType.Error);
       }
     }
 

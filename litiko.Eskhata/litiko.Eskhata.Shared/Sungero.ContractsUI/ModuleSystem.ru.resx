@@ -113,7 +113,7 @@
     <value>Миграция контрагентов</value>
   </data>
   <data name="CoverAction_DeleteContractAsynclitiko" xml:space="preserve">
-    <value>Удаление договоров</value>
+    <value>Удаление всех мигрированных договоров</value>
   </data>
   <data name="sf_632bcf54_8ebb_4286_8ddc_8f80628cc16a" xml:space="preserve">
     <value>Мигрированные договора</value>
