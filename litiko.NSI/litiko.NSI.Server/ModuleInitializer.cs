@@ -46,6 +46,16 @@ namespace litiko.NSI.Server
         AddressTypes.AccessRights.Save();        
       }
       #endregion      
+            
+      if (!Mappings.GetAll().Any())
+      {
+       var record = Mappings.Create();
+       record.EntityType = NSI.Mapping.EntityType.DocumentKind;
+       record.SourceName = "Техническая запись";
+       record.SourceId = 1;
+       record.Save();
+       InitializationLogger.Debug("Init: Created system record in Mapping.");
+      }
     }
   }
 }
