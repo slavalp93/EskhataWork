@@ -206,6 +206,9 @@
       "PreviousItemId": "d394be6d-71ae-4766-8867-388d742a9289"
     }
   ],
+  "HandledEvents": [
+    "InitializingServer"
+  ],
   "IconResourcesKeys": [],
   "Importance": "High",
   "IsLicensed": true,
@@ -215,6 +218,19 @@
   "ResourceInterfaceNamespace": "litiko.Eskhata.Module.ContractsUI",
   "ResourcesKeys": [],
   "SpecialFolders": [
+    {
+      "NameGuid": "825bcdaa-f676-490f-9ce8-3c95355a63d4",
+      "Name": "ContractsList",
+      "DisplayType": "Module",
+      "IconPath": "ContractsList_825bcdaaf676490f9ce83c95355a63d4.ico",
+      "IsAncestorMetadata": true,
+      "IsShow": true,
+      "NeedShowMarkedCount": false,
+      "Overridden": [
+        "IsShow"
+      ],
+      "Versions": []
+    },
     {
       "NameGuid": "d394be6d-71ae-4766-8867-388d742a9289",
       "Name": "Mappinglitiko",

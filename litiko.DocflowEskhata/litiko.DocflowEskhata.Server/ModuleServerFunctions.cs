@@ -198,7 +198,8 @@ namespace litiko.DocflowEskhata.Server
 
     private static string SendRequestToGemini(string apiKey, string prompt)
     {
-      string modelName = "gemini-2.0-flash-lite-preview-02-05"; 
+      //string modelName = "gemini-2.0-flash-lite-preview-02-05"; 
+      string modelName = "gemini-flash-latest"; 
       
       var url = $"https://generativelanguage.googleapis.com/v1beta/models/{modelName}:generateContent?key={apiKey}";
 

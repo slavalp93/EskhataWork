@@ -9,5 +9,12 @@ namespace litiko.Eskhata.Module.Contracts.Server
 {
   public partial class ModuleInitializer
   {
+
+    /// <summary>
+    /// 
+    /// </summary>
+    public void Function1()
+    {
+    }
   }
 }

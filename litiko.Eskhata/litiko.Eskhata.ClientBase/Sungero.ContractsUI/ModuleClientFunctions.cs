@@ -15,6 +15,15 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
 
     public virtual void DeleteMigratedPartiesAsync()
     {
+      var managerRole = Sungero.CoreEntities.Roles.GetAll().FirstOrDefault(r=>r.Name == "Менеджеры модуля \"Договоры\"");
+      
+      var currentUser = Employees.Current;
+      
+      if(!currentUser.IncludedIn(managerRole))
+      {
+        Dialogs.ShowMessage("Недостаточно прав для выполнения данной операции");
+        return;
+      }
       litiko.Eskhata.Module.Parties.PublicFunctions.Module.Remote.RunAsyncDeleteMigratedParties();
       Dialogs.NotifyMessage("Запущено фоновое удаление мигрированных контрагентов. Система уведомит вас по завершении.");
     }
@@ -24,6 +33,16 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
     /// </summary>
     public virtual void ImportCounterpariesAsync()
     {
+      var managerRole = Sungero.CoreEntities.Roles.GetAll().FirstOrDefault(r=>r.Name == "Менеджеры модуля \"Договоры\"");
+      
+      var currentUser = Employees.Current;
+      
+      if(!currentUser.IncludedIn(managerRole))
+      {
+        Dialogs.ShowMessage("Недостаточно прав для выполнения данной операции");
+        return;
+      }
+      
       var dialog = Dialogs.CreateInputDialog("Миграция контрагентов");
       var fileInput = dialog.AddFileSelect("Выберите файл XML", true);
       fileInput.WithFilter("XML", "xml");
@@ -40,12 +59,21 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
     /// </summary>
     public virtual void DeleteMigratedContractsAsync()
     {
-      // 1. Вызываем удаленную функцию, которая просто ставит задачу в очередь
-      // Используем .Remote, так как функция находится на сервере
-      litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.RunAsyncDeleteMigratedContracts();
+      var managerRole = Sungero.CoreEntities.Roles.GetAll().FirstOrDefault(r=>r.Name == "Менеджеры модуля \"Договоры\"");
       
-      // 2. Мгновенно уведомляем пользователя
-      Dialogs.NotifyMessage("Запущена фоновое удаление мигрированных договоров. Система уведомит вас по завершении.");
+      var currentUser = Employees.Current;
+      
+      if(!currentUser.IncludedIn(managerRole))
+      {
+        Dialogs.ShowMessage("Недостаточно прав для выполнения данной операции");
+        return;
+      }
+      else
+      {
+        litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.RunAsyncDeleteMigratedContracts();
+        
+        Dialogs.NotifyMessage("Запущена фоновое удаление мигрированных договоров. Система уведомит вас по завершении.");
+      }
     }
 
     /// <summary>
@@ -53,6 +81,15 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
     /// </summary>
     public virtual void ImportContractsFromUIAsync()
     {
+      var managerRole = Sungero.CoreEntities.Roles.GetAll().FirstOrDefault(r=>r.Name == "Менеджеры модуля \"Договоры\"");
+      
+      var currentUser = Employees.Current;
+      
+      if(!currentUser.IncludedIn(managerRole))
+      {
+        Dialogs.ShowMessage("Недостаточно прав для выполнения данной операции");
+        return;
+      }
       var dialog = Dialogs.CreateInputDialog("Миграция договоров");
       
       var fileInput = dialog.AddFileSelect("Выберите файл XML", true);
@@ -68,7 +105,7 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
       try
       {
         var resultMessage = litiko.Eskhata.Module.Contracts.PublicFunctions.Module.Remote.StartAsyncImportContracts(fileBase64, fileName);
-        // Показываем сообщение от сервера (что импорт запущен)
+        
         Dialogs.ShowMessage(resultMessage, MessageType.Information);
       }
       catch (Exception ex)

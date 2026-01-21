@@ -51,7 +51,7 @@ namespace litiko.Eskhata.Module.Parties.Server
           return;
         }
 
-        // КЕШИРОВАНИЕ (Ваша логика загрузки словарей)
+        // КЕШИРОВАНИЕ
         var okonhDict = litiko.NSI.OKONHs.GetAll().Where(x => x.ExternalId != null && x.ExternalId != "").ToDictionary(x => x.ExternalId);
         var okvedDict = litiko.NSI.OKVEDs.GetAll().Where(x => x.ExternalId != null && x.ExternalId != "").ToDictionary(x => x.ExternalId);
         var okopfDict = litiko.NSI.OKOPFs.GetAll().Where(x => x.ExternalId != null && x.ExternalId != "").ToDictionary(x => x.ExternalId);
@@ -225,9 +225,22 @@ namespace litiko.Eskhata.Module.Parties.Server
                                                  Dictionary<string, litiko.Eskhata.ICity> cityDict,
                                                  Dictionary<string, litiko.NSI.IAddressType> addressTypeDict)
     {
-      var isExternalID = companyElement.Element("ExternalID")?.Value;
-      var isINN = companyElement.Element("INN")?.Value;
-
+      var isExternalID = companyElement.Element("ExternalID")?.Value.Trim();
+      var isINN = companyElement.Element("INN")?.Value.Trim();
+      var isOKOPF = companyElement.Element("FORMA")?.Value.Trim();
+      var isOKFS = companyElement.Element("OWNERSHIP")?.Value.Trim();
+      var isCodeOKONHelements = companyElement.Element("CODE_OKONH")?.Elements("element");
+      var isCodeOKVEDelements = companyElement.Element("CODE_OKVED")?.Elements("element");
+      var isNumbers = companyElement.Element("NUMBERS")?.Value.Trim();
+      var isPS_REF = companyElement.Element("PS_REF")?.Value;
+      var isCountry = companyElement.Element("COUNTRY")?.Value;
+      var isCity = companyElement.Element("City")?.Value;
+      var isAddressType = companyElement.Element("AddressType")?.Value;
+      var isBank = companyElement.Element("Bank")?.Value;
+      var isTaxNonResident = companyElement.Element("TaxNonResident")?.Value;
+      var isReliability = companyElement.Element("Reliability")?.Value;
+      
+      
       var company = litiko.Eskhata.Companies.GetAll()
         .FirstOrDefault(x => (!string.IsNullOrEmpty(isExternalID) && x.ExternalId == isExternalID) ||
                         (!string.IsNullOrEmpty(isINN) && x.TIN == isINN));
@@ -235,64 +248,126 @@ namespace litiko.Eskhata.Module.Parties.Server
       if (company == null)
       {
         company = litiko.Eskhata.Companies.Create();
+        
         company.ExternalId = isExternalID;
+        
         company.TIN = isINN;
       }
 
       company.Name = companyElement.Element("Name")?.Value.Trim() ?? "Без имени";
+      
       company.LegalName = companyElement.Element("LONG_NAME")?.Value.Trim();
+      
       company.Inamelitiko = companyElement.Element("I_NAME")?.Value.Trim();
-      company.EINlitiko = companyElement.Element("IIN")?.Value.Trim(); // у юрлица вместо иин идет РЯМ
+      
       company.Nonresident = ParseBoolSafe(companyElement.Element("REZIDENT")?.Value);
+      
       company.NUNonrezidentlitiko = ParseBoolSafe(companyElement.Element("NU_REZIDENT")?.Value);
+      
       company.TRRC = companyElement.Element("KPP")?.Value;
+      
       company.NCEO = companyElement.Element("KOD_OKPO")?.Value;
-      company.RegNumlitiko = companyElement.Element("REGIST_NUM")?.Value;
-      company.Businesslitiko = companyElement.Element("BUSINESS")?.Value;
-      company.PostalAddress = companyElement.Element("PostAdress")?.Value;
-      company.LegalAddress = companyElement.Element("LegalAdress")?.Value;
-      company.Phones = companyElement.Element("Phone")?.Value;
-      company.Email = companyElement.Element("Email")?.Value;
-      company.Homepage = companyElement.Element("WebSite")?.Value;
-      company.VATPayerlitiko = ParseBoolSafe(companyElement.Element("VATPayer")?.Value);
-      company.AccountEskhatalitiko = companyElement.Element("InternalAcc")?.Value;
-      company.Account = companyElement.Element("CorrAcc")?.Value;
-      company.Streetlitiko = companyElement.Element("Street")?.Value;
-      company.HouseNumberlitiko = companyElement.Element("BuildingNumber")?.Value;
-
-      // Словари
-      var isOKOPF = companyElement.Element("FORMA")?.Value;
-      if (!string.IsNullOrEmpty(isOKOPF) && okopfDict.ContainsKey(isOKOPF)) company.OKOPFlitiko = okopfDict[isOKOPF];
-
-      var isOKFS = companyElement.Element("OWNERSHIP")?.Value;
-      if (!string.IsNullOrEmpty(isOKFS) && okfsDict.ContainsKey(isOKFS)) company.OKFSlitiko = okfsDict[isOKFS];
-
-      var isCountry = companyElement.Element("COUNTRY")?.Value;
-      if (!string.IsNullOrEmpty(isCountry) && countryDict.ContainsKey(isCountry)) company.Countrylitiko = countryDict[isCountry];
-
-      var isCity = companyElement.Element("City")?.Value;
-      if (!string.IsNullOrEmpty(isCity) && cityDict.ContainsKey(isCity)) company.City = cityDict[isCity];
-
-      var isAddressType = companyElement.Element("AddressType")?.Value;
-      if (!string.IsNullOrEmpty(isAddressType) && addressTypeDict.ContainsKey(isAddressType)) company.AddressTypelitiko = addressTypeDict[isAddressType];
-
-      // OKONH / OKVED (Elements)
-      var okonhEl = companyElement.Element("CODE_OKONH")?.Elements("element").FirstOrDefault()?.Value?.Trim();
-      if (!string.IsNullOrEmpty(okonhEl) && okonhDict.ContainsKey(okonhEl)) company.OKONHlitiko = okonhDict[okonhEl];
-
-      var okvedEl = companyElement.Element("CODE_OKVED")?.Elements("element").FirstOrDefault()?.Value?.Trim();
-      if (!string.IsNullOrEmpty(okvedEl) && okvedDict.ContainsKey(okvedEl)) company.OKVEDlitiko = okvedDict[okvedEl];
-
-      // Числа
-      var isNumbers = companyElement.Element("NUMBERS")?.Value;
-      if (!string.IsNullOrEmpty(isNumbers)) company.Numberslitiko = int.Parse(isNumbers);
-
-      // Надежность (Enum)
-      var isRel = companyElement.Element("Reliability")?.Value?.Trim();
-      if (!string.IsNullOrEmpty(isRel))
+      
+      litiko.NSI.IOKOPF foundOkopf = null;
+      
+      if (!string.IsNullOrEmpty(isOKOPF) && okopfDict.TryGetValue(isOKOPF, out foundOkopf))
+        company.OKOPFlitiko = foundOkopf;
+      
+      litiko.NSI.IOKFS foundOkfs = null;
+      if (!string.IsNullOrEmpty(isOKFS) && okfsDict.TryGetValue(isOKFS, out foundOkfs))
+        company.OKFSlitiko = foundOkfs;
+      
+      if (isCodeOKONHelements != null)
       {
-        if (isRel.Equals("Надежный", StringComparison.OrdinalIgnoreCase)) company.Reliabilitylitiko = litiko.Eskhata.Company.Reliabilitylitiko.Reliable;
-        else company.Reliabilitylitiko = litiko.Eskhata.Company.Reliabilitylitiko.NotReliable;
+        litiko.NSI.IOKONH foundOkonh = null;
+        
+        var firstVal = isCodeOKONHelements.FirstOrDefault(n => !string.IsNullOrWhiteSpace(n?.Value))?.Value?.Trim();
+        
+        if (!string.IsNullOrEmpty(firstVal) && okonhDict.TryGetValue(firstVal, out foundOkonh))
+        {
+          if (!object.Equals(company.OKONHlitiko, foundOkonh))
+            company.OKONHlitiko = foundOkonh;
+        }
+      }
+      if (isCodeOKVEDelements != null)
+      {
+        litiko.NSI.IOKVED foundOkved = null;
+        
+        var firstVal = isCodeOKVEDelements.FirstOrDefault(n => !string.IsNullOrWhiteSpace(n?.Value))?.Value?.Trim();
+        
+        if (!string.IsNullOrEmpty(firstVal) && okvedDict.TryGetValue(firstVal, out foundOkved))
+        {
+          if (!object.Equals(company.OKVEDlitiko, foundOkved))
+            company.OKVEDlitiko = foundOkved;
+        }
+      }
+      
+      company.EINlitiko = companyElement.Element("IIN")?.Value.Trim(); // у юрлица вместо иин идет РЯМ
+      
+      company.RegNumlitiko = companyElement.Element("REGIST_NUM")?.Value;
+      
+      if (!string.IsNullOrEmpty(isNumbers))
+        company.Numberslitiko = string.IsNullOrEmpty(isNumbers) ? (int?)null : int.Parse(isNumbers);
+      
+      company.Businesslitiko = companyElement.Element("BUSINESS")?.Value;
+      
+      if (!string.IsNullOrEmpty(isPS_REF))
+      {
+        var enterpriseType = litiko.NSI.EnterpriseTypes.GetAll().FirstOrDefault(x => x.ExternalId == isPS_REF);
+        company.EnterpriseTypelitiko = enterpriseType;
+      }
+      
+      ICountry foundCountry = null;
+      if (!string.IsNullOrEmpty(isCountry) && countryDict.TryGetValue(isCountry, out foundCountry))
+        company.Countrylitiko = foundCountry;
+      
+      company.PostalAddress = companyElement.Element("PostAdress")?.Value;
+      
+      company.LegalAddress = companyElement.Element("LegalAdress")?.Value;
+      
+      company.Phones = companyElement.Element("Phone")?.Value;
+      
+      ICity foundCity = null;
+      if (!string.IsNullOrEmpty(isCity) && cityDict.TryGetValue(isCity, out foundCity))
+        company.City = foundCity;
+      
+      litiko.NSI.IAddressType foundAddressType = null;
+      if (!string.IsNullOrEmpty(isAddressType) && addressTypeDict.TryGetValue(isAddressType, out foundAddressType))
+        company.AddressTypelitiko = foundAddressType;
+      
+      company.Streetlitiko = companyElement.Element("Street")?.Value;
+      
+      company.HouseNumberlitiko = companyElement.Element("BuildingNumber")?.Value;
+      
+      company.Email = companyElement.Element("Email")?.Value;
+      
+      company.Homepage = companyElement.Element("WebSite")?.Value;
+      
+      if (!string.IsNullOrEmpty(isTaxNonResident))
+        company.NUNonrezidentlitiko = ParseBoolSafe(isTaxNonResident);
+      
+      company.VATPayerlitiko = ParseBoolSafe(companyElement.Element("VATPayer")?.Value);
+      
+      company.Account = companyElement.Element("CorrAcc")?.Value;
+      
+      company.AccountEskhatalitiko = companyElement.Element("InternalAcc")?.Value;
+      
+      if (!string.IsNullOrEmpty(isBank))
+      {
+        var bank = Sungero.Parties.Banks.GetAll().FirstOrDefault(x => x.ExternalId == isBank);
+        company.Bank = bank;
+      }
+
+      if (!string.IsNullOrWhiteSpace(isReliability))
+      {
+        Sungero.Core.Enumeration? reliabilityEnum = null;
+        var relTrim = isReliability.Trim();
+        if (relTrim.Equals("Надежный", StringComparison.OrdinalIgnoreCase) || relTrim.Equals("Высокий", StringComparison.OrdinalIgnoreCase) || relTrim.Equals("НИЗКИЙ", StringComparison.OrdinalIgnoreCase) || relTrim.Equals("ВЫСОКИЙ", StringComparison.OrdinalIgnoreCase))
+          reliabilityEnum = litiko.Eskhata.Company.Reliabilitylitiko.Reliable;
+        else if (relTrim.Equals("Не надежный", StringComparison.OrdinalIgnoreCase) || relTrim.Equals("Низкая", StringComparison.OrdinalIgnoreCase) || relTrim.Equals("НИЗКИЙ", StringComparison.OrdinalIgnoreCase) || relTrim.Equals("ВЫСОКИЙ", StringComparison.OrdinalIgnoreCase))
+          reliabilityEnum = litiko.Eskhata.Company.Reliabilitylitiko.NotReliable;
+        
+        if (reliabilityEnum.HasValue) company.Reliabilitylitiko = reliabilityEnum;
       }
 
       return company;
@@ -308,7 +383,23 @@ namespace litiko.Eskhata.Module.Parties.Server
     {
       var isExternalID = personElement.Element("ExternalID")?.Value;
       var isINN = personElement.Element("INN")?.Value;
-
+      var isCountry = personElement.Element("COUNTRY")?.Value;
+      var isDateOfBirth = personElement.Element("DATE_PERS")?.Value;
+      var isFamilyStatus = personElement.Element("MARIGE_ST")?.Value;
+      var isDocBirthPlace = personElement.Element("DOC_BIRTH_PLACE")?.Value;
+      var isPostAdress = personElement.Element("PostAdress")?.Value;
+      var isWebSite = personElement.Element("WebSite")?.Value;
+      var isCity = personElement.Element("City")?.Value;
+      var isAddressType = personElement.Element("AddressType")?.Value;
+      var isStreet = personElement.Element("Street")?.Value;
+      var isBuildingNumber = personElement.Element("BuildingNumber")?.Value;
+      var isTaxNonResident = personElement.Element("TaxNonResident")?.Value;
+      var isVatPayer = personElement.Element("VATPayer")?.Value;
+      var isReliability = personElement.Element("Reliability")?.Value;
+      var isCorrAcc = personElement.Element("CorrAcc")?.Value;
+      var isInternalAcc = personElement.Element("InternalAcc")?.Value;
+      var isBank = personElement.Element("Bank")?.Value;
+      
       var person = Eskhata.People.GetAll()
         .FirstOrDefault(x => (!string.IsNullOrEmpty(isExternalID) && x.ExternalId == isExternalID) || (!string.IsNullOrEmpty(isINN) && x.TIN == isINN));
 
@@ -319,52 +410,114 @@ namespace litiko.Eskhata.Module.Parties.Server
       }
 
       person.LastName = personElement.Element("LastName")?.Value?.Trim();
+      
       person.FirstName = personElement.Element("FirstName")?.Value?.Trim();
+      
       person.MiddleName = personElement.Element("MiddleName")?.Value?.Trim();
+      
       person.Nonresident = ParseBoolSafe(personElement.Element("REZIDENT")?.Value);
+      
+      person.NUNonrezidentlitiko = ParseBoolSafe(personElement.Element("NU_REZIDENT")?.Value);
+      
       person.Inamelitiko = personElement.Element("I_NAME")?.Value?.Trim();
-      person.TIN = isINN;
-      person.SINlitiko = personElement.Element("IIN")?.Value;
-      person.BirthPlace = personElement.Element("DOC_BIRTH_PLACE")?.Value;
-      person.PostalAddress = personElement.Element("PostAdress")?.Value;
-      person.Email = personElement.Element("Email")?.Value;
-      person.Phones = personElement.Element("Phone")?.Value;
-      person.Streetlitiko = personElement.Element("Street")?.Value;
-      person.HouseNumberlitiko = personElement.Element("BuildingNumber")?.Value;
-      person.Account = personElement.Element("CorrAcc")?.Value;
-      person.AccountEskhatalitiko = personElement.Element("InternalAcc")?.Value;
-
-      var bDate = TryParseDate(personElement.Element("DATE_PERS")?.Value);
-      if (bDate.HasValue) person.DateOfBirth = bDate;
-
+      
+      var parsedDate = TryParseDate(isDateOfBirth);
+      if (parsedDate.HasValue)
+        person.DateOfBirth = parsedDate.Value;
+      
       var sex = personElement.Element("SEX")?.Value;
       if (sex == "М") person.Sex = Eskhata.Person.Sex.Male;
       else if (sex == "Ж") person.Sex = Eskhata.Person.Sex.Female;
+      
+      if (!string.IsNullOrEmpty(isFamilyStatus))
+      {
+        var familyStatus = litiko.NSI.FamilyStatuses.GetAll().FirstOrDefault(x => x.ExternalId == isFamilyStatus);
+        if (familyStatus != null) person.FamilyStatuslitiko = familyStatus;
+      }
+      
+      if (!string.IsNullOrEmpty(isINN))
+        person.TIN = isINN;
+      
+      ICountry foundCountry = null;
+      if (!string.IsNullOrEmpty(isCountry) && countryDict.TryGetValue(isCountry, out foundCountry))
+        person.Citizenship = foundCountry;
+      
+      if (!string.IsNullOrEmpty(isDocBirthPlace))
+        person.BirthPlace = isDocBirthPlace.Trim();
+      
+      if (!string.IsNullOrEmpty(isPostAdress))
+        person.PostalAddress = isPostAdress.Trim();
+      
+      person.Email = personElement.Element("Email")?.Value;
+      
+      person.Phones = personElement.Element("Phone")?.Value;
+      
+      if (!string.IsNullOrEmpty(isWebSite))
+        person.Homepage = isWebSite.Trim();
+      
+      ICity foundCity = null;
+      if (!string.IsNullOrEmpty(isCity) && cityDict.TryGetValue(isCity, out foundCity))
+        person.City = foundCity;
+      
+      litiko.NSI.IAddressType foundAddressType = null;
+      if (!string.IsNullOrEmpty(isAddressType) && addressTypeDict.TryGetValue(isAddressType, out foundAddressType))
+        person.AddressTypelitiko = foundAddressType;
+      
+      if (!string.IsNullOrEmpty(isStreet))
+        person.Streetlitiko = isStreet.Trim();
+      
+      if (!string.IsNullOrEmpty(isBuildingNumber))
+        person.HouseNumberlitiko = isBuildingNumber.Trim();
+      
+      if (!string.IsNullOrEmpty(isTaxNonResident))
+        person.NUNonrezidentlitiko = ParseBoolSafe(isTaxNonResident);
+      
+      if (!string.IsNullOrEmpty(isVatPayer))
+        person.VATPayerlitiko = ParseBoolSafe(isVatPayer);
+      
+      if (!string.IsNullOrEmpty(isReliability))
+      {
+        Sungero.Core.Enumeration? reliabilityEnum = null;
+        var relTrim = isReliability.Trim();
+        if (relTrim == "Надежный") reliabilityEnum = litiko.Eskhata.Person.Reliabilitylitiko.Reliable;
+        else if (relTrim == "Не надежный") reliabilityEnum = litiko.Eskhata.Person.Reliabilitylitiko.NotReliable;
+        
+        if (reliabilityEnum.HasValue) person.Reliabilitylitiko = reliabilityEnum;
+      }
+      
+      if (!string.IsNullOrEmpty(isCorrAcc))
+        person.Account = isCorrAcc.Trim();
+      
+      if (!string.IsNullOrEmpty(isInternalAcc))
+        person.AccountEskhatalitiko = isInternalAcc.Trim();
 
-      var isCountry = personElement.Element("COUNTRY")?.Value;
-      if (!string.IsNullOrEmpty(isCountry) && countryDict.ContainsKey(isCountry)) person.Citizenship = countryDict[isCountry];
-
-      var isCity = personElement.Element("City")?.Value;
-      if (!string.IsNullOrEmpty(isCity) && cityDict.ContainsKey(isCity)) person.City = cityDict[isCity];
-
-      var isAddressType = personElement.Element("AddressType")?.Value;
-      if (!string.IsNullOrEmpty(isAddressType) && addressTypeDict.ContainsKey(isAddressType)) person.AddressTypelitiko = addressTypeDict[isAddressType];
-
+      if (!string.IsNullOrEmpty(isBank))
+      {
+        var bank = Sungero.Parties.Banks.GetAll().FirstOrDefault(x => x.ExternalId == isBank);
+        person.Bank = bank;
+      }
+      
       // Паспортные данные
       var identity = personElement.Element("IdentityDocument");
+      
       if (identity != null)
       {
         var xmlType = identity.Element("TYPE")?.Value;
+        
         var kind = Sungero.Parties.IdentityDocumentKinds.GetAll().FirstOrDefault(x => x.SID == xmlType);
+        
         if (kind != null) person.IdentityKind = kind;
         
         person.IdentityNumber = identity.Element("NUM")?.Value;
+        
         person.IdentitySeries = identity.Element("SER")?.Value;
+        
         person.IdentityAuthority = identity.Element("WHO")?.Value;
+        
         person.IdentityDateOfIssue = TryParseDate(identity.Element("DATE_BEGIN")?.Value);
+        
         person.IdentityExpirationDate = TryParseDate(identity.Element("DATE_END")?.Value);
       }
-
       return person;
     }
 
@@ -373,53 +526,50 @@ namespace litiko.Eskhata.Module.Parties.Server
     // =====================================================================
     public virtual void DeleteMigratedPartiesAsynclitiko(litiko.Eskhata.Module.Parties.Server.AsyncHandlerInvokeArgs.DeleteMigratedPartiesAsynclitikoInvokeArgs args)
     {
-      // 1. Отключаем автоматический повтор при ошибках
       args.Retry = false;
       int deletedCount = 0;
       int errorCount = 0;
       var errorDetails = new List<string>();
 
-      // 2. Получаем ID всех мигрированных
       var companyIds = Eskhata.Companies.GetAll(c => c.IsMigratedlitiko == true).Select(c => c.Id).ToList();
       var personIds = Eskhata.People.GetAll(p => p.IsMigratedlitiko == true).Select(p => p.Id).ToList();
       
       Logger.DebugFormat("[MIGR_DELETE] Начинаю удаление: Компаний - {0}, Персон - {1}", companyIds.Count, personIds.Count);
 
-      // 3. Функция удаления (внутренняя для удобства)
-      // Мы будем удалять по одному, чтобы ссылки на одном объекте не блокировали удаление других
-      Action<long, bool> safeDelete = (id, isCompany) => 
+      Action<long, bool> safeDelete = (id, isCompany) =>
       {
-        try 
+        try
         {
-          // Каждое удаление в своей маленькой транзакции
-          Transactions.Execute(() => 
-          {
-            IEntity obj = isCompany ? (IEntity)Eskhata.Companies.Get(id) : (IEntity)Eskhata.People.Get(id);
-            if (obj != null)
-            {
-              if (Locks.GetLockInfo(obj).IsLocked) Locks.Unlock(obj);
-              
-              if (isCompany) Eskhata.Companies.Delete((litiko.Eskhata.ICompany)obj);
-              else Eskhata.People.Delete((litiko.Eskhata.IPerson)obj);
-              
-              deletedCount++;
-            }
-          });
+          Transactions.Execute(() =>
+                               {
+                                 IEntity obj = isCompany ? (IEntity)Eskhata.Companies.Get(id) : (IEntity)Eskhata.People.Get(id);
+                                 if (obj != null)
+                                 {
+                                   if (Locks.GetLockInfo(obj).IsLocked) Locks.Unlock(obj);
+                                   
+                                   if (isCompany)
+                                     Eskhata.Companies.Delete((litiko.Eskhata.ICompany)obj);
+                                   else
+                                     Eskhata.People.Delete((litiko.Eskhata.IPerson)obj);
+                                   
+                                   deletedCount++;
+                                 }
+                               });
         }
         catch (Exception ex)
         {
           errorCount++;
-          // Логируем только уникальные причины ошибок, чтобы не раздувать лог
-          if (errorDetails.Count < 10) errorDetails.Add(ex.Message);
+          
+          if (errorDetails.Any())
+            errorDetails.Add(ex.Message);
+          
           Logger.DebugFormat("[MIGR_DELETE] Не удалось удалить {0} ID {1}: {2}", isCompany ? "Компанию" : "Персону", id, ex.Message);
         }
       };
 
-      // 4. Запускаем удаление
       foreach (var id in companyIds) safeDelete(id, true);
       foreach (var id in personIds) safeDelete(id, false);
 
-      // 5. Уведомление пользователю
       var author = Employees.GetAll(e => e.Id == args.AuthorId).FirstOrDefault();
       if (author != null)
       {
@@ -440,7 +590,6 @@ namespace litiko.Eskhata.Module.Parties.Server
       }
     }
 
-    // Вспомогательные методы (Ваши)
     private static DateTime? TryParseDate(string date) {
       DateTime r;
       if (DateTime.TryParseExact(date, "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out r)) return r;
@@ -476,85 +625,60 @@ namespace litiko.Eskhata.Module.Parties.Server
       notice.ActiveText = sb.ToString();
       notice.Start();
     }
-    
-//    public virtual void DeleteMigratedPartiesAsynclitiko(litiko.Eskhata.Module.Parties.Server.AsyncHandlerInvokeArgs.DeleteMigratedPartiesAsynclitikoInvokeArgs args)
+
+//    // Вспомогательный метод для пакетного удаления
+//    private int DeleteEntitiesBatch(List<long> ids, Type type, ref int errors)
 //    {
-//      args.Retry = false;
-//      int deleted = 0;
-//      int errors = 0;
-//
-//      // Получаем список всех мигрированных (Компании + Персоны)
-//      var companyIds = Eskhata.Companies.GetAll(c => c.IsMigratedlitiko == true).Select(c => c.Id).ToList();
-//      var personIds = Eskhata.People.GetAll(p => p.IsMigratedlitiko == true).Select(p => p.Id).ToList();
-//
-//      // Удаляем Компании
-//      deleted += DeleteEntitiesBatch(companyIds, typeof(litiko.Eskhata.ICompany), ref errors);
-//      // Удаляем Персон
-//      deleted += DeleteEntitiesBatch(personIds, typeof(litiko.Eskhata.IPerson), ref errors);
-//
-//      // Уведомление
-//      var author = Employees.GetAll(e => e.Id == args.AuthorId).FirstOrDefault();
-//      if (author != null)
+//      int deletedCount = 0;
+//      int batchSize = 50;
+//      for (int i = 0; i < ids.Count; i += batchSize)
 //      {
-//        var notice = Sungero.Workflow.SimpleTasks.CreateWithNotices("Очистка контрагентов завершена", author);
-//        notice.ActiveText = string.Format("Удалено: {0}\nОшибок (связи/блокировки): {1}", deleted, errors);
-//        notice.Start();
+//        var batch = ids.Skip(i).Take(batchSize).ToList();
+//        Transactions.Execute(() =>
+//                             {
+//                               foreach (var id in batch)
+//                               {
+//                                 try
+//                                 {
+//                                   var entity = (type == typeof(litiko.Eskhata.ICompany))
+//                                     ? (IEntity)Eskhata.Companies.Get(id)
+//                                     : (IEntity)Eskhata.People.Get(id);
+//                                   
+//                                   if (entity != null)
+//                                   {
+//                                     if (Locks.GetLockInfo(entity).IsLocked) Locks.Unlock(entity);
+//                                     if (type == typeof(litiko.Eskhata.ICompany)) Eskhata.Companies.Delete((litiko.Eskhata.ICompany)entity);
+//                                     else Eskhata.People.Delete((litiko.Eskhata.IPerson)entity);
+//                                     deletedCount++;
+//                                   }
+//                                 }
+//                                 catch {  }
+//                               }
+//                             });
 //      }
+//      return deletedCount;
 //    }
-
-    // Вспомогательный метод для пакетного удаления
-    private int DeleteEntitiesBatch(List<long> ids, Type type, ref int errors)
-    {
-      int deletedCount = 0;
-      int batchSize = 50;
-      for (int i = 0; i < ids.Count; i += batchSize)
-      {
-        var batch = ids.Skip(i).Take(batchSize).ToList();
-        Transactions.Execute(() =>
-                             {
-                               foreach (var id in batch)
-                               {
-                                 try
-                                 {
-                                   var entity = (type == typeof(litiko.Eskhata.ICompany))
-                                     ? (IEntity)Eskhata.Companies.Get(id)
-                                     : (IEntity)Eskhata.People.Get(id);
-                                   
-                                   if (entity != null)
-                                   {
-                                     if (Locks.GetLockInfo(entity).IsLocked) Locks.Unlock(entity);
-                                     if (type == typeof(litiko.Eskhata.ICompany)) Eskhata.Companies.Delete((litiko.Eskhata.ICompany)entity);
-                                     else Eskhata.People.Delete((litiko.Eskhata.IPerson)entity);
-                                     deletedCount++;
-                                   }
-                                 }
-                                 catch {  }
-                               }
-                             });
-      }
-      return deletedCount;
-    }
-
-    private void NotifyAuthor(int authorId, string title, litiko.Eskhata.Module.Parties.Structures.Module.IResultImportCounterpartyXml res)
-    {
-      var author = Employees.GetAll(e => e.Id == authorId).FirstOrDefault();
-      if (author == null) return;
-
-      var notice = Sungero.Workflow.SimpleTasks.CreateWithNotices(title, author);
-      var sb = new System.Text.StringBuilder();
-      sb.AppendLine("📊 Результаты миграции:");
-      sb.AppendLine(string.Format("• Компании: {0} (Новых: {1}, Дублей: {2})", res.TotalCompanies, res.ImportedCompanies, res.DuplicateCompanies));
-      sb.AppendLine(string.Format("• Персоны: {0} (Новых: {1}, Дублей: {2})", res.TotalPersons, res.ImportedPersons, res.DuplicatePersons));
-      sb.AppendLine(string.Format("❌ Ошибок: {0}", res.Errors.Count));
-      
-      if (res.Errors.Any())
-      {
-        sb.AppendLine("\n⚠️ Ошибки:");
-        foreach (var err in res.Errors) sb.AppendLine(err);
-      }
-      
-      notice.ActiveText = sb.ToString();
-      notice.Start();
-    }
+//
+//    private void NotifyAuthor(int authorId, string title, litiko.Eskhata.Module.Parties.Structures.Module.IResultImportCounterpartyXml res)
+//    {
+//      var author = Employees.GetAll(e => e.Id == authorId).FirstOrDefault();
+//      if (author == null) return;
+//
+//      var notice = Sungero.Workflow.SimpleTasks.CreateWithNotices(title, author);
+//      var sb = new System.Text.StringBuilder();
+//      sb.AppendLine("📊 Результаты миграции:");
+//      sb.AppendLine(string.Format("• Компании: {0} (Новых: {1}, Дублей: {2})", res.TotalCompanies, res.ImportedCompanies, res.DuplicateCompanies));
+//      sb.AppendLine(string.Format("• Персоны: {0} (Новых: {1}, Дублей: {2})", res.TotalPersons, res.ImportedPersons, res.DuplicatePersons));
+//      sb.AppendLine(string.Format("❌ Ошибок: {0}", res.Errors.Count));
+//      
+//      if (res.Errors.Any())
+//      {
+//        sb.AppendLine("\n⚠️ Ошибки:");
+//        foreach (var err in res.Errors) sb.AppendLine(err);
+//      }
+//      
+//      notice.ActiveText = sb.ToString();
+//      notice.Start();
+//    }
   }
 }
