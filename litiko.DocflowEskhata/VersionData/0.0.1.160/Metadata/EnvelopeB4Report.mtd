@@ -1,0 +1,67 @@
+{
+  "$type": "Sungero.Metadata.ReportMetadata, Sungero.Reporting.Shared",
+  "NameGuid": "f753b2ff-da35-4143-8825-90da3f5f9648",
+  "Name": "EnvelopeB4Report",
+  "AssociatedGuid": "008f33e1-1dcd-480c-9827-4c977ec86e42",
+  "BaseGuid": "cef9a810-3f30-4eca-9fe3-30992af0b818",
+  "DataSources": [],
+  "DefaultExportFormat": "Pdf",
+  "ExportFormats": [
+    "Pdf"
+  ],
+  "HandledEvents": [
+    "BeforeExecuteServer",
+    "AfterExecuteServer"
+  ],
+  "IconResourcesKeys": [],
+  "IntegrationServiceName": "EnvelopeC4Report",
+  "Overridden": [
+    "DisplayName",
+    "HandledEvents",
+    "Parameters",
+    "PublicConstants",
+    "PublicStructures"
+  ],
+  "Parameters": [
+    {
+      "NameGuid": "1db48e52-b89f-4569-979c-ec0a291d4260",
+      "Name": "ReportSessionId",
+      "InternalDataTypeName": "System.String",
+      "Versions": []
+    },
+    {
+      "NameGuid": "5c380e6d-c657-489a-99d6-e90c91e2188a",
+      "Name": "PrintSender",
+      "InternalDataTypeName": "System.Boolean",
+      "IsSimpleDataType": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "f8661a4a-503f-4df3-924a-87883d3c237d",
+      "Name": "OutgoingDocuments",
+      "EntityType": "f5f104fb-52e4-422b-9de1-a36937d85a2d",
+      "InternalDataTypeName": "Sungero.Docflow.IOutgoingDocumentBase, Sungero.Domain.Interfaces",
+      "IsCollection": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "8085cfb1-0603-43c1-9354-91a39b256371",
+      "Name": "ContractualDocuments",
+      "EntityType": "454df3c6-b850-47cf-897f-a10d767baa77",
+      "InternalDataTypeName": "Sungero.Docflow.IContractualDocumentBase, Sungero.Domain.Interfaces",
+      "IsCollection": true,
+      "Versions": []
+    },
+    {
+      "NameGuid": "ce696da7-78c3-454c-ac09-214421fe81a1",
+      "Name": "AccountingDocuments",
+      "EntityType": "96c4f4f3-dc74-497a-b347-e8faf4afe320",
+      "InternalDataTypeName": "Sungero.Docflow.IAccountingDocumentBase, Sungero.Domain.Interfaces",
+      "IsCollection": true,
+      "Versions": []
+    }
+  ],
+  "PublicStructures": [],
+  "ResourcesKeys": [],
+  "Versions": []
+}
