@@ -125,7 +125,7 @@
     <value>DeleteContractAsynclitiko</value>
   </data>
   <data name="CoverDescription_DeleteContractAsynclitiko" xml:space="preserve">
-    <value>Удаление всех мигрированных договоров</value>
+    <value>Удаление мигрированных договоров</value>
   </data>
   <data name="sf_632bcf54_8ebb_4286_8ddc_8f80628cc16a" xml:space="preserve">
     <value>MigratedContractslitiko</value>
@@ -134,7 +134,7 @@
     <value>MigrtedContractsListlitiko</value>
   </data>
   <data name="CoverDescription_MigrtedContractsListlitiko" xml:space="preserve">
-    <value>Реестр по всем мигрированным договорам</value>
+    <value>Реестр мигрированных договоров</value>
   </data>
   <data name="CoverDescription_DeleteCounterpartyAsynclitiko" xml:space="preserve">
     <value>Удаление мигрированных контрагентов</value>

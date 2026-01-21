@@ -548,8 +548,8 @@ namespace litiko.Eskhata.Module.Parties.Server
         var bank = Sungero.Parties.Banks.GetAll().FirstOrDefault(x => x.ExternalId == isBank);
         person.Bank = bank;
       }
-      if (!string.IsNullOrEmpty(isTaxNonResident)) person.NUNonrezidentlitiko = ParseBoolSafe(isTaxNonResident);
-      if (!string.IsNullOrEmpty(isVatPayer)) person.VATPayerlitiko = ParseBoolSafe(isVatPayer);
+        if (!string.IsNullOrEmpty(isTaxNonResident)) person.NUNonrezidentlitiko = ParseBoolSafe(isTaxNonResident);
+        if (!string.IsNullOrEmpty(isVatPayer)) person.VATPayerlitiko = ParseBoolSafe(isVatPayer);
       
       if (!string.IsNullOrEmpty(isReliability))
       {
