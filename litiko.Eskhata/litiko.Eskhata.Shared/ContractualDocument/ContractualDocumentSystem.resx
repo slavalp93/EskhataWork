@@ -226,4 +226,31 @@
   <data name="Property_AmountOfExpenseslitiko" xml:space="preserve">
     <value>Amount of expenses</value>
   </data>
+  <data name="Property_PaymentMethodlitiko" xml:space="preserve">
+    <value>Payment method</value>
+  </data>
+  <data name="Enum_PaymentMethodlitiko_Prepayment" xml:space="preserve">
+    <value>Prepayment</value>
+  </data>
+  <data name="Enum_PaymentMethodlitiko_Postpay" xml:space="preserve">
+    <value>Postpay</value>
+  </data>
+  <data name="ControlGroup_f6348ba726894ab19663390b684c0611" xml:space="preserve">
+    <value>Payment</value>
+  </data>
+  <data name="Property_FrequencyOfPaymentlitiko" xml:space="preserve">
+    <value>Frequency of payment</value>
+  </data>
+  <data name="Property_IsPartialPaymentlitiko" xml:space="preserve">
+    <value>Partial payment</value>
+  </data>
+  <data name="Property_IsEqualPaymentlitiko" xml:space="preserve">
+    <value>Equal payment</value>
+  </data>
+  <data name="Property_AmountForPeriodlitiko" xml:space="preserve">
+    <value>Amount for period</value>
+  </data>
+  <data name="Property_AmountForPeriodInWordslitiko" xml:space="preserve">
+    <value>Amount for period in words</value>
+  </data>
 </root>

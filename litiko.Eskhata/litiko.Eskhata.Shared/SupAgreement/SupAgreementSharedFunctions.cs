@@ -16,7 +16,7 @@ namespace litiko.Eskhata.Shared
     /// <param name="currencyRate">Курс валюты.</param>
     /// <param name="currency">Валюта.</param>
     public override void FillTotalAmount(double? amount, litiko.NSI.ICurrencyRate currencyRate, Sungero.Commons.ICurrency currency)
-    {                  
+    {                        
       if (_obj.AmountForPeriodlitiko > 0 && _obj.TotalAmountlitiko == 0)
         amount = _obj.AmountForPeriodlitiko;
       else

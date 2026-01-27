@@ -112,29 +112,8 @@
   <data name="Property_ReasonForChangelitiko" xml:space="preserve">
     <value>Reason for change</value>
   </data>
-  <data name="Property_PaymentMethodlitiko" xml:space="preserve">
-    <value>Payment method</value>
-  </data>
-  <data name="Enum_PaymentMethodlitiko_Prepayment" xml:space="preserve">
-    <value>Prepayment</value>
-  </data>
-  <data name="Enum_PaymentMethodlitiko_Postpay" xml:space="preserve">
-    <value>Postpay</value>
-  </data>
   <data name="ControlGroup_9783066c8edb4db0ad308b6b82ac8b14" xml:space="preserve">
     <value>Payment</value>
-  </data>
-  <data name="Property_FrequencyOfPaymentlitiko" xml:space="preserve">
-    <value>Frequency of payment</value>
-  </data>
-  <data name="Property_IsPartialPaymentlitiko" xml:space="preserve">
-    <value>Partial payment</value>
-  </data>
-  <data name="Property_IsEqualPaymentlitiko" xml:space="preserve">
-    <value>Equal payment</value>
-  </data>
-  <data name="Property_AmountForPeriodlitiko" xml:space="preserve">
-    <value>Amount for period</value>
   </data>
   <data name="Property_AccDebtCreditlitiko" xml:space="preserve">
     <value>Account of settlements with debtors and creditors</value>
@@ -243,9 +222,6 @@
   </data>
   <data name="Action_CreateLegalOpinionlitikoConfirmationDescription" xml:space="preserve">
     <value />
-  </data>
-  <data name="Property_AmountForPeriodInWordslitiko" xml:space="preserve">
-    <value>Amount for period in words</value>
   </data>
   <data name="Property_IsMigratedlitiko" xml:space="preserve">
     <value>Is migrated</value>

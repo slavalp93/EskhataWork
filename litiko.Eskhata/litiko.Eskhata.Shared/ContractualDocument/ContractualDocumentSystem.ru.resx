@@ -211,4 +211,31 @@
   <data name="Property_AmountOfExpenseslitiko" xml:space="preserve">
     <value>Сумма затрат по договору</value>
   </data>
+  <data name="Property_PaymentMethodlitiko" xml:space="preserve">
+    <value>Способ оплаты</value>
+  </data>
+  <data name="Enum_PaymentMethodlitiko_Prepayment" xml:space="preserve">
+    <value>Предоплата</value>
+  </data>
+  <data name="Enum_PaymentMethodlitiko_Postpay" xml:space="preserve">
+    <value>Постоплата</value>
+  </data>
+  <data name="ControlGroup_f6348ba726894ab19663390b684c0611" xml:space="preserve">
+    <value>Оплата</value>
+  </data>
+  <data name="Property_FrequencyOfPaymentlitiko" xml:space="preserve">
+    <value>Периодичность оплаты</value>
+  </data>
+  <data name="Property_IsPartialPaymentlitiko" xml:space="preserve">
+    <value>Оплата частями</value>
+  </data>
+  <data name="Property_IsEqualPaymentlitiko" xml:space="preserve">
+    <value>Равномерная оплата</value>
+  </data>
+  <data name="Property_AmountForPeriodlitiko" xml:space="preserve">
+    <value>Сумма за период</value>
+  </data>
+  <data name="Property_AmountForPeriodInWordslitiko" xml:space="preserve">
+    <value>Сумма за период прописью</value>
+  </data>
 </root>
