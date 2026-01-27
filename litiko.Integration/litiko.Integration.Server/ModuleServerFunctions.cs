@@ -4353,7 +4353,10 @@ namespace litiko.Integration.Server
       var laborPayment      = "null";
       var isWithinBudget    = "null";
       var amountToBePaid    = string.Empty;
-      var amountOfExpenses  = string.Empty;      
+      var amountOfExpenses  = string.Empty;
+      var isEqualPayment    = "null";
+      var amountForPeriod   = string.Empty;
+      var currencyOperation = string.Empty;
       
       if (supAgreement != null)
       {        
@@ -4374,6 +4377,9 @@ namespace litiko.Integration.Server
         isWithinBudget    = ToYesNoNull(supAgreement.IsWithinBudgetlitiko);        
         amountToBePaid      = supAgreement.AmountToBePaidlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
         amountOfExpenses    = supAgreement.AmountOfExpenseslitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        isEqualPayment      = ToYesNoNull(supAgreement.IsEqualPaymentlitiko);
+        amountForPeriod     = supAgreement.AmountForPeriodlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        currencyOperation   = supAgreement.CurrencyOperationlitiko?.AlphaCode ?? "";
       }
       
       if (accountingDocument != null)
@@ -4394,7 +4400,10 @@ namespace litiko.Integration.Server
         laborPayment      = ToYesNoNull(contract?.IsIndividualPaymentlitiko);
         isWithinBudget    = ToYesNoNull(contract.IsWithinBudgetlitiko);
         //amountToBePaid    = string.Empty;
-        //amountOfExpenses  = string.Empty;;
+        //amountOfExpenses  = string.Empty;
+        //isEqualPayment    = string.Empty;
+        //amountForPeriod   = string.Empty ;
+        currencyOperation   = accountingDocument.CurrencyOperationlitiko?.AlphaCode ?? "";
       }      
       
       // ==========================
@@ -4426,7 +4435,10 @@ namespace litiko.Integration.Server
                                          new XElement("IncomeTaxAmount", incomeTaxAmount),
                                          new XElement("LaborPayment", laborPayment),
                                          new XElement("AmountToBePaid", amountToBePaid),
-                                         new XElement("AmountOfExpenses", amountOfExpenses)
+                                         new XElement("AmountOfExpenses", amountOfExpenses),
+                                         new XElement("IsEqualPayment", isEqualPayment),
+                                         new XElement("AmountForPeriod", amountForPeriod),
+                                         new XElement("OperationCurrency", currencyOperation)
                                         );
       
       return new XElement("Data", documentElement);
