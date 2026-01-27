@@ -33,7 +33,8 @@ namespace litiko.Integration.Server
       else
         return this.GetErrorResult(SendDocumentStages.Resources.UnsupportedDocumentType);
         
-      var integrationMethod = IntegrationMethods.GetAll().Where(x => x.Name == integrationMethodName).FirstOrDefault();
+      
+      var integrationMethod = Functions.Module.GetIntegrationMethod(document);
       if (integrationMethod == null)
         return this.GetErrorResult(SendDocumentStages.Resources.IntegrationMethodNotFoundFormat(integrationMethodName));
       

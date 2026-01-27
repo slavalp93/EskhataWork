@@ -25,6 +25,7 @@ namespace litiko.Integration.Client
       var person = Eskhata.People.As(entity);
       var contract = Eskhata.Contracts.As(entity);
       var supAgreement = Eskhata.SupAgreements.As(entity);
+      var accountingDocument = Eskhata.AccountingDocumentBases.As(entity);
       
       if ((company != null || person != null) && string.IsNullOrEmpty(Eskhata.Counterparties.As(entity).TIN))
         return Eskhata.Companies.Resources.ErrorNeedFillTin;
@@ -106,6 +107,8 @@ namespace litiko.Integration.Client
           errorList = litiko.Integration.Functions.Module.Remote.R_DR_SET_CONTRACT_Online(exchDoc, contract);
         else if (supAgreement != null)
           errorList = litiko.Integration.Functions.Module.Remote.R_DR_SET_PAYMENT_DOCUMENT_Online(exchDoc, supAgreement);
+        else if (accountingDocument != null)
+          errorList = litiko.Integration.Functions.Module.Remote.R_DR_SET_PAYMENT_DOCUMENT_Online(exchDoc, accountingDocument);        
                 
         if (errorList.Any())
         {
