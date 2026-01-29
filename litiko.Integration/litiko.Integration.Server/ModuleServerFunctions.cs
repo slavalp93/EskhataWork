@@ -4322,7 +4322,7 @@ namespace litiko.Integration.Server
       else if (incomingInvoice != null)
         contract = Eskhata.Contracts.As(incomingInvoice.Contract);
       else if (accountingDocument != null)
-        contract = Eskhata.Contracts.As(accountingDocument.LeadingDocument);      
+        contract = Eskhata.Contracts.As(accountingDocument.LeadingDocument);            
       
       const string dateFormat = "dd.MM.yyyy";
       
@@ -4357,6 +4357,21 @@ namespace litiko.Integration.Server
       var isEqualPayment    = "null";
       var amountForPeriod   = string.Empty;
       var currencyOperation = string.Empty;
+      
+      // PaymentBasis
+      var matrix2 = NSI.PublicFunctions.Module.GetContractsVsPaymentDoc(contract, contract.Counterparty);
+      
+      var isPaymentContract   = ToYesNoNull(matrix2?.PBIsPaymentContract);
+      var isPaymentInvoice    = ToYesNoNull(matrix2?.PBIsPaymentInvoice);
+      var isPaymentTaxInvoice = ToYesNoNull(matrix2?.PBIsPaymentTaxInvoice);
+      var isPaymentAct        = ToYesNoNull(matrix2?.PBIsPaymentAct);
+      var isPaymentOrder      = ToYesNoNull(matrix2?.PBIsPaymentOrder);
+      
+      var isClosureContract   = ToYesNoNull(matrix2?.PCBIsPaymentContract);
+      var isClosureInvoice    = ToYesNoNull(matrix2?.PCBIsPaymentInvoice);
+      var isClosureTaxInvoice = ToYesNoNull(matrix2?.PCBIsPaymentTaxInvoice);
+      var isClosureAct        = ToYesNoNull(matrix2?.PCBIsPaymentAct);
+      var isClosureWaybill    = ToYesNoNull(matrix2?.PCBIsPaymentWaybill);      
       
       if (supAgreement != null)
       {        
@@ -4438,7 +4453,21 @@ namespace litiko.Integration.Server
                                          new XElement("AmountOfExpenses", amountOfExpenses),
                                          new XElement("IsEqualPayment", isEqualPayment),
                                          new XElement("AmountForPeriod", amountForPeriod),
-                                         new XElement("OperationCurrency", currencyOperation)
+                                         new XElement("OperationCurrency", currencyOperation),
+                                         new XElement("PaymentBasis",
+                                                      new XElement("IsPaymentContract",   isPaymentContract),
+                                                      new XElement("IsPaymentInvoice",    isPaymentInvoice),
+                                                      new XElement("IsPaymentTaxInvoice", isPaymentTaxInvoice),
+                                                      new XElement("IsPaymentAct",        isPaymentAct),
+                                                      new XElement("IsPaymentOrder",      isPaymentOrder)
+                                                     ),
+                                         new XElement("PaymentClosureBasis",
+                                                      new XElement("IsPaymentContract",   isClosureContract),
+                                                      new XElement("IsPaymentInvoice",    isClosureInvoice),
+                                                      new XElement("IsPaymentTaxInvoice", isClosureTaxInvoice),
+                                                      new XElement("IsPaymentAct",        isClosureAct),
+                                                      new XElement("IsPaymentWaybill",    isClosureWaybill)
+                                                     )
                                         );
       
       return new XElement("Data", documentElement);
