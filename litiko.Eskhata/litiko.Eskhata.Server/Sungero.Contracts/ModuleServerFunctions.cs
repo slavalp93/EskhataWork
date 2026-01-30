@@ -8,7 +8,7 @@ using Sungero.Core;
 using Sungero.CoreEntities;
 using Sungero.Domain.Shared;
 using Sungero.Domain; 
-
+using System.Net;
 
 namespace litiko.Eskhata.Module.Contracts.Server
 {
@@ -60,6 +60,17 @@ namespace litiko.Eskhata.Module.Contracts.Server
       args.AuthorId = Users.Current.Id;
       args.ExecuteAsync();
     }
+    
+//    [Remote]
+//    public virtual string GetMyIpAddress()
+//    {
+//      var hostName = Dns.GetHostName();
+//      var ips = Dns.GetHostEntry(hostName).AddressList
+//                   .Where(ip => ip.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork) // Только IPv4
+//                   .Select(ip => ip.ToString());
+//      
+//      return string.Join("; ", ips);
+//    }
   }
   #region Синхронное выполнение
     /*[Remote, Public]

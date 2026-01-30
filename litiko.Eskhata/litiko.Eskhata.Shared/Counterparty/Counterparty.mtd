@@ -57,7 +57,7 @@
   "IconResourcesKeys": [],
   "IsAbstract": true,
   "LayeredFromGuid": "294767f1-009f-4fbd-80fc-f98c49ddc560",
-  "OperationsClass": "",
+  "OperationsClass": "CounterpartyOperations",
   "Properties": [
     {
       "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
