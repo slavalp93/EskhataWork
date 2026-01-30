@@ -14,10 +14,7 @@ namespace litiko.Eskhata
     {
       base.Created(e);
       
-      Functions.Contract.SetIsStandard(_obj);
-      
-      _obj.IsPartialPaymentlitiko = false;
-      _obj.IsEqualPaymentlitiko = false;
+      Functions.Contract.SetIsStandard(_obj);      
     }
   }
 

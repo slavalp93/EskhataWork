@@ -21,6 +21,13 @@ namespace litiko.Eskhata.Shared
       
       var defaultCurrency = Sungero.Commons.PublicFunctions.Currency.Remote.GetDefaultCurrency();
       _obj.State.Properties.CurrencyOperationlitiko.IsRequired = !Equals(_obj.CurrencyContractlitiko, defaultCurrency);
+      _obj.State.Properties.PaymentMethodlitiko.IsRequired = true;
+      _obj.State.Properties.FrequencyOfPaymentlitiko.IsRequired = true;
+      
+      var contract = Eskhata.Contracts.As(_obj) ?? Eskhata.Contracts.As(_obj.LeadingDocument);
+      var isFrameworkContract = contract?.IsFrameworkContract ?? false;      
+      _obj.State.Properties.AmountForPeriodlitiko.IsRequired = _obj.State.Properties.AmountForPeriodlitiko.IsVisible && !isFrameworkContract;
+
     } 
 
     /// <summary>
@@ -43,6 +50,9 @@ namespace litiko.Eskhata.Shared
       _obj.State.Properties.VatAmount.IsVisible = isCompany;
       
       _obj.State.Properties.TotalAmount.IsEnabled = false;
+      
+      _obj.State.Properties.AmountForPeriodlitiko.IsVisible = _obj.IsEqualPaymentlitiko.GetValueOrDefault() || _obj.IsPartialPaymentlitiko.GetValueOrDefault();
+      _obj.State.Properties.AmountForPeriodInWordslitiko.IsVisible = _obj.State.Properties.AmountForPeriodlitiko.IsVisible;      
       
       // TODO убрать из обновления формы
       _obj.State.Controls.CounterpartryInfolitiko.Refresh();

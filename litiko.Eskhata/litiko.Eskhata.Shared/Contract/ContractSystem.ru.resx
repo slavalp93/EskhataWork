@@ -112,29 +112,8 @@
   <data name="Property_ReasonForChangelitiko" xml:space="preserve">
     <value>Основание изменений</value>
   </data>
-  <data name="Property_PaymentMethodlitiko" xml:space="preserve">
-    <value>Способ оплаты</value>
-  </data>
-  <data name="Enum_PaymentMethodlitiko_Prepayment" xml:space="preserve">
-    <value>Предоплата</value>
-  </data>
-  <data name="Enum_PaymentMethodlitiko_Postpay" xml:space="preserve">
-    <value>Постоплата</value>
-  </data>
   <data name="ControlGroup_9783066c8edb4db0ad308b6b82ac8b14" xml:space="preserve">
     <value>Оплата</value>
-  </data>
-  <data name="Property_FrequencyOfPaymentlitiko" xml:space="preserve">
-    <value>Периодичность оплаты</value>
-  </data>
-  <data name="Property_IsPartialPaymentlitiko" xml:space="preserve">
-    <value>Оплата частями</value>
-  </data>
-  <data name="Property_IsEqualPaymentlitiko" xml:space="preserve">
-    <value>Равномерная оплата</value>
-  </data>
-  <data name="Property_AmountForPeriodlitiko" xml:space="preserve">
-    <value>Сумма за период</value>
   </data>
   <data name="Property_AccDebtCreditlitiko" xml:space="preserve">
     <value>Счет расчетов с дебиторами и кредиторами</value>
@@ -237,9 +216,6 @@
   </data>
   <data name="Action_CreateLegalOpinionlitikoDescription" xml:space="preserve">
     <value>Создание юридичиского заключения к договору. </value>
-  </data>
-  <data name="Property_AmountForPeriodInWordslitiko" xml:space="preserve">
-    <value>Сумма за период прописью</value>
   </data>
   <data name="Property_IsMigratedlitiko" xml:space="preserve">
     <value>Мигрированный</value>

@@ -4108,7 +4108,7 @@ namespace litiko.Integration.Server
         integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_GET_PERSON;
       else if (Eskhata.Contracts.Is(entity))
         integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_SET_CONTRACT;
-      else if (Eskhata.SupAgreements.Is(entity))
+      else if (Eskhata.SupAgreements.Is(entity) || Eskhata.AccountingDocumentBases.Is(entity))
         integrationMethodName = PublicConstants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT;
       
       if (!string.IsNullOrEmpty(integrationMethodName))
@@ -4329,48 +4329,126 @@ namespace litiko.Integration.Server
     }
     
     /// <summary>
-    /// Формирует XML-структуру <Data> для документа типа "Дополнительное соглашение" (SupAgreement).
+    /// Формирует XML-структуру <Data> для документов типа "Дополнительное соглашение" (SupAgreement), Входящий счет (IncomingInvoice), Акт выполненных работ (ContractStatement)
     /// Включает сведения о документе, без информации о контрагенте (Company/Person).
     /// </summary>
-    /// <param name="contractualDocument">Документ SupAgreement</param>
+    /// <param name="document">Документ</param>
     /// <returns>Элемент XElement с полной информацией о документе</returns>
-    private XElement BuildXmlForSupAgreement(litiko.Eskhata.ISupAgreement contractualDocument)
+    private XElement BuildXmlForPaymentDocument(Sungero.Docflow.IOfficialDocument document)
     {
-      if (contractualDocument == null)
+      var supAgreement = Eskhata.SupAgreements.As(document);      
+      var incomingInvoice = Eskhata.IncomingInvoices.As(document);
+      var contractStatement = Eskhata.ContractStatements.As(document);
+      
+      var accountingDocument = Eskhata.AccountingDocumentBases.As(document);
+      
+      if (supAgreement == null && accountingDocument == null)
         return new XElement("Data");
+      
+      var contract = Eskhata.Contracts.Null;
+      if (supAgreement != null)
+        contract = Eskhata.Contracts.As(supAgreement.LeadingDocument);
+      else if (incomingInvoice != null)
+        contract = Eskhata.Contracts.As(incomingInvoice.Contract);
+      else if (accountingDocument != null)
+        contract = Eskhata.Contracts.As(accountingDocument.LeadingDocument);            
       
       const string dateFormat = "dd.MM.yyyy";
       
       // ==========================
       // Document values
       // ==========================
-      var documentId        = contractualDocument.Id.ToString();
-      var externalId        = contractualDocument.ExternalId ?? "";
-      var contractId        = contractualDocument.LeadingDocument?.Id.ToString() ?? "";
-      var contractExtId     = contractualDocument.LeadingDocument?.ExternalId ?? "";
-      var documentKind      = contractualDocument.DocumentKind?.Name ?? "";
-      var subject           = contractualDocument.Subject ?? "";
-      var name              = (contractualDocument.Name ?? "").Substring(0, Math.Min((contractualDocument.Name ?? "").Length, 100));
-      var registrationNumber= contractualDocument.RegistrationNumber ?? "";
-      var registrationDate  = contractualDocument.RegistrationDate?.ToString(dateFormat) ?? "";
-      var validFrom         = contractualDocument.ValidFrom?.ToString(dateFormat) ?? "";
-      var validTill         = contractualDocument.ValidTill?.ToString(dateFormat) ?? "";
-      var totalAmount       = contractualDocument.TotalAmountlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
-      var currency          = contractualDocument.CurrencyContractlitiko?.AlphaCode ?? "";
-      var operationCurrency = contractualDocument.CurrencyOperationlitiko?.AlphaCode ?? "";
-      var currencyRate      = contractualDocument.CurrencyRatelitiko?.Rate is double r
-        ? r.ToString(System.Globalization.CultureInfo.InvariantCulture)
-        : "";
-      var vatApplicable     = ToYesNoNull(contractualDocument.IsVATlitiko);
-      var vatRate           = contractualDocument.VatRatelitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
-      var vatAmount         = contractualDocument.VatAmount?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
-      var incomeTaxRate     = contractualDocument.IncomeTaxRatelitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
-      var incomeTaxAmount   = contractualDocument.IncomeTaxAmountlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
-      var laborPayment      = ToYesNoNull(contractualDocument.IsIndividualPaymentlitiko);
-      var isWithinBudget    = ToYesNoNull(contractualDocument.IsWithinBudgetlitiko);
+      var documentId        = document.Id.ToString();
+      var externalId        = document.ExternalId ?? "";
+      var documentKind      = document.DocumentKind?.Name ?? "";
+      var subject           = document.Subject ?? "";
+      var name              = (document.Name ?? "").Substring(0, Math.Min((document.Name ?? "").Length, 100));
+      var registrationNumber = document.RegistrationNumber ?? "";
+      var registrationDate  = document.RegistrationDate?.ToString(dateFormat) ?? "";      
+      var contractId        = contract?.Id.ToString();
+      var contractExtId     = contract?.ExternalId ?? "";
       
-      var amountToBePaid      = contractualDocument.AmountToBePaidlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
-      var amountOfExpenses    = contractualDocument.AmountOfExpenseslitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+      var validFrom         = string.Empty;
+      var validTill         = string.Empty;
+      var totalAmount       = string.Empty;
+      var currency          = string.Empty;
+      var operationCurrency = string.Empty;
+      var currencyRate      = string.Empty;
+      var vatApplicable     = "null";
+      var vatRate           = string.Empty;
+      var vatAmount         = string.Empty;
+      var incomeTaxRate     = string.Empty;
+      var incomeTaxAmount   = string.Empty;
+      var laborPayment      = "null";
+      var isWithinBudget    = "null";
+      var amountToBePaid    = string.Empty;
+      var amountOfExpenses  = string.Empty;
+      var isEqualPayment    = "null";
+      var amountForPeriod   = string.Empty;
+      var currencyOperation = string.Empty;
+      
+      // PaymentBasis
+      var matrix2 = NSI.PublicFunctions.Module.GetContractsVsPaymentDoc(contract, contract.Counterparty);
+      
+      var isPaymentContract   = ToYesNoNull(matrix2?.PBIsPaymentContract);
+      var isPaymentInvoice    = ToYesNoNull(matrix2?.PBIsPaymentInvoice);
+      var isPaymentTaxInvoice = ToYesNoNull(matrix2?.PBIsPaymentTaxInvoice);
+      var isPaymentAct        = ToYesNoNull(matrix2?.PBIsPaymentAct);
+      var isPaymentOrder      = ToYesNoNull(matrix2?.PBIsPaymentOrder);
+      
+      var isClosureContract   = ToYesNoNull(matrix2?.PCBIsPaymentContract);
+      var isClosureInvoice    = ToYesNoNull(matrix2?.PCBIsPaymentInvoice);
+      var isClosureTaxInvoice = ToYesNoNull(matrix2?.PCBIsPaymentTaxInvoice);
+      var isClosureAct        = ToYesNoNull(matrix2?.PCBIsPaymentAct);
+      var isClosureWaybill    = ToYesNoNull(matrix2?.PCBIsPaymentWaybill);      
+      
+      if (supAgreement != null)
+      {        
+        validFrom         = supAgreement.ValidFrom?.ToString(dateFormat) ?? "";
+        validTill         = supAgreement.ValidTill?.ToString(dateFormat) ?? "";
+        totalAmount       = supAgreement.TotalAmountlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        currency          = supAgreement.CurrencyContractlitiko?.AlphaCode ?? "";
+        operationCurrency = supAgreement.CurrencyOperationlitiko?.AlphaCode ?? "";
+        currencyRate      = supAgreement.CurrencyRatelitiko?.Rate is double r
+          ? r.ToString(System.Globalization.CultureInfo.InvariantCulture)
+          : "";
+        vatApplicable     = ToYesNoNull(supAgreement.IsVATlitiko);
+        vatRate           = supAgreement.VatRatelitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        vatAmount         = supAgreement.VatAmount?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        incomeTaxRate     = supAgreement.IncomeTaxRatelitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        incomeTaxAmount   = supAgreement.IncomeTaxAmountlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        laborPayment      = ToYesNoNull(supAgreement.IsIndividualPaymentlitiko);
+        isWithinBudget    = ToYesNoNull(supAgreement.IsWithinBudgetlitiko);        
+        amountToBePaid      = supAgreement.AmountToBePaidlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        amountOfExpenses    = supAgreement.AmountOfExpenseslitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        isEqualPayment      = ToYesNoNull(supAgreement.IsEqualPaymentlitiko);
+        amountForPeriod     = supAgreement.AmountForPeriodlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        currencyOperation   = supAgreement.CurrencyOperationlitiko?.AlphaCode ?? "";
+      }
+      
+      if (accountingDocument != null)
+      {        
+        //validFrom       = string.Empty;
+        validTill         = incomingInvoice?.PaymentDueDate?.ToString(dateFormat) ?? "";
+        totalAmount       = accountingDocument.TotalAmount?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        currency          = accountingDocument.Currency?.AlphaCode ?? "";
+        operationCurrency = accountingDocument.CurrencyOperationlitiko?.AlphaCode ?? "";
+        currencyRate      = accountingDocument.CurrencyRatelitiko?.Rate is double r
+          ? r.ToString(System.Globalization.CultureInfo.InvariantCulture)
+          : "";
+        vatApplicable     = ToYesNoNull(contract?.IsVATlitiko);
+        vatRate           = accountingDocument.VatRatelitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        vatAmount         = accountingDocument.VatAmount?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        incomeTaxRate     = accountingDocument.IncomeTaxRatelitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        incomeTaxAmount   = accountingDocument.IncomeTaxAmountlitiko?.ToString(System.Globalization.CultureInfo.InvariantCulture) ?? "";
+        laborPayment      = ToYesNoNull(contract?.IsIndividualPaymentlitiko);
+        isWithinBudget    = ToYesNoNull(contract.IsWithinBudgetlitiko);
+        //amountToBePaid    = string.Empty;
+        //amountOfExpenses  = string.Empty;
+        //isEqualPayment    = string.Empty;
+        //amountForPeriod   = string.Empty ;
+        currencyOperation   = accountingDocument.CurrencyOperationlitiko?.AlphaCode ?? "";
+      }      
       
       // ==========================
       // Формирование XML
@@ -4401,7 +4479,24 @@ namespace litiko.Integration.Server
                                          new XElement("IncomeTaxAmount", incomeTaxAmount),
                                          new XElement("LaborPayment", laborPayment),
                                          new XElement("AmountToBePaid", amountToBePaid),
-                                         new XElement("AmountOfExpenses", amountOfExpenses)
+                                         new XElement("AmountOfExpenses", amountOfExpenses),
+                                         new XElement("IsEqualPayment", isEqualPayment),
+                                         new XElement("AmountForPeriod", amountForPeriod),
+                                         new XElement("OperationCurrency", currencyOperation),
+                                         new XElement("PaymentBasis",
+                                                      new XElement("IsPaymentContract",   isPaymentContract),
+                                                      new XElement("IsPaymentInvoice",    isPaymentInvoice),
+                                                      new XElement("IsPaymentTaxInvoice", isPaymentTaxInvoice),
+                                                      new XElement("IsPaymentAct",        isPaymentAct),
+                                                      new XElement("IsPaymentOrder",      isPaymentOrder)
+                                                     ),
+                                         new XElement("PaymentClosureBasis",
+                                                      new XElement("IsPaymentContract",   isClosureContract),
+                                                      new XElement("IsPaymentInvoice",    isClosureInvoice),
+                                                      new XElement("IsPaymentTaxInvoice", isClosureTaxInvoice),
+                                                      new XElement("IsPaymentAct",        isClosureAct),
+                                                      new XElement("IsPaymentWaybill",    isClosureWaybill)
+                                                     )
                                         );
       
       return new XElement("Data", documentElement);
@@ -4562,30 +4657,29 @@ namespace litiko.Integration.Server
     [Public]
     public string BuildDocumentXml(Sungero.Docflow.IOfficialDocument document, long session_id, string application_key, string dictionary, long lastId = 0)
     {
-      if (document == null)
-        return string.Empty;
-      
-      XElement dataElement;
-      
-      // Определяем тип документа
-      bool isContract = litiko.Eskhata.Contracts.Is(document);
-      bool isSupAgreement = litiko.Eskhata.SupAgreements.Is(document);
-      
-      if (isContract)
-      {
-        // Вызываем функцию построения XML для обычного контракта
-        dataElement = BuildXmlForContract(litiko.Eskhata.Contracts.As(document));
-      }
-      else if (isSupAgreement)
-      {
-        // Вызываем функцию построения XML для дополнительного соглашения
-        dataElement = BuildXmlForSupAgreement(litiko.Eskhata.SupAgreements.As(document));
-      }
-      else
-      {
-        // Неизвестный тип документа, возвращаем пустой XML
-        dataElement = new XElement("Data");
-      }
+        if (document == null)
+           return string.Empty;
+    
+        XElement dataElement;
+    
+        // Определяем тип документа
+        bool isContract = litiko.Eskhata.Contracts.Is(document);
+        bool isSupAgreement = litiko.Eskhata.SupAgreements.Is(document);
+        bool isAccountingDocument = litiko.Eskhata.AccountingDocumentBases.Is(document);        
+    
+        if (isContract)
+        {            
+            dataElement = BuildXmlForContract(litiko.Eskhata.Contracts.As(document));
+        }
+        else if (isSupAgreement || isAccountingDocument)
+        {
+            dataElement = BuildXmlForPaymentDocument(document);
+        }
+        else
+        {
+            // Неизвестный тип документа, возвращаем пустой XML 
+            dataElement = new XElement("Data");
+        } 
 
       var xdoc = new XDocument(
         new XDeclaration("1.0", "UTF-8", null),

@@ -3,6 +3,17 @@
   "NameGuid": "ec4c98b5-8e58-478a-9067-cf2419f99fb4",
   "Name": "AccountingDocumentBase",
   "AccessRightsMode": "Both",
+  "Actions": [
+    {
+      "NameGuid": "ee2e8155-3df0-4352-9ab4-406c5d5cab0d",
+      "Name": "ExportToABSlitiko",
+      "GenerateHandler": true,
+      "IsAncestorMetadata": true,
+      "Overridden": [
+        "GenerateHandler"
+      ]
+    }
+  ],
   "BaseGuid": "96c4f4f3-dc74-497a-b347-e8faf4afe320",
   "CanBeNavigationPropertyType": true,
   "CreationAreaMetadata": {

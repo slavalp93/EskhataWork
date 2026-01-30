@@ -10,6 +10,11 @@ namespace litiko.Eskhata
   partial class ContractualDocumentClientHandlers
   {
 
+    public virtual void PaymentMethodlitikoValueInput(Sungero.Presentation.EnumerationValueInputEventArgs e)
+    {      
+      Functions.ContractualDocument.RefreshDocumentForm(_obj);
+    }
+
     public override void SubjectValueInput(Sungero.Presentation.StringValueInputEventArgs e)
     {
       var len = !string.IsNullOrWhiteSpace(e.NewValue) ? e.NewValue.Length : 0;

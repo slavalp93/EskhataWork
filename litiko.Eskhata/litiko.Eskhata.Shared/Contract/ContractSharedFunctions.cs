@@ -34,9 +34,7 @@ namespace litiko.Eskhata.Shared
     {
       base.RefreshDocumentForm();
             
-      _obj.State.Properties.RBOlitiko.IsVisible = _obj.DocumentGroup?.Name == "Аренда здания (МХБ, филиал, ГО)" && Eskhata.People.Is(_obj.Counterparty);
-      _obj.State.Properties.AmountForPeriodlitiko.IsVisible = _obj.IsEqualPaymentlitiko.GetValueOrDefault() || _obj.IsPartialPaymentlitiko.GetValueOrDefault();
-      _obj.State.Properties.AmountForPeriodInWordslitiko.IsVisible = _obj.State.Properties.AmountForPeriodlitiko.IsVisible;
+      _obj.State.Properties.RBOlitiko.IsVisible = _obj.DocumentGroup?.Name == "Аренда здания (МХБ, филиал, ГО)" && Eskhata.People.Is(_obj.Counterparty);      
       _obj.State.Properties.RegionOfRentallitiko.IsVisible = _obj.DocumentKind?.Name == "Аренда" && Eskhata.People.Is(_obj.Counterparty);
       _obj.State.Properties.PaymentRegionlitiko.IsVisible = _obj.DocumentKind?.Name == "Прочие оплаты профессиональных услуг" && Eskhata.People.Is(_obj.Counterparty);
       _obj.State.Properties.AccDebtCreditlitiko.IsVisible = _obj.PaymentMethodlitiko == Eskhata.Contract.PaymentMethodlitiko.Postpay;
@@ -50,11 +48,8 @@ namespace litiko.Eskhata.Shared
     {
       base.SetRequiredProperties();
       
-      _obj.State.Properties.TotalAmountlitiko.IsRequired = !_obj.IsFrameworkContract.GetValueOrDefault();
-      _obj.State.Properties.AmountForPeriodlitiko.IsRequired = _obj.State.Properties.AmountForPeriodlitiko.IsVisible && !_obj.IsFrameworkContract.GetValueOrDefault();
-      _obj.State.Properties.RBOlitiko.IsRequired = _obj.State.Properties.RBOlitiko.IsVisible;
-      _obj.State.Properties.PaymentMethodlitiko.IsRequired = true;
-      _obj.State.Properties.FrequencyOfPaymentlitiko.IsRequired = true;
+      _obj.State.Properties.TotalAmountlitiko.IsRequired = !_obj.IsFrameworkContract.GetValueOrDefault();      
+      _obj.State.Properties.RBOlitiko.IsRequired = _obj.State.Properties.RBOlitiko.IsVisible;            
     }
 
     /// <summary>
