@@ -10,6 +10,23 @@ namespace litiko.Eskhata
   partial class ContractualDocumentSharedHandlers
   {
 
+    public virtual void AmountForPeriodlitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
+    {
+      Functions.ContractualDocument.FillTotalAmount(_obj, e.NewValue, _obj.CurrencyRatelitiko, _obj.Currency);
+    }
+
+    public virtual void IsEqualPaymentlitikoChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
+    {
+      if (e.NewValue.GetValueOrDefault())
+        _obj.IsPartialPaymentlitiko = false;      
+    }
+
+    public virtual void IsPartialPaymentlitikoChanged(Sungero.Domain.Shared.BooleanPropertyChangedEventArgs e)
+    {
+      if (e.NewValue.GetValueOrDefault())
+        _obj.IsEqualPaymentlitiko = false;
+    }
+
     public virtual void PennyAmountlitikoChanged(Sungero.Domain.Shared.DoublePropertyChangedEventArgs e)
     {
       Functions.ContractualDocument.FillAmountToBePaid(_obj, _obj.TotalAmount, _obj.IncomeTaxAmountlitiko, e.NewValue);

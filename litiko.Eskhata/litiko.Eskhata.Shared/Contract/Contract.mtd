@@ -561,71 +561,6 @@
         },
         {
           "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
-          "NameGuid": "9b25a9e3-a606-43de-aed8-328312c07405",
-          "Name": "PaymentMethodlitikolitiko",
-          "ColumnNumber": 0,
-          "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
-          "ParentGuid": "9783066c-8edb-4db0-ad30-8b6b82ac8b14",
-          "PropertyGuid": "d249eed0-c18f-45f7-b929-4fb7ec4e474d",
-          "RowNumber": 0,
-          "RowSpan": 1,
-          "Settings": []
-        },
-        {
-          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
-          "NameGuid": "5cd97f26-0060-4e83-8a07-b0a20f2b9935",
-          "Name": "FrequencyOfPaymentlitikolitiko",
-          "ColumnNumber": 0,
-          "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
-          "ParentGuid": "9783066c-8edb-4db0-ad30-8b6b82ac8b14",
-          "PropertyGuid": "7f9cedd9-1ae0-48e1-a970-a42d26b8e5d8",
-          "RowNumber": 1,
-          "RowSpan": 1,
-          "Settings": []
-        },
-        {
-          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
-          "NameGuid": "4844dc7b-bd1f-45c2-8171-52bf2dcbc788",
-          "Name": "IsEqualPaymentlitikolitiko",
-          "ColumnNumber": 1,
-          "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
-          "ParentGuid": "9783066c-8edb-4db0-ad30-8b6b82ac8b14",
-          "PropertyGuid": "47987ff0-97f5-494f-aa73-a3218227cd8a",
-          "RowNumber": 1,
-          "RowSpan": 1,
-          "Settings": []
-        },
-        {
-          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
-          "NameGuid": "c6d5004b-61d8-48a4-be54-a57ce0be8e40",
-          "Name": "IsPartialPaymentlitikolitiko",
-          "ColumnNumber": 1,
-          "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
-          "ParentGuid": "9783066c-8edb-4db0-ad30-8b6b82ac8b14",
-          "PropertyGuid": "0c0c0089-6b15-4b82-ba0e-668b7942cdfa",
-          "RowNumber": 0,
-          "RowSpan": 1,
-          "Settings": []
-        },
-        {
-          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
-          "NameGuid": "81311079-3832-4944-82ef-590e7a78573f",
-          "Name": "AmountForPeriodlitikolitiko",
-          "ColumnNumber": 0,
-          "ColumnSpan": 1,
-          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
-          "ParentGuid": "9783066c-8edb-4db0-ad30-8b6b82ac8b14",
-          "PropertyGuid": "4fae7cfa-4767-44cf-899b-01a5f92fe698",
-          "RowNumber": 2,
-          "RowSpan": 1,
-          "Settings": []
-        },
-        {
-          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
           "NameGuid": "85862d4b-69a1-496c-a48b-79f35bd6bebd",
           "Name": "ScanReceivedlitikolitiko",
           "ColumnNumber": 0,
@@ -658,8 +593,73 @@
           "ColumnSpan": 2,
           "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
           "ParentGuid": "9783066c-8edb-4db0-ad30-8b6b82ac8b14",
-          "PropertyGuid": "87ef78f8-fe0f-4a1c-8383-cb4016c94790",
+          "PropertyGuid": "dd70db58-6ef7-413a-85e3-8eac5faced05",
           "RowNumber": 3,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "e1001100-f75a-45b7-88e5-ff898f533cc8",
+          "Name": "PaymentMethodlitikolitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
+          "ParentGuid": "9783066c-8edb-4db0-ad30-8b6b82ac8b14",
+          "PropertyGuid": "dfdabfe4-9872-4a13-99f8-a822d5f26986",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "613fa6a2-0026-417d-9200-4b0e6f161720",
+          "Name": "FrequencyOfPaymentlitikolitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
+          "ParentGuid": "9783066c-8edb-4db0-ad30-8b6b82ac8b14",
+          "PropertyGuid": "098ecdcf-88d3-4787-b17e-fb3232c8d269",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "fc8c6a98-bed7-426e-b7dd-d6a10003febd",
+          "Name": "IsPartialPaymentlitikolitiko",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "9783066c-8edb-4db0-ad30-8b6b82ac8b14",
+          "PropertyGuid": "4c3f5c8d-db7d-4ee4-8ae5-c0466ea3050a",
+          "RowNumber": 0,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "6ae4db0b-7de0-450a-9a61-645862be013b",
+          "Name": "IsEqualPaymentlitikolitiko",
+          "ColumnNumber": 1,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
+          "ParentGuid": "9783066c-8edb-4db0-ad30-8b6b82ac8b14",
+          "PropertyGuid": "dfc73d4a-39de-4b1f-9f37-76f45a0a8c60",
+          "RowNumber": 1,
+          "RowSpan": 1,
+          "Settings": []
+        },
+        {
+          "$type": "Sungero.Metadata.ControlMetadata, Sungero.Metadata",
+          "NameGuid": "75ddc31b-4614-4b00-8286-e9e9a90e4843",
+          "Name": "AmountForPeriodlitikolitiko",
+          "ColumnNumber": 0,
+          "ColumnSpan": 1,
+          "DataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
+          "ParentGuid": "9783066c-8edb-4db0-ad30-8b6b82ac8b14",
+          "PropertyGuid": "14d51eb7-c299-4605-8012-bec402d26cef",
+          "RowNumber": 2,
           "RowSpan": 1,
           "Settings": []
         }
@@ -893,79 +893,13 @@
       "PreviousPropertyGuid": "b11d23b4-65bd-4602-8335-ee55e83d7638"
     },
     {
-      "$type": "Sungero.Metadata.EnumPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "d249eed0-c18f-45f7-b929-4fb7ec4e474d",
-      "Name": "PaymentMethodlitiko",
-      "Code": "PaymentMethodl",
-      "DirectValues": [
-        {
-          "NameGuid": "d32ccb6b-ace6-4e1a-b54a-72ed816ae760",
-          "Name": "Prepayment",
-          "Code": "Prepayment"
-        },
-        {
-          "NameGuid": "9bbdba3f-c000-4511-94b9-aa1c2a354ce4",
-          "Name": "Postpay",
-          "Code": "Postpay"
-        }
-      ],
-      "HandledEvents": [
-        "ValueInputClient"
-      ],
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToEnumerationBinder",
-      "PreviousPropertyGuid": "cfc30ce1-e272-49b8-a20b-928fb8f2b26d"
-    },
-    {
-      "$type": "Sungero.Metadata.NavigationPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "7f9cedd9-1ae0-48e1-a970-a42d26b8e5d8",
-      "Name": "FrequencyOfPaymentlitiko",
-      "Code": "FrequencyOfPay",
-      "EntityGuid": "e5095b15-da6f-41c2-a451-81aac76232ae",
-      "FlatListInStandaloneLookup": true,
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
-      "PreviousPropertyGuid": "d249eed0-c18f-45f7-b929-4fb7ec4e474d"
-    },
-    {
-      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "0c0c0089-6b15-4b82-ba0e-668b7942cdfa",
-      "Name": "IsPartialPaymentlitiko",
-      "Code": "IsPartialPayme",
-      "HandledEvents": [
-        "ChangedShared"
-      ],
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
-      "PreviousPropertyGuid": "7f9cedd9-1ae0-48e1-a970-a42d26b8e5d8"
-    },
-    {
-      "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "47987ff0-97f5-494f-aa73-a3218227cd8a",
-      "Name": "IsEqualPaymentlitiko",
-      "Code": "IsEqualPayment",
-      "HandledEvents": [
-        "ChangedShared"
-      ],
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.BooleanEditorToBooleanBinder",
-      "PreviousPropertyGuid": "0c0c0089-6b15-4b82-ba0e-668b7942cdfa"
-    },
-    {
-      "$type": "Sungero.Metadata.DoublePropertyMetadata, Sungero.Metadata",
-      "NameGuid": "4fae7cfa-4767-44cf-899b-01a5f92fe698",
-      "Name": "AmountForPeriodlitiko",
-      "Code": "AmountForPerio",
-      "HandledEvents": [
-        "ChangedShared"
-      ],
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.NumericEditorToIntAndDoubleBinder",
-      "PreviousPropertyGuid": "47987ff0-97f5-494f-aa73-a3218227cd8a"
-    },
-    {
       "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
       "NameGuid": "d3d4ab8f-b082-41c7-ad52-8a2bdf448906",
       "Name": "AccDebtCreditlitiko",
       "Code": "AccDebtCreditl",
       "Length": 20,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-      "PreviousPropertyGuid": "87ef78f8-fe0f-4a1c-8383-cb4016c94790"
+      "PreviousPropertyGuid": "cfc30ce1-e272-49b8-a20b-928fb8f2b26d"
     },
     {
       "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
@@ -1005,16 +939,6 @@
       "FlatListInStandaloneLookup": true,
       "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.DropDownEditorToNavigationBinder",
       "PreviousPropertyGuid": "8470fc48-267e-4164-aa3f-40ef8e422251"
-    },
-    {
-      "$type": "Sungero.Metadata.StringPropertyMetadata, Sungero.Metadata",
-      "NameGuid": "87ef78f8-fe0f-4a1c-8383-cb4016c94790",
-      "Name": "AmountForPeriodInWordslitiko",
-      "CanBeSearch": false,
-      "Code": "AmountFPInW",
-      "IsShowedInList": false,
-      "ListDataBinderTypeName": "Sungero.Presentation.CommonDataBinders.StringEditorToStringBinder",
-      "PreviousPropertyGuid": "4fae7cfa-4767-44cf-899b-01a5f92fe698"
     },
     {
       "$type": "Sungero.Metadata.BooleanPropertyMetadata, Sungero.Metadata",

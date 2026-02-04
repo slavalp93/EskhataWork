@@ -18,6 +18,8 @@ namespace litiko.Eskhata
       _obj.IsIndividualPaymentlitiko = false;
       _obj.Currency = Sungero.Commons.PublicFunctions.Currency.Remote.GetDefaultCurrency();
       _obj.UpdateRquiredlitiko = false;
+      _obj.IsPartialPaymentlitiko = false;
+      _obj.IsEqualPaymentlitiko = false;      
     }
   }
 
