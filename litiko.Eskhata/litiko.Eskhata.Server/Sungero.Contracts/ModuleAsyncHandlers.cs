@@ -422,7 +422,7 @@ namespace litiko.Eskhata.Module.Contracts.Server
                                    }
                                    catch (Exception ex)
                                    {
-                                     result.Errors.Add(string.Format("Критический сбой {0}: {1}", externalId, ex.Message));
+                                     result.Errors.Add(string.Format("Критический сбой договора с ИД - {0}: {1}", externalId, ex.Message));
                                    }
                                  }
                                });
