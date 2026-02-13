@@ -10,7 +10,6 @@ using Sungero.Core;
 using Sungero.CoreEntities;
 using Sungero.Domain.Shared;
 
-
 namespace litiko.Eskhata.Module.Parties.Server
 {
   partial class ModuleAsyncHandlers
@@ -214,7 +213,7 @@ namespace litiko.Eskhata.Module.Parties.Server
     }
 
     // =====================================================================
-    // ПАРСИНГ КОМПАНИИ (Все ваши поля)
+    // ПАРСИНГ КОМПАНИИ
     // =====================================================================
     private litiko.Eskhata.ICompany ParseCompany(XElement companyElement,
                                                  Dictionary<string, litiko.NSI.IOKONH> okonhDict,
@@ -240,10 +239,7 @@ namespace litiko.Eskhata.Module.Parties.Server
       var isTaxNonResident = companyElement.Element("TaxNonResident")?.Value;
       var isReliability = companyElement.Element("Reliability")?.Value;
       
-      
-      var company = litiko.Eskhata.Companies.GetAll()
-        .FirstOrDefault(x => (!string.IsNullOrEmpty(isExternalID) && x.ExternalId == isExternalID) ||
-                        (!string.IsNullOrEmpty(isINN) && x.TIN == isINN));
+      var company = litiko.Eskhata.Companies.GetAll().FirstOrDefault(x => (!string.IsNullOrEmpty(isExternalID) && x.ExternalId == isExternalID) ||(!string.IsNullOrEmpty(isINN) && x.TIN == isINN));
 
       if (company == null)
       {
@@ -374,7 +370,7 @@ namespace litiko.Eskhata.Module.Parties.Server
     }
 
     // =====================================================================
-    // ПАРСИНГ ПЕРСОНЫ (Все ваши поля)
+    // ПАРСИНГ ПЕРСОНЫ
     // =====================================================================
     private litiko.Eskhata.IPerson ParsePerson(XElement personElement,
                                                Dictionary<string, litiko.Eskhata.ICountry> countryDict,
@@ -400,12 +396,12 @@ namespace litiko.Eskhata.Module.Parties.Server
       var isInternalAcc = personElement.Element("InternalAcc")?.Value;
       var isBank = personElement.Element("Bank")?.Value;
       
-      var person = Eskhata.People.GetAll()
-        .FirstOrDefault(x => (!string.IsNullOrEmpty(isExternalID) && x.ExternalId == isExternalID) || (!string.IsNullOrEmpty(isINN) && x.TIN == isINN));
+      var person = Eskhata.People.GetAll().FirstOrDefault(x => (!string.IsNullOrEmpty(isExternalID) && x.ExternalId == isExternalID) || (!string.IsNullOrEmpty(isINN) && x.TIN == isINN));
 
       if (person == null)
       {
         person = Eskhata.People.Create();
+        
         person.ExternalId = isExternalID;
       }
 
@@ -422,16 +418,19 @@ namespace litiko.Eskhata.Module.Parties.Server
       person.Inamelitiko = personElement.Element("I_NAME")?.Value?.Trim();
       
       var parsedDate = TryParseDate(isDateOfBirth);
+      
       if (parsedDate.HasValue)
         person.DateOfBirth = parsedDate.Value;
       
       var sex = personElement.Element("SEX")?.Value;
+      
       if (sex == "М") person.Sex = Eskhata.Person.Sex.Male;
       else if (sex == "Ж") person.Sex = Eskhata.Person.Sex.Female;
       
       if (!string.IsNullOrEmpty(isFamilyStatus))
       {
         var familyStatus = litiko.NSI.FamilyStatuses.GetAll().FirstOrDefault(x => x.ExternalId == isFamilyStatus);
+        
         if (familyStatus != null) person.FamilyStatuslitiko = familyStatus;
       }
       
@@ -481,7 +480,6 @@ namespace litiko.Eskhata.Module.Parties.Server
         var relTrim = isReliability.Trim();
         if (relTrim == "Надежный") reliabilityEnum = litiko.Eskhata.Person.Reliabilitylitiko.Reliable;
         else if (relTrim == "Не надежный") reliabilityEnum = litiko.Eskhata.Person.Reliabilitylitiko.NotReliable;
-        
         if (reliabilityEnum.HasValue) person.Reliabilitylitiko = reliabilityEnum;
       }
       
@@ -563,7 +561,7 @@ namespace litiko.Eskhata.Module.Parties.Server
           if (errorDetails.Any())
             errorDetails.Add(ex.Message);
           
-          Logger.DebugFormat("[MIGR_DELETE] Не удалось удалить {0} ID {1}: {2}", isCompany ? "Компанию" : "Персону", id, ex.Message);
+          Logger.DebugFormat("Не удалось удалить {0} ID {1}: {2}", isCompany ? "Компанию" : "Персону", id, ex.Message);
         }
       };
 

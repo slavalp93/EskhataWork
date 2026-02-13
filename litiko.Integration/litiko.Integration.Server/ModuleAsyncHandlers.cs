@@ -242,6 +242,9 @@ namespace litiko.Integration.Server
             throw AppliedCodeException.Create($"State message from IS:{stateMsg}");         
           
           IEnumerable<XElement> dataElements;
+          
+          //IExchangeDocument exchDoc = null;
+          
           if (dictionary == Constants.Module.IntegrationMethods.R_DR_SET_CONTRACT || dictionary == Constants.Module.IntegrationMethods.R_DR_SET_PAYMENT_DOCUMENT)
             dataElements = xmlDoc.Descendants("Data").Elements();
           else
@@ -323,7 +326,10 @@ namespace litiko.Integration.Server
               break;
             case Constants.Module.IntegrationMethods.R_DR_GET_CITIES:
               errorList = Functions.Module.R_DR_GET_CITIES(dataElements);
-              break;              
+              break; 
+//            case Constants.Module.IntegrationMethods.R_DR_GET_MIGRATED_CONTRACT:
+//              errorList = Functions.Module.R_DR_GET_MIGRATED_CONTRACT(exchDoc);
+//              break;
           }
           
           if (errorList.Any())

@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Sungero.Core;
 using Sungero.CoreEntities;
+using System.IO.Compression;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
 using System.IO;
 using System.Xml.Linq;
 using litiko.Eskhata.Module.Contracts.Structures.Module;
@@ -14,10 +18,310 @@ namespace litiko.Eskhata.Module.Contracts.Server
   partial class ModuleAsyncHandlers
   {
 
+    //    public virtual void ExportFromBuslitiko(litiko.Eskhata.Module.Contracts.Server.AsyncHandlerInvokeArgs.ExportFromBuslitikoInvokeArgs args)
+    //    {
+    //      var userId = args.UserId;
+//
+    //      var ids = args.ExternalIds.Split(new[] { ','}, StringSplitOptions.RemoveEmptyEntries).ToList();
+//
+    //      if(!ids.Any())
+    //      {
+    //        Logger.Debug("Список ID пуст");
+    //        return;
+    //      }
+//
+    //      Logger.DebugFormat($"Start ExportFromBusHandler for {ids.Count} items");
+//
+    //      var errorList = new StringBuilder();
+//
+    //      byte[] zipContent = null;
+//
+    //      try
+    //      {
+    //        zipContent = GenerateZipArchive(ids, errorList);
+    //      }
+    //      catch (Exception ex)
+    //      {
+    //        Logger.Error("Critical error in ExportFromBusHandler", ex);
+    //        SendNotification(userId, "Произошла критическая ошибка при формировании архива: " + ex.Message, null);
+    //        return;
+    //      }
+//
+    //      var documentName = $"Экспорт из Шины ({ids.Count} шт.) от {Calendar.Now:dd.MM.yyyy HH:mm}";
+//
+    //      var document = CreateSimpleDocument(documentName, zipContent);
+//
+    //      var message = "Экспорт завершен. Файл во вложении.";
+//
+    //      if (errorList.Length > 0)
+    //        message += $"\n\nНе удалось загрузить следующие ID:\n{errorList}";
+//
+    //      SendNotification(userId, message, document);
+    //    }
+
+    //    public virtual void UploadHozDoglitiko(litiko.Eskhata.Module.Contracts.Server.AsyncHandlerInvokeArgs.UploadHozDoglitikoInvokeArgs args)
+    //    {
+    //      List<long> Ids = new List<long>
+    //      {
+    //        57227376326, 76733521958, 76075666319, 82317544435, 69857910867, 81559622395, 69130476865, 77802499802, 35733172640, 63167682556, 61907589585,
+    //        60449322840, 77797991516, 1840886148, 9697688878, 12969032762, 27051363972, 39291663179, 4695340469, 12487526163, 10846060607, 1840876789,
+    //        1840878612, 1848633541, 1848634362, 39488424213, 61719849499, 63997493763, 59466099513, 26090430823, 73024456932, 72704382656, 75537394341,
+    //        69855836419, 41602534099, 78500824380, 82356433507
+    //      };
+    //    }
+    
+    //    private byte[] GenerateZipArchive(List<string> ids, StringBuilder errors)
+    //    {
+    //      using (var httpClient = new HttpClient())
+    //      {
+    //        httpClient.Timeout = TimeSpan.FromMinutes(10); // Увеличиваем тайм-аут
+//
+    //        // Создаем корневые элементы для общих файлов
+    //        // Мы будем складывать все полученные пакеты внутрь этих тегов
+    //        var contractsRoot = new XElement("Data");
+    //        var clientsRoot = new XElement("Counterparty");
+//
+    //        foreach (var id in ids)
+    //        {
+    //          try
+    //          {
+    //            // --- ШАГ 1: ЗАПРОС ДОГОВОРА ---
+    //            var contractReq = BuildXmlRequest("R_DR_GET_CONTRACT", "ExternalID", id);
+//
+    //            // Получаем ответ и чистим его от Java-ошибок
+    //            var contractResp = GetCleanXmlFromBus(httpClient, contractReq);
+//
+    //            // Проверки на пустоту и корректность XML
+    //            if (string.IsNullOrEmpty(contractResp))
+    //            {
+    //              errors.AppendLine($"{id}: Пустой ответ.");
+    //              continue;
+    //            }
+    //            if (!contractResp.StartsWith("<"))
+    //            {
+    //              var snippet = contractResp.Length > 100 ? contractResp.Substring(0, 100) : contractResp;
+    //              errors.AppendLine($"{id}: Ответ не XML. Начало: {snippet}");
+    //              continue;
+    //            }
+//
+    //            // Парсим XML
+    //            var contractDoc = XDocument.Parse(contractResp);
+//
+    //            // Ищем тег <Document> в ответе
+    //            var docNode = contractDoc.Descendants().FirstOrDefault(x => x.Name.LocalName == "Document");
+//
+    //            if (docNode != null)
+    //            {
+    //              // Добавляем этот "пакет" в общий список
+    //              contractsRoot.Add(docNode);
+    //            }
+    //            else
+    //            {
+    //              var errMsg = contractDoc.Descendants("stateMsg").FirstOrDefault()?.Value
+    //                ?? contractDoc.Descendants("message").FirstOrDefault()?.Value
+    //                ?? "нет описания";
+    //              errors.AppendLine($"{id}: нет данных (<Document>). Шина: {errMsg}");
+    //              continue;
+    //            }
+//
+    //            // --- ШАГ 2: ЗАПРОС КЛИЕНТА ---
+    //            // Ищем ID клиента внутри полученного договора
+    //            var cpIdValue = contractDoc.Descendants("CounterpartyExternalId").FirstOrDefault()?.Value;
+//
+    //            if (!string.IsNullOrEmpty(cpIdValue))
+    //            {
+    //              System.Threading.Thread.Sleep(200); // Пауза, чтобы не дудосить шину
+//
+    //              var clientReq = BuildXmlRequestForClient(id, cpIdValue);
+    //              var clientResp = GetCleanXmlFromBus(httpClient, clientReq);
+//
+    //              if (!string.IsNullOrEmpty(clientResp) && clientResp.StartsWith("<"))
+    //              {
+    //                try
+    //                {
+    //                  var clientDoc = XDocument.Parse(clientResp);
+    //                  var cpNode = clientDoc.Descendants().FirstOrDefault(x => x.Name.LocalName == "Counterparty");
+//
+    //                  if (cpNode != null)
+    //                  {
+    //                    // Добавляем содержимое (Company или Person) в общий список
+    //                    clientsRoot.Add(cpNode.Elements());
+    //                  }
+    //                }
+    //                catch { /* Ошибки клиента не критичны */ }
+    //              }
+    //            }
+//
+    //            System.Threading.Thread.Sleep(200);
+    //          }
+    //          catch (Exception ex)
+    //          {
+    //            Logger.Error($"Error processing ID {id}", ex);
+    //            errors.AppendLine($"{id}: Ошибка C# - {ex.Message}");
+    //          }
+    //        }
+//
+    //        // --- ШАГ 3: ФОРМИРОВАНИЕ ZIP ---
+    //        // Создаем итоговые XML документы
+    //        var finalContracts = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), contractsRoot);
+    //        var finalClients = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), clientsRoot);
+//
+    //        using (var memoryStream = new MemoryStream())
+    //        {
+    //          using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+    //          {
+    //            AddFileToZip(archive, "contracts.xml", finalContracts);
+    //            AddFileToZip(archive, "clients.xml", finalClients);
+    //          }
+    //          return memoryStream.ToArray();
+    //        }
+    //      }
+    //    }
+//
+    //    private Sungero.Docflow.ISimpleDocument CreateSimpleDocument(string name, byte[] content)
+    //    {
+    //      var doc = Sungero.Docflow.SimpleDocuments.Create();
+//
+    //      doc.Name = name;
+//
+    //      using (var stream = new MemoryStream(content))
+    //      {
+    //        doc.CreateVersionFrom(stream, "zip");
+    //      }
+    //      doc.Save();
+//
+    //      return doc;
+    //    }
+//
+    //    private void SendNotification(long userId, string messageBody, Sungero.Domain.Shared.IEntity attachment)
+    //    {
+    //      var author = Employees.GetAll(e => e.Id == userId).FirstOrDefault();
+//
+    //      var notice = Sungero.Workflow.SimpleTasks.CreateWithNotices("Результат выгрузки", author);
+//
+    //      notice.Subject = "Выгрузка из Шины (XML)";
+//
+    //      notice.ActiveText = messageBody;
+//
+    //      if(attachment != null)
+    //      {
+    //        notice.Attachments.Add(attachment);
+    //      }
+//
+    //      notice.Start();
+    //    }
+//
+    //    private string PostXml(HttpClient client, string xml)
+    //    {
+    //      var forwardUrl = Constants.Module.forwardUrl;
+    //      try
+    //      {
+    //        var content = new StringContent(xml, Encoding.UTF8, "application/xml");
+//
+    //        var response = client.PostAsync(forwardUrl, content).Result;
+//
+    //        if (response.IsSuccessStatusCode)
+    //          return response.Content.ReadAsStringAsync().Result;
+    //      }
+    //      catch (Exception ex)
+    //      {
+    //        Logger.Error("HTTP Error", ex);
+    //      }
+    //      return null;
+    //    }
+//
+    //    private void AddFileToZip(ZipArchive archive, string name, XDocument xmlDoc)
+    //    {
+    //      var entry = archive.CreateEntry(name);
+//
+    //      using (var stream = entry.Open())
+    //      {
+    //        using (var writer = new StreamWriter(stream, Encoding.UTF8))
+    //        {
+    //          xmlDoc.Save(writer);
+    //        }
+    //      }
+//
+    //    }
+//
+    //    private string BuildXmlRequest(string dictionary, string keyName, string keyValue)
+    //    {
+    //      return $@"<?xml version=""1.0"" encoding=""UTF-8""?>
+    //                    <root>
+    //                        <head>
+    //                            <session_id>{Guid.NewGuid()}</session_id>
+    //                            <application_key>192.168.206.23/Integration/odata/Integration/ProcessResponseFromIS##</application_key>
+    //                        </head>
+    //                        <request>
+    //                            <protocol-version>1.00</protocol-version>
+    //                            <request-type>R_DR_GET_DATA</request-type>
+    //                            <dictionary>{dictionary}</dictionary>
+    //                            <{keyName}>{keyValue}</{keyName}>
+    //                        </request>
+    //                    </root>";
+    //    }
+//
+    //    private string BuildXmlRequestForClient(string dogId, string clientId)
+    //    {
+    //      return $@"<?xml version=""1.0"" encoding=""UTF-8""?>
+    //                    <root>
+    //                        <head>
+    //                            <session_id>{Guid.NewGuid()}</session_id>
+    //                            <application_key>192.168.206.23/Integration/odata/Integration/ProcessResponseFromIS##</application_key>
+    //                        </head>
+    //                        <request>
+    //                            <protocol-version>1.00</protocol-version>
+    //                            <request-type>R_DR_GET_DATA</request-type>
+    //                            <dictionary>R_DR_GET_COUNTERPARTY</dictionary>
+    //                            <ExternalID>{dogId}</ExternalID>
+    //                            <CounterpartyId>{clientId}</CounterpartyId>
+    //                        </request>
+    //                    </root>";
+    //    }
+//
+    //   private string GetCleanXmlFromBus(HttpClient client, string requestXml)
+    //    {
+    //      var forwardUrl = Constants.Module.forwardUrl; // Или используйте константу ForwardUrl
+    //      try
+    //      {
+    //        var content = new StringContent(requestXml, Encoding.UTF8, "application/xml");
+//
+    //        // 1. Отправляем запрос
+    //        var response = client.PostAsync(forwardUrl, content).Result;
+//
+    //        // 2. ВАЖНО: Читаем тело ответа НЕЗАВИСИМО от статус-кода (200, 400 или 500)
+    //        // Раньше тут могла быть проверка if (response.IsSuccessStatusCode), она всё портила.
+    //        var rawResponse = response.Content.ReadAsStringAsync().Result;
+//
+    //        if (string.IsNullOrWhiteSpace(rawResponse)) return null;
+//
+    //        // 3. ОЧИСТКА: Ищем начало XML
+    //        // Шина присылает: "java.io.FileNotFoundException... <?xml version..."
+    //        var xmlStartIndex = rawResponse.IndexOf("<?xml");
+//
+    //        // На случай если <?xml нет, ищем <root
+    //        if (xmlStartIndex == -1) xmlStartIndex = rawResponse.IndexOf("<root");
+//
+    //        // 4. Если нашли XML, отрезаем всё лишнее слева (ошибку Java)
+    //        if (xmlStartIndex >= 0)
+    //        {
+    //          return rawResponse.Substring(xmlStartIndex).Trim();
+    //        }
+//
+    //        // Если XML не нашли, возвращаем как есть (чтобы увидеть это в логах)
+    //        return rawResponse.Trim();
+    //      }
+    //      catch (Exception ex)
+    //      {
+    //        Logger.Error("HTTP Request Error", ex);
+    //        return null;
+    //      }
+    //    }
+
+    #region Миграция
     public virtual void DeleteMigratedContractAsynclitiko(litiko.Eskhata.Module.Contracts.Server.AsyncHandlerInvokeArgs.DeleteMigratedContractAsynclitikoInvokeArgs args)
     {
       
-      // Получаем только ID, чтобы не грузить память
       var allIds = Eskhata.Contracts.GetAll(c => c.IsMigratedlitiko == true)
         .Select(c => c.Id).ToList();
 
@@ -54,6 +358,8 @@ namespace litiko.Eskhata.Module.Contracts.Server
     
     public virtual void ImportContractsAsyncHandlerlitiko(litiko.Eskhata.Module.Contracts.Server.AsyncHandlerInvokeArgs.ImportContractsAsyncHandlerlitikoInvokeArgs args)
     {
+      Logger.Debug("Start Migrating Contracts");
+      
       args.Retry = false;
       
       var result = litiko.Eskhata.Module.Contracts.Structures.Module.ResultImportXmlUI.Create();
@@ -98,13 +404,14 @@ namespace litiko.Eskhata.Module.Contracts.Server
         int batchSize = 100;
         for (int i = 0; i < documentElements.Count; i += batchSize)
         {
-          // Берем следующую пачку из 100 элементов
           var batch = documentElements.Skip(i).Take(batchSize).ToList();
 
           Transactions.Execute(() =>
                                {
                                  foreach (var docXml in batch)
                                  {
+                                   var externalId = docXml.Element("ExternalID")?.Value.Trim();
+                                   
                                    try
                                    {
                                      var contract = ParseContractOptimized(docXml, result, currencies, docKinds, docGroups, departments,
@@ -115,7 +422,7 @@ namespace litiko.Eskhata.Module.Contracts.Server
                                    }
                                    catch (Exception ex)
                                    {
-                                     result.Errors.Add("Критический сбой строки: " + ex.Message);
+                                     result.Errors.Add(string.Format("Критический сбой договора с ИД - {0}: {1}", externalId, ex.Message));
                                    }
                                  }
                                });
@@ -125,13 +432,12 @@ namespace litiko.Eskhata.Module.Contracts.Server
       {
         if (migrationDoc != null) ContractsEskhata.MigrationDocuments.Delete(migrationDoc);
 
-        // ОТПРАВКА УВЕДОМЛЕНИЯ на основе данных из result
         var author = Employees.GetAll(e => e.Id == args.AuthorId).FirstOrDefault();
         if (author != null)
         {
-          var notice = Sungero.Workflow.SimpleTasks.CreateWithNotices("Результат импорта договоров", author);
+          var notice = Sungero.Workflow.SimpleTasks.CreateWithNotices("Результат миграции договоров", author);
           var sb = new System.Text.StringBuilder();
-          sb.AppendLine("Импорт завершен.");
+          sb.AppendLine("Миграция завершена.");
           sb.AppendLine(string.Format("📊 Всего в файле: {0}", result.TotalCount));
           sb.AppendLine(string.Format("✅ Успешно создано: {0}", result.ImportedCount));
           sb.AppendLine(string.Format("🔄 Пропущено (дубли): {0}", result.DuplicateCount));
@@ -139,7 +445,7 @@ namespace litiko.Eskhata.Module.Contracts.Server
           
           if (result.Errors.Any())
           {
-            sb.AppendLine("\n⚠️ Список проблем:");
+            sb.AppendLine("\n⚠️ Список ошибок:");
             foreach (var err in result.Errors)
               sb.AppendLine(err);
           }
@@ -208,14 +514,12 @@ namespace litiko.Eskhata.Module.Contracts.Server
         foundDocumentKind = docKinds.FirstOrDefault(k => k.ExternalIdlitiko == documentKindId);
         if (foundDocumentKind == null)
         {
-          // КРИТИЧЕСКАЯ ОШИБКА: Нет вида документа -> Нельзя создать договор
           result.Errors.Add($"Договор {externalId}: Вид документа '{documentKindId}' не найден.");
           return null;
         }
       }
       else
       {
-        // Если вид обязателен
         result.Errors.Add($"Договор {externalId}: Не указан Вид документа.");
         return null;
       }
@@ -228,40 +532,18 @@ namespace litiko.Eskhata.Module.Contracts.Server
       contract.Counterparty = foundCounterparty;
       contract.DocumentKind = foundDocumentKind;
       
-      // Контрагент
-      /*cpId = docXml.Element("CounterpartyExternalId")?.Value?.Trim();
-      if(!string.IsNullOrEmpty(cpId))
-      {
-        var cp = counterparties.FirstOrDefault(c => c.ExternalId == cpId);
-        if (cp != null) contract.Counterparty = cp;
-        else result.Errors.Add($"Договор {extId}: Контрагент {cpId} не найден.");
-      }
-
-      // Вид документа
-      var kindId = docXml.Element("DocumentKind")?.Value?.Trim();
-      if(!string.IsNullOrEmpty(kindId))
-      {
-        var kind = docKinds.FirstOrDefault(k => k.ExternalIdlitiko == kindId);
-        if (kind != null) contract.DocumentKind = kind;
-        else result.Errors.Add($"Договор {extId}: Вид {kindId} не найден.");
-      }*/
-      
-      // Группа
       var documentGroupId = docXml.Element("DocumentGroup")?.Value?.Trim();
       if(!string.IsNullOrEmpty(documentGroupId))
         contract.DocumentGroup = docGroups.FirstOrDefault(g => g.ExternalIdlitiko == documentGroupId);
 
-      // Валюта
       var currency = docXml.Element("Currency")?.Value?.Trim();
       if (!string.IsNullOrEmpty(currency))
         contract.Currency = currencies.FirstOrDefault(c => c.AlphaCode == currency || c.NumericCode == currency);
 
-      // Валюта операции
       var curOpCode = docXml.Element("OperationCurrency")?.Value?.Trim(); // если пусто, то будет TJS логика реализована в АБС при выгрузке
       if (!string.IsNullOrEmpty(curOpCode))
         contract.CurrencyOperationlitiko = currencies.FirstOrDefault(c => c.AlphaCode == curOpCode || c.NumericCode == curOpCode);
 
-      //  Сначала ищем ОТВЕТСТВЕННОГО
       litiko.Eskhata.IEmployee responsibleObj = null;
       var empId = docXml.Element("ResponsibleEmployee")?.Value?.Trim();
       
@@ -515,5 +797,6 @@ namespace litiko.Eskhata.Module.Contracts.Server
       var args = litiko.Eskhata.Module.Contracts.AsyncHandlers.ImportContractsAsyncHandlerlitiko.Create();
       args.ExecuteAsync();
     }
+    #endregion
   }
 }

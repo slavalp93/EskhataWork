@@ -64,4 +64,10 @@
   <data name="AsyncHandler_Description_eddedf0aab1e433caddd89353c681c4b" xml:space="preserve">
     <value>Удаление мигрированных договоров</value>
   </data>
+  <data name="AsyncHandler_Description_694c8e0e917b4d2faf4b64a2d3911851" xml:space="preserve">
+    <value>Выгрузка хозяйственных договоров</value>
+  </data>
+  <data name="AsyncHandler_Description_77284c8cc811484c966798d9e2f869a0" xml:space="preserve">
+    <value>Выгрузка договора по заданным ID</value>
+  </data>
 </root>

@@ -41,6 +41,44 @@
           "ParameterType": "LongInteger"
         }
       ]
+    },
+    {
+      "NameGuid": "694c8e0e-917b-4d2f-af4b-64a2d3911851",
+      "Name": "UploadHozDoglitiko",
+      "DelayPeriod": 15,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "3797c652-f757-4282-adf2-cb8c35b74762",
+          "Name": "ExternalIds",
+          "ParameterType": "String"
+        },
+        {
+          "NameGuid": "cc1f74bd-87ef-4297-bfbf-94cc751919fd",
+          "Name": "AuthorId",
+          "ParameterType": "LongInteger"
+        }
+      ]
+    },
+    {
+      "NameGuid": "77284c8c-c811-484c-9667-98d9e2f869a0",
+      "Name": "ExportFromBuslitiko",
+      "DelayPeriod": 15,
+      "DelayStrategy": "RegularDelayStrategy",
+      "IsHandlerGenerated": true,
+      "Parameters": [
+        {
+          "NameGuid": "0552b7cc-132a-4830-9e7d-a8762c2ff392",
+          "Name": "UserId",
+          "ParameterType": "LongInteger"
+        },
+        {
+          "NameGuid": "1a82a4d4-537d-4904-8af5-339c385ab0ef",
+          "Name": "ExternalIds",
+          "ParameterType": "String"
+        }
+      ]
     }
   ],
   "BaseGuid": "f9d15b1c-2784-4c84-8348-1e162d70b988",

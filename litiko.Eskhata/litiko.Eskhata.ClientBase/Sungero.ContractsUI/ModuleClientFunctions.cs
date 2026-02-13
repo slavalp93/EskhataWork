@@ -12,6 +12,67 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
 {
   partial class ModuleFunctions
   {
+//    public virtual void ExportBusData()
+//    {
+//      var hozDogIds = new List<string> {
+//        "57227376326", "76733521958", "76075666319", "82317544435", "69857910867",
+//        "81559622395", "69130476865", "77802499802", "35733172640", "63167682556",
+//        "61907589585", "60449322840", "77797991516", "1840886148", "9697688878",
+//        "12969032762", "27051363972", "39291663179", "4695340469", "12487526163",
+//        "10846060607", "1840876789", "1840878612", "1848633541", "1848634362",
+//        "39488424213", "61719849499", "63997493763", "59466099513", "26090430823",
+//        "73024456932", "72704382656", "75537394341", "69855836419", "41602534099",
+//        "78500824380", "82356433507"
+//      };
+//
+//      // 2. Создаем диалог
+//      var dialog = Dialogs.CreateTaskDialog("Экспорт данных из Шины",
+//                                            "Выберите, какие договоры выгрузить в XML.");
+//      
+//      // Кнопка для выделенных в гриде записей
+//      var btnSelected = dialog.Buttons.AddCustom("Выделенные записи");
+//      // Кнопка для списка по умолчанию
+//      var btnDefault = dialog.Buttons.AddCustom("Список по умолчанию (Тест)");
+//      
+//      dialog.Buttons.AddCancel();
+//
+//      var result = dialog.Show();
+//
+//      if (result == DialogButtons.Cancel)
+//        return;
+//
+//      List<string> idsToExport = new List<string>();
+//
+//      if (result == btnDefault)
+//      {
+//        idsToExport = hozDogIds;
+//      }
+//      else if (result == btnSelected)
+//      {
+//        
+//        foreach (var entity in hozDogIds)
+//        {
+//          idsToExport.Add(entity.ToString());
+//        }
+//      }
+//
+//      if (!idsToExport.Any())
+//      {
+//        Dialogs.ShowMessage("Список для выгрузки пуст.", MessageType.Warning);
+//        return;
+//      }
+//
+//      // 3. Вызов Асинхронного обработчика
+//      var asyncArgs = litiko.Eskhata.Module.Contracts.AsyncHandlers.ExportFromBuslitiko.Create();
+//      asyncArgs.UserId = Users.Current.Id;
+//      
+//      // Превращаем список в строку "123,456,789"
+//      asyncArgs.ExternalIds = string.Join(",", idsToExport);
+//      
+//      asyncArgs.ExecuteAsync();
+//
+//      Dialogs.NotifyMessage($"Запущен экспорт {idsToExport.Count} договоров. Ожидайте уведомление.");
+//    }
 
     public virtual void DeleteMigratedPartiesAsync()
     {
@@ -28,9 +89,6 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
       Dialogs.NotifyMessage("Запущено фоновое удаление мигрированных контрагентов. Система уведомит вас по завершении.");
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public virtual void ImportCounterpariesAsync()
     {
       var managerRole = Sungero.CoreEntities.Roles.GetAll().FirstOrDefault(r=>r.Name == "Менеджеры модуля \"Договоры\"");
@@ -113,6 +171,16 @@ namespace litiko.Eskhata.Module.ContractsUI.Client
         Dialogs.ShowMessage($"Не удалось запустить миграцию: {ex.Message}", MessageType.Error);
       }
     }
+    
+    
+//    /// <summary>
+//    /// 
+//    /// </summary>
+//    public virtual void ShowIp()
+//    {
+//      var ip = litiko.Eskhata.Module.Contracts.Functions.Module.Remote.GetMyIpAddress();
+//      Dialogs.ShowMessage($"IP адрес сервера Directum: {ip}");
+//    }
 
     /*/// <summary>
     /// Импорт контрагентов (оставляем как есть, если там данных немного,

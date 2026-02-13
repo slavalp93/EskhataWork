@@ -337,6 +337,14 @@
       "GenerateHandler": true,
       "MonthSchedule": "Monthly",
       "StartAt": "1753-01-01T04:15:00"
+    },
+    {
+      "NameGuid": "fd60e0a9-df45-44e5-b042-ec64022108b9",
+      "Name": "GetContracts",
+      "GenerateHandler": true,
+      "IsEnabled": false,
+      "MonthSchedule": "Monthly",
+      "StartAt": "1753-01-01T08:30:00"
     }
   ],
   "PublicConstants": [
